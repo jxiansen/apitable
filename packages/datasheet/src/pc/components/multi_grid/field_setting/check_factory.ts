@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import { isNil } from 'lodash';
 import keyBy from 'lodash/keyBy';
@@ -27,8 +25,8 @@ import { store } from 'pc/store';
 
 const compose =
   (...args: any) =>
-    (value: any, datasheetId: string) =>
-      args.reduceRight((preValue: any, curFn: (arg0: any, arg1: string) => any) => curFn(preValue, datasheetId), value);
+  (value: any, datasheetId: string) =>
+    args.reduceRight((preValue: any, curFn: (arg0: any, arg1: string) => any) => curFn(preValue, datasheetId), value);
 
 export const checkComputeRef = (curField: string | ILookUpField | IFormulaField) => {
   if (typeof curField === 'string') {
@@ -93,13 +91,13 @@ class ButtonField {
       return {
         errors: {
           property1: t(Strings.should_not_empty, {
-            name: t(Strings.button_operation)
+            name: t(Strings.button_operation),
           }),
         },
       };
     }
 
-    if (curField.property?.text ==null || curField.property?.text.length ===0) {
+    if (curField.property?.text == null || curField.property?.text.length === 0) {
       return {
         errors: {
           property2: t(Strings.automation_content_should_not_empty),
@@ -131,7 +129,11 @@ class ButtonField {
   }
 
   static checkStream(curField: IButtonField, datasheetId?: string) {
-    return compose(ButtonField.isExitType, CheckFieldSettingBase.checkFieldNameLen, CheckFieldSettingBase.checkFieldNameBlank)(curField, datasheetId!);
+    return compose(
+      ButtonField.isExitType,
+      CheckFieldSettingBase.checkFieldNameLen,
+      CheckFieldSettingBase.checkFieldNameBlank,
+    )(curField, datasheetId!);
   }
 }
 

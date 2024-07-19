@@ -1,5 +1,3 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 
 export interface ISpacePermissionManage {
@@ -109,4 +107,3 @@ export interface IMenuTree {
   operators: string[];
   children?: IMenuTree[];
 }
-

@@ -8,25 +8,28 @@ const fieldMap: IFieldMap = {
     name: 'title',
     type: FieldType.SingleText,
     property: {
-      defaultValue: ''
-    }
+      defaultValue: '',
+    },
   },
   fld2222: {
     id: 'fld2222',
     name: 'option',
     type: FieldType.MultiSelect,
     property: {
-      options: [{
-        id: 'opt111',
-        name: 'opt1',
-        color: 0
-      }, {
-        id: 'opt222',
-        name: 'opt2',
-        color: 1
-      }]
-    }
-  }
+      options: [
+        {
+          id: 'opt111',
+          name: 'opt1',
+          color: 0,
+        },
+        {
+          id: 'opt222',
+          name: 'opt2',
+          color: 1,
+        },
+      ],
+    },
+  },
 };
 
 const datasheetState = mockWidgetSdkDatasheetPack({
@@ -34,28 +37,31 @@ const datasheetState = mockWidgetSdkDatasheetPack({
     snapshot: mockSnapshot({
       meta: {
         fieldMap,
-        views: [{
-          id: 'viw1111',
-          name: 'view1',
-          type: ViewType.Grid,
-          columns: Object.keys(fieldMap).map(fieldId => ({ fieldId })),
-          rows: [],
-          frozenColumnCount: 1
-        }, {
-          id: 'viw2222',
-          name: 'view2',
-          type: ViewType.Grid,
-          columns: Object.keys(fieldMap).map(fieldId => ({ fieldId })),
-          rows: [],
-          frozenColumnCount: 1
-        }],
+        views: [
+          {
+            id: 'viw1111',
+            name: 'view1',
+            type: ViewType.Grid,
+            columns: Object.keys(fieldMap).map((fieldId) => ({ fieldId })),
+            rows: [],
+            frozenColumnCount: 1,
+          },
+          {
+            id: 'viw2222',
+            name: 'view2',
+            type: ViewType.Grid,
+            columns: Object.keys(fieldMap).map((fieldId) => ({ fieldId })),
+            rows: [],
+            frozenColumnCount: 1,
+          },
+        ],
       },
-      recordMap: {}
+      recordMap: {},
     }),
-  }) 
+  }),
 });
 export const simpleDatasheet = mockWidgetSdkStore({
   datasheetMap: {
-    [datasheetState.datasheet!.id]: datasheetState
-  }
+    [datasheetState.datasheet!.id]: datasheetState,
+  },
 });

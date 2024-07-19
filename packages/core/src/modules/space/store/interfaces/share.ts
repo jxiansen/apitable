@@ -1,5 +1,3 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 
 export interface IShareNodeTree {
@@ -25,7 +23,7 @@ export interface IShareInfo {
   spaceName?: string;
   allowCopyDataToExternal?: string;
   allowDownloadAttachment?: string;
-  featureViewManualSave?: boolean
+  featureViewManualSave?: boolean;
 }
 
 export interface IShareInfoAction {

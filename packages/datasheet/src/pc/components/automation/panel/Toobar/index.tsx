@@ -1,18 +1,10 @@
-
-
 import { useAtomValue } from 'jotai';
 import * as React from 'react';
-import {
-  Box, IconButton, TextButton,
-  useThemeColors
-} from '@apitable/components';
+import { Box, IconButton, TextButton, useThemeColors } from '@apitable/components';
 import { StoreActions, Strings, t } from '@apitable/core';
 import { BookOutlined, CloseOutlined, ListOutlined, ShareOutlined } from '@apitable/icons';
 import { automationStateAtom } from 'pc/components/automation/controller';
-import {
-  useAutomationResourceNode,
-  useAutomationResourcePermission
-} from 'pc/components/automation/controller/use_automation_permission';
+import { useAutomationResourceNode, useAutomationResourcePermission } from 'pc/components/automation/controller/use_automation_permission';
 import { OrEmpty } from 'pc/components/common/or_empty';
 import { AutomationScenario } from 'pc/components/robot/interface';
 import { useSideBarVisible } from 'pc/hooks';
@@ -40,36 +32,34 @@ export const MobileToolBar: React.FC<React.PropsWithChildren<{ title?: string }>
         <ListOutlined size={16} color={colors.black[50]} />
       </div>
 
-      <Box >
+      <Box>
+        <OrEmpty visible={permission.sharable && automationState?.scenario === AutomationScenario.node}>
+          {nodeItem && (
+            <IconButton
+              component="button"
+              shape="square"
+              icon={() => (
+                <ShareOutlined size={16} color={nodeItem.nodeShared ? colors.primaryColor : colors.secondLevelText} className={styles.toolIcon} />
+              )}
+              onClick={() => {
+                if (!automationState?.resourceId || automationState?.scenario !== AutomationScenario.node) {
+                  return;
+                }
 
-        <OrEmpty
-          visible={permission.sharable && automationState?.scenario === AutomationScenario.node}>
-          {
-            nodeItem && (
-              <IconButton
-                component="button"
-                shape="square"
-                icon={() => <ShareOutlined size={16} color={nodeItem.nodeShared ? colors.primaryColor : colors.secondLevelText} className={styles.toolIcon} />}
-                onClick={() => {
-                  if (!automationState?.resourceId || automationState?.scenario !== AutomationScenario.node) {
-                    return;
-                  }
-
-                  setSideBarVisible(false);
-                  dispatch(StoreActions.updateShareModalNodeId(automationState?.resourceId));
-                }}
-                disabled={!permission.sharable}
-                style={{ marginLeft: 8 }}
-              />
-            )
-          }
+                setSideBarVisible(false);
+                dispatch(StoreActions.updateShareModalNodeId(automationState?.resourceId));
+              }}
+              disabled={!permission.sharable}
+              style={{ marginLeft: 8 }}
+            />
+          )}
         </OrEmpty>
 
         <OrEmpty visible={automationState?.scenario === AutomationScenario.node}>
           <IconButton
             component="button"
             shape="square"
-            icon={() => <BookOutlined color={colors.secondLevelText} size={16}/>}
+            icon={() => <BookOutlined color={colors.secondLevelText} size={16} />}
             onClick={() => {
               window.open(t(Strings.robot_help_url));
             }}
@@ -77,7 +67,6 @@ export const MobileToolBar: React.FC<React.PropsWithChildren<{ title?: string }>
           />
         </OrEmpty>
       </Box>
-
     </Box>
   );
 };

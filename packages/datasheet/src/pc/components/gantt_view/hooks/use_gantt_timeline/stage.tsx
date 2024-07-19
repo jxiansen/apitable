@@ -1,5 +1,3 @@
-
-
 import { Stage as KonvaStage } from 'react-konva';
 
 const Stage = (props: any) => {

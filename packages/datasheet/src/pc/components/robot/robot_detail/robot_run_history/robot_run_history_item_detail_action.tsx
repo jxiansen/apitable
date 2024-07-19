@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import { Box } from '@apitable/components';
 import { t, Strings } from '@apitable/core';

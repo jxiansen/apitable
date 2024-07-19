@@ -13,13 +13,13 @@ test('use selection should return a range', () => {
     rec1111: {
       id: 'rec1111',
       data: {},
-      commentCount: 0
+      commentCount: 0,
     },
     rec2222: {
       id: 'rec2222',
       data: {},
-      commentCount: 0
-    }
+      commentCount: 0,
+    },
   };
   mockWidgetSdkData.addRecords(recordMap);
   mockWidgetSdkData.dispatch({
@@ -28,20 +28,27 @@ test('use selection should return a range', () => {
     payload: {
       activeCell: {
         fieldId: primaryFieldId,
-        recordId: 'rec1111'
+        recordId: 'rec1111',
       },
-      ranges: [{ start: {
-        fieldId: primaryFieldId,
-        recordId: 'rec1111'
-      }, end: {
-        fieldId: primaryFieldId,
-        recordId: 'rec2222'
-      }}],
+      ranges: [
+        {
+          start: {
+            fieldId: primaryFieldId,
+            recordId: 'rec1111',
+          },
+          end: {
+            fieldId: primaryFieldId,
+            recordId: 'rec2222',
+          },
+        },
+      ],
     },
   });
-  mockWidgetSdkData.dispatch(StoreActions.setPageParams({
-    datasheetId: DEFAULT_DATASHEET_ID
-  }));
+  mockWidgetSdkData.dispatch(
+    StoreActions.setPageParams({
+      datasheetId: DEFAULT_DATASHEET_ID,
+    })
+  );
 
   const wrapper = createSimpleWrapper({ widgetState: mockWidgetSdkData.widgetSdkData });
   const { result } = renderHook(() => useSelection(), { wrapper });

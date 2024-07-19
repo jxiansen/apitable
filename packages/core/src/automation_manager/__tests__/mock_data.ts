@@ -1,5 +1,3 @@
-
-
 import { IRobotTaskRuntimeContext } from 'automation_manager/interface';
 
 export const runtimeContext: IRobotTaskRuntimeContext = {
@@ -17,14 +15,12 @@ export const runtimeContext: IRobotTaskRuntimeContext = {
         typeId: 'actionType1',
         // action input
         input: {},
-        // 
+        //
         nextActionId: 'string',
-      }
+      },
     },
     // actionType map;
-    actionTypesById: {
-
-    }
+    actionTypesById: {},
   },
   executedNodeIds: ['triggerId1'],
   currentNodeId: 'actionId1',
@@ -34,17 +30,17 @@ export const runtimeContext: IRobotTaskRuntimeContext = {
       output: {
         datasheet: {
           id: 'dstAid',
-          name: 'apitableA'
+          name: 'apitableA',
         },
         record: {
           id: 'recordId',
           url: 'url',
           fields: {
-            field1: 'field1value'
-          }
-        }
-      }
-    }
+            field1: 'field1value',
+          },
+        },
+      },
+    },
   },
   isDone: false,
   success: false,
@@ -57,31 +53,31 @@ export const webhookSendRequestInput = {
     operands: [
       {
         type: 'Literal',
-        value: 'url'
+        value: 'url',
       },
       {
         type: 'Literal',
-        value: 'https://oapi.dingtalk.com/robot/send?access_token=8bfaxxbd2cbd490594a99609b44f98e637e7233fb4ff57ec97d9b866cec07c8e'
+        value: 'https://oapi.dingtalk.com/robot/send?access_token=8bfaxxbd2cbd490594a99609b44f98e637e7233fb4ff57ec97d9b866cec07c8e',
       },
       {
         type: 'Literal',
-        value: 'method'
+        value: 'method',
       },
       {
         type: 'Literal',
-        value: 'POST'
+        value: 'POST',
       },
       {
         type: 'Literal',
-        value: 'headers'
+        value: 'headers',
       },
       {
         type: 'Literal',
-        value: 'Content-Type: application/json'
+        value: 'Content-Type: application/json',
       },
       {
         type: 'Literal',
-        value: 'body'
+        value: 'body',
       },
       {
         type: 'Expression',
@@ -90,7 +86,7 @@ export const webhookSendRequestInput = {
           operands: [
             {
               type: 'Literal',
-              value: '{\n  "msgtype": "link",\n  "link": {\n      "text": "'
+              value: '{\n  "msgtype": "link",\n  "link": {\n      "text": "',
             },
             {
               type: 'Expression',
@@ -104,33 +100,30 @@ export const webhookSendRequestInput = {
                       operands: [
                         {
                           type: 'Literal',
-                          value: 'triggerId1'
-                        }
-                      ]
-                    }
+                          value: 'triggerId1',
+                        },
+                      ],
+                    },
                   },
                   {
                     type: 'Literal',
-                    value: [
-                      'datasheet',
-                      'name'
-                    ]
-                  }
-                ]
-              }
+                    value: ['datasheet', 'name'],
+                  },
+                ],
+              },
             },
             {
               type: 'Literal',
-              value: '",\n      "title": "doge: automation test",\n      "picUrl": "",\n      "messageUrl": "https://example.com"\n  }\n}\n'
-            }
-          ]
-        }
-      }
-    ]
-  }
+              value: '",\n      "title": "doge: automation test",\n      "picUrl": "",\n      "messageUrl": "https://example.com"\n  }\n}\n',
+            },
+          ],
+        },
+      },
+    ],
+  },
 };
 
-// 
+//
 export const recordMatchConditionTriggerInput = {
   type: 'Expression',
   value: {
@@ -138,15 +131,15 @@ export const recordMatchConditionTriggerInput = {
     operands: [
       {
         type: 'Literal',
-        value: 'datasheetId'
+        value: 'datasheetId',
       },
       {
         type: 'Literal',
-        value: 'dst7CQK5vuco6J0uCZ'
+        value: 'dst7CQK5vuco6J0uCZ',
       },
       {
         type: 'Literal',
-        value: 'filter'
+        value: 'filter',
       },
       {
         type: 'Literal',
@@ -160,14 +153,14 @@ export const recordMatchConditionTriggerInput = {
                 operands: [
                   {
                     type: 'Literal',
-                    value: 'fldPCvePQTx0g'
+                    value: 'fldPCvePQTx0g',
                   },
                   {
                     type: 'Literal',
-                    value: 'optCA1Qr7mn3X'
-                  }
-                ]
-              }
+                    value: 'optCA1Qr7mn3X',
+                  },
+                ],
+              },
             },
             {
               type: 'Expression',
@@ -176,20 +169,20 @@ export const recordMatchConditionTriggerInput = {
                 operands: [
                   {
                     type: 'Literal',
-                    value: 'fldiyZVA2QhFe'
+                    value: 'fldiyZVA2QhFe',
                   },
                   {
                     type: 'Literal',
-                    value: 3
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      }
-    ]
-  }
+                    value: 3,
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
 };
 
 export const formData = {
@@ -199,7 +192,7 @@ export const formData = {
       'method',
       {
         type: 'Literal',
-        value: 'GET'
+        value: 'GET',
       },
       'url',
       {
@@ -212,38 +205,34 @@ export const formData = {
                 operands: [
                   {
                     type: 'Literal',
-                    value: '12312'
-                  }
+                    value: '12312',
+                  },
                 ],
-                operator: 'concatString'
-              }
-            }
+                operator: 'concatString',
+              },
+            },
           ],
-          operator: 'concatParagraph'
-        }
+          operator: 'concatParagraph',
+        },
       },
       'headers',
       {
         type: 'Expression',
         value: {
-          operands: [
-            {}
-          ],
-          operator: 'newArray'
-        }
-      }
+          operands: [{}],
+          operator: 'newArray',
+        },
+      },
     ],
-    operator: 'newObject'
-  }
+    operator: 'newObject',
+  },
 };
 
 export const conditionSchema = {
   type: 'object',
   properties: {
     method: {
-      enum: [
-        'POST'
-      ]
-    }
-  }
+      enum: ['POST'],
+    },
+  },
 };

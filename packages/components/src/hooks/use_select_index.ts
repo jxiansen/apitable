@@ -1,5 +1,3 @@
-
-
 import { useKeyPress } from 'ahooks';
 import type { InputRef } from 'antd';
 import { getArrayLoopIndex } from 'helper';
@@ -20,12 +18,11 @@ export interface IUseSelectProps {
 
 export const useSelectIndex = (props: IUseSelectProps) => {
   const [index, setIndex] = useState(-1);
-  const { inputRef, listContainerRef, onArrowRightPress, onEscapePress,
-    onArrowLeftPress, activeItemClass, listLength, onEnter, containerRef } = props;
+  const { inputRef, listContainerRef, onArrowRightPress, onEscapePress, onArrowLeftPress, activeItemClass, listLength, onEnter, containerRef } =
+    props;
   const isEditing = () => {
     if (inputRef) {
-      return document.activeElement === ReactDOM.findDOMNode(inputRef.current?.input) ||
-        document.activeElement === inputRef.current;
+      return document.activeElement === ReactDOM.findDOMNode(inputRef.current?.input) || document.activeElement === inputRef.current;
     }
     if (containerRef) {
       return containerRef.current!.contains(document.activeElement);
@@ -50,16 +47,18 @@ export const useSelectIndex = (props: IUseSelectProps) => {
   }, [listLength]);
 
   useEffect(() => {
-    if (!listContainerRef?.current) { return; }
+    if (!listContainerRef?.current) {
+      return;
+    }
     if (index === -1) {
       listContainerRef && listContainerRef!.current!.scrollTo(0, 0);
     }
   }, [index, listContainerRef]);
 
-  useKeyPress('UpArrow', e => {
+  useKeyPress('UpArrow', (e) => {
     updateIndex(e, -1);
   });
-  useKeyPress('DownArrow', e => {
+  useKeyPress('DownArrow', (e) => {
     updateIndex(e, +1);
   });
 
@@ -70,7 +69,7 @@ export const useSelectIndex = (props: IUseSelectProps) => {
     onArrowLeftPress && onArrowLeftPress(index);
   });
 
-  useKeyPress('Enter', e => {
+  useKeyPress('Enter', (e) => {
     e.stopImmediatePropagation();
     e.stopPropagation();
     if (isEditing()) {
@@ -78,7 +77,7 @@ export const useSelectIndex = (props: IUseSelectProps) => {
     }
   });
 
-  useKeyPress('Esc', e => {
+  useKeyPress('Esc', (e) => {
     e.stopImmediatePropagation();
     e.stopPropagation();
     onEscapePress && onEscapePress();

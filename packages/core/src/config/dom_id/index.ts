@@ -1,5 +1,3 @@
-
-
 import * as WORKBENCH_SIDE_ID from './workbench_side_id';
 import * as DATASHEET_ID from './datasheet_id';
 import * as NAV_ID from './nav_id';

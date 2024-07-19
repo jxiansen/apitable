@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType, FieldType, ILinkField } from 'types';
 import { IOpenField } from 'types/open/open_field_read_types';
 import { Conversion, IUpdateOpenMagicLinkFieldProperty } from 'types/open/open_field_write_types';
@@ -14,7 +12,7 @@ const linkField: ILinkField = {
     brotherFieldId: 'fld1111111',
     limitToView: 'viw111111',
     limitSingleRecord: false,
-  }
+  },
 };
 
 const openLinkField: IOpenField = {
@@ -26,14 +24,14 @@ const openLinkField: IOpenField = {
     brotherFieldId: 'fld1111111',
     limitToViewId: 'viw111111',
     limitSingleRecord: false,
-  }
+  },
 };
 
 const propertyOptionalFill: IUpdateOpenMagicLinkFieldProperty = {
   foreignDatasheetId: 'dst2222',
   limitToViewId: 'viw22222',
   limitSingleRecord: false,
-  conversion: Conversion.KeepText
+  conversion: Conversion.KeepText,
 };
 
 const propertyOptionalNotFill: IUpdateOpenMagicLinkFieldProperty = {
@@ -42,7 +40,7 @@ const propertyOptionalNotFill: IUpdateOpenMagicLinkFieldProperty = {
 
 describe('Magic Link field read property format check', () => {
   const valid = getOpenFieldProperty(linkField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid(openLinkField.property);
     expect(expectValue).toEqual(receiveValue);
   });
@@ -77,7 +75,7 @@ describe('Magic Link field update property conversion property check', () => {
     const [expectValue, receiveValue] = valid(propertyOptionalFill, {
       foreignDatasheetId: 'dst2222',
       limitToView: 'viw22222',
-      limitSingleRecord: false
+      limitSingleRecord: false,
     });
     expect(expectValue).toEqual(receiveValue);
   });

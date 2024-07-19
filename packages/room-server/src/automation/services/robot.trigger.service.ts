@@ -1,5 +1,3 @@
-
-
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { ResourceRobotDto } from 'automation/dtos/robot.dto';
 import { NodeService } from 'node/services/node.service';

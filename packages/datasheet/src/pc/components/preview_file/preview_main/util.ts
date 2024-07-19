@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import FileSaver from 'file-saver';
 import { IAttachmentValue, Strings, t } from '@apitable/core';

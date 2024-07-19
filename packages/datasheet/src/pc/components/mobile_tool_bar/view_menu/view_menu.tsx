@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { t, Strings } from '@apitable/core';
 import { Popup } from 'pc/components/common/mobile/popup';

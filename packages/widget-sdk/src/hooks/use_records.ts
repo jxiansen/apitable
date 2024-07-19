@@ -1,5 +1,3 @@
-
-
 import { useContext, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { IRecordQuery, IWidgetContext } from 'interface';

@@ -1,5 +1,3 @@
-
-
 import { ICurrencyField } from '../../../types/field_types';
 import { commonTestSuit, getValidCellValue, validProperty } from './common';
 import { CurrencyField } from 'model/field/currency_field';
@@ -8,7 +6,7 @@ const currencyField: ICurrencyField = {
   name: 'Currency Field',
   id: 'fld1111',
   type: 17,
-  property: CurrencyField.defaultProperty()
+  property: CurrencyField.defaultProperty(),
 };
 
 describe('Format check for currency fields', () => {
@@ -71,88 +69,108 @@ describe('Format check for currency fields', () => {
 
 describe('Check currency field property format', () => {
   it('property = undefined', function () {
-    expect(validProperty({
-      ...currencyField,
-      property: undefined
-    } as any)).toEqual(false);
+    expect(
+      validProperty({
+        ...currencyField,
+        property: undefined,
+      } as any)
+    ).toEqual(false);
   });
 
   it('property = null', function () {
-    expect(validProperty({
-      ...currencyField,
-      property: null
-    } as any)).toEqual(false);
+    expect(
+      validProperty({
+        ...currencyField,
+        property: null,
+      } as any)
+    ).toEqual(false);
   });
 
   it('property = {}', function () {
-    expect(validProperty({
-      ...currencyField,
-      property: {}
-    } as any)).toEqual(false);
+    expect(
+      validProperty({
+        ...currencyField,
+        property: {},
+      } as any)
+    ).toEqual(false);
   });
 
   it('property only required', function () {
-    expect(validProperty({
-      ...currencyField,
-      property: {
-        symbol: '&',
-        precision: 0
-      }
-    } as any)).toEqual(true);
+    expect(
+      validProperty({
+        ...currencyField,
+        property: {
+          symbol: '&',
+          precision: 0,
+        },
+      } as any)
+    ).toEqual(true);
   });
 
   it('property precision is missing', function () {
-    expect(validProperty({
-      ...currencyField,
-      property: {
-        symbol: '&',
-      }
-    } as any)).toEqual(false);
+    expect(
+      validProperty({
+        ...currencyField,
+        property: {
+          symbol: '&',
+        },
+      } as any)
+    ).toEqual(false);
   });
 
   it('property symbol is an empty string', function () {
-    expect(validProperty({
-      ...currencyField,
-      property: {
-        ...currencyField.property,
-        symbol: ''
-      }
-    } as any)).toEqual(true);
+    expect(
+      validProperty({
+        ...currencyField,
+        property: {
+          ...currencyField.property,
+          symbol: '',
+        },
+      } as any)
+    ).toEqual(true);
   });
 
   it('property.symbolAlign = 2', function () {
-    expect(validProperty({
-      ...currencyField,
-      property: {
-        ...currencyField.property,
-        symbolAlign: 2
-      }
-    } as any)).toEqual(true);
+    expect(
+      validProperty({
+        ...currencyField,
+        property: {
+          ...currencyField.property,
+          symbolAlign: 2,
+        },
+      } as any)
+    ).toEqual(true);
   });
 
   it('property.symbolAlign = 3', function () {
-    expect(validProperty({
-      ...currencyField,
-      property: {
-        ...currencyField.property,
-        symbolAlign: 3
-      }
-    } as any)).toEqual(false);
+    expect(
+      validProperty({
+        ...currencyField,
+        property: {
+          ...currencyField.property,
+          symbolAlign: 3,
+        },
+      } as any)
+    ).toEqual(false);
   });
 
   it('property attribute is correct', function () {
-    expect(validProperty({
-      ...currencyField
-    } as any)).toEqual(true);
+    expect(
+      validProperty({
+        ...currencyField,
+      } as any)
+    ).toEqual(true);
   });
 
   it('property has redundant properties', function () {
-    expect(validProperty({
-      ...currencyField,
-      property: {
-        ...currencyField.property,
-        icon: ''
-      }
-    } as any)).toEqual(false);
+    expect(
+      validProperty({
+        ...currencyField,
+        property: {
+          ...currencyField.property,
+          icon: '',
+        },
+      } as any)
+    ).toEqual(false);
   });
 });

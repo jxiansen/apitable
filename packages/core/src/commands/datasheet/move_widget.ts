@@ -1,5 +1,3 @@
-
-
 import { ResourceType } from 'types';
 import { ExecuteResult, ICollaCommandDef, ICollaCommandExecuteContext } from '../../command_manager';
 import { DatasheetActions } from '../../commands_actions/datasheet';
@@ -27,22 +25,25 @@ export const moveWidget: ICollaCommandDef<IMoveWidget> = {
       return null;
     }
 
-    const activePanelIndex = widgetPanels.findIndex(item => item.id === panelId);
+    const activePanelIndex = widgetPanels.findIndex((item) => item.id === panelId);
 
     if (activePanelIndex < 0) {
       return null;
     }
 
     const widgets = widgetPanels[activePanelIndex]!.widgets;
-    const installedWidgetIds = widgets.map(widget => widget.id);
-    const ids = layout.map(v => v.id);
+    const installedWidgetIds = widgets.map((widget) => widget.id);
+    const ids = layout.map((v) => v.id);
     const _ids = [...new Set([...ids, ...installedWidgetIds])];
     if (_ids.length !== ids.length) {
       return null;
     }
 
     const moveWidgetAction = DatasheetActions.moveWidget2Action(state, {
-      widgetPanelIndex: activePanelIndex, layout, resourceType, resourceId
+      widgetPanelIndex: activePanelIndex,
+      layout,
+      resourceType,
+      resourceId,
     });
 
     if (!moveWidgetAction) {

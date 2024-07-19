@@ -1,5 +1,3 @@
-
-
 import { testPath } from 'event_manager';
 import { ResourceType } from 'types';
 import { IAtomEventType } from '../interface';
@@ -23,7 +21,7 @@ export class OPEventFieldUpdated extends IAtomEventType<IFieldUpdated> {
       context: {
         fieldId,
         datasheetId: resourceId,
-      }
+      },
     };
   }
 }

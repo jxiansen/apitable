@@ -1,4 +1,3 @@
-
 export interface IApiErrorTip {
   tipId: string;
   extra?: any;

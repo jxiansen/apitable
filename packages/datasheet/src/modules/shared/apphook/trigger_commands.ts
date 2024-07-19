@@ -1,5 +1,3 @@
-
-
 /*
  * Command binding for various event triggers
  *

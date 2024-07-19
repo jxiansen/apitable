@@ -1,5 +1,3 @@
-
-
 import {
   CollaCommandManager,
   CollaCommandName,
@@ -442,7 +440,7 @@ export class Clipboard {
          * 这里 stdValueTable.body 的数据格式为一个二维数组，
          * 第一个纬度是选区的每一行，
          * 第二个纬度是每一行中，选区从左往右对应每一列的单元格数据
-         * 
+         *
          * 因此这里的逻辑就是删除第二层数组中，对应位置的数据
          */
         _body = _body.map((row) => {

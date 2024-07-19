@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import Color from 'color';
 import { applyDefaultTheme } from 'theme';
@@ -30,14 +28,14 @@ export const CalendarDiv = styled.div.attrs(applyDefaultTheme)`
       }
     }
     .btn-pre-month,
-    .btn-next-month{
+    .btn-next-month {
       & > div:hover {
         background: inherit;
       }
     }
   }
   .weeks {
-    ${props => css`
+    ${(props) => css`
       border-bottom: 1px solid ${props.theme.color.fc5};
     `}
     line-height: 32px;
@@ -53,7 +51,7 @@ export const CalendarDiv = styled.div.attrs(applyDefaultTheme)`
     left: 50%;
     transform: translateX(-50%);
     padding: 8px 32px;
-    background-color: ${props => props.theme.color.bgBrandDefault};
+    background-color: ${(props) => props.theme.color.bgBrandDefault};
     border-radius: 4px;
     color: #fff;
     font-size: 14px;
@@ -65,19 +63,19 @@ export const CalendarDiv = styled.div.attrs(applyDefaultTheme)`
       }
       .curMonth {
         .day-value {
-          ${props => css`
-          color: ${props.theme.color.fc1};
-        `}
+          ${(props) => css`
+            color: ${props.theme.color.fc1};
+          `}
         }
         &.weekend .day-value {
-          ${props => css`
-          color: ${props.theme.color.fc4};
-        `}
+          ${(props) => css`
+            color: ${props.theme.color.fc4};
+          `}
         }
       }
       .week-row {
         position: relative;
-        ${props => css`
+        ${(props) => css`
           border-bottom: 1px solid ${props.theme.color.fc5};
           &:last-child {
             border-bottom: 1px solid ${props.theme.color.fc5};
@@ -106,25 +104,25 @@ export const CalendarDiv = styled.div.attrs(applyDefaultTheme)`
       }
     }
     .weekend {
-      ${props => css`
+      ${(props) => css`
         background-color: ${convertHexToRGB(props.theme.color.fc6, 0.4)};
       `}
       &.today {
-        ${props => css`
+        ${(props) => css`
           border-top: 2px solid ${Color(props.theme.color.tangerine[500]).toString()};
         `}
         .day-value {
-          ${props => css`
+          ${(props) => css`
             background-color: ${Color(props.theme.color.tangerine[500]).toString()};
           `}
         }
       }
     }
     .active {
-      background-color: ${props => props.theme.color.bgBrandActive};
+      background-color: ${(props) => props.theme.color.bgBrandActive};
     }
     .today {
-      ${props => css`
+      ${(props) => css`
         border-top: 2px solid ${props.theme.color.fc0};
       `}
       .day-value {
@@ -136,7 +134,7 @@ export const CalendarDiv = styled.div.attrs(applyDefaultTheme)`
         text-align: center;
         border-radius: 100%;
         color: #fff !important;
-        ${props => css`
+        ${(props) => css`
           background-color: ${props.theme.color.fc0};
         `}
       }
@@ -149,7 +147,7 @@ export const HeaderDiv = styled.div.attrs(applyDefaultTheme)`
   align-items: center;
   line-height: 32px;
   padding: 4px 12px;
-  ${props => {
+  ${(props) => {
     const { textCommonPrimary, bgBrandDefault, borderBrandDefault } = props.theme.color;
     return css`
       button {
@@ -165,7 +163,7 @@ export const HeaderDiv = styled.div.attrs(applyDefaultTheme)`
         font-weight: bolder;
         text-align: center;
         width: 88px;
-        color: ${textCommonPrimary}
+        color: ${textCommonPrimary};
       }
     `;
   }}
@@ -187,8 +185,7 @@ export const WeekDiv = styled.div.attrs(applyDefaultTheme)`
   font-size: 13px;
   width: 14.285%;
   display: inline-block;
-  ${props => css`
+  ${(props) => css`
     color: ${props.theme.color.fc1};
   `}
 `;
-

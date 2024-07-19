@@ -1,5 +1,3 @@
-
-
 import { Api, Strings, t } from '@apitable/core';
 import { Message } from 'pc/components/common/message/message';
 

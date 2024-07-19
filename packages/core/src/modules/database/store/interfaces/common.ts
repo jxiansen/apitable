@@ -1,5 +1,3 @@
-
-
 /**
  * pagination data fixed structure
  */

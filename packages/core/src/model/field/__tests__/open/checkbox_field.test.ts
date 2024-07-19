@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType } from 'types/field_api_enums';
 import { IOpenField, IOpenCheckboxFieldProperty } from 'types/open/open_field_read_types';
 import { FieldType, ICheckboxField } from 'types/field_types';
@@ -10,8 +8,8 @@ const checkboxField: ICheckboxField = {
   id: 'fld1111',
   type: FieldType.Checkbox,
   property: {
-    icon: 'flag-ni'
-  }
+    icon: 'flag-ni',
+  },
 };
 
 const openCheckboxField: IOpenField = {
@@ -19,17 +17,17 @@ const openCheckboxField: IOpenField = {
   id: 'fld1111',
   type: APIMetaFieldType.Checkbox,
   property: {
-    icon: '🇳🇮'
-  }
+    icon: '🇳🇮',
+  },
 };
 
 const writeOpenProperty: IOpenCheckboxFieldProperty = {
-  icon: 'flag-ni'
+  icon: 'flag-ni',
 };
 
 describe('the format check of checkbox reads property', () => {
   const valid = getOpenFieldProperty(checkboxField);
-  it('the correct property', function() {
+  it('the correct property', function () {
     const [expectValue, receiveValue] = valid(openCheckboxField.property);
     expect(receiveValue).toEqual(expectValue);
   });

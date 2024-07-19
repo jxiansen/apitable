@@ -1,5 +1,3 @@
-
-
 import { CURSOR_MOVE, DATASHEET_ACTIVE_COLLABORATOR, DATASHEET_DEACTIVATE_COLLABORATOR } from 'modules/shared/store/action_constants';
 import { ICursorMove, ICollaborator } from 'exports/store/interfaces';
 
@@ -26,7 +24,7 @@ export const cursorMove = (
     recordId: string;
     time: number;
   },
-  datasheetId: string,
+  datasheetId: string
 ): ICursorMove => {
   return {
     type: CURSOR_MOVE,

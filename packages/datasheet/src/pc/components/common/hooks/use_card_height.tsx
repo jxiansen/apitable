@@ -1,5 +1,3 @@
-
-
 import { sum } from 'lodash';
 import { IViewColumn, Selectors } from '@apitable/core';
 import { getFieldHeight, getVietualFieldHeight, hasCover } from 'pc/components/gallery_view/utils';

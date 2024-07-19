@@ -1,8 +1,4 @@
-
-
-import type {
-  SingleSelectField,
-} from 'model/field/select_field/single_select_field';
+import type { SingleSelectField } from 'model/field/select_field/single_select_field';
 import { IField, FieldType } from 'types/field_types';
 
 /**
@@ -17,9 +13,7 @@ import { IField, FieldType } from 'types/field_types';
  * @param {Field} oldField
  * @returns {(string | null)}
  */
-export function str2single(value: string[] | string | null,
-  newField: SingleSelectField,
-  oldField: IField): string | null {
+export function str2single(value: string[] | string | null, newField: SingleSelectField, oldField: IField): string | null {
   if (value == null) return null;
   /* If value is an array, but the old type is not a multi-select type, return null */
   if (Array.isArray(value) && oldField.type !== FieldType.MultiSelect) {
@@ -42,5 +36,4 @@ export function str2single(value: string[] | string | null,
   }
   const option = newField.findOptionByName(value as string);
   return option ? option.id : null;
-
 }

@@ -1,19 +1,17 @@
-
-
 export const EmptyObjectOperand = {
   type: 'Expression',
   value: {
     operator: 'newObject',
-    operands: []
-  }
+    operands: [],
+  },
 };
 
 export const EmptyArrayOperand = {
   type: 'Expression',
   value: {
     operator: 'newArray',
-    operands: []
-  }
+    operands: [],
+  },
 };
 
 export const EmptyNullOperand = {

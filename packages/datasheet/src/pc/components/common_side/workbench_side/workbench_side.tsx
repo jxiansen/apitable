@@ -1,5 +1,3 @@
-
-
 import { ShortcutActionManager, ShortcutActionName } from 'modules/shared/shortcut_key';
 import { getShortcutKeyString } from 'modules/shared/shortcut_key/keybinding_config';
 import { usePostHog } from 'posthog-js/react';
@@ -192,7 +190,7 @@ export const WorkbenchSide: FC<React.PropsWithChildren<unknown>> = () => {
     [spaceId],
   );
 
-  const activeKey = useAppSelector(state => state.catalogTree.activeType || updateActiveKey('get'));
+  const activeKey = useAppSelector((state) => state.catalogTree.activeType || updateActiveKey('get'));
 
   useEffect(() => {
     if (!activeNodeId || !rootId) {
@@ -242,7 +240,7 @@ export const WorkbenchSide: FC<React.PropsWithChildren<unknown>> = () => {
 
   useEffect(() => {
     if (spaceId) {
-      getPrivateTreeData().then(rlt => {
+      getPrivateTreeData().then((rlt) => {
         if (rlt === null) {
           changeHandler(ConfigConstant.Modules.CATALOG);
           setShowPrivate(false);
@@ -332,9 +330,12 @@ export const WorkbenchSide: FC<React.PropsWithChildren<unknown>> = () => {
             <SpaceInfo />
           </div>
           <div className={styles.search}>
-            <Tooltip title={t(Strings.search_node_tip, {
-              shortcutKey: getShortcutKeyString(ShortcutActionName.SearchNode)
-            })} placement="right">
+            <Tooltip
+              title={t(Strings.search_node_tip, {
+                shortcutKey: getShortcutKeyString(ShortcutActionName.SearchNode),
+              })}
+              placement="right"
+            >
               <IconButton
                 shape="square"
                 className={styles.searchBtn}
@@ -453,11 +454,13 @@ export const WorkbenchSide: FC<React.PropsWithChildren<unknown>> = () => {
         {saveAsTemplateModalNodeId && (
           <GenerateTemplate nodeId={saveAsTemplateModalNodeId} onCancel={() => dispatch(StoreActions.updateSaveAsTemplateModalNodeId(''))} />
         )}
-        {importModalNodeId && <ImportFile
-          isPrivate={activeKey === ConfigConstant.Modules.PRIVATE}
-          parentId={importModalNodeId} 
-          onCancel={() => dispatch(StoreActions.updateImportModalNodeId(''))} 
-        />}
+        {importModalNodeId && (
+          <ImportFile
+            isPrivate={activeKey === ConfigConstant.Modules.PRIVATE}
+            parentId={importModalNodeId}
+            onCancel={() => dispatch(StoreActions.updateImportModalNodeId(''))}
+          />
+        )}
         {panelVisible && (
           <SearchPanel
             folderId={panelInfo!.folderId}

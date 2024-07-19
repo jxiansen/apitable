@@ -1,5 +1,3 @@
-
-
 import { credentials } from '@grpc/grpc-js';
 import { HttpService } from '@nestjs/axios';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
@@ -46,7 +44,7 @@ export class GrpcClientProxy extends ClientGrpcProxy implements OnApplicationBoo
         this.logger.log({
           message: `Subscription to [${RedisConstants.ROOM_POOL_CHANNEL}] successful`,
           channel: RedisConstants.ROOM_POOL_CHANNEL,
-          count
+          count,
         });
       }
     });
@@ -80,7 +78,7 @@ export class GrpcClientProxy extends ClientGrpcProxy implements OnApplicationBoo
     const protoMethods = Object.keys(clientRef[name].prototype);
     const grpcService = {} as T;
 
-    protoMethods.forEach(m => {
+    protoMethods.forEach((m) => {
       const key = m[0]!.toLowerCase() + m.slice(1, m.length);
       grpcService[key] = this.createAsyncUnaryServiceMethod(grpcClient, m);
     });
@@ -128,17 +126,14 @@ export class GrpcClientProxy extends ClientGrpcProxy implements OnApplicationBoo
     return addressList[index]!;
   }
 
-  createAsyncUnaryServiceMethod(
-    client: any,
-    methodName: string
-  ): (...args: any[]) => Observable<any> {
+  createAsyncUnaryServiceMethod(client: any, methodName: string): (...args: any[]) => Observable<any> {
     return (...args: any[]) => {
       const localClient = client();
       const isRequestStream = localClient[methodName].requestStream;
       const upstreamSubjectOrData = args[0];
       const isUpstreamSubject = upstreamSubjectOrData && isFunction(upstreamSubjectOrData.subscribe);
       if (isRequestStream && isUpstreamSubject) {
-        return new Observable(observer => {
+        return new Observable((observer) => {
           const callArgs = [
             (error: unknown, data: unknown) => {
               if (error) {
@@ -160,7 +155,7 @@ export class GrpcClientProxy extends ClientGrpcProxy implements OnApplicationBoo
           );
         });
       }
-      return new Observable(observer => {
+      return new Observable((observer) => {
         localClient[methodName](...args, (error: any, data: any) => {
           if (error) {
             return observer.error(error);
@@ -180,15 +175,15 @@ export class GrpcClientProxy extends ClientGrpcProxy implements OnApplicationBoo
       return;
     }
 
-    const checkTasks = checkIps.map(address => {
-      return this.checkRoomClient(address).then(result => {
+    const checkTasks = checkIps.map((address) => {
+      return this.checkRoomClient(address).then((result) => {
         return Promise.resolve(result);
       });
     });
 
     const batchCheckTaskResult = await Promise.all(checkTasks);
 
-    const validHealthyClient = filter(batchCheckTaskResult, el => !isEmpty(el));
+    const validHealthyClient = filter(batchCheckTaskResult, (el) => !isEmpty(el));
 
     this.clientIps = new Set(validHealthyClient as string[]);
   }
@@ -227,10 +222,11 @@ export class GrpcClientProxy extends ClientGrpcProxy implements OnApplicationBoo
 
     // Add healthy IP while removing unhealthy IP
     this.clientIps.add(roomClientAddress);
-    await redisClient.pipeline()
+    await redisClient
+      .pipeline()
       .zadd(RedisConstants.ROOM_POOL_LOAD_HEALTHY_KEY, healthScore, address)
       .hdel(RedisConstants.ROOM_POOL_LOAD_UNHEALTHY_KEY, address)
-      .exec(error => {
+      .exec((error) => {
         if (error) {
           this.logger.error('grpc handleHealthy error', error);
         }
@@ -251,14 +247,15 @@ export class GrpcClientProxy extends ClientGrpcProxy implements OnApplicationBoo
     if (!available || latestOfflineNum >= HealthConstants.ROOM_MAX_OFFLINE_TIMES) {
       // Need to delete the local
       this.clientIps.delete(roomClientAddress);
-      await redisClient.pipeline()
+      await redisClient
+        .pipeline()
         // Removal from the pool to be detected
         .srem(RedisConstants.ROOM_POOL_LOAD_KEY, address)
         // Removal from Healthy Pool
         .zrem(RedisConstants.ROOM_POOL_LOAD_HEALTHY_KEY, address)
         // Removed from Unhealthy pool
         .hdel(RedisConstants.ROOM_POOL_LOAD_UNHEALTHY_KEY, address)
-        .exec(error => {
+        .exec((error) => {
           if (error) {
             this.logger.error('grpc handleHealthy error', error);
           }
@@ -283,11 +280,12 @@ export class GrpcClientProxy extends ClientGrpcProxy implements OnApplicationBoo
       // Use a collection of storage ip, improve the efficiency of redis
       try {
         this.clientIps.add(roomClientAddress);
-        await redisClient.pipeline()
+        await redisClient
+          .pipeline()
           .sadd(RedisConstants.ROOM_POOL_LOAD_KEY, address)
           // Successful service startup default means healthy, append to healthy Ip pool, `1` means available level
           .zadd(RedisConstants.ROOM_POOL_LOAD_HEALTHY_KEY, 1, address)
-          .exec(error => {
+          .exec((error) => {
             if (error) {
               this.logger.error('grpc handleNestMessage error', error);
             }
@@ -303,14 +301,15 @@ export class GrpcClientProxy extends ClientGrpcProxy implements OnApplicationBoo
         // Need to delete the local
         this.clientIps.delete(roomClientAddress);
 
-        await redisClient.pipeline()
+        await redisClient
+          .pipeline()
           // Removal from the pool to be detected
           .srem(RedisConstants.ROOM_POOL_LOAD_KEY, address)
           // Removal from Health Pool
           .zrem(RedisConstants.ROOM_POOL_LOAD_HEALTHY_KEY, address)
           // Removed from unhealthy pool
           .hdel(RedisConstants.ROOM_POOL_LOAD_UNHEALTHY_KEY, address)
-          .exec(error => {
+          .exec((error) => {
             if (error) {
               this.logger.error('grpc handleNestMessage error', error);
             }
@@ -323,12 +322,12 @@ export class GrpcClientProxy extends ClientGrpcProxy implements OnApplicationBoo
     }
   }
 
-  private splitAddress(str: string): { roomClientAddress: string, checkRoomClientAddress: string } {
+  private splitAddress(str: string): { roomClientAddress: string; checkRoomClientAddress: string } {
     // Split port + IP according to format
     const cargo = split(str, ':');
     return {
       roomClientAddress: `${cargo[0]}:${cargo[1]}`,
-      checkRoomClientAddress: `${cargo[0]}:${cargo[2]}`
+      checkRoomClientAddress: `${cargo[0]}:${cargo[2]}`,
     };
   }
 

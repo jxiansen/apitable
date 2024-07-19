@@ -1,5 +1,3 @@
-
-
 import classnames from 'classnames';
 import * as React from 'react';
 import { FC, useRef } from 'react';
@@ -46,7 +44,7 @@ const TreeBase: FC<React.PropsWithChildren<ITreeProps>> = ({ rightClick }) => {
     }
     rightClick(e, data);
   };
-  
+
   const onContextMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();

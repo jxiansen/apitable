@@ -1,5 +1,3 @@
-
-
 import { Edge, Node as FlowNode } from '@apitable/react-flow';
 import { DragNodeType } from './constants';
 

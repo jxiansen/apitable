@@ -1,5 +1,3 @@
-
-
 import { isObject } from 'lodash';
 import { useState, useEffect } from 'react';
 import { Selectors } from '@apitable/core';

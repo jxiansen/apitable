@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Alert, showAlert } from './index';
 import { Button } from '../button';
@@ -22,7 +20,7 @@ export default {
   },
   args: {
     content: 'Scanner for decks of cards with bar codes printed on card edges',
-  }
+  },
 };
 
 const Template: Story<IAlertProps> = (args) => <Alert {...args} />;
@@ -31,7 +29,7 @@ export const Default = Template.bind({});
 
 export const SuccessType = Template.bind({});
 SuccessType.args = {
-  type: 'success'
+  type: 'success',
 };
 
 export const WithTitle = Template.bind({});
@@ -41,27 +39,29 @@ WithTitle.args = {
 
 export const Closable = Template.bind({});
 Closable.args = {
-  closable: true
+  closable: true,
 };
 
 export const CloseCallback = Template.bind({});
 CloseCallback.args = {
   closable: true,
-  onClose: () => alert('I turned off this reminder ⏰')
+  onClose: () => alert('I turned off this reminder ⏰'),
 };
 
 export const ShowAlertFunction = () => {
   return (
-    <Button color="primary" onClick={() => {
-      showAlert({
-        content: 'Scanner for decks of cards with bar codes printed on card edges',
-        type: 'warning',
-        closable: true,
-        duration: 0,
-      });
-    }}>
+    <Button
+      color="primary"
+      onClick={() => {
+        showAlert({
+          content: 'Scanner for decks of cards with bar codes printed on card edges',
+          type: 'warning',
+          closable: true,
+          duration: 0,
+        });
+      }}
+    >
       Click to trigger alert
     </Button>
   );
-  
 };

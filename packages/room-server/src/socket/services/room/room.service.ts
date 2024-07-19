@@ -1,5 +1,3 @@
-
-
 import { MetadataValue } from '@grpc/grpc-js';
 import { Injectable, Logger } from '@nestjs/common';
 import { isNil } from '@nestjs/common/utils/shared.utils';
@@ -24,9 +22,8 @@ export class RoomService {
 
   constructor(
     private readonly nestService: NestService,
-    private readonly nestClient: GrpcClient
-  ) {
-  }
+    private readonly nestClient: GrpcClient,
+  ) {}
 
   async clientDisconnect(socket: Socket) {
     const rooms = socket.rooms;
@@ -51,10 +48,10 @@ export class RoomService {
   @Retryable({
     maxAttempts: SocketConstants.GRPC_OPTIONS.retryPolicy.maxAttempts,
     sentryScopeContext: {
-      tags: args => {
+      tags: (args) => {
         return { clientId: args![0]?.clientId };
       },
-      extra: args => {
+      extra: (args) => {
         return { roomId: args![0]?.roomId, clientId: args![0]?.clientId, cookie: args![0]?.cookie };
       },
     },
@@ -121,7 +118,7 @@ export class RoomService {
     // get all rooms of the datasheet resource
     const roomIds = [message.roomId];
     // custom request to get multiple service node pod sockets
-    socket.nsp.serverSideEmit(SocketEventEnum.CLUSTER_SOCKET_ID_EVENT, roomIds, async(_err: any, replies: string | any[]) => {
+    socket.nsp.serverSideEmit(SocketEventEnum.CLUSTER_SOCKET_ID_EVENT, roomIds, async (_err: any, replies: string | any[]) => {
       this.logger.log({ message: 'WatchRoom:ServerSideEmit', replies, err: `${_err}` });
       // no room connection return directly
       if (!replies.length) {
@@ -161,10 +158,10 @@ export class RoomService {
   @Retryable({
     maxAttempts: SocketConstants.GRPC_OPTIONS.retryPolicy.maxAttempts,
     sentryScopeContext: {
-      tags: args => {
+      tags: (args) => {
         return { clientId: args![0]?.clientId };
       },
-      extra: args => {
+      extra: (args) => {
         return { roomId: args![0]?.roomId, clientId: args![0]?.clientId, cookie: args![0]?.cookie };
       },
     },
@@ -261,7 +258,7 @@ export class RoomService {
       return;
     }
 
-    message.forEach(ro => {
+    message.forEach((ro) => {
       server.to(ro.nodeId).emit(BroadcastTypes.NODE_SHARE_DISABLED, { shareIds: ro.shareIds });
       return;
     });
@@ -276,7 +273,7 @@ export class RoomService {
     const { event, ...args } = message;
     // Field permission closures or attribute changes are broadcast directly to each room
     if (event === BroadcastTypes.FIELD_PERMISSION_DISABLE || event === BroadcastTypes.FIELD_PERMISSION_SETTING_CHANGE) {
-      roomIds.map(roomId => {
+      roomIds.map((roomId) => {
         server.to(roomId).emit(event, args);
         return;
       });
@@ -286,7 +283,7 @@ export class RoomService {
       await this.broadcastFieldPermissionChangeToUser(server, message, [...server.adapter.rooms.get(message.datasheetId)]);
     }
     // custom request to get multiple service node pod sockets
-    server.serverSideEmit(SocketEventEnum.CLUSTER_SOCKET_ID_EVENT, roomIds, async(err: string, replies: string | any[]) => {
+    server.serverSideEmit(SocketEventEnum.CLUSTER_SOCKET_ID_EVENT, roomIds, async (err: string, replies: string | any[]) => {
       this.logger.log({ message: 'FieldPermission:ServerSideEmit', replies, err: `${err}` });
       // no room connection return directly
       if (!replies.length) {
@@ -317,7 +314,7 @@ export class RoomService {
       }
     }
     // broadcast to each socket
-    infos.forEach(info => {
+    infos.forEach((info) => {
       // Sharing page connection, only broadcast field permission is on
       if (info.shareId) {
         if (event === BroadcastTypes.FIELD_PERMISSION_ENABLE) {

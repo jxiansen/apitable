@@ -1,5 +1,3 @@
-
-
 import { FloatUiTooltip as Tooltip } from '@apitable/components';
 import { QuestionCircleOutlined } from '@apitable/icons';
 import styles from './style.module.less';

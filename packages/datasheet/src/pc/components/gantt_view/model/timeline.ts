@@ -1,5 +1,3 @@
-
-
 import { range } from 'lodash';
 import { DateUnitType, Strings, t } from '@apitable/core';
 import { getEndDate, getStartDate, isLastDayOfMonth, isLastMonthOfYear } from '../utils';

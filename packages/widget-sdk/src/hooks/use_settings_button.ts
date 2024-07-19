@@ -1,16 +1,14 @@
-
-
 import { useContext } from 'react';
 import { WidgetConfigContext } from '../context';
 
 /**
- * When using this hooks, the settings button will be displayed at the top of the widget window. 
- * Returns the button's activation state, will be re-rendered when setting that is clicked. 
+ * When using this hooks, the settings button will be displayed at the top of the widget window.
+ * Returns the button's activation state, will be re-rendered when setting that is clicked.
  * You can use toggleSetting actively change the button activation state.
  * The settings screen requires developers to manage the show/hide state themselves via the isShowingSettings state.
- * 
+ *
  * @returns
- * 
+ *
  * ### Example
  * ```js
  * import { useSettingsButton } from '@apitable/widget-sdk';

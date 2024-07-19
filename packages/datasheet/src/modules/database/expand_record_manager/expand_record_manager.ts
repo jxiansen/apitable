@@ -1,5 +1,3 @@
-
-
 import { EXPAND_RECORD } from 'pc/components/expand_record/expand_record.enum';
 
 class ExpandRecordManager {

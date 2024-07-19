@@ -1,5 +1,3 @@
-
-
 import { Checkbox, TreeSelect } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { usePostHog } from 'posthog-js/react';
@@ -37,25 +35,29 @@ export const UsingTemplateModal: FC<React.PropsWithChildren<IUsingTemplateModalP
   useEffect(() => {
     if (nodeTreeData) {
       const teamPId = `${nodeTreeData.nodeId}-team`;
-      const _nodeTree = transformNodeTreeData([nodeTreeData]).slice(1).map((item) => {
-        if (item.pId === nodeTreeData.nodeId) {
-          return {
-            ...item,
-            pId: teamPId,
-          };
-        }
-        return item;
-      });
+      const _nodeTree = transformNodeTreeData([nodeTreeData])
+        .slice(1)
+        .map((item) => {
+          if (item.pId === nodeTreeData.nodeId) {
+            return {
+              ...item,
+              pId: teamPId,
+            };
+          }
+          return item;
+        });
       const privatePId = `${nodeTreeData.nodeId}-private`;
-      const _privateNodeTree = transformNodeTreeData([nodePrivateTreeData]).slice(1).map((item) => {
-        if (item.pId === nodePrivateTreeData.nodeId) {
-          return {
-            ...item,
-            pId: privatePId,
-          };
-        }
-        return item;
-      });
+      const _privateNodeTree = transformNodeTreeData([nodePrivateTreeData])
+        .slice(1)
+        .map((item) => {
+          if (item.pId === nodePrivateTreeData.nodeId) {
+            return {
+              ...item,
+              pId: privatePId,
+            };
+          }
+          return item;
+        });
       const treeData = [
         {
           title: t(Strings.catalog_team),
@@ -85,11 +87,12 @@ export const UsingTemplateModal: FC<React.PropsWithChildren<IUsingTemplateModalP
   };
 
   const checkNodePrivate = (nodeId: string) => {
-
     if (nodeId.includes('private')) {
       return true;
     }
-    return transformNodeTreeData([nodePrivateTreeData]).slice(1).some((item) => item.id === nodeId);
+    return transformNodeTreeData([nodePrivateTreeData])
+      .slice(1)
+      .some((item) => item.id === nodeId);
   };
 
   const onOk = async () => {

@@ -1,11 +1,20 @@
-
-
 import { DatasheetOperationPermission, FieldType, IInsertPosition, IPermissionResult, IWidgetContext, IWidgetDatasheetState } from 'interface';
 import {
-  CollaCommandName, ConfigConstant, ExecuteResult, Field as CoreField, ICollaCommandExecuteResult, ISetRecordOptions, Selectors,
-  FieldType as CoreFieldType, IDPrefix, getNewId, getFieldClass, IField, Conversion,
+  CollaCommandName,
+  ConfigConstant,
+  ExecuteResult,
+  Field as CoreField,
+  ICollaCommandExecuteResult,
+  ISetRecordOptions,
+  Selectors,
+  FieldType as CoreFieldType,
+  IDPrefix,
+  getNewId,
+  getFieldClass,
+  IField,
+  Conversion,
   getFieldTypeByString,
-  IReduxState
+  IReduxState,
 } from 'core';
 import { cmdExecute } from 'message/utils';
 import { getWidgetDatasheet } from 'store';
@@ -13,11 +22,11 @@ import { errMsg } from 'utils/private';
 
 /**
  * Datasheet operation
- * 
+ *
  * It is recommended to use if you want to operate datasheet, such as obtaining datasheet data, adding records, deleting records, etc.,
  * we recommend using the {@link useDatasheet} hook function.
- * 
- * If you need to obtain record data, 
+ *
+ * If you need to obtain record data,
  * you can use {@link useRecord} (query single record data) and {@link useRecords} (batch query record data).
  *
  * - {@link addRecord}: Creates a new record with the specified cell values
@@ -31,9 +40,9 @@ import { errMsg } from 'utils/private';
  * - {@link deleteRecord}: Delete the given record
  *
  * - {@link deleteRecords}: Delete the given records
- * 
+ *
  * - {@link addField}: Creates a new field
- * 
+ *
  * - {@link deleteField}: Delete the given field
  *
  * - {@link checkPermissionsForAddRecord}: Checks whether the current user has permission to create the specified record
@@ -47,7 +56,7 @@ import { errMsg } from 'utils/private';
  * - {@link checkPermissionsForDeleteRecord}: Checks whether the current user has permission to delete the specified record
  *
  * - {@link checkPermissionsForDeleteRecords}: Checks whether the current user has permission to delete the specified records
- * 
+ *
  * - {@link checkPermissionsForAddField}: Checks whether the current user has permission to create the specified field
  *
  * - {@link checkPermissionsForDeleteField}: Checks whether the current user has permission to delete the specified field
@@ -62,7 +71,7 @@ export class Datasheet {
    */
   constructor(
     public datasheetId: string,
-    private wCtx: IWidgetContext,
+    private wCtx: IWidgetContext
   ) {
     this.datasheetData = wCtx.widgetStore?.getState().datasheetMap[this.datasheetId];
   }
@@ -83,7 +92,7 @@ export class Datasheet {
 
   /**
    * The name of the Datasheet.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -93,14 +102,14 @@ export class Datasheet {
    * ```
    */
   get name() {
-    return this.datasheetData?.datasheet?.datasheetName; 
+    return this.datasheetData?.datasheet?.datasheetName;
   }
 
   private checkRecordsValues(records: { [key: string]: any }[]) {
     const state = this.wCtx.widgetStore.getState() as any as IReduxState;
     const fieldDataMap = Selectors.getFieldMap(state, this.datasheetId)!;
 
-    records.forEach(valuesMap => {
+    records.forEach((valuesMap) => {
       Object.entries(valuesMap).forEach(([fieldId, cellValue]) => {
         const fieldData = fieldDataMap[fieldId];
         if (!fieldData) {
@@ -122,7 +131,7 @@ export class Datasheet {
   private transformRecordValues(records: { [key: string]: any }[]): { [key: string]: any }[] {
     const state = this.wCtx.widgetStore.getState() as any as IReduxState;
     const fieldDataMap = Selectors.getFieldMap(state, this.datasheetId)!;
-    return records.map(valuesMap => {
+    return records.map((valuesMap) => {
       const coreFieldMap: Record<string, any> = {};
       Object.entries(valuesMap).forEach(([fieldId, cellValue]) => {
         const coreField = CoreField.bindModel(fieldDataMap[fieldId]!, state);
@@ -160,32 +169,42 @@ export class Datasheet {
       return { acceptable: false, message: 'Failed to load the data of the datasheet' };
     }
 
-    switch(operation) {
-      case DatasheetOperationPermission.AddRecord: {
-        if (!permissions.rowCreatable) {
-          return { acceptable: false, message: 'The permission of the datasheet is read-only and cannot be added record' };
+    switch (operation) {
+      case DatasheetOperationPermission.AddRecord:
+        {
+          if (!permissions.rowCreatable) {
+            return { acceptable: false, message: 'The permission of the datasheet is read-only and cannot be added record' };
+          }
         }
-      } break;
-      case DatasheetOperationPermission.EditRecord: {
-        if (!permissions.cellEditable) {
-          return { acceptable: false, message: 'The permission of the datasheet is read-only and cannot be updated cell' };
+        break;
+      case DatasheetOperationPermission.EditRecord:
+        {
+          if (!permissions.cellEditable) {
+            return { acceptable: false, message: 'The permission of the datasheet is read-only and cannot be updated cell' };
+          }
         }
-      } break;
-      case DatasheetOperationPermission.DeleteRecord: {
-        if (!permissions.rowRemovable) {
-          return { acceptable: false, message: 'The permission of the datasheet is read-only and cannot be deleted record' };
+        break;
+      case DatasheetOperationPermission.DeleteRecord:
+        {
+          if (!permissions.rowRemovable) {
+            return { acceptable: false, message: 'The permission of the datasheet is read-only and cannot be deleted record' };
+          }
         }
-      } break;
-      case DatasheetOperationPermission.AddField: {
-        if (!permissions.fieldCreatable) {
-          return { acceptable: false, message: 'The permission of the datasheet is read-only and cannot be added field' };
+        break;
+      case DatasheetOperationPermission.AddField:
+        {
+          if (!permissions.fieldCreatable) {
+            return { acceptable: false, message: 'The permission of the datasheet is read-only and cannot be added field' };
+          }
         }
-      } break;
-      case DatasheetOperationPermission.DeleteField: {
-        if (!permissions.fieldRemovable) {
-          return { acceptable: false, message: 'The permission of the datasheet is read-only and cannot be deleted field' };
+        break;
+      case DatasheetOperationPermission.DeleteField:
+        {
+          if (!permissions.fieldRemovable) {
+            return { acceptable: false, message: 'The permission of the datasheet is read-only and cannot be deleted field' };
+          }
         }
-      } break;
+        break;
     }
 
     return { acceptable: true };
@@ -222,8 +241,7 @@ export class Datasheet {
         const checkError = fieldEntity.validateOpenWriteValue(!value ? null : value).error;
         if (checkError) {
           return errMsg(`
-            The currently written value ${value} of the ${field.name} field does not conform to the format of ${checkError.message}. Please check.`
-          );
+            The currently written value ${value} of the ${field.name} field does not conform to the format of ${checkError.message}. Please check.`);
         }
       }
     }
@@ -234,12 +252,12 @@ export class Datasheet {
   }
 
   private checkFieldName(name?: string): IPermissionResult {
-    if (typeof name !== 'string'){
+    if (typeof name !== 'string') {
       return errMsg('Field name must be a string');
     }
     const state = this.wCtx.widgetStore.getState() as any as IReduxState;
     const fieldDataMap = Selectors.getFieldMap(state, this.datasheetId)!;
-    const hasTheSameName = Object.keys(fieldDataMap).some(fieldId => {
+    const hasTheSameName = Object.keys(fieldDataMap).some((fieldId) => {
       const item = fieldDataMap[fieldId]!;
       return item.name === name;
     });
@@ -306,9 +324,9 @@ export class Datasheet {
 
   /**
    * Creates new records with the specified cell values.
-   * 
+   *
    * @param records Array of objects with a fields key mapping fieldId to value for that field.
-   * 
+   *
    * @param insertPosition Position to insert in the view.
    *
    * @returns The returned promise will resolve to an array of recordIds of the new records once the new records are persisted.
@@ -377,7 +395,7 @@ export class Datasheet {
     if (insertPosition) {
       // Iterate through rows to find the actual insertion location, same as common/components/menu datasheet right click UI operation
       // TODO: This approach will need to be optimized in the future
-      index = view.rows!.findIndex(row => row.recordId === insertPosition.anchorRecordId) ;
+      index = view.rows!.findIndex((row) => row.recordId === insertPosition.anchorRecordId);
       if (index === -1) {
         throw new Error(`Anchor recordId: ${insertPosition.anchorRecordId} is not exist in datasheet`);
       }
@@ -394,19 +412,22 @@ export class Datasheet {
       throw new Error('Insert index should not greater than all row count in view');
     }
 
-    return new Promise(async(resolve) => {
-      const result: ICollaCommandExecuteResult<any> = await cmdExecute({
-        cmd: CollaCommandName.AddRecords,
-        datasheetId: this.datasheetId,
-        viewId,
-        count: transformedRecords.length,
-        index,
-        cellValues: transformedRecords,
-      }, this.wCtx.id);
+    return new Promise(async (resolve) => {
+      const result: ICollaCommandExecuteResult<any> = await cmdExecute(
+        {
+          cmd: CollaCommandName.AddRecords,
+          datasheetId: this.datasheetId,
+          viewId,
+          count: transformedRecords.length,
+          index,
+          cellValues: transformedRecords,
+        },
+        this.wCtx.id
+      );
       if (result.result === ExecuteResult.Fail) {
         throw new Error(result.reason);
       }
-  
+
       if (result.result === ExecuteResult.None) {
         throw new Error('Add record method has been ignored');
       }
@@ -422,7 +443,7 @@ export class Datasheet {
    * @param valuesMap key for fieldId, value for the contents of the cell object,
    * only need to pass to modify the value, do not need to modify the key value do not need to pass.
    * To empty a field, you need to pass key: null.
-   * @return 
+   * @return
    *
    * #### Description
    * Throws an error if the user does not have permission to update the given cell values in the record, or or recordId does not exist,
@@ -475,7 +496,7 @@ export class Datasheet {
    * }
    * ```
    */
-  async setRecords(records: { id: string, valuesMap: { [key: string]: any } }[]) {
+  async setRecords(records: { id: string; valuesMap: { [key: string]: any } }[]) {
     const recordIds: string[] = [];
     const recordsValues: { [key: string]: any }[] = [];
     for (const record of records) {
@@ -493,8 +514,8 @@ export class Datasheet {
         throw new Error(`RecordId: ${recordId} is not exist in datasheet`);
       }
 
-      this.transformRecordValues([record.valuesMap]).forEach(valueMap => {
-        Object.entries(valueMap).forEach(([fieldId, cellValue])=> {
+      this.transformRecordValues([record.valuesMap]).forEach((valueMap) => {
+        Object.entries(valueMap).forEach(([fieldId, cellValue]) => {
           pre.push({
             recordId,
             fieldId,
@@ -505,11 +526,14 @@ export class Datasheet {
       return pre;
     }, []);
 
-    const result: ICollaCommandExecuteResult<any> = await cmdExecute({
-      cmd: CollaCommandName.SetRecords,
-      datasheetId: this.datasheetId,
-      data,
-    }, this.wCtx.id);
+    const result: ICollaCommandExecuteResult<any> = await cmdExecute(
+      {
+        cmd: CollaCommandName.SetRecords,
+        datasheetId: this.datasheetId,
+        data,
+      },
+      this.wCtx.id
+    );
     if (result.result === ExecuteResult.Fail) {
       throw new Error(result.reason);
     }
@@ -547,7 +571,7 @@ export class Datasheet {
    *
    * @param recordIds array of recordIds.
    * @returns
-   * 
+   *
    *
    * #### Description
    * Delete the given record by recordIds.
@@ -567,11 +591,14 @@ export class Datasheet {
    * ```
    */
   async deleteRecords(recordIds: string[]) {
-    const result: ICollaCommandExecuteResult<any> = await cmdExecute({
-      cmd: CollaCommandName.DeleteRecords,
-      datasheetId: this.datasheetId,
-      data: recordIds,
-    }, this.wCtx.id);
+    const result: ICollaCommandExecuteResult<any> = await cmdExecute(
+      {
+        cmd: CollaCommandName.DeleteRecords,
+        datasheetId: this.datasheetId,
+        data: recordIds,
+      },
+      this.wCtx.id
+    );
     if (result.result === ExecuteResult.Fail) {
       throw new Error(result.reason);
     }
@@ -584,12 +611,12 @@ export class Datasheet {
    * @param type type for the field.
    * @param property property for the field. omit for fields without writable property.
    * @returns
-   * 
+   *
    *
    * #### Description
    *
    * Refer to {@link FieldType} for supported field types, the write format for property, and other specifics for certain field types.
-   * 
+   *
    * Throws an error if the user does not have permission to create a field,
    * if invalid name, type or property are provided, or if creating fields of this type is not supported.
    *
@@ -614,17 +641,22 @@ export class Datasheet {
       property: getFieldClass(fieldType).defaultProperty(),
     } as IField;
     const field = CoreField.bindContext(fieldInfoForState, state);
-    const result: ICollaCommandExecuteResult<any> = await cmdExecute({
-      cmd: CollaCommandName.AddFields,
-      data: [{
-        data: {
-          name,
-          type: fieldType,
-          property: field.addOpenFieldPropertyTransformProperty(property),
-        } as any,
-        index,
-      }],
-    }, this.wCtx.id);
+    const result: ICollaCommandExecuteResult<any> = await cmdExecute(
+      {
+        cmd: CollaCommandName.AddFields,
+        data: [
+          {
+            data: {
+              name,
+              type: fieldType,
+              property: field.addOpenFieldPropertyTransformProperty(property),
+            } as any,
+            index,
+          },
+        ],
+      },
+      this.wCtx.id
+    );
     if (result.result === ExecuteResult.Fail) {
       throw new Error(result.reason);
     }
@@ -643,7 +675,7 @@ export class Datasheet {
    * mark whether the associated field of the associated datasheet is deleted or converted to text,
    * the default is Converted to a text field.
    * @returns
-   * 
+   *
    *
    * #### Description
    *
@@ -663,13 +695,18 @@ export class Datasheet {
     if (this.checkPrimaryField(fieldId!)) {
       throw new Error(`${fieldId} is Primary field, cannot be deleted`);
     }
-    const result: ICollaCommandExecuteResult<any> = await cmdExecute({
-      cmd: CollaCommandName.DeleteField,
-      data: [{
-        deleteBrotherField: conversion === Conversion.Delete,
-        fieldId,
-      }],
-    }, this.wCtx.id);
+    const result: ICollaCommandExecuteResult<any> = await cmdExecute(
+      {
+        cmd: CollaCommandName.DeleteField,
+        data: [
+          {
+            deleteBrotherField: conversion === Conversion.Delete,
+            fieldId,
+          },
+        ],
+      },
+      this.wCtx.id
+    );
     if (result.result === ExecuteResult.Fail) {
       throw new Error(result.reason);
     }
@@ -681,11 +718,11 @@ export class Datasheet {
 
   /**
    * Checks whether the current user has permission to create the specified record.
-   * 
+   *
    * @param valuesMap object mapping fieldId to value for that field.
    * @returns
-   * 
-   * 
+   *
+   *
    * #### Description
    * Accepts partial input, in the same format as {@link addRecord}. The more information provided, the more accurate the permissions check will be.
    *
@@ -724,17 +761,17 @@ export class Datasheet {
 
   /**
    * Checks whether the current user has permission to create the specified records.
-   * 
+   *
    * @param records Array of objects mapping fieldId to value for that field.
    * @returns
-   * 
-   * 
+   *
+   *
    * #### Description
    * array of objects mapping fieldId to value for that field.
    *
    * Accepts partial input, in the same format as {@link addRecords}.
    * The more information provided, the more accurate the permissions check will be.
-   * 
+   *
    * The format of records is the same as when writing to cells. For cell value writing format, refer to {@link FieldType}.
    *
    * Returns `{acceptable: true}` if the current user can update the specified record.
@@ -773,7 +810,7 @@ export class Datasheet {
    */
   checkPermissionsForAddRecords(records?: { valuesMap: { [key: string]: any } }[]): IPermissionResult {
     const recordsValues: ({ [key: string]: any } | undefined)[] = [];
-    for (const record of (records || [])) {
+    for (const record of records || []) {
       recordsValues.push(record.valuesMap);
     }
     const basicPermissionsCheckResult = this.checkBasicPermissions(DatasheetOperationPermission.AddRecord);
@@ -785,7 +822,7 @@ export class Datasheet {
 
   /**
    * Checks whether the current user has permission to perform the given record update.
-   * 
+   *
    * @param recordId the record to update
    *
    * @param valuesMap specified as object mapping fieldId to value for that field
@@ -794,8 +831,8 @@ export class Datasheet {
    *
    * #### Description
    *
-   * This method performs **permission** and **value legality** checks based on the level of detail of the value passed in. 
-   * Passing in valuesMap will check the legality of cell writes and column permissions, 
+   * This method performs **permission** and **value legality** checks based on the level of detail of the value passed in.
+   * Passing in valuesMap will check the legality of cell writes and column permissions,
    * and passing in recordId will check the existence of records and modification permissions.
    *
    * The format of records is the same as when writing to cells. For cell value writing format, refer to {@link FieldType}.
@@ -840,15 +877,15 @@ export class Datasheet {
 
   /**
    * Checks whether the current user has permission to perform the given record updates.
-   * 
+   *
    * @param records Array of objects containing recordId and fields/cellValues to update for that records.
    *
    * @returns {@link IPermissionResult}
    *
    * #### Description
    *
-   * This method performs **permission** and **value legality** checks based on the level of detail of the value passed in. 
-   * Passing in valuesMap will check the legality of cell writes and column permissions, 
+   * This method performs **permission** and **value legality** checks based on the level of detail of the value passed in.
+   * Passing in valuesMap will check the legality of cell writes and column permissions,
    * and passing in recordId will check the existence of records and modification permissions.
    *
    * The format of records is the same as when writing to cells. For cell value writing format, refer to {@link FieldType}.
@@ -902,7 +939,7 @@ export class Datasheet {
    * ```
    *
    */
-  checkPermissionsForSetRecords(records: { id?: string, valuesMap?: { [key: string]: any } }[]): IPermissionResult {
+  checkPermissionsForSetRecords(records: { id?: string; valuesMap?: { [key: string]: any } }[]): IPermissionResult {
     const recordIds: (string | undefined)[] = [];
     const recordsValues: ({ [key: string]: any } | undefined)[] = [];
     for (const record of records) {
@@ -928,7 +965,7 @@ export class Datasheet {
    *
    * @param recordId the record to be deleted.
    * @returns
-   * 
+   *
    *
    * #### Description
    * Accepts optional input.
@@ -968,11 +1005,11 @@ export class Datasheet {
 
   /**
    * Checks whether the current user has permission to delete the specified records.
-   * 
+   *
    * @param recordIds the records to be deleted.
    * @returns
-   * 
-   * 
+   *
+   *
    * #### Description
    * Accepts optional input.
    *
@@ -1009,7 +1046,7 @@ export class Datasheet {
 
     return this.checkRecordIdsExist(recordIds);
   }
-  
+
   /**
    * Checks whether the current user has permission to create a field.
    *
@@ -1017,12 +1054,12 @@ export class Datasheet {
    * @param type type for the field.
    * @param property property for the field. omit for fields without writable property.
    * @returns
-   * 
+   *
    *
    * #### Description
    *
    * Accepts partial input, in the same format as {@link addField}.
-   * 
+   *
    * Returns `{acceptable: true}` if the current user can create the specified field.
    *
    * Returns `{acceptable: false, message: string}` if no permission to operate, message may be used to display an error message to the user.
@@ -1035,7 +1072,7 @@ export class Datasheet {
    * if (!addFieldCheckResult.acceptable) {
    *   alert(addFieldCheckResult.message);
    * }
-   * 
+   *
    * // Check if user could potentially create a field.
    * // Use when you don't know the specific a field you want to create yet (for example,
    * // to show or hide UI controls that let you start creating a field.)
@@ -1061,7 +1098,7 @@ export class Datasheet {
         return errMsg('Unknown field type');
       }
     }
-    
+
     if (fieldType && property != null) {
       const fieldInfoForState = {
         id: getNewId(IDPrefix.Field),
@@ -1082,10 +1119,10 @@ export class Datasheet {
 
   /**
    * Checks whether the current user has permission to delete a field.
-   * 
+   *
    * @param fieldId the field to be deleted
    * @returns
-   * 
+   *
    *
    * #### Description
    *

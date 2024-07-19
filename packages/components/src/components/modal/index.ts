@@ -1,5 +1,3 @@
-
-
 export * from './modal';
 export * from './components/modal_pro';
 

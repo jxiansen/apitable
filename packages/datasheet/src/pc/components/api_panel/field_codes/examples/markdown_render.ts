@@ -1,5 +1,3 @@
-
-
 // @ts-ignore
 import Clipboard from 'clipboard';
 import MarkdownIt from 'markdown-it';

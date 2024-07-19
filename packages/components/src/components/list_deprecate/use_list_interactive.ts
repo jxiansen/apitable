@@ -1,5 +1,3 @@
-
-
 import { IUseSelectProps, useSelectIndex } from 'hooks';
 
 interface IUseListInteractive {

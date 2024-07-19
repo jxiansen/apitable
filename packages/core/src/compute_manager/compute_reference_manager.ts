@@ -1,5 +1,3 @@
-
-
 import { computeCache } from 'compute_manager/compute_cache_manager';
 import { COMPUTE_REF_MAP_CACHE_KEY } from 'compute_manager/helper';
 import { parse, TokenType } from 'formula_parser';
@@ -8,10 +6,7 @@ import { LookUpField } from 'model/field/lookup_field';
 import { IFieldMap, IReduxState } from '../exports/store/interfaces';
 import { FieldType, IField } from 'types';
 
-import {
-  getSnapshot,
-  getDatasheetPrimaryField,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getSnapshot, getDatasheetPrimaryField } from 'modules/database/store/selectors/resource/datasheet/base';
 type IRefMap = Map<string, Set<string>>;
 // Reference management for computed fields
 export class ComputeRefManager {
@@ -54,7 +49,7 @@ export class ComputeRefManager {
    */
   private getRefDstIds(dstId: string, fieldMap: IFieldMap, refMap: IRefMap): string[] {
     const fieldIds = Object.keys(fieldMap);
-    const allKeys = fieldIds.map(fid => `${dstId}-${fid}`);
+    const allKeys = fieldIds.map((fid) => `${dstId}-${fid}`);
     const allDependenceKeys = new Set<string>();
     const collectDependenceFieldKeys = (refKey: string) => {
       refMap.get(refKey)?.forEach((key) => {
@@ -66,7 +61,7 @@ export class ComputeRefManager {
     };
 
     const hasErrorKeys: string[] = [];
-    allKeys.forEach(key => {
+    allKeys.forEach((key) => {
       try {
         collectDependenceFieldKeys(key);
       } catch (error) {
@@ -74,7 +69,7 @@ export class ComputeRefManager {
       }
     });
 
-    const dstSet = new Set(Array.from(allDependenceKeys).map(key => key.split('-')[0]!));
+    const dstSet = new Set(Array.from(allDependenceKeys).map((key) => key.split('-')[0]!));
     return Array.from(dstSet);
   }
 
@@ -87,7 +82,7 @@ export class ComputeRefManager {
     const ref = this.reRefMap.get(key);
     visitedNode.add(key);
     if (ref) {
-      return Array.from(ref).every(key => this.checkRef(key, new Set(visitedNode)));
+      return Array.from(ref).every((key) => this.checkRef(key, new Set(visitedNode)));
     }
     return true;
   }
@@ -106,7 +101,7 @@ export class ComputeRefManager {
     const key = `${datasheetId}-${fieldId}`;
     const thisFieldDeps = this.reRefMap.get(key);
     if (thisFieldDeps) {
-      thisFieldDeps.forEach(item => {
+      thisFieldDeps.forEach((item) => {
         const thisFieldDep = this.refMap.get(item);
         thisFieldDep?.delete(key);
         if (thisFieldDep?.size === 0) {
@@ -138,7 +133,7 @@ export class ComputeRefManager {
    */
   public computeRefMap(fieldMap: IFieldMap, datasheetId: string, state: IReduxState, shouldSyncCache = true) {
     Object.values(fieldMap)
-      .filter(field => Field.bindContext(field, state).isComputed || field.type === FieldType.Link || field.type === FieldType.OneWayLink)
+      .filter((field) => Field.bindContext(field, state).isComputed || field.type === FieldType.Link || field.type === FieldType.OneWayLink)
       .forEach((field: IField) => {
         switch (field.type) {
           case FieldType.Formula:
@@ -149,7 +144,7 @@ export class ComputeRefManager {
             }
             const formulaRelatedFieldIds = new Set<string>();
             if (formulaExpr && formulaExpr.lexer.errors.length === 0) {
-              formulaExpr.lexer.matches.forEach(token => {
+              formulaExpr.lexer.matches.forEach((token) => {
                 switch (token.type) {
                   case TokenType.Value:
                     const fieldId = token.value.slice(1, -1);
@@ -161,10 +156,8 @@ export class ComputeRefManager {
                 }
               });
             }
-            this.addReRef(`${datasheetId}-${field.id}`,
-              new Set(Array.from(formulaRelatedFieldIds).map(fid => `${datasheetId}-${fid}`)),
-            );
-            formulaRelatedFieldIds.forEach(fid => {
+            this.addReRef(`${datasheetId}-${field.id}`, new Set(Array.from(formulaRelatedFieldIds).map((fid) => `${datasheetId}-${fid}`)));
+            formulaRelatedFieldIds.forEach((fid) => {
               const key = `${datasheetId}-${fid}`;
               this.addRef(key, `${datasheetId}-${field.id}`);
             });
@@ -173,7 +166,7 @@ export class ComputeRefManager {
           case FieldType.LookUp:
             const keys = new LookUpField(field, state).getCurrentDatasheetRelatedFieldKeys(datasheetId);
             this.addReRef(`${datasheetId}-${field.id}`, new Set(keys));
-            keys.forEach(key => {
+            keys.forEach((key) => {
               this.addRef(key, `${datasheetId}-${field.id}`);
             });
             break;
@@ -211,7 +204,7 @@ export class ComputeRefManager {
    */
   public getAllEffectKeysByKey(key: string): {
     hasError: boolean;
-    effectedKeys: Set<string>
+    effectedKeys: Set<string>;
   } {
     const effectedKeys = new Set<string>();
     const collectEffectedFieldKeys = (refKey: string) => {
@@ -228,12 +221,12 @@ export class ComputeRefManager {
     } catch (error) {
       return {
         hasError: true,
-        effectedKeys
+        effectedKeys,
       };
     }
     return {
       hasError: false,
-      effectedKeys
+      effectedKeys,
     };
   }
 

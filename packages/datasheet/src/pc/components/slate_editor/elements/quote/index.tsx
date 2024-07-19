@@ -1,5 +1,3 @@
-
-
 import { IElementRenderProps, IElement } from '../../interface/element';
 
 import styles from './quote.module.less';

@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import '@apitable/i18n-lang';
 import { Reflector } from '@nestjs/core';
@@ -32,11 +30,11 @@ describe('ApiDatasheetGuard', () => {
     it('missing spaceId, return 400 code', () => {
       (context.switchToHttp().getRequest as jest.Mock).mockReturnValueOnce({
         params: {
-          dstId: 'abc'
+          dstId: 'abc',
         },
       });
       const error = ApiException.tipError(ApiTipConstant.api_params_instance_space_id_error);
-      return guard.canActivate(context).catch(e => {
+      return guard.canActivate(context).catch((e) => {
         return expect(e).toStrictEqual(error);
       });
     });
@@ -48,7 +46,7 @@ describe('ApiDatasheetGuard', () => {
         },
       });
       const error = ApiException.tipError(ApiTipConstant.api_datasheet_not_exist);
-      return guard.canActivate(context).catch(e => {
+      return guard.canActivate(context).catch((e) => {
         return expect(e).toStrictEqual(error);
       });
     });
@@ -61,7 +59,7 @@ describe('ApiDatasheetGuard', () => {
         },
       });
       const error = ApiException.tipError(ApiTipConstant.api_datasheet_not_exist);
-      return guard.canActivate(context).catch(e => {
+      return guard.canActivate(context).catch((e) => {
         return expect(e).toStrictEqual(error);
       });
     });
@@ -79,7 +77,7 @@ describe('ApiDatasheetGuard', () => {
       });
       (memberRepository.selectSpaceIdsByUserId as jest.Mock).mockReturnValueOnce(['bbb']);
       const error = ApiException.tipError(ApiTipConstant.api_datasheet_not_visible);
-      return guard.canActivate(context).catch(e => {
+      return guard.canActivate(context).catch((e) => {
         return expect(e).toStrictEqual(error);
       });
     });
@@ -97,7 +95,7 @@ describe('ApiDatasheetGuard', () => {
       });
       (memberRepository.selectSpaceIdsByUserId as jest.Mock).mockReturnValueOnce(['bbb']);
       const error = ApiException.tipError(ApiTipConstant.api_forbidden_because_of_not_in_space);
-      return guard.canActivate(context).catch(e => {
+      return guard.canActivate(context).catch((e) => {
         return expect(e).toStrictEqual(error);
       });
     });

@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { IRecordList } from 'shared/interfaces';
 import { ApiRecordDto } from '../dtos/api.record.dto';

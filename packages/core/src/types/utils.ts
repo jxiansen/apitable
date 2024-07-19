@@ -1,22 +1,23 @@
-
-
 import type { AxiosResponse } from 'axios';
 import type { DefaultStatusMessage } from 'config/constant';
 import { Object } from 'ts-toolbelt';
 
 /**
-  * part specified as optional type
-  */
+ * part specified as optional type
+ */
 export type WithOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
-export type IAxiosResponse<T = any> = Object.Merge<{
-  data: {
-    success: boolean;
-    code: number;
-    message: DefaultStatusMessage;
-    data: T;
-  }
-}, AxiosResponse<T>>;
+export type IAxiosResponse<T = any> = Object.Merge<
+  {
+    data: {
+      success: boolean;
+      code: number;
+      message: DefaultStatusMessage;
+      data: T;
+    };
+  },
+  AxiosResponse<T>
+>;
 
 export interface IJsonSchema {
   $ref?: string;
@@ -45,7 +46,7 @@ export interface IJsonSchema {
    * Default json for the object represented by
    * this schema
    */
-  'default'?: any;
+  default?: any;
 
   /////////////////////////////////////////////////
   // Number Validation
@@ -124,9 +125,9 @@ export interface IJsonSchema {
    * Enumerates the values that this schema can be
    * e.g.
    * {"type": "string",
-     *  "enum": ["red", "green", "blue"]}
+   *  "enum": ["red", "green", "blue"]}
    */
-  'enum'?: any[];
+  enum?: any[];
   enumNames?: any[];
   /**
    * The basic type of this schema, can be one of

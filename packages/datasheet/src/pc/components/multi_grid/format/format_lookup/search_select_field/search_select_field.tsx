@@ -28,7 +28,7 @@ export const SearchSelectField = (props: ISearchSelectFieldProps) => {
   const filter = (item: IViewColumn) => {
     if (fieldType) {
       const field = fieldMap[item.fieldId];
-      if(field.type == FieldType.Button) {
+      if (field.type == FieldType.Button) {
         return false;
       }
       return fieldType.includes(field.type);
@@ -42,8 +42,11 @@ export const SearchSelectField = (props: ISearchSelectFieldProps) => {
     return {
       label: !fieldType?.includes(FieldType.Link) ? field.name : Selectors.getDatasheet(store.getState(), field.property.foreignDatasheetId)?.name!,
       value: field.id,
-      prefixIcon: !fieldType?.includes(FieldType.Link) ? getFieldTypeIcon(field.type, colors.thirdLevelText)
-        : <DatasheetOutlined color={colors.thirdLevelText} />,
+      prefixIcon: !fieldType?.includes(FieldType.Link) ? (
+        getFieldTypeIcon(field.type, colors.thirdLevelText)
+      ) : (
+        <DatasheetOutlined color={colors.thirdLevelText} />
+      ),
       disabledTip: t(Strings.view_sort_and_group_disabled),
     };
   });
@@ -52,9 +55,11 @@ export const SearchSelectField = (props: ISearchSelectFieldProps) => {
     onChange(targetId);
   }
 
-  const listStyle = fieldType?.includes(FieldType.Link) ? {
-    display: 'none'
-  } : {};
+  const listStyle = fieldType?.includes(FieldType.Link)
+    ? {
+        display: 'none',
+      }
+    : {};
 
   return (
     <div>

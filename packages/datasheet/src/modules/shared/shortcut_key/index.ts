@@ -1,5 +1,3 @@
-
-
 /**
  * 【Shortcut Key Binding System】
  * The inspiration and much of the code comes from vscode and can be understood by referring to the preference -> Keyboard Shortcuts configuration.

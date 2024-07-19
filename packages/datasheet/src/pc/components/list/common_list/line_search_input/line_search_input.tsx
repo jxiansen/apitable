@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import * as React from 'react';
 import { stopPropagation, useThemeColors } from '@apitable/components';

@@ -1,5 +1,3 @@
-
-
 import { RobotTriggerTypeService } from './robot.trigger.type.service';
 import { AutomationServiceRepository } from '../repositories/automation.service.repository';
 import { AutomationTriggerTypeRepository } from '../repositories/automation.trigger.type.repository';
@@ -25,17 +23,17 @@ describe('RobotTriggerTypeServiceTest', () => {
     },
   ];
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       providers: [AutomationTriggerTypeRepository, AutomationServiceRepository, RobotTriggerTypeService],
     }).compile();
-    
+
     automationTriggerTypeRepository = moduleFixture.get<AutomationTriggerTypeRepository>(AutomationTriggerTypeRepository);
     automationServiceRepository = moduleFixture.get<AutomationServiceRepository>(AutomationServiceRepository);
     service = moduleFixture.get<RobotTriggerTypeService>(RobotTriggerTypeService);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
@@ -43,7 +41,7 @@ describe('RobotTriggerTypeServiceTest', () => {
     expect(service).toBeDefined();
   });
 
-  it("given two trigger type entity when group trigger's id by the special service slug and endpoints", async() => {
+  it("given two trigger type entity when group trigger's id by the special service slug and endpoints", async () => {
     jest.spyOn(automationTriggerTypeRepository, 'getTriggerTypeServiceRelByEndPoints').mockResolvedValue(triggerTypes);
     jest.spyOn(automationServiceRepository, 'countServiceByServiceIdAndSlug').mockResolvedValue(1);
     const serviceSlugTriggerTypeVo = await service.getServiceSlugToTriggerTypeId(
@@ -54,7 +52,7 @@ describe('RobotTriggerTypeServiceTest', () => {
     expect(Object.keys(serviceSlugTriggerTypeVo).length).toEqual(2);
   });
 
-  it("given non trigger type entity when group trigger's id by the special service slug and endpoints then should be got empty list", async() => {
+  it("given non trigger type entity when group trigger's id by the special service slug and endpoints then should be got empty list", async () => {
     jest.spyOn(automationTriggerTypeRepository, 'getTriggerTypeServiceRelByEndPoints').mockResolvedValue([]);
     const nonServiceSlugTriggerTypeVo = await service.getServiceSlugToTriggerTypeId(
       [EventTypeEnums.RecordMatchesConditions, EventTypeEnums.RecordCreated],
@@ -64,7 +62,7 @@ describe('RobotTriggerTypeServiceTest', () => {
     expect(Object.keys(nonServiceSlugTriggerTypeVo).length).toEqual(0);
   });
 
-  it("given two trigger type entity when group trigger's id by the non-conditional service slug and endpoints then got empty list", async() => {
+  it("given two trigger type entity when group trigger's id by the non-conditional service slug and endpoints then got empty list", async () => {
     jest.spyOn(automationTriggerTypeRepository, 'getTriggerTypeServiceRelByEndPoints').mockResolvedValue(triggerTypes);
     jest.spyOn(automationServiceRepository, 'countServiceByServiceIdAndSlug').mockResolvedValue(0);
     const nonConditionalServiceSlugTriggerTypeVo = await service.getServiceSlugToTriggerTypeId(
@@ -75,7 +73,7 @@ describe('RobotTriggerTypeServiceTest', () => {
     expect(Object.keys(nonConditionalServiceSlugTriggerTypeVo).length).toEqual(0);
   });
 
-  it('given one trigger type when get trigger type then should be get the i18n render trigger type', async() => {
+  it('given one trigger type when get trigger type then should be get the i18n render trigger type', async () => {
     jest.spyOn(automationTriggerTypeRepository, 'selectAllTriggerType').mockResolvedValue([
       {
         triggerTypeId: 'triggerTypeId',
@@ -103,8 +101,8 @@ describe('RobotTriggerTypeServiceTest', () => {
           en: {
             $serviceName: 'serviceName',
           },
-        }
-      }
+        },
+      },
     ]);
     const triggerTypes = await service.getTriggerType('en');
     expect(triggerTypes).toBeDefined();

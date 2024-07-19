@@ -1,4 +1,3 @@
-
 export const teal = {
   50: '#E2F6EF',
   100: '#BDECDA',
@@ -12,4 +11,3 @@ export const teal = {
   900: '#134E38',
   1000: '#083F28',
 };
-

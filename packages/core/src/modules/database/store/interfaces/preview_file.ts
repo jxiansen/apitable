@@ -1,5 +1,3 @@
-
-
 import { SET_PREVIEW_DEFAULT_ACTIVE, SET_PREVIEW_FILE, SET_PREVIEW_FILE_CELL_ACTIVE } from '../../../shared/store/action_constants';
 import { IAttachmentValue } from 'types';
 
@@ -10,14 +8,14 @@ export interface IPreviewFile {
    * read attachments list from redux,
    * which implements collaboration reading
    */
-  datasheetId?: string; 
-  recordId?: string; 
+  datasheetId?: string;
+  recordId?: string;
   fieldId?: string;
   activeIndex: number;
   cellValue: IAttachmentValue[];
   editable: boolean;
   onChange: (cellValue: IAttachmentValue[]) => void;
-  disabledDownload: boolean,
+  disabledDownload: boolean;
 }
 
 export interface ISetPreviewFileAction {

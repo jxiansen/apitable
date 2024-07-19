@@ -1,5 +1,3 @@
-
-
 import { memo } from 'react';
 import Heading, { IHeadingProps, THeadingDepth } from './heading';
 

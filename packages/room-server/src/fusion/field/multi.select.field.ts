@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, ICellValue, IField, ISelectFieldProperty } from '@apitable/core';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { isArray } from 'class-validator';
@@ -28,7 +26,7 @@ export class MultiSelectField extends BaseField implements OnApplicationBootstra
   override async roTransform(fieldValue: IFieldValue, field: IField): Promise<ICellValue> {
     const optionIds: string[] = [];
     for (const value of Object.values(fieldValue as string[])) {
-      (field.property as ISelectFieldProperty).options.map(option => {
+      (field.property as ISelectFieldProperty).options.map((option) => {
         if (isOptionId(value) && value === option.id) {
           optionIds.push(option.id);
         } else if (value === option.name) {

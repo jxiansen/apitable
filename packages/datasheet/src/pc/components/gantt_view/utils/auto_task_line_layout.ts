@@ -1,5 +1,3 @@
-
-
 import { ISetRecordOptions, Selectors, fastCloneDeep, IViewRow, IGanttViewStyle } from '@apitable/core';
 import { getDiffOriginalCount } from 'pc/components/gantt_view';
 import { store } from 'pc/store';
@@ -51,10 +49,10 @@ export const autoTaskScheduling = (visibleRows: IViewRow[], ganttStyle: IGanttVi
     if (!sourceAdj[sourceId] || !rowsTimeList[sourceId]) return;
 
     if (rowsTimeList[sourceId].diffCount < 0) return;
-    
+
     sourceAdj[sourceId]?.forEach((targetId) => {
       if (cycleEdges.includes(`taskLine-${sourceId}-${targetId}`) || !rowsTimeList[targetId]) return;
-      
+
       const { diffCount } = rowsTimeList[targetId];
       if (diffCount < 0) return;
       // Compare the size of all post-tasks to the size of all pre-tasks, whichever is closest
@@ -63,7 +61,7 @@ export const autoTaskScheduling = (visibleRows: IViewRow[], ganttStyle: IGanttVi
       let recentTime = rowsTimeList[sourceId].endTime ?? rowsTimeList[sourceId].startTime;
 
       targetAdj[targetId].forEach((sourceItem: string) => {
-        if(!rowsTimeList[sourceItem]) {
+        if (!rowsTimeList[sourceItem]) {
           return;
         }
         const { diffCount: sourceItemDiffTime } = rowsTimeList[sourceItem];

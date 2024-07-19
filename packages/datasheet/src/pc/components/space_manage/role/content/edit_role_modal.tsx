@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Box, TextInput, Typography, useThemeColors } from '@apitable/components';

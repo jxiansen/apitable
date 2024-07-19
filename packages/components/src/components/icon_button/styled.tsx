@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
 import { IIconButtonWrapperProps } from './interface';
@@ -12,10 +10,10 @@ export const sizeMap = {
   large: {
     size: 32,
     borderRadius: 6,
-  }
+  },
 };
 
-export const IconButtonStyle = styled.div.attrs(applyDefaultTheme) <IIconButtonWrapperProps>`
+export const IconButtonStyle = styled.div.attrs(applyDefaultTheme)<IIconButtonWrapperProps>`
   cursor: pointer;
   padding: 4px;
   transition: all 0.3s;
@@ -25,11 +23,11 @@ export const IconButtonStyle = styled.div.attrs(applyDefaultTheme) <IIconButtonW
   svg {
     pointer-events: none;
   }
-  &[type="button"] {
+  &[type='button'] {
     border: 0;
     &[disabled] {
       cursor: not-allowed;
-      opacity: .5;
+      opacity: 0.5;
     }
   }
   ${(props) => {
@@ -37,7 +35,7 @@ export const IconButtonStyle = styled.div.attrs(applyDefaultTheme) <IIconButtonW
     if (props.disabled) {
       return css`
         cursor: not-allowed;
-        opacity: .5;
+        opacity: 0.5;
       `;
     }
     return '';
@@ -58,9 +56,9 @@ export const IconButtonStyle = styled.div.attrs(applyDefaultTheme) <IIconButtonW
     switch (props.variant) {
       case 'default':
         let defaultVariant = css`
-            color: ${color.textCommonTertiary};
-            background: ${props.active ? color.bgBglessActiveSolid : 'unset'};
-          `;
+          color: ${color.textCommonTertiary};
+          background: ${props.active ? color.bgBglessActiveSolid : 'unset'};
+        `;
         if (!props.active && !props.disabled) {
           defaultVariant = [
             ...defaultVariant,
@@ -71,16 +69,16 @@ export const IconButtonStyle = styled.div.attrs(applyDefaultTheme) <IIconButtonW
               &:active {
                 background: ${color.bgBglessActive};
               }
-            `
+            `,
           ];
         }
         return defaultVariant;
 
       case 'background':
         let bgVariant = css`
-           border-radius: ${isSquare ? '6px' : '32px'};
-           color: ${color.textCommonTertiary};
-           background: ${color.bgControlsDefault};
+          border-radius: ${isSquare ? '6px' : '32px'};
+          color: ${color.textCommonTertiary};
+          background: ${color.bgControlsDefault};
         `;
         if (!props.disabled) {
           bgVariant = [
@@ -92,7 +90,7 @@ export const IconButtonStyle = styled.div.attrs(applyDefaultTheme) <IIconButtonW
               &:active {
                 background: ${props.disabled ? 'inherit' : color.bgBglessActiveSolid};
               }
-            `
+            `,
           ];
         }
         return bgVariant;
@@ -118,7 +116,7 @@ export const IconButtonStyle = styled.div.attrs(applyDefaultTheme) <IIconButtonW
                 transform: scale(0.5, 0.5);
                 background: ${color.bgBglessActiveSolid};
               }
-            `
+            `,
           ];
         }
         return blurVariant;

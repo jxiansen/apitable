@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Alert } from './alert';
@@ -32,11 +30,7 @@ export const showAlert = (config: IAlertFuncBaseProps) => {
 
   function render() {
     setTimeout(() => {
-      root.render(
-        (
-          <Alert {...rest} />
-        ),
-      );
+      root.render(<Alert {...rest} />);
     });
   }
 

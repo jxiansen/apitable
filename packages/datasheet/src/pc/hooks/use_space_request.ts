@@ -1,5 +1,3 @@
-
-
 import { message } from 'antd';
 import { useDispatch } from 'react-redux';
 import { Api, ApiInterface, Navigation, StoreActions, Strings, t } from '@apitable/core';

@@ -1,5 +1,3 @@
-
-
 import { Modal } from 'antd';
 import * as React from 'react';
 import { useThemeColors } from '@apitable/components';

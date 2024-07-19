@@ -1,4 +1,3 @@
-
 export const yellow = {
   50: '#FFF9E3',
   100: '#FFF2C2',
@@ -12,4 +11,3 @@ export const yellow = {
   900: '#B58D02',
   1000: '#886A00',
 };
-

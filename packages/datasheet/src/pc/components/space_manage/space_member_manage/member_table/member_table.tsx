@@ -1,5 +1,3 @@
-
-
 import { Table } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 import * as React from 'react';
@@ -31,19 +29,20 @@ export const MemberTable: FC<React.PropsWithChildren<IMemberTable>> = (props) =>
   const dispatch = useAppDispatch();
   const [pageNo, setPageNo] = useState(1);
   const [scrollHeight, setScrollHeight] = useState(0);
-  const { spaceId, selectedTeamInfoInSpace, selectMemberListInSpace, memberListInSpace, selectedRows, user, spaceResource, spaceInfo } = useAppSelector(
-    (state: IReduxState) => ({
-      spaceId: state.space.activeId || '',
-      selectedTeamInfoInSpace: state.spaceMemberManage.selectedTeamInfoInSpace,
-      selectMemberListInSpace: state.spaceMemberManage.selectMemberListInSpace,
-      selectedRows: state.spaceMemberManage.selectedRows,
-      memberListInSpace: state.spaceMemberManage.memberListInSpace,
-      user: state.user.info,
-      spaceResource: state.spacePermissionManage.spaceResource,
-      spaceInfo: state.space.curSpaceInfo,
-    }),
-    shallowEqual,
-  );
+  const { spaceId, selectedTeamInfoInSpace, selectMemberListInSpace, memberListInSpace, selectedRows, user, spaceResource, spaceInfo } =
+    useAppSelector(
+      (state: IReduxState) => ({
+        spaceId: state.space.activeId || '',
+        selectedTeamInfoInSpace: state.spaceMemberManage.selectedTeamInfoInSpace,
+        selectMemberListInSpace: state.spaceMemberManage.selectMemberListInSpace,
+        selectedRows: state.spaceMemberManage.selectedRows,
+        memberListInSpace: state.spaceMemberManage.memberListInSpace,
+        user: state.user.info,
+        spaceResource: state.spacePermissionManage.spaceResource,
+        spaceInfo: state.space.curSpaceInfo,
+      }),
+      shallowEqual,
+    );
   const { updateMemberListInSpace } = useUpdateMemberListInSpace();
   const { removeMember } = useMemberManage();
   const [adjustMemberModalVisible, setAdjustMemberModalVisible] = useState(false);
@@ -193,11 +192,11 @@ export const MemberTable: FC<React.PropsWithChildren<IMemberTable>> = (props) =>
         const text = value ? value.map((team: any) => team.fullHierarchyTeamName).join(' & ') : [];
         const tipsTitle = value
           ? value.map((team: any, index: number) => (
-            <div key={index} className={styles.teamItem}>
-              <p>-</p>
-              <p>{team.fullHierarchyTeamName}</p>
-            </div>
-          ))
+              <div key={index} className={styles.teamItem}>
+                <p>-</p>
+                <p>{team.fullHierarchyTeamName}</p>
+              </div>
+            ))
           : '';
         return (
           <Tooltip title={tipsTitle} rowsNumber={2} textEllipsis overflowWidth={200} showTipAnyway>
@@ -259,11 +258,11 @@ export const MemberTable: FC<React.PropsWithChildren<IMemberTable>> = (props) =>
     rowSelection: isBindSocial
       ? undefined
       : {
-        selectedRowKeys: selectMemberListInSpace,
-        selectedRows,
-        onChange: onSelectMemberChange,
-        columnWidth: 40,
-      },
+          selectedRowKeys: selectMemberListInSpace,
+          selectedRows,
+          onChange: onSelectMemberChange,
+          columnWidth: 40,
+        },
     rowKey: (record: any) => String(record.orderNo),
   };
 

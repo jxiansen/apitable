@@ -1,5 +1,3 @@
-
-
 import { TokenType } from '../lexer/token';
 import { AstNode, AstNodeType, BinaryOperatorNode, UnaryOperatorNode, ValueOperandNode } from '../parser/ast';
 

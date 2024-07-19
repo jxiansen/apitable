@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Box, Typography, useTheme } from '@apitable/components';
 import { Strings, t } from '@apitable/core';
@@ -28,12 +26,12 @@ export const SchemaPropertyList = (props: ISchemaPropertyListProps) => {
   // Whether there are prototype properties/methods, and if so, group them.
   const hasPrototype = list.some((item) => item.isPrototype);
 
-  if(list.length === 0 && placeHolder) {
+  if (list.length === 0 && placeHolder) {
     return (
       <Box padding={'15px 0 12px 0'} display={'flex'} justifyContent={'center'}>
-        <Typography variant={'body4'} color={colors.textCommonTertiary}>{
-          placeHolder
-        }</Typography>
+        <Typography variant={'body4'} color={colors.textCommonTertiary}>
+          {placeHolder}
+        </Typography>
       </Box>
     );
   }
@@ -44,7 +42,16 @@ export const SchemaPropertyList = (props: ISchemaPropertyListProps) => {
         {list.map((item, index) => {
           const isActive = activeIndex === index;
           const disabled = item.disabled;
-          return <SchemaPropertyListItem currentStep={currentStep} isActive={isActive} disabled={disabled} key={item.key} item={item} handleItemClick={handleItemClick} />;
+          return (
+            <SchemaPropertyListItem
+              currentStep={currentStep}
+              isActive={isActive}
+              disabled={disabled}
+              key={item.key}
+              item={item}
+              handleItemClick={handleItemClick}
+            />
+          );
         })}
       </>
     );
@@ -73,7 +80,7 @@ export const SchemaPropertyList = (props: ISchemaPropertyListProps) => {
     <>
       {layoutGroupList.map((eachGroup) => {
         const { items, title } = eachGroup;
-        if(items.length===0) {
+        if (items.length === 0) {
           return null;
         }
         return (
@@ -96,7 +103,16 @@ export const SchemaPropertyList = (props: ISchemaPropertyListProps) => {
               if (!item) return null;
               const isActive = list[activeIndex!]?.key === itemKey;
               const disabled = item.disabled;
-              return <SchemaPropertyListItem currentStep={currentStep} isActive={isActive} disabled={disabled} key={item.key} item={item} handleItemClick={handleItemClick} />;
+              return (
+                <SchemaPropertyListItem
+                  currentStep={currentStep}
+                  isActive={isActive}
+                  disabled={disabled}
+                  key={item.key}
+                  item={item}
+                  handleItemClick={handleItemClick}
+                />
+              );
             })}
           </>
         );

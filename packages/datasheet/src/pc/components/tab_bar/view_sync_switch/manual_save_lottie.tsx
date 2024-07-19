@@ -1,5 +1,3 @@
-
-
 import { useEffect, useRef } from 'react';
 import SyncJson from 'static/json/sync.json';
 

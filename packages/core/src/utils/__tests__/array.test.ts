@@ -1,5 +1,3 @@
-
-
 import { moveArrayElement } from '..';
 
 describe('test move array element', () => {

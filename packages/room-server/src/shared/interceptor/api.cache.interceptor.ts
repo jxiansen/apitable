@@ -1,5 +1,3 @@
-
-
 import { CacheInterceptor, Injectable } from '@nestjs/common';
 import { ExecutionContext } from '@nestjs/common/interfaces';
 import { API_CACHE_KEY, AUTHORIZATION_PREFIX, DEFAULT_X_MAX_AGE, X_MAX_AGE } from '../common';
@@ -48,4 +46,3 @@ export const apiCacheTTLFactory = (ctx: ExecutionContext) => {
   }
   return maxAge;
 };
-

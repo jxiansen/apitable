@@ -1,5 +1,3 @@
-
-
 function fixPoint(key: 'x' | 'y', offset: number, width: number, containerWidth: number) {
   const maxOffset = (width - containerWidth) / 2;
 

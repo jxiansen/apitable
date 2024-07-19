@@ -1,5 +1,3 @@
-
-
 import { IMenuConfig, IMenuEventHandler } from './interface';
 
 function eventManager() {
@@ -17,7 +15,7 @@ function eventManager() {
       if (handler) {
         handler(configs);
       }
-    }
+    },
   };
 }
 

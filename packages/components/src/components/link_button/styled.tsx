@@ -1,5 +1,3 @@
-
-
 import { getActionColor } from 'helper/color_helper';
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
@@ -10,10 +8,12 @@ export const LinkButtonText = styled.span<Pick<ILinkButtonProps, 'underline' | '
   font-weight: normal;
   font-size: 14px;
   line-height: 18px;
-  ${props => Boolean(props.underline) && css`
-    border-bottom: 1px solid currentColor;
-  `}
-  ${props => {
+  ${(props) =>
+    Boolean(props.underline) &&
+    css`
+      border-bottom: 1px solid currentColor;
+    `}
+  ${(props) => {
     if (props.prefixIcon) {
       return css`
         margin-left: 4px;
@@ -29,18 +29,23 @@ export const LinkButtonText = styled.span<Pick<ILinkButtonProps, 'underline' | '
 `;
 type ILinkButtonBaseProps = Omit<ILinkButtonProps, 'color' | 'as'>;
 
-export const StyledLinkButton = styled.div.attrs(applyDefaultTheme) <ILinkButtonBaseProps>`
+export const StyledLinkButton = styled.div.attrs(applyDefaultTheme)<ILinkButtonBaseProps>`
   ${(props) => {
-    if (props.block) return css`width:100%;`;
-    return css `width: max-content;`;
+    if (props.block)
+      return css`
+        width: 100%;
+      `;
+    return css`
+      width: max-content;
+    `;
   }}
   ${(props) => {
     if (props.disabled) {
       return css`
-          cursor: not-allowed;
-          opacity: 0.5;
-          pointer-events: none;
-        `;
+        cursor: not-allowed;
+        opacity: 0.5;
+        pointer-events: none;
+      `;
     }
     return;
   }};
@@ -59,7 +64,7 @@ export const StyledLinkButton = styled.div.attrs(applyDefaultTheme) <ILinkButton
       }
       &:active {
         color: ${active};
-      }  
+      }
     `;
   }}
   &[type="button"] {

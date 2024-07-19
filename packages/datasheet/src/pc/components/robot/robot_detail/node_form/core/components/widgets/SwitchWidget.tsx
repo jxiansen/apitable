@@ -1,5 +1,3 @@
-
-
 import { Box, Switch } from '@apitable/components';
 import { IWidgetProps } from '../../interface';
 

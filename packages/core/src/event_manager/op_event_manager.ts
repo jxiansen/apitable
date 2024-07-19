@@ -1,5 +1,3 @@
-
-
 import { IChangeset } from 'engine';
 import { IReduxState } from '../exports/store/interfaces';
 import { EventManager } from './event_manager';
@@ -14,7 +12,10 @@ export class OPEventManager extends EventManager implements IOPEventManager {
   }
 
   private getAllEvents(realAtomEvents: IEventInstance<IRealAtomEvent>[], virtualAtomEvents: IEventInstance<IVirtualAtomEvent>[]) {
-    const { op2Event, options: { enableCombEvent } } = this.options;
+    const {
+      op2Event,
+      options: { enableCombEvent },
+    } = this.options;
     let combEvents: IEventInstance<ICombEvent>[] = [];
     const atomEvents = [...realAtomEvents, ...virtualAtomEvents];
     if (enableCombEvent) {
@@ -26,7 +27,11 @@ export class OPEventManager extends EventManager implements IOPEventManager {
   }
 
   public async asyncHandleChangesets(changesets: Omit<IChangeset, 'messageId'>[]) {
-    const { op2Event, options: { enableVirtualEvent, enableEventComplete, enableCombEvent }, getState } = this.options;
+    const {
+      op2Event,
+      options: { enableVirtualEvent, enableEventComplete, enableCombEvent },
+      getState,
+    } = this.options;
     const realAtomEvents = op2Event.parseOps2Events(changesets);
     let virtualAtomEvents: IEventInstance<IVirtualAtomEvent>[] = [];
     let state;
@@ -52,7 +57,11 @@ export class OPEventManager extends EventManager implements IOPEventManager {
   }
 
   public handleChangesets(changesets: Omit<IChangeset, 'messageId'>[]) {
-    const { op2Event, options: { enableVirtualEvent }, getState } = this.options;
+    const {
+      op2Event,
+      options: { enableVirtualEvent },
+      getState,
+    } = this.options;
     const realAtomEvents = op2Event.parseOps2Events(changesets);
     let virtualAtomEvents: IEventInstance<IVirtualAtomEvent>[] = [];
     if (enableVirtualEvent) {

@@ -12,13 +12,7 @@ export const FilterButton = (props: IFilterButtonProps) => {
 
   const colors = useThemeColors();
   return (
-    <LinkButton
-      prefixIcon={<AddOutlined />}
-      href={'javascript:void(0)'}
-      underline={false}
-      color={colors.secondLevelText}
-      onClick={onClick}
-    >
+    <LinkButton prefixIcon={<AddOutlined />} href={'javascript:void(0)'} underline={false} color={colors.secondLevelText} onClick={onClick}>
       {children}
     </LinkButton>
   );

@@ -1,5 +1,3 @@
-
-
 import { ICommentMsg } from '@apitable/core';
 import { EntityRepository, Repository } from 'typeorm';
 import { RecordCommentEntity } from '../entities/record.comment.entity';
@@ -21,7 +19,7 @@ export class RecordCommentRepository extends Repository<RecordCommentEntity> {
       .andWhere('rc.is_deleted = 0')
       .groupBy('rc.record_id')
       .getRawMany()
-      .then(result => {
+      .then((result) => {
         return result.reduce<{ [recordId: string]: number }>((pre, cur) => {
           pre[cur.recordId] = parseInt(cur.count, 10);
           return pre;

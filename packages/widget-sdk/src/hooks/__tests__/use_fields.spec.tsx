@@ -21,21 +21,23 @@ describe('use fields should return a field entity array', () => {
         manageable: false,
         permission: {
           editable: false,
-          readable: false
+          readable: false,
         },
         setting: {
-          formSheetAccessible: true
-        }
-      }
+          formSheetAccessible: true,
+        },
+      },
     };
-    mockWidgetSdkData.dispatch(StoreActions.updateDatasheet(DEFAULT_DATASHEET_ID, {
-      fieldPermissionMap
-    } as any));
+    mockWidgetSdkData.dispatch(
+      StoreActions.updateDatasheet(DEFAULT_DATASHEET_ID, {
+        fieldPermissionMap,
+      } as any)
+    );
     // No permission column display NoPermission.
     const wrapper = createSimpleWrapper({ widgetState: mockWidgetSdkData.widgetSdkData });
     const { result } = renderHook(() => useFields(viewId), { wrapper });
-  
-    const validRes = result.current.some(f => f.name === 'NoPermission') && result.current.every(f => f.id !== noPermissionFieldId);
+
+    const validRes = result.current.some((f) => f.name === 'NoPermission') && result.current.every((f) => f.id !== noPermissionFieldId);
     expect(validRes).toBe(true);
   });
 

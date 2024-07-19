@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { DatasheetViewDto } from 'fusion/dtos/datasheet.view.dto';
 import { IViewList } from 'shared/interfaces';

@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { difference } from 'lodash';
 import Image from 'next/image';
@@ -29,7 +27,7 @@ export interface INodeInstalledWidget {
   widgetPackageIcon: string;
 }
 
-export const WidgetPreview: React.FC<React.PropsWithChildren<IWidgetPreviewProps>> = props => {
+export const WidgetPreview: React.FC<React.PropsWithChildren<IWidgetPreviewProps>> = (props) => {
   const { onChange, datasheetId } = props;
   const [installedWidgets, setInstalledWidgets] = useState<INodeInstalledWidget[] | null>(null);
   const [selectedWidgetIds, setSelectedWidgetIds] = useState<string[]>([]);
@@ -39,7 +37,7 @@ export const WidgetPreview: React.FC<React.PropsWithChildren<IWidgetPreviewProps
     if (!datasheetId) {
       return;
     }
-    WidgetApi.getWidgetsInfoByNodeId(datasheetId).then(res => {
+    WidgetApi.getWidgetsInfoByNodeId(datasheetId).then((res) => {
       const { data, success } = res.data;
       if (success) {
         setInstalledWidgets(data);
@@ -60,7 +58,7 @@ export const WidgetPreview: React.FC<React.PropsWithChildren<IWidgetPreviewProps
       setSelectedWidgetIds([...selectedWidgetIds, id]);
     }
   };
-  const themeName = useAppSelector(state => state.theme);
+  const themeName = useAppSelector((state) => state.theme);
   const templateEmptyPng = themeName === ThemeName.Light ? NotDataImgLight : NotDataImgDark;
   return (
     <div className={styles.widgetList}>
@@ -68,7 +66,7 @@ export const WidgetPreview: React.FC<React.PropsWithChildren<IWidgetPreviewProps
       <div className={styles.widgetListWrap}>
         <div className={styles.scroll}>
           {installedWidgets?.length ? (
-            installedWidgets.map(item => {
+            installedWidgets.map((item) => {
               return (
                 <div
                   key={item.widgetId}
@@ -87,23 +85,19 @@ export const WidgetPreview: React.FC<React.PropsWithChildren<IWidgetPreviewProps
                   </Tooltip>
                   <div style={{ borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
                     <div className={styles.widgetIconBox}>
-                      <Image src={item.widgetPackageIcon} alt="" width={16} height={16}/>
+                      <Image src={item.widgetPackageIcon} alt="" width={16} height={16} />
                     </div>
-                    <img
-                      src={item.widgetPackageCover || integrateCdnHost(Settings.widget_default_cover_img.value)}
-                      alt=""
-                      width={'100%'}
-                    />
+                    <img src={item.widgetPackageCover || integrateCdnHost(Settings.widget_default_cover_img.value)} alt="" width={'100%'} />
                   </div>
                   <div className={styles.checked}>
-                    <CheckOutlined color={colors.defaultBg} size={16}/>
+                    <CheckOutlined color={colors.defaultBg} size={16} />
                   </div>
                 </div>
               );
             })
           ) : (
             <div className={styles.emptyImg}>
-              <Image src={templateEmptyPng} width={160} objectFit="contain" alt=""/>
+              <Image src={templateEmptyPng} width={160} objectFit="contain" alt="" />
             </div>
           )}
         </div>

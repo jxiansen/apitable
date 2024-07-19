@@ -1,4 +1,3 @@
-
 import { Tabs, TabsProps } from 'antd';
 import cls from 'classnames';
 import { compact } from 'lodash';
@@ -15,8 +14,8 @@ import styles from './style.module.less';
 export const ShareContent: FC<React.PropsWithChildren<IShareContentProps>> = ({ data, defaultActiveKey = 'Invite' }) => {
   const { screenIsAtMost } = useResponsive();
   const nodeId = data.nodeId;
-  const activeNodePrivate = useAppSelector((state) =>
-    state.catalogTree.treeNodesMap[nodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[nodeId]?.nodePrivate
+  const activeNodePrivate = useAppSelector(
+    (state) => state.catalogTree.treeNodesMap[nodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[nodeId]?.nodePrivate,
   );
   const isMobile = screenIsAtMost(ScreenSize.md);
   const renderTabs = () => {
@@ -32,7 +31,7 @@ export const ShareContent: FC<React.PropsWithChildren<IShareContentProps>> = ({ 
         children: <PublicShareInviteLink nodeId={data.nodeId} />,
       },
     ]);
-    return <Tabs defaultActiveKey={activeNodePrivate ? 'Publish': defaultActiveKey} items={items} />;
+    return <Tabs defaultActiveKey={activeNodePrivate ? 'Publish' : defaultActiveKey} items={items} />;
   };
 
   return <div className={cls(styles.shareContent, { [styles.shareContentMobile]: isMobile })}>{renderTabs()}</div>;

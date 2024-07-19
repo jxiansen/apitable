@@ -1,5 +1,3 @@
-
-
 import { IJOTAction } from 'engine/ot';
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { StatType } from 'model/field/stat';

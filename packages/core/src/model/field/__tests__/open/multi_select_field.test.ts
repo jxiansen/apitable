@@ -1,12 +1,15 @@
-
-
 import { getFieldOptionColor } from 'model/color';
 import { ISelectField } from 'types';
 import { APIMetaFieldType } from 'types/field_api_enums';
 import { IOpenField } from 'types/open/open_field_read_types';
 import { IUpdateOpenMultiSelectFieldProperty } from 'types/open/open_field_write_types';
-import { getOpenFieldProperty, transformProperty, updateOpenFieldPropertyTransformProperty
-  , validAddOpenProperty, validUpdateOpenProperty } from './common';
+import {
+  getOpenFieldProperty,
+  transformProperty,
+  updateOpenFieldPropertyTransformProperty,
+  validAddOpenProperty,
+  validUpdateOpenProperty,
+} from './common';
 
 const singleSelectField: ISelectField = {
   name: 'Multiple selection fields',
@@ -17,15 +20,15 @@ const singleSelectField: ISelectField = {
       {
         id: 'opt000',
         name: 'Test Label 1',
-        color: 1
+        color: 1,
       },
       {
         id: 'opt001',
         name: 'Test Label 2',
-        color: 2
-      }
-    ]
-  }
+        color: 2,
+      },
+    ],
+  },
 };
 const invalidIdField: ISelectField = {
   name: 'Multiple selection fields',
@@ -36,16 +39,16 @@ const invalidIdField: ISelectField = {
       {
         id: '',
         name: 'Test Label 1',
-        color: 0
+        color: 0,
       },
       {
         id: '',
         name: 'Test Label 2',
-        color: 0
-      }
+        color: 0,
+      },
     ],
-    defaultValue: ['Test Label 1']
-  }
+    defaultValue: ['Test Label 1'],
+  },
 };
 
 const fieldWithoutDefaultValue: ISelectField = {
@@ -57,15 +60,15 @@ const fieldWithoutDefaultValue: ISelectField = {
       {
         id: '',
         name: 'Test Label 1',
-        color: 0
+        color: 0,
       },
       {
         id: '',
         name: 'Test Label 2',
-        color: 0
-      }
+        color: 0,
+      },
     ],
-  }
+  },
 };
 
 const openSingleSelectField: IOpenField = {
@@ -77,35 +80,40 @@ const openSingleSelectField: IOpenField = {
       {
         id: 'opt000',
         name: 'Test Label 1',
-        color: getFieldOptionColor(1)
+        color: getFieldOptionColor(1),
       },
       {
         id: 'opt001',
         name: 'Test Label 2',
-        color: getFieldOptionColor(2)
-      }
-    ]
-  }
+        color: getFieldOptionColor(2),
+      },
+    ],
+  },
 };
 
 const writeOpenPropertyDelete: IUpdateOpenMultiSelectFieldProperty = {
-  options: [{
-    id: 'opt000',
-    name: 'Test Label 1',
-    color: getFieldOptionColor(1).name
-  }]
+  options: [
+    {
+      id: 'opt000',
+      name: 'Test Label 1',
+      color: getFieldOptionColor(1).name,
+    },
+  ],
 };
 
 const writeOpenProperty: IUpdateOpenMultiSelectFieldProperty = {
-  options: [{
-    id: 'opt000',
-    name: 'Test Label 1',
-    color: getFieldOptionColor(1).name
-  }, {
-    id: 'opt001',
-    name: 'Test Label 2',
-    color: getFieldOptionColor(2).name
-  }]
+  options: [
+    {
+      id: 'opt000',
+      name: 'Test Label 1',
+      color: getFieldOptionColor(1).name,
+    },
+    {
+      id: 'opt001',
+      name: 'Test Label 2',
+      color: getFieldOptionColor(2).name,
+    },
+  ],
 };
 
 describe('Multiple selection fields read property format check', () => {
@@ -186,5 +194,4 @@ describe('transform property', () => {
     const property = transformProperty(fieldWithoutDefaultValue);
     expect(property).not.toHaveProperty(['options', 'defaultValue']);
   });
-
 });

@@ -1,17 +1,46 @@
-
-
 import { IDatasheetState } from './datasheet/datasheet';
 import { IOperation } from 'engine';
 import {
-  CHANGE_WIDGET_PANEL_WIDTH, DASHBOARD_ACTIVE_COLLABORATOR, DASHBOARD_CONNECTED, DASHBOARD_DEACTIVATE_COLLABORATOR, DASHBOARD_ERROR_CODE,
-  DASHBOARD_JOT_ACTION, DASHBOARD_ROOM_INFO_SYNC, DASHBOARD_UPDATE_REVISION, DATASHEET_ACTIVE_COLLABORATOR, DATASHEET_CONNECTED,
-  DATASHEET_DEACTIVATE_COLLABORATOR, DATASHEET_ERROR_CODE, DATASHEET_JOT_ACTION, DATASHEET_ROOM_INFO_SYNC, DATASHEET_UPDATE_REVISION,
-  FORM_ACTIVE_COLLABORATOR, FORM_CONNECTED, FORM_DEACTIVATE_COLLABORATOR, FORM_ERROR_CODE, FORM_JOT_ACTION, FORM_ROOM_INFO_SYNC, FORM_UPDATE_REVISION,
-  MIRROR_ACTIVE_COLLABORATOR, MIRROR_CONNECTED, MIRROR_DEACTIVATE_COLLABORATOR, MIRROR_ERROR_CODE, MIRROR_JOT_ACTION, MIRROR_ROOM_INFO_SYNC,
+  CHANGE_WIDGET_PANEL_WIDTH,
+  DASHBOARD_ACTIVE_COLLABORATOR,
+  DASHBOARD_CONNECTED,
+  DASHBOARD_DEACTIVATE_COLLABORATOR,
+  DASHBOARD_ERROR_CODE,
+  DASHBOARD_JOT_ACTION,
+  DASHBOARD_ROOM_INFO_SYNC,
+  DASHBOARD_UPDATE_REVISION,
+  DATASHEET_ACTIVE_COLLABORATOR,
+  DATASHEET_CONNECTED,
+  DATASHEET_DEACTIVATE_COLLABORATOR,
+  DATASHEET_ERROR_CODE,
+  DATASHEET_JOT_ACTION,
+  DATASHEET_ROOM_INFO_SYNC,
+  DATASHEET_UPDATE_REVISION,
+  FORM_ACTIVE_COLLABORATOR,
+  FORM_CONNECTED,
+  FORM_DEACTIVATE_COLLABORATOR,
+  FORM_ERROR_CODE,
+  FORM_JOT_ACTION,
+  FORM_ROOM_INFO_SYNC,
+  FORM_UPDATE_REVISION,
+  MIRROR_ACTIVE_COLLABORATOR,
+  MIRROR_CONNECTED,
+  MIRROR_DEACTIVATE_COLLABORATOR,
+  MIRROR_ERROR_CODE,
+  MIRROR_JOT_ACTION,
+  MIRROR_ROOM_INFO_SYNC,
   MIRROR_UPDATE_REVISION,
   SET_DASHBOARD_SYNCING,
-  SET_DATASHEET_SYNCING, SET_FORM_SYNCING, SET_MIRROR_SYNCING, SWITCH_ACTIVE_PANEL, TOGGLE_WIDGET_PANEL, UPDATE_DASHBOARD, UPDATE_DATASHEET,
-  UPDATE_MIRROR, WIDGET_JOT_ACTION, WIDGET_UPDATE_REVISION,
+  SET_DATASHEET_SYNCING,
+  SET_FORM_SYNCING,
+  SET_MIRROR_SYNCING,
+  SWITCH_ACTIVE_PANEL,
+  TOGGLE_WIDGET_PANEL,
+  UPDATE_DASHBOARD,
+  UPDATE_DATASHEET,
+  UPDATE_MIRROR,
+  WIDGET_JOT_ACTION,
+  WIDGET_UPDATE_REVISION,
 } from '../../../../shared/store/action_constants';
 import { ResourceType } from 'types';
 import { IDashboard, IDashboardPack } from './dashboard';
@@ -97,7 +126,11 @@ interface IUpdateRevisionForMirror {
   mirrorId: string;
 }
 
-export type IUpdateRevision = IUpdateRevisionForDashboard | IUpdateRevisionForDatasheet | IUpdateRevisionForWidget | IUpdateRevisionForForm
+export type IUpdateRevision =
+  | IUpdateRevisionForDashboard
+  | IUpdateRevisionForDatasheet
+  | IUpdateRevisionForWidget
+  | IUpdateRevisionForForm
   | IUpdateRevisionForMirror;
 
 interface ISetDatasheetConnected {
@@ -175,47 +208,47 @@ interface IRoomInfoSyncForMirror {
 export type IRoomInfoSync = IRoomInfoSyncForDashboard | IRoomInfoSyncForForm | IRoomInfoSyncForDatasheet | IRoomInfoSyncForMirror;
 
 interface IResourceErrCodeForDatasheet {
-  type: typeof DATASHEET_ERROR_CODE,
-  payload: number | null,
-  datasheetId: string,
+  type: typeof DATASHEET_ERROR_CODE;
+  payload: number | null;
+  datasheetId: string;
 }
 
 interface IResourceErrCodeForForm {
-  type: typeof FORM_ERROR_CODE,
-  payload: number | null,
-  formId: string,
+  type: typeof FORM_ERROR_CODE;
+  payload: number | null;
+  formId: string;
 }
 
 interface IResourceErrCodeForDashboard {
-  type: typeof DASHBOARD_ERROR_CODE,
-  payload: number | null,
-  dashboardId: string,
+  type: typeof DASHBOARD_ERROR_CODE;
+  payload: number | null;
+  dashboardId: string;
 }
 
 interface IResourceErrCodeForMirror {
-  type: typeof MIRROR_ERROR_CODE,
-  payload: number | null,
-  mirrorId: string,
+  type: typeof MIRROR_ERROR_CODE;
+  payload: number | null;
+  mirrorId: string;
 }
 
 export type IResourceErrCode = IResourceErrCodeForDatasheet | IResourceErrCodeForForm | IResourceErrCodeForDashboard | IResourceErrCodeForMirror;
 
 interface IUpdateDatasheet {
-  type: typeof UPDATE_DATASHEET,
-  payload: Partial<INodeMeta>,
-  datasheetId: string,
+  type: typeof UPDATE_DATASHEET;
+  payload: Partial<INodeMeta>;
+  datasheetId: string;
 }
 
 interface IUpdateDashboard {
-  type: typeof UPDATE_DASHBOARD,
-  payload: Partial<INodeMeta>,
-  dashboardId: string,
+  type: typeof UPDATE_DASHBOARD;
+  payload: Partial<INodeMeta>;
+  dashboardId: string;
 }
 
 interface IUpdateMirror {
-  type: typeof UPDATE_MIRROR,
-  payload: Partial<INodeMeta>,
-  mirrorId: string,
+  type: typeof UPDATE_MIRROR;
+  payload: Partial<INodeMeta>;
+  mirrorId: string;
 }
 
 export type IUpdateResource = IUpdateDatasheet | IUpdateDashboard | IUpdateMirror;
@@ -245,7 +278,10 @@ export interface IActiveMirrorCollaboratorAction {
 }
 
 export type IActiveCollaboratorAction =
-  IActiveDatasheetCollaboratorAction | IActiveFormCollaboratorAction | IActiveDashboardCollaboratorAction | IActiveMirrorCollaboratorAction;
+  | IActiveDatasheetCollaboratorAction
+  | IActiveFormCollaboratorAction
+  | IActiveDashboardCollaboratorAction
+  | IActiveMirrorCollaboratorAction;
 
 export interface IDeActiveDatasheetCollaborator {
   type: typeof DATASHEET_DEACTIVATE_COLLABORATOR;
@@ -274,46 +310,49 @@ export interface IDeActiveMirrorCollaborator {
 }
 
 export type IDeActiveCollaborator =
-  IDeActiveDatasheetCollaborator | IDeActiveFormCollaborator | IDeActiveDashboardCollaborator | IDeActiveMirrorCollaborator;
+  | IDeActiveDatasheetCollaborator
+  | IDeActiveFormCollaborator
+  | IDeActiveDashboardCollaborator
+  | IDeActiveMirrorCollaborator;
 
 export interface IToggleDatasheetWidgetPanel {
-  type: typeof TOGGLE_WIDGET_PANEL,
-  payload: boolean,
-  datasheetId: string,
+  type: typeof TOGGLE_WIDGET_PANEL;
+  payload: boolean;
+  datasheetId: string;
 }
 
 export interface IToggleMirrorWidgetPanel {
-  type: typeof TOGGLE_WIDGET_PANEL,
-  payload: boolean,
-  mirrorId: string,
+  type: typeof TOGGLE_WIDGET_PANEL;
+  payload: boolean;
+  mirrorId: string;
 }
 
 export type IToggleWidgetPanelAction = IToggleDatasheetWidgetPanel | IToggleMirrorWidgetPanel;
 
 export interface IChangeDatasheetWidgetPanelWidth {
-  type: typeof CHANGE_WIDGET_PANEL_WIDTH,
-  payload: number,
-  datasheetId: string,
+  type: typeof CHANGE_WIDGET_PANEL_WIDTH;
+  payload: number;
+  datasheetId: string;
 }
 
 export interface IChangeMirrorWidgetPanelWidth {
-  type: typeof CHANGE_WIDGET_PANEL_WIDTH,
-  payload: number,
-  mirrorId: string,
+  type: typeof CHANGE_WIDGET_PANEL_WIDTH;
+  payload: number;
+  mirrorId: string;
 }
 
 export type IChangeWidgetPanelWidth = IChangeMirrorWidgetPanelWidth | IChangeDatasheetWidgetPanelWidth;
 
 export interface ISwitchDatasheetActivePanel {
-  type: typeof SWITCH_ACTIVE_PANEL,
-  payload: string | null,
-  datasheetId: string,
+  type: typeof SWITCH_ACTIVE_PANEL;
+  payload: string | null;
+  datasheetId: string;
 }
 
 export interface ISwitchMirrorActivePanel {
-  type: typeof SWITCH_ACTIVE_PANEL,
-  payload: string | null,
-  mirrorId: string,
+  type: typeof SWITCH_ACTIVE_PANEL;
+  payload: string | null;
+  mirrorId: string;
 }
 
 export type ISwitchActivePanel = ISwitchDatasheetActivePanel | ISwitchMirrorActivePanel;

@@ -1,5 +1,3 @@
-
-
 import isEqual from 'lodash/isEqual';
 import { AnyAction, Dispatch, Middleware, MiddlewareAPI } from 'redux';
 import { BatchAction } from 'redux-batched-actions';

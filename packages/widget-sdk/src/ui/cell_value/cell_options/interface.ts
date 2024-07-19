@@ -1,5 +1,3 @@
-
-
 import { ISelectFieldBaseOpenValue } from '@apitable/core';
 import { CSSProperties } from 'react';
 

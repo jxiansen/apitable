@@ -1,5 +1,3 @@
-
-
 import {
   CollaCommandName,
   Field,
@@ -32,52 +30,31 @@ import {
 import { Span } from '@metinseylan/nestjs-opentelemetry';
 import { Injectable } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
-import {
-  DatasheetRecordAlarmBaseService,
-} from 'database/alarm/datasheet.record.alarm.base.service';
+import { DatasheetRecordAlarmBaseService } from 'database/alarm/datasheet.record.alarm.base.service';
 import { DatasheetEntity } from 'database/datasheet/entities/datasheet.entity';
 import { DatasheetMetaEntity } from 'database/datasheet/entities/datasheet.meta.entity';
-import {
-  DatasheetRecordEntity,
-} from 'database/datasheet/entities/datasheet.record.entity';
+import { DatasheetRecordEntity } from 'database/datasheet/entities/datasheet.record.entity';
 import { RecordCommentEntity } from 'database/datasheet/entities/record.comment.entity';
 import { DatasheetMetaService } from 'database/datasheet/services/datasheet.meta.service';
-import {
-  DatasheetRecordService,
-} from 'database/datasheet/services/datasheet.record.service';
+import { DatasheetRecordService } from 'database/datasheet/services/datasheet.record.service';
 import { DatasheetService } from 'database/datasheet/services/datasheet.service';
 import { RecordCommentService } from 'database/datasheet/services/record.comment.service';
-import {
-  EffectConstantName,
-  ICommonData,
-  IFieldData,
-  IRestoreRecordInfo,
-} from 'database/ot/interfaces/ot.interface';
+import { EffectConstantName, ICommonData, IFieldData, IRestoreRecordInfo } from 'database/ot/interfaces/ot.interface';
 import produce from 'immer';
 import { chunk, intersection, isEmpty, pick, update } from 'lodash';
 import { InjectLogger } from 'shared/common';
 import { SourceTypeEnum } from 'shared/enums/changeset.source.type.enum';
-import {
-  CommonException,
-  DatasheetException,
-  OtException,
-  PermissionException,
-  ServerException,
-} from 'shared/exception';
+import { CommonException, DatasheetException, OtException, PermissionException, ServerException } from 'shared/exception';
 import { ExceptionUtil } from 'shared/exception/exception.util';
 import { IdWorker } from 'shared/helpers';
 import { IAuthHeader, IOpAttach, NodePermission } from 'shared/interfaces';
 import { RestService } from 'shared/services/rest/rest.service';
 import { EntityManager } from 'typeorm';
 import { Logger } from 'winston';
-import {
-  DatasheetChangesetEntity,
-} from '../../datasheet/entities/datasheet.changeset.entity';
+import { DatasheetChangesetEntity } from '../../datasheet/entities/datasheet.changeset.entity';
 import { WidgetEntity } from '../../widget/entities/widget.entity';
 import { WidgetService } from '../../widget/services/widget.service';
-import {
-  DatasheetRecordArchiveEntity,
-} from '../../datasheet/entities/datasheet.record.archive.entity';
+import { DatasheetRecordArchiveEntity } from '../../datasheet/entities/datasheet.record.archive.entity';
 
 @Injectable()
 export class DatasheetOtService {
@@ -91,8 +68,7 @@ export class DatasheetOtService {
     // private readonly envConfigService: EnvConfigService,
     private readonly recordAlarmService: DatasheetRecordAlarmBaseService,
     private readonly datasheetService: DatasheetService,
-  ) {
-  }
+  ) {}
 
   private static isAttachField(cellValue: any): boolean {
     return !!(cellValue && Array.isArray(cellValue) && cellValue[0]?.mimeType && cellValue[0]?.token);
@@ -309,10 +285,10 @@ export class DatasheetOtService {
       const currentRecordCountInDst = await this.metaService.getRowsNumByDstId(datasheetId);
       const spaceUsages = await this.restService.getSpaceUsage(spaceId);
       const subscribeInfo = await this.restService.getSpaceSubscription(spaceId);
-      const afterCreateCountInDst = Number(currentRecordCountInDst) + Number(resultSet.toCreateRecord.size)
-        + Number(resultSet.toUnarchiveRecord.size);
-      const afterCreateCountInSpace = Number(spaceUsages.recordNums) + Number(resultSet.toCreateRecord.size)
-        + Number(resultSet.toUnarchiveRecord.size);
+      const afterCreateCountInDst =
+        Number(currentRecordCountInDst) + Number(resultSet.toCreateRecord.size) + Number(resultSet.toUnarchiveRecord.size);
+      const afterCreateCountInSpace =
+        Number(spaceUsages.recordNums) + Number(resultSet.toCreateRecord.size) + Number(resultSet.toUnarchiveRecord.size);
 
       if (subscribeInfo.maxRowsPerSheet >= 0 && afterCreateCountInDst > subscribeInfo.maxRowsPerSheet) {
         const datasheetEntity = await this.datasheetService.getDatasheet(datasheetId);
@@ -400,8 +376,9 @@ export class DatasheetOtService {
       const afterArchiveCountInDst = Number(currentArchivedRecordCountInDst) + Number(resultSet.toArchiveRecordIds.length);
 
       if (subscribeInfo.maxArchivedRowsPerSheet >= 0 && afterArchiveCountInDst > subscribeInfo.maxArchivedRowsPerSheet) {
-        throw new ServerException(DatasheetException.getRECORD_ARCHIVE_LIMIT_PER_DATASHEETMsg(subscribeInfo.maxArchivedRowsPerSheet,
-          afterArchiveCountInDst));
+        throw new ServerException(
+          DatasheetException.getRECORD_ARCHIVE_LIMIT_PER_DATASHEETMsg(subscribeInfo.maxArchivedRowsPerSheet, afterArchiveCountInDst),
+        );
       }
     }
 
@@ -620,9 +597,17 @@ export class DatasheetOtService {
       if (resultSet.linkActionMainDstId !== resultSet.datasheetId) {
         // Since the database deleted link field, link field of linked datasheet is changed to text field,
         // don't check permission
-        if ((odData.type == FieldType.Link || odData.type == FieldType.OneWayLink) && odData.property.foreignDatasheetId === resultSet.linkActionMainDstId && oiData.type == FieldType.Text) {
+        if (
+          (odData.type == FieldType.Link || odData.type == FieldType.OneWayLink) &&
+          odData.property.foreignDatasheetId === resultSet.linkActionMainDstId &&
+          oiData.type == FieldType.Text
+        ) {
           skip = true;
-        } else if ((oiData.type == FieldType.Link || oiData.type == FieldType.OneWayLink) && oiData.property.foreignDatasheetId === resultSet.linkActionMainDstId && cmd.startsWith('UNDO:')) {
+        } else if (
+          (oiData.type == FieldType.Link || oiData.type == FieldType.OneWayLink) &&
+          oiData.property.foreignDatasheetId === resultSet.linkActionMainDstId &&
+          cmd.startsWith('UNDO:')
+        ) {
           // Since the database undo deleting link field, original link field of linked datasheet changes back to link field,
           // don't check permission
           skip = true;
@@ -1101,7 +1086,7 @@ export class DatasheetOtService {
     const recordId = action.p[1] as string;
     const autoSubscriptionFields = this.getAutoSubscriptionFields(resultSet.temporaryFieldMap);
 
-    if ('oi' in action && (cmd === 'UnarchiveRecords')) {
+    if ('oi' in action && cmd === 'UnarchiveRecords') {
       if (!permission.rowUnarchivable) {
         throw new ServerException(PermissionException.OPERATION_DENIED);
       }
@@ -1161,7 +1146,7 @@ export class DatasheetOtService {
       this.collectRecordSubscriptions(autoSubscriptionFields, recordId, recordData, undefined, resultSet);
     }
 
-    if ('od' in action && (cmd === 'ArchiveRecords')) {
+    if ('od' in action && cmd === 'ArchiveRecords') {
       if (!permission.rowArchivable) {
         throw new ServerException(PermissionException.OPERATION_DENIED);
       }
@@ -2029,10 +2014,10 @@ export class DatasheetOtService {
           Object.keys(recordData).forEach((fieldId) => {
             fieldUpdatedMap[fieldId] = fieldUpdatedMap[fieldId]
               ? {
-                ...fieldUpdatedMap[fieldId],
-                at: updatedAt,
-                by: uuid,
-              }
+                  ...fieldUpdatedMap[fieldId],
+                  at: updatedAt,
+                  by: uuid,
+                }
               : { at: updatedAt, by: uuid };
           });
         }
@@ -2084,10 +2069,10 @@ export class DatasheetOtService {
         const newRecordMeta =
           updateFieldIds.length || autoNumberFields.length
             ? {
-              createdAt,
-              createdBy: uuid,
-              fieldUpdatedMap,
-            }
+                createdAt,
+                createdBy: uuid,
+                fieldUpdatedMap,
+              }
             : { createdAt, createdBy: uuid };
 
         // TODO Delete this code block after cell alarm is changed to async creation

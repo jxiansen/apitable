@@ -1,5 +1,3 @@
-
-
 import { IOperation, IRemoteChangeset, ResourceType } from '@apitable/core';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';

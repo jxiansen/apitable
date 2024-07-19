@@ -1,5 +1,3 @@
-
-
 import { CollaCommandName, ExecuteResult, getUniqName, IField, IFieldMap, Strings, t } from '@apitable/core';
 import { notifyWithUndo } from 'pc/components/common/notify';
 import { NotifyKey } from 'pc/components/common/notify/notify.interface';

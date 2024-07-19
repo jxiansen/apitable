@@ -1,5 +1,3 @@
-
-
 import { NodeBaseInfo } from 'database/interfaces';
 import { NodeEntity } from 'node/entities/node.entity';
 import { INodeExtra } from 'shared/interfaces';

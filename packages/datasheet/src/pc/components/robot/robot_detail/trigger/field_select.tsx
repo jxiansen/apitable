@@ -1,5 +1,3 @@
-
-
 import { ITheme, DropdownSelect as Select, useTheme } from '@apitable/components';
 import { FieldType, IField } from '@apitable/core';
 import { FieldIconMapFieldType as FieldIconMap } from '@apitable/widget-sdk';

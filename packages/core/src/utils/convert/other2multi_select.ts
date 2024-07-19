@@ -1,8 +1,4 @@
-
-
-import type {
-  MultiSelectField,
-} from 'model/field/select_field/multi_select_field';
+import type { MultiSelectField } from 'model/field/select_field/multi_select_field';
 import { IField, FieldType } from 'types/field_types';
 
 /**
@@ -21,9 +17,7 @@ import { IField, FieldType } from 'types/field_types';
  * @param {Field} oldField
  * @returns {(string[] | null)}
  */
-export function str2multi(value: string[] | string | null,
-  newField: MultiSelectField,
-  oldField: IField): string[] | null {
+export function str2multi(value: string[] | string | null, newField: MultiSelectField, oldField: IField): string[] | null {
   if (value == null) return null;
   /* If value is an array, but the old type is not a multi-select type, return null */
   if (Array.isArray(value) && oldField.type !== FieldType.MultiSelect) {
@@ -36,7 +30,7 @@ export function str2multi(value: string[] | string | null,
     return option ? [option.id] : null;
   } else if (Array.isArray(value) && oldField.type === FieldType.MultiSelect) {
     const result: string[] = [];
-    (value as string[]).forEach(v => {
+    (value as string[]).forEach((v) => {
       const option = newField.findOptionById(v);
       if (option) {
         result.push(option.id);
@@ -49,5 +43,4 @@ export function str2multi(value: string[] | string | null,
     return [option.id];
   }
   return null;
-
 }

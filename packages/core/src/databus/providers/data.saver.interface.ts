@@ -1,5 +1,3 @@
-
-
 import { IResourceOpsCollect } from 'command_manager';
 import { IReduxState } from 'exports/store/interfaces';
 import { Store } from 'redux';

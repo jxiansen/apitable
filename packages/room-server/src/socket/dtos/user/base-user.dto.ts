@@ -1,5 +1,3 @@
-
-
 export interface IBaseUserDto {
   memberName: string;
   avatar: string;

@@ -8,10 +8,7 @@ import { IReduxState, Strings, t } from '@apitable/core';
 import { updateNodeInfo } from '@apitable/core/dist/modules/space/store/actions/catalog_tree';
 import { useAppSelector } from 'pc/store/react-redux';
 import { automationNameAtom, automationStateAtom } from '../../../automation/controller';
-import {
-  useAutomationResourceNode,
-  useAutomationResourcePermission
-} from '../../../automation/controller/use_automation_permission';
+import { useAutomationResourceNode, useAutomationResourcePermission } from '../../../automation/controller/use_automation_permission';
 import { EditableText } from '../../../editable_text';
 import { updateRobotName } from '../../api';
 import { useAutomationRobot } from '../../hooks';
@@ -38,7 +35,7 @@ export const InputTitle: FC = () => {
       if (automationState?.scenario === AutomationScenario.node) {
         setValue(nodeItem?.nodeName);
       }
-    }else {
+    } else {
       setValue(automationName);
     }
   }, [automationName, automationState?.scenario, dispatch, nodeItem?.nodeId, nodeItem?.nodeName, nodeItem?.type, templateId]);
@@ -71,7 +68,10 @@ export const InputTitle: FC = () => {
   return (
     <WidthEditableText
       editable={manageable}
-      onChange={handleNameChange} color={colors.textCommonPrimary} placeholder={t(Strings.robot_unnamed)}
-      value={value}/>
+      onChange={handleNameChange}
+      color={colors.textCommonPrimary}
+      placeholder={t(Strings.robot_unnamed)}
+      value={value}
+    />
   );
 };

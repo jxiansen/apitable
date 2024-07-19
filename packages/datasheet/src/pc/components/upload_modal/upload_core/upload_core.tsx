@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import type { Identifier } from 'dnd-core';
 import produce from 'immer';

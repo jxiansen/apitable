@@ -1,5 +1,3 @@
-
-
 import { useDebounceFn } from 'ahooks';
 import produce from 'immer';
 import { get, isEqual } from 'lodash';
@@ -28,8 +26,8 @@ export const FilterValue: React.FC<React.PropsWithChildren<IFilterValueProps>> =
     field.type === FieldType.LookUp
       ? field.property.relatedLinkFieldId
       : primaryField?.type === FieldType.LookUp
-        ? primaryField.property.relatedLinkFieldId
-        : '';
+      ? primaryField.property.relatedLinkFieldId
+      : '';
   const { isViewLock } = useContext(ViewFilterContext);
 
   const { run: debounceInput } = useDebounceFn(

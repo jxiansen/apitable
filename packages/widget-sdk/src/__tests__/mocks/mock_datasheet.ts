@@ -7,11 +7,7 @@ export const DEFAULT_DATASHEET_NAME = 'datasheet1';
 export const DEFAULT_DATASHEET_DESCRIPTION = 'description';
 
 export function mockWidgetSdkDatasheetPack(props: Partial<IWidgetDatasheetState> = {}): IWidgetDatasheetState {
-  const {
-    connected = true,
-    datasheet = mockWidgetSdkDatasheet(),
-    client = mockClient()
-  } = props;
+  const { connected = true, datasheet = mockWidgetSdkDatasheet(), client = mockClient() } = props;
   return {
     connected,
     datasheet,
@@ -27,7 +23,7 @@ export function mockWidgetSdkDatasheet(props: Partial<IDatasheetMain> = {}): IDa
     permissions = createMockPermissions(),
     snapshot = mockSnapshot(),
     fieldPermissionMap,
-    isPartOfData
+    isPartOfData,
   } = props;
   return {
     id: datasheetId,
@@ -49,12 +45,12 @@ export function mockSnapshot(props: Partial<ISnapshot> = {}): ISnapshot {
       primaryFieldId: '',
     },
     datasheetId = DEFAULT_DATASHEET_ID,
-    recordMap = {}
+    recordMap = {},
   } = props;
   return {
     meta,
-    datasheetId, 
-    recordMap
+    datasheetId,
+    recordMap,
   };
 }
 
@@ -62,6 +58,6 @@ export function mockClient(props: Partial<IDatasheetClient> = {}): IDatasheetCli
   const { viewDerivation = {}, selection } = props;
   return {
     viewDerivation,
-    selection
+    selection,
   };
 }

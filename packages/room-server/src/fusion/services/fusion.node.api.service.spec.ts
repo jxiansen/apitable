@@ -1,4 +1,3 @@
-
 import { FusionNodeApiService } from './fusion.node.api.service';
 import { RestService } from 'shared/services/rest/rest.service';
 import { NodeTypeEnum } from '../../shared/enums/node.enum';
@@ -10,7 +9,7 @@ describe('Test FusionNodeApiService', () => {
   let service: FusionNodeApiService;
   let restService: RestService;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       providers: [
         {
@@ -24,7 +23,7 @@ describe('Test FusionNodeApiService', () => {
           useValue: {
             headers: {
               authorization: 'token',
-            }
+            },
           },
         },
         FusionNodeApiService,
@@ -34,14 +33,14 @@ describe('Test FusionNodeApiService', () => {
     service = moduleFixture.get<FusionNodeApiService>(FusionNodeApiService);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
-  it('should be return edit space\'s datasheets', async() => {
-    jest.spyOn(restService, 'getNodesList').mockResolvedValue([
-      { nodeId: 'datasheetId', nodeName: 'datasheetId', type: 2, icon: '100', parentId: 'parentId' }
-    ] as any);
+  it("should be return edit space's datasheets", async () => {
+    jest
+      .spyOn(restService, 'getNodesList')
+      .mockResolvedValue([{ nodeId: 'datasheetId', nodeName: 'datasheetId', type: 2, icon: '100', parentId: 'parentId' }] as any);
     const nodes = await service.getNodeList('spaceId', NodeTypeEnum.Datasheet, [1]);
     expect(nodes.length).toEqual(1);
   });

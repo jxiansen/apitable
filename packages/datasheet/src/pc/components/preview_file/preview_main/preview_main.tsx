@@ -1,5 +1,3 @@
-
-
 import { useKeyPress } from 'ahooks';
 import mime from 'mime-types';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -94,7 +92,7 @@ export const PreviewMain: React.FC<React.PropsWithChildren<IPreviewMain>> = (pro
     setOfficePreviewUrl(null);
     fetchPreviewUrl();
     // eslint-disable-next-line
-  }, [activeIndex,officePreviewEnable]);
+  }, [activeIndex, officePreviewEnable]);
 
   const handlePrev = useCallback(
     (e: any) => {

@@ -1,5 +1,3 @@
-
-
 import { EventRealTypeEnums, OPEventNameEnums } from 'event_manager/enum';
 import { testPath } from 'event_manager/helper';
 import { ResourceType } from 'types/resource_types';
@@ -28,7 +26,7 @@ export class OPEventRecordDeleted extends IAtomEventType<IRecordDelete> {
         action,
         datasheetId: resourceId,
         recordId,
-      }
+      },
     };
   }
 }

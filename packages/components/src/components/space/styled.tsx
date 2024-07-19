@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { ISpaceProps } from './interface';
 import { FLEX_ALIGN } from './constant';
@@ -7,7 +5,7 @@ import { FLEX_ALIGN } from './constant';
 export const SpaceStyled = styled.div<ISpaceProps>`
   display: inline-flex;
   align-items: center;
-  ${props => {
+  ${(props) => {
     const size = props.size;
     if (typeof size === 'number') {
       return css`
@@ -22,7 +20,7 @@ export const SpaceStyled = styled.div<ISpaceProps>`
       gap: 8px;
     `;
   }}
-  ${props => {
+  ${(props) => {
     if (props.vertical) {
       return css`
         flex-direction: column;
@@ -30,7 +28,7 @@ export const SpaceStyled = styled.div<ISpaceProps>`
     }
     return '';
   }}
-  ${props => {
+  ${(props) => {
     if (props.wrap) {
       return css`
         flex-wrap: wrap;
@@ -38,7 +36,7 @@ export const SpaceStyled = styled.div<ISpaceProps>`
     }
     return '';
   }}
-  ${props => {
+  ${(props) => {
     if (props.align) {
       return css`
         align-items: ${FLEX_ALIGN[props.align]};
@@ -54,7 +52,7 @@ export const SpaceItemStyled = styled.div<ISpaceProps>`
 `;
 
 export const SplitStyled = styled.span<ISpaceProps>`
-  ${props => {
+  ${(props) => {
     if (props.size) {
       return css`
         margin-right: ${props.size}px;
@@ -65,6 +63,5 @@ export const SplitStyled = styled.span<ISpaceProps>`
     `;
   }}
   height: 0.9em;
-  border-left: 1px solid #E5E9ED;
+  border-left: 1px solid #e5e9ed;
 `;
-

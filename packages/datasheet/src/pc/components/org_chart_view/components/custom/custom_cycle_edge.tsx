@@ -1,5 +1,3 @@
-
-
 import { Tooltip } from 'antd';
 import { FC, useContext } from 'react';
 import { IconButton, useThemeColors } from '@apitable/components';

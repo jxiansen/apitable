@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import * as Url from './url.widget';
 import Qs from 'qs';
@@ -17,7 +15,7 @@ export const readInstallationWidgets = (widgetIds: string[], linkId?: string) =>
       linkId,
     },
     // serialize arguement revisions: [1,2,3] to normal GET params revisions=1&revisions=2&revisions=3
-    paramsSerializer: params => {
+    paramsSerializer: (params) => {
       return Qs.stringify(params, { arrayFormat: 'repeat' });
     },
   });
@@ -38,7 +36,7 @@ export const installWidget = (nodeId: string, packageId: string, name?: string) 
   return axios.post<IApiWrapper & { data: IWidget }>(Url.INSTALL_WIDGET, {
     nodeId: nodeId,
     widgetPackageId: packageId,
-    name
+    name,
   });
 };
 

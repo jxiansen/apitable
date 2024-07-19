@@ -1,5 +1,3 @@
-
-
 import { Checkbox } from 'antd';
 import { FC } from 'react';
 import { Strings, t, IReduxState } from '@apitable/core';

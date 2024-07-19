@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import * as React from 'react';
 import { colorVars, Checkbox, Divider, useListenVisualHeight, IUseListenTriggerInfo, WrapperTooltip } from '@apitable/components';

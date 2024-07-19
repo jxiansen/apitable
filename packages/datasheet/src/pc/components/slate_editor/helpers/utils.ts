@@ -1,5 +1,3 @@
-
-
 import _isUrl from 'is-url';
 import { cloneDeep } from 'lodash';
 import { Editor, Range, Selection, Node, Element, Location } from 'slate';
@@ -45,10 +43,10 @@ export const getCurrentElement = (editor: any, location?: Location) => {
   const path = !selection
     ? [0, 0]
     : Range.isRange(selection)
-      ? [...selection.focus.path]
-      : Array.isArray(selection)
-        ? [...selection, 0]
-        : [...selection.path, 0];
+    ? [...selection.focus.path]
+    : Array.isArray(selection)
+    ? [...selection, 0]
+    : [...selection.path, 0];
   // The last path is a leaf text node and needs to be removed
   path.pop();
   try {
@@ -139,7 +137,7 @@ export const getValidPopupPosition = ({ anchor, popup, offset = { x: 0, y: 0 }, 
   const wh = window.innerHeight;
   const ww = window.innerWidth;
   let top = at + oy,
-      left = al + ox;
+    left = al + ox;
   if (alh === 'center') {
     pw /= 2;
     left = al - pw + aw / 2;

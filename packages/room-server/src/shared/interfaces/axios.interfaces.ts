@@ -1,5 +1,3 @@
-
-
 import { IFieldPermissionMap, IPermissions } from '@apitable/core';
 
 /**

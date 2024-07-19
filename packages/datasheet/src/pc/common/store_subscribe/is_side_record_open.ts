@@ -1,5 +1,3 @@
-
-
 import { RecordVision, StoreActions } from '@apitable/core';
 import { store } from 'pc/store';
 import { getStorage, setStorage, StorageMethod, StorageName } from 'pc/utils/storage';

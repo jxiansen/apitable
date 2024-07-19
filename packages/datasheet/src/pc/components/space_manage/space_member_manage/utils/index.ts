@@ -1,5 +1,3 @@
-
-
 import { Api, ITagsInSpace, ISubTeamListInSpaceBase, IMemberInfoInSpace, ISpaceInfo, ISpaceBasicInfo } from '@apitable/core';
 // @ts-ignore
 import { socialPlatPreOperate } from 'enterprise/home/social_platform/utils';

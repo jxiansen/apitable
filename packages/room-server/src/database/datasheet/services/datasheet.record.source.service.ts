@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@nestjs/common';
 import { SourceTypeEnum } from 'shared/enums/changeset.source.type.enum';
 import { IdWorker } from 'shared/helpers';
@@ -24,7 +22,8 @@ export class DatasheetRecordSourceService {
         createdBy: userId?.length ? userId : null,
       });
     }
-    await this.repository.createQueryBuilder()
+    await this.repository
+      .createQueryBuilder()
       .insert()
       .into(DatasheetRecordSourceEntity)
       .values(entities)

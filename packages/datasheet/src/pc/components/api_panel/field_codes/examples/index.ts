@@ -1,5 +1,3 @@
-
-
 import { runInContext } from 'lodash';
 import { Strings, t } from '@apitable/core';
 import { CodeLanguage } from '../enum';

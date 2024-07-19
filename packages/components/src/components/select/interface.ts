@@ -1,5 +1,3 @@
-
-
 import React, { ReactNode } from 'react';
 
 export type ISelectValue = string | number;
@@ -73,12 +71,12 @@ export interface ISelectProps {
   /**
    * After the search is enabled, the search keyword inline styles
    */
-  highlightStyle?: React.CSSProperties
+  highlightStyle?: React.CSSProperties;
 
   /**
    * Prompt when data is empty
    */
-  noDataTip?: string | (() => ReactNode)
+  noDataTip?: string | (() => ReactNode);
 
   /**
    * Whether to hide the selected items

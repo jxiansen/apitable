@@ -1,5 +1,3 @@
-
-
 import { useContext } from 'react';
 import { fastCloneDeep } from '@apitable/core';
 import { GanttCoordinate, GANTT_TASK_GAP_SIZE, IScrollState } from 'pc/components/gantt_view';

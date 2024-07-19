@@ -1,10 +1,8 @@
-
-
 import { IErrorListProps } from '../../interface';
 
 export default function DefaultErrorList(props: IErrorListProps) {
   const { errors } = props;
-  const newErrors = Array.from(new Set(errors.map(r => r.stack)));
+  const newErrors = Array.from(new Set(errors.map((r) => r.stack)));
   console.log(errors);
   console.log(newErrors);
   return (

@@ -1,4 +1,3 @@
-
 // @ts-ignore
 import { IWizardsConfig, Player, SystemConfig } from '@apitable/core';
 import { modifyWizardConfig } from 'pc/common/wizard';

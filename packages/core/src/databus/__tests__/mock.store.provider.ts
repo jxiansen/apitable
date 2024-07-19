@@ -1,12 +1,10 @@
-
-
 import { IStoreOptions, IStoreProvider } from '../providers';
 import { Store, AnyAction, createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { batchDispatchMiddleware } from 'redux-batched-actions';
 import { IBaseDatasheetPack, IReduxState, IServerDashboardPack } from 'exports/store/interfaces';
 import * as Reducers from 'exports/store/reducers';
-import { setDashboard,setDatasheetConnected,loadFieldPermissionMap,receiveDataPack } from 'modules/database/store/actions/resource';
+import { setDashboard, setDatasheetConnected, loadFieldPermissionMap, receiveDataPack } from 'modules/database/store/actions/resource';
 import { setPageParams } from 'modules/database/store/actions/page_params';
 
 export const fulfillDatasheetStore = (datasheetPack: IBaseDatasheetPack) => {
@@ -15,7 +13,7 @@ export const fulfillDatasheetStore = (datasheetPack: IBaseDatasheetPack) => {
     setPageParams({
       datasheetId: datasheetPack.datasheet.id,
       spaceId: datasheetPack.datasheet.spaceId,
-    }),
+    })
   );
 
   if (datasheetPack.fieldPermissionMap) {
@@ -40,7 +38,7 @@ export class MockStoreProvider implements IStoreProvider {
 
   createDashboardStore(
     dashboardPack: IServerDashboardPack,
-    _options: IStoreOptions,
+    _options: IStoreOptions
   ): Store<IReduxState, AnyAction> | Promise<Store<IReduxState, AnyAction>> {
     return Promise.resolve(fulfillDashboardStore(dashboardPack));
   }

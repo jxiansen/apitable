@@ -1,5 +1,3 @@
-
-
 import { memo, useCallback } from 'react';
 import * as React from 'react';
 import { stopPropagation } from '@apitable/components';

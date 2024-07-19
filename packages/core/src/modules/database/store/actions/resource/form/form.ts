@@ -1,5 +1,3 @@
-
-
 import { fetchFormPack, fetchShareFormPack, fetchTemplateFormPack } from '../../../../api/form_api';
 import { fetchEmbedDatasheetPack } from '../../../../api/datasheet_api';
 import { AxiosResponse } from 'axios';
@@ -49,16 +47,16 @@ export function fetchForm(formId: string, successFn?: (props?: any) => void) {
       requestMethod = () => fetchTemplateFormPack(templateId, formId);
     }
 
-    if(embedId) {
+    if (embedId) {
       requestMethod = () => fetchEmbedDatasheetPack(embedId, formId);
     }
 
     dispatch(requestFormPack(formId));
     return requestMethod(formId)
-      .then(response => {
+      .then((response) => {
         return Promise.resolve({ formId, response, dispatch, shareId });
       })
-      .catch(e => {
+      .catch((e) => {
         if (state.catalogTree.treeNodesMap[formId]) {
           dispatch(deleteNode({ nodeId: formId, parentId: state.catalogTree.treeNodesMap[formId]!.parentId }));
         }
@@ -106,7 +104,7 @@ export function receiveFormData({
 }): any {
   const formId = form.id;
   const { meta, formProps } = snapshot;
-  const currentView = meta.views.filter(view => {
+  const currentView = meta.views.filter((view) => {
     return view.id === sourceInfo.viewId;
   });
   if (!currentView.length) {
@@ -139,7 +137,7 @@ export function receiveFormData({
           permissions: DEFAULT_READ_ONLY_PERMISSION,
         } as INodeMeta,
       },
-      { isPartOfData: true },
+      { isPartOfData: true }
     ),
   ];
 }

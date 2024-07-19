@@ -1,5 +1,3 @@
-
-
 import * as Sentry from '@sentry/nextjs';
 import parser from 'html-react-parser';
 import { Navigation, OnOkType, OtErrorCode, StatusCode, Strings, t } from '@apitable/core';

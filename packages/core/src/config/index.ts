@@ -1,5 +1,3 @@
-
-
 import * as ConfigConstant from './constant';
 import { Navigation, SpacePathType } from './router';
 import * as StatusCode from './status_code';
@@ -20,7 +18,7 @@ export {
   NoticeTemplatesConstant,
   ApiTipConfig,
   ApiTipConstant,
-  BillingConfig
+  BillingConfig,
 };
 
 export * from './emojis_config';

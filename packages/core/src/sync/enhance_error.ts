@@ -1,5 +1,3 @@
-
-
 import { ModalType, OnOkType } from 'types';
 export class EnhanceError extends Error {
   code: string | undefined;

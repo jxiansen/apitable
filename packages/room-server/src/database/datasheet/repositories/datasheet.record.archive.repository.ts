@@ -1,19 +1,14 @@
-
-
 import { EntityRepository, In, Repository } from 'typeorm';
-import {
-  DatasheetRecordArchiveEntity,
-} from '../entities/datasheet.record.archive.entity';
+import { DatasheetRecordArchiveEntity } from '../entities/datasheet.record.archive.entity';
 import { chunk } from 'lodash';
 
 @EntityRepository(DatasheetRecordArchiveEntity)
 export class DatasheetRecordArchiveRepository extends Repository<DatasheetRecordArchiveEntity> {
-
   async getArchiveStatusByDstIdAndRecordId(dstId: string, recordId: string): Promise<boolean> {
     return await this.findOne({
       where: { dstId, recordId, isDeleted: false },
       select: ['isArchived'],
-    }).then(entity => {
+    }).then((entity) => {
       return entity == null ? false : entity.isArchived;
     });
   }
@@ -22,8 +17,8 @@ export class DatasheetRecordArchiveRepository extends Repository<DatasheetRecord
     return await this.find({
       where: { dstId, isArchived: true, isDeleted: false },
       select: ['recordId'],
-    }).then(entities => {
-      return new Set(entities.map(entity => entity.recordId));
+    }).then((entities) => {
+      return new Set(entities.map((entity) => entity.recordId));
     });
   }
 
@@ -33,7 +28,7 @@ export class DatasheetRecordArchiveRepository extends Repository<DatasheetRecord
         where: { dstId, recordId: In(recordIds), isArchived: true, isDeleted: false },
         select: ['recordId'],
       });
-      return entities.map(entity => entity.recordId);
+      return entities.map((entity) => entity.recordId);
     };
 
     let batchRecordIds = chunk(recordIds, 1000);
@@ -63,5 +58,4 @@ export class DatasheetRecordArchiveRepository extends Repository<DatasheetRecord
       skip: offset,
     });
   }
-
 }

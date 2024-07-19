@@ -1,5 +1,3 @@
-
-
 import { EventAtomTypeEnums, EventRealTypeEnums, EventSourceTypeEnums, ResourceType } from '@apitable/core';
 import { AutomationService } from '../../services/automation.service';
 import { RobotTriggerService } from '../../services/robot.trigger.service';
@@ -18,7 +16,7 @@ describe('FormSubmittedListener', () => {
   let triggerEventHelper: TriggerEventHelper;
   let formSubmittedListener: FormSubmittedListener;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [
         WinstonModule.forRootAsync({
@@ -60,7 +58,7 @@ describe('FormSubmittedListener', () => {
     formSubmittedListener = moduleFixture.get<FormSubmittedListener>(FormSubmittedListener);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
@@ -71,13 +69,13 @@ describe('FormSubmittedListener', () => {
     expect(formSubmittedListener).toBeDefined();
   });
 
-  it('Should not throw', async() => {
+  it('Should not throw', async () => {
     jest
       .spyOn(robotTriggerService, 'getTriggersByResourceAndEventType')
       .mockResolvedValue([{ triggerId: 'triggerId', triggerTypeId: 'triggerTypeId', input: {}, robotId: 'robotId' }]);
     jest.spyOn(triggerEventHelper, 'renderInput').mockReturnValue({ formId: 'formId' });
     jest.spyOn(automationService, 'handleTask');
-    await expect(async() => {
+    await expect(async () => {
       await formSubmittedListener.handleFormSubmittedEvent({
         scope: ResourceType.Form,
         realType: EventRealTypeEnums.REAL,

@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import { FC } from 'react';
 import { t, Strings } from '@apitable/core';

@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { DATASHEET_ID } from '@apitable/core';
 import style from './style.module.less';

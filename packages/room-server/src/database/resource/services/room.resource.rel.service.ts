@@ -1,5 +1,3 @@
-
-
 import { FieldType, IRemoteChangeset, IResourceRevision, ResourceIdPrefix } from '@apitable/core';
 import { RedisService } from '@apitable/nestjs-redis';
 import { Span } from '@metinseylan/nestjs-opentelemetry';
@@ -20,7 +18,6 @@ import { ResourceMetaRepository } from '../repositories/resource.meta.repository
  */
 @Injectable()
 export class RoomResourceRelService {
-
   constructor(
     @InjectLogger() private readonly logger: Logger,
     private readonly redisService: RedisService,
@@ -30,8 +27,7 @@ export class RoomResourceRelService {
     private readonly datasheetService: DatasheetService,
     private readonly resourceMetaRepository: ResourceMetaRepository,
     private readonly widgetService: WidgetService,
-  ) {
-  }
+  ) {}
 
   async hasResource(roomId: string): Promise<boolean> {
     // Create or update Room - Resource two-way association
@@ -49,11 +45,10 @@ export class RoomResourceRelService {
       // Analyze resource, reversely compute the room which the resource belongs to
       if (roomIds.length === 0) {
         const dstIds = await this.reverseComputeDatasheetRoom(resourceId);
-        dstIds.forEach(id => allEffectResourceIds.add(id));
+        dstIds.forEach((id) => allEffectResourceIds.add(id));
         continue;
       }
-      roomIds.filter(id => id.startsWith(ResourceIdPrefix.Datasheet))
-        .forEach(id => allEffectResourceIds.add(id));
+      roomIds.filter((id) => id.startsWith(ResourceIdPrefix.Datasheet)).forEach((id) => allEffectResourceIds.add(id));
     }
     return Array.from(allEffectResourceIds);
   }
@@ -65,7 +60,7 @@ export class RoomResourceRelService {
     if (!withoutSelf && roomIds.length === 0 && resourceId.startsWith(ResourceIdPrefix.Datasheet)) {
       return [resourceId];
     }
-    return roomIds.filter(id => id.startsWith(ResourceIdPrefix.Datasheet)).map(id => id);
+    return roomIds.filter((id) => id.startsWith(ResourceIdPrefix.Datasheet)).map((id) => id);
   }
 
   async getDatasheetResourceIds(roomId: string): Promise<string[]> {
@@ -76,7 +71,7 @@ export class RoomResourceRelService {
     if (resourceIds.length === 0 && roomId.startsWith(ResourceIdPrefix.Datasheet)) {
       return [roomId];
     }
-    return resourceIds.filter(id => id.startsWith(ResourceIdPrefix.Datasheet)).map(id => id);
+    return resourceIds.filter((id) => id.startsWith(ResourceIdPrefix.Datasheet)).map((id) => id);
   }
 
   async getResourceRevisions(roomId: string): Promise<IResourceRevision[]> {
@@ -90,7 +85,7 @@ export class RoomResourceRelService {
     const dstIds: string[] = [];
     const rscIds: string[] = [];
     const wdtIds: string[] = [];
-    resourceIds.forEach(id => {
+    resourceIds.forEach((id) => {
       switch (id.substring(0, 3)) {
         case ResourceIdPrefix.Datasheet:
           dstIds.push(id);
@@ -118,7 +113,7 @@ export class RoomResourceRelService {
       const wdtRevisions = await this.widgetService.getRevisionByWdtIds(wdtIds);
       resourceRevisions.push(...wdtRevisions);
     }
-    const revisions = resourceRevisions.map(rscRevision => {
+    const revisions = resourceRevisions.map((rscRevision) => {
       return {
         resourceId: rscRevision.resourceId,
         revision: Number(rscRevision.revision),
@@ -230,8 +225,9 @@ export class RoomResourceRelService {
     const fieldMap = await this.datasheetMetaService.getFieldMapByDstId(dstId);
     // Filter loading linked datasheet
     const foreignDatasheetIdToFiledIdsMap = new Map<string, string[]>();
-    Object.values(fieldMap).filter(field => field.type === FieldType.Link)
-      .forEach(field => {
+    Object.values(fieldMap)
+      .filter((field) => field.type === FieldType.Link)
+      .forEach((field) => {
         const { foreignDatasheetId, brotherFieldId } = field.property;
         // Filter out self linking
         if (!foreignDatasheetId || foreignDatasheetId === dstId) {
@@ -257,24 +253,25 @@ export class RoomResourceRelService {
       const foreignDatasheetFieldMap = await this.datasheetMetaService.getFieldMapByDstId(foreignDatasheetId);
 
       // Check if there are other linked datasheets
-      const field = Object.values(foreignDatasheetFieldMap).find(field => field.type === FieldType.Link
-        && !dstIds.includes(field.property.foreignDatasheetId));
+      const field = Object.values(foreignDatasheetFieldMap).find(
+        (field) => field.type === FieldType.Link && !dstIds.includes(field.property.foreignDatasheetId),
+      );
       if (!field) {
         continue;
       }
 
       // Check if LookUp reference exists
       const lookUpFieldIds = Object.values(foreignDatasheetFieldMap)
-        .filter(field => field.type === FieldType.LookUp && linkFieldIds.includes(field.property.relatedLinkFieldId))
-        .map(field => {
+        .filter((field) => field.type === FieldType.LookUp && linkFieldIds.includes(field.property.relatedLinkFieldId))
+        .map((field) => {
           return field.id;
         });
       // Influenced fields of linked datasheet. Link + LookUp + Formula
       const effectFieldIds = lookUpFieldIds.length > 0 ? [...linkFieldIds, ...lookUpFieldIds] : linkFieldIds;
       // Check if Formula reference exists
       const formulaFieldIds = Object.values(foreignDatasheetFieldMap)
-        .filter(field => field.type === FieldType.Formula)
-        .map(field => {
+        .filter((field) => field.type === FieldType.Formula)
+        .map((field) => {
           // Extract formula expression, if it references fields
           const formulaRefFieldIds = field.property?.expression.match(/fld\w{10}/g);
           // return type of String.match may be null or empty array
@@ -285,7 +282,8 @@ export class RoomResourceRelService {
           // thus the field is influenced.
           const inter = intersection<string>(formulaRefFieldIds, effectFieldIds);
           return inter.length > 0 ? field.id : null;
-        }).filter(Boolean) as string[];
+        })
+        .filter(Boolean) as string[];
       formulaFieldIds.length && effectFieldIds.push(...formulaFieldIds);
 
       // Read field inverse reference relation, trace influenced linked datasheet upward

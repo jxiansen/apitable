@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { AnimationItem } from 'lottie-web/index';
 import QueueAnim from 'rc-queue-anim';

@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@nestjs/common';
 import { CollaCommandName, ICollaCommandOptions, IField, IFieldMap, IRecordMap } from '@apitable/core';
 
@@ -11,7 +9,7 @@ import { CollaCommandName, ICollaCommandOptions, IField, IFieldMap, IRecordMap }
 export class CommandOptionsService {
   getSetRecordsOptions(dstId: string, records: IRecordMap, fieldMap: IFieldMap): ICollaCommandOptions {
     const fieldData = Object.values(records).reduce<any[]>((pre, cur) => {
-      Object.keys(fieldMap).forEach(fieldId => {
+      Object.keys(fieldMap).forEach((fieldId) => {
         if (cur.data && cur.data.hasOwnProperty(fieldId)) {
           pre.push({
             recordId: cur.id,
@@ -26,12 +24,12 @@ export class CommandOptionsService {
     return {
       cmd: CollaCommandName.SetRecords,
       datasheetId: dstId,
-      data: fieldData
+      data: fieldData,
     };
   }
 
   getAddFieldOptions(dstId: string, fields: IField[], index: number): ICollaCommandOptions {
-    const addFieldsOptions = fields.map(field => {
+    const addFieldsOptions = fields.map((field) => {
       return {
         index: index++,
         data: field,

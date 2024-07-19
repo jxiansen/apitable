@@ -1,5 +1,3 @@
-
-
 import { ThemeName } from '@apitable/components';
 import { getEnvVariables } from 'pc/utils/env';
 

@@ -1,5 +1,3 @@
-
-
 import type { ILexer } from '../lexer/lexer';
 import { Token, TokenType } from '../lexer/token';
 import {
@@ -19,10 +17,10 @@ import { t, Strings } from 'exports/i18n';
 import { SelfRefError } from 'formula_parser/errors/self_ref.error';
 
 /**
-  * operator precedence
-  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
-  * In the array below, the priority is sorted from high to low. The same line has the same priority.
-  */
+ * operator precedence
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+ * In the array below, the priority is sorted from high to low. The same line has the same priority.
+ */
 const PriorityMap = new Map<TokenType, number>();
 [
   [TokenType.Times, TokenType.Div, TokenType.Mod],
@@ -32,12 +30,15 @@ const PriorityMap = new Map<TokenType, number>();
   [TokenType.And],
   [TokenType.Or],
   [TokenType.Concat],
-].forEach((arr, index) => arr.forEach(type => PriorityMap.set(type, index)));
+].forEach((arr, index) => arr.forEach((type) => PriorityMap.set(type, index)));
 
 export class FormulaExprParser {
   private currentToken: Token | null;
 
-  constructor(public lexer: ILexer, public context: { state: IReduxState, field: IField, fieldMap: IFieldMap }) {
+  constructor(
+    public lexer: ILexer,
+    public context: { state: IReduxState; field: IField; fieldMap: IFieldMap }
+  ) {
     this.currentToken = this.lexer.getNextToken();
   }
 
@@ -45,9 +46,11 @@ export class FormulaExprParser {
     const node = this.expr();
     if (this.currentToken != null) {
       console.error(this.currentToken);
-      throw new Error(t(Strings.function_err_unrecognized_char, {
-        value: this.currentToken.value,
-      }));
+      throw new Error(
+        t(Strings.function_err_unrecognized_char, {
+          value: this.currentToken.value,
+        })
+      );
     }
     return node;
   }
@@ -65,9 +68,11 @@ export class FormulaExprParser {
         case TokenType.RightParen:
           throw new SyntaxError(t(Strings.function_err_end_of_right_bracket));
       }
-      throw new SyntaxError(t(Strings.function_err_unable_parse_char, {
-        value: this.currentToken.value,
-      }));
+      throw new SyntaxError(
+        t(Strings.function_err_unable_parse_char, {
+          value: this.currentToken.value,
+        })
+      );
     }
     return this.currentToken;
   }
@@ -108,9 +113,11 @@ export class FormulaExprParser {
         const node = new CallOperandNode(token);
         const FuncClass = Functions.get(node.value.toUpperCase());
         if (!FuncClass) {
-          throw new TypeError(t(Strings.function_err_not_definition, {
-            name: node.value,
-          }));
+          throw new TypeError(
+            t(Strings.function_err_not_definition, {
+              name: node.value,
+            })
+          );
         }
 
         this.next(TokenType.LeftParen);
@@ -190,9 +197,11 @@ export class FormulaExprParser {
       }
 
       default:
-        throw new Error(t(Strings.function_err_unknown_operator, {
-          type: token.value,
-        }));
+        throw new Error(
+          t(Strings.function_err_unknown_operator, {
+            type: token.value,
+          })
+        );
     }
   }
 
@@ -202,11 +211,23 @@ export class FormulaExprParser {
 
     let node: AstNode = this.factor();
 
-    while (this.currentToken &&
+    while (
+      this.currentToken &&
       [
-        TokenType.And, TokenType.Or, TokenType.Add, TokenType.Times, TokenType.Div, TokenType.Minus,
-        TokenType.Mod, TokenType.Concat, TokenType.Equal, TokenType.NotEqual, TokenType.Greater, TokenType.GreaterEqual,
-        TokenType.Less, TokenType.LessEqual,
+        TokenType.And,
+        TokenType.Or,
+        TokenType.Add,
+        TokenType.Times,
+        TokenType.Div,
+        TokenType.Minus,
+        TokenType.Mod,
+        TokenType.Concat,
+        TokenType.Equal,
+        TokenType.NotEqual,
+        TokenType.Greater,
+        TokenType.GreaterEqual,
+        TokenType.Less,
+        TokenType.LessEqual,
       ].includes(this.currentToken.type)
     ) {
       const token: Token = this.currentToken;
@@ -219,13 +240,13 @@ export class FormulaExprParser {
       const currentToken = this.currentToken;
       const currentTokenIndex = this.lexer.currentTokenIndex;
       /**
-        * Take a step forward, get the token and go back
-        *
-        * 1. If you encounter a function or left parenthesis, go forward to test the entire function or parenthesis content,
-        * get the following operator and then fall back
-        *
-        * 2. If it is not a function, just try a token forward, get the operator and then fall back
-        */
+       * Take a step forward, get the token and go back
+       *
+       * 1. If you encounter a function or left parenthesis, go forward to test the entire function or parenthesis content,
+       * get the following operator and then fall back
+       *
+       * 2. If it is not a function, just try a token forward, get the operator and then fall back
+       */
       if ([TokenType.Call, TokenType.LeftParen].includes(currentToken.type)) {
         this.factor();
         nextToken = this.currentToken;

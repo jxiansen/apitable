@@ -1,5 +1,3 @@
-
-
 import { RECEIVE_INSTALLATIONS_WIDGET, RESET_WIDGET } from '../../../../shared/store/action_constants';
 
 export interface IWidgetSnapshot {
@@ -7,7 +5,7 @@ export interface IWidgetSnapshot {
   datasheetId?: string;
   sourceId?: string;
   storage: {
-    [key: string]: any
+    [key: string]: any;
   };
 }
 
@@ -28,7 +26,7 @@ export enum WidgetReleaseType {
   /**
    * censorship preview
    */
-  Preview = 10
+  Preview = 10,
 }
 
 export enum WidgetPackageStatus {
@@ -67,19 +65,19 @@ export interface IWidgetPackage {
   ownerUuid: string;
   isEmpower: boolean;
   ownerMemberId: string;
-  extras: {[key: string]: any};
+  extras: { [key: string]: any };
   installEnv?: WidgetInstallEnv[];
   runtimeEnv?: WidgetRuntimeEnv[];
 }
 
 export enum WidgetInstallEnv {
   Dashboard = 'dashboard',
-  Panel = 'panel'
+  Panel = 'panel',
 }
 
 export enum WidgetRuntimeEnv {
   Mobile = 'mobile',
-  Desktop = 'desktop'
+  Desktop = 'desktop',
 }
 
 export interface IWidget {
@@ -115,13 +113,13 @@ export interface IWidgetPack {
 export type IWidgetMap = { [widgetId: string]: IWidgetPack };
 
 export interface IUnMountWidget {
-  type: typeof RESET_WIDGET,
+  type: typeof RESET_WIDGET;
   payload: string[];
   widgetId?: string;
 }
 
 export interface IReadInstallationsWidget {
-  type: typeof RECEIVE_INSTALLATIONS_WIDGET,
+  type: typeof RECEIVE_INSTALLATIONS_WIDGET;
   payload: IWidget;
   widgetId?: string;
 }

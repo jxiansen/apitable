@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { memo, useContext, useState } from 'react';
@@ -25,8 +23,7 @@ interface IDrop {
 
 const DropBase = ({ children, date, update }: IDrop) => {
   const colors = useThemeColors();
-  const { view, calendarStyle, isStartDateTimeField, isEndDateTimeField, isMobile, tasks, datasheetId, permissions } =
-    useContext(CalendarContext);
+  const { view, calendarStyle, isStartDateTimeField, isEndDateTimeField, isMobile, tasks, datasheetId, permissions } = useContext(CalendarContext);
   const { startFieldId, endFieldId } = calendarStyle;
   const [showAdd, setShowAdd] = useState(false);
   const [{ isOver, isOverCurrent }, drop] = useDrop(

@@ -1,5 +1,3 @@
-
-
 import { slice } from 'lodash';
 import { CellType, fastCloneDeep } from '@apitable/core';
 import { IAdjacency, IGroupLinearRow } from '../interface';

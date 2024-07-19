@@ -1,5 +1,3 @@
-
-
 import { ConfigProvider, Table, Tabs } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React, { FC, useEffect, useState } from 'react';

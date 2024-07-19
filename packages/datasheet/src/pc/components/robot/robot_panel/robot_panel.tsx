@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import { useSetAtom } from 'jotai';
 import { Provider } from 'jotai/react';
@@ -20,9 +18,9 @@ const RobotBase = () => {
 
   const theme = useTheme();
 
-  const setAutomationAtom = useSetAtom(automationStateAtom );
+  const setAutomationAtom = useSetAtom(automationStateAtom);
 
-  useMount(()=> {
+  useMount(() => {
     setAutomationAtom({
       scenario: AutomationScenario.datasheet,
     });
@@ -31,7 +29,6 @@ const RobotBase = () => {
   return (
     <FormEditProvider>
       <Provider>
-
         <ThemeProvider theme={cachedTheme}>
           <SWRConfig
             value={{

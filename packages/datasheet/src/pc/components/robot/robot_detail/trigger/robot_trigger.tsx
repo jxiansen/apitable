@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import produce from 'immer';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
@@ -100,7 +98,7 @@ export const customizer = (objValue, othValue) => {
   if (isNil(objValue) && isNil(othValue)) {
     return true;
   }
-  if(objValue === '******' || othValue === '******') {
+  if (objValue === '******' || othValue === '******') {
     return true;
   }
   const l = pickBy(objValue, identity);
@@ -459,9 +457,9 @@ export const RobotTriggerBase = memo((props: IRobotTriggerBase) => {
                 const transformedValue =
                   value == null || isEqual(value, EmptyNullOperand)
                     ? {
-                      operator: OperatorEnums.And,
-                      operands: [],
-                    }
+                        operator: OperatorEnums.And,
+                        operands: [],
+                      }
                     : value.value;
                 return (
                   <RecordMatchesConditionsFilter
@@ -570,9 +568,9 @@ export const RobotTriggerBase = memo((props: IRobotTriggerBase) => {
           const transformedValue =
             value == null || isEqual(value, EmptyNullOperand)
               ? {
-                operator: OperatorEnums.And,
-                operands: [],
-              }
+                  operator: OperatorEnums.And,
+                  operands: [],
+                }
               : value.value;
           const dstId = getDstIdItem ?? triggerDatasheetValue?.id;
 

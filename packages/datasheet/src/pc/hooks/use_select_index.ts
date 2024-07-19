@@ -1,5 +1,3 @@
-
-
 import { useKeyPress } from 'ahooks';
 import type { InputRef } from 'antd';
 import * as React from 'react';

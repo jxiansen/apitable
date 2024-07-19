@@ -1,4 +1,3 @@
-
 import classNames from 'classnames';
 import * as React from 'react';
 import { Dispatch, memo, SetStateAction, useState } from 'react';
@@ -56,14 +55,16 @@ export const FormateLink: React.FC<React.PropsWithChildren<IFormateLinkProps>> =
   };
 
   const setForeignDatasheetId = (id: string) => {
-    const property = !isLinkType ? {
-      ...currentField.property,
-      foreignDatasheetId: id,
-    } : {
-      ...currentField.property,
-      foreignDatasheetId: id,
-      brotherFieldId: activeDatasheetId === id ? undefined : (currentField as ILinkField).property.brotherFieldId
-    };
+    const property = !isLinkType
+      ? {
+          ...currentField.property,
+          foreignDatasheetId: id,
+        }
+      : {
+          ...currentField.property,
+          foreignDatasheetId: id,
+          brotherFieldId: activeDatasheetId === id ? undefined : (currentField as ILinkField).property.brotherFieldId,
+        };
     setCurrentField({
       ...currentField,
       property,

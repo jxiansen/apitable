@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { Box, FloatUiTooltip, IconButton, Typography, useTheme } from '@apitable/components';
 import { Selectors, Strings, t } from '@apitable/core';

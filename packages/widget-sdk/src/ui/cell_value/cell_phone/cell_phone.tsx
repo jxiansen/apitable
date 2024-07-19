@@ -1,5 +1,3 @@
-
-
 import React, { CSSProperties } from 'react';
 import { PhoneStyled } from './styled';
 

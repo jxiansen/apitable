@@ -1,5 +1,3 @@
-
-
 import { IAttachmentValue, isGif } from '@apitable/core';
 import React, { CSSProperties } from 'react';
 import { AttachmentDiv, AttachmentWrapperStyled } from './styled';
@@ -42,11 +40,7 @@ export const CellAttachment = (props: ICellAttachment) => {
         return (
           <Tooltip content={file.name} key={file.id + index}>
             <AttachmentDiv className={cellClassName} style={cellStyle}>
-              <img
-                src={imgUrl}
-                width={calcFileWidth(file, HEIGHT)}
-                height={HEIGHT}
-              />
+              <img src={imgUrl} width={calcFileWidth(file, HEIGHT)} height={HEIGHT} />
             </AttachmentDiv>
           </Tooltip>
         );

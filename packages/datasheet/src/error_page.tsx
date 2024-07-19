@@ -1,5 +1,3 @@
-
-
 /*
  * The fallback page displayed when the React global crashes
  */

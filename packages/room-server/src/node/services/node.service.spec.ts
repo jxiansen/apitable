@@ -1,4 +1,3 @@
-
 import { NodeService } from './node.service';
 import { UnitMemberService } from 'unit/services/unit.member.service';
 import { NodePermissionService } from './node.permission.service';
@@ -19,7 +18,7 @@ describe('Test NodeService', () => {
   let nodeRelRepository: NodeRelRepository;
   let metaService: MetaService;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       providers: [
         {
@@ -76,108 +75,108 @@ describe('Test NodeService', () => {
     nodeService = moduleFixture.get<NodeService>(NodeService);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
-  it('should be pass node exist', async() => {
+  it('should be pass node exist', async () => {
     jest.spyOn(nodeRepository, 'selectCountByNodeId').mockResolvedValue(1);
     await nodeService.checkNodeIfExist('1');
   });
 
-  it('should be throw except check node not exist', async() => {
+  it('should be throw except check node not exist', async () => {
     jest.spyOn(nodeRepository, 'selectCountByNodeId').mockResolvedValue(0);
-    await expect(async() => await nodeService.checkNodeIfExist('1')).rejects.toThrow(PermissionException.NODE_NOT_EXIST.message);
+    await expect(async () => await nodeService.checkNodeIfExist('1')).rejects.toThrow(PermissionException.NODE_NOT_EXIST.message);
   });
 
-  it('should be return space id by node id', async() => {
+  it('should be return space id by node id', async () => {
     jest.spyOn(nodeRepository, 'selectSpaceIdByNodeId').mockResolvedValue({ spaceId: '1' });
     const spaceId = await nodeService.getSpaceIdByNodeId('1');
     expect(spaceId).toEqual('1');
   });
 
-  it('should be throw when get space id by node id', async() => {
+  it('should be throw when get space id by node id', async () => {
     jest.spyOn(nodeRepository, 'selectSpaceIdByNodeId').mockResolvedValue({} as any);
-    await expect(async() => await nodeService.getSpaceIdByNodeId('1')).rejects.toThrow(PermissionException.NODE_NOT_EXIST.message);
+    await expect(async () => await nodeService.getSpaceIdByNodeId('1')).rejects.toThrow(PermissionException.NODE_NOT_EXIST.message);
   });
 
-  it('should be pass user in space', async() => {
+  it('should be pass user in space', async () => {
     jest.spyOn(unitMemberService, 'checkUserIfInSpace');
     jest.spyOn(nodeRepository, 'selectSpaceIdByNodeId').mockResolvedValue({ spaceId: '1' });
     const spaceId = await nodeService.checkUserForNode('1', '1');
     expect(spaceId).toEqual('1');
   });
 
-  it('should be throw user no in space', async() => {
+  it('should be throw user no in space', async () => {
     jest.spyOn(unitMemberService, 'checkUserIfInSpace').mockRejectedValue(new ServerException(PermissionException.ACCESS_DENIED));
     jest.spyOn(nodeRepository, 'selectSpaceIdByNodeId').mockResolvedValue({ spaceId: '1' });
-    await expect(async() => await nodeService.checkUserForNode('1', '1')).rejects.toThrow(PermissionException.ACCESS_DENIED.message);
+    await expect(async () => await nodeService.checkUserForNode('1', '1')).rejects.toThrow(PermissionException.ACCESS_DENIED.message);
   });
 
-  it('should be pass check node permission', async() => {
+  it('should be pass check node permission', async () => {
     jest.spyOn(nodePermissionService, 'getNodeRole').mockResolvedValue({ readable: true } as any);
     await nodeService.checkNodePermission('1', { cookie: 'true' });
   });
 
-  it('should be throw no node permission', async() => {
+  it('should be throw no node permission', async () => {
     jest.spyOn(nodePermissionService, 'getNodeRole').mockResolvedValue({} as any);
-    await expect(async() => {
+    await expect(async () => {
       await nodeService.checkNodePermission('1', { cookie: 'false' });
     }).rejects.toThrow(PermissionException.ACCESS_DENIED.message);
   });
 
-  it('should be return main node id', async() => {
+  it('should be return main node id', async () => {
     jest.spyOn(nodeRelRepository, 'selectMainNodeIdByRelNodeId').mockResolvedValue({ mainNodeId: '1' } as any);
     const nodeId = await nodeService.getMainNodeId('1');
     expect(nodeId).toEqual('1');
   });
 
-  it('should be throw node no exist', async() => {
+  it('should be throw node no exist', async () => {
     jest.spyOn(nodeRelRepository, 'selectMainNodeIdByRelNodeId').mockResolvedValue({} as any);
-    await expect(async() => {
+    await expect(async () => {
       await nodeService.getMainNodeId('1');
     }).rejects.toThrow(DatasheetException.DATASHEET_NOT_EXIST.message);
   });
 
-  it('should be return rel node by main node', async() => {
+  it('should be return rel node by main node', async () => {
     jest.spyOn(nodeRelRepository, 'selectRelNodeIdByMainNodeId').mockResolvedValue([] as any);
     const nodeIds = await nodeService.getRelNodeIds('1');
     expect(nodeIds.length).toEqual(0);
   });
 
-  it('should be return permission', async() => {
+  it('should be return permission', async () => {
     jest.spyOn(nodePermissionService, 'getNodePermission').mockResolvedValue({} as any);
     const permission = await nodeService.getPermissions('1', { cookie: 'true' }, {} as any);
     expect(permission).toEqual({});
   });
 
-  it('should be return node is template', async() => {
+  it('should be return node is template', async () => {
     jest.spyOn(nodeRepository, 'selectTemplateCountByNodeId').mockResolvedValue(1);
     const isTemplate = await nodeService.isTemplate('1');
     expect(isTemplate).toBeTruthy();
   });
 
-  it('should be return node is no template', async() => {
+  it('should be return node is no template', async () => {
     jest.spyOn(nodeRepository, 'selectTemplateCountByNodeId').mockResolvedValue(0);
     const isTemplate = await nodeService.isTemplate('-1');
     expect(isTemplate).toBeFalsy();
   });
 
-  it('should be return revision', async() => {
+  it('should be return revision', async () => {
     jest.spyOn(metaService, 'selectRevisionByResourceId').mockResolvedValue({ revision: '1' } as any);
     const revision = await nodeService.getRevisionByResourceId('1');
     expect(revision).toEqual(1);
   });
 
-  it('should be return whether record history', async() => {
-    jest.spyOn(nodeRepository, 'selectExtraByNodeId').mockResolvedValue({ extra: { showRecordHistory: true }});
+  it('should be return whether record history', async () => {
+    jest.spyOn(nodeRepository, 'selectExtraByNodeId').mockResolvedValue({ extra: { showRecordHistory: true } });
     const isShowed = await nodeService.showRecordHistory('1');
     expect(isShowed).toBeTruthy();
   });
 
-  it('should be throw no show record history', async() => {
-    jest.spyOn(nodeRepository, 'selectExtraByNodeId').mockResolvedValue({ extra: { showRecordHistory: false }});
-    await expect(async() => {
+  it('should be throw no show record history', async () => {
+    jest.spyOn(nodeRepository, 'selectExtraByNodeId').mockResolvedValue({ extra: { showRecordHistory: false } });
+    await expect(async () => {
       await nodeService.showRecordHistory('-1', true);
     }).rejects.toThrow(DatasheetException.SHOW_RECORD_HISTORY_NOT_PERMISSION.message);
   });

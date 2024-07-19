@@ -1,5 +1,3 @@
-
-
 import { EntityRepository, In, Repository } from 'typeorm';
 import { NodeRelInfo } from '../../database/interfaces/internal';
 import { NodeRelEntity } from '../entities/node.rel.entity';

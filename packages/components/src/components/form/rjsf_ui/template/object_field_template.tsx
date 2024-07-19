@@ -1,5 +1,3 @@
-
-
 import { ObjectFieldTemplateProps, utils } from '@rjsf/core';
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -12,11 +10,11 @@ const ObjectFieldTemplateWrapper = styled.div`
   display: flex;
   flex-direction: column;
   .field-object {
-    padding-top: 0!important;
+    padding-top: 0 !important;
   }
 `;
 const InlineObjectChildren = styled.div<{ inline?: boolean }>`
-  display: ${(props) => props.inline ? 'flex' : 'block'};  
+  display: ${(props) => (props.inline ? 'flex' : 'block')};
   align-items: flex-start;
 `;
 
@@ -27,12 +25,12 @@ const ObjectFieldLayout = (props: ObjectFieldTemplateProps) => {
   if (layout) {
     return (
       <>
-        {
-          (layout as string[][]).map(rowFieldNames => {
-            const thisRowFields = properties.filter(ele => rowFieldNames.includes(ele.name));
-            if (thisRowFields.length) {
-              const width = isInline ? `${Math.round(100 / thisRowFields.length)}%` : '100%';
-              return <InlineObjectChildren inline={isInline}>
+        {(layout as string[][]).map((rowFieldNames) => {
+          const thisRowFields = properties.filter((ele) => rowFieldNames.includes(ele.name));
+          if (thisRowFields.length) {
+            const width = isInline ? `${Math.round(100 / thisRowFields.length)}%` : '100%';
+            return (
+              <InlineObjectChildren inline={isInline}>
                 {thisRowFields.map((element, index: number) => (
                   <div
                     key={index} // FIXME: better key
@@ -41,11 +39,11 @@ const ObjectFieldLayout = (props: ObjectFieldTemplateProps) => {
                     {element.content}
                   </div>
                 ))}
-              </InlineObjectChildren>;
-            }
-            return null;
-          })
-        }
+              </InlineObjectChildren>
+            );
+          }
+          return null;
+        })}
       </>
     );
   }
@@ -66,17 +64,7 @@ const ObjectFieldLayout = (props: ObjectFieldTemplateProps) => {
 };
 
 export const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
-  const {
-    title,
-    required,
-    disabled,
-    readonly,
-    uiSchema,
-    idSchema,
-    schema,
-    formData,
-    onAddClick,
-  } = props;
+  const { title, required, disabled, readonly, uiSchema, idSchema, schema, formData, onAddClick } = props;
 
   const hasCollapse = 'ui:options' in uiSchema && 'collapse' in uiSchema['ui:options']!;
   const showTitle = 'ui:options' in uiSchema && 'showTitle' in uiSchema['ui:options']! ? Boolean(uiSchema['ui:options']!['showTitle']) : true;
@@ -88,8 +76,8 @@ export const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
   // if (currentObjectDepth > 3) return null;
   return (
     <ObjectFieldTemplateWrapper>
-      {(uiSchema['ui:title'] || title) && (
-        showTitle && <TitleField
+      {(uiSchema['ui:title'] || title) && showTitle && (
+        <TitleField
           id={`${idSchema.$id}-${currentObjectDepth}`}
           title={title}
           required={required}
@@ -105,8 +93,8 @@ export const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
           description={description}
         />
       )} */}
-      {
-        !collapse && <div>
+      {!collapse && (
+        <div>
           <ObjectFieldLayout {...props} />
           {/* <InlineObjectChildren inline={isInline}>
             {properties.map((element: any, index: number) => (
@@ -117,16 +105,9 @@ export const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
               </div>
             ))}
           </InlineObjectChildren> */}
-          {canExpand(schema, uiSchema, formData) && (
-
-            <button
-              onClick={onAddClick(schema)}
-              disabled={disabled || readonly}
-            />
-          )}
+          {canExpand(schema, uiSchema, formData) && <button onClick={onAddClick(schema)} disabled={disabled || readonly} />}
         </div>
-      }
-
+      )}
     </ObjectFieldTemplateWrapper>
   );
 };

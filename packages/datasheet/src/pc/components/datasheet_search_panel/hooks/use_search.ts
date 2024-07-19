@@ -11,15 +11,15 @@ interface IParams {
   folderId: string;
   localDispatch: React.Dispatch<Partial<ISearchPanelState>>;
   localState: ISearchPanelState;
-  options ?: ISearchShowOption
+  options?: ISearchShowOption;
 }
 
 export const useSearch = ({ localDispatch, folderId, localState, options }: IParams) => {
   const spaceId = useAppSelector((state) => state.space.activeId!);
   const previousCurrentFolderId = usePrevious(localState.currentFolderId);
   const activeNodeId = useAppSelector((state) => Selectors.getNodeId(state));
-  const activeNodePrivate = useAppSelector((state) =>
-    state.catalogTree.treeNodesMap[activeNodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[activeNodeId]?.nodePrivate
+  const activeNodePrivate = useAppSelector(
+    (state) => state.catalogTree.treeNodesMap[activeNodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[activeNodeId]?.nodePrivate,
   );
 
   const search = useMemo(() => {
@@ -29,18 +29,12 @@ export const useSearch = ({ localDispatch, folderId, localState, options }: IPar
         if (success) {
           const folders = data.filter((node) => node.type === ConfigConstant.NodeType.FOLDER);
           const files: INode[] = [];
-          if(
-            options?.showDatasheet !== false
-          ){
-            const dstFiles= data.filter((node) =>
-              node.type === ConfigConstant.NodeType.DATASHEET);
+          if (options?.showDatasheet !== false) {
+            const dstFiles = data.filter((node) => node.type === ConfigConstant.NodeType.DATASHEET);
             files.push(...dstFiles);
           }
-          if(
-            options?.showForm
-          ) {
-            const formList= data.filter((node) =>
-              node.type === ConfigConstant.NodeType.FORM);
+          if (options?.showForm) {
+            const formList = data.filter((node) => node.type === ConfigConstant.NodeType.FORM);
             files.push(...formList);
           }
           localDispatch({ showSearch: true, currentFolderId: folderId });
@@ -52,7 +46,7 @@ export const useSearch = ({ localDispatch, folderId, localState, options }: IPar
         }
       });
     }, 500);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [folderId, localDispatch, activeNodePrivate]);
 
   useEffect(() => {

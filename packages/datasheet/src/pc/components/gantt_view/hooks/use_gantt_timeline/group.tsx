@@ -1,5 +1,3 @@
-
-
 import { Group as KonvaGroup } from 'react-konva';
 
 const Group = (props: any) => {

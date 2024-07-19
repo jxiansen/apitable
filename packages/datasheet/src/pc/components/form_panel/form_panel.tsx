@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { memo, FC, useContext, useEffect, useState } from 'react';
 import { Selectors, StatusCode, Strings, t } from '@apitable/core';

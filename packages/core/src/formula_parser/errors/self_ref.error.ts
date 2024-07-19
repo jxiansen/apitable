@@ -1,15 +1,11 @@
-
-
 import { t, Strings } from 'exports/i18n';
 
 /**
- * The error for formula expression parser 
+ * The error for formula expression parser
  * references the column itself.
  */
 export class SelfRefError extends Error {
-
   constructor() {
-    
     // ideally, don't translation in `super` constructor
     // for compatibility of front-end i18n messages
     super(SelfRefError.parseI18NMessage());

@@ -1,5 +1,3 @@
-
-
 import { FC, memo } from 'react';
 import { NodeProps } from '@apitable/react-flow';
 import { INodeData } from '../../interfaces';

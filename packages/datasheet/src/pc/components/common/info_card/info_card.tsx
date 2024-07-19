@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { TriggerProps } from 'rc-trigger';
 import * as React from 'react';

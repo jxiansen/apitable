@@ -1,5 +1,3 @@
-
-
 import { get } from 'lodash';
 import { useContext } from 'react';
 import { DatasheetApi, IJOTAction } from '@apitable/core';
@@ -53,14 +51,16 @@ export const ReplyBox = ({ action, handleEmoji, datasheetId, expandRecordId }: I
     });
   };
 
-  return <div className={styles.comment}>
-    <ReplyComment reply={getReplyComment(action)} isStatic />
-    <SlateEditor
-      key={get(action, 'createdAt')}
-      initialValue={get(action, 'commentMsg.content')}
-      emojis={get(emojis, get(action as any, 'commentId'))}
-      handleEmoji={handleEmoji}
-      readOnly
-    />
-  </div>;
+  return (
+    <div className={styles.comment}>
+      <ReplyComment reply={getReplyComment(action)} isStatic />
+      <SlateEditor
+        key={get(action, 'createdAt')}
+        initialValue={get(action, 'commentMsg.content')}
+        emojis={get(emojis, get(action as any, 'commentId'))}
+        handleEmoji={handleEmoji}
+        readOnly
+      />
+    </div>
+  );
 };

@@ -1,5 +1,3 @@
-
-
 import { RowHeightLevel } from '@apitable/core';
 import { ItemType, IndicesMap, ICoordinate, CellMetaData, CellMetaDataMap } from '../../interface';
 

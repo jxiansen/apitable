@@ -1,11 +1,5 @@
-
-
-import {
-  ISetFieldInfoAction, IGridViewActiveFieldState, ISetTempSelection, IClearFieldInfoAction,
-} from '../../../../../../exports/store/interfaces';
-import {
-  SET_ACTIVE_FIELD_STATE, CLEAR_FIELD_INFO,
-} from '../../../../../shared/store/action_constants';
+import { ISetFieldInfoAction, IGridViewActiveFieldState, ISetTempSelection, IClearFieldInfoAction } from '../../../../../../exports/store/interfaces';
+import { SET_ACTIVE_FIELD_STATE, CLEAR_FIELD_INFO } from '../../../../../shared/store/action_constants';
 
 export const gridViewActiveFieldStateDefault: IGridViewActiveFieldState = {
   fieldId: '',
@@ -19,10 +13,7 @@ export const gridViewActiveFieldStateDefault: IGridViewActiveFieldState = {
 
 type IPayloadAction = ISetFieldInfoAction | ISetTempSelection | IClearFieldInfoAction;
 
-export const gridViewActiveFieldState = (
-  state: IGridViewActiveFieldState = gridViewActiveFieldStateDefault,
-  action: IPayloadAction,
-) => {
+export const gridViewActiveFieldState = (state: IGridViewActiveFieldState = gridViewActiveFieldStateDefault, action: IPayloadAction) => {
   switch (action.type) {
     case SET_ACTIVE_FIELD_STATE: {
       return { ...state, ...action.payload };
@@ -31,7 +22,7 @@ export const gridViewActiveFieldState = (
       return gridViewActiveFieldStateDefault;
     }
     // case SET_TEMP_SELECTION:
-    // TODO: data compare logic 
+    // TODO: data compare logic
 
     default:
       return state;

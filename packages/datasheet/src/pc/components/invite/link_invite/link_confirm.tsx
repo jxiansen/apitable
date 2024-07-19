@@ -1,4 +1,3 @@
-
 import { useMount } from 'ahooks';
 import Image from 'next/image';
 import { useState, FC } from 'react';
@@ -32,47 +31,50 @@ const LinkConfirm: FC<React.PropsWithChildren<unknown>> = () => {
 
   const InviteImage = themeName === ThemeName.Light ? inviteImageLight : inviteImageDark;
 
-  const { loading, run: join } = useRequest(function (linkToken, nodeId, data = '') {
-    return Api.joinViaSpace(linkToken, nodeId, data);
-  }, {
-    onSuccess: function (res: any, params: any[]) {
-      const { success, code } = res.data;
-      if (success) {
-        Router.push(Navigation.WORKBENCH, { params: { spaceId: inviteLinkInfo!.data.spaceId, nodeId: shareId }, clearQuery: true });
-        dispatch(StoreActions.updateInviteLinkInfo(null));
-        dispatch(StoreActions.updateErrCode(null));
-      } else if (code === StatusCode.UN_AUTHORIZED) {
-        if (LOGIN_ON_AUTHORIZATION_REDIRECT_TO_URL) {
-          const redirectUri = `${location.pathname}?inviteLinkToken=${inviteLinkToken}&inviteCode=${inviteCode}&nodeId=${nodeId}&inviteLinkData=${params[2]}`;
-          location.href = `${LOGIN_ON_AUTHORIZATION_REDIRECT_TO_URL}${redirectUri}`;
-          return;
-        }
-        if (INVITE_USER_BY_AUTH0) {
-          const urlParams = new URLSearchParams(window.location.search);
-          const info = {
-            inviteLinkInfo,
-            linkToken: inviteLinkToken,
-            inviteLinkData: params[2],
-            inviteCode: urlParams.get('inviteCode'),
-          };
-          localStorage.setItem('invite_link_data', JSON.stringify(info));
-          Router.push(Navigation.WORKBENCH);
-          return;
-        }
-        Router.push(Navigation.INVITE, {
-          params: { invitePath: 'link/login' },
-          query: { inviteLinkToken: inviteLinkToken!, inviteCode, nodeId, inviteLinkData: params[2] },
-        });
-      } else {
-        window.location.reload();
-      }
-      return;
+  const { loading, run: join } = useRequest(
+    function (linkToken, nodeId, data = '') {
+      return Api.joinViaSpace(linkToken, nodeId, data);
     },
-    onError: function () {
-      Message.error({ content: t(Strings.error) });
+    {
+      onSuccess: function (res: any, params: any[]) {
+        const { success, code } = res.data;
+        if (success) {
+          Router.push(Navigation.WORKBENCH, { params: { spaceId: inviteLinkInfo!.data.spaceId, nodeId: shareId }, clearQuery: true });
+          dispatch(StoreActions.updateInviteLinkInfo(null));
+          dispatch(StoreActions.updateErrCode(null));
+        } else if (code === StatusCode.UN_AUTHORIZED) {
+          if (LOGIN_ON_AUTHORIZATION_REDIRECT_TO_URL) {
+            const redirectUri = `${location.pathname}?inviteLinkToken=${inviteLinkToken}&inviteCode=${inviteCode}&nodeId=${nodeId}&inviteLinkData=${params[2]}`;
+            location.href = `${LOGIN_ON_AUTHORIZATION_REDIRECT_TO_URL}${redirectUri}`;
+            return;
+          }
+          if (INVITE_USER_BY_AUTH0) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const info = {
+              inviteLinkInfo,
+              linkToken: inviteLinkToken,
+              inviteLinkData: params[2],
+              inviteCode: urlParams.get('inviteCode'),
+            };
+            localStorage.setItem('invite_link_data', JSON.stringify(info));
+            Router.push(Navigation.WORKBENCH);
+            return;
+          }
+          Router.push(Navigation.INVITE, {
+            params: { invitePath: 'link/login' },
+            query: { inviteLinkToken: inviteLinkToken!, inviteCode, nodeId, inviteLinkData: params[2] },
+          });
+        } else {
+          window.location.reload();
+        }
+        return;
+      },
+      onError: function () {
+        Message.error({ content: t(Strings.error) });
+      },
+      manual: true,
     },
-    manual: true,
-  });
+  );
 
   useMount(() => {
     whenPageRefreshed();

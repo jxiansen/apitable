@@ -1,5 +1,3 @@
-
-
 import { IRemoteChangeset } from '@apitable/core';
 
 export interface IWatchRoomMessage {

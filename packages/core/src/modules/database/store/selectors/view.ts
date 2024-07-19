@@ -1,5 +1,3 @@
-
-
 import { createSelector } from 'reselect';
 import { getCurrentView } from 'modules/database/store/selectors/resource/datasheet/calc';
 

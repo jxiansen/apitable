@@ -1,5 +1,3 @@
-
-
 /**
  * user base information
  * @author Zoe zheng

@@ -1,5 +1,3 @@
-
-
 import { fulfillDatasheetStore } from './mock.store.provider';
 import { MockDataBus, resetDataLoader } from './mock.databus';
 import { ResourceType } from 'types';
@@ -235,7 +233,7 @@ describe('event handlers', () => {
         index: 3,
         count: 1,
       },
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -273,7 +271,7 @@ describe('event handlers', () => {
         index: 3,
         count: 0,
       },
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.None);

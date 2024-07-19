@@ -1,5 +1,3 @@
-
-
 import { CurrencyField } from 'model/field/currency_field';
 import { APIMetaFieldType, FieldType, ICurrencyField, SymbolAlign, TSymbolAlign } from 'types';
 import { IOpenField } from 'types/open/open_field_read_types';
@@ -14,8 +12,8 @@ const currencyField: ICurrencyField = {
     defaultValue: '1',
     precision: 1,
     symbol: '$',
-    symbolAlign: SymbolAlign['left']
-  }
+    symbolAlign: SymbolAlign['left'],
+  },
 };
 
 const openCurrencyField: IOpenField = {
@@ -26,15 +24,15 @@ const openCurrencyField: IOpenField = {
     defaultValue: '1',
     precision: 1,
     symbol: '$',
-    symbolAlign: TSymbolAlign.Left
-  }
+    symbolAlign: TSymbolAlign.Left,
+  },
 };
 
 const propertyOptionalFill: IUpdateOpenCurrencyFieldProperty = {
   defaultValue: '1',
   precision: 1,
   symbol: '$',
-  symbolAlign: TSymbolAlign.Left
+  symbolAlign: TSymbolAlign.Left,
 };
 
 const propertyOptionalNotFill: IUpdateOpenCurrencyFieldProperty = {

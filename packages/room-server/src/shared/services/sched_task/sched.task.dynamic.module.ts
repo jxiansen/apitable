@@ -1,5 +1,3 @@
-
-
 import { DynamicModule, Module } from '@nestjs/common';
 import { DatabaseModule } from 'database/database.module';
 import * as fs from 'fs';

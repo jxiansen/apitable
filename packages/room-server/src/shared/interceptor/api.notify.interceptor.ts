@@ -1,5 +1,3 @@
-
-
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { Strings } from '@apitable/core';
 import { DATASHEET_HTTP_DECORATE, DATASHEET_MEMBER_FIELD, DATASHEET_META_HTTP_DECORATE, InjectLogger, USER_HTTP_DECORATE } from '../common';
@@ -20,15 +18,14 @@ export class ApiNotifyInterceptor implements NestInterceptor {
     @InjectLogger() private readonly logger: Logger,
     private readonly i18n: I18nService,
     private readonly queueSenderService: QueueSenderBaseService,
-  ) {
-  }
+  ) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Promise<any> {
     const request = context.switchToHttp().getRequest<any>();
     return next.handle().pipe(
       tap((data: ApiResponse<any>) => {
         if (request[DATASHEET_MEMBER_FIELD] && data.data && data.data.records) {
-          this.createMemberNotification(request, data.data.records).catch(err => {
+          this.createMemberNotification(request, data.data.records).catch((err) => {
             this.logger.error('Failed to notice members about the record modification through API', { stack: err?.stack, message: err?.message });
           });
         }
@@ -65,9 +62,11 @@ export class ApiNotifyInterceptor implements NestInterceptor {
             body: {
               extras: {
                 fieldName,
-                recordTitle: recordTitle ? truncate(recordTitle, { length: 20 }) : await this.i18n.translate(Strings.record_unnamed, {
-                  lang: request[USER_HTTP_DECORATE]?.locale,
-                }),
+                recordTitle: recordTitle
+                  ? truncate(recordTitle, { length: 20 })
+                  : await this.i18n.translate(Strings.record_unnamed, {
+                      lang: request[USER_HTTP_DECORATE]?.locale,
+                    }),
                 recordIds: [record.recordId],
                 viewId: viewId,
               },
@@ -82,4 +81,3 @@ export class ApiNotifyInterceptor implements NestInterceptor {
     }
   }
 }
-

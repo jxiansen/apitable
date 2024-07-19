@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react';
 import * as React from 'react';
 import { TextInput, Button, Switch } from '@apitable/components';

@@ -1,14 +1,4 @@
-
-import {
-  FieldType,
-  IBaseDatasheetPack,
-  IFieldMap,
-  IFieldPermissionMap,
-  IMeta,
-  IRecordMap,
-  IViewProperty,
-  Role
-} from '@apitable/core';
+import { FieldType, IBaseDatasheetPack, IFieldMap, IFieldPermissionMap, IMeta, IRecordMap, IViewProperty, Role } from '@apitable/core';
 import { RestService } from 'shared/services/rest/rest.service';
 import { DatasheetFieldCascaderService } from './datasheet.field.cascader.service';
 import { DatasheetService } from 'database/datasheet/services/datasheet.service';
@@ -29,7 +19,7 @@ describe('DatasheetFieldTreeSelectService', () => {
   let datasheetService: DatasheetService;
   let cascaderDataBusService: CascaderDatabusService;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [
         WinstonModule.forRootAsync({
@@ -55,7 +45,7 @@ describe('DatasheetFieldTreeSelectService', () => {
           provide: UnitService,
           useValue: {
             getUnitInfo: jest.fn(),
-          }
+          },
         },
         CascaderDatabusService,
         DatasheetFieldCascaderService,
@@ -65,156 +55,155 @@ describe('DatasheetFieldTreeSelectService', () => {
     restService = moduleFixture.get<RestService>(RestService);
     datasheetService = moduleFixture.get<DatasheetService>(DatasheetService);
     datasheetFieldCascaderService = moduleFixture.get<DatasheetFieldCascaderService>(DatasheetFieldCascaderService);
-    jest.spyOn(datasheetService, 'getBasePacks').mockImplementation(
-      (dstId: string): Promise<IBaseDatasheetPack[]> => {
-        if (dstId === 'datasheetId') {
-          return Promise.resolve([
-            {
-              datasheet: {
-                id: 'datasheetId',
-                name: 'datasheet name',
-                revision: 1,
-              } as any,
-              snapshot: {
-                meta: {
-                  views: [
-                    {
-                      id: 'viewId',
-                      name: 'Grid View',
-                      rows: [{ recordId: 'recA' }, { recordId: 'recB' }, { recordId: 'recC' }, { recordId: 'recD' }],
-                      type: 1,
-                      columns: [{ fieldId: 'fldA' }, { fieldId: 'fldB' }, { fieldId: 'fldC' }],
-                      autoSave: false,
-                      frozenColumnCount: 1,
-                    },
-                  ] as IViewProperty[],
-                  fieldMap: {
-                    fldC: {
-                      id: 'fldC',
-                      name: 'level-3',
-                      type: 19,
-                      property: {},
-                    },
-                    fldA: {
-                      id: 'fldA',
-                      name: 'level-1',
-                      type: 19,
-                      property: {},
-                    },
-                    fldB: {
-                      id: 'fldB',
-                      name: 'level-2',
-                      type: 19,
-                      property: {},
-                    },
-                  } as IFieldMap,
-                } as IMeta,
-                recordMap: {
-                  recA: {
-                    id: 'recA',
-                    data: {
-                      fldC: [{ text: 'node-3-1', type: 1 }],
-                      fldA: [{ text: 'node-1-1', type: 1 }],
-                      fldB: [{ text: 'node-2-1', type: 1 }],
-                    },
-                    commentCount: 0,
+    jest.spyOn(datasheetService, 'getBasePacks').mockImplementation((dstId: string): Promise<IBaseDatasheetPack[]> => {
+      if (dstId === 'datasheetId') {
+        return Promise.resolve([
+          {
+            datasheet: {
+              id: 'datasheetId',
+              name: 'datasheet name',
+              revision: 1,
+            } as any,
+            snapshot: {
+              meta: {
+                views: [
+                  {
+                    id: 'viewId',
+                    name: 'Grid View',
+                    rows: [{ recordId: 'recA' }, { recordId: 'recB' }, { recordId: 'recC' }, { recordId: 'recD' }],
+                    type: 1,
+                    columns: [{ fieldId: 'fldA' }, { fieldId: 'fldB' }, { fieldId: 'fldC' }],
+                    autoSave: false,
+                    frozenColumnCount: 1,
                   },
-                  recB: {
-                    id: 'recB',
-                    data: {
-                      fldC: [{ text: 'node-3-4', type: 1 }],
-                      fldA: [{ text: 'node-1-2', type: 1 }],
-                      fldB: [{ text: 'node-2-3', type: 1 }],
-                    },
-                    commentCount: 0,
+                ] as IViewProperty[],
+                fieldMap: {
+                  fldC: {
+                    id: 'fldC',
+                    name: 'level-3',
+                    type: 19,
+                    property: {},
                   },
-                  recC: {
-                    id: 'recC',
-                    data: {
-                      fldC: [{ text: 'node-3-3', type: 1 }],
-                      fldA: [{ text: 'node-1-1', type: 1 }],
-                      fldB: [{ text: 'node-2-2', type: 1 }],
-                    },
-                    commentCount: 0,
+                  fldA: {
+                    id: 'fldA',
+                    name: 'level-1',
+                    type: 19,
+                    property: {},
                   },
-                  recD: {
-                    id: 'recD',
-                    data: {
-                      fldC: [{ text: 'node-3-2', type: 1 }],
-                      fldA: [{ text: 'node-1-1', type: 1 }],
-                      fldB: [{ text: 'node-2-1', type: 1 }],
-                    },
-                    commentCount: 0,
+                  fldB: {
+                    id: 'fldB',
+                    name: 'level-2',
+                    type: 19,
+                    property: {},
                   },
-                } as IRecordMap,
-                datasheetId: 'datasheetId',
-              },
+                } as IFieldMap,
+              } as IMeta,
+              recordMap: {
+                recA: {
+                  id: 'recA',
+                  data: {
+                    fldC: [{ text: 'node-3-1', type: 1 }],
+                    fldA: [{ text: 'node-1-1', type: 1 }],
+                    fldB: [{ text: 'node-2-1', type: 1 }],
+                  },
+                  commentCount: 0,
+                },
+                recB: {
+                  id: 'recB',
+                  data: {
+                    fldC: [{ text: 'node-3-4', type: 1 }],
+                    fldA: [{ text: 'node-1-2', type: 1 }],
+                    fldB: [{ text: 'node-2-3', type: 1 }],
+                  },
+                  commentCount: 0,
+                },
+                recC: {
+                  id: 'recC',
+                  data: {
+                    fldC: [{ text: 'node-3-3', type: 1 }],
+                    fldA: [{ text: 'node-1-1', type: 1 }],
+                    fldB: [{ text: 'node-2-2', type: 1 }],
+                  },
+                  commentCount: 0,
+                },
+                recD: {
+                  id: 'recD',
+                  data: {
+                    fldC: [{ text: 'node-3-2', type: 1 }],
+                    fldA: [{ text: 'node-1-1', type: 1 }],
+                    fldB: [{ text: 'node-2-1', type: 1 }],
+                  },
+                  commentCount: 0,
+                },
+              } as IRecordMap,
+              datasheetId: 'datasheetId',
             },
-          ]);
-        }
-        if(dstId === 'advancedDatasheet') {
-          return Promise.resolve([
-            {
-              datasheet: {
-                id: 'advancedDatasheet',
-                name: 'datasheet name',
-                revision: 1,
-              } as any,
-              snapshot: {
-                meta: {
-                  views: [
-                    {
-                      id: 'viewId',
-                      name: 'Grid View',
-                      rows: [],
-                      type: 1,
-                      columns: [{ fieldId: 'fldA' }, { fieldId: 'fldB' }, { fieldId: 'fldC' }],
-                      autoSave: false,
-                      frozenColumnCount: 1,
-                    },
-                    {
-                      id: 'viewId02',
-                      name: 'Grid View',
-                      rows: [],
-                      type: 1,
-                      columns: [{ fieldId: 'fldA', hidden: true }, { fieldId: 'fldB' }, { fieldId: 'fldC' }],
-                      autoSave: false,
-                      frozenColumnCount: 1,
-                    },
-                  ] as IViewProperty[],
+          },
+        ]);
+      }
+      if (dstId === 'advancedDatasheet') {
+        return Promise.resolve([
+          {
+            datasheet: {
+              id: 'advancedDatasheet',
+              name: 'datasheet name',
+              revision: 1,
+            } as any,
+            snapshot: {
+              meta: {
+                views: [
+                  {
+                    id: 'viewId',
+                    name: 'Grid View',
+                    rows: [],
+                    type: 1,
+                    columns: [{ fieldId: 'fldA' }, { fieldId: 'fldB' }, { fieldId: 'fldC' }],
+                    autoSave: false,
+                    frozenColumnCount: 1,
+                  },
+                  {
+                    id: 'viewId02',
+                    name: 'Grid View',
+                    rows: [],
+                    type: 1,
+                    columns: [{ fieldId: 'fldA', hidden: true }, { fieldId: 'fldB' }, { fieldId: 'fldC' }],
+                    autoSave: false,
+                    frozenColumnCount: 1,
+                  },
+                ] as IViewProperty[],
 
-                  fieldMap: {
-                    fldC: {
-                      id: 'fldC',
-                      name: 'level-3',
-                      type: FieldType.AutoNumber,
-                      property: {},
-                    } as any,
-                    fldA: {
-                      id: 'fldA',
-                      name: 'level-1',
-                      type: 19,
-                      property: {},
-                    },
-                    fldB: {
-                      id: 'fldB',
-                      name: 'level-2',
-                      type: 19,
-                      property: {},
-                    },
-                  } as IFieldMap,
-                } as IMeta,
-                recordMap: { } as IRecordMap,
-                datasheetId: 'advancedDatasheet',
-              },
+                fieldMap: {
+                  fldC: {
+                    id: 'fldC',
+                    name: 'level-3',
+                    type: FieldType.AutoNumber,
+                    property: {},
+                  } as any,
+                  fldA: {
+                    id: 'fldA',
+                    name: 'level-1',
+                    type: 19,
+                    property: {},
+                  },
+                  fldB: {
+                    id: 'fldB',
+                    name: 'level-2',
+                    type: 19,
+                    property: {},
+                  },
+                } as IFieldMap,
+              } as IMeta,
+              recordMap: {} as IRecordMap,
+              datasheetId: 'advancedDatasheet',
             },
-          ]);
-        }
-        return Promise.resolve([]);
-      },
-    );
-    jest.spyOn(restService, 'getFieldPermission').mockImplementation(
-      (headers: IAuthHeader, nodeId: string, _shareId?: string): Promise<IFieldPermissionMap> => {
+          },
+        ]);
+      }
+      return Promise.resolve([]);
+    });
+    jest
+      .spyOn(restService, 'getFieldPermission')
+      .mockImplementation((headers: IAuthHeader, nodeId: string, _shareId?: string): Promise<IFieldPermissionMap> => {
         if (headers?.token === 'token' && nodeId === 'datasheetId') {
           return Promise.resolve({
             fldA: {
@@ -294,11 +283,10 @@ describe('DatasheetFieldTreeSelectService', () => {
         }
 
         throw new ServerException(CommonException.SERVER_ERROR);
-      },
-    );
+      });
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
@@ -311,53 +299,53 @@ describe('DatasheetFieldTreeSelectService', () => {
   });
 
   describe('getCascaderLinkedFields', () => {
-    it('get all permission fields - should return all fields', async() => {
+    it('get all permission fields - should return all fields', async () => {
       const datasheet = await cascaderDataBusService.getDatasheet('datasheetId');
       const view = await cascaderDataBusService.getView(datasheet!, { auth: { token: 'token' }, viewId: 'viewId' });
       const linkedFields = await datasheetFieldCascaderService.getCascaderLinkedFields(view!.view);
       expect(linkedFields.length).toEqual(3);
     });
 
-    it('have unreadable field--should remove unreadable fields', async() => {
+    it('have unreadable field--should remove unreadable fields', async () => {
       const datasheet = await cascaderDataBusService.getDatasheet('datasheetId');
       const view = await cascaderDataBusService.getView(datasheet!, { auth: { token: 'unreadableToken' }, viewId: 'viewId' });
       const linkedFields = await datasheetFieldCascaderService.getCascaderLinkedFields(view!.view);
       expect(linkedFields.length).toEqual(0);
     });
 
-    it('without field  permission--should return all fields', async() => {
+    it('without field  permission--should return all fields', async () => {
       const datasheet = await cascaderDataBusService.getDatasheet('datasheetId');
       const view = await cascaderDataBusService.getView(datasheet!, { auth: { token: 'normalToken' }, viewId: 'viewId' });
       const linkedFields = await datasheetFieldCascaderService.getCascaderLinkedFields(view!.view);
       expect(linkedFields.length).toEqual(3);
     });
 
-    it('should be filter advanced field', async() => {
+    it('should be filter advanced field', async () => {
       const datasheet = await cascaderDataBusService.getDatasheet('advancedDatasheet');
       const view = await cascaderDataBusService.getView(datasheet!, { auth: { token: 'normalToken' }, viewId: 'viewId' });
       const linkedFields = await datasheetFieldCascaderService.getCascaderLinkedFields(view!.view);
       expect(linkedFields.length).toEqual(2);
     });
 
-    it('should be filter advanced field', async() => {
+    it('should be filter advanced field', async () => {
       const datasheet = await cascaderDataBusService.getDatasheet('advancedDatasheet');
       const view = await cascaderDataBusService.getView(datasheet!, { auth: { token: 'normalToken' }, viewId: 'viewId' });
       const linkedFields = await datasheetFieldCascaderService.getCascaderLinkedFields(view!.view);
       expect(linkedFields.length).toEqual(2);
     });
 
-    it('should be filter advanced field then only one field', async() => {
+    it('should be filter advanced field then only one field', async () => {
       const datasheet = await cascaderDataBusService.getDatasheet('advancedDatasheet');
       const view = await cascaderDataBusService.getView(datasheet!, { auth: { token: 'normalToken' }, viewId: 'viewId02' });
       const linkedFields = await datasheetFieldCascaderService.getCascaderLinkedFields(view!.view);
-      const fieldIds: string[] = slice(linkedFields, 0, 2).map(i => i.id);
+      const fieldIds: string[] = slice(linkedFields, 0, 2).map((i) => i.id);
       expect(linkedFields.length).toEqual(1);
       expect(fieldIds.length).toEqual(1);
     });
   });
 
   describe('getCascaderLinkedRecords', () => {
-    it('should return cascader list', async() => {
+    it('should return cascader list', async () => {
       const datasheet = await cascaderDataBusService.getDatasheet('datasheetId');
       const cascaderSourceDataView = await cascaderDataBusService.getView(datasheet!, { auth: { token: 'token' }, viewId: 'viewId' });
       const fieldIds: string[] = ['fldA', 'fldB', 'fldC'];

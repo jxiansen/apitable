@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useMemo, useState } from 'react';
 import { Provider } from 'react-redux';
 import { IWidgetConfig, IWidgetContext, RuntimeEnv } from 'interface';
@@ -15,12 +13,13 @@ const _Provider: any = Provider;
  */
 export const WidgetContext = React.createContext<IWidgetContext>(null!);
 
-export type IWidgetProviderProps = IWidgetContext & IWidgetConfig & {
-  /** Optionally, add a class to the outermost div of the components */
-  className?: string;
-  /** Optionally, add a style to the outermost div of the components */
-  style?: React.CSSProperties;
-};
+export type IWidgetProviderProps = IWidgetContext &
+  IWidgetConfig & {
+    /** Optionally, add a class to the outermost div of the components */
+    className?: string;
+    /** Optionally, add a style to the outermost div of the components */
+    style?: React.CSSProperties;
+  };
 
 /**
  * Provide the ability to get and control the outer UI state of the widget.
@@ -30,10 +29,20 @@ export const WidgetConfigContext = React.createContext<IWidgetConfig>(null!);
 /**
  * Within the main project, the WidgetProvider need to be wrapped before the widget be used.
  */
-export const WidgetProvider: React.FC<React.PropsWithChildren<IWidgetProviderProps>> = props => {
+export const WidgetProvider: React.FC<React.PropsWithChildren<IWidgetProviderProps>> = (props) => {
   const {
-    id, className, style, locale = 'zh-CN', theme = ThemeName.Light, runtimeEnv = RuntimeEnv.Desktop,
-    isShowingSettings, isFullscreen, toggleSettings, toggleFullscreen, expandRecord, children
+    id,
+    className,
+    style,
+    locale = 'zh-CN',
+    theme = ThemeName.Light,
+    runtimeEnv = RuntimeEnv.Desktop,
+    isShowingSettings,
+    isFullscreen,
+    toggleSettings,
+    toggleFullscreen,
+    expandRecord,
+    children,
   } = props;
   const [widgetStore, setWidgetStore] = useState<IWidgetStore>();
   const [mountId] = useState(() => id + uniqueId());

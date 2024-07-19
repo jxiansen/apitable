@@ -1,5 +1,3 @@
-
-
 import { APIMetaMemberType, ApiTipConstant, ICellValue, IField, MemberType } from '@apitable/core';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { isString } from 'class-validator';

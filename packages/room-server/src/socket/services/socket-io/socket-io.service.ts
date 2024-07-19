@@ -1,5 +1,3 @@
-
-
 import { Injectable, Logger } from '@nestjs/common';
 import { isNil } from '@nestjs/common/utils/shared.utils';
 import { SocketConstants } from 'shared/common/constants/socket.module.constants';
@@ -15,7 +13,7 @@ export class SocketIoService {
   constructor(
     private readonly nestService: NestService,
     private readonly roomService: RoomService,
-  ) { }
+  ) {}
 
   public joinRoom(socket: IAuthenticatedSocket) {
     // nest-server room

@@ -1,5 +1,3 @@
-
-
 import { IResourceRevision } from '@apitable/core';
 import { DatasheetEntity } from '../entities/datasheet.entity';
 import { EntityRepository, Repository } from 'typeorm';
@@ -8,7 +6,7 @@ import { EntityRepository, Repository } from 'typeorm';
 export class DatasheetRepository extends Repository<DatasheetEntity> {
   /**
    * Query an entity
-   * 
+   *
    * @param dstId datasheet ID
    */
   public selectById(dstId: string): Promise<DatasheetEntity | undefined> {
@@ -17,7 +15,7 @@ export class DatasheetRepository extends Repository<DatasheetEntity> {
 
   /**
    * Query the revision number of a datasheet.
-   * 
+   *
    * @param dstId datasheet ID
    */
   selectRevisionByDstId(dstId: string): Promise<DatasheetEntity | undefined> {
@@ -44,7 +42,7 @@ export class DatasheetRepository extends Repository<DatasheetEntity> {
 
   /**
    * Query the ID of the space which the given datasheet belongs to
-   * 
+   *
    * @param dstId datasheet ID
    */
   selectSpaceIdByDstId(dstId: string): Promise<DatasheetEntity | undefined> {

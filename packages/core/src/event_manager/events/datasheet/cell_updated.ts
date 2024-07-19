@@ -1,13 +1,8 @@
-
-
 import { getComputeRefManager } from 'compute_manager';
 import { testPath } from 'event_manager/helper';
 import { Field } from 'model/field';
 import { IReduxState } from '../../../exports/store/interfaces';
-import {
-  getSnapshot,
-  getField,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getSnapshot, getField } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getFieldMap } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { getCellValue } from 'modules/database/store/selectors/resource/datasheet/cell_calc';
 import { FieldType, ILinkField } from 'types';
@@ -42,8 +37,8 @@ export class OPEventCellUpdated extends IAtomEventType<ICellUpdatedContext> {
         change: {
           from: action['od'],
           to: action['oi'],
-        }
-      }
+        },
+      },
     };
   }
 
@@ -75,7 +70,7 @@ export class OPEventCellUpdated extends IAtomEventType<ICellUpdatedContext> {
       if (!fieldRefs?.size) {
         return;
       }
-      fieldRefs.forEach(refId => {
+      fieldRefs.forEach((refId) => {
         const [_datasheetId, _fieldId] = refId.split('-') as [string, string];
         const fieldMap = getFieldMap(state, _datasheetId)!;
         // 3. Depends on one of the fields of this field
@@ -124,17 +119,17 @@ export class OPEventCellUpdated extends IAtomEventType<ICellUpdatedContext> {
               if (relatedLinkField.type === FieldType.OneWayLink) {
                 const _snapshot = getSnapshot(state, _datasheetId)!;
                 const _records = Object.values(_snapshot.recordMap);
-                const filterRecords = _records.filter(record => {
+                const filterRecords = _records.filter((record) => {
                   const recordData = record?.data[relatedLinkField.id] as string[] | undefined;
                   return recordData && recordData.includes(recordId);
                 });
-                triggerRecIds = filterRecords.map(record => record.id);
+                triggerRecIds = filterRecords.map((record) => record.id);
               }
             }
             // TODO: The value of the link field cell must be null or an array.
             // Due to the existence of dirty data, we first judge whether it is an array type before processing it. Delete data after cleaning?
             if (triggerRecIds && Array.isArray(triggerRecIds)) {
-              (triggerRecIds as string[]).forEach(recId => {
+              (triggerRecIds as string[]).forEach((recId) => {
                 enqueueChecker(`${_datasheetId}-${recId}-${_fieldId}`);
               });
             }
@@ -152,7 +147,7 @@ export class OPEventCellUpdated extends IAtomEventType<ICellUpdatedContext> {
             const linkRecIds = getCellValue(state, snapshot, recordId, thisLinkFieldId);
             // FIXME: There may be a non-empty cv that is not an array here. Causes the following code to have problems, first compatible.
             if (linkRecIds && Array.isArray(linkRecIds)) {
-              linkRecIds.forEach(recId => {
+              linkRecIds.forEach((recId) => {
                 enqueueChecker(`${_datasheetId}-${recId}-${_fieldId}`);
               });
             }
@@ -195,12 +190,14 @@ export class OPEventCellUpdated extends IAtomEventType<ICellUpdatedContext> {
      * In theory, in the absence of circular references, there will be no infinite loop.
      */
     const res: IEventInstance<IVirtualAtomEvent>[] = [];
-    finalComputeEventContextQueue.forEach(context => {
+    finalComputeEventContextQueue.forEach((context) => {
       const [datasheetId, recordId, fieldId] = context.split('-');
       res.push({
         eventName: OPEventNameEnums.CellUpdated,
         context: {
-          datasheetId, recordId, fieldId,
+          datasheetId,
+          recordId,
+          fieldId,
         },
         atomType: EventAtomTypeEnums.ATOM,
         realType: EventRealTypeEnums.VIRTUAL,

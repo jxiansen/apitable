@@ -1,5 +1,3 @@
-
-
 import { Api } from '@apitable/core';
 
 export const useBilling = () => {

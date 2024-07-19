@@ -1,4 +1,3 @@
-
 export const orange = {
   50: '#FFF6E5',
   100: '#FFE5B7',
@@ -12,4 +11,3 @@ export const orange = {
   900: '#AB5C00',
   1000: '#7D4400',
 };
-

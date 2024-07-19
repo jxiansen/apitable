@@ -1,11 +1,6 @@
-
-
 import Joi from 'joi';
 import { IReduxState, IRecord } from '../../exports/store/interfaces';
-import {
-  ILastModifiedTimeField, ILastModifiedTimeFieldProperty, FieldType, IField,
-  DateFormat, TimeFormat, CollectType,
-} from 'types/field_types';
+import { ILastModifiedTimeField, ILastModifiedTimeFieldProperty, FieldType, IField, DateFormat, TimeFormat, CollectType } from 'types/field_types';
 import { DatasheetActions } from '../../commands_actions/datasheet';
 import { DateTimeBaseField } from './date_time_base_field';
 import { ICellValue } from 'model/record';
@@ -15,7 +10,10 @@ import { IUpdateOpenLastModifiedTimeFieldProperty } from 'types/open/open_field_
 import { getFieldDefaultProperty } from './const';
 
 export class LastModifiedTimeField extends DateTimeBaseField {
-  constructor(public override field: ILastModifiedTimeField, state: IReduxState) {
+  constructor(
+    public override field: ILastModifiedTimeField,
+    state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -23,8 +21,12 @@ export class LastModifiedTimeField extends DateTimeBaseField {
     datasheetId: datasheetIdString().required(),
     collectType: Joi.number().allow(CollectType.AllFields, CollectType.SpecifiedFields).required(),
     fieldIdCollection: Joi.array().items(Joi.string()).required(),
-    dateFormat: Joi.string().allow(...enumToArray(DateFormat)).required(),
-    timeFormat: Joi.string().allow(...enumToArray(TimeFormat)).required(),
+    dateFormat: Joi.string()
+      .allow(...enumToArray(DateFormat))
+      .required(),
+    timeFormat: Joi.string()
+      .allow(...enumToArray(TimeFormat))
+      .required(),
     includeTime: Joi.boolean().required(),
     timeZone: Joi.string(),
     includeTimeZone: Joi.boolean(),
@@ -87,7 +89,7 @@ export class LastModifiedTimeField extends DateTimeBaseField {
       }
       return acc;
     }, [] as number[]);
-    return timestamps.length ? Math.max(...timestamps as number[]) : null;
+    return timestamps.length ? Math.max(...(timestamps as number[])) : null;
   }
 
   override get openFieldProperty(): IOpenLastModifiedTimeFieldProperty {
@@ -97,12 +99,14 @@ export class LastModifiedTimeField extends DateTimeBaseField {
       timeFormat: TimeFormat[timeFormat]!,
       includeTime,
       collectType,
-      fieldIdCollection
+      fieldIdCollection,
     };
   }
 
   static openUpdatePropertySchema = Joi.object({
-    dateFormat: Joi.string().valid(...enumKeyToArray(DateFormat)).required(),
+    dateFormat: Joi.string()
+      .valid(...enumKeyToArray(DateFormat))
+      .required(),
     timeFormat: Joi.valid(...enumKeyToArray(TimeFormat)),
     includeTime: Joi.boolean(),
     collectType: Joi.number().valid(CollectType.AllFields, CollectType.SpecifiedFields),
@@ -124,7 +128,7 @@ export class LastModifiedTimeField extends DateTimeBaseField {
       timeFormat: timeFormat ? TimeFormat[timeFormat] : defaultProperty.timeFormat,
       collectType: collectType ?? defaultProperty.collectType,
       fieldIdCollection: fieldIdCollection || [],
-      includeTime: includeTime ?? defaultProperty.includeTime
+      includeTime: includeTime ?? defaultProperty.includeTime,
     };
   }
 }

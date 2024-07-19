@@ -1,12 +1,19 @@
-
-
 import Joi from 'joi';
 import { isNumber, isString } from 'lodash';
 import { ICellValue } from 'model/record';
 import { isNullValue } from 'model/utils';
 import { FOperator, FOperatorDescMap, IAddOpenFieldProperty, IAPIMetaTextBaseFieldProperty, IFilterCondition, IFilterText } from 'types';
 import {
-  BasicValueType, FieldType, IEmailField, IPhoneField, ISegment, ISingleTextField, IStandardValue, ITextField, IURLField, SegmentType,
+  BasicValueType,
+  FieldType,
+  IEmailField,
+  IPhoneField,
+  ISegment,
+  ISingleTextField,
+  IStandardValue,
+  ITextField,
+  IURLField,
+  SegmentType,
 } from 'types/field_types';
 import { IOpenFilterValueString } from 'types/open/open_filter_types';
 import { fastCloneDeep, string2Segment } from 'utils';
@@ -37,11 +44,16 @@ export abstract class TextBaseField extends Field {
     FOperator.IsRepeat,
   ];
 
-  static cellValueSchema = Joi.array().items(Joi.object({
-    text: Joi.string().allow('').required(),
-    type: Joi.number().required(),
-    link: Joi.string(),
-  }).required()).allow(null).required();
+  static cellValueSchema = Joi.array()
+    .items(
+      Joi.object({
+        text: Joi.string().allow('').required(),
+        type: Joi.number().required(),
+        link: Joi.string(),
+      }).required()
+    )
+    .allow(null)
+    .required();
 
   static openWriteValueSchema = Joi.string().allow(null).required();
 
@@ -89,7 +101,7 @@ export abstract class TextBaseField extends Field {
     };
 
     if (cellValue) {
-      stdValue.data = cellValue.map(seg => fastCloneDeep(seg));
+      stdValue.data = cellValue.map((seg) => fastCloneDeep(seg));
     }
 
     return stdValue;
@@ -103,17 +115,17 @@ export abstract class TextBaseField extends Field {
 
     let segments: ISegment[];
     if ([FieldType.MultiSelect, FieldType.Link, FieldType.OneWayLink, FieldType.Attachment, FieldType.Member].includes(sourceType)) {
-      segments = [{ type: SegmentType.Text, text: data.map(d => d.text).join(', ') }];
+      segments = [{ type: SegmentType.Text, text: data.map((d) => d.text).join(', ') }];
     } else if (sourceType === FieldType.Text) {
-      segments = data.map(d => ({
+      segments = data.map((d) => ({
         type: d.type || SegmentType.Text,
         ...d,
       }));
     } else {
-      segments = [{ type: SegmentType.Text, text: data.map(d => d.text).join('') }];
+      segments = [{ type: SegmentType.Text, text: data.map((d) => d.text).join('') }];
     }
 
-    if (segments.length === 0 || segments.every(segment => segment.text === '')) {
+    if (segments.length === 0 || segments.every((segment) => segment.text === '')) {
       return null;
     }
 
@@ -122,7 +134,7 @@ export abstract class TextBaseField extends Field {
 
   validate(value: any): value is ISegment[] {
     if (Array.isArray(value)) {
-      return value.every(segment => {
+      return value.every((segment) => {
         return segment != null && isNumber(segment.type) && isString(segment.text);
       });
     }
@@ -132,7 +144,7 @@ export abstract class TextBaseField extends Field {
   defaultValueForCondition(condition: IFilterCondition<FieldType.Text>): null | ISegment[] {
     // There is no default padding logic for text type filtering\
     const { value } = condition;
-    return value ? value.map(item => ({ text: item, type: SegmentType.Text })) : null;
+    return value ? value.map((item) => ({ text: item, type: SegmentType.Text })) : null;
   }
 
   cellValueToString(cellValue: ISegment[] | null): string | null {
@@ -140,7 +152,7 @@ export abstract class TextBaseField extends Field {
       return null;
     }
     const cv = [cellValue].flat();
-    return (cv as ISegment[]).map(seg => seg.text).join('') || null;
+    return (cv as ISegment[]).map((seg) => seg.text).join('') || null;
   }
 
   static stringInclude(str: string, searchStr: string) {
@@ -149,11 +161,13 @@ export abstract class TextBaseField extends Field {
 
   // The formatted string is directly passed in here
   static _isMeetFilter(
-    operator: FOperator, cellText: string | null, conditionValue: IFilterText,
+    operator: FOperator,
+    cellText: string | null,
+    conditionValue: IFilterText,
     optFn?: {
-      containsFn?: (filterValue: string) => boolean,
-      doesNotContainFn?: (filterValue: string) => boolean
-      defaultFn?: () => boolean,
+      containsFn?: (filterValue: string) => boolean;
+      doesNotContainFn?: (filterValue: string) => boolean;
+      defaultFn?: () => boolean;
     }
   ) {
     if (operator === FOperator.IsEmpty) {
@@ -207,11 +221,11 @@ export abstract class TextBaseField extends Field {
     return TextBaseField._isMeetFilter(operator, cellText, conditionValue, {
       containsFn: (filterValue: string) => cellText != null && this.stringInclude(cellText, filterValue),
       doesNotContainFn: (filterValue: string) => cellText == null || !this.stringInclude(cellText, filterValue),
-      defaultFn: () => super.isMeetFilter(operator, cellValue, conditionValue)
+      defaultFn: () => super.isMeetFilter(operator, cellValue, conditionValue),
     });
   }
 
-  cellValueToApiStandardValue(cellValue: ISegment[] | null): ISegment |string | null {
+  cellValueToApiStandardValue(cellValue: ISegment[] | null): ISegment | string | null {
     return this.cellValueToString(cellValue);
   }
 

@@ -1,5 +1,3 @@
-
-
 import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { isEmpty, isNil, isUndefined } from '@nestjs/common/utils/shared.utils';
@@ -17,7 +15,10 @@ import * as util from 'util';
 export class NestService {
   private readonly logger = new Logger(NestService.name);
 
-  constructor(private readonly redisService: RedisService, private readonly httpService: HttpService) {}
+  constructor(
+    private readonly redisService: RedisService,
+    private readonly httpService: HttpService,
+  ) {}
 
   // each node holds the connection of the current nest
   private socketMap = new Map<string, IAuthenticatedSocket>();
@@ -53,17 +54,17 @@ export class NestService {
    * @param socketIds
    */
   async getSocketInfos(socketIds: string[]): Promise<any[]> {
-    const ids = socketIds.map(id => util.format(NestCacheKeys.SOCKET, id));
+    const ids = socketIds.map((id) => util.format(NestCacheKeys.SOCKET, id));
     const raws = await this.redisService.getValues(ids);
-    return raws!.filter(Boolean).map(raw => JSON.parse(raw));
+    return raws!.filter(Boolean).map((raw) => JSON.parse(raw));
   }
 
   private async getSocketNotifyUrl() {
     return await this.redisService
       .getSockets(SocketConstants.NEST_SERVER_PREFIX)
-      .then(result => {
+      .then((result) => {
         this.logger.log(`NestServer:Connection:Redis ${JSON.stringify(result)}`);
-        const socketServer: string[] = Array.from(Object.values(result)).filter(value => value != getSocketServerAddr(getIPAddress()));
+        const socketServer: string[] = Array.from(Object.values(result)).filter((value) => value != getSocketServerAddr(getIPAddress()));
         if (!isEmpty(socketServer)) {
           const index = randomNum(0, socketServer.length - 1);
           return socketServer[index] + GatewayConstants.SOCKET_SERVER_NOTIFY_PATH;
@@ -71,7 +72,7 @@ export class NestService {
         this.logger.warn(`NestServer:Connection:empty ${JSON.stringify(result)}`);
         return null;
       })
-      .catch(e => {
+      .catch((e) => {
         this.logger.error('NestServer:Connection:Redis', e?.stack);
         return null;
       });
@@ -97,21 +98,21 @@ export class NestService {
 
   private async notify(event: string, message: any): Promise<any | null> {
     this.logger.debug({ event, message });
-    return await new Promise(resolve => {
+    return await new Promise((resolve) => {
       const socketId = this.getSocketId();
       if (!isUndefined(socketId)) {
-        this.socketMap.get(socketId)!.emit(event, message, function(answer: any) {
+        this.socketMap.get(socketId)!.emit(event, message, function (answer: any) {
           // this.logger.debug({ event, answer });
           return resolve(answer);
         });
       } else {
         this.logger.warn(`${event} This pod no connected to NestServer`);
         this.httpNotify(event, message)
-          .then(result => {
+          .then((result) => {
             this.logger.debug({ event, result });
             return resolve(result);
           })
-          .catch(e => {
+          .catch((e) => {
             this.logger.error('NestService:notify:error', e?.stack);
             return resolve(null);
           });

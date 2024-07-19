@@ -1,22 +1,10 @@
-
-
 import classNames from 'classnames';
 import { omit } from 'lodash';
 import { Dispatch, SetStateAction } from 'react';
 import * as React from 'react';
 // eslint-disable-next-line no-restricted-imports
 import { Checkbox, colorVars, Select, Switch } from '@apitable/components';
-import {
-  DateFormat,
-  formatTimeZone,
-  getUtcOptionList,
-  IDateTimeFieldProperty,
-  IField,
-  Selectors,
-  Strings,
-  t,
-  TimeFormat,
-} from '@apitable/core';
+import { DateFormat, formatTimeZone, getUtcOptionList, IDateTimeFieldProperty, IField, Selectors, Strings, t, TimeFormat } from '@apitable/core';
 import { MobileSelect } from 'pc/components/common';
 import { ComponentDisplay, ScreenSize } from 'pc/components/common/component_display';
 import { Divider } from 'pc/components/common/divider';

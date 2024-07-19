@@ -1,5 +1,3 @@
-
-
 import { IReduxState, IFieldMap, ThemeName, RecordVision, IRecordCellValue } from 'exports/store/interfaces';
 import { FieldType } from 'types/field_types';
 import { IFormulaContext } from '../functions/basic';
@@ -157,11 +155,11 @@ export const mergeContext = (recordData: IRecordCellValue, _fieldMap?: IFieldMap
 
 export const generateMockState = (fieldMap: IFieldMap): IReduxState => ({
   share: {
-    spaceId: null
+    spaceId: null,
   },
   unitInfo: {
     unitMap: null,
-    userMap: null
+    userMap: null,
   },
   recordVision: RecordVision.Center,
   theme: ThemeName.Light,
@@ -241,7 +239,7 @@ export const generateMockState = (fieldMap: IFieldMap): IReduxState => ({
             views: [],
           },
           recordMap: {},
-          datasheetId: 'datasheetId'
+          datasheetId: 'datasheetId',
         },
       },
     },
@@ -286,7 +284,7 @@ export const generateMockState = (fieldMap: IFieldMap): IReduxState => ({
     /** Parameters required for member message sending **/
     permissionCommitRemindParameter: null,
     /** Unauthorized member unitIds **/
-    noPermissionMembers: []
+    noPermissionMembers: [],
   },
   user: {
     info: null,
@@ -351,7 +349,7 @@ export const generateMockState = (fieldMap: IFieldMap): IReduxState => ({
     previewModalVisible: false,
     activeId: '',
     spaceFeatures: null,
-    envs: {}
+    envs: {},
   },
   invite: {
     inviteEmailInfo: null,
@@ -385,7 +383,7 @@ export const generateMockState = (fieldMap: IFieldMap): IReduxState => ({
     menuCardState: null as any,
   },
   rightPane: {
-    width: 0
+    width: 0,
   },
   billing: {
     catalog: {},
@@ -407,16 +405,16 @@ export const generateMockState = (fieldMap: IFieldMap): IReduxState => ({
     onChange: () => {},
     disabledDownload: false,
   },
-  embedInfo: {}
+  embedInfo: {},
 });
 
 export const mockState = {
   share: {
-    spaceId: null
+    spaceId: null,
   },
   unitInfo: {
     unitMap: null,
-    userMap: null
+    userMap: null,
   },
   widgetMap: {},
   dashboardMap: {},
@@ -490,7 +488,7 @@ export const mockState = {
             views: [],
           },
           recordMap: {},
-          datasheetId: 'datasheetId'
+          datasheetId: 'datasheetId',
         },
       },
     },
@@ -529,7 +527,7 @@ export const mockState = {
     /** Parameters required for member message sending **/
     permissionCommitRemindParameter: null,
     /** Unauthorized member unitIds **/
-    noPermissionMembers: []
+    noPermissionMembers: [],
   },
   user: {
     info: null,
@@ -591,7 +589,7 @@ export const mockState = {
     marketplaceApps: [],
     previewModalVisible: false,
     activeId: '',
-    spaceFeatures: null
+    spaceFeatures: null,
   },
   invite: {
     inviteEmailInfo: null,

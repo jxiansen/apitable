@@ -1,5 +1,3 @@
-
-
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseModule } from 'database/database.module';
@@ -29,27 +27,10 @@ import { IsNodeExistConstraint } from './validations/validation.constraint';
     UserModule,
     UnitModule,
     forwardRef(() => DatabaseModule),
-    TypeOrmModule.forFeature([
-      NodeRepository,
-      NodeRelRepository,
-      NodeDescRepository,
-      NodeShareSettingRepository,
-    ]),
+    TypeOrmModule.forFeature([NodeRepository, NodeRelRepository, NodeDescRepository, NodeShareSettingRepository]),
   ],
   controllers: [],
-  providers: [
-    NodeService,
-    NodePermissionService, 
-    NodeShareSettingService, 
-    NodeDescriptionService, 
-    IsNodeExistConstraint,
-  ],
-  exports: [
-    NodeService, 
-    NodePermissionService, 
-    NodeShareSettingService, 
-    NodeDescriptionService, 
-    IsNodeExistConstraint,
-  ]
+  providers: [NodeService, NodePermissionService, NodeShareSettingService, NodeDescriptionService, IsNodeExistConstraint],
+  exports: [NodeService, NodePermissionService, NodeShareSettingService, NodeDescriptionService, IsNodeExistConstraint],
 })
 export class NodeModule {}

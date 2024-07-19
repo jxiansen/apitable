@@ -14,7 +14,7 @@ import { ViewType } from 'modules/shared/store/constants';
 
 class ViewDerivateFactory {
   static createViewDerivate(state: IReduxState, datasheetId: string, viewType: ViewType): ViewDerivateBase {
-    switch(viewType) {
+    switch (viewType) {
       case ViewType.Calendar:
         return new ViewDerivateCalendar(state, datasheetId);
       case ViewType.Gallery:
@@ -39,11 +39,7 @@ class ViewDerivateFactory {
 
 export { ViewDerivateFactory };
 
-export const dispatchNewViewDerivation = (
-  store: MiddlewareAPI<Dispatch<AnyAction>, IReduxState>,
-  datasheetId: string,
-  viewId?: string
-) => {
+export const dispatchNewViewDerivation = (store: MiddlewareAPI<Dispatch<AnyAction>, IReduxState>, datasheetId: string, viewId?: string) => {
   const state = store.getState();
   const currentViewId = getActiveViewId(state);
   const view = getViewInNode(state, datasheetId, viewId || currentViewId);
@@ -56,8 +52,10 @@ export const dispatchNewViewDerivation = (
   console.log(viewDerivate);
   const viewDerivation = viewDerivate.getViewDerivation(view);
   console.log('DERIVATE: calcViewDerivation %s  %s cost: %s ms', datasheetId, view.id, Date.now() - timeStart);
-  store.dispatch(setViewDerivation(datasheetId, {
-    viewId: view.id,
-    viewDerivation,
-  }));
+  store.dispatch(
+    setViewDerivation(datasheetId, {
+      viewId: view.id,
+      viewDerivation,
+    })
+  );
 };

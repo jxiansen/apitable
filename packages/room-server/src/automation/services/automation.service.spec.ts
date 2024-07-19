@@ -1,5 +1,3 @@
-
-
 import { ConfigConstant } from '@apitable/core';
 import { RedisService } from '@apitable/nestjs-redis';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';

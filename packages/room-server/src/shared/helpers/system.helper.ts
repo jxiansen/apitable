@@ -1,5 +1,3 @@
-
-
 import * as os from 'os';
 
 /**
@@ -18,11 +16,7 @@ export const getIPAddress = (): string => {
     const iface = interfaces[devName]!;
     for (const i of Object.keys(iface)) {
       const alias = iface[i];
-      if (
-        alias.family === 'IPv4' &&
-        alias.address !== '127.0.0.1' &&
-        !alias.internal
-      ) {
+      if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
         address = alias.address;
       }
     }

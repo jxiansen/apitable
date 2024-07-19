@@ -1,5 +1,3 @@
-
-
 import { difference, isEqual } from 'lodash';
 import { IFieldMap, IViewColumn, Selectors, StoreActions } from '@apitable/core';
 import { store } from 'pc/store';

@@ -1,5 +1,3 @@
-
-
 import { ICronSchema } from './types';
 
 import { Just, Maybe, Nothing } from 'purify-ts/index';

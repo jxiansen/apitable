@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import * as React from 'react';
 import { FC } from 'react';
@@ -19,8 +17,8 @@ import { ChatPage } from 'enterprise/chat/chat_page';
 
 const WorkspaceRoute: FC<React.PropsWithChildren<unknown>> = () => {
   const nodeId = useAppSelector((state) => Selectors.getNodeId(state));
-  const activeNodePrivate = useAppSelector((state) =>
-    state.catalogTree.treeNodesMap[nodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[nodeId]?.nodePrivate
+  const activeNodePrivate = useAppSelector(
+    (state) => state.catalogTree.treeNodesMap[nodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[nodeId]?.nodePrivate,
   );
 
   const activeNodeError = useAppSelector((state) => state.catalogTree.activeNodeError);

@@ -1,18 +1,7 @@
-
-
 import { FC } from 'react';
 // eslint-disable-next-line no-restricted-imports
 import { colorVars, Select, Typography } from '@apitable/components';
-import {
-  t,
-  Strings,
-  getUtcOptionList,
-  Selectors,
-  Api,
-  StoreActions,
-  getTimeZoneOffsetByUtc,
-  getClientTimeZone, getTimeZone,
-} from '@apitable/core';
+import { t, Strings, getUtcOptionList, Selectors, Api, StoreActions, getTimeZoneOffsetByUtc, getClientTimeZone, getTimeZone } from '@apitable/core';
 import { Message } from 'pc/components/common/message/message';
 import { store } from 'pc/store';
 import { useAppSelector } from 'pc/store/react-redux';
@@ -33,7 +22,7 @@ const options = [
     label: `${t(Strings.follow_client_time_zone)} ${getClientTimeZone()}`,
     value: getTimeZone(),
   },
-  ...getUtcOptionList()
+  ...getUtcOptionList(),
 ];
 
 export const TimezoneSetting: FC = () => {

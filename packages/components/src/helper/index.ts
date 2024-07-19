@@ -1,5 +1,3 @@
-
-
 import { defaultTheme, ITheme } from '../theme';
 
 export const getTheme = (theme?: any): ITheme => {

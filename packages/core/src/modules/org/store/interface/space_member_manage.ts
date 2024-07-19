@@ -1,5 +1,3 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 import { ITeamData } from './address_list';
 

@@ -1,5 +1,3 @@
-
-
 import { useMemo } from 'react';
 import { useThemeColors } from '@apitable/components';
 import { Strings, t } from '@apitable/core';

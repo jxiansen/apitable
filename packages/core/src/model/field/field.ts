@@ -1,4 +1,3 @@
-
 import { IReduxState } from 'exports/store';
 import Joi from 'joi';
 import { isEqual } from 'lodash';
@@ -44,20 +43,23 @@ export abstract class Field {
 
   static bindModel: IBindFieldModel;
 
-  constructor(public field: IField, public state: IReduxState) { }
+  constructor(
+    public field: IField,
+    public state: IReduxState
+  ) {}
 
   /**
-    * Field Property returned by Field Meta API. Unlike the interface used internally, the API exposes the transformed result.
-    * - More friendly information, number enum to string.
-    * - Eliminate unnecessary exposed field information
-    */
+   * Field Property returned by Field Meta API. Unlike the interface used internally, the API exposes the transformed result.
+   * - More friendly information, number enum to string.
+   * - Eliminate unnecessary exposed field information
+   */
   abstract get apiMetaProperty(): IAPIMetaFieldProperty | null;
 
   /**
-    * Each field has its own openValue for use in the widget SDK, robot variables and subsequent open scenarios.
-    * This is open to developers and will do some processing on cellValue.
-    * This method describes the structure of the field openValue. Currently used in robot variables.
-    */
+   * Each field has its own openValue for use in the widget SDK, robot variables and subsequent open scenarios.
+   * This is open to developers and will do some processing on cellValue.
+   * This method describes the structure of the field openValue. Currently used in robot variables.
+   */
   abstract get openValueJsonSchema(): IJsonSchema;
 
   /**
@@ -194,7 +196,7 @@ export abstract class Field {
    */
   static isFilterBelongFieldType<T extends FieldType>(
     t: T,
-    v: IFilterCondition<FieldType>,
+    v: IFilterCondition<FieldType>
   ): v is Extract<IFilterCondition<T>, IFilterCondition<FieldType>> {
     return v.fieldType === t;
   }
@@ -285,8 +287,7 @@ export abstract class Field {
     str2 = str2.trim();
 
     // test pinyin sort
-    return str1 === str2 ? 0 :
-      zhIntlCollator ? zhIntlCollator.compare(str1, str2) : (str1.localeCompare(str2, 'zh-CN') > 0 ? 1 : -1);
+    return str1 === str2 ? 0 : zhIntlCollator ? zhIntlCollator.compare(str1, str2) : str1.localeCompare(str2, 'zh-CN') > 0 ? 1 : -1;
   }
 
   /**
@@ -365,9 +366,7 @@ export abstract class Field {
     return false;
   }
 
-  abstract defaultValueForCondition(
-    condition: IFilterCondition,
-  ): ICellValue;
+  abstract defaultValueForCondition(condition: IFilterCondition): ICellValue;
 
   /**
    * Returns the default value of the field attribute configuration when adding a record
@@ -414,7 +413,7 @@ export abstract class Field {
       type: getFieldTypeString(type),
       property: this.openFieldProperty,
       editable: this.recordEditable(),
-      required
+      required,
     };
     if (this.field.id === firstFieldId) {
       res.isPrimary = true;
@@ -437,7 +436,9 @@ export abstract class Field {
     return Joi.object({
       id: Joi.string().required(),
       conversion: Joi.boolean(),
-    }).required().validate(deleteFieldSchema);
+    })
+      .required()
+      .validate(deleteFieldSchema);
   }
 
   /**
@@ -492,8 +493,7 @@ export abstract class Field {
    */
   getOptionColorNumberByName(name: string) {
     const colorNames = getColorNames();
-    const colorNum = colorNames.findIndex(colorName => colorName === name);
+    const colorNum = colorNames.findIndex((colorName) => colorName === name);
     return colorNum > -1 ? colorNum : undefined;
   }
 }
-

@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { useContext, useEffect, useState, useRef } from 'react';
 import { lightColors, Message } from '@apitable/components';
@@ -116,24 +114,24 @@ export const useTaskLineSetting = (props: ITaskLineSettingProps) => {
   const shadowProps =
     cacheTheme === 'light'
       ? {
-        stroke: rgbaToHex(colors.lineColor, 1),
-        strokeWidth: 1,
-        shadowColor: rgbaToHex(colors.shadowBg, 0.12),
-        shadowBlur: 12,
-        // shadowOffsetX: 2,
-        shadowOffsetY: 6,
-        shadowEnabled: true,
-      }
+          stroke: rgbaToHex(colors.lineColor, 1),
+          strokeWidth: 1,
+          shadowColor: rgbaToHex(colors.shadowBg, 0.12),
+          shadowBlur: 12,
+          // shadowOffsetX: 2,
+          shadowOffsetY: 6,
+          shadowEnabled: true,
+        }
       : {
-        stroke: rgbaToHex(colors.lineColor, 1),
-        strokeWidth: 1,
-        shadowColor: '#000000',
-        shadowOpacity: 0.12,
-        shadowBlur: 12,
-        // shadowOffsetX: 2,
-        shadowOffsetY: 6,
-        shadowEnabled: true,
-      };
+          stroke: rgbaToHex(colors.lineColor, 1),
+          strokeWidth: 1,
+          shadowColor: '#000000',
+          shadowOpacity: 0.12,
+          shadowBlur: 12,
+          // shadowOffsetX: 2,
+          shadowOffsetY: 6,
+          shadowEnabled: true,
+        };
 
   const lineSettingModels = (
     <>

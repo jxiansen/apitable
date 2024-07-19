@@ -1,4 +1,1 @@
-
-
 declare module 'ot-fuzzer';
-

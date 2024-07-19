@@ -1,5 +1,3 @@
-
-
 import * as fs from 'fs';
 
 if (process.argv.length < 4) {
@@ -19,13 +17,12 @@ const keys = Object.keys(parsedData).sort();
 for (const key of keys) {
   if (parsedData.hasOwnProperty(key)) {
     if (parsedData[key].description) {
-      fs.appendFileSync(outputFilePath, `# ${parsedData[key].description
-        .replaceAll('\n', '\n# ')} \n`, 'utf-8');
+      fs.appendFileSync(outputFilePath, `# ${parsedData[key].description.replaceAll('\n', '\n# ')} \n`, 'utf-8');
     }
     let envLine = '';
     if (typeof parsedData[key].value === 'string') {
       envLine = `${key}=${parsedData[key].value}`;
-    }else {
+    } else {
       envLine = `${key}=${JSON.stringify(parsedData[key].value)}`;
     }
     fs.appendFileSync(outputFilePath, envLine + '\n\n', 'utf-8');

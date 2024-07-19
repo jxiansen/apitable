@@ -1,5 +1,3 @@
-
-
 import { IJOTAction, IMirrorSnapshot, IOperation, IRemoteChangeset, IWidget, jot } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { EffectConstantName, ICommonData } from 'database/ot/interfaces/ot.interface';
@@ -20,7 +18,7 @@ export class MirrorOtService {
     @InjectLogger() private readonly logger: Logger,
     private readonly widgetService: WidgetService,
     private readonly resourceMetaService: MetaService,
-  ) { }
+  ) {}
 
   createResultSet() {
     return {
@@ -31,9 +29,8 @@ export class MirrorOtService {
   }
 
   analyseOperates(operations: IOperation[], permission: NodePermission, resultSet: { [key: string]: any }) {
-
-    operations.map(item => {
-      item.actions.forEach(action => {
+    operations.map((item) => {
+      item.actions.forEach((action) => {
         if (action.p[0] === 'widgetPanels') {
           // ===== Operations on widget panel =====
           // Insertion and deletion of widget panels and widgets require manageable permission
@@ -68,7 +65,7 @@ export class MirrorOtService {
     // Recover whole widget panel
     const panel = action['li'];
     const widgets: IWidget[] = panel.widgets;
-    const ids = widgets.map(item => item.id);
+    const ids = widgets.map((item) => item.id);
     resultSet.addWidgetIds.push(...ids);
   }
 
@@ -82,17 +79,11 @@ export class MirrorOtService {
     // Delete whole widget panel
     const panel = action['ld'];
     const widgets: IWidget[] = panel.widgets;
-    const ids = widgets.map(item => item.id);
+    const ids = widgets.map((item) => item.id);
     resultSet.deleteWidgetIds.push(...ids);
   }
 
-  transaction = async(
-    manager: EntityManager,
-    effectMap: Map<string, any>,
-    commonData: ICommonData,
-    resultSet: { [key: string]: any }
-  ) => {
-
+  transaction = async (manager: EntityManager, effectMap: Map<string, any>, commonData: ICommonData, resultSet: { [key: string]: any }) => {
     await this.handleAddWidget(manager, commonData, resultSet);
 
     await this.handleDeleteWidget(manager, resultSet);
@@ -108,7 +99,7 @@ export class MirrorOtService {
 
   async handleAddWidget(manager: EntityManager, commonData: ICommonData, resultSet: { [key: string]: any }) {
     if (this.logger.isDebugEnabled()) {
-      this.logger.debug('[Start updating widget\'s add state]');
+      this.logger.debug("[Start updating widget's add state]");
     }
     if (!resultSet.addWidgetIds.length) {
       return;
@@ -120,7 +111,8 @@ export class MirrorOtService {
     this.logger.info('[ ======> Start batch adding widgets]');
     for (const widgetId of resultSet.addWidgetIds) {
       if (deleteWidgetIds.includes(widgetId)) {
-        await manager.createQueryBuilder()
+        await manager
+          .createQueryBuilder()
           .update(WidgetEntity)
           .set({ isDeleted: false })
           .where('widget_id=:widgetId', { widgetId: widgetId })
@@ -132,14 +124,15 @@ export class MirrorOtService {
 
   async handleDeleteWidget(manager: EntityManager, resultSet: { [key: string]: any }) {
     if (this.logger.isDebugEnabled()) {
-      this.logger.debug('[Start updating widget\'s delete state]');
+      this.logger.debug("[Start updating widget's delete state]");
     }
 
     if (!resultSet.deleteWidgetIds.length) {
       return;
     }
     this.logger.info('[ ======> Start batch deleting widgets]');
-    await manager.createQueryBuilder()
+    await manager
+      .createQueryBuilder()
       .update(WidgetEntity)
       .set({ isDeleted: true })
       .where('widget_id IN(:...widgetIds)', { widgetIds: resultSet.deleteWidgetIds })
@@ -179,18 +172,21 @@ export class MirrorOtService {
     const beginTime = +new Date();
     this.logger.info(`[${remoteChangeset.resourceId}] ====> Start storing changeset......`);
     const { userId } = commonData;
-    await manager.createQueryBuilder()
+    await manager
+      .createQueryBuilder()
       .insert()
       .into(ResourceChangesetEntity)
-      .values([{
-        id: IdWorker.nextId().toString(),
-        messageId: remoteChangeset.messageId,
-        resourceId: remoteChangeset.resourceId,
-        resourceType: remoteChangeset.resourceType,
-        operations: remoteChangeset.operations,
-        revision: remoteChangeset.revision,
-        createdBy: userId,
-      }])
+      .values([
+        {
+          id: IdWorker.nextId().toString(),
+          messageId: remoteChangeset.messageId,
+          resourceId: remoteChangeset.resourceId,
+          resourceType: remoteChangeset.resourceType,
+          operations: remoteChangeset.operations,
+          revision: remoteChangeset.revision,
+          createdBy: userId,
+        },
+      ])
       .updateEntity(false)
       .execute();
     const endTime = +new Date();

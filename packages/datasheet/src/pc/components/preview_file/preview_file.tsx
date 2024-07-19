@@ -1,5 +1,3 @@
-
-
 import { useKeyPress, useMount, useToggle, useUnmount } from 'ahooks';
 import classNames from 'classnames';
 
@@ -70,7 +68,7 @@ const PreviewFileModal: React.FC<React.PropsWithChildren<IPreviewFileModal>> = (
   const dispatch = useAppDispatch();
   const { screenIsAtMost } = useResponsive();
   const isMobile = screenIsAtMost(ScreenSize.md);
-  const { IS_ENTERPRISE } =getEnvVariables();
+  const { IS_ENTERPRISE } = getEnvVariables();
 
   const _spaceId = spaceId || shareInfo?.spaceId || getEnvVariables().TEMPLATE_SPACE_ID!;
   useEffect(() => {

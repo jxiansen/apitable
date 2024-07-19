@@ -1,5 +1,3 @@
-
-
 import { IField } from '@apitable/core';
 import { ApiTipId } from 'shared/exception';
 import { IFieldValue } from 'shared/interfaces';
@@ -8,7 +6,6 @@ import { IFieldValue } from 'shared/interfaces';
  * Field validation interface
  */
 export interface IFieldValidatorInterface {
-
   /**
    * Return `string` for failed validation, return `null` for passed validation
    *

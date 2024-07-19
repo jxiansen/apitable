@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { ISelectFieldOption } from '@apitable/core';
 import { OptionSetting } from './enum';

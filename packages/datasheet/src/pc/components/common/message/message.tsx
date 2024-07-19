@@ -1,5 +1,3 @@
-
-
 import { message } from 'antd';
 import { ArgsProps, ConfigOptions } from 'antd/lib/message';
 import { Strings, t } from '@apitable/core';

@@ -1,5 +1,3 @@
-
-
 export enum EmitterEventName {
   ViewMouseDown,
   ViewClick,

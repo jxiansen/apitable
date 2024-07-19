@@ -1,5 +1,3 @@
-
-
 import { difference } from 'lodash';
 import { forwardRef, useRef, useContext, useCallback } from 'react';
 import * as React from 'react';
@@ -282,7 +280,7 @@ export const FieldEditorBase: React.ForwardRefRenderFunction<IEditor, IFormField
         </ComputedFieldWrapper>
       );
     case FieldType.Button:
-      return (<>/</>);
+      return <>/</>;
     case FieldType.WorkDoc:
       if (isMobile) {
         return <ComputedFieldWrapper className={styles.formWorkdoc} title={t(Strings.tooltip_edit_form_workdoc_field)} />;

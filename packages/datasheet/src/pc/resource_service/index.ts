@@ -1,5 +1,3 @@
-
-
 import { Store } from 'redux';
 import { IReduxState } from '@apitable/core';
 import { onError } from 'pc/resource_service/error';

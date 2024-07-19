@@ -38,7 +38,7 @@ class EventMessage {
 
   mountWidget(widgetId: string) {
     this.widgets.set(widgetId, {
-      subscribeViews: []
+      subscribeViews: [],
     });
   }
 
@@ -78,18 +78,22 @@ class EventMessage {
   }
 
   onSyncWidgetSubscribeView(widgetId: string, callback: (subscribeViews: ISubscribeView[]) => void) {
-    this.on(MessageType.WIDGET_SUBSCRIBE_CHANGE, interceptor((subscribeViews: ISubscribeView[]) => {
-      const widget = this.widgets.get(widgetId);
-      if (widget) {
-        const currentSubscribeViews = widget.subscribeViews;
-        this.widgets.set(widgetId, {
-          ...widget,
-          subscribeViews
-        });
-        const newSubscribeViews = differenceBy(subscribeViews, currentSubscribeViews, ({ datasheetId, viewId }) => `${datasheetId}-${viewId}`);
-        callback(newSubscribeViews);
-      }
-    }), widgetId);
+    this.on(
+      MessageType.WIDGET_SUBSCRIBE_CHANGE,
+      interceptor((subscribeViews: ISubscribeView[]) => {
+        const widget = this.widgets.get(widgetId);
+        if (widget) {
+          const currentSubscribeViews = widget.subscribeViews;
+          this.widgets.set(widgetId, {
+            ...widget,
+            subscribeViews,
+          });
+          const newSubscribeViews = differenceBy(subscribeViews, currentSubscribeViews, ({ datasheetId, viewId }) => `${datasheetId}-${viewId}`);
+          callback(newSubscribeViews);
+        }
+      }),
+      widgetId
+    );
   }
 
   syncWidgetSubscribeView(subscribeViews: ISubscribeView[], widgetId: string) {
@@ -107,13 +111,17 @@ class EventMessage {
   syncCmd(cmdOptions: ICollaCommandOptions, widgetId: string): Promise<ICollaCommandExecuteResult<any>> {
     this.emit(MessageType.WIDGET_SYNC_COMMAND, cmdOptions);
     return new Promise((resolve, reject) => {
-      this.on(MessageType.MAIN_SYNC_COMMAND_RESULT, interceptor((res: IResponse<ICollaCommandExecuteResult<any>>) => {
-        if (res.success && res.data) {
-          resolve(res.data);
-          return;
-        }
-        reject(res.message);
-      }), widgetId);
+      this.on(
+        MessageType.MAIN_SYNC_COMMAND_RESULT,
+        interceptor((res: IResponse<ICollaCommandExecuteResult<any>>) => {
+          if (res.success && res.data) {
+            resolve(res.data);
+            return;
+          }
+          reject(res.message);
+        }),
+        widgetId
+      );
     });
   }
 

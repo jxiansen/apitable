@@ -1,5 +1,3 @@
-
-
 import React, { Fragment } from 'react';
 import { Tooltip } from './tooltip';
 import { IWrapperTooltip } from './interface';
@@ -8,11 +6,7 @@ export const WrapperTooltip: React.FC<React.PropsWithChildren<IWrapperTooltip>> 
   const { tip, wrapper, children } = props;
 
   if (wrapper) {
-    return <Tooltip content={tip}>
-      {children}
-    </Tooltip>;
+    return <Tooltip content={tip}>{children}</Tooltip>;
   }
-  return <Fragment>
-    {children}
-  </Fragment>;
+  return <Fragment>{children}</Fragment>;
 };

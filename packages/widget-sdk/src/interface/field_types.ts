@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType as CoreFieldType, DateFormat, TimeFormat } from 'core';
 
 /**
@@ -340,7 +338,7 @@ export enum FieldType {
    * ```
    */
   MagicLink = CoreFieldType.MagicLink,
-  TwoWayLink= CoreFieldType.TwoWayLink,
+  TwoWayLink = CoreFieldType.TwoWayLink,
   /**
    * A valid URL.
    *
@@ -964,27 +962,27 @@ export enum FieldType {
    *
    */
   WorkDoc = CoreFieldType.WorkDoc,
-    /**
-     * Button click trigger automation.
-     *
-     * ** Cell read format **
-     *
-     * n/a
-     *
-     * ** Cell write format **
-     *
-     * n/a
-     *
-     * ** Field property read format **
-     *
-     * n/a
-     *
-     * ** Field property write format **
-     *
-     * n/a
-     *
-     */
-  Button = CoreFieldType.Button
+  /**
+   * Button click trigger automation.
+   *
+   * ** Cell read format **
+   *
+   * n/a
+   *
+   * ** Cell write format **
+   *
+   * n/a
+   *
+   * ** Field property read format **
+   *
+   * n/a
+   *
+   * ** Field property write format **
+   *
+   * n/a
+   *
+   */
+  Button = CoreFieldType.Button,
 }
 
 export interface IAttachmentValue {

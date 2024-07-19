@@ -2,7 +2,10 @@ import { IReduxState, IViewDerivation, IViewProperty } from 'exports/store/inter
 import { ViewDerivateBase } from './view_derivate_base';
 
 export class ViewDerivateOrgChart extends ViewDerivateBase {
-  constructor(protected override state: IReduxState, public override datasheetId: string) {
+  constructor(
+    protected override state: IReduxState,
+    public override datasheetId: string
+  ) {
     super(state, datasheetId);
   }
 

@@ -21,10 +21,8 @@ import { getModalTitle, getPlaceholder } from './utils';
 import styles from './style.module.less';
 
 export const SearchPanelMain: React.FC<ISearchPanelProps> = (props) => {
-  const {
-    hidePanel, noCheckPermission, options, onNodeSelect,
-    directClickMode, showMirrorNode, localState, localDispatch, secondConfirmType
-  } = props;
+  const { hidePanel, noCheckPermission, options, onNodeSelect, directClickMode, showMirrorNode, localState, localDispatch, secondConfirmType } =
+    props;
 
   const colors = useThemeColors();
   const { embedId } = useAppSelector((state) => state.pageParams);
@@ -42,7 +40,7 @@ export const SearchPanelMain: React.FC<ISearchPanelProps> = (props) => {
   const isMobile = screenIsAtMost(ScreenSize.md);
   const editorRef = useRef<{
     focus: () => void;
-      } | null>(null);
+  } | null>(null);
 
   const onCancelClick = () => {
     localDispatch({ searchValue: '' });
@@ -50,7 +48,7 @@ export const SearchPanelMain: React.FC<ISearchPanelProps> = (props) => {
   };
 
   let needSelectView = secondConfirmType === SecondConfirmType.Form || secondConfirmType === SecondConfirmType.Chat;
-  if(directClickMode == true) {
+  if (directClickMode == true) {
     needSelectView = false;
   }
 
@@ -62,17 +60,15 @@ export const SearchPanelMain: React.FC<ISearchPanelProps> = (props) => {
 
   useEffect(() => {
     if (!needSelectView) {
-
       if (datasheet) {
         props.onChange({ datasheetId: datasheet.id });
       }
 
-      if(directClickMode) {
-        if(localState.currentFormId){
+      if (directClickMode) {
+        if (localState.currentFormId) {
           props.onChange({ formId: localState.currentFormId });
         }
-      }else {
-
+      } else {
         if (form) {
           props.onChange({ formId: form.id });
         }
@@ -164,21 +160,24 @@ export const SearchPanelMain: React.FC<ISearchPanelProps> = (props) => {
         onSwitcherChange={(val) => localDispatch({ onlyShowEditableNode: val })}
         onCancelClick={onCancelClick}
         placeholder={getPlaceholder(options)}
-        checkboxText={options?.needPermission === 'manageable'? t(Strings.hide_unmanageable_files): t(Strings.hide_unusable_sheet)}
+        checkboxText={options?.needPermission === 'manageable' ? t(Strings.hide_unmanageable_files) : t(Strings.hide_unusable_sheet)}
         checked={localState.onlyShowEditableNode}
         value={localState.searchValue}
         switchVisible={secondConfirmType !== SecondConfirmType.Form}
       />
-      {!localState.showSearch && !embedId && <FolderBreadcrumb parents={localState.parents} onNodeClick={(e, id) => {
-        if (e === 'Datasheet') {
-          onNodeSelect?.({
-            datasheetId: id
-          });
-        }
-        onNodeClick(e, id);
-      }}
-      />
-      }
+      {!localState.showSearch && !embedId && (
+        <FolderBreadcrumb
+          parents={localState.parents}
+          onNodeClick={(e, id) => {
+            if (e === 'Datasheet') {
+              onNodeSelect?.({
+                datasheetId: id,
+              });
+            }
+            onNodeClick(e, id);
+          }}
+        />
+      )}
       {localState.showSearch ? (
         <SearchResult
           searchResult={localState.searchResult}
@@ -186,14 +185,14 @@ export const SearchPanelMain: React.FC<ISearchPanelProps> = (props) => {
           options={options}
           onlyShowAvailable={localState.onlyShowEditableNode}
           onNodeClick={(e, id) => {
-            if(e==='Form') {
+            if (e === 'Form') {
               onNodeSelect?.({
-                formId: id
+                formId: id,
               });
             }
-            if(e==='Datasheet') {
+            if (e === 'Datasheet') {
               onNodeSelect?.({
-                datasheetId: id
+                datasheetId: id,
               });
             }
             onNodeClick(e, id);
@@ -212,14 +211,14 @@ export const SearchPanelMain: React.FC<ISearchPanelProps> = (props) => {
           noCheckPermission={noCheckPermission}
           isSelectView={secondConfirmType === SecondConfirmType.Form}
           onNodeClick={(e, id) => {
-            if(e==='Form') {
+            if (e === 'Form') {
               onNodeSelect?.({
-                formId: id
+                formId: id,
               });
             }
-            if(e==='Datasheet') {
+            if (e === 'Datasheet') {
               onNodeSelect?.({
-                datasheetId: id
+                datasheetId: id,
               });
             }
             onNodeClick(e, id);

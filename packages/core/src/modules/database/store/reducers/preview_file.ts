@@ -1,5 +1,3 @@
-
-
 import { produce } from 'immer';
 import { IPreviewFile, ISetPreviewDefaultAction, ISetPreviewFileAction, ISetPreviewFileCellValueAction } from '../../../../exports/store/interfaces';
 import { SET_PREVIEW_DEFAULT_ACTIVE, SET_PREVIEW_FILE, SET_PREVIEW_FILE_CELL_ACTIVE } from '../../../shared/store/action_constants';
@@ -17,18 +15,16 @@ const defaultState: IPreviewFile = {
 
 type IPreviewFileActions = ISetPreviewFileAction | ISetPreviewFileCellValueAction | ISetPreviewDefaultAction;
 
-export const previewFile = produce(
-  (state: IPreviewFile = defaultState, action: IPreviewFileActions) => {
-    switch (action.type) {
-      case SET_PREVIEW_FILE:
-        return { ...action.payload };
-      case SET_PREVIEW_FILE_CELL_ACTIVE:
-        state.cellValue = action.payload;
-        return state;
-      case SET_PREVIEW_DEFAULT_ACTIVE:
-        return defaultState;
-      default:
-        return state;
-    }
-  }, defaultState
-);
+export const previewFile = produce((state: IPreviewFile = defaultState, action: IPreviewFileActions) => {
+  switch (action.type) {
+    case SET_PREVIEW_FILE:
+      return { ...action.payload };
+    case SET_PREVIEW_FILE_CELL_ACTIVE:
+      state.cellValue = action.payload;
+      return state;
+    case SET_PREVIEW_DEFAULT_ACTIVE:
+      return defaultState;
+    default:
+      return state;
+  }
+}, defaultState);

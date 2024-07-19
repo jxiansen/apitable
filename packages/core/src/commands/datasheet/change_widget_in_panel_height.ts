@@ -1,5 +1,3 @@
-
-
 import { ICollaCommandDef, ICollaCommandExecuteContext, ExecuteResult } from 'command_manager';
 import { getResourceWidgetPanels } from 'modules/database/store/selectors/resource';
 import { DatasheetActions } from 'commands_actions/datasheet';
@@ -23,20 +21,30 @@ export const changeWidgetInPanelHeight: ICollaCommandDef<IChangeWidgetInPanelHei
     const { widgetId, resourceId, resourceType, panelId, widgetHeight } = options;
     const widgetPanels = getResourceWidgetPanels(state, resourceId, resourceType);
 
-    if (!widgetPanels) { return null; }
+    if (!widgetPanels) {
+      return null;
+    }
 
-    const widgetPanelIndex = widgetPanels.findIndex(item => item.id === panelId);
+    const widgetPanelIndex = widgetPanels.findIndex((item) => item.id === panelId);
 
-    if (widgetPanelIndex < 0) { return null; }
+    if (widgetPanelIndex < 0) {
+      return null;
+    }
 
     const widgets = widgetPanels[widgetPanelIndex]!.widgets;
-    const widgetIndex = widgets.findIndex(item => item.id === widgetId);
+    const widgetIndex = widgets.findIndex((item) => item.id === widgetId);
 
-    if (widgetIndex < 0) { return null; }
+    if (widgetIndex < 0) {
+      return null;
+    }
 
-    const changeWidgetHeightAction = DatasheetActions.changeWidgetHeight2Action(
-      state, { widgetIndex, widgetPanelIndex, widgetHeight, resourceId, resourceType }
-    );
+    const changeWidgetHeightAction = DatasheetActions.changeWidgetHeight2Action(state, {
+      widgetIndex,
+      widgetPanelIndex,
+      widgetHeight,
+      resourceId,
+      resourceType,
+    });
 
     if (!changeWidgetHeightAction) {
       return null;

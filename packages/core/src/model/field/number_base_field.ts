@@ -1,5 +1,3 @@
-
-
 import { IReduxState } from '../../exports/store/interfaces';
 import { isNumber } from 'lodash';
 import { ICellValue } from 'model/record';
@@ -45,7 +43,7 @@ export const numberFormat = (cv: ICellValue, formatting?: IComputedFieldFormatti
     if (cv == null) {
       return null;
     }
-    const cellString = numberToShow(times((cv as number), 100), precision);
+    const cellString = numberToShow(times(cv as number, 100), precision);
     return cellString == null ? null : cellString + '%';
   }
   const cellString = numberToShow(cv as number, precision);
@@ -53,7 +51,10 @@ export const numberFormat = (cv: ICellValue, formatting?: IComputedFieldFormatti
 };
 
 export abstract class NumberBaseField extends Field {
-  constructor(public override field: ICommonNumberField, state: IReduxState) {
+  constructor(
+    public override field: ICommonNumberField,
+    state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -63,7 +64,7 @@ export abstract class NumberBaseField extends Field {
       defaultValue: defaultValue || undefined,
       precision,
       commaStyle: commaStyle || undefined,
-      symbol: symbol || undefined
+      symbol: symbol || undefined,
     };
   }
 
@@ -147,8 +148,7 @@ export abstract class NumberBaseField extends Field {
     if (cellValue2 === null) {
       return 1;
     }
-    return cellValue1 === cellValue2 ?
-      0 : (cellValue1 > cellValue2 ? 1 : -1);
+    return cellValue1 === cellValue2 ? 0 : cellValue1 > cellValue2 ? 1 : -1;
   }
 
   override compare(cellValue1: number, cellValue2: number): number {

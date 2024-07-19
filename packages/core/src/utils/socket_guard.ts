@@ -1,16 +1,10 @@
-
-
 export const socketGuard = () => {
-  return function(
-    _target: any,
-    _propertyKey: string | symbol,
-    descriptor: PropertyDescriptor,
-  ): PropertyDescriptor {
+  return function (_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor): PropertyDescriptor {
     const originalMethod = descriptor.value;
     let ignoreSocketError = false;
     let timeout: NodeJS.Timeout;
     const socketErrCodes = [50000, 50001];
-    descriptor.value = function(this: any, ...arg: any[]): any {
+    descriptor.value = function (this: any, ...arg: any[]): any {
       if (!this.io.socket.connected) {
         return (() => {})();
       }

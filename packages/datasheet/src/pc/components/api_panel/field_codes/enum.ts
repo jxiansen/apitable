@@ -1,5 +1,3 @@
-
-
 export enum CodeLanguage {
   Curl,
   Js,

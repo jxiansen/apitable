@@ -1,5 +1,3 @@
-
-
 export * from './cell';
 export * from './field_head';
 export * from './operation_area';

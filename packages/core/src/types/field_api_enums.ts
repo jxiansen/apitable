@@ -1,5 +1,3 @@
-
-
 export enum APIMetaFieldType {
   NotSupport = 'NotSupport',
   Text = 'Text',
@@ -39,7 +37,7 @@ export enum APIMetaViewType {
   Kanban = 'Kanban',
   Gantt = 'Gantt',
   Calendar = 'Calendar',
-  Architecture = 'Architecture'
+  Architecture = 'Architecture',
 }
 
 export enum APIMetaMemberType {
@@ -48,9 +46,9 @@ export enum APIMetaMemberType {
 }
 
 /**
-  * Field Meta describes cell data. Columns can be read, that is, cells can be read. Cell permissions and column permissions are strongly related.
-  * Permission level: Manage > Edit > Read
-  */
+ * Field Meta describes cell data. Columns can be read, that is, cells can be read. Cell permissions and column permissions are strongly related.
+ * Permission level: Manage > Edit > Read
+ */
 export enum APIMetaFieldPermissionLevel {
   Read = 'Read', // read cell
   Edit = 'Edit', // write cell
@@ -67,5 +65,5 @@ export enum APIMetaFieldPropertyFormatEnums {
 export enum TSymbolAlign {
   Default = 'Default',
   Left = 'Left',
-  Right = 'Right'
+  Right = 'Right',
 }

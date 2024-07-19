@@ -14,9 +14,14 @@
  */
 
 import { lightColors } from '@apitable/components';
-import { Api,
+import {
+  Api,
   // @ts-ignore
-  BillingConfig, StoreActions, Strings, t } from '@apitable/core';
+  BillingConfig,
+  StoreActions,
+  Strings,
+  t,
+} from '@apitable/core';
 import { store } from 'pc/store';
 
 const GradesColor = {
@@ -28,7 +33,9 @@ const GradesColor = {
   Dingtalk_Enterprise: lightColors.rc01,
 };
 export const getBillingInfo = async (spaceId: string) => {
-  const { data: { success, data } } = await Api.subscribeInfo(spaceId); // Request subscription content.
+  const {
+    data: { success, data },
+  } = await Api.subscribeInfo(spaceId); // Request subscription content.
   if (!success) {
     return;
   }
@@ -42,12 +49,11 @@ export const getBillingInfo = async (spaceId: string) => {
     deadline: deadline || -1,
     productName: t(Strings[productI18nName]),
     productColor: GradesColor[product], // Subscription levels correspond to theme colours
-
   };
 };
 
 export const updateSubscription = (spaceId: string) => {
-  getBillingInfo(spaceId).then(data => {
+  getBillingInfo(spaceId).then((data) => {
     store.dispatch(StoreActions.updateSubscription(data));
   });
 };

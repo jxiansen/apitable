@@ -1,5 +1,3 @@
-
-
 export enum Method {
   Push,
   Replace,

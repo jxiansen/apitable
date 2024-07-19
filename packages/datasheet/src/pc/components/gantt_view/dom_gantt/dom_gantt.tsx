@@ -1,5 +1,3 @@
-
-
 import { FC, useContext } from 'react';
 import { isMobile as isTouchDevice } from 'react-device-detect';
 import { useDispatch } from 'react-redux';

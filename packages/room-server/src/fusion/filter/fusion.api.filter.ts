@@ -1,5 +1,3 @@
-
-
 import {
   ApiTipConstant,
   AstNode,
@@ -98,7 +96,7 @@ export class FusionApiFilter {
       filedMap = keyBy(filedMap, 'name');
     }
     if (fields && fields.length) {
-      fields.forEach(field => {
+      fields.forEach((field) => {
         if (filedMap[field]) {
           map[field] = filedMap[field]!;
         }
@@ -132,7 +130,7 @@ export class FusionApiFilter {
               ...state.previewFile,
               // NOTE Funtions cannot be passed between worker threads. Since this function is not used in formula evaluation,
               // we simply remove it.
-              onChange: (undefined as any) as () => void,
+              onChange: undefined as any as () => void,
             },
           },
         },
@@ -189,7 +187,7 @@ export class FusionApiFilter {
       }, []);
     }
     // If you do not specify a view ID, all columns with permissions are returned
-    return Object.keys(fieldMap).map(fieldId => {
+    return Object.keys(fieldMap).map((fieldId) => {
       return { fieldId: fieldId };
     });
   }

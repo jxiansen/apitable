@@ -1,5 +1,3 @@
-
-
 export const copy = (text: string, editorData?: string) => {
   const handleCopy = (e: ClipboardEvent) => {
     e.clipboardData?.setData('text/plain', text);

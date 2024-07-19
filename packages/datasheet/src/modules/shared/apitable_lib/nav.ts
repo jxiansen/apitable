@@ -1,5 +1,3 @@
-
-
 /*
  * Left navigation bar
  *

@@ -1,5 +1,3 @@
-
-
 import { ArrayFieldTemplateProps } from '@rjsf/core';
 import { ArrowDownOutlined, ArrowUpOutlined, DeleteOutlined } from '@apitable/icons';
 import { Button } from 'components/button';
@@ -24,27 +22,14 @@ const ArrayFieldItem = (props: IArrayFieldItem) => {
       {props.hasToolbar && (
         <>
           {(props.hasMoveUp || props.hasMoveDown) && (
-            <IconButton
-              disabled={isUpDisable}
-              size="small"
-              onClick={props.onReorderClick(props.index, props.index - 1)}
-              icon={ArrowUpOutlined}
-            />
+            <IconButton disabled={isUpDisable} size="small" onClick={props.onReorderClick(props.index, props.index - 1)} icon={ArrowUpOutlined} />
           )}
 
           {(props.hasMoveUp || props.hasMoveDown) && (
-            <IconButton
-              disabled={isDownDisable}
-              onClick={props.onReorderClick(props.index, props.index + 1)}
-              icon={ArrowDownOutlined}
-            />
+            <IconButton disabled={isDownDisable} onClick={props.onReorderClick(props.index, props.index + 1)} icon={ArrowDownOutlined} />
           )}
           {props.hasRemove && (
-            <IconButton
-              disabled={props.disabled || props.readonly}
-              onClick={props.onDropIndexClick(props.index)}
-              icon={DeleteOutlined}
-            />
+            <IconButton disabled={props.disabled || props.readonly} onClick={props.onDropIndexClick(props.index)} icon={DeleteOutlined} />
           )}
         </>
       )}
@@ -96,12 +81,16 @@ export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
 
   return (
     <div>
-      {items.map(element => <ArrayFieldItem {...element} hasRemove={hasRemove} />)}
+      {items.map((element) => (
+        <ArrayFieldItem {...element} hasRemove={hasRemove} />
+      ))}
       {addable && (
         <div>
-          <Button onClick={onAddClick} size="small" >+ New</Button>
+          <Button onClick={onAddClick} size="small">
+            + New
+          </Button>
         </div>
       )}
-    </div >
+    </div>
   );
 };

@@ -9,29 +9,29 @@ import { getSnapshot } from 'store';
 
 /**
  * Datasheet operations
- * 
+ *
  * - {@link id} The unique ID of the datasheet.
- * 
+ *
  * - {@link name} The name of the datasheet.
- * 
+ *
  * - {@link url} The url of the datasheet.
- * 
+ *
  * - {@link description} The description of the Datasheet.
- * 
+ *
  * - {@link views}: All views of the datasheet.
- * 
+ *
  * - {@link fields}: All fields of the datasheet.
- * 
+ *
  * - {@link getView}: Get the specified view in the datasheet.
- * 
+ *
  * - {@link getField}: Get the specified field in the datasheet.
- * 
+ *
  * - {@link createFieldAsync}: Create a new field.
- * 
+ *
  * - {@link deleteFieldAsync}: Delete the specified field.
- * 
+ *
  * - {@link getRecordAsync}: Get the record by record ID in the datasheet.
- * 
+ *
  * - {@link getRecordsAsync}: Batch get records in the datasheet.
  *
  * - {@link createRecordAsync}: Create a new record with the specified cell values.
@@ -57,7 +57,7 @@ export class Datasheet {
    */
   constructor(
     private datasheetId: string,
-    private wCtx: IWidgetContext,
+    private wCtx: IWidgetContext
   ) {
     this.modalDatasheet = new ModelDatasheet(datasheetId, wCtx);
     this.datasheetData = wCtx.widgetStore?.getState().datasheetMap[this.datasheetId];
@@ -65,7 +65,7 @@ export class Datasheet {
 
   /**
    * The unique ID of the datasheet.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -80,7 +80,7 @@ export class Datasheet {
 
   /**
    * The name of the datasheet.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -90,12 +90,12 @@ export class Datasheet {
    * ```
    */
   public get name() {
-    return this.datasheetData?.datasheet?.datasheetName; 
+    return this.datasheetData?.datasheet?.datasheetName;
   }
 
   /**
    * The description of the datasheet.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -110,7 +110,7 @@ export class Datasheet {
 
   /**
    * The url of the datasheet.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -124,7 +124,7 @@ export class Datasheet {
 
   /**
    * All views of the datasheet.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -136,12 +136,12 @@ export class Datasheet {
   public get views(): Array<View> {
     const state = this.wCtx.widgetStore.getState() as unknown as IReduxState;
     const viewList = Selectors.getViewsList(state, this.datasheetId);
-    return viewList.map(view => new View(this.datasheetId ,this.wCtx, view));
+    return viewList.map((view) => new View(this.datasheetId, this.wCtx, view));
   }
 
   /**
    * All fields of the datasheet.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -162,9 +162,9 @@ export class Datasheet {
 
   /**
    * Get the specified view in the datasheet.
-   * 
+   *
    * @param viewKey Name or ID of the view
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -188,14 +188,14 @@ export class Datasheet {
     if (!finalView) {
       return null;
     }
-    return new View(this.datasheetId ,this.wCtx, finalView);
+    return new View(this.datasheetId, this.wCtx, finalView);
   }
 
   /**
    * Get the specified field in the datasheet.
-   * 
+   *
    * @param fieldKey Name or ID of the field.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -226,9 +226,9 @@ export class Datasheet {
    * @param name The name of the field.
    * @param type The type of the field.
    * @param property The property of the field.
-   * 
+   *
    * @returns
-   * 
+   *
    * #### Description
    *
    * Refer to {@link FieldType} for supported field types, the write format for property, and other specifics for certain field types.
@@ -251,7 +251,7 @@ export class Datasheet {
    * @param conversion
    * When deleting a field as an associated field,
    * mark whether the associated field of the associated datasheet is deleted or converted to text, the default is Converted to a text field.
-   * 
+   *
    * @returns
    *
    * #### Description
@@ -271,7 +271,7 @@ export class Datasheet {
 
   /**
    * Get the record by record ID in the datasheet.
-   * 
+   *
    * @param recordId the ID of the record.
    * @returns
    *
@@ -287,11 +287,11 @@ export class Datasheet {
 
   /**
    * Batch get records in the datasheet.
-   * 
+   *
    * @param options.recordIds List of record IDs
-   * 
+   *
    * @param options.sorts Which fields the records need to be sorted by.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -300,12 +300,7 @@ export class Datasheet {
    * console.log(myDatasheet.getRecordsAsync({ recordIds: [myRecordId01, myRecordId02] })); // => [Record, Record]
    * ```
    */
-  public getRecordsAsync(
-    options?: {
-      recordIds?: string[],
-      sorts?: ISortedField[],
-    }
-  ) {
+  public getRecordsAsync(options?: { recordIds?: string[]; sorts?: ISortedField[] }) {
     const state = this.wCtx.widgetStore.getState() as unknown as IReduxState;
     const currentView = Selectors.getCurrentView(state, this.datasheetId);
     const finalView = currentView || Selectors.getViewsList(state, this.datasheetId)[0];
@@ -317,7 +312,7 @@ export class Datasheet {
       finalRows = viewDerivation.visibleRows;
     } else {
       const { recordIds } = options;
-      finalRows = recordIds?.map(recordId => ({ recordId }));
+      finalRows = recordIds?.map((recordId) => ({ recordId }));
     }
 
     const sorts = options?.sorts;
@@ -376,7 +371,7 @@ export class Datasheet {
 
   /**
    * Create new records with the specified cell values.
-   * 
+   *
    * @param records Array of objects with a fields key mapping fieldId to value for that field.
    * @param insertPosition Position to insert in the view.
    *
@@ -384,7 +379,7 @@ export class Datasheet {
    *
    * #### Description
    * Add multiple records and optionally specify its position in the view (inserted at the end by default).
-   * 
+   *
    * An error will be thrown when the user does not have permission to perform the operation or when the cell value format check does not pass.
    *
    * Refer to {@link FieldType} for cell value write formats.
@@ -416,11 +411,8 @@ export class Datasheet {
    * }
    * ```
    */
-  public async createRecordsAsync(
-    records: { [key: string]: any }[] = [], 
-    insertPosition?: IInsertPosition
-  ): Promise<string[]> {
-    const finalRecords = records.map(record => ({ valuesMap: record }));
+  public async createRecordsAsync(records: { [key: string]: any }[] = [], insertPosition?: IInsertPosition): Promise<string[]> {
+    const finalRecords = records.map((record) => ({ valuesMap: record }));
     return await this.modalDatasheet.addRecords(finalRecords, insertPosition);
   }
 
@@ -429,11 +421,11 @@ export class Datasheet {
    *
    * @param recordId The ID of the record.
    *
-   * @param valuesMap 
+   * @param valuesMap
    * key for fieldId, value for the contents of the cell object,
    * only need to pass to modify the value, do not need to modify the key value do not need to pass.
    * To empty a field, you need to pass key: null.
-   * @return 
+   * @return
    *
    * #### Description
    * Throws an error if the user does not have permission to update the given cell values in the record, or or recordId does not exist,
@@ -479,7 +471,7 @@ export class Datasheet {
    * }
    * ```
    */
-  public async updateRecordsAsync(records: { id: string, valuesMap: { [key: string]: any } }[]) {
+  public async updateRecordsAsync(records: { id: string; valuesMap: { [key: string]: any } }[]) {
     return await this.modalDatasheet.setRecords(records);
   }
 
@@ -511,7 +503,7 @@ export class Datasheet {
    *
    * @param recordIds Array of recordIds.
    * @returns
-   * 
+   *
    *
    * #### Description
    * Delete the given record by recordIds.

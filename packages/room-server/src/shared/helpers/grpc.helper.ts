@@ -1,5 +1,3 @@
-
-
 import { generateRandomString } from '@apitable/core';
 import { Metadata, MetadataValue } from '@grpc/grpc-js';
 import { TRACE_ID } from 'shared/common';

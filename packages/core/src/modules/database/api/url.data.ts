@@ -1,5 +1,3 @@
-
-
 // =============== Dashboard related =======================
 export const FETCH_DASHBOARD = '/dashboards/:dashboardId/dataPack';
 export const FETCH_SHARE_DASHBOARD = '/shares/:shareId/dashboards/:dashboardId/dataPck';

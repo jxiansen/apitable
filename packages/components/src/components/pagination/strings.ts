@@ -1,5 +1,3 @@
-
-
 export const Strings = {
   paginationTotal: {
     zh: '第 {start}-{end} 条/总共 {total} 条',
@@ -15,6 +13,6 @@ export const Strings = {
   },
   pageSize: {
     zh: '{val}条/一页',
-    en: '{val}/page'
-  }
+    en: '{val}/page',
+  },
 };

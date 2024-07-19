@@ -1,5 +1,3 @@
-
-
 import { Dispatch, SetStateAction } from 'react';
 import { Skeleton } from '@apitable/components';
 import { FormContainer } from '../form_container';

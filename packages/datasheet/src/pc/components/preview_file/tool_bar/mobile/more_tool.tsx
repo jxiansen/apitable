@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react';
 import * as React from 'react';
 import { LinkButton, useThemeColors } from '@apitable/components';

@@ -1,5 +1,3 @@
-
-
 import { Workbook } from 'exceljs';
 import React from 'react';
 import {
@@ -132,10 +130,10 @@ export const generateUserInfo = (
   if ('memberId' in item) {
     const title = spaceInfo
       ? getSocialWecomUnitName?.({
-        name: item.originName || item.memberName,
-        isModified: item.isMemberNameModified,
-        spaceInfo,
-      }) ||
+          name: item.originName || item.memberName,
+          isModified: item.isMemberNameModified,
+          spaceInfo,
+        }) ||
         item.originName ||
         item.memberName
       : item.memberName;

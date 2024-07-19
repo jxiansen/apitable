@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { Strings, t } from '@apitable/core';
 import { SearchOutlined } from '@apitable/icons';

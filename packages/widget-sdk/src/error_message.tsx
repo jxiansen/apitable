@@ -1,5 +1,3 @@
-
-
 import React, { FC } from 'react';
 import { StatusCode, Strings, t } from 'core';
 import { ThemeName } from '@apitable/components';
@@ -38,31 +36,35 @@ export const ErrorMessage: FC<IErrorMessageProps> = (props) => {
         width: '100%',
       }}
     >
-      <div style={{
-        width: '160px',
-        height: '120px',
-        margin: '0 auto',
-      }}>
-        <img src={widgetNoPermission.src} alt='' width={160} height={120} style={{ margin: '0 auto' }} />
+      <div
+        style={{
+          width: '160px',
+          height: '120px',
+          margin: '0 auto',
+        }}
+      >
+        <img src={widgetNoPermission.src} alt="" width={160} height={120} style={{ margin: '0 auto' }} />
       </div>
-      
+
       <p
         style={{
           textAlign: 'center',
           fontSize: 14,
         }}
       >
-        {
-          getErrorTip()
-        }，
-        <a href={t(Strings.dashboard_access_denied_help_link)} target="_blank" rel="noopener noreferrer" style={{
-          borderBottom: '1px solid',
-          paddingBottom: 2,
-        }}>
+        {getErrorTip()}，
+        <a
+          href={t(Strings.dashboard_access_denied_help_link)}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            borderBottom: '1px solid',
+            paddingBottom: 2,
+          }}
+        >
           {t(Strings.know_more)}
         </a>
       </p>
     </div>
   );
 };
-

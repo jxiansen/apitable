@@ -1,5 +1,3 @@
-
-
 import { useClickOutside } from '@huse/click-outside';
 import { Input } from 'antd';
 import classNames from 'classnames';

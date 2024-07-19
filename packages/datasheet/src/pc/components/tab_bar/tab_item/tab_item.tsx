@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { FC, useEffect, useRef } from 'react';
 import * as React from 'react';

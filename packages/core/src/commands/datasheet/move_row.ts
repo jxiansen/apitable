@@ -1,13 +1,8 @@
-
-
 import { isEmpty } from 'lodash';
 import { IJOTAction, jot } from 'engine/ot';
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { DropDirectionType } from 'modules/shared/store/constants';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getRowsIndexMap } from 'modules/database/store/selectors/resource/datasheet/rows_calc';
 
 import { ISetRecordOptions, setRecords } from './set_records';
@@ -50,7 +45,7 @@ export const moveRow: ICollaCommandDef<IMoveRowOptions> = {
       return null;
     }
 
-    if (!views.some(item => item.id === viewId)) {
+    if (!views.some((item) => item.id === viewId)) {
       throw new Error(t(Strings.error_move_row_failed_invalid_params));
     }
 
@@ -69,7 +64,7 @@ export const moveRow: ICollaCommandDef<IMoveRowOptions> = {
             originRowIndex,
             rowIndexMap: JSON.stringify(recordMap),
             recordIds: JSON.stringify(Object.keys(snapshot.recordMap)),
-            rows: JSON.stringify(snapshot.meta.views[0]!.rows)
+            rows: JSON.stringify(snapshot.meta.views[0]!.rows),
           },
         });
         return collected;

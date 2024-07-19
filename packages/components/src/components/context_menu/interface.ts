@@ -1,5 +1,3 @@
-
-
 import React, { MouseEvent } from 'react';
 
 export interface IContextMenuClickState {

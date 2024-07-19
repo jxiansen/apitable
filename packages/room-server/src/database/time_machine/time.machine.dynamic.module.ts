@@ -1,5 +1,3 @@
-
-
 import { DynamicModule, Module } from '@nestjs/common';
 import { TimeMachineBaseService } from 'database/time_machine/time.machine.service.base';
 import fs from 'fs';
@@ -9,17 +7,15 @@ import path from 'path';
   providers: [
     {
       provide: TimeMachineBaseService,
-      useClass: class TimeMachineService extends TimeMachineBaseService {
-      }
+      useClass: class TimeMachineService extends TimeMachineBaseService {},
     },
   ],
   exports: [
     {
       provide: TimeMachineBaseService,
-      useClass: class TimeMachineService extends TimeMachineBaseService {
-      }
+      useClass: class TimeMachineService extends TimeMachineBaseService {},
     },
-  ]
+  ],
 })
 export class TimeMachineDynamicModule {
   static forRoot(): DynamicModule {

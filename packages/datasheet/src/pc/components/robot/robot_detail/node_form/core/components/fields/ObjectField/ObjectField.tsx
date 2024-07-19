@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react';
 import { getObjectOperandProperty, isOperand, objectCombOperand } from '@apitable/core';
 import { ADDITIONAL_PROPERTY_FLAG } from '../../../const';
@@ -53,9 +51,9 @@ const ObjectField = (props: IFieldProps) => {
         _newFormData,
         errorSchema &&
           props.errorSchema && {
-          ...props.errorSchema,
-          [name]: errorSchema,
-        },
+            ...props.errorSchema,
+            [name]: errorSchema,
+          },
       );
     };
   };
@@ -102,9 +100,9 @@ const ObjectField = (props: IFieldProps) => {
         renamedObj,
         errorSchema &&
           props.errorSchema && {
-          ...props.errorSchema,
-          [value]: errorSchema,
-        },
+            ...props.errorSchema,
+            [value]: errorSchema,
+          },
       );
     };
   };

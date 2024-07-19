@@ -1,5 +1,3 @@
-
-
 import Enum from 'shared/enums/enum';
 
 export enum FusionApiVersion {

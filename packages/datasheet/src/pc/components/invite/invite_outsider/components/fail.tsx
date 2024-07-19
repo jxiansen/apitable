@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { t, Strings } from '@apitable/core';
 import { WarnOutlined } from '@apitable/icons';

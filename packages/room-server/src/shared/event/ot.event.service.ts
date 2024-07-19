@@ -1,5 +1,3 @@
-
-
 import { OPEventManager, OPEventNameEnums, IReduxState, OP2Event, IRemoteChangeset } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { IOtEventContext } from 'database/ot/interfaces/ot.interface';

@@ -36,7 +36,7 @@ describe('datasheet modal should return the correct result', () => {
     const { datasheet } = createContextDefault();
     expect(datasheet.id).toEqual(DEFAULT_DATASHEET_ID);
   });
-  test('test addRecord', async() => {
+  test('test addRecord', async () => {
     const { mockWidgetSdkData, cmdExecuteMock, datasheet } = createContextDefault({ needMock: true });
     const recordId = await datasheet.addRecord({});
     expect(getSnapshot(mockWidgetSdkData.widgetSdkData)?.recordMap[recordId]?.id).toBe(recordId);
@@ -44,10 +44,10 @@ describe('datasheet modal should return the correct result', () => {
     cmdExecuteMock?.mockRestore();
   });
 
-  test('test addRecords', async() => {
+  test('test addRecords', async () => {
     const { mockWidgetSdkData, cmdExecuteMock, datasheet } = createContextDefault({ needMock: true });
 
-    const recordIds = await datasheet.addRecords([{ valuesMap: {}}]);
+    const recordIds = await datasheet.addRecords([{ valuesMap: {} }]);
     const recordMap = getSnapshot(mockWidgetSdkData.widgetSdkData)!.recordMap;
 
     expect(recordIds.every((recId) => recordMap[recId])).toBe(true);
@@ -55,7 +55,7 @@ describe('datasheet modal should return the correct result', () => {
     cmdExecuteMock?.mockRestore();
   });
 
-  test('test setRecord', async() => {
+  test('test setRecord', async () => {
     const { mockWidgetSdkData, cmdExecuteMock, datasheet } = createContextDefault({ needMock: true });
 
     const primaryFieldId = getPrimaryFieldId(mockWidgetSdkData.widgetSdkData as any, DEFAULT_DATASHEET_ID)!;
@@ -71,12 +71,12 @@ describe('datasheet modal should return the correct result', () => {
     cmdExecuteMock?.mockRestore();
   });
 
-  test('test setRecords', async() => {
+  test('test setRecords', async () => {
     const { mockWidgetSdkData, cmdExecuteMock, datasheet } = createContextDefault({ needMock: true });
 
     const primaryFieldId = getPrimaryFieldId(mockWidgetSdkData.widgetSdkData as any, DEFAULT_DATASHEET_ID)!;
 
-    const recordIds = await datasheet.addRecords([{ valuesMap: { [primaryFieldId]: '1111' }}, { valuesMap: { [primaryFieldId]: '1111' }}]);
+    const recordIds = await datasheet.addRecords([{ valuesMap: { [primaryFieldId]: '1111' } }, { valuesMap: { [primaryFieldId]: '1111' } }]);
 
     await datasheet.setRecords(
       recordIds.map((recordId, i) => ({
@@ -84,7 +84,7 @@ describe('datasheet modal should return the correct result', () => {
         valuesMap: {
           [primaryFieldId]: i.toString(),
         },
-      })),
+      }))
     );
 
     const result = recordIds.every((recId, i) => {
@@ -97,7 +97,7 @@ describe('datasheet modal should return the correct result', () => {
     cmdExecuteMock?.mockRestore();
   });
 
-  test('test deleteRecord', async() => {
+  test('test deleteRecord', async () => {
     const { mockWidgetSdkData, cmdExecuteMock, datasheet } = createContextDefault({ needMock: true });
 
     const recordId = await datasheet.addRecord({});
@@ -109,10 +109,10 @@ describe('datasheet modal should return the correct result', () => {
     cmdExecuteMock?.mockRestore();
   });
 
-  test('test deleteRecords', async() => {
+  test('test deleteRecords', async () => {
     const { mockWidgetSdkData, cmdExecuteMock, datasheet } = createContextDefault({ needMock: true });
 
-    const recordIds = await datasheet.addRecords([{ valuesMap: {}}]);
+    const recordIds = await datasheet.addRecords([{ valuesMap: {} }]);
     await datasheet.deleteRecords(recordIds);
     const recordMap = getSnapshot(mockWidgetSdkData.widgetSdkData)!.recordMap;
     expect(recordIds.every((rec) => !recordMap[rec])).toBe(true);
@@ -120,7 +120,7 @@ describe('datasheet modal should return the correct result', () => {
     cmdExecuteMock?.mockRestore();
   });
 
-  test('test addField', async() => {
+  test('test addField', async () => {
     const { mockWidgetSdkData, cmdExecuteMock, datasheet } = createContextDefault({ needMock: true });
 
     const fieldId = await datasheet.addField('test field', FieldType.SingleText, null);
@@ -131,7 +131,7 @@ describe('datasheet modal should return the correct result', () => {
     cmdExecuteMock?.mockRestore();
   });
 
-  test('test deleteField', async() => {
+  test('test deleteField', async () => {
     const { mockWidgetSdkData, cmdExecuteMock, datasheet } = createContextDefault({ needMock: true });
 
     const fieldId = await datasheet.addField('test field', FieldType.SingleText, null);
@@ -164,7 +164,7 @@ describe('datasheet modal should return the correct result', () => {
           editable: false,
           rowCreatable: false,
         },
-      }),
+      })
     );
     const context = createSimpleContextWrapper({ mockWidgetSdkData });
 

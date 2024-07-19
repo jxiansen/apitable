@@ -1,5 +1,3 @@
-
-
 import { useAtomValue } from 'jotai';
 import * as React from 'react';
 import { memo, useEffect } from 'react';
@@ -20,7 +18,10 @@ export const RobotList = memo(() => {
   const canManageRobot = permissions.manageable;
 
   const datasheetId = useAppSelector(Selectors.getActiveDatasheetId);
-  const { state: { error, data: robotList }, api: { refresh } } = useAutomationList();
+  const {
+    state: { error, data: robotList },
+    api: { refresh },
+  } = useAutomationList();
 
   const { data: triggerTypes, loading: triggerTypesLoading } = useTriggerTypes();
   const { data: actionTypes, loading: actionTypesLoading } = useActionTypes();
@@ -35,52 +36,49 @@ export const RobotList = memo(() => {
     }
   }, [refresh, showModal]);
 
-  const {
-    canAddNewRobot,
-    disableTip,
-  } = useAddNewRobot();
+  const { canAddNewRobot, disableTip } = useAddNewRobot();
 
   if (error) return null;
   if (triggerTypesLoading || actionTypesLoading || triggerTypes.length === 0 || actionTypes.length === 0) {
-    return <Skeleton
-      count={3}
-      height="68px"
-      type="text"
-      circle={false}
-      style={{
-        marginBottom: 16,
-      }}
-    />;
+    return (
+      <Skeleton
+        count={3}
+        height="68px"
+        type="text"
+        circle={false}
+        style={{
+          marginBottom: 16,
+        }}
+      />
+    );
   }
 
   if (robotList?.length === 0) {
     return <RobotEmptyList />;
   }
 
-  const robotLength = robotList?.length ??0;
+  const robotLength = robotList?.length ?? 0;
   return (
-    <div style={{ width: '100%' }} >
-      {
-        robotList?.map((robot, index) => {
-          return (
-            <RobotListItemCard
-              index={index}
-              key={robot.robotId}
-              robotCardInfo={robot}
-              onNavigate={async () => {
-                await navigateAutomation(robot.resourceId, robot.robotId);
-              }}
-              readonly={!canManageRobot}
-            />
-          );
-        })
-      }
-      <OrTooltip tooltip={disableTip} tooltipEnable={robotLength >= ConfigConstant.MAX_ROBOT_COUNT_PER_DST} >
+    <div style={{ width: '100%' }}>
+      {robotList?.map((robot, index) => {
+        return (
+          <RobotListItemCard
+            index={index}
+            key={robot.robotId}
+            robotCardInfo={robot}
+            onNavigate={async () => {
+              await navigateAutomation(robot.resourceId, robot.robotId);
+            }}
+            readonly={!canManageRobot}
+          />
+        );
+      })}
+      <OrTooltip tooltip={disableTip} tooltipEnable={robotLength >= ConfigConstant.MAX_ROBOT_COUNT_PER_DST}>
         <NewItem
           height={64}
-          disabled={(!canAddNewRobot) || Boolean(robotLength >= ConfigConstant.MAX_ROBOT_COUNT_PER_DST)}
+          disabled={!canAddNewRobot || Boolean(robotLength >= ConfigConstant.MAX_ROBOT_COUNT_PER_DST)}
           onClick={async () => {
-            if(!canManageRobot) {
+            if (!canManageRobot) {
               return;
             }
 
@@ -88,9 +86,7 @@ export const RobotList = memo(() => {
             await refresh();
           }}
         >
-          {
-            t(Strings.new_automation)
-          }
+          {t(Strings.new_automation)}
         </NewItem>
       </OrTooltip>
     </div>

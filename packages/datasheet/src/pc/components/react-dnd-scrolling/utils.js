@@ -1,5 +1,3 @@
-
-
 export function noop() {}
 
 export function intBetween(min, max, val) {

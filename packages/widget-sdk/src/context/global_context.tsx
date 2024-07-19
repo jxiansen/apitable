@@ -1,5 +1,3 @@
-
-
 import { IGlobalContext } from 'interface';
 import React, { useState } from 'react';
 import { initGlobalContext } from '../store';
@@ -33,9 +31,7 @@ export const GlobalContextProvider: React.FC<React.PropsWithChildren<unknown>> =
 
   return (
     <_Provider store={globalContext.globalStore}>
-      <GlobalContext.Provider value={globalContext}>
-        {children}
-      </GlobalContext.Provider>
+      <GlobalContext.Provider value={globalContext}>{children}</GlobalContext.Provider>
     </_Provider>
   );
 };

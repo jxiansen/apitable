@@ -1,5 +1,3 @@
-
-
 import { IJOTAction, IOperation, OTActionName } from 'engine';
 import { IRecord, IRecordCellValue } from 'exports/store/interfaces';
 import { SegmentType } from 'types';
@@ -67,7 +65,7 @@ export const mockDefaultRecord: IRecord = {
 };
 
 export const mockOperationOfAddRecords = (
-  records: { id: string; rows: { view: number; index: number }[]; values?: IRecordCellValue }[],
+  records: { id: string; rows: { view: number; index: number }[]; values?: IRecordCellValue }[]
 ): IOperation => ({
   actions: records.flatMap(({ id, rows, values }) => [
     ...rows.map(
@@ -78,7 +76,7 @@ export const mockOperationOfAddRecords = (
           },
           n: OTActionName.ListInsert,
           p: ['meta', 'views', view, 'rows', index],
-        } as IJOTAction),
+        }) as IJOTAction
     ),
     {
       n: OTActionName.ObjectInsert,
@@ -98,6 +96,6 @@ export const mockOperationOfAddRecords = (
   fieldTypeMap: records.some(({ values }) => values && 'fld1' in values)
     ? { fld1: 1, fld2: 4 }
     : {
-      fld2: 4,
-    },
+        fld2: 4,
+      },
 });

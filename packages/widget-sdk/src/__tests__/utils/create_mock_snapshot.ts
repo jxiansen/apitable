@@ -11,6 +11,6 @@ export function createMockSnapshot(): ISnapshot {
       views: [],
     },
     recordMap: {},
-    datasheetId: 'dstMock'
+    datasheetId: 'dstMock',
   };
 }

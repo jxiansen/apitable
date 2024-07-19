@@ -1,13 +1,8 @@
-
-
 import Joi from 'joi';
 import { ICellValue } from '../record';
 import { Field } from './field';
 import { IFilterCondition, FOperator, IFilterCheckbox } from '../../types/view_types';
-import {
-  ICheckboxField, ICheckboxFieldProperty, IStandardValue,
-  FieldType, IField, BasicValueType,
-} from '../../types/field_types';
+import { ICheckboxField, ICheckboxFieldProperty, IStandardValue, FieldType, IField, BasicValueType } from '../../types/field_types';
 import { DatasheetActions } from '../../commands_actions/datasheet';
 import { isEmpty } from 'lodash';
 import { StatType } from './stat';
@@ -32,14 +27,7 @@ export class CheckboxField extends Field {
 
   static openWriteValueValueSchema = Joi.boolean().allow(null).required();
 
-  static _statTypeList = [
-    StatType.None,
-    StatType.CountAll,
-    StatType.Checked,
-    StatType.UnChecked,
-    StatType.PercentChecked,
-    StatType.PercentUnChecked,
-  ];
+  static _statTypeList = [StatType.None, StatType.CountAll, StatType.Checked, StatType.UnChecked, StatType.PercentChecked, StatType.PercentUnChecked];
 
   static _acceptFilterOperators = [FOperator.Is];
 
@@ -111,9 +99,11 @@ export class CheckboxField extends Field {
   cellValueToStdValue(cellValue: boolean): IStandardValue {
     return {
       sourceType: this.field.type,
-      data: [{
-        text: this.cellValueToString(cellValue) || '',
-      }],
+      data: [
+        {
+          text: this.cellValueToString(cellValue) || '',
+        },
+      ],
     };
   }
 
@@ -149,7 +139,7 @@ export class CheckboxField extends Field {
   }
 
   static _compare(cellValue1: ICellValue, cellValue2: ICellValue, _orderInCellValueSensitive?: boolean): number {
-    return Boolean(cellValue1) === Boolean(cellValue2) ? 0 : (Boolean(cellValue1) > Boolean(cellValue2) ? 1 : -1);
+    return Boolean(cellValue1) === Boolean(cellValue2) ? 0 : Boolean(cellValue1) > Boolean(cellValue2) ? 1 : -1;
   }
 
   override compare(cellValue1: ICellValue, cellValue2: ICellValue, orderInCellValueSensitive?: boolean): number {

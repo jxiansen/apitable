@@ -1,5 +1,3 @@
-
-
 import { shallowEqual, useSelector } from 'react-redux';
 import { FieldType, getNewId, IDeniedField, IDPrefix, ConfigConstant } from 'core';
 import { useMeta } from './use_meta';
@@ -15,7 +13,7 @@ import { getFieldMap, getFieldPermissionMap, getFieldRoleByFieldId } from 'store
  * Rerendering is triggered when a field property changes.
  *
  * If no ID is passed in, undefined is returned.
- * 
+ *
  * @param fieldId The ID for this field.
  * @returns
  *
@@ -29,19 +27,19 @@ import { getFieldMap, getFieldPermissionMap, getFieldRoleByFieldId } from 'store
  *   return <p>{field.name}</p>
  * }
  * ```
- * 
+ *
  */
 
 export function useField(fieldId: string | undefined): Field | undefined;
 
 /**
  * ## Support for loading the corresponding datasheet data field.
- * 
+ *
  * @param datasheet Datasheet instance, by {@link useDatasheet} get.
  * @param fieldId The ID for this field
  * @returns
  *
- * 
+ *
  * ### Example
  * ```js
  * import { useField, useDatasheet } from '@apitable/widget-sdk';
@@ -52,7 +50,7 @@ export function useField(fieldId: string | undefined): Field | undefined;
  *   const field = useField(datasheet, 'fldXXXXXXX');
  *   return <p>{field.name}</p>
  * }
- * 
+ *
  * ```
  */
 export function useField(datasheet: Datasheet | undefined, fieldId: string | undefined): Field | undefined;
@@ -63,14 +61,14 @@ export function useField(param1: Datasheet | string | undefined, param2?: string
   const fieldId = param1 instanceof Datasheet ? param2 : param1;
   const datasheetId = hasDatasheet ? (param1 as Datasheet).datasheetId : metaDatasheetId;
   const context = useContext<IWidgetContext>(WidgetContext);
-  const field = useSelector(state => {
+  const field = useSelector((state) => {
     if (!fieldId) {
       return;
     }
     return getFieldMap(state, datasheetId)?.[fieldId];
   }, shallowEqual);
 
-  const fieldRole = useSelector(state => {
+  const fieldRole = useSelector((state) => {
     const fieldPermissionMap = getFieldPermissionMap(state);
     if (!fieldId) {
       return;
@@ -78,7 +76,7 @@ export function useField(param1: Datasheet | string | undefined, param2?: string
     return getFieldRoleByFieldId(fieldPermissionMap, fieldId);
   });
 
-  // If fieldRole dose not exist, the field really dose not exist, 
+  // If fieldRole dose not exist, the field really dose not exist,
   // and if fieldRole is None, there is no permission to access
   return useMemo(() => {
     if (!datasheetId || !field) {

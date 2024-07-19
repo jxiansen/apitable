@@ -1,13 +1,8 @@
-
-
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { IJOTAction } from 'engine';
 import { IViewProperty } from '../../exports/store/interfaces';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { CollaCommandName } from '..';
 import { ResourceType } from 'types';
 import { manualSaveView } from 'commands/datasheet/manual_save_view';
@@ -16,7 +11,7 @@ export interface ISetViewAutoSave {
   cmd: CollaCommandName.SetViewAutoSave;
   viewId: string;
   autoSave: boolean;
-  viewProperty?: IViewProperty
+  viewProperty?: IViewProperty;
 }
 
 export const setViewAutoSave: ICollaCommandDef<ISetViewAutoSave> = {
@@ -56,7 +51,7 @@ export const setViewAutoSave: ICollaCommandDef<ISetViewAutoSave> = {
       resourceId: datasheetId,
       resourceType: ResourceType.Datasheet,
       actions,
-      fieldMapSnapshot
+      fieldMapSnapshot,
     };
   },
 };

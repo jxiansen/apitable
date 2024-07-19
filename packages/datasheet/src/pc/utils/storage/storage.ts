@@ -1,5 +1,3 @@
-
-
 import store from 'store2';
 import { ICalendarViewStatus, IGanttViewStatus, IOrgChartViewStatus, RecordVision } from '@apitable/core';
 import { IFieldDescCollapseStatus } from 'pc/components/expand_record/field_editor';

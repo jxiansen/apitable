@@ -1,5 +1,3 @@
-
-
 /**
  * Twitter_Snowflake
  * snowflake algorithm
@@ -134,7 +132,7 @@ class SnowFlake {
 
     const hash = getMAC()
       .split(':')
-      .map(seg => parseInt(seg, 16))
+      .map((seg) => parseInt(seg, 16))
       // FNV hash
       .reduce((hash, x) => ((hash * FNV_PRIME) & MAX_64BIT_UNSIGNED_INT) ^ BigInt(x), FNV_OFFSET_BASIS);
     return hash & MACHINE_ID_MASK;

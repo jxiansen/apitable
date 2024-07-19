@@ -42,7 +42,8 @@ const formatMonth = (value: string) => {
 
 const formatYear = (value: string) => {
   // format January-December, expect 0 = January, 11 = December
-  return dayjs.tz()
+  return dayjs
+    .tz()
     .month(Number(value) - 1)
     .format('MMMM');
 };

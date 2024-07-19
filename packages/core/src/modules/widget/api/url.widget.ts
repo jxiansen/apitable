@@ -1,5 +1,3 @@
-
-
 // ================ Widget related =======================
 export const INSTALLATION_WIDGETS = '/widget/get';
 export const WIDGET_CENTER_LIST = '/widget/package/store/list';

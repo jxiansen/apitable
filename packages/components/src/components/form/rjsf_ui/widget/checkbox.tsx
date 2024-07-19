@@ -1,5 +1,3 @@
-
-
 import { WidgetProps } from '@rjsf/core';
 import { Switch } from 'components/switch';
 import React from 'react';
@@ -7,7 +5,7 @@ import styled from 'styled-components';
 
 const CheckboxWrapper = styled.div`
   display: flex;
-  cursor: pointer;  
+  cursor: pointer;
   width: '100%';
   user-select: none;
   padding: 4px;

@@ -1,5 +1,3 @@
-
-
 import { RecordType } from 'pc/components/expand_record/expand_record.enum';
 
 export interface IExpandRecordDatasheetProp {

@@ -1,11 +1,19 @@
-
-
 import { produce } from 'immer';
 import { isEmpty } from 'lodash';
 import {
-  IAddressList, IMemberInfoInAddressList, IUpdateMemberInfoAction, IUpdateMemberListAction, IUpdateSelectedTeamInfoAction,
-  IUpdateSingleMemberInMemberListAction, IUpdateTeamListAction, IUpdateAddressTreeAction, ITeamTreeNode, IUpdateMemberListPageNoAction,
-  IUpdateMemberListTotalAction, IUpdateMemberListLodingAction, IUpdateMemberListPageAction,
+  IAddressList,
+  IMemberInfoInAddressList,
+  IUpdateMemberInfoAction,
+  IUpdateMemberListAction,
+  IUpdateSelectedTeamInfoAction,
+  IUpdateSingleMemberInMemberListAction,
+  IUpdateTeamListAction,
+  IUpdateAddressTreeAction,
+  ITeamTreeNode,
+  IUpdateMemberListPageNoAction,
+  IUpdateMemberListTotalAction,
+  IUpdateMemberListLodingAction,
+  IUpdateMemberListPageAction,
 } from '../../../../exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';
 
@@ -27,11 +35,17 @@ const defaultState: IAddressList = {
   memberListTotal: 0,
   memberListLoading: false,
 };
-type IAddressListActions = IUpdateTeamListAction |
-  IUpdateMemberListAction | IUpdateMemberListPageAction |
-  IUpdateSelectedTeamInfoAction |
-  IUpdateMemberInfoAction | IUpdateSingleMemberInMemberListAction | IUpdateAddressTreeAction |
-  IUpdateMemberListPageNoAction | IUpdateMemberListTotalAction | IUpdateMemberListLodingAction;
+type IAddressListActions =
+  | IUpdateTeamListAction
+  | IUpdateMemberListAction
+  | IUpdateMemberListPageAction
+  | IUpdateSelectedTeamInfoAction
+  | IUpdateMemberInfoAction
+  | IUpdateSingleMemberInMemberListAction
+  | IUpdateAddressTreeAction
+  | IUpdateMemberListPageNoAction
+  | IUpdateMemberListTotalAction
+  | IUpdateMemberListLodingAction;
 const updateMemberInList = (state: IMemberInfoInAddressList[], payload: Partial<IMemberInfoInAddressList>) => {
   if (!payload.memberId) {
     return state;
@@ -43,7 +57,6 @@ const updateMemberInList = (state: IMemberInfoInAddressList[], payload: Partial<
     }
     prev.push({ ...cur });
     return prev;
-
   }, []);
 };
 
@@ -63,18 +76,16 @@ const findParent = (data: ITeamTreeNode[], id: string): null | ITeamTreeNode => 
 };
 
 const getReplacedTeamList = (oldTeamList: ITeamTreeNode[], newTeamList: ITeamTreeNode[]) => {
-
   const parentChildrenMap = oldTeamList.reduce((acc, item) => {
     acc.set(item.teamId, item.children);
     return acc;
   }, new Map());
-  return newTeamList.map(item => {
+  return newTeamList.map((item) => {
     return {
       ...item,
-      children: parentChildrenMap.get(item.teamId) || []
+      children: parentChildrenMap.get(item.teamId) || [],
     };
   });
-
 };
 
 const updateTeamTree = (originTree: ITeamTreeNode[], parentId: string, childrenTree: ITeamTreeNode[]) => {
@@ -83,7 +94,7 @@ const updateTeamTree = (originTree: ITeamTreeNode[], parentId: string, childrenT
     return;
   }
   parent.hasChildren = !isEmpty(childrenTree);
-  if(!parent.children || parent.children.length === 0) {
+  if (!parent.children || parent.children.length === 0) {
     parent.children = childrenTree;
   } else {
     parent.children = getReplacedTeamList(parent.children, childrenTree);
@@ -97,7 +108,7 @@ export const addressList = produce((data: IAddressList = defaultState, action: I
       return data;
     }
     case actions.UPDATE_MEMBER_LIST_PAGE: {
-      if(data.memberListPageNo > 0) {
+      if (data.memberListPageNo > 0) {
         const memberList = [...data.memberList, ...action.payload];
         data.memberList = memberList;
         return data;
@@ -130,11 +141,11 @@ export const addressList = produce((data: IAddressList = defaultState, action: I
       data.memberListTotal = action.payload;
       return data;
     }
-    case actions.UPDATE_MEMBER_LIST_PAGE_NO: { 
+    case actions.UPDATE_MEMBER_LIST_PAGE_NO: {
       data.memberListPageNo = action.payload;
       return data;
     }
-    case actions.UPDATE_MEMBER_LIST_LOADING: { 
+    case actions.UPDATE_MEMBER_LIST_LOADING: {
       data.memberListLoading = action.payload;
       return;
     }

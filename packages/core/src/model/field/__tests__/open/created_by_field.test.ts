@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType } from 'types/field_api_enums';
 import { IOpenField, IOpenFieldProperty } from 'types/open/open_field_read_types';
 import { FieldType, ICreatedByField } from 'types/field_types';
@@ -11,22 +9,22 @@ const createdByField: ICreatedByField = {
   type: FieldType.CreatedBy,
   property: {
     uuids: [],
-    datasheetId: 'dst1111'
-  }
+    datasheetId: 'dst1111',
+  },
 };
 
 const openCreatedByField: IOpenField = {
   name: 'Creator Field',
   id: 'fld1111',
   type: APIMetaFieldType.CreatedBy,
-  property: null
+  property: null,
 };
 
 const writeOpenProperty: IOpenFieldProperty = null;
 
 describe('Created by field read property format check', () => {
   const valid = getOpenFieldProperty(createdByField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid(openCreatedByField.property);
     expect(receiveValue).toEqual(expectValue);
   });

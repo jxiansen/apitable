@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { IReduxState } from '../../exports/store/interfaces';
 import { TextBaseField } from './text_base_field';
@@ -11,12 +9,15 @@ import { getFieldDefaultProperty } from './const';
 import { ISingleTextProperty } from 'types/field_types';
 
 export class SingleTextField extends TextBaseField {
-  constructor(public override field: ISingleTextField, public override state: IReduxState) {
+  constructor(
+    public override field: ISingleTextField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
   static override propertySchema = Joi.object({
-    defaultValue: Joi.string().allow('')
+    defaultValue: Joi.string().allow(''),
   });
 
   static defaultProperty() {
@@ -64,7 +65,7 @@ export class SingleTextField extends TextBaseField {
     }
 
     if (sourceType === FieldType.Text) {
-      return data.map(d => {
+      return data.map((d) => {
         return {
           type: d.type || SegmentType.Text,
           text: d.text.replace(/\n/g, ' '),

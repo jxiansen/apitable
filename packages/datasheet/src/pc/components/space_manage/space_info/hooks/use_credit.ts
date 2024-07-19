@@ -1,5 +1,3 @@
-
-
 import { useMemo } from 'react';
 import { decimalCeil } from '@apitable/core';
 import { IHooksParams, IHooksResult } from '../interface';

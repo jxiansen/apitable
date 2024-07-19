@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import * as React from 'react';
 import { ILightOrDarkThemeColors } from '@apitable/components';

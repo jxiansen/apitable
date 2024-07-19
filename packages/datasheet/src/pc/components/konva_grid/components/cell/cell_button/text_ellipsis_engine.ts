@@ -1,8 +1,4 @@
-
-
-import {
-  ITextEllipsisProps,
-} from 'pc/components/konva_grid';
+import { ITextEllipsisProps } from 'pc/components/konva_grid';
 
 import { getTextWidth } from 'pc/components/konva_grid/utils/get_text_width';
 import { DEFAULT_FONT_FAMILY } from 'pc/utils';

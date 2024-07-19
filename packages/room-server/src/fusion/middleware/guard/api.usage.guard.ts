@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { DatasheetService } from 'database/datasheet/services/datasheet.service';

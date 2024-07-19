@@ -1,5 +1,3 @@
-
-
 import { Logger } from '@nestjs/common';
 import { RedisOptions } from 'ioredis';
 import { RedisConstants } from 'shared/common/constants/socket.module.constants';

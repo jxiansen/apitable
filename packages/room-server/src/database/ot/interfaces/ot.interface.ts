@@ -1,5 +1,3 @@
-
-
 import { IMeta, ILocalChangeset, IRecordCellValue, IRecordMeta, ResourceType } from '@apitable/core';
 import { SourceTypeEnum } from 'shared/enums/changeset.source.type.enum';
 import { IAuthHeader, NodePermission } from '../../../shared/interfaces';
@@ -21,13 +19,13 @@ export enum EffectConstantName {
 
 export interface ICommonData {
   userId?: string;
-  uuid?: string,
-  spaceId: string,
-  dstId: string,
-  revision: number,
-  resourceId: string,
-  resourceType: ResourceType,
-  permission: NodePermission,
+  uuid?: string;
+  spaceId: string;
+  dstId: string;
+  revision: number;
+  resourceId: string;
+  resourceType: ResourceType;
+  permission: NodePermission;
 }
 
 export interface IFieldData {
@@ -36,8 +34,8 @@ export interface IFieldData {
 }
 
 export interface IRestoreRecordInfo {
-  data: IRecordCellValue,
-  recordMeta?: IRecordMeta,
+  data: IRecordCellValue;
+  recordMeta?: IRecordMeta;
 }
 
 /**
@@ -67,16 +65,16 @@ export interface IRoomChannelMessage {
   allowAllEntrance?: boolean;
   /** No auth for Java internal request */
   internalAuth?: {
-    userId: string,
-    uuid: string
-  }
+    userId: string;
+    uuid: string;
+  };
 }
 
 export interface IChangesetParseResult {
-  transaction: any,
-  effectMap: Map<string, any>, 
-  commonData: ICommonData, 
-  resultSet: any,
+  transaction: any;
+  effectMap: Map<string, any>;
+  commonData: ICommonData;
+  resultSet: any;
 }
 
 export interface IOtEventContext {

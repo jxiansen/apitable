@@ -1,5 +1,3 @@
-
-
 import { IdWorker } from 'shared/helpers/snowflake';
 import { BeforeInsert, Column, Entity, PrimaryColumn } from 'typeorm';
 

@@ -1,5 +1,3 @@
-
-
 import { useEffect, useRef } from 'react';
 import { browser } from 'modules/shared/browser';
 

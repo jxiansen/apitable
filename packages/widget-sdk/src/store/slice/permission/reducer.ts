@@ -5,15 +5,12 @@ import { IWidgetPermission } from 'interface';
 
 export const DEFAULT_WIDGET_PERMISSION = {
   storage: {
-    editable: false
+    editable: false,
   },
-  datasheet: DEFAULT_PERMISSION
+  datasheet: DEFAULT_PERMISSION,
 };
 
-export function permissionReducer(
-  state: IWidgetPermission = DEFAULT_WIDGET_PERMISSION,
-  action: ISetPermissionAction
-): IWidgetPermission {
+export function permissionReducer(state: IWidgetPermission = DEFAULT_WIDGET_PERMISSION, action: ISetPermissionAction): IWidgetPermission {
   switch (action.type) {
     case SET_PERMISSION: {
       return {
@@ -21,6 +18,7 @@ export function permissionReducer(
         ...action.payload,
       };
     }
-    default: return state;
+    default:
+      return state;
   }
 }

@@ -1,5 +1,3 @@
-
-
 import { colorVars } from '@apitable/components';
 import { WarnCircleFilled, CheckCircleFilled, InfoCircleFilled } from '@apitable/icons';
 // const modulesFiles = require.context('./modules', true, /.js$/)

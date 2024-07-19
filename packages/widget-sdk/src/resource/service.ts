@@ -1,5 +1,3 @@
-
-
 import { databus, Url } from '@apitable/core';
 import {
   CollaCommandManager,

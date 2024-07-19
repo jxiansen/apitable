@@ -1,5 +1,3 @@
-
-
 import { Radio, Space, RadioChangeEvent } from 'antd';
 import produce from 'immer';
 import Image from 'next/image';
@@ -139,9 +137,9 @@ export const ShareModal: React.FC<React.PropsWithChildren<IShareModalProps>> = (
     const checked = e.target.value;
     const params = checked
       ? {
-        fillAnonymous: checked,
-        submitLimit: 0,
-      }
+          fillAnonymous: checked,
+          submitLimit: 0,
+        }
       : { fillAnonymous: checked };
 
     updateProps(params);

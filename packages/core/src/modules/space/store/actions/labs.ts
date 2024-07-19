@@ -1,5 +1,3 @@
-
-
 import * as ActionConstants from 'modules/shared/store/action_constants';
 import { ILabs } from '../../../../exports/store/interfaces';
 
@@ -12,4 +10,3 @@ export const setLabs = (labs: ILabs) => {
     payload: labs,
   };
 };
-

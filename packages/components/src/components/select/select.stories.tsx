@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Select, DropdownSelect, SearchSelect } from './index';
 import { Tooltip } from '../tooltip';

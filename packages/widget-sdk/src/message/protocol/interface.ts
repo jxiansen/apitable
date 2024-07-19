@@ -2,7 +2,7 @@ export enum MessageType {
   /**
    * Sending messages in the main thread.
    * Add MAIN for easy identification.
-  */
+   */
   MAIN_CONNECT_WIDGET = 'MAIN_CONNECT_WIDGET',
   MAIN_INIT_WIDGET_DATA = 'MAIN_INIT_WIDGET_DATA',
   MAIN_SYNC_WIDGET_CONFIG = 'MAIN_SYNC_WIDGET_CONFIG',
@@ -50,7 +50,7 @@ export interface IContentWindow {
 
 export enum MouseListenerType {
   ENTER = 'mouseenter',
-  LEAVE = 'mouseleave'
+  LEAVE = 'mouseleave',
 }
 
 export enum ConnectStatus {
@@ -59,5 +59,5 @@ export enum ConnectStatus {
   // Connection is established, but no data can be sent or received.
   SYN_SENT,
   // The ability to send and receive data has been confirmed.
-  ESTABLISHED
+  ESTABLISHED,
 }

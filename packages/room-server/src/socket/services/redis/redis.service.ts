@@ -1,5 +1,3 @@
-
-
 import { Inject, Injectable } from '@nestjs/common';
 import { RedisConstants } from 'shared/common/constants/socket.module.constants';
 import { SocketCache, UserRoom } from 'shared/enums/redis-key.enum';
@@ -7,9 +5,7 @@ import { RedisClient } from './redis.provider';
 
 @Injectable()
 export class RedisService {
-  constructor(
-    @Inject(RedisConstants.REDIS_CLIENT) public readonly redis: RedisClient
-  ) {}
+  constructor(@Inject(RedisConstants.REDIS_CLIENT) public readonly redis: RedisClient) {}
 
   getClient() {
     return this.redis;
@@ -28,11 +24,7 @@ export class RedisService {
   async saveUserSocketId(userId: string, socketId: string): Promise<[error: Error | null, result: unknown][] | null> {
     const key: string = UserRoom.PREFIX + userId;
     // `sadd` adds set collection elements, returns true, repeatedly returns false
-    return await this.redis
-      .multi()
-      .sadd(key, socketId)
-      .expire(key, UserRoom.EXPIRE)
-      .exec();
+    return await this.redis.multi().sadd(key, socketId).expire(key, UserRoom.EXPIRE).exec();
   }
 
   /**
@@ -113,5 +105,4 @@ export class RedisService {
   async removeSocket(prefix: string, key: string) {
     return await this.redis.hdel(SocketCache.PREFIX + prefix, key);
   }
-
 }

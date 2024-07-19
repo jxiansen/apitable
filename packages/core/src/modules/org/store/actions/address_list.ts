@@ -1,5 +1,3 @@
-
-
 import { ISelectedTeamInfo, IMemberInfoInAddressList, IUserInfo, ITeamTreeNode } from 'exports/store/interfaces';
 import { Api } from 'exports/api';
 import * as actions from '../../../shared/store/action_constants';
@@ -80,30 +78,39 @@ export function updataMemberListLoading(loading: boolean) {
 export function getTeamListData(_user: IUserInfo) {
   let teamList: ITeamTreeNode[] = [];
   return (dispatch: any) => {
-    Api.getTeamListLayered().then(res => {
-      const { success, data } = res.data;
-      if (success) {
-        teamList = data;
-      }
-      dispatch(updateTeamList(teamList));
-
-      const firstTeamId = teamList?.[0]?.teamId;
-      if (!firstTeamId) return;
-
-      Api.readTeam(firstTeamId).then(res => {
+    Api.getTeamListLayered().then(
+      (res) => {
         const { success, data } = res.data;
-        success && dispatch(updateSelectedTeamInfo({
-          teamTitle: data.teamName,
-          memberCount: data.memberCount,
-          teamId: data.teamId,
-        }));
-        dispatch(updateMemberInfo({ memberId: '', email: '' }));
-      }, err => {
-        console.error('API.readTeam error', err);
-      });
-    }, err => {
-      console.error('API.getTeamListLayered error', err);
-    });
+        if (success) {
+          teamList = data;
+        }
+        dispatch(updateTeamList(teamList));
+
+        const firstTeamId = teamList?.[0]?.teamId;
+        if (!firstTeamId) return;
+
+        Api.readTeam(firstTeamId).then(
+          (res) => {
+            const { success, data } = res.data;
+            success &&
+              dispatch(
+                updateSelectedTeamInfo({
+                  teamTitle: data.teamName,
+                  memberCount: data.memberCount,
+                  teamId: data.teamId,
+                })
+              );
+            dispatch(updateMemberInfo({ memberId: '', email: '' }));
+          },
+          (err) => {
+            console.error('API.readTeam error', err);
+          }
+        );
+      },
+      (err) => {
+        console.error('API.getTeamListLayered error', err);
+      }
+    );
   };
 }
 
@@ -119,19 +126,21 @@ export function getMemberListData(teamId?: string) {
   return (dispatch: any) => {
     dispatch(updataMemberListLoading(true));
 
-    Api.getMemberListInSpace(JSON.stringify({ ...pageObjectParams, pageNo: 1 }), teamId).then(res => {
-      const { success, data } = res.data;
-      if (success) {
-        const memberListInSpace: IMemberInfoInAddressList[] = data.records;
-        const memberTotal = data.total;
-        dispatch(updateMemberListTotal(memberTotal));
-        dispatch(updateMemberList(memberListInSpace));
-        dispatch(updataMemberListLoading(false));
-       
+    Api.getMemberListInSpace(JSON.stringify({ ...pageObjectParams, pageNo: 1 }), teamId).then(
+      (res) => {
+        const { success, data } = res.data;
+        if (success) {
+          const memberListInSpace: IMemberInfoInAddressList[] = data.records;
+          const memberTotal = data.total;
+          dispatch(updateMemberListTotal(memberTotal));
+          dispatch(updateMemberList(memberListInSpace));
+          dispatch(updataMemberListLoading(false));
+        }
+      },
+      (err) => {
+        console.error('API.getMemberListInSpace error', err);
       }
-    }, err => {
-      console.error('API.getMemberListInSpace error', err);
-    });
+    );
   };
 }
 
@@ -141,22 +150,25 @@ export function getMemberListPageData(pageNo: number, teamId?: string) {
     order: ' vom.id',
     sort: ConfigConstant.SORT_ASC,
   };
-  
+
   return (dispatch: any) => {
     dispatch(updataMemberListLoading(true));
 
-    Api.getMemberListInSpace(JSON.stringify({ ...pageObjectParams, pageNo }), teamId).then(res => {
-      const { success, data } = res.data;
-      if (success) {
-        const memberListInSpace: IMemberInfoInAddressList[] = data.records;
-        const memberTotal = data.total;
-        dispatch(updateMemberListTotal(memberTotal));
-        dispatch(updateMemberListPage(memberListInSpace));
-        dispatch(updataMemberListLoading(false));
-      } 
-    }, err => {
-      console.error('API.getMemberListInSpace error', err);
-    });
+    Api.getMemberListInSpace(JSON.stringify({ ...pageObjectParams, pageNo }), teamId).then(
+      (res) => {
+        const { success, data } = res.data;
+        if (success) {
+          const memberListInSpace: IMemberInfoInAddressList[] = data.records;
+          const memberTotal = data.total;
+          dispatch(updateMemberListTotal(memberTotal));
+          dispatch(updateMemberListPage(memberListInSpace));
+          dispatch(updataMemberListLoading(false));
+        }
+      },
+      (err) => {
+        console.error('API.getMemberListInSpace error', err);
+      }
+    );
   };
 }
 
@@ -165,21 +177,23 @@ export function getMemberListPageData(pageNo: number, teamId?: string) {
  */
 export function getMemberInfoData(memberId: string) {
   return (dispatch: any) => {
-    Api.getMemberInfo({ memberId }).then(res => {
-      const { success, data } = res.data;
-      if (success) {
-        dispatch(updateMemberInfo(data));
+    Api.getMemberInfo({ memberId }).then(
+      (res) => {
+        const { success, data } = res.data;
+        if (success) {
+          dispatch(updateMemberInfo(data));
+        }
+      },
+      (err) => {
+        console.error('API.getMemberInfo error', err);
       }
-    }, err => {
-      console.error('API.getMemberInfo error', err);
-    });
+    );
   };
 }
 
 export const getSubTeam = (teamId: string | number): any => {
-  return async(dispatch: any) => {
+  return async (dispatch: any) => {
     const subTree = await Api.getSubTeams(teamId);
     dispatch(updateAddressTree(teamId, subTree.data.data));
   };
 };
-

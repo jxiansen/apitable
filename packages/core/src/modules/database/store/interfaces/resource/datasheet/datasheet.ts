@@ -1,5 +1,3 @@
-
-
 import { IRemoteChangeset } from 'engine/ot';
 import { StatType } from 'model/field/stat';
 import { ICellValue } from 'model/record';

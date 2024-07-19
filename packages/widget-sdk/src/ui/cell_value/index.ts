@@ -1,5 +1,3 @@
-
-
 export * from './cell_value';
 
 export * from './cell_text';

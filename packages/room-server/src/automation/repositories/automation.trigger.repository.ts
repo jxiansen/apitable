@@ -1,5 +1,3 @@
-
-
 import { generateRandomString } from '@apitable/core';
 import { ResourceRobotDto } from 'automation/dtos/robot.dto';
 import { EntityRepository, In, IsNull, Not, Repository } from 'typeorm';

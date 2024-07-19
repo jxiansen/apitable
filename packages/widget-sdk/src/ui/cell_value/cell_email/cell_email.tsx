@@ -1,5 +1,3 @@
-
-
 import React, { CSSProperties } from 'react';
 import { EmailStyled } from './styled';
 

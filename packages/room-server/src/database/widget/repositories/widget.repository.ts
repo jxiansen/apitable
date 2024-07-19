@@ -1,5 +1,3 @@
-
-
 import { IResourceRevision } from '@apitable/core';
 import { WidgetEntity } from '../entities/widget.entity';
 import { EntityRepository, Repository } from 'typeorm';

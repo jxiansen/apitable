@@ -1,5 +1,3 @@
-
-
 import dayjs from 'dayjs';
 import type { IDateTimeField, ITimestamp } from 'types/field_types';
 import duration from 'dayjs/plugin/duration';

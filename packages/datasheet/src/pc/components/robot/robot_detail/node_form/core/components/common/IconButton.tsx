@@ -1,5 +1,3 @@
-
-
 export default function IconButton(props: any) {
   const { type = 'default', icon, className, ...otherProps } = props;
   return (

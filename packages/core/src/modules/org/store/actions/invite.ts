@@ -1,5 +1,3 @@
-
-
 import { IInviteEmailInfo, ITeamTreeNode, IInviteLink, IInviteLinkInfo } from '../../../../exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';
 import { Api } from '../../../../exports/api';
@@ -13,8 +11,8 @@ export function updateErrCode(code: number | null) {
 
 /**
  * invite by email
- * @param info 
- * @returns 
+ * @param info
+ * @returns
  */
 export function updateInviteEmailInfo(info: IInviteEmailInfo) {
   return {
@@ -31,8 +29,8 @@ export const updateMailToken = (token: string) => {
 
 /**
  * invite by link - inviter
- * @param childrenTree 
- * @returns 
+ * @param childrenTree
+ * @returns
  */
 export const updateTeamTreeInvite = (childrenTree: ITeamTreeNode[]) => {
   return {
@@ -62,7 +60,9 @@ export const getSubTeamInvite = (teamId: string): any => {
 // TODO: to be delete by yudongdong
 export const getLinkInviteList = (): any => {
   return async (dispatch: any) => {
-    const { data: { success, data } } = await Api.getLinkList();
+    const {
+      data: { success, data },
+    } = await Api.getLinkList();
     if (success) {
       dispatch(updateLinkInviteList(data));
     }
@@ -71,8 +71,8 @@ export const getLinkInviteList = (): any => {
 
 /**
  * invite by link - invitee(be invited)
- * @param data 
- * @returns 
+ * @param data
+ * @returns
  */
 export const updateInviteLinkInfo = (data: IInviteLinkInfo | null) => {
   return {

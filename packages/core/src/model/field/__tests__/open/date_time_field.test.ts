@@ -1,5 +1,3 @@
-
-
 import { DateTimeField } from 'model/field/date_time_field';
 import { APIMetaFieldType, DateFormat, FieldType, IDateTimeField, TimeFormat } from 'types';
 import { IOpenField } from 'types/open/open_field_read_types';
@@ -18,8 +16,8 @@ const dateTimeField: IDateTimeField = {
     /** Whether to include time */
     includeTime: true,
     /** Whether to automatically fill in the creation time when adding a new record */
-    autoFill: false
-  }
+    autoFill: false,
+  },
 };
 
 const openDateTimeField: IOpenField = {
@@ -30,19 +28,19 @@ const openDateTimeField: IOpenField = {
     dateFormat: 'YYYY-MM-DD',
     timeFormat: 'HH:mm',
     includeTime: true,
-    autoFill: false
-  }
+    autoFill: false,
+  },
 };
 
 const propertyOptionalFill: IUpdateOpenDateTimeFieldProperty = {
   dateFormat: 'YYYY-MM-DD',
   timeFormat: 'HH:mm',
   includeTime: true,
-  autoFill: false
+  autoFill: false,
 };
 
 const propertyOptionalNotFill: IUpdateOpenDateTimeFieldProperty = {
-  dateFormat: 'YYYY-MM-DD'
+  dateFormat: 'YYYY-MM-DD',
 };
 
 describe('Date field read property format check', () => {
@@ -76,7 +74,7 @@ describe('date field update property conversion property check', () => {
   it('Do not fill in optional fields', () => {
     const [expectValue, receiveValue] = valid(propertyOptionalNotFill, {
       ...DateTimeField.defaultProperty(),
-      dateFormat: DateFormat['YYYY-MM-DD']
+      dateFormat: DateFormat['YYYY-MM-DD'],
     });
     expect(expectValue).toEqual(receiveValue);
   });

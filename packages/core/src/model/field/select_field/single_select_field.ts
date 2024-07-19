@@ -1,5 +1,3 @@
-
-
 import { t, Strings } from '../../../exports/i18n';
 import Joi from 'joi';
 import { find, isString } from 'lodash';
@@ -16,7 +14,10 @@ import { IEffectOption, IWriteOpenSelectBaseFieldProperty } from 'types/open';
 import { IOpenFilterValueSelect } from 'types/open/open_filter_types';
 
 export class SingleSelectField extends SelectField {
-  constructor(public override field: ISingleSelectField, public override state: IReduxState) {
+  constructor(
+    public override field: ISingleSelectField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -36,23 +37,27 @@ export class SingleSelectField extends SelectField {
       return helpers.message({ en: 'option is not string' });
     }
 
-    if (!(field.property as ISelectFieldProperty).options.some(option => option.id === optionId)) {
+    if (!(field.property as ISelectFieldProperty).options.some((option) => option.id === optionId)) {
       return helpers.message({ en: 'option not exist field property' });
     }
     return optionId;
-  }).allow(null).required();
+  })
+    .allow(null)
+    .required();
 
   static openWriteValueSchema = Joi.custom((owv: string | ISelectFieldBaseOpenValue, helpers) => {
     const field = helpers.prefs['context']?.['field'];
-    const optionIdOrName = isString(owv) ? owv : (owv.id || owv.name);
+    const optionIdOrName = isString(owv) ? owv : owv.id || owv.name;
     if (!optionIdOrName) {
       return helpers.error('value format error');
     }
-    if (!(field.property as ISelectFieldProperty).options.some(option => option.id === optionIdOrName || option.name === optionIdOrName)) {
+    if (!(field.property as ISelectFieldProperty).options.some((option) => option.id === optionIdOrName || option.name === optionIdOrName)) {
       return helpers.error('option not exist field property');
     }
     return optionIdOrName;
-  }).allow(null).required();
+  })
+    .allow(null)
+    .required();
 
   validateCellValue(cv: ICellValue): Joi.ValidationResult {
     return SingleSelectField.cellValueSchema.validate(cv, { context: { field: this.field } });
@@ -97,28 +102,18 @@ export class SingleSelectField extends SelectField {
             value: {
               type: 'string',
               title: t(Strings.robot_variables_join_option_color_values),
-            }
-          }
+            },
+          },
         },
-      }
+      },
     };
   }
 
   get acceptFilterOperators(): FOperator[] {
-    return [
-      FOperator.Is,
-      FOperator.IsNot,
-      FOperator.Contains,
-      FOperator.DoesNotContain,
-      FOperator.IsEmpty,
-      FOperator.IsNotEmpty,
-      FOperator.IsRepeat,
-    ];
+    return [FOperator.Is, FOperator.IsNot, FOperator.Contains, FOperator.DoesNotContain, FOperator.IsEmpty, FOperator.IsNotEmpty, FOperator.IsRepeat];
   }
 
-  defaultValueForCondition(
-    condition: IFilterCondition<FieldType.SingleSelect>,
-  ): string | null {
+  defaultValueForCondition(condition: IFilterCondition<FieldType.SingleSelect>): string | null {
     const { operator, value } = condition;
     if (operator === FOperator.Is || operator === FOperator.Contains) {
       // only one value will auto fill
@@ -137,7 +132,7 @@ export class SingleSelectField extends SelectField {
     };
 
     if (val) {
-      const option = find(this.field.property.options, opt => {
+      const option = find(this.field.property.options, (opt) => {
         return opt.id === val;
       }) as any;
 
@@ -157,12 +152,12 @@ export class SingleSelectField extends SelectField {
 
   stdValueToCellValue(stdValue: IStandardValue) {
     // filter empty text
-    const data = stdValue.data.filter(d => d.text);
+    const data = stdValue.data.filter((d) => d.text);
     if (data.length === 0) {
       return null;
     }
     const currentOptionText = data[0]!.text;
-    const option = this.field.property.options.find(opt => opt.name === currentOptionText);
+    const option = this.field.property.options.find((opt) => opt.name === currentOptionText);
     return option ? option.id : null;
   }
 
@@ -175,12 +170,10 @@ export class SingleSelectField extends SelectField {
   }
 
   validate(value: any): value is string {
-    return isString(value) && this.field.property.options.some(option => option.id === value);
+    return isString(value) && this.field.property.options.some((option) => option.id === value);
   }
 
-  override isMeetFilter(
-    operator: FOperator, cellValue: string | null, conditionValue: Exclude<IFilterSingleSelect, null>,
-  ) {
+  override isMeetFilter(operator: FOperator, cellValue: string | null, conditionValue: Exclude<IFilterSingleSelect, null>) {
     if (operator === FOperator.IsEmpty) {
       return cellValue == null;
     }
@@ -197,11 +190,11 @@ export class SingleSelectField extends SelectField {
       }
 
       case FOperator.Contains: {
-        return Array.isArray(conditionValue) && conditionValue.some(value => value === cellValue);
+        return Array.isArray(conditionValue) && conditionValue.some((value) => value === cellValue);
       }
 
       case FOperator.DoesNotContain: {
-        return !Array.isArray(conditionValue) || !conditionValue.some(value => value === cellValue);
+        return !Array.isArray(conditionValue) || !conditionValue.some((value) => value === cellValue);
       }
 
       default: {
@@ -234,20 +227,24 @@ export class SingleSelectField extends SelectField {
     if (isNullValue(openWriteValue)) {
       return null;
     }
-    const fieldValue = typeof openWriteValue === 'string' ? openWriteValue : (openWriteValue.id || openWriteValue!.name);
-    const option = this.field.property.options.find(option => (
-      isOptionId(fieldValue as string) && fieldValue === option.id || fieldValue === option.name
-    ));
+    const fieldValue = typeof openWriteValue === 'string' ? openWriteValue : openWriteValue.id || openWriteValue!.name;
+    const option = this.field.property.options.find(
+      (option) => (isOptionId(fieldValue as string) && fieldValue === option.id) || fieldValue === option.name
+    );
     return option?.id ?? null;
   }
 
   static override openUpdatePropertySchema = Joi.object({
-    options: Joi.array().items(Joi.object({
-      id: Joi.string(),
-      name: Joi.string().required(),
-      color: Joi.alternatives(Joi.number(), Joi.string())
-    })).required(),
-    defaultValue: Joi.string()
+    options: Joi.array()
+      .items(
+        Joi.object({
+          id: Joi.string(),
+          name: Joi.string().required(),
+          color: Joi.alternatives(Joi.number(), Joi.string()),
+        })
+      )
+      .required(),
+    defaultValue: Joi.string(),
   }).required();
 
   override validateUpdateOpenProperty(updateProperty: IWriteOpenSelectBaseFieldProperty, effectOption?: IEffectOption): Joi.ValidationResult {
@@ -260,7 +257,7 @@ export class SingleSelectField extends SelectField {
 
   override filterValueToOpenFilterValue(value: IFilterSingleSelect): IOpenFilterValueSelect {
     if (Array.isArray(value)) {
-      const _value = value.filter(v => this.findOptionById(v));
+      const _value = value.filter((v) => this.findOptionById(v));
       return _value.length ? _value[0]! : null;
     }
     return null;

@@ -1,4 +1,3 @@
-
 import { Column, Entity } from 'typeorm';
 import { BaseEntity } from 'shared/entities/base.entity';
 import { ILinkRecordData } from '../models/link.record.data';

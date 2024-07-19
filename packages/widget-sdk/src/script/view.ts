@@ -15,7 +15,7 @@ export class View {
 
   /**
    * The unique ID of the view.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -30,7 +30,7 @@ export class View {
 
   /**
    * The name of the view.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -45,9 +45,9 @@ export class View {
 
   /**
    * The type of the view.
-   * 
+   *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myView.type);
@@ -60,9 +60,9 @@ export class View {
 
   /**
    * The url of the view.
-   * 
+   *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myView.url);
@@ -74,11 +74,11 @@ export class View {
 
   /**
    * Get the specified record in the view.
-   * 
+   *
    * @param recordId The ID of the record.
-   * 
+   *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myView.getRecordAsync('recxxxxxx')); // => Record
@@ -90,25 +90,20 @@ export class View {
 
   /**
    * Batch get the records in the view.
-   * 
+   *
    * @param options.recordIds List of record IDs.
-   * 
+   *
    * @param options.sorts Which fields the records need to be sorted by.
-   * 
+   *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myView.getRecordsAsync()); // => [Record, Record, ...]
    * console.log(myView.getRecordsAsync({ recordIds: ['recxxxxxx01', 'recxxxxxx02'] })); // => [Record, Record]
    * ```
    */
-  public getRecordsAsync(
-    options?: {
-      recordIds?: string[],
-      sorts?: ISortedField[],
-    }
-  ): Record[] {
+  public getRecordsAsync(options?: { recordIds?: string[]; sorts?: ISortedField[] }): Record[] {
     const { rows } = this.viewData;
     if (!rows?.length) return [];
 
@@ -120,7 +115,7 @@ export class View {
       finalRows = viewDerivation.visibleRows;
     } else {
       const { recordIds } = options;
-      finalRows = recordIds?.map(recordId => ({ recordId }));
+      finalRows = recordIds?.map((recordId) => ({ recordId }));
     }
     const sorts = options?.sorts;
     if (sorts?.length) {

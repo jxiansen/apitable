@@ -1,5 +1,3 @@
-
-
 import { supportedLanguages } from 'app.environment';
 import { I18nJsonLoader, I18nTranslation } from 'nestjs-i18n';
 import { util } from 'protobufjs';

@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import { FC } from 'react';
 import { Button, useThemeMode } from '@apitable/components';

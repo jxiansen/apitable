@@ -7,21 +7,21 @@ import { getRobotDetail } from 'pc/components/editors/button_editor/api';
 import { IAutomationDatum } from 'pc/components/robot/interface';
 import { RobotListItemCardReadOnly } from 'pc/components/robot/robot_list_item/robot_readonly_card';
 
-export const AutomationItem: FunctionComponent<{ id: string;fieldId: string, handleDelete: () => void }> = ({ fieldId, id, handleDelete }) => {
+export const AutomationItem: FunctionComponent<{ id: string; fieldId: string; handleDelete: () => void }> = ({ fieldId, id, handleDelete }) => {
   const { data } = useSWR(['automation_item'], () => getRobotDetail(id ?? ''));
 
   const router = useRouter();
-  if(!(data instanceof ResponseDataAutomationVO)) {
+  if (!(data instanceof ResponseDataAutomationVO)) {
     return null;
   }
 
   const respItem = data?.data;
-  if (respItem ==null) {
+  if (respItem == null) {
     return null;
   }
 
   // @ts-ignore
-  if(!respItem.triggers?.some(r => getFieldId(r)===fieldId)){
+  if (!respItem.triggers?.some((r) => getFieldId(r) === fieldId)) {
     return null;
   }
 

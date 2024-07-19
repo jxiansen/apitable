@@ -7,10 +7,14 @@ import { ConfigConstant, Events, Player, Strings, t } from '@apitable/core';
 import { AutomationPanel } from 'pc/components/automation';
 import {
   automationActionsAtom,
-  automationCacheAtom, automationCurrentTriggerId,
+  automationCacheAtom,
+  automationCurrentTriggerId,
   automationLocalMap,
-  automationPanelAtom, automationStateAtom,
-  automationTriggersAtom, IAutomationPanel, PanelName
+  automationPanelAtom,
+  automationStateAtom,
+  automationTriggersAtom,
+  IAutomationPanel,
+  PanelName,
 } from 'pc/components/automation/controller';
 import { getFieldId } from 'pc/components/automation/controller/hooks/get_field_id';
 import { checkIfModified } from 'pc/components/automation/modal/step_input_compare';
@@ -22,10 +26,11 @@ import { TriggerCommands } from '../../../../../modules/shared/apphook/trigger_c
 const CONST_ENABLE_PREVENT = true;
 const CONST_KEY_AUTOM_TRAGET_PAGE = 'CONST_KEY_AUTOM_TRAGET_PAGE';
 const CONST_KEY_AUTOM_TRAGET_VISIBLE = 'CONST_KEY_AUTOM_TRAGET_VISIBLE';
-export const AutomationPanelWrapper: React.FC<React.PropsWithChildren<{
+export const AutomationPanelWrapper: React.FC<
+  React.PropsWithChildren<{
     automationId: string;
-}>> = React.memo(({ automationId }) => {
-
+  }>
+> = React.memo(({ automationId }) => {
   const setLocalState = useSetAtom(automationLocalMap);
   const [panel] = useAtom(automationPanelAtom);
 
@@ -45,32 +50,37 @@ export const AutomationPanelWrapper: React.FC<React.PropsWithChildren<{
   const [panelState, setAutomationPanel] = useAtom(automationPanelAtom);
   const setItem = useSetAtom(automationCurrentTriggerId);
 
-  const [lcoalPanel, setPanel] =useState<IAutomationPanel|undefined>(undefined);
+  const [lcoalPanel, setPanel] = useState<IAutomationPanel | undefined>(undefined);
 
   const handle = async (url) => {
-    if(!CONST_ENABLE_PREVENT) {
-      return ;
+    if (!CONST_ENABLE_PREVENT) {
+      return;
     }
-    if(router.asPath === url) {
+    if (router.asPath === url) {
       return;
     }
 
     setCache({
       id: automationId,
       map: localMap,
-      panel: panel
+      panel: panel,
     });
 
-    const gotUrl =sessionStorage.getItem(CONST_KEY_AUTOM_TRAGET_PAGE);
+    const gotUrl = sessionStorage.getItem(CONST_KEY_AUTOM_TRAGET_PAGE);
     sessionStorage.removeItem(CONST_KEY_AUTOM_TRAGET_PAGE);
-    if(gotUrl === url) {
+    if (gotUrl === url) {
       return;
     }
 
-    if (!checkIfModified({
-      triggers,
-      actions
-    }, localMap)) {
+    if (
+      !checkIfModified(
+        {
+          triggers,
+          actions,
+        },
+        localMap,
+      )
+    ) {
       return;
     }
 
@@ -85,15 +95,11 @@ export const AutomationPanelWrapper: React.FC<React.PropsWithChildren<{
           cancelText: t(Strings.cancel),
           okText: t(Strings.confirm),
           onOk: () => {
-            setCache({
-
-            });
+            setCache({});
             isClosedRef.current = true;
             localStorage.setItem(CONST_KEY_AUTOM_TRAGET_VISIBLE, 'false');
             router.push(url);
-            setLocalState(
-              new Map<string, IRobotTrigger | IRobotAction>()
-            );
+            setLocalState(new Map<string, IRobotTrigger | IRobotAction>());
             sessionStorage.setItem(CONST_KEY_AUTOM_TRAGET_PAGE, url);
             resolve(true);
           },
@@ -116,10 +122,7 @@ export const AutomationPanelWrapper: React.FC<React.PropsWithChildren<{
     return () => {
       router.events.off('routeChangeStart', debounced);
     };
-
   }, [debounced, handle, router.events]);
 
-  return (
-    <AutomationPanel resourceId={automationId} panel={lcoalPanel}/>
-  );
+  return <AutomationPanel resourceId={automationId} panel={lcoalPanel} />;
 });

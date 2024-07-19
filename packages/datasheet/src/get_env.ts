@@ -1,5 +1,3 @@
-
-
 /**
  * Get system environment variables
  */

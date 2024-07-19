@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { ContextMenu, useContextMenu, useThemeColors } from '@apitable/components';
 import { KONVA_DATASHEET_ID, t, Strings } from '@apitable/core';

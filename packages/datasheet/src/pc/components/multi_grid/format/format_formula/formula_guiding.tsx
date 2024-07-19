@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { IFunction, IField, t, Strings } from '@apitable/core';
 import { ExpressionColorant } from './token_colorant';
@@ -18,8 +16,8 @@ export const FormulaGuiding: React.FC<React.PropsWithChildren<IFormulaGuiding>> 
     type === 'func'
       ? (item as IFunction).summary
       : t(Strings.summary_return_field_value_of_row, {
-        name: (item as IField).name,
-      });
+          name: (item as IField).name,
+        });
 
   const syntax = type === 'func' ? (item as IFunction).definition : `{${(item as IField).name}}`;
   const examples = type === 'func' ? (item as IFunction).example : `{${(item as IField).name}}`;

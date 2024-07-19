@@ -1,5 +1,3 @@
-
-
 import { Api, StoreActions } from '@apitable/core';
 import { store } from 'pc/store';
 

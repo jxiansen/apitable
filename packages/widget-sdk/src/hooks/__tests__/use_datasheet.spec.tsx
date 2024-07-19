@@ -10,8 +10,7 @@ test('use datasheet should return a Datasheet entity', () => {
 
   const wrapper = createSimpleWrapper({ widgetState: mockWidgetSdkData.widgetSdkData });
   const { result } = renderHook(() => useDatasheet(), { wrapper });
-  
+
   expect(result.current).toBeInstanceOf(Datasheet);
   expect(result.current!.id).toBe(DEFAULT_DATASHEET_ID);
 });
-

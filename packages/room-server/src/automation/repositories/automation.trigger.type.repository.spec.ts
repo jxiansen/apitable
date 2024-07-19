@@ -1,5 +1,3 @@
-
-
 import { AutomationTriggerTypeRepository } from './automation.trigger.type.repository';
 import { AutomationTriggerTypeEntity } from '../entities/automation.trigger.type.entity';
 import { DeepPartial, getConnection } from 'typeorm';
@@ -16,7 +14,7 @@ describe('AutomationTriggerTypeRepository', () => {
   const theTriggerTypeId = 'triggerTypeId';
   const theEndpoint = 'endpoint';
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({ isGlobal: true }),
@@ -40,7 +38,7 @@ describe('AutomationTriggerTypeRepository', () => {
     await repository.save(record);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
@@ -48,7 +46,7 @@ describe('AutomationTriggerTypeRepository', () => {
     expect(repository).toBeDefined();
   });
 
-  it('given a RecordMatchesConditions trigger type entity when get it by endpoint then should be got it', async() => {
+  it('given a RecordMatchesConditions trigger type entity when get it by endpoint then should be got it', async () => {
     const triggerTypeServiceRelDtos = await repository.getTriggerTypeServiceRelByEndPoint(theEndpoint);
     expect(triggerTypeServiceRelDtos).toBeDefined();
     expect(triggerTypeServiceRelDtos.length).toEqual(1);
@@ -56,7 +54,7 @@ describe('AutomationTriggerTypeRepository', () => {
     expect(triggerTypeServiceRelDtos[0]!.triggerTypeId).toEqual(theTriggerTypeId);
   });
 
-  it('given a RecordMatchesConditions trigger type entity when get it by endpoint then should be got it', async() => {
+  it('given a RecordMatchesConditions trigger type entity when get it by endpoint then should be got it', async () => {
     const triggerTypeServiceRelWithEndpointDtos = await repository.getTriggerTypeServiceRelByEndPoints([theEndpoint]);
     expect(triggerTypeServiceRelWithEndpointDtos).toBeDefined();
     expect(triggerTypeServiceRelWithEndpointDtos.length).toEqual(1);
@@ -65,7 +63,7 @@ describe('AutomationTriggerTypeRepository', () => {
     expect(triggerTypeServiceRelWithEndpointDtos[0]!.endpoint).toEqual(theEndpoint);
   });
 
-  it('should be get inputJsonSchema by trigger type id.', async() => {
+  it('should be get inputJsonSchema by trigger type id.', async () => {
     const inputJsonSchema = await repository.selectInputJsonSchemaById(theTriggerTypeId);
     expect(inputJsonSchema).toBeDefined();
     expect(inputJsonSchema!.triggerTypeId).toEqual(theTriggerTypeId);

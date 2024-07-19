@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 export interface IListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import parser from 'html-react-parser';
 import { isInteger } from 'lodash';
@@ -35,7 +33,7 @@ import {
   DeleteOutlined,
   DuplicateOutlined,
   ExpandOutlined,
-  ArchiveOutlined
+  ArchiveOutlined,
 } from '@apitable/icons';
 import { Message } from 'pc/components/common';
 import { Modal } from 'pc/components/common/modal/modal/modal';

@@ -1,5 +1,3 @@
-
-
 import { CollaCommandName } from 'commands/enum';
 import { ExecuteFailReason, ExecuteResult, ExecuteType, ICollaCommandExecuteSuccessResult } from 'command_manager/types';
 import { ErrorCode, ErrorType, FieldType, IError, ResourceType } from 'types';
@@ -234,8 +232,8 @@ describe('execute', () => {
               },
             },
           },
-        ],
-      ),
+        ]
+      )
     );
   });
 
@@ -311,7 +309,7 @@ describe('execute', () => {
           html: '<span>comment&nbsp;1</span>',
           emojis: {},
         },
-      }),
+      })
     );
   });
 });
@@ -375,7 +373,7 @@ describe('_executeActions', () => {
         result: ExecuteResult.Success,
         actions: [],
       },
-      ExecuteType.Undo,
+      ExecuteType.Undo
     );
 
     expect(result).toBeNull();
@@ -390,7 +388,7 @@ describe('_executeActions', () => {
         result: ExecuteResult.Success,
         actions: [],
       },
-      ExecuteType.Redo,
+      ExecuteType.Redo
     );
 
     expect(result).toBeNull();
@@ -408,7 +406,7 @@ describe('_executeActions', () => {
         linkedActions: [],
         fieldMapSnapshot: { fld2: mockDatasheetMap['dst1']!.snapshot.meta.fieldMap['fld2']! },
       },
-      ExecuteType.Redo,
+      ExecuteType.Redo
     );
 
     expect(result).toStrictEqual({ ...mockResultOfAddOneDefaultRecordInDst1('rec1'), executeType: ExecuteType.Redo });

@@ -1,5 +1,3 @@
-
-
 import { UndoManager } from 'command_manager';
 import { CollaCommandName } from 'commands/enum';
 import { IJOTAction, ILocalChangeset, IOperation, IRemoteChangeset, jot } from 'engine';
@@ -26,9 +24,9 @@ export interface IEngineEvent {
 }
 
 /**
-  * Real-time collaboration engine, providing real-time collaboration support for any serializable JSON structure data
-  * TODO: Listen to the datasheet loaded event, supplementary check whether the version has fallen behind
-  */
+ * Real-time collaboration engine, providing real-time collaboration support for any serializable JSON structure data
+ * TODO: Listen to the datasheet loaded event, supplementary check whether the version has fallen behind
+ */
 export class Engine {
   bufferStorage: BufferStorage;
   resourceId: string;
@@ -45,14 +43,14 @@ export class Engine {
   private readonly viewPropertyFilter?: ViewPropertyFilter;
 
   constructor(params: {
-    resourceId: string,
-    resourceType: ResourceType,
-    event: IEngineEvent,
-    getRevision: () => number,
-    getNetworking: () => INetworking,
-    getState: () => any,
-    lsStore: ILsStore,
-    dispatch: (action: any) => void,
+    resourceId: string;
+    resourceType: ResourceType;
+    event: IEngineEvent;
+    getRevision: () => number;
+    getNetworking: () => INetworking;
+    getState: () => any;
+    lsStore: ILsStore;
+    dispatch: (action: any) => void;
   }) {
     const { resourceId, resourceType, getRevision, getNetworking, lsStore, event, getState, dispatch } = params;
     this.resourceId = resourceId;
@@ -76,15 +74,15 @@ export class Engine {
    * in the case of accidental network disconnection and active refresh
    */
   pushOpBuffer(operation: IOperation) {
-    const _actions = this.viewPropertyFilter ?
-      this.viewPropertyFilter.parseActions(operation.actions, { commandName: operation.cmd as CollaCommandName }) :
-      operation.actions;
+    const _actions = this.viewPropertyFilter
+      ? this.viewPropertyFilter.parseActions(operation.actions, { commandName: operation.cmd as CollaCommandName })
+      : operation.actions;
     if (_actions.length) {
       this.bufferStorage.pushOpBuffer({
         ...operation,
         actions: _actions,
         revision: this.getRevision(),
-        resourceType: this.resourceType
+        resourceType: this.resourceType,
       });
     }
   }
@@ -169,12 +167,13 @@ export class Engine {
       this.bufferStorage.clearLocalPendingChangeset();
       this.bufferStorage.clearOpBuffer();
 
-      this.event.onError && this.event.onError({
-        type: ErrorType.CollaError,
-        code: ErrorCode.EngineCreateFailed,
-        message: t(Strings.local_data_conflict),
-        modalType: ModalType.Info
-      });
+      this.event.onError &&
+        this.event.onError({
+          type: ErrorType.CollaError,
+          code: ErrorCode.EngineCreateFailed,
+          message: t(Strings.local_data_conflict),
+          modalType: ModalType.Info,
+        });
     }
   }
 
@@ -205,16 +204,16 @@ export class Engine {
     let otherCmdTriggerSubscription = false;
 
     const fieldMap = getFieldMap(this.getState(), this.resourceId);
-    remoteChangeset.operations.forEach(op => {
+    remoteChangeset.operations.forEach((op) => {
       // AddRecords
       if (op.cmd === CollaCommandName.AddRecords) {
-        if (fieldMap && Object.values(fieldMap).some(field => field.type === FieldType.CreatedBy && field.property.subscription)) {
+        if (fieldMap && Object.values(fieldMap).some((field) => field.type === FieldType.CreatedBy && field.property.subscription)) {
           hasCreatedFieldWithSubscription = true;
           return;
         }
       } else {
         // other command
-        op.actions.map(action => {
+        op.actions.map((action) => {
           const path = testPath(action.p, ['recordMap', ':recordId', 'data', ':fieldId']);
           if (path.pass) {
             const field = fieldMap?.[path.fieldId];
@@ -233,8 +232,8 @@ export class Engine {
   }
 
   /**
-    * The submitted changeset is accepted by the service
-    */
+   * The submitted changeset is accepted by the service
+   */
   async handleAcceptCommit(remoteChangeset: IRemoteChangeset) {
     // Check version continuity, if not, add it first.
     await this.checkMissChanges(remoteChangeset.revision);
@@ -252,8 +251,8 @@ export class Engine {
       remoteChangeset?.messageId === this.bufferStorage.localPendingChangeset?.messageId &&
       remoteChangeset?.revision === revision + 1
     ) {
-      const filteredOperations = remoteChangeset.operations.filter(op => {
-        return (op.cmd === CollaCommandName.SystemSetRecords || op.cmd === CollaCommandName.SystemSetFieldAttr);
+      const filteredOperations = remoteChangeset.operations.filter((op) => {
+        return op.cmd === CollaCommandName.SystemSetRecords || op.cmd === CollaCommandName.SystemSetFieldAttr;
       });
 
       if (filteredOperations.length) {
@@ -274,8 +273,14 @@ export class Engine {
    */
   private async fetchMissVersion(startRevision: number, endRevision: number): Promise<IRemoteChangeset[]> {
     console.log('fetchingMissVersion', this.resourceId, startRevision, endRevision);
-    const result = await DatasheetApi.fetchChangesets<IChangesetPack>(this.resourceId, this.resourceType,
-      startRevision, endRevision, this.getState().pageParams.nodeId, this.getState().pageParams.shareId);
+    const result = await DatasheetApi.fetchChangesets<IChangesetPack>(
+      this.resourceId,
+      this.resourceType,
+      startRevision,
+      endRevision,
+      this.getState().pageParams.nodeId,
+      this.getState().pageParams.shareId
+    );
     if (result.data.success) {
       console.log('fetchMissVersion success: ', result.data.data);
 
@@ -322,7 +327,7 @@ export class Engine {
     // must ensure that data.revision does not jump carry
     if (cs.revision > revision + 1) {
       console.log('revision error', revision, cs.revision);
-      throw new Error('miss changes didn\'t well prepared');
+      throw new Error("miss changes didn't well prepared");
     }
 
     // Changesets smaller than the current version are ignored directly
@@ -365,7 +370,7 @@ export class Engine {
     }
 
     const changesetList = await this.fetchMissVersion(revision + 1, revisionUpgradeTo);
-    changesetList.forEach(cs => {
+    changesetList.forEach((cs) => {
       this.applyNewChanges(cs);
     });
   }
@@ -394,11 +399,11 @@ export class Engine {
     if (baseRevision < revision) {
       let changesetList = await this.fetchMissVersion(baseRevision + 1, revision + 1);
       /**
-        * Check if localChangeset is already in changesetList, if so
-        * 1. It means that localChangeset has been applied to the snapshot, so it does not need to be sent locally
-        * 2. This changeset before this needs to be transformed, and the latter does not need to be transformed
-        */
-      const transformEndIndex = changesetList.findIndex(changeset => {
+       * Check if localChangeset is already in changesetList, if so
+       * 1. It means that localChangeset has been applied to the snapshot, so it does not need to be sent locally
+       * 2. This changeset before this needs to be transformed, and the latter does not need to be transformed
+       */
+      const transformEndIndex = changesetList.findIndex((changeset) => {
         return changeset.messageId === this.bufferStorage.localPendingChangeset!.messageId;
       });
 
@@ -413,7 +418,7 @@ export class Engine {
         console.log('The local opBuffer enters localPendingChangeset', this.bufferStorage.localPendingChangeset);
       }
 
-      changesetList.forEach(changeset => {
+      changesetList.forEach((changeset) => {
         this.doTransform(changeset);
       });
     }
@@ -429,11 +434,8 @@ export class Engine {
 
     // localChangeset needs to be transformed and updated to the latest version
     if (this.bufferStorage.localPendingChangeset) {
-      console.log(
-        'localPendingChangeset before transform:',
-        { localChangeset: this.bufferStorage.localPendingChangeset, remoteActions },
-      );
-      const newOperations = this.bufferStorage.localPendingChangeset.operations.map(op => {
+      console.log('localPendingChangeset before transform:', { localChangeset: this.bufferStorage.localPendingChangeset, remoteActions });
+      const newOperations = this.bufferStorage.localPendingChangeset.operations.map((op) => {
         const [leftOp, rightOp] = jot.transformX(op.actions, remoteActions);
         remoteActions = rightOp;
         return {
@@ -446,18 +448,12 @@ export class Engine {
         operations: newOperations,
         baseRevision: cs.revision,
       };
-      console.log(
-        'localChangeset after transformed: ',
-        { localChangeset: this.bufferStorage.localPendingChangeset, remoteActions },
-      );
+      console.log('localChangeset after transformed: ', { localChangeset: this.bufferStorage.localPendingChangeset, remoteActions });
     }
 
     if (this.bufferStorage.opBuffer.length) {
-      console.log(
-        'opBuffer before transform:',
-        { localChangeset: this.bufferStorage.localPendingChangeset, remoteActions },
-      );
-      this.bufferStorage.opBuffer = this.bufferStorage.opBuffer.map(op => {
+      console.log('opBuffer before transform:', { localChangeset: this.bufferStorage.localPendingChangeset, remoteActions });
+      this.bufferStorage.opBuffer = this.bufferStorage.opBuffer.map((op) => {
         const [leftOp, rightOp] = jot.transformX(op.actions, remoteActions);
         remoteActions = rightOp;
         return {
@@ -465,13 +461,12 @@ export class Engine {
           actions: leftOp,
         };
       });
-      console.log(
-        'opBuffer after transformed: ',
-        { localPendingChangeset: this.bufferStorage.localPendingChangeset, serverOperations: remoteActions },
-      );
+      console.log('opBuffer after transformed: ', {
+        localPendingChangeset: this.bufferStorage.localPendingChangeset,
+        serverOperations: remoteActions,
+      });
     }
 
     return remoteActions;
   }
 }
-

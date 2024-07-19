@@ -1,5 +1,3 @@
-
-
 import { Api } from 'exports/api';
 import axios from 'axios';
 import { getCustomConfig } from 'config';
@@ -14,14 +12,17 @@ import { setLabs, updateSpaceResource } from 'exports/store/actions';
  */
 export const spaceList = (): any => {
   return (dispatch: any) => {
-    Api.spaceList().then((res) => {
-      const { success, data } = res.data;
-      if (success) {
-        dispatch(setSpaceList(data));
+    Api.spaceList().then(
+      (res) => {
+        const { success, data } = res.data;
+        if (success) {
+          dispatch(setSpaceList(data));
+        }
+      },
+      (err) => {
+        console.error('API.spaceList error', err);
       }
-    }, err => {
-      console.error('API.spaceList error', err);
-    });
+    );
   };
 };
 
@@ -52,16 +53,19 @@ export const setQuitSpaceId = (spaceId: string) => {
  */
 export const quitSpace = (spaceId: string) => {
   return (dispatch: any) => {
-    Api.quitSpace(spaceId).then((res) => {
-      const { success } = res.data;
-      if (success) {
-        dispatch(setQuitSpaceId(''));
-        dispatch(initCatalogTree());
-        dispatch(getUserMe());
+    Api.quitSpace(spaceId).then(
+      (res) => {
+        const { success } = res.data;
+        if (success) {
+          dispatch(setQuitSpaceId(''));
+          dispatch(initCatalogTree());
+          dispatch(getUserMe());
+        }
+      },
+      (err) => {
+        console.log('API.quitSpace error', err);
       }
-    }, err => {
-      console.log('API.quitSpace error', err);
-    });
+    );
   };
 };
 
@@ -184,21 +188,24 @@ export const getSpaceInfo = (spaceId: string, ignoreTimeLimit: boolean = false) 
 
     // prevent too many requests.
     // after last call > 1 min
-    if (!ignoreTimeLimit && (Date.now() - lastUpdateTime < 1000 * 60)) {
+    if (!ignoreTimeLimit && Date.now() - lastUpdateTime < 1000 * 60) {
       return;
     }
 
-    Api.spaceInfo(spaceId).then((res) => {
-      const { data, success } = res.data;
-      if (success) {
-        dispatch(setSpaceInfo({ ...data, lastUpdateTime: Date.now() }));
-        dispatch(setSpaceFeatures(data.feature));
-        dispatch(updateSpaceResource(data.userResource));
-        dispatch(setLabs(data.labsKeys));
+    Api.spaceInfo(spaceId).then(
+      (res) => {
+        const { data, success } = res.data;
+        if (success) {
+          dispatch(setSpaceInfo({ ...data, lastUpdateTime: Date.now() }));
+          dispatch(setSpaceFeatures(data.feature));
+          dispatch(updateSpaceResource(data.userResource));
+          dispatch(setLabs(data.labsKeys));
+        }
+      },
+      (err) => {
+        console.log('API.spaceInfo error', err);
       }
-    }, err => {
-      console.log('API.spaceInfo error', err);
-    });
+    );
   };
 };
 
@@ -208,14 +215,17 @@ export const getSpaceInfo = (spaceId: string, ignoreTimeLimit: boolean = false) 
  */
 export const getSpaceFeatures = () => {
   return (dispatch: any) => {
-    Api.getSpaceFeatures().then((res) => {
-      const { data, success } = res.data;
-      if (success) {
-        dispatch(setSpaceFeatures(data));
+    Api.getSpaceFeatures().then(
+      (res) => {
+        const { data, success } = res.data;
+        if (success) {
+          dispatch(setSpaceFeatures(data));
+        }
+      },
+      (err) => {
+        console.log('API.getSpaceFeatures error', err);
       }
-    }, err => {
-      console.log('API.getSpaceFeatures error', err);
-    });
+    );
   };
 };
 
@@ -238,14 +248,17 @@ export const fetchMarketplaceApps = (spaceId: string) => {
       return;
     }
 
-    Api.getMarketplaceApps(spaceId).then((res) => {
-      const { success, data } = res.data;
-      if (success) {
-        dispatch(setMarketPlaceApps(data));
+    Api.getMarketplaceApps(spaceId).then(
+      (res) => {
+        const { success, data } = res.data;
+        if (success) {
+          dispatch(setMarketPlaceApps(data));
+        }
+      },
+      (err) => {
+        console.log('API.getMarketplaceApps error', err);
       }
-    }, err => {
-      console.log('API.getMarketplaceApps error', err);
-    });
+    );
   };
 };
 
@@ -265,4 +278,3 @@ export const setEnvs = (envs: IEnvs) => {
     payload: envs,
   };
 };
-

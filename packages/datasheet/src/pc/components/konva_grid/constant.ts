@@ -1,5 +1,3 @@
-
-
 import { FieldHeadIconType } from './interface';
 
 export const GRID_FIELD_HEAD_HEIGHT = 40; // Height of field header

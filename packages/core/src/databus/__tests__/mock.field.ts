@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType, IAPIMetaField } from 'types';
 
 export const mockFieldVos: IAPIMetaField[] = [

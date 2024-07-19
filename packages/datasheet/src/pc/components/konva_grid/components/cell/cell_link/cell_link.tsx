@@ -1,5 +1,3 @@
-
-
 import { KonvaEventObject } from 'konva/lib/Node';
 import dynamic from 'next/dynamic';
 import { FC, useContext, useState } from 'react';
@@ -105,7 +103,7 @@ export const CellLink: FC<React.PropsWithChildren<ICellProps>> = (props) => {
   if (!realField) {
     return null;
   }
-  
+
   const { limitToView, foreignDatasheetId } = realField.property;
   const addBtnVisible = !realField.property.limitSingleRecord || renderContent == null;
 

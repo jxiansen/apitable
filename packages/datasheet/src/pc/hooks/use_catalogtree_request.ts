@@ -1,5 +1,3 @@
-
-
 import { shallowEqual } from 'react-redux';
 import {
   Api,
@@ -505,11 +503,13 @@ export const useCatalogTreeRequest = () => {
           targetNode.hasChildren &&
           !targetNode.children.length
         ) {
-          dispatch(StoreActions.deleteNodeAction({
-            parentId: nodeMaps[nodeId].parentId,
-            nodeId,
-            module,
-          }));
+          dispatch(
+            StoreActions.deleteNodeAction({
+              parentId: nodeMaps[nodeId].parentId,
+              nodeId,
+              module,
+            }),
+          );
           return;
         }
         dispatch(StoreActions.moveTo(nodeId, targetNodeId, pos, module));

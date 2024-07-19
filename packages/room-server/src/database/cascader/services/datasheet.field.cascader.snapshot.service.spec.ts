@@ -1,4 +1,3 @@
-
 import { DatasheetService } from 'database/datasheet/services/datasheet.service';
 import { RestService } from 'shared/services/rest/rest.service';
 import { CascaderChildren } from '../models/cascader.children';
@@ -40,7 +39,7 @@ describe('DatasheetFieldTreeSelectService', () => {
   let datasheetService: DatasheetService;
   let datasheetCascaderFieldRepository: DatasheetCascaderFieldRepository;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [
         WinstonModule.forRootAsync({
@@ -53,7 +52,7 @@ describe('DatasheetFieldTreeSelectService', () => {
           provide: NodeService,
           useValue: {
             getSpaceIdByNodeId: jest.fn(),
-          }
+          },
         },
         {
           provide: RestService,
@@ -72,7 +71,7 @@ describe('DatasheetFieldTreeSelectService', () => {
           provide: UnitService,
           useValue: {
             getUnitInfo: jest.fn(),
-          }
+          },
         },
         CascaderDatabusService,
         DatasheetFieldCascaderSnapshotService,
@@ -85,7 +84,7 @@ describe('DatasheetFieldTreeSelectService', () => {
             create: jest.fn(),
             manager: {
               transaction: jest.fn(),
-            }
+            },
           },
         },
       ],
@@ -97,11 +96,11 @@ describe('DatasheetFieldTreeSelectService', () => {
     datasheetCascaderFieldRepository = moduleFixture.get<DatasheetCascaderFieldRepository>(DatasheetCascaderFieldRepository);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
-  it('should returns tree select nodes snapshot when given snapshot records', async() => {
+  it('should returns tree select nodes snapshot when given snapshot records', async () => {
     jest.spyOn(datasheetCascaderFieldRepository, 'selectRecordData').mockResolvedValue([
       {
         spaceId: 'spc41',
@@ -205,7 +204,7 @@ describe('DatasheetFieldTreeSelectService', () => {
     expect(cascaderNodes.treeSelectNodes[1]!.children[0]!.children[0]!.text).toEqual('level-3-6');
   });
 
-  it('unique branch', async() => {
+  it('unique branch', async () => {
     jest.spyOn(datasheetCascaderFieldRepository, 'selectRecordData').mockResolvedValue([
       {
         spaceId: 'spc41',
@@ -258,7 +257,7 @@ describe('DatasheetFieldTreeSelectService', () => {
     expect(treeSelects.treeSelectNodes[2]!.children[0]!.children.length).toEqual(1);
   });
 
-  it('given lack text cell record when given snapshot records', async() => {
+  it('given lack text cell record when given snapshot records', async () => {
     jest.spyOn(datasheetCascaderFieldRepository, 'selectRecordData').mockResolvedValue([
       {
         spaceId: 'spc24',
@@ -314,7 +313,7 @@ describe('DatasheetFieldTreeSelectService', () => {
     expect(cascaderNodes.treeSelectNodes[0]!.children[1]!.children.length).toEqual(0);
   });
 
-  it('should be pass when save snapshot', async() => {
+  it('should be pass when save snapshot', async () => {
     jest.spyOn(datasheetService, 'getBasePacks').mockResolvedValue([
       {
         datasheet: {

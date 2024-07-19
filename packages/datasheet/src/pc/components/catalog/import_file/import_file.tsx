@@ -1,5 +1,3 @@
-
-
 import { Progress, Upload } from 'antd';
 import { FC, useState } from 'react';
 import { TextButton, useThemeColors } from '@apitable/components';

@@ -1,5 +1,3 @@
-
-
 import classnames from 'classnames';
 import * as React from 'react';
 import { Field, FieldType, IField } from '@apitable/core';

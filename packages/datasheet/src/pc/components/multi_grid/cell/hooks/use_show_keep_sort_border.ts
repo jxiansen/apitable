@@ -1,5 +1,3 @@
-
-
 import { shallowEqual } from 'react-redux';
 import { Selectors } from '@apitable/core';
 

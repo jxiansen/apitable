@@ -1,5 +1,3 @@
-
-
 import { cellValueToImageSrc, IAttachmentValue, IImageSrcOption, isImage, isPdf, isWebp, Settings } from '@apitable/core';
 import accept from 'attr-accept';
 import Bowser from 'bowser';
@@ -48,10 +46,7 @@ export enum DocType {
   PPT,
 }
 
-export const NO_SUPPORT_IMG_MIME_TYPE = [
-  'image/vnd.adobe.photoshop',
-  'image/tiff',
-];
+export const NO_SUPPORT_IMG_MIME_TYPE = ['image/vnd.adobe.photoshop', 'image/tiff'];
 
 const WORD_MIME_TYPE = [
   'application/msword',
@@ -82,22 +77,14 @@ const EXCEL_MIME_TYPE = [
   'text/csv',
 ];
 
-export const DOC_MIME_TYPE = [
-  ...WORD_MIME_TYPE,
-  ...EXCEL_MIME_TYPE,
-  ...PPT_MIME_TYPE,
-];
+export const DOC_MIME_TYPE = [...WORD_MIME_TYPE, ...EXCEL_MIME_TYPE, ...PPT_MIME_TYPE];
 
 const MEDIA_TYPE = ['audio/*', 'video/*'];
 
 // ts suffix files are recognized as video/mp2t video format by default.
 const INVALID_MEDIA_TYPE = ['video/mp2t'];
 
-const ZIPPED_TYPE = [
-  'application/zip',
-  'application/x-7z-compressed',
-  'application/x-rar-compressed',
-];
+const ZIPPED_TYPE = ['application/zip', 'application/x-7z-compressed', 'application/x-rar-compressed'];
 
 interface IFileLikeProps {
   name: string;
@@ -112,7 +99,7 @@ export function isWhatFileType(file: IFileLikeProps) {
   if (isPdf(file)) {
     return FileType.Pdf;
   }
-  if (accept(file, DOC_MIME_TYPE) || inferredType && DOC_MIME_TYPE.includes(inferredType)) {
+  if (accept(file, DOC_MIME_TYPE) || (inferredType && DOC_MIME_TYPE.includes(inferredType))) {
     return FileType.Doc;
   }
   if (accept(file, MEDIA_TYPE) && inferredType && !INVALID_MEDIA_TYPE.includes(inferredType)) {
@@ -129,13 +116,13 @@ export function isWhatFileType(file: IFileLikeProps) {
 
 export function isDocType(file: IFileLikeProps) {
   const inferredType = mime.lookup(file.name);
-  if (accept(file, WORD_MIME_TYPE) || inferredType && WORD_MIME_TYPE.includes(inferredType)) {
+  if (accept(file, WORD_MIME_TYPE) || (inferredType && WORD_MIME_TYPE.includes(inferredType))) {
     return DocType.Word;
   }
-  if (accept(file, PPT_MIME_TYPE) || inferredType && PPT_MIME_TYPE.includes(inferredType)) {
+  if (accept(file, PPT_MIME_TYPE) || (inferredType && PPT_MIME_TYPE.includes(inferredType))) {
     return DocType.PPT;
   }
-  if (accept(file, EXCEL_MIME_TYPE) || inferredType && EXCEL_MIME_TYPE.includes(inferredType)) {
+  if (accept(file, EXCEL_MIME_TYPE) || (inferredType && EXCEL_MIME_TYPE.includes(inferredType))) {
     return DocType.Excel;
   }
   return '';
@@ -145,12 +132,14 @@ export function isDocType(file: IFileLikeProps) {
  * copy from next /image
 
  */
-type StaticImageData = string | {
-  src: string;
-  height: number;
-  width: number;
-  blurDataURL?: string;
-};
+type StaticImageData =
+  | string
+  | {
+      src: string;
+      height: number;
+      width: number;
+      blurDataURL?: string;
+    };
 
 export function renderFileIconUrl(curFile: IFileLikeProps) {
   const file = renderFileIcon(curFile);
@@ -205,12 +194,7 @@ export const imageSizeExceeded = (size: number) => {
  */
 export const showOriginImageThumbnail = (file: IAttachmentValue) => {
   const fileArgument = { name: file.name, type: file.mimeType };
-  return (
-    (isPdf(fileArgument) && file.preview) ||
-    (isImage(fileArgument) &&
-      !imageSizeExceeded(file.size) &&
-      isSupportImage(file.mimeType))
-  );
+  return (isPdf(fileArgument) && file.preview) || (isImage(fileArgument) && !imageSizeExceeded(file.size) && isSupportImage(file.mimeType));
 };
 
 export const isSupportImage = (mimeType: string) => {
@@ -220,10 +204,7 @@ export const isSupportImage = (mimeType: string) => {
 // Get a preview of the file.
 // 1. Pictures, PDF Show pictures.
 // 2. Other file types show the corresponding Icon.
-export const getCellValueThumbSrc = (
-  file: IAttachmentValue,
-  option: IImageSrcOption
-) => {
+export const getCellValueThumbSrc = (file: IAttachmentValue, option: IImageSrcOption) => {
   let imgSrc = '';
   if (!file) {
     return imgSrc;
@@ -249,9 +230,7 @@ export const getCellValueThumbSrc = (
 };
 
 export function getDownloadSrc(fileInfo: IAttachmentValue) {
-  return `${Settings[fileInfo.bucket].value}${
-    fileInfo.token
-  }?attname=${encodeURIComponent(fileInfo.name)}`;
+  return `${Settings[fileInfo.bucket].value}${fileInfo.token}?attname=${encodeURIComponent(fileInfo.name)}`;
 }
 
 export function getAvInfoRequestUrl(fileInfo: IAttachmentValue) {

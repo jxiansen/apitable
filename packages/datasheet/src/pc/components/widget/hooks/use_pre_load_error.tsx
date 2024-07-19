@@ -1,5 +1,3 @@
-
-
 import { FC, useCallback, useMemo } from 'react';
 import { IWidget, Strings, t, WidgetInstallEnv, WidgetRuntimeEnv } from '@apitable/core';
 import { ScreenSize } from 'pc/components/common/component_display';

@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Story } from '@storybook/react';
 import { DownloadOutlined } from '@apitable/icons';
@@ -27,8 +25,8 @@ export default {
     },
   },
   args: {
-    children: BUTTON_TEXT
-  }
+    children: BUTTON_TEXT,
+  },
 };
 
 const Template: Story<ITextButtonProps> = (args) => <TextButton {...args} />;
@@ -37,35 +35,35 @@ export const Default = Template.bind({});
 
 export const PrefixIcon = Template.bind({});
 PrefixIcon.args = {
-  prefixIcon: <DownloadOutlined/>
+  prefixIcon: <DownloadOutlined />,
 };
 
 export const SuffixIcon = Template.bind({});
 SuffixIcon.args = {
-  suffixIcon: <DownloadOutlined />
+  suffixIcon: <DownloadOutlined />,
 };
 
 export const DangerColor = Template.bind({});
 DangerColor.args = {
-  color: 'danger'
+  color: 'danger',
 };
 
 export const PrimaryColor = Template.bind({});
 PrimaryColor.args = {
-  color: 'primary'
+  color: 'primary',
 };
 
 export const LargeSize = Template.bind({});
 LargeSize.args = {
-  size: 'large'
+  size: 'large',
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  disabled: true
+  disabled: true,
 };
 
 export const Block = Template.bind({});
 Block.args = {
-  block: true
+  block: true,
 };

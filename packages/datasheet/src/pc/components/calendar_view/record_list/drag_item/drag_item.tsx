@@ -1,5 +1,3 @@
-
-
 import cls from 'classnames';
 import { memo, MouseEvent, useContext } from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';

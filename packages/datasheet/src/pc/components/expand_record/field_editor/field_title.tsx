@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import * as React from 'react';
 import { useContext, useMemo, useRef, useState } from 'react';
@@ -214,25 +212,25 @@ export const FieldTitle: React.FC<React.PropsWithChildren<IFieldTitleProps>> = (
             (!fieldPermissionMap || !fieldPermissionMap[fieldId] || fieldPermissionMap[fieldId].manageable) &&
             !mirrorId &&
             nodeId && (
-            <div className={styles.buttonsGroup} style={{ display: showFieldSetting ? 'flex' : '' }}>
-              <Tooltip title={t(Strings.insert_new_field_below)}>
-                <IconButton
-                  component="button"
-                  shape="square"
-                  icon={() => <AddOutlined size={16} color={colors.fc3} />}
-                  onClick={(e) => onAppendField(e, Number(columnIndexOfView), columnHidden)}
-                />
-              </Tooltip>
-              <Tooltip title={t(Strings.config)}>
-                <IconButton
-                  component="button"
-                  shape="square"
-                  icon={() => <MoreOutlined size={16} color={colors.fc3} />}
-                  onClick={(e) => onShowMenu(e)}
-                />
-              </Tooltip>
-            </div>
-          )}
+              <div className={styles.buttonsGroup} style={{ display: showFieldSetting ? 'flex' : '' }}>
+                <Tooltip title={t(Strings.insert_new_field_below)}>
+                  <IconButton
+                    component="button"
+                    shape="square"
+                    icon={() => <AddOutlined size={16} color={colors.fc3} />}
+                    onClick={(e) => onAppendField(e, Number(columnIndexOfView), columnHidden)}
+                  />
+                </Tooltip>
+                <Tooltip title={t(Strings.config)}>
+                  <IconButton
+                    component="button"
+                    shape="square"
+                    icon={() => <MoreOutlined size={16} color={colors.fc3} />}
+                    onClick={(e) => onShowMenu(e)}
+                  />
+                </Tooltip>
+              </div>
+            )}
 
           {showAlarm && field.type === FieldType.DateTime && isMobile && Boolean(cellValue) && (
             <LinkButton underline={false} onClick={() => setOpenAlarm(true)}>

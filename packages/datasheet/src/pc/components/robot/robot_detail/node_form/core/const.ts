@@ -1,5 +1,3 @@
-
-
 export const REQUIRED_FIELD_SYMBOL = '*';
 
 export const COMPONENT_TYPES = {

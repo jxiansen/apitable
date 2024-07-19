@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { FC, useRef } from 'react';
 import { ScrollBarType } from '../../interfaces';

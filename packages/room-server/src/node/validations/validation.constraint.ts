@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@nestjs/common';
 import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 import { NodeRepository } from 'node/repositories/node.repository';
@@ -18,7 +16,7 @@ export class IsNodeExistConstraint implements ValidatorConstraintInterface {
 }
 
 export function IsNodeExist(validationOptions?: ValidationOptions) {
-  return function(object: Object, propertyName: string) {
+  return function (object: Object, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,

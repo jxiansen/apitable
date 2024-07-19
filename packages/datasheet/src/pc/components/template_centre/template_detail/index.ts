@@ -1,5 +1,3 @@
-
-
 export * from './template_detail';
 export { NodeTree } from './node_tree';
 

@@ -1,5 +1,3 @@
-
-
 import { IComments, IFieldMap, IRecord, IReduxState, IViewColumn } from 'exports/store/interfaces';
 import { Store } from 'redux';
 
@@ -11,7 +9,10 @@ export class Record {
    *
    * @deprecated This constructor is not intended for public use.
    */
-  constructor(private readonly record: IRecord, options: IRecordOptions) {
+  constructor(
+    private readonly record: IRecord,
+    options: IRecordOptions
+  ) {
     const { voTransformOptions } = options;
     this.voTransformOptions = voTransformOptions;
   }

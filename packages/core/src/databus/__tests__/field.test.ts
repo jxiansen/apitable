@@ -1,5 +1,3 @@
-
-
 import { FieldType } from 'types';
 import { MockDataBus, resetDataLoader } from './mock.databus';
 
@@ -8,7 +6,7 @@ const db = MockDataBus.getDatabase();
 beforeAll(resetDataLoader);
 
 describe('field info', () => {
-  test('basic field info', async() => {
+  test('basic field info', async () => {
     const dst1 = await db.getDatasheet('dst1', {
       loadOptions: {},
       storeOptions: {},
@@ -22,7 +20,7 @@ describe('field info', () => {
 
     const fields = await view1!.getFields({});
 
-    const fieldData = fields.map(field => ({ id: field.id, name: field.name, type: field.type }));
+    const fieldData = fields.map((field) => ({ id: field.id, name: field.name, type: field.type }));
 
     expect(fieldData).toStrictEqual([
       {
@@ -40,7 +38,7 @@ describe('field info', () => {
 });
 
 describe('getViewObject', () => {
-  test('verbatim', async() => {
+  test('verbatim', async () => {
     const dst1 = await db.getDatasheet('dst1', {
       loadOptions: {},
       storeOptions: {},
@@ -56,7 +54,7 @@ describe('getViewObject', () => {
 
     expect(fields.length).toBeGreaterThan(1);
 
-    expect(fields[1]!.getViewObject(x => x)).toStrictEqual({
+    expect(fields[1]!.getViewObject((x) => x)).toStrictEqual({
       id: 'fld2',
       name: 'field 2',
       type: FieldType.MultiSelect,

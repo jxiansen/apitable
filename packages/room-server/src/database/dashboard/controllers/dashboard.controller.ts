@@ -1,5 +1,3 @@
-
-
 import { Controller, Get, Headers, Param, UseInterceptors } from '@nestjs/common';
 import { DashboardService } from 'database/dashboard/services/dashboard.service';
 import { UserService } from 'user/services/user.service';
@@ -18,14 +16,11 @@ export class DashboardController {
     private readonly nodeService: NodeService,
     private readonly dashboardService: DashboardService,
     private readonly nodeShareSettingService: NodeShareSettingService,
-  ) { }
+  ) {}
 
   @Get('dashboards/:dashboardId/dataPack')
   @UseInterceptors(ResourceDataInterceptor)
-  async getDatePack(@Headers('cookie') cookie: string,
-                    @Headers('token') token: string,
-                    @Param('dashboardId') dashboardId: string,
-  ) {
+  async getDatePack(@Headers('cookie') cookie: string, @Headers('token') token: string, @Param('dashboardId') dashboardId: string) {
     const { userId } = await this.userService.getMe({ cookie });
     await this.nodeService.checkUserForNode(userId, dashboardId);
     return await this.dashboardService.fetchDashboardPack(dashboardId, { token, cookie });
@@ -57,5 +52,4 @@ export class DashboardController {
     }
     return await this.dashboardService.fetchTemplateDashboardPack(templateId, dashboardId, { token, cookie });
   }
-
 }

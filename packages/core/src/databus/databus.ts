@@ -1,5 +1,3 @@
-
-
 import { Database } from './logic';
 import { IDataStorageProvider, IStoreProvider } from './providers';
 

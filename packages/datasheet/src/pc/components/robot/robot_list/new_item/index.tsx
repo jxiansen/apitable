@@ -10,7 +10,7 @@ interface INewItemProps {
   height?: number;
   className?: string;
   children: ReactNode;
-  itemId?: string,
+  itemId?: string;
   disabled: boolean;
   onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
@@ -37,8 +37,7 @@ export const StyledBox = styled(Box)<{ disabled?: boolean }>`
 
 const DEFAULT_ADD_ITEM_HEIGHT = 84;
 
-export const NewItem: FC<INewItemProps> = forwardRef<any, INewItemProps>(({ className, itemId,
-  onClick, height, children, disabled }, ref) => {
+export const NewItem: FC<INewItemProps> = forwardRef<any, INewItemProps>(({ className, itemId, onClick, height, children, disabled }, ref) => {
   const theme = useTheme();
 
   return (

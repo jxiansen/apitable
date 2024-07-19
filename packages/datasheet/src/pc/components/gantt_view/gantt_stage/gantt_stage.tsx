@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';

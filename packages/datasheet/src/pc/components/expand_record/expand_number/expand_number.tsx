@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { forwardRef, memo, useEffect } from 'react';
 import { IBaseEditorProps, IEditor } from 'pc/components/editors/interface';

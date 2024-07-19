@@ -1,12 +1,11 @@
-
-
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useCounter } from 'ahooks';
 import { loadWidget, WidgetLoadError } from '../../initialize_widget';
 
 export function useWidgetComponent(
-  codeUrl?: string, widgetPackageId?: string):
-  [React.FC<React.PropsWithChildren<unknown>> | undefined, () => void, boolean, WidgetLoadError | undefined] {
+  codeUrl?: string,
+  widgetPackageId?: string
+): [React.FC<React.PropsWithChildren<unknown>> | undefined, () => void, boolean, WidgetLoadError | undefined] {
   const componentRef = useRef<React.FC>();
   // if need to load the widget package.
   const validate = Boolean(codeUrl && widgetPackageId);
@@ -22,19 +21,24 @@ export function useWidgetComponent(
       return;
     }
 
-    loadWidget(codeUrl!, widgetPackageId!,
+    loadWidget(
+      codeUrl!,
+      widgetPackageId!,
       // when version is refreshed or incoming codeUrl changes, the widget code package is reloaded
       count > preCount.current || (Boolean(preCodeUrl.current) && preCodeUrl.current !== codeUrl)
-    ).then(component => {
-      componentRef.current = component;
-      setLoading(false);
-      setError(undefined);
-    }).catch(error => {
-      setError(error);
-    }).then(() => {
-      preCount.current = count;
-      preCodeUrl.current = codeUrl;
-    });
+    )
+      .then((component) => {
+        componentRef.current = component;
+        setLoading(false);
+        setError(undefined);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .then(() => {
+        preCount.current = count;
+        preCodeUrl.current = codeUrl;
+      });
   }, [codeUrl, count, setLoading, widgetPackageId, validate]);
 
   const refresh = useCallback(() => {

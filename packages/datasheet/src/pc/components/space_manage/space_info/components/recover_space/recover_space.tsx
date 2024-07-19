@@ -1,5 +1,3 @@
-
-
 import { Modal as ModalMobile } from 'antd-mobile';
 import cls from 'classnames';
 import dayjs from 'dayjs';

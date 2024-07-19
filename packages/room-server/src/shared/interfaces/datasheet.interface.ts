@@ -1,5 +1,3 @@
-
-
 import type { CellFormatEnum, ICellValue, IFieldMap, IMeta, IRecord, IRecordMap, IReduxState, ISnapshot, ISortedField } from '@apitable/core';
 import type { Store } from 'redux';
 import type { IBaseException } from 'shared/exception/base.exception';

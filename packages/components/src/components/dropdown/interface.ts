@@ -1,5 +1,3 @@
-
-
 import { IContextMenuItemProps } from '../context_menu';
 
 export interface IDropdownProps {

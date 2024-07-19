@@ -1,5 +1,3 @@
-
-
 import { Line as LineComponent } from 'react-konva';
 
 const Line = (props: any) => {

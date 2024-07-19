@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { FC, memo, useContext } from 'react';
 import { useGetSignatureAssertFunc } from '@apitable/widget-sdk';

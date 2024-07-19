@@ -1,5 +1,3 @@
-
-
 import { LS_DATASHEET_NAMESPACE } from 'config/constant';
 import { ResourceType } from 'types';
 import { generateRandomString } from 'utils';
@@ -59,8 +57,7 @@ interface LocalForageDbMethodsCore {
 
   keys(callback?: (err: any, keys: string[]) => void): Promise<string[]>;
 
-  iterate<T, U>(iteratee: (value: T, key: string, iterationNumber: number) => U,
-                callback?: (err: any, result: U) => void): Promise<U>;
+  iterate<T, U>(iteratee: (value: T, key: string, iterationNumber: number) => U, callback?: (err: any, result: U) => void): Promise<U>;
 }
 
 export interface ILocalForage extends LocalForageDbMethodsCore {
@@ -98,9 +95,9 @@ export interface ILocalForage extends LocalForageDbMethodsCore {
 }
 
 /**
-  * used to cache opBuffer and localChangeset in local localStorage
-  * Unsaved data can also be recovered locally for poor network conditions/unexpected shutdown
-  */
+ * used to cache opBuffer and localChangeset in local localStorage
+ * Unsaved data can also be recovered locally for poor network conditions/unexpected shutdown
+ */
 export class BufferStorage {
   static bufferStorageNamespace = `${LS_DATASHEET_NAMESPACE}.opBuffer`;
   static pendingChangesetsNamespace = `${LS_DATASHEET_NAMESPACE}.localChangeset`;
@@ -113,7 +110,11 @@ export class BufferStorage {
   private localPendingChangesetStorage = this.lsStore.namespace(BufferStorage.pendingChangesetsNamespace);
   private _localPendingChangeset: ILocalChangeset | undefined;
 
-  constructor(public resourceId: string, public resourceType: ResourceType, public lsStore: ILsStore) {
+  constructor(
+    public resourceId: string,
+    public resourceType: ResourceType,
+    public lsStore: ILsStore
+  ) {
     this.resumeLocalState();
   }
 
@@ -196,7 +197,7 @@ export class BufferStorage {
    */
   pushOpBuffer(operation: IOperation) {
     // To trigger the setter, assign directly instead of push
-    const opBuffer = this. opBuffer;
+    const opBuffer = this.opBuffer;
     this.opBuffer = [...opBuffer, operation];
   }
 
@@ -221,12 +222,12 @@ export class BufferStorage {
   }
 
   /**
-    * @description A processing of the collaborative data structure for the online cache
-    * Only the localChangeset is considered here. The op buffer storage records the op temp structure , which does not need to be compatible.
-    * @param changeset
-    * Currently 0.6.2 , this compatibility processing can be removed after two or three versions
-    * @private
-    */
+   * @description A processing of the collaborative data structure for the online cache
+   * Only the localChangeset is considered here. The op buffer storage records the op temp structure , which does not need to be compatible.
+   * @param changeset
+   * Currently 0.6.2 , this compatibility processing can be removed after two or three versions
+   * @private
+   */
   private compatibleLocalChangeset(changeset: ILocalChangeset | undefined): ILocalChangeset | undefined {
     if (!changeset) {
       return;

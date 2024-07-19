@@ -1,11 +1,6 @@
-
-
 import axios from 'axios';
 import * as Url from '../../shared/api/url';
-import {
-  IApiWrapper, ILocateIdMap,
-  IUserInfo,
-} from '../../../exports/store/interfaces';
+import { IApiWrapper, ILocateIdMap, IUserInfo } from '../../../exports/store/interfaces';
 
 /**
  *
@@ -82,4 +77,3 @@ export function updateUser(info: {
 export function updateOwnerMemberInfo(memberName: string) {
   return axios.post(Url.MEMBER_UPDATE, { memberName });
 }
-

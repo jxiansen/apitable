@@ -1,5 +1,3 @@
-
-
 import { ResourceType } from '@apitable/core';
 import { resourceService } from 'pc/resource_service';
 import { store } from 'pc/store';

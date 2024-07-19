@@ -1,5 +1,3 @@
-
-
 import { DynamicModule, Module } from '@nestjs/common';
 import { enableAmqp } from 'app.environment';
 import { QueueModule } from './queue.module';
@@ -9,17 +7,15 @@ import { QueueSenderBaseService } from './queue.sender.base.service';
   providers: [
     {
       provide: QueueSenderBaseService,
-      useClass: class QueueService extends QueueSenderBaseService {
-      },
+      useClass: class QueueService extends QueueSenderBaseService {},
     },
   ],
   exports: [
     {
       provide: QueueSenderBaseService,
-      useClass: class QueueService extends QueueSenderBaseService {
-      }
+      useClass: class QueueService extends QueueSenderBaseService {},
     },
-  ]
+  ],
 })
 export class QueueDynamicModule {
   static forRoot(): DynamicModule {

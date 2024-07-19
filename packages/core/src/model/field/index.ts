@@ -1,5 +1,3 @@
-
-
 import { Store } from 'redux';
 import {
   FieldType,
@@ -258,7 +256,9 @@ export const getFieldClass = (type: FieldType) => {
  * Before calling Field on the web side, inject the store instance first, then you don't need to pass in the store again every time you bindModel
  */
 let storeCache: Store;
-export const injectStore = (store: Store) => { storeCache = store; };
+export const injectStore = (store: Store) => {
+  storeCache = store;
+};
 
 /**
  * Bind the field model data to get an instance of the field calculation method.
@@ -330,4 +330,3 @@ Field.bindModel = bindModel as IBindFieldModel;
 // The difference between bindContext and bindModel is that
 // bindContext creates a new Field object every time, and it is mandatory to pass in the store.
 Field.bindContext = bindContext as IBindFieldContext;
-

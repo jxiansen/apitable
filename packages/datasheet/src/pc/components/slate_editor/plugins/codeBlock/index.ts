@@ -1,5 +1,3 @@
-
-
 import 'prismjs/themes/prism.css';
 
 export * from './language';

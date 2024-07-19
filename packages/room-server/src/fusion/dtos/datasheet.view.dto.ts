@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { ViewTypeTextEnum } from 'shared/enums/field.type.enum';
 import { IApiDatasheetView } from 'shared/interfaces';

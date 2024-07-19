@@ -9,12 +9,11 @@ import { AutomationPanel } from '../panel';
 import { checkIfModified } from './step_input_compare';
 import style from './styles.module.less';
 
-export const DrawerWrapper: React.FC<React.PropsWithChildren<{
+export const DrawerWrapper: React.FC<
+  React.PropsWithChildren<{
     onClose: () => void;
-}>> = React.memo(({
-
-  onClose }) => {
-
+  }>
+> = React.memo(({ onClose }) => {
   const isClosedRef = React.useRef(false);
 
   const triggers = useAtomValue(automationTriggersAtom);
@@ -27,10 +26,15 @@ export const DrawerWrapper: React.FC<React.PropsWithChildren<{
       return true;
     }
 
-    if (!checkIfModified({
-      triggers,
-      actions
-    }, localMap)) {
+    if (
+      !checkIfModified(
+        {
+          triggers,
+          actions,
+        },
+        localMap,
+      )
+    ) {
       return true;
     }
     const confirmPromise = await new Promise<boolean>((resolve) => {
@@ -60,21 +64,8 @@ export const DrawerWrapper: React.FC<React.PropsWithChildren<{
   }, [getCloseable, onClose]);
 
   return (
-    <Drawer
-      zIndex={200}
-      open
-      className={style.modalWrapper}
-      width={'90vw'}
-      onClose={handleCloseClick}
-      title={
-        null
-      }
-      destroyOnClose
-      closable={false}
-    >
-      <AutomationPanel onClose={
-        handleCloseClick
-      } />
+    <Drawer zIndex={200} open className={style.modalWrapper} width={'90vw'} onClose={handleCloseClick} title={null} destroyOnClose closable={false}>
+      <AutomationPanel onClose={handleCloseClick} />
     </Drawer>
   );
 });

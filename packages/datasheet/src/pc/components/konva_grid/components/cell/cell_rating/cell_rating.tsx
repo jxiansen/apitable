@@ -1,5 +1,3 @@
-
-
 import { memo, useContext, useState } from 'react';
 import { ConfigConstant, KONVA_DATASHEET_ID } from '@apitable/core';
 import { generateTargetName } from 'pc/components/gantt_view';

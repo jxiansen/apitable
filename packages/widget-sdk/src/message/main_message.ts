@@ -22,11 +22,11 @@ class MainMessage {
   // Current form marking.
   origin: string = 'main';
   /**
-   * Widget Map loaded by the main thread, managing connection status and 
+   * Widget Map loaded by the main thread, managing connection status and
    * view calculation subscriptions.
    * key => widgetId
    */
-  widgets: Map<string, IWidget> = new Map;
+  widgets: Map<string, IWidget> = new Map();
 
   private messageBridge: PostMessage;
 
@@ -41,7 +41,7 @@ class MainMessage {
   private wrapEmitData(data: IResponse) {
     return {
       ...data,
-      origin: this.origin
+      origin: this.origin,
     };
   }
 
@@ -56,8 +56,8 @@ class MainMessage {
   }
 
   /**
-   * @param widgetId 
-   * @returns 
+   * @param widgetId
+   * @returns
    */
   getConnectStatus(widgetId: string) {
     const widget = this.widgets.get(widgetId);
@@ -66,9 +66,9 @@ class MainMessage {
 
   /**
    * Set widget window
-   * @param widgetId 
-   * @param window 
-   * @returns 
+   * @param widgetId
+   * @param window
+   * @returns
    */
   initWidgetWindow(widgetId: string, window: IContentWindow, bindDatasheetId: string) {
     // SYN_SENT
@@ -84,16 +84,16 @@ class MainMessage {
     this.widgets.set(widgetId, {
       connect: ConnectStatus.SYN_SENT,
       subscribeViews: [],
-      bindDatasheetId
+      bindDatasheetId,
     });
     this.messageBridge.addWindow(widgetId, window!);
   }
 
   /**
    * Send messages.
-   * @param widgetId 
-   * @param type 
-   * @param data 
+   * @param widgetId
+   * @param type
+   * @param data
    */
   emit(widgetId: string, type: MessageType, data?: any, messageId?: string) {
     this.messageBridge.emit(type, this.wrapEmitData({ success: true, data: data }), widgetId, messageId);
@@ -101,8 +101,8 @@ class MainMessage {
 
   /**
    * Broadcast messages.
-   * @param type 
-   * @param data 
+   * @param type
+   * @param data
    */
   emitBroadcast(type: MessageType, data?: any) {
     this.messageBridge.emit(type, this.wrapEmitData({ success: true, data: data }));
@@ -110,9 +110,9 @@ class MainMessage {
 
   /**
    * Receiving messages.
-   * @param widgetId 
-   * @param type 
-   * @param callback 
+   * @param widgetId
+   * @param type
+   * @param callback
    */
   on(widgetId: string, type: MessageType, callback: (data: any, messageId?: string) => void) {
     this.messageBridge.on(type, interceptor(callback), widgetId, widgetId);
@@ -148,7 +148,7 @@ class MainMessage {
 
   /**
    * Get the view of all widget in the main thread or a subscribed widget.
-   * @param widgetId 
+   * @param widgetId
    */
   subscribeViews(widgetId?: string): ISubscribeView[] {
     if (widgetId) {
@@ -162,8 +162,8 @@ class MainMessage {
 
   /**
    * Receive connect a widget.
-   * @param widgetId 
-   * @param callback 
+   * @param widgetId
+   * @param callback
    * @param window
    */
   onConnectWidget(widgetId: string, callback: (status: ConnectStatus) => void) {
@@ -194,9 +194,9 @@ class MainMessage {
   syncWidgetConfig(widgetId: string, config: IWidgetConfigIframe) {
     this.emit(widgetId, MessageType.MAIN_SYNC_WIDGET_CONFIG, config);
   }
-  
+
   /**
-   * @param widgetId 
+   * @param widgetId
    */
   refreshWidget(widgetId: string) {
     this.emit(widgetId, MessageType.MAIN_REFRESH_WIDGET);
@@ -267,11 +267,11 @@ class MainMessage {
   syncActionBroadcast(action: AnyAction) {
     this.emitBroadcast(MessageType.MAIN_SYNC_ACTION, action);
   }
-  
+
   /**
    * Synchronize the action to the specified widget.
-   * @param widgetId 
-   * @param action 
+   * @param widgetId
+   * @param action
    */
   syncAction(widgetId: string, action: AnyAction, messageId?: string) {
     this.emit(widgetId, MessageType.MAIN_SYNC_ACTION, action, messageId);
@@ -283,7 +283,7 @@ class MainMessage {
 
   /**
    * Synchronizing view subscription data.
-   * @param widgetId 
+   * @param widgetId
    * @param callback Pick out the new subscriptions, the user determines if there is currently a view-derived cache,
    * and if not, go to dispatch to trigger the computation.
    */
@@ -294,7 +294,7 @@ class MainMessage {
         const currentSubscribeViews = widget.subscribeViews;
         this.widgets.set(widgetId, {
           ...widget,
-          subscribeViews
+          subscribeViews,
         });
         const newSubscribeViews = differenceBy(subscribeViews, currentSubscribeViews, ({ datasheetId, viewId }) => `${datasheetId}-${viewId}`);
         callback(newSubscribeViews);

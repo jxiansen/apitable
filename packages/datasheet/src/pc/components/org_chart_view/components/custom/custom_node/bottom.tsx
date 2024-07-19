@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { FC, useContext } from 'react';
 import { useThemeColors } from '@apitable/components';

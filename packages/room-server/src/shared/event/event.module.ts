@@ -1,5 +1,3 @@
-
-
 import { Module } from '@nestjs/common';
 import { OTEventService } from './ot.event.service';
 

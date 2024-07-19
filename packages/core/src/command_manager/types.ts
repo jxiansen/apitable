@@ -1,5 +1,3 @@
-
-
 import { IOperation } from 'engine';
 import { IFieldMap, IReduxState } from '../exports/store/interfaces';
 import { ILinkedActions } from './command';

@@ -1,5 +1,3 @@
-
-
 import { Box, Typography, useThemeColors } from '@apitable/components';
 import { Strings, t } from '@apitable/core';
 import { QuestionCircleOutlined } from '@apitable/icons';

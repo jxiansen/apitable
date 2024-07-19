@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { Reflector } from '@nestjs/core';
 import { ApiDatasheetGuard, IApiDatasheetOptions } from 'fusion/middleware/guard/api.datasheet.guard';
@@ -70,7 +68,7 @@ describe('ApiDatasheetGuard', () => {
         return expect(e).toStrictEqual(error);
       });
     });
-    it('should load metadata if requireMetadata is true', async() => {
+    it('should load metadata if requireMetadata is true', async () => {
       (context.switchToHttp().getRequest as jest.Mock).mockReturnValueOnce({
         [DATASHEET_HTTP_DECORATE]: {
           spaceId: 'aaa',

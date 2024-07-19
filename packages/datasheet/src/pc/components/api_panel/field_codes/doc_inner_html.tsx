@@ -1,5 +1,3 @@
-
-
 import template from 'lodash/template';
 import * as React from 'react';
 import { ModalType, Strings, t } from '@apitable/core';

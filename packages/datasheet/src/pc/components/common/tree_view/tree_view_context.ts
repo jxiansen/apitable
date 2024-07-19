@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { ConfigConstant } from '@apitable/core';
 import { ExpandAction } from './tree_view';

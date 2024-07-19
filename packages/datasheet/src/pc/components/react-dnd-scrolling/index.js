@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react';
 import { DndContext } from 'react-dnd';
 import { findDOMNode } from 'react-dom';

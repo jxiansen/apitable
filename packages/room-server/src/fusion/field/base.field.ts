@@ -1,5 +1,3 @@
-
-
 import { CellFormatEnum, Field, ICellValue, IField } from '@apitable/core';
 import { IFieldValidatorInterface } from 'fusion/i.field.validator.interface';
 import { ApiException, ApiTipId } from 'shared/exception';

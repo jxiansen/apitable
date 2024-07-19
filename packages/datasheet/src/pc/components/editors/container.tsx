@@ -1,5 +1,3 @@
-
-
 import { useUnmount } from 'ahooks';
 import dayjs from 'dayjs';
 import { isEmpty, isEqual, noop, omit } from 'lodash';
@@ -156,9 +154,9 @@ const EditorContainerBase: React.ForwardRefRenderFunction<IContainerEdit, Editor
   const activeCellRef = useRef<ICell | null>(
     field && record
       ? {
-        recordId: record.id,
-        fieldId: field.id,
-      }
+          recordId: record.id,
+          fieldId: field.id,
+        }
       : null,
   );
   const dispatch = useDispatch();

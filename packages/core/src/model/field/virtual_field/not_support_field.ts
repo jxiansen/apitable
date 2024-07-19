@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { ICellValue } from '../../record';
 import { Field } from '../field';
@@ -16,7 +14,7 @@ export class NotSupportField extends Field {
   get apiMetaProperty() {
     return null;
   }
-  
+
   get openValueJsonSchema() {
     return {
       title: this.field.name,

@@ -1,5 +1,3 @@
-
-
 import { IReduxState, IResource } from '../../../../../exports/store/interfaces';
 import { ResourceType } from 'types';
 import { assertNever } from 'utils';
@@ -9,7 +7,11 @@ import { getDatasheet, getPermissions, getWidgetPanels, getWidgetPanelStatus } f
 import { getWidget } from './widget';
 import { getForm, getFormClient, getFormPermission } from './form';
 import {
-  getMirror, getMirrorCollaborator, getMirrorPermission, getWidgetPanelStatusWithMirror, getWidgetPanelsWithMirror
+  getMirror,
+  getMirrorCollaborator,
+  getMirrorPermission,
+  getWidgetPanelStatusWithMirror,
+  getWidgetPanelsWithMirror,
 } from 'modules/database/store/selectors/resource/mirror';
 
 export * from './mirror';
@@ -89,9 +91,7 @@ export const getResourceRevision = (state: IReduxState, id: string, type: Resour
   assertNever(type);
 };
 
-export const getResourceNetworking = (
-  state: IReduxState, resourceId: string, resourceType: ResourceType,
-) => {
+export const getResourceNetworking = (state: IReduxState, resourceId: string, resourceType: ResourceType) => {
   if (!resourceId) {
     return;
   }
@@ -171,7 +171,7 @@ export const getResourceActiveWidgetPanel = (state: IReduxState, resourceId: str
   }
 
   if (activePanelId) {
-    return panels.find(item => item.id === activePanelId) || panels[0];
+    return panels.find((item) => item.id === activePanelId) || panels[0];
   }
 
   return panels[0];

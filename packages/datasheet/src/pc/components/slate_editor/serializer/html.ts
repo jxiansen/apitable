@@ -1,5 +1,3 @@
-
-
 import { Text } from 'slate';
 import { ElementType, MarkType, HIGHLIGHT_COLORS } from '../constant';
 import { EditorValue } from '../interface/editor';

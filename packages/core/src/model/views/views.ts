@@ -1,5 +1,3 @@
-
-
 import { ISnapshot } from '../../exports/store/interfaces';
 import { IViewProperty } from '../../exports/store/interfaces';
 import { getViewById } from 'modules/database/store/selectors/resource/datasheet/base';
@@ -39,7 +37,7 @@ export abstract class View {
     return t(Strings.record);
   }
 
-  get recordShowUnit(){
+  get recordShowUnit() {
     // TODO: i18n
     return '条';
   }

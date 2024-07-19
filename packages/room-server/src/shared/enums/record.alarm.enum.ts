@@ -1,5 +1,3 @@
-
-
 export enum RecordAlarmStatus {
   PENDING = 0,
   PROCESSING = 1,

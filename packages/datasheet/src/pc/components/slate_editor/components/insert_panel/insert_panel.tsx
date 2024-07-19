@@ -1,5 +1,3 @@
-
-
 import { useRef, useEffect, useState, useCallback, useContext, useMemo } from 'react';
 import * as React from 'react';
 import { Transforms, Editor, Path, Element, Node } from 'slate';

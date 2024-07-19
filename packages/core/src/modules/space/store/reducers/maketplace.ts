@@ -1,5 +1,3 @@
-
-
 import { SET_MARKETPLACE_APPS } from '../../../shared/store/action_constants';
 import { IApp, ISetMarketplaceAppsAction } from '../../../../exports/store/interfaces';
 

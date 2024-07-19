@@ -1,5 +1,3 @@
-
-
 import { Divider } from 'antd';
 import classNames from 'classnames';
 import { forwardRef, memo, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
@@ -49,16 +47,7 @@ interface ISearchContentRefProps {
 }
 
 const LinkEditorBase: React.ForwardRefRenderFunction<IEditor, ILinkEditorProps> = (props, ref) => {
-  const {
-    datasheetId,
-    recordId,
-    field,
-    cellValue,
-    toggleEditing: _toggleEditing,
-    onSave,
-    loading,
-    layout = LinkEditorModalLayout.Center,
-  } = props;
+  const { datasheetId, recordId, field, cellValue, toggleEditing: _toggleEditing, onSave, loading, layout = LinkEditorModalLayout.Center } = props;
   const colors = useThemeColors();
   const editing = props.editing;
 

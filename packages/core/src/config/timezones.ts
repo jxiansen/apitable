@@ -32,7 +32,7 @@ export const getTimeZone = () => {
 
 export const getTimeZoneOffsetByUtc = (utc: string, isdstDate?: boolean) => {
   const currentTimeZoneData = TIMEZONES.find((tz) => tz.utc.includes(utc));
-  const dstDiff = currentTimeZoneData?.isdst ? isdstDate ? 0 : -1 : 0;
+  const dstDiff = currentTimeZoneData?.isdst ? (isdstDate ? 0 : -1) : 0;
   return currentTimeZoneData ? currentTimeZoneData.offset + dstDiff : 0;
 };
 

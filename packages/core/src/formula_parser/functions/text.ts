@@ -1,5 +1,3 @@
-
-
 import { FormulaFunc, IFormulaParam } from './basic';
 import { BasicValueType, FormulaFuncType } from 'types';
 import { AstNode } from 'formula_parser/parser';
@@ -223,7 +221,7 @@ export class Upper extends TextFunc {
 export class Mid extends TextFunc {
   static override validateParams(params: AstNode[]) {
     if (params.length < 3) {
-      throw new ParamsCountError(ParamsErrorType.AtLeastCount, 'MID', 3); 
+      throw new ParamsCountError(ParamsErrorType.AtLeastCount, 'MID', 3);
     }
   }
 
@@ -258,9 +256,7 @@ export class Replace extends TextFunc {
     return BasicValueType.String;
   }
 
-  static override func(params: [
-    IFormulaParam<string>, IFormulaParam<number>, IFormulaParam<number>, IFormulaParam<string>
-  ]): TextType {
+  static override func(params: [IFormulaParam<string>, IFormulaParam<number>, IFormulaParam<number>, IFormulaParam<string>]): TextType {
     let [{ value: str }, { value: whereToStart }, { value: count }, { value: replaceStr }] = params;
     if (str == null) {
       return null;
@@ -366,9 +362,7 @@ export class Substitute extends TextFunc {
     return BasicValueType.String;
   }
 
-  static override func(params: [
-    IFormulaParam<string>, IFormulaParam<string>, IFormulaParam<string>, IFormulaParam<number>
-  ]): TextType {
+  static override func(params: [IFormulaParam<string>, IFormulaParam<string>, IFormulaParam<string>, IFormulaParam<number>]): TextType {
     const [{ value: str }, { value: oldText }, { value: newText }] = params;
     const index = params[3] && noNaN(Number(params[3].value) - 1);
     const splitArr = String(str).split(oldText);
@@ -376,7 +370,8 @@ export class Substitute extends TextFunc {
     if (str == null) {
       return null;
     }
-    if (index < 1 || index > splitArr.length - 2) { // When the starting position does not match the range value, return the original string directly
+    if (index < 1 || index > splitArr.length - 2) {
+      // When the starting position does not match the range value, return the original string directly
       return String(str);
     }
     if (index) {

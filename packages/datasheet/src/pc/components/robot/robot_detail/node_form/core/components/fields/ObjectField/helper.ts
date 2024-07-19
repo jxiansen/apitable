@@ -1,5 +1,3 @@
-
-
 export const getDefaultValue = (type: string) => {
   switch (type) {
     case 'string':

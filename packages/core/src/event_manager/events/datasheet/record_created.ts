@@ -1,12 +1,7 @@
-
-
 import { IOperation } from 'engine/ot/interface';
 import { testPath } from 'event_manager';
 import { IReduxState } from '../../../exports/store/interfaces';
-import {
-  getDatasheet,
-  getFieldMap,
-} from 'modules/database/store/selectors/resource/datasheet';
+import { getDatasheet, getFieldMap } from 'modules/database/store/selectors/resource/datasheet';
 import { ResourceType } from 'types';
 import { transformOpFields } from '../../helper';
 import { IAtomEventType } from '../interface';
@@ -27,7 +22,7 @@ export class OPEventRecordCreated extends IAtomEventType<IRecordCreated> {
   scope = ResourceType.Datasheet;
 
   test({ action, resourceId, op }: IOPBaseContext) {
-    const { pass, recordId } = testPath(action.p, ['recordMap', ':recordId'], ('oi' in action));
+    const { pass, recordId } = testPath(action.p, ['recordMap', ':recordId'], 'oi' in action);
 
     let success = pass;
     if (op.cmd === 'UnarchiveRecords') {
@@ -37,7 +32,7 @@ export class OPEventRecordCreated extends IAtomEventType<IRecordCreated> {
     if (!success) {
       return {
         pass: success,
-        context: null
+        context: null,
       };
     }
     // fill phase will overwrite diffFields
@@ -50,15 +45,15 @@ export class OPEventRecordCreated extends IAtomEventType<IRecordCreated> {
         recordId,
         op,
         fields: action['oi'].data,
-        diffFields
-      }
+        diffFields,
+      },
     };
   }
   /**
    * Complete event context
    */
   fill(events: IEventInstance<IOPEvent>[], state: IReduxState) {
-    return events.map(event => {
+    return events.map((event) => {
       if (event.eventName === OPEventNameEnums.RecordCreated) {
         const { datasheetId, recordId } = event.context as IRecordCreated;
         const fieldMap = getFieldMap(state, datasheetId)!;

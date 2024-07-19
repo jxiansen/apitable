@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { ICellValue } from '../../record';
 import { Field } from '../field';
@@ -20,7 +18,7 @@ export class DeniedField extends Field {
   get openValueJsonSchema() {
     return {
       title: this.field.name,
-      type: 'string'
+      type: 'string',
     };
   }
 

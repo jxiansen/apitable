@@ -1,5 +1,3 @@
-
-
 import { IReduxState, IViewProperty } from '@apitable/core';
 
 export enum WorkerJobType {

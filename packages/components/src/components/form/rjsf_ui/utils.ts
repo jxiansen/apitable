@@ -1,5 +1,3 @@
-
-
 import { ObjectFieldTemplateProps, UiSchema } from '@rjsf/core';
 
 export const getObjectDepth = (props: ObjectFieldTemplateProps): number => {
@@ -8,14 +6,17 @@ export const getObjectDepth = (props: ObjectFieldTemplateProps): number => {
   return ids.length - 1;
 };
 
-export const getOptions = (key: string, uiSchema: UiSchema): {
-  has: boolean,
-  value?: any,
+export const getOptions = (
+  key: string,
+  uiSchema: UiSchema
+): {
+  has: boolean;
+  value?: any;
 } => {
   if ('ui:options' in uiSchema && key in uiSchema['ui:options']!) {
     return {
       has: true,
-      value: uiSchema['ui:options']![key]
+      value: uiSchema['ui:options']![key],
     };
   }
   return {

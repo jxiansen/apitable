@@ -1,5 +1,3 @@
-
-
 export enum TrackEvents {
   ButtonClick = 'ButtonClick',
   OpTransform = 'OpTransform',
@@ -23,10 +21,10 @@ export enum TrackEvents {
 
   // posthug event name
   TemplateSearchKeyword = 'templateSearchKeyword',
-  TemplatePageView='templatePageView',
-  TemplateUse='templateUse',
-  TemplateConfirmUse='templateConfirmUse',
-  InviteByContacts='inviteByContacts',
-  InviteByWorkbench='inviteByWorkbench',
-  FormPrefill='formPrefill'
+  TemplatePageView = 'templatePageView',
+  TemplateUse = 'templateUse',
+  TemplateConfirmUse = 'templateConfirmUse',
+  InviteByContacts = 'inviteByContacts',
+  InviteByWorkbench = 'inviteByWorkbench',
+  FormPrefill = 'formPrefill',
 }

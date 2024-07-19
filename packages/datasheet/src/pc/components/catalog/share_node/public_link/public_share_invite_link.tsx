@@ -1,5 +1,3 @@
-
-
 import { useRequest } from 'ahooks';
 import { Tooltip } from 'antd';
 import { FC, useState, useCallback } from 'react';
@@ -50,7 +48,7 @@ export const PublicShareInviteLink: FC<React.PropsWithChildren<IPublicShareLinkP
   const [WidgetEmbedVisible, setWidgetEmbedVisible] = useState(false);
   const isAI = nodeId.startsWith(ConfigConstant.NodeTypeReg.AI);
 
-  const automationId = getRegResult('/'+nodeId, autIdReg);
+  const automationId = getRegResult('/' + nodeId, autIdReg);
   const hideShareCodeModal = useCallback(() => {
     setWidgetEmbedVisible(false);
   }, []);
@@ -200,8 +198,8 @@ export const PublicShareInviteLink: FC<React.PropsWithChildren<IPublicShareLinkP
       disabled: Boolean(isShareMirror),
     },
   ];
-  if(automationId != null) {
-    Permission= [
+  if (automationId != null) {
+    Permission = [
       {
         value: 'onlyRead',
         label: t(Strings.can_view),
@@ -277,9 +275,7 @@ export const PublicShareInviteLink: FC<React.PropsWithChildren<IPublicShareLinkP
   }
 
   if (!spaceFeatures?.fileSharable) {
-    return (
-      <DisabledShareFile style={{ marginBottom: 16 }} />
-    );
+    return <DisabledShareFile style={{ marginBottom: 16 }} />;
   }
 
   if (!shareSettings.shareOpened) {
@@ -299,7 +295,7 @@ export const PublicShareInviteLink: FC<React.PropsWithChildren<IPublicShareLinkP
       </div>
     );
   }
-  
+
   return (
     <div className={styles.publish}>
       {renderShareSwitchButton()}

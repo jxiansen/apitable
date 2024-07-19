@@ -1,5 +1,3 @@
-
-
 // Use antd first, then replace it with your own component
 import { Radio } from 'antd';
 import { getLiteralOperandValue } from '@apitable/core';

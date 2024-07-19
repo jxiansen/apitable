@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 
 import { AnyAction, combineReducers } from 'redux';
@@ -12,7 +10,9 @@ const form = (state: IFormState | null = null, action: AnyAction | IJOTActionPay
   if (action.type === actions.SET_FORM_DATA) {
     return action.payload;
   }
-  if (!state) { return null; }
+  if (!state) {
+    return null;
+  }
   switch (action.type) {
     case actions.UPDATE_FORM: {
       return {
@@ -28,12 +28,12 @@ const form = (state: IFormState | null = null, action: AnyAction | IJOTActionPay
           formProps: {
             ...state.snapshot.formProps,
             ...action.payload,
-          }
-        }
+          },
+        },
       };
     }
     case actions.FORM_JOT_ACTION: {
-      return produce<IFormState, IFormState>(state, draft => {
+      return produce<IFormState, IFormState>(state, (draft) => {
         JOTApply(draft, action as IJOTActionPayload);
         return draft;
       });
@@ -61,7 +61,7 @@ const client = (state: IFormClient = defaultClient, action: AnyAction): IFormCli
     case actions.FORM_ACTIVE_COLLABORATOR: {
       if (!state.collaborators) {
         return { ...state, collaborators: [action.payload] };
-      } else if (state.collaborators.find(user => user.socketId === action.payload.socketId)) {
+      } else if (state.collaborators.find((user) => user.socketId === action.payload.socketId)) {
         console.error('warning user enter with same socketid');
         return state;
       }
@@ -72,7 +72,7 @@ const client = (state: IFormClient = defaultClient, action: AnyAction): IFormCli
       if (!state.collaborators) {
         return state;
       }
-      state.collaborators = state.collaborators.filter(user => user.socketId !== action.payload.socketId);
+      state.collaborators = state.collaborators.filter((user) => user.socketId !== action.payload.socketId);
       return state;
     }
     case actions.FORM_ROOM_INFO_SYNC: {
@@ -98,10 +98,7 @@ const formPack = combineReducers({
     if (action.type === actions.SET_FORM_LOADING) {
       return action.payload;
     }
-    if (
-      action.type === actions.FORM_ERROR_CODE ||
-      action.type === actions.SET_FORM_DATA
-    ) {
+    if (action.type === actions.FORM_ERROR_CODE || action.type === actions.SET_FORM_DATA) {
       return false;
     }
 
@@ -117,10 +114,7 @@ const formPack = combineReducers({
     if (action.type === actions.FORM_ERROR_CODE) {
       return action.payload;
     }
-    if (
-      action.type === actions.SET_FORM_LOADING ||
-      action.type === actions.SET_FORM_DATA
-    ) {
+    if (action.type === actions.SET_FORM_LOADING || action.type === actions.SET_FORM_DATA) {
       return null;
     }
     return state;
@@ -135,10 +129,7 @@ const formPack = combineReducers({
   client,
 });
 
-export const formMap = (
-  state: IFormMap = {},
-  action: IResetFormAction | AnyAction,
-): IFormMap => {
+export const formMap = (state: IFormMap = {}, action: IResetFormAction | AnyAction): IFormMap => {
   if (!action.formId) {
     return state;
   }

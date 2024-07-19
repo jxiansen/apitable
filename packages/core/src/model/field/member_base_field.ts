@@ -1,12 +1,7 @@
-
-
 import { IUserInfo } from '../../exports/store/interfaces';
 import { getUserMap } from 'modules/org/store/selectors/unit_info';
 import { hasIntersect, isSameSet } from 'utils/array';
-import {
-  BasicValueType, IUnitIds, IStandardValue, IUuids,
-  IMemberField, ICreatedByField, ILastModifiedByField,
-} from '../../types/field_types';
+import { BasicValueType, IUnitIds, IStandardValue, IUuids, IMemberField, ICreatedByField, ILastModifiedByField } from '../../types/field_types';
 import { FOperator, IFilterCondition, IFilterMember } from '../../types/view_types';
 import { ICellValue, ICellToStringOption } from '../record';
 import { ArrayValueField } from './array_field';
@@ -18,7 +13,6 @@ import { OtherTypeUnitId } from './const';
 export type ICommonMemberField = IMemberField | ICreatedByField | ILastModifiedByField;
 
 export abstract class MemberBaseField extends ArrayValueField {
-
   get apiMetaProperty(): IAPIMetaMemberBaseFieldProperty {
     return null;
   }
@@ -35,15 +29,7 @@ export abstract class MemberBaseField extends ArrayValueField {
   }
 
   override get acceptFilterOperators(): FOperator[] {
-    return [
-      FOperator.Is,
-      FOperator.IsNot,
-      FOperator.Contains,
-      FOperator.DoesNotContain,
-      FOperator.IsEmpty,
-      FOperator.IsNotEmpty,
-      FOperator.IsRepeat,
-    ];
+    return [FOperator.Is, FOperator.IsNot, FOperator.Contains, FOperator.DoesNotContain, FOperator.IsEmpty, FOperator.IsNotEmpty, FOperator.IsRepeat];
   }
 
   /**
@@ -75,16 +61,12 @@ export abstract class MemberBaseField extends ArrayValueField {
       str1 = str1.trim();
       str2 = str2.trim();
 
-      return str1 === str2 ? 0 : (str1 > str2 ? 1 : -1);
+      return str1 === str2 ? 0 : str1 > str2 ? 1 : -1;
     }
     return super.compare(cellValue1, cellValue2);
   }
 
-  override isMeetFilter(
-    operator: FOperator,
-    cellValue: IUnitIds | IUuids | null,
-    conditionValue: Exclude<IFilterMember, null>,
-  ) {
+  override isMeetFilter(operator: FOperator, cellValue: IUnitIds | IUuids | null, conditionValue: Exclude<IFilterMember, null>) {
     const cv4filter = cellValue ? this.getUnitIds(cellValue)! : [];
     // If it is judged in advance that it is empty or not, it should be judged directly as null, which is compatible with old data.
     // There is no guarantee that cv comes with null, not an empty array.
@@ -144,7 +126,7 @@ export abstract class MemberBaseField extends ArrayValueField {
 
   /**
    * Inherited classes need to implement this method
-    * @desc Get an array of corresponding names according to uuids/unitIds
+   * @desc Get an array of corresponding names according to uuids/unitIds
    */
   getUnitNames(_cellValue: IUnitIds | IUuids): null | string[] {
     return null;
@@ -152,7 +134,7 @@ export abstract class MemberBaseField extends ArrayValueField {
 
   /**
    * Inherited classes need to implement this method
-    * @desc Get an array of corresponding unit information according to uuids/unitIds
+   * @desc Get an array of corresponding unit information according to uuids/unitIds
    */
   getUnits(_cellValue: IUnitIds | IUuids): null | any[] {
     return null;
@@ -160,7 +142,7 @@ export abstract class MemberBaseField extends ArrayValueField {
 
   /**
    * Inherited classes need to implement this method
-    * @desc Get an array of corresponding names according to uuids/unitIds
+   * @desc Get an array of corresponding names according to uuids/unitIds
    */
   getUnitList(_cellValue: IUnitIds | IUuids): null | string[] {
     return null;
@@ -195,7 +177,7 @@ export abstract class MemberBaseField extends ArrayValueField {
     if (!cellValue) return stdValue;
     const nameValues = this.cellValueToArray(cellValue);
     if (!nameValues) return stdValue;
-    nameValues.forEach(item => {
+    nameValues.forEach((item) => {
       stdValue.data.push({
         text: item,
       });
@@ -208,9 +190,7 @@ export abstract class MemberBaseField extends ArrayValueField {
   }
 
   defaultValueForCondition(
-    condition: IFilterCondition<FieldType.Member> |
-      IFilterCondition<FieldType.CreatedBy> |
-      IFilterCondition<FieldType.LastModifiedBy>,
+    condition: IFilterCondition<FieldType.Member> | IFilterCondition<FieldType.CreatedBy> | IFilterCondition<FieldType.LastModifiedBy>
   ): ICellValue {
     if (this.field.type !== FieldType.Member) {
       return null;
@@ -225,14 +205,7 @@ export abstract class MemberBaseField extends ArrayValueField {
       return null;
     }
 
-    if (
-      condition.operator === FOperator.Is ||
-      (
-        condition.operator === FOperator.Contains &&
-        condition.value &&
-        condition.value.length === 1
-      )
-    ) {
+    if (condition.operator === FOperator.Is || (condition.operator === FOperator.Contains && condition.value && condition.value.length === 1)) {
       return condition.value;
     }
 
@@ -278,7 +251,7 @@ export abstract class MemberBaseField extends ArrayValueField {
     }
     const isSimple = openWriteValue.length && typeof openWriteValue[0] === 'string';
     // user on redux in iframe is different from user in main thread
-    const userInfo = this.state.user.info || this.state.user as any as IUserInfo;
+    const userInfo = this.state.user.info || (this.state.user as any as IUserInfo);
     const transUserId = (id: string) => {
       // For openWriteValue, it may be the userId of the current user, so try to determine whether it is the userId of the current user.
       if (id === userInfo?.userId && userInfo.unitId) {
@@ -287,8 +260,8 @@ export abstract class MemberBaseField extends ArrayValueField {
       return id;
     };
     if (isSimple) {
-      return (openWriteValue as string[]).map(v => transUserId(v));
+      return (openWriteValue as string[]).map((v) => transUserId(v));
     }
-    return (openWriteValue as IMemberFieldOpenValue[]).map(v => transUserId(v.id));
+    return (openWriteValue as IMemberFieldOpenValue[]).map((v) => transUserId(v.id));
   }
 }

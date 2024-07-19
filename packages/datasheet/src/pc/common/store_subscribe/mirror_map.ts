@@ -1,5 +1,3 @@
-
-
 import { difference } from 'lodash';
 import { ResourceType } from '@apitable/core';
 import { eqSet } from '@apitable/widget-sdk';

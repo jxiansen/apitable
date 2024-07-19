@@ -1,5 +1,3 @@
-
-
 import { light } from './light';
 import { dark } from './dark';
 import { DefaultTheme } from 'styled-components';

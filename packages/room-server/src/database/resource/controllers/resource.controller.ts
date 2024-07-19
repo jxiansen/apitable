@@ -1,5 +1,3 @@
-
-
 import { ILocalChangeset, OtErrorCode, readonlyFields, ResourceIdPrefix, ResourceType } from '@apitable/core';
 import { Body, Controller, Get, Headers, Param, Post, Query, UseInterceptors } from '@nestjs/common';
 import { DatasheetMetaService } from 'database/datasheet/services/datasheet.meta.service';
@@ -133,7 +131,7 @@ export class ResourceController {
   async applyChangesets(
     @Headers('cookie') cookie: string,
     @Body()
-      data: {
+    data: {
       changesets: ILocalChangeset[];
       roomId: string;
     },

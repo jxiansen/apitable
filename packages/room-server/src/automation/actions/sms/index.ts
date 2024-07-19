@@ -1,5 +1,3 @@
-
-
 import nodemailer from 'nodemailer';
 import { marked } from 'marked';
 import { JSDOM } from 'jsdom';
@@ -8,8 +6,8 @@ import { ResponseStatusCodeEnums } from '../enum/response.status.code.enums';
 import { IActionResponse, IErrorResponse } from '../interface/action.response';
 
 interface IMailServer {
-  domain: string,
-  port: string,
+  domain: string;
+  port: string;
 }
 
 interface IMailMessageRequest {
@@ -39,7 +37,7 @@ export async function sendMail(request: IMailMessageRequest): Promise<IActionRes
     auth: {
       user: account,
       pass: password,
-    }
+    },
   });
   transporter.use('compile', (mail, callback) => {
     if (mail.data.text) {

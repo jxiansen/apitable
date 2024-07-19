@@ -1,9 +1,7 @@
-
-
 import React from 'react';
 import { IDropdownProps } from './interface';
 import { DropdownStyled } from './styled';
-import { ContextMenu } from '../context_menu'; 
+import { ContextMenu } from '../context_menu';
 import { useContextMenu } from '@apitable/react-contexify';
 import { ChevronDownOutlined } from '@apitable/icons';
 

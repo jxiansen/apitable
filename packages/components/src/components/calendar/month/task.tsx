@@ -1,5 +1,3 @@
-
-
 import React, { memo, useContext } from 'react';
 import { ILevelResult } from '../interface';
 import classNames from 'classnames';
@@ -15,19 +13,20 @@ interface ITask {
 
 const TaskBase = (props: ITask) => {
   const { levelItem, levelIdx, isMore } = props;
-  const {
-    space, listHeight, defaultListHeight, disabled, disableResize,
-    onResizeStart, Drag, listStyle, startListStyle, warnText, moveTaskId
-  } = useContext(CalendarContext);
+  const { space, listHeight, defaultListHeight, disabled, disableResize, onResizeStart, Drag, listStyle, startListStyle, warnText, moveTaskId } =
+    useContext(CalendarContext);
   const { task, isEnd, isStart, isEmptyEnd, left, len, warn } = levelItem;
   const { id, title, startDisabled, endDisabled } = task;
-  const style = levelIdx !== undefined ? {
-    top: levelIdx * (listHeight + space) + defaultListHeight + 4 + 'px',
-    left: (left - 1) * (100 / 7) + '%',
-    width: (len || 1) * (100 / 7) + '%',
-  } : { 
-    position: 'relative'
-  };
+  const style =
+    levelIdx !== undefined
+      ? {
+          top: levelIdx * (listHeight + space) + defaultListHeight + 4 + 'px',
+          left: (left - 1) * (100 / 7) + '%',
+          width: (len || 1) * (100 / 7) + '%',
+        }
+      : {
+          position: 'relative',
+        };
   return (
     <div
       key={id}
@@ -59,7 +58,7 @@ const TaskBase = (props: ITask) => {
       )}
       {Drag ? (
         <Drag
-          id={id} 
+          id={id}
           listStyle={{
             ...listStyle,
             ...(isStart ? startListStyle : {}),
@@ -72,12 +71,17 @@ const TaskBase = (props: ITask) => {
         >
           {title}
         </Drag>
-      ) : <div className="list" style={{
-        ...listStyle,
-        ...(isStart ? startListStyle : {})
-      }}>
-        {title}
-      </div>}
+      ) : (
+        <div
+          className="list"
+          style={{
+            ...listStyle,
+            ...(isStart ? startListStyle : {}),
+          }}
+        >
+          {title}
+        </div>
+      )}
       {warn && warnText}
     </div>
   );

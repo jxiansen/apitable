@@ -1,5 +1,3 @@
-
-
 import { INetworking, IReduxState } from '../../../../../exports/store/interfaces';
 import { getDatasheetParentId } from 'modules/database/store/selectors/resource/datasheet/base';
 
@@ -72,4 +70,3 @@ export const getWidgetPanelStatusWithMirror = (state: IReduxState, mirrorId: str
   const mirrorPack = getMirrorPack(state, mirrorId);
   return mirrorPack?.client?.widgetPanelStatus;
 };
-

@@ -1,5 +1,3 @@
-
-
 import { ISegment, SegmentType, SymbolAlign } from 'types/field_types';
 import { phone } from 'phone';
 import { shim } from 'string.prototype.matchall';
@@ -20,7 +18,7 @@ export function generateRandomString(length = 20): string {
 export const MAX_NAME_STRING_LENGTH = 100;
 
 export function isValidName(name: string) {
-  if (!name || (typeof name !== 'string')) {
+  if (!name || typeof name !== 'string') {
     return false;
   }
 
@@ -45,14 +43,14 @@ enum EscapeMap {
   '<' = '&lt;',
   '>' = '&gt;',
   '"' = '&quot;',
-  '\'' = '&#x27;',
+  "'" = '&#x27;',
   '`' = '&#x60;',
 }
 /* eslint-enable @typescript-eslint/naming-convention */
 
 export const escapeHtml = (str: string): string => {
   const replaceReg = new RegExp('(?:&|<|>|"|\'|`)', 'g');
-  return replaceReg.test(str) ? str.replace(replaceReg, m => EscapeMap[m]) : str;
+  return replaceReg.test(str) ? str.replace(replaceReg, (m) => EscapeMap[m]) : str;
 };
 
 const URL_PROTOCOL_REG = /^(https?|ftp):\/\/|mailto:/i;
@@ -61,22 +59,28 @@ const LINK_SUFFIX = '\\b([/?#][-a-zA-Z0-9@:%_+.~#?&/=;$,!\\*\\[\\]{}^|<>]*)?';
 const URL_HOST_BODY = '([\\-a-zA-Z0-9:%_+~#@]{1,256}\\.){1,50}';
 const ANY_TOP_DOMAIN = '[a-z\\-]{2,15}';
 /* eslint-disable */
-const TOP_DOMAIN = 'com|org|net|int|edu|gov|mil|ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cu|cv|cw|cx|cy|cz|de|dj|dk|dm|do|dz|ec|ee|eg|eh|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gh|gi|gl|gm|gn|gp|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mf|mg|mh|mk|ml|mm|mn|mo|mp|mq|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|om|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ro|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sk|sl|sm|sn|so|sr|ss|st|su|sv|sx|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|um|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|za|zm|zw|site|top|wtf|xxx|xyz|cloud|engineering|help|one';
+const TOP_DOMAIN =
+  'com|org|net|int|edu|gov|mil|ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cu|cv|cw|cx|cy|cz|de|dj|dk|dm|do|dz|ec|ee|eg|eh|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gh|gi|gl|gm|gn|gp|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mf|mg|mh|mk|ml|mm|mn|mo|mp|mq|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|om|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ro|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sk|sl|sm|sn|so|sr|ss|st|su|sv|sx|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|um|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|za|zm|zw|site|top|wtf|xxx|xyz|cloud|engineering|help|one';
 const TOP_10_DOMAIN = 'com|cn|tk|de|net|org|uk|info|nl|ru';
 // Since the top-level domain name is incomplete, it is changed to a url with a protocol header, ignoring the above top-level domain name and matching directly
-const URL_REG = new RegExp(`(((${PROTOCOL}):\\/\\/${URL_HOST_BODY}${ANY_TOP_DOMAIN})|(${URL_HOST_BODY}(${TOP_10_DOMAIN})))(:[0-9]{2,5})?${LINK_SUFFIX}`, 'gi');
+const URL_REG = new RegExp(
+  `(((${PROTOCOL}):\\/\\/${URL_HOST_BODY}${ANY_TOP_DOMAIN})|(${URL_HOST_BODY}(${TOP_10_DOMAIN})))(:[0-9]{2,5})?${LINK_SUFFIX}`,
+  'gi'
+);
 // Mailto's greedy matching will be very slow when encountering extremely long strings (English without spaces), and the length needs to be limited.
-const EMAIL_URL_BODY = '[\\w.!#$%&\'*+-/=?^_\\`{|}~]{1,2000}@[A-Za-z0-9_.-]+\\.';
+const EMAIL_URL_BODY = "[\\w.!#$%&'*+-/=?^_\\`{|}~]{1,2000}@[A-Za-z0-9_.-]+\\.";
 const LENGTH_LIMITED_EMAIL_REG = new RegExp(`^(?!data:)((mailto:${EMAIL_URL_BODY}${ANY_TOP_DOMAIN})|(${EMAIL_URL_BODY}(${TOP_DOMAIN})))\\b`, 'gi');
 const LOCALHOST_REG = /localhost:[0-9]{2,5}/;
 const IP_ADDRESS_REG = /(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9][0-9]|[0-9])(:[0-9]{2,5})?/;
 const IP_REG = new RegExp(`((https?|http|ftp)://)?((${LOCALHOST_REG.source})|(${IP_ADDRESS_REG.source}))(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?`, 'gi');
 export const LINK_REG = new RegExp(`(${IP_REG.source})|(${URL_REG.source})|(${LENGTH_LIMITED_EMAIL_REG.source})`, 'gi');
-const EMAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const EMAIL_REG = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/gi;
+const EMAIL =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_REG =
+  /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/gi;
 
 const VCODE_REG = /[\da-z]{8}/i;
-export function isVCode(code: string): boolean{
+export function isVCode(code: string): boolean {
   return new RegExp(VCODE_REG).test(code);
 }
 export function hasUrlProtocol(url: string): boolean {
@@ -112,10 +116,12 @@ export function parseAllUrl(value: string): ISegment[] {
   let execResult = regExp.exec(value);
 
   if (execResult == null) {
-    return [{
-      type: SegmentType.Text,
-      text: value,
-    }];
+    return [
+      {
+        type: SegmentType.Text,
+        text: value,
+      },
+    ];
   }
 
   while (execResult) {
@@ -155,7 +161,9 @@ export const stringHash2Number = (str: string, range: number): number => {
   /**
    * String str is mapped to a value in the specified range [0,range)
    */
-  const sumOfStringCharCode = Array.from(str).map(c => c.charCodeAt(0)).reduce((a, b) => a + b);
+  const sumOfStringCharCode = Array.from(str)
+    .map((c) => c.charCodeAt(0))
+    .reduce((a, b) => a + b);
   return Math.abs(sumOfStringCharCode % range);
 };
 
@@ -187,14 +195,14 @@ export function string2Segment(str: string): ISegment[] {
     return segmentList;
   }
 
-  urlMatch.forEach(element => {
+  urlMatch.forEach((element) => {
     const text = element[0]!;
     const hasScheme = Boolean(element[15]);
     const index = element.index!;
     urlTmp[index] = { text, hasScheme, type: SegmentType.Url };
   });
 
-  emailMatch.forEach(ele => {
+  emailMatch.forEach((ele) => {
     const text = ele[0]!;
     const index = ele.index!;
     urlTmp[index] = { text, type: SegmentType.Email };
@@ -239,9 +247,15 @@ export const dateStrReplaceCN = (str: string) => {
   }
 
   return str.replace(/(\s?[年月]\s?)|(\s?[时分]\s?)|([日秒])/g, (_, p1, p2, p3) => {
-    if (p1) { return '/'; }
-    if (p2) { return ':'; }
-    if (p3) { return ''; }
+    if (p1) {
+      return '/';
+    }
+    if (p2) {
+      return ':';
+    }
+    if (p3) {
+      return '';
+    }
     return _;
   });
 };
@@ -283,7 +297,7 @@ export function str2Currency(
   symbol: string = '',
   digits: number = 3,
   splitter: string = ',',
-  symbolAlign = SymbolAlign.default,
+  symbolAlign = SymbolAlign.default
 ): string | null {
   let tempStr = ('' + input).trim();
   let sign = '';
@@ -307,9 +321,11 @@ export function str2Currency(
 
   const regExp = new RegExp(`(\\d)(?=(\\d{${digits}})+\\.)`, 'g');
 
-  tempStr = tempStr.replace(regExp, function(_$0: string, $1: any) {
-    return $1 + splitter;
-  }).replace(/\.$/, '');
+  tempStr = tempStr
+    .replace(regExp, function (_$0: string, $1: any) {
+      return $1 + splitter;
+    })
+    .replace(/\.$/, '');
   if (!tempStr) {
     return null;
   }

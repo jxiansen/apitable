@@ -1,5 +1,3 @@
-
-
 import { utils } from '../core';
 import { IThemeProps } from '../core/interface';
 import { ArrayFieldTemplate, ErrorList, FieldTemplate, ObjectFieldTemplate } from './template';

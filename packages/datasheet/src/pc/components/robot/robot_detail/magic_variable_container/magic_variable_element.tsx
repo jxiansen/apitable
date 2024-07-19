@@ -1,5 +1,3 @@
-
-
 // Define a React component renderer for our code blocks.
 import styled from 'styled-components';
 import { Box, useTheme, Typography } from '@apitable/components';

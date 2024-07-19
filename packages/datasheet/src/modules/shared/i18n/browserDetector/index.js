@@ -1,5 +1,3 @@
-
-
 /* eslint-disable */
 import * as utils from './utils.js';
 import cookie from './browserLookups/cookie.js';

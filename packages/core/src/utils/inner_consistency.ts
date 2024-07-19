@@ -1,5 +1,3 @@
-
-
 import { CollaCommandName } from 'commands/enum';
 import { IResourceOpsCollect } from 'command_manager';
 import { IJOTAction, OTActionName } from 'engine/ot';
@@ -9,30 +7,33 @@ import xor from 'lodash/xor';
 import { FieldType, ILinkFieldProperty, ILinkIds, ResourceType } from 'types';
 import type { ISnapshot } from '../modules/database/store/interfaces/resource';
 
-export type IInnerConsistencyErrorInfo = {
-  viewId: string;
-  viewName: string;
-  recordsInMap: string[];
-  notExistInRecordMap?: string[];
-  notExistInFieldMap?: string[];
-  notExistInViewRow?: string[];
-  notExistInViewColumn?: string[];
-  duplicateRows?: number[];
-  duplicateColumns?: number[];
-  replaceRows?: boolean;
-} | {
-  duplicateViews: number[];
-} | {
-  /** recordId:fieldId -> updated set of linked recordIds (may be empty) */
-  updatedSelfLinkRecordIds: Map<string, string[]>
-};
+export type IInnerConsistencyErrorInfo =
+  | {
+      viewId: string;
+      viewName: string;
+      recordsInMap: string[];
+      notExistInRecordMap?: string[];
+      notExistInFieldMap?: string[];
+      notExistInViewRow?: string[];
+      notExistInViewColumn?: string[];
+      duplicateRows?: number[];
+      duplicateColumns?: number[];
+      replaceRows?: boolean;
+    }
+  | {
+      duplicateViews: number[];
+    }
+  | {
+      /** recordId:fieldId -> updated set of linked recordIds (may be empty) */
+      updatedSelfLinkRecordIds: Map<string, string[]>;
+    };
 
 /**
-  *
-  * @param array columns or rows
-  * @param key id key
-  * @return the index of the rows/columns to be deleted
-  */
+ *
+ * @param array columns or rows
+ * @param key id key
+ * @return the index of the rows/columns to be deleted
+ */
 function getDuplicates<T = any>(array: T[], key: 'recordId' | 'fieldId' | 'id'): number[] | null {
   const set = new Set();
   const result: number[] = [];
@@ -59,8 +60,7 @@ export function checkInnerConsistency(snapshot: ISnapshot) {
   const consistencyErrors: IInnerConsistencyErrorInfo[] = [];
   const duplicateViews = getDuplicates(snapshot.meta.views, 'id');
   // filter duplicate views
-  const views = duplicateViews ? snapshot.meta.views.filter((_, index) => !duplicateViews.some((idx) => idx === index))
-    : snapshot.meta.views;
+  const views = duplicateViews ? snapshot.meta.views.filter((_, index) => !duplicateViews.some((idx) => idx === index)) : snapshot.meta.views;
 
   // remove duplicate views
   if (duplicateViews) {
@@ -69,9 +69,9 @@ export function checkInnerConsistency(snapshot: ISnapshot) {
     });
   }
 
-  views.forEach(view => {
-    const recordsInRow = view.rows.filter(row => Boolean(row && row.recordId)).map(row => row.recordId);
-    const fieldsInColumn = (view.columns as any[]).filter(column => Boolean(column && column.fieldId)).map(column => column.fieldId);
+  views.forEach((view) => {
+    const recordsInRow = view.rows.filter((row) => Boolean(row && row.recordId)).map((row) => row.recordId);
+    const fieldsInColumn = (view.columns as any[]).filter((column) => Boolean(column && column.fieldId)).map((column) => column.fieldId);
     const differentRecords = xor(recordsInMap, recordsInRow);
     const differentFields = xor(fieldsInMap, fieldsInColumn);
     const duplicateRows = getDuplicates(view.rows, 'recordId');
@@ -92,16 +92,16 @@ export function checkInnerConsistency(snapshot: ISnapshot) {
       if (differentRecords.length > 100) {
         err.replaceRows = true;
       } else {
-        const notExistInRecordMap = differentRecords.filter(record => !snapshot.recordMap[record]);
-        const notExistInViewRow = differentRecords.filter(record => snapshot.recordMap[record]);
+        const notExistInRecordMap = differentRecords.filter((record) => !snapshot.recordMap[record]);
+        const notExistInViewRow = differentRecords.filter((record) => snapshot.recordMap[record]);
         err.notExistInRecordMap = notExistInRecordMap; // exists in view.rows, but not in recordMap, indicating that rows add ghost rows
         err.notExistInViewRow = notExistInViewRow; // exists in recordMap, but does not exist in view.rows, indicating that rows are missing in rows
       }
     }
 
     if (differentFields.length) {
-      const notExistInFieldMap = differentFields.filter(record => !snapshot.meta.fieldMap[record]);
-      const notExistInViewColumn = differentFields.filter(record => snapshot.meta.fieldMap[record]);
+      const notExistInFieldMap = differentFields.filter((record) => !snapshot.meta.fieldMap[record]);
+      const notExistInViewColumn = differentFields.filter((record) => snapshot.meta.fieldMap[record]);
       err.notExistInFieldMap = notExistInFieldMap; // exists in view.columns, but not in fieldMap, indicating that columns have added ghost rows
 
       // exists in fieldMap, but does not exist in view.columns, indicating that rows are missing in columns
@@ -132,15 +132,18 @@ export function checkInnerConsistency(snapshot: ISnapshot) {
         if (!Array.isArray(cellValue)) {
           continue;
         }
-        if (cellValue.some(linkedRecordId => !recordMap[linkedRecordId])) {
+        if (cellValue.some((linkedRecordId) => !recordMap[linkedRecordId])) {
           const cellId = recordId + ':' + fieldId;
-          updatedSelfLinkRecordIds.set(cellId, cellValue.filter(linkedRecordId => recordMap[linkedRecordId]));
+          updatedSelfLinkRecordIds.set(
+            cellId,
+            cellValue.filter((linkedRecordId) => recordMap[linkedRecordId])
+          );
         }
       }
     }
     if (updatedSelfLinkRecordIds.size) {
       consistencyErrors.push({
-        updatedSelfLinkRecordIds
+        updatedSelfLinkRecordIds,
       });
     }
   }
@@ -152,7 +155,7 @@ export function checkInnerConsistency(snapshot: ISnapshot) {
 export function generateFixInnerConsistencyChangesets(
   datasheetId: string,
   errors: IInnerConsistencyErrorInfo[],
-  state: IReduxState,
+  state: IReduxState
 ): IResourceOpsCollect[] {
   const deleteViewActions: IJOTAction[] = [];
   const viewLocalActions: IJOTAction[] = [];
@@ -161,7 +164,7 @@ export function generateFixInnerConsistencyChangesets(
     return [];
   }
 
-  errors.forEach(data => {
+  errors.forEach((data) => {
     // Delete duplicate view
     if ('duplicateViews' in data) {
       data.duplicateViews.forEach((index, i) => {
@@ -177,7 +180,7 @@ export function generateFixInnerConsistencyChangesets(
     // Remove invalid self-linking record IDs
     if ('updatedSelfLinkRecordIds' in data) {
       const { recordMap } = datasheet.snapshot;
-      for (const[cellId, newRecordIds] of data.updatedSelfLinkRecordIds) {
+      for (const [cellId, newRecordIds] of data.updatedSelfLinkRecordIds) {
         const [recordId, fieldId] = cellId.split(':') as [string, string];
         const record = recordMap[recordId]!;
         if (!record) {
@@ -213,7 +216,7 @@ export function generateFixInnerConsistencyChangesets(
       replaceRows,
       recordsInMap,
     } = data;
-    const viewIndex = datasheet.snapshot.meta.views.findIndex(view => view.id === viewId);
+    const viewIndex = datasheet.snapshot.meta.views.findIndex((view) => view.id === viewId);
     const rows = datasheet.snapshot.meta.views[viewIndex]!.rows;
     const columns = datasheet.snapshot.meta.views[viewIndex]!.columns;
     // row/column index is value to prevent duplicate deletions
@@ -238,14 +241,14 @@ export function generateFixInnerConsistencyChangesets(
         n: OTActionName.ObjectReplace,
         p: ['meta', 'views', viewIndex, 'rows'],
         od: rows,
-        oi: recordsInMap.map(recordId => ({ recordId })),
+        oi: recordsInMap.map((recordId) => ({ recordId })),
       });
     }
 
     // If it does not exist in the recordMap, delete it in the view
     notExistInRecordMap &&
       notExistInRecordMap.forEach((recordId: string) => {
-        const rowIndex = rows.findIndex(row => row && row.recordId === recordId);
+        const rowIndex = rows.findIndex((row) => row && row.recordId === recordId);
         rowIndex > -1 && rowsToDelete.add(rowIndex);
       });
 
@@ -262,7 +265,7 @@ export function generateFixInnerConsistencyChangesets(
     // If it does not exist in the fieldMap, delete it in the view
     notExistInFieldMap &&
       notExistInFieldMap.forEach((fieldId: string) => {
-        const columnIndex = columns.findIndex(column => column && column.fieldId === fieldId);
+        const columnIndex = columns.findIndex((column) => column && column.fieldId === fieldId);
         columnIndex > -1 && columnsToDelete.add(columnIndex);
       });
 

@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import '@apitable/i18n-lang';
 import { RestService } from 'shared/services/rest/rest.service';
@@ -35,36 +33,32 @@ describe('ApiUsageGuard', () => {
 
   describe('canActivate', () => {
     it('usage--call backend error--should return error', () => {
-      jest.spyOn(restService, 'getApiUsage').mockImplementationOnce(
-        () => {
-          throw new ServerException(CommonException.SERVER_ERROR);
-        },
-      );
-      return guard.canActivate(context).catch(e => {
+      jest.spyOn(restService, 'getApiUsage').mockImplementationOnce(() => {
+        throw new ServerException(CommonException.SERVER_ERROR);
+      });
+      return guard.canActivate(context).catch((e) => {
         return expect(e).toStrictEqual(ApiException.tipError(ApiTipConstant.api_server_error));
       });
     });
     it('usage not isAllowOverLimit throws an error', () => {
-      jest.spyOn(restService, 'getApiUsage').mockImplementationOnce(
-        () => Promise.resolve({
+      jest.spyOn(restService, 'getApiUsage').mockImplementationOnce(() =>
+        Promise.resolve({
           isAllowOverLimit: false,
           maxApiUsageCount: 2,
           apiCallUsedNumsCurrentMonth: 2,
           apiUsageUsedCount: 4,
-          apiCallNumsPerMonth: 4
+          apiCallNumsPerMonth: 4,
         }),
       );
-      return guard.canActivate(context).catch(e => {
+      return guard.canActivate(context).catch((e) => {
         return expect(e).toStrictEqual(ApiException.tipError(ApiTipConstant.api_forbidden_because_of_usage));
       });
     });
     it('java api not response throws an error', () => {
-      jest.spyOn(restService, 'getApiUsage').mockImplementationOnce(
-        (): any => {
-          return null;
-        },
-      );
-      return guard.canActivate(context).catch(e => {
+      jest.spyOn(restService, 'getApiUsage').mockImplementationOnce((): any => {
+        return null;
+      });
+      return guard.canActivate(context).catch((e) => {
         return expect(e).toStrictEqual(ApiException.tipError(ApiTipConstant.api_forbidden));
       });
     });

@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import { IRecordVisionAction, RecordVision } from '../../../../exports/store/interfaces';
 import { SET_RECORD_VISION_MODE } from '../../../shared/store/action_constants';

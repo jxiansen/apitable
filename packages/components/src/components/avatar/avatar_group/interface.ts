@@ -1,5 +1,3 @@
-
-
 export interface IAvatarGroup {
   /**
    * maximum number of avatars displayed

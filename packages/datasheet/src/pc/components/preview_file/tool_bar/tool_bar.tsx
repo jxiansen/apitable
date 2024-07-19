@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import FileSaver from 'file-saver';
 import * as React from 'react';

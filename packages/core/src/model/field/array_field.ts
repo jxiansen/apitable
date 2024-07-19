@@ -24,4 +24,3 @@ export abstract class ArrayValueField extends Field {
   // Most of the fields of arrayValueToString can be directly joined, and the format of number dataTime needs to be formatted first.
   abstract arrayValueToString(cellValues: any[] | null): string | null;
 }
-

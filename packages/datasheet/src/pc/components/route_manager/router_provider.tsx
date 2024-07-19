@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import { ConfigProvider, message } from 'antd';
 import { Locale } from 'antd/lib/locale-provider';

@@ -1,5 +1,3 @@
-
-
 import * as SocketIO from 'socket.io';
 import { ITokenPayload } from './token-payload.interface';
 

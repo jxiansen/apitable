@@ -1,5 +1,3 @@
-
-
 import { CellFormatEnum, FieldType, IMultiSelectField, IReduxState, ISingleSelectField, Reducers } from '@apitable/core';
 import { MultiSelectField } from 'fusion/field/multi.select.field';
 import { SingleSelectField } from 'fusion/field/single.select.field';
@@ -86,7 +84,7 @@ describe('SelectorField', () => {
   });
 
   describe('SingleSelect--roTransform', () => {
-    it('SingleSelect1😭--Return option Id', async() => {
+    it('SingleSelect1😭--Return option Id', async () => {
       expect(await single.roTransform('SingleSelect1😭', singleField)).toBe('optXOidJQufLD');
     });
   });
@@ -102,7 +100,7 @@ describe('SelectorField', () => {
   });
 
   describe('MultiSelect--roTransform', () => {
-    it('[MultiSelect1😊]--Return an array of option Id', async() => {
+    it('[MultiSelect1😊]--Return an array of option Id', async () => {
       expect(await multi.roTransform(['MultiSelect1😊'], multiField)).toStrictEqual(['optmD8Wbh3Pw6']);
     });
   });

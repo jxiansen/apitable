@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
@@ -7,16 +5,8 @@ import * as stories from './button.stories';
 import { black, deepPurple } from '../../colors';
 import { convertHexToRGB } from '../../helper';
 
-const {
-  PrimaryButton,
-  DefaultButton,
-  DisabledButton,
-  PrefixIconButton,
-  SuffixIconButton,
-  LoadingButton,
-  BlockButton,
-  JellyButton
-} = composeStories(stories);
+const { PrimaryButton, DefaultButton, DisabledButton, PrefixIconButton, SuffixIconButton, LoadingButton, BlockButton, JellyButton } =
+  composeStories(stories);
 
 describe('Button test', () => {
   it('Buttons support clicking by default', () => {
@@ -56,7 +46,7 @@ describe('Button test', () => {
     // Button last child element is svg icon
     expect(buttonElement.lastChild?.contains(svgElement));
   });
-  
+
   it('Button support loading ui', () => {
     render(<LoadingButton />);
     const buttonElement = screen.getByRole('button');
@@ -80,16 +70,16 @@ describe('Button test', () => {
     expect(styles.width).toBe('100%');
   });
 
-  it ('Button default is solid button', () => {
-    render(<PrimaryButton/>);
+  it('Button default is solid button', () => {
+    render(<PrimaryButton />);
     const buttonElement = screen.getByRole('button');
     const styles = getComputedStyle(buttonElement);
     const targetColor = convertHexToRGB(black[50]);
     expect(styles.color).toBe(targetColor);
   });
 
-  it ('Button support Jelly button(light button)', () => {
-    render(<JellyButton/>);
+  it('Button support Jelly button(light button)', () => {
+    render(<JellyButton />);
     const buttonElement = screen.getByRole('button');
     const styles = getComputedStyle(buttonElement);
     const targetColor = convertHexToRGB(deepPurple[500]);

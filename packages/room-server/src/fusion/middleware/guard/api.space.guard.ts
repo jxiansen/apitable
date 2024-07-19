@@ -1,5 +1,3 @@
-
-
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { SPACE_ID_HTTP_DECORATE, USER_HTTP_DECORATE } from '../../../shared/common';
 import { ApiException } from '../../../shared/exception';
@@ -13,9 +11,7 @@ import { UnitMemberService } from 'unit/services/unit.member.service';
  */
 @Injectable()
 export class ApiSpaceGuard implements CanActivate {
-
-  constructor( private readonly memberService: UnitMemberService) {
-  }
+  constructor(private readonly memberService: UnitMemberService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();

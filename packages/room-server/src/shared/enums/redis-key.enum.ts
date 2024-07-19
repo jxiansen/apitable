@@ -1,5 +1,3 @@
-
-
 export enum UserRoom {
   PREFIX = 'cache:online:room:',
   // 3 days

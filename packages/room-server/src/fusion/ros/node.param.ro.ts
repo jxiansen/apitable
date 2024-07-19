@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsArray, IsOptional, IsString, IsEnum, IsInt, Max, Min } from 'class-validator';
@@ -66,7 +64,7 @@ export class NodeListQueryRo {
     default: '[0, 1, 2, 3]',
     description: '0 - Manger, 1 - Editor, 2 - Update-only, 3 - Read-only',
   })
-  @Transform(value => integerStringToArray(value), { toClassOnly: true })
+  @Transform((value) => integerStringToArray(value), { toClassOnly: true })
   @IsOptional()
   @IsArray()
   @IsInt({ each: true, message: ApiTipConstant.api_node_permission_value_error })

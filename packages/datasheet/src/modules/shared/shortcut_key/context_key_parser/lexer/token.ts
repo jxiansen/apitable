@@ -1,5 +1,3 @@
-
-
 export enum TokenType {
   Value = 'Value',
   And = 'And',

@@ -1,5 +1,3 @@
-
-
 import { IViewProperty, Selectors } from '@apitable/core';
 
 import { useAppSelector } from 'pc/store/react-redux';

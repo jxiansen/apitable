@@ -1,6 +1,12 @@
-
-
-import { ICollaborator, IDashboard, INodeMeta, ISourceDatasheetInfo, ITemporaryView, IWidgetPanel, IWidgetPanelStatus } from 'exports/store/interfaces';
+import {
+  ICollaborator,
+  IDashboard,
+  INodeMeta,
+  ISourceDatasheetInfo,
+  ITemporaryView,
+  IWidgetPanel,
+  IWidgetPanelStatus,
+} from 'exports/store/interfaces';
 import * as ActionConstants from '../../../../shared/store/action_constants';
 import * as actions from '../../../../shared/store/action_constants';
 
@@ -49,8 +55,8 @@ export interface IMirrorSnapshot {
 
 export interface IUpdateMirrorInfo {
   type: typeof ActionConstants.UPDATE_DASHBOARD_INFO;
-  dashboardId: string,
-  payload: Partial<IDashboard>,
+  dashboardId: string;
+  payload: Partial<IDashboard>;
 }
 
 export interface IMirrorClient {

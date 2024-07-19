@@ -1,5 +1,3 @@
-
-
 import { MAX_INDENT } from '../../constant';
 import { IElementRenderProps, IElement } from '../../interface/element';
 

@@ -1,5 +1,3 @@
-
-
 import { EventEmitDto } from './event-emit.dto';
 
 export class EventSendDto extends EventEmitDto {

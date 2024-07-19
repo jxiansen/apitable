@@ -1,5 +1,3 @@
-
-
 import { get } from 'lodash';
 import Image from 'next/image';
 import { FC, useState } from 'react';
@@ -82,8 +80,7 @@ export const Guide: FC<React.PropsWithChildren<unknown>> = () => {
                             key={card.id}
                             className={styles.moduleItem}
                             style={{
-                              backgroundColor:
-                                  downModuleId === card.id ? get(colors, card.activeBackgroundColor) : get(colors, card.backgroundColor),
+                              backgroundColor: downModuleId === card.id ? get(colors, card.activeBackgroundColor) : get(colors, card.backgroundColor),
                             }}
                             onClick={() => {
                               if (card.video) {

@@ -1,5 +1,3 @@
-
-
 export class InternalSpaceSubscriptionView {
   maxRowsPerSheet!: number; // The maximum record allowed per datasheet
   maxArchivedRowsPerSheet!: number; // The maximum archived record allowed per datasheet
@@ -44,7 +42,7 @@ export class InternalCreateDatasheetVo {
 export class InternalSpaceInfoVo {
   spaceId!: string;
   labs!: {
-    viewManualSave: boolean
+    viewManualSave: boolean;
   };
 }
 

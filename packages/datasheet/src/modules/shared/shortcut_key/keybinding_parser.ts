@@ -1,5 +1,3 @@
-
-
 import { Keybinding, SimpleKeybinding, KeyCodeUtils } from './key_codes';
 
 export class KeybindingParser {

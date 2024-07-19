@@ -1,5 +1,3 @@
-
-
 import keyBy from 'lodash/keyBy';
 import { RESET_UNIT_INFO, UPDATE_UNIT_MAP, UPDATE_USER_MAP } from '../../../shared/store/action_constants';
 import { IUnitMap } from '../../../../exports/store/interfaces';
@@ -41,16 +39,18 @@ export const resetUnitInfo = () => {
 
 /**
  * load the missing unit information
- * @param names 
- * @param linkId 
- * @returns 
+ * @param names
+ * @param linkId
+ * @returns
  */
-export const loadLackUnitMap = (names: string, linkId?: string,) => {
-  return async(dispatch: any) => {
+export const loadLackUnitMap = (names: string, linkId?: string) => {
+  return async (dispatch: any) => {
     if (!names.length) {
       return;
     }
-    const { data: { data: resData }} = await Api.searchUnitInfoVo(names, linkId);
+    const {
+      data: { data: resData },
+    } = await Api.searchUnitInfoVo(names, linkId);
     if (!resData.length) {
       return;
     }

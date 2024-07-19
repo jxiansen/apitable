@@ -1,13 +1,11 @@
-
-
 import { useProviderTheme } from 'hooks';
 import React from 'react';
 import styled from 'styled-components';
 
 const LoadingSvg = styled.svg`
-  margin: auto; 
-  background: none; 
-  display: block; 
+  margin: auto;
+  background: none;
+  display: block;
   shape-rendering: auto;
 `;
 

@@ -1,5 +1,3 @@
-
-
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { getThemeName } from 'helper/colors';
 import React from 'react';
@@ -16,10 +14,10 @@ export const ThemeProvider: React.FC<React.PropsWithChildren<IThemeContext>> = (
   const { theme } = props;
   const themeName = theme || getThemeName();
   if (typeof themeName !== 'string') {
-    return <_Provider theme={themeName} >{props.children}</_Provider>;
+    return <_Provider theme={themeName}>{props.children}</_Provider>;
   }
   const themeColor = themeName.includes(ThemeName.Dark) ? dark : light;
-  return <_Provider theme={themeColor} >{props.children}</_Provider>;
+  return <_Provider theme={themeColor}>{props.children}</_Provider>;
 };
 
 export const ThemeContext = Context as IThemeContext;

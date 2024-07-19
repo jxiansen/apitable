@@ -1,5 +1,3 @@
-
-
 import { getCustomConfig } from 'config';
 import { ResourceType } from 'types';
 import { CollaCommandName } from '..';

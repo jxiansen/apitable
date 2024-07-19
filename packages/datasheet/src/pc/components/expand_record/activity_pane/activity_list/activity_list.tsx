@@ -1,5 +1,3 @@
-
-
 import cls from 'classnames';
 import { FC, useContext, useRef, useState } from 'react';
 import { ActivitySelectType } from 'pc/utils';

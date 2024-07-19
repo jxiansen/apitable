@@ -1,5 +1,3 @@
-
-
 import AddButton from '../../common/AddButton';
 import { ArrayFieldTitle } from './ArrayFieldTitle';
 import { DefaultArrayItem } from './DefaultArrayItem';

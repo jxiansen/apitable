@@ -1,8 +1,24 @@
 import {
-  CollaCommandName, DatasheetActions, ExecuteResult, FieldCmd, getNewIds, IAddFieldsOptions,
-  IAddRecordsOptions, ICollaCommandExecuteResult, ICollaCommandOptions, ResourceType,
-  IDeleteFieldOptions, IDPrefix, IJOTAction, IRecordMap, ISetRecordsOptions, ISetFieldAttrOptions,
-  Selectors, IDeleteRecordOptions, IField, StoreActions,
+  CollaCommandName,
+  DatasheetActions,
+  ExecuteResult,
+  FieldCmd,
+  getNewIds,
+  IAddFieldsOptions,
+  IAddRecordsOptions,
+  ICollaCommandExecuteResult,
+  ICollaCommandOptions,
+  ResourceType,
+  IDeleteFieldOptions,
+  IDPrefix,
+  IJOTAction,
+  IRecordMap,
+  ISetRecordsOptions,
+  ISetFieldAttrOptions,
+  Selectors,
+  IDeleteRecordOptions,
+  IField,
+  StoreActions,
 } from '@apitable/core';
 import { getSnapshot } from 'store';
 import { MockWidgetSdkData } from '__tests__/mocks/mock_data';
@@ -11,8 +27,8 @@ import { DEFAULT_DATASHEET_ID } from '__tests__/mocks/mock_datasheet';
 const applyJOTOperations = StoreActions.applyJOTOperations;
 /**
  * Wrapping with promise to simulate cmd asynchrony.
- * @param data 
- * @param status 
+ * @param data
+ * @param status
  */
 function outputPromise(data: any, status: boolean = true): Promise<ICollaCommandExecuteResult<any>> {
   return new Promise((resolve, reject) => {
@@ -20,9 +36,7 @@ function outputPromise(data: any, status: boolean = true): Promise<ICollaCommand
   });
 }
 
-export const createMockCmdExecute = (context: {
-  mockWidgetSdkData: MockWidgetSdkData
-}) => {
+export const createMockCmdExecute = (context: { mockWidgetSdkData: MockWidgetSdkData }) => {
   const { mockWidgetSdkData } = context;
   const state = mockWidgetSdkData.widgetSdkData as any;
   return (cmdOpts: ICollaCommandOptions) => {
@@ -38,7 +52,7 @@ export const createMockCmdExecute = (context: {
           recordMap[newRecordIds[index]!] = {
             id: newRecordIds[index]!,
             data: recordCellValue,
-            commentCount: 0
+            commentCount: 0,
           };
         });
         mockWidgetSdkData.addRecords(recordMap);
@@ -84,7 +98,7 @@ export const createMockCmdExecute = (context: {
 
         const actions = DatasheetActions.deleteField2Action(snapshot!, {
           fieldId: _cmdOpts.data[0]?.fieldId || '',
-          datasheetId: snapshot!.datasheetId
+          datasheetId: snapshot!.datasheetId,
         })!;
         const operations = [{ cmd: _cmdOpts.cmd, actions }];
 
@@ -124,7 +138,8 @@ export const createMockCmdExecute = (context: {
         mockWidgetSdkData.dispatch(reduxAction);
         return outputPromise({});
       }
-      default: return outputPromise({ data: null });
+      default:
+        return outputPromise({ data: null });
     }
   };
 };

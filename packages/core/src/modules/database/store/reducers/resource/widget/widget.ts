@@ -1,5 +1,3 @@
-
-
 import { AnyAction, combineReducers } from 'redux';
 import { WIDGET_JOT_ACTION, WIDGET_UPDATE_REVISION } from '../../../../../shared/store/action_constants';
 import { IJOTActionPayload, IUnMountWidget, IWidget } from '../../../../../../exports/store/interfaces';
@@ -15,11 +13,11 @@ export const widgetMap = (state = {}, action: IUnMountWidget | AnyAction) => {
     }
     return newState;
   }
-  
+
   if (!action.widgetId) {
     return state;
   }
-  
+
   return {
     ...state,
     [action.widgetId]: widgetPack(state[action.widgetId], action),
@@ -35,7 +33,7 @@ export const widget = (state: IWidget, action: AnyAction) => {
   }
   switch (action.type) {
     case WIDGET_JOT_ACTION:
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         JOTApply(draft, action as IJOTActionPayload);
         return draft;
       });
@@ -63,4 +61,3 @@ export const widgetPack = combineReducers({
   },
   widget,
 });
-

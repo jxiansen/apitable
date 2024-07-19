@@ -1,16 +1,16 @@
-
-
 import {
-  ICollaborator, IActiveDatasheetCollaboratorAction, IDeActiveDatasheetCollaborator,
-  ICursorMove, IRoomInfoSync,
+  ICollaborator,
+  IActiveDatasheetCollaboratorAction,
+  IDeActiveDatasheetCollaborator,
+  ICursorMove,
+  IRoomInfoSync,
 } from '../../../../../../exports/store/interfaces';
 import * as actions from '../../../../../shared/store/action_constants';
 
-export type ICollaboratorAction = IActiveDatasheetCollaboratorAction | IDeActiveDatasheetCollaborator |
-  IRoomInfoSync | ICursorMove;
+export type ICollaboratorAction = IActiveDatasheetCollaboratorAction | IDeActiveDatasheetCollaborator | IRoomInfoSync | ICursorMove;
 
 function activeCollaborator(state: ICollaborator[], { payload }: IActiveDatasheetCollaboratorAction): ICollaborator[] {
-  if (state.find(user => user.socketId === payload.socketId)) {
+  if (state.find((user) => user.socketId === payload.socketId)) {
     console.warn('! ' + 'warning user enter with same socketid');
     return state;
   }
@@ -18,12 +18,12 @@ function activeCollaborator(state: ICollaborator[], { payload }: IActiveDatashee
 }
 
 function deactivateCollaborator(state: ICollaborator[], { payload }: IDeActiveDatasheetCollaborator): ICollaborator[] {
-  return state.filter(user => user.socketId !== payload.socketId);
+  return state.filter((user) => user.socketId !== payload.socketId);
 }
 
 function userCursorMove(state: ICollaborator[], { payload }: ICursorMove): ICollaborator[] {
   const { socketId, ...rest } = payload;
-  return state.map(user => {
+  return state.map((user) => {
     if (user.socketId === socketId) {
       return { ...user, activeCell: rest };
     }

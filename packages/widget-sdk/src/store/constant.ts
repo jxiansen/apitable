@@ -1,5 +1,3 @@
-
-
 /** error code */
 export const SET_ERROR_CODE = 'SET_ERROR_CODE';
 

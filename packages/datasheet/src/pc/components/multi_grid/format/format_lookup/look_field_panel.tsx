@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { ILinkField } from '@apitable/core';
 import { FieldSearchPanel, IFieldSearchPanelProps, ShowType } from './search_field_panel';

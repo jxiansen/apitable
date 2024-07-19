@@ -1,5 +1,3 @@
-
-
 import { useUpdateEffect } from 'ahooks';
 import { KonvaEventObject } from 'konva/lib/Node';
 import { isEqual } from 'lodash';
@@ -204,9 +202,9 @@ export const useGridMouseEvent = (props: IUseGridMouseEventProps) => {
     const currentActiveCell =
       targetRecordId && targetFieldId
         ? {
-          recordId: targetRecordId,
-          fieldId: targetFieldId,
-        }
+            recordId: targetRecordId,
+            fieldId: targetFieldId,
+          }
         : null;
     if (currentActiveCell) {
       setCellDown(true);

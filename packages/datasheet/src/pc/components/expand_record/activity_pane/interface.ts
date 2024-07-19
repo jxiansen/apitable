@@ -1,5 +1,3 @@
-
-
 import { IComments } from '@apitable/core';
 import { ActivitySelectType } from 'pc/utils';
 

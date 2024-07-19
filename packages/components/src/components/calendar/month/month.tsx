@@ -1,5 +1,3 @@
-
-
 import React, { FC, memo, useEffect, useMemo, useRef, useState } from 'react';
 import { MonthListDiv } from './styled';
 import { getLevels, getPanelData } from '../utils';
@@ -13,18 +11,27 @@ import { CalendarContext } from '../calendar_context';
 import { Week } from './week';
 
 export type IMonth = Omit<ICalendar, 'defaultDate'> & {
-  step: number
+  step: number;
   isMobile: boolean;
 };
 
-const MonthBase:FC<React.PropsWithChildren<IMonth>> = props => {
+const MonthBase: FC<React.PropsWithChildren<IMonth>> = (props) => {
   const {
-    isMobile, step, tasks = [], update, dnd = [], listStyle, startListStyle,
-    warnText, rowMixCount = 3, disabled, resizable, moreText, moveTaskId
+    isMobile,
+    step,
+    tasks = [],
+    update,
+    dnd = [],
+    listStyle,
+    startListStyle,
+    warnText,
+    rowMixCount = 3,
+    disabled,
+    resizable,
+    moreText,
+    moveTaskId,
   } = props;
-  const { data, year, month } = useMemo(() =>
-    getPanelData(step),
-  [step]);
+  const { data, year, month } = useMemo(() => getPanelData(step), [step]);
   const space = isMobile ? SPACE_MOBILE : SPACE;
   const defaultListHeight = isMobile ? DEFAULT_MOBILE_LIST_HEIGHT : DEFAULT_LIST_HEIGHT;
   const today = format(new Date(), FORMAT);
@@ -61,56 +68,68 @@ const MonthBase:FC<React.PropsWithChildren<IMonth>> = props => {
     return () => {
       window.removeEventListener('resize', handleResize, false);
     };
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
   useEffect(() => {
     setWidth(calendarWidth / 7);
     const rows = calendarRef.current?.querySelectorAll('.week-row');
     const rowHeights: number[] = [];
-    rows?.forEach(row => {
+    rows?.forEach((row) => {
       rowHeights.push(row.scrollHeight);
     });
     setHeight(rowHeights);
-
   }, [step, calendarWidth]);
-  const[resizeDay, setResizeDay] = useState(0);
+  const [resizeDay, setResizeDay] = useState(0);
   const { onResizeStart, resizeData } = useResize({ height, width, update, setResizeDay, tasks });
   const { clientHeight, scrollHeight } = calendarHeights;
   const disableResize = disabled || !resizable || !update;
 
   const listHeight = listStyle?.height ? parseInt(listStyle?.height as string) : defaultListHeight;
 
-  const resizeMsg = resizeDay ? {
-    id: resizeData?.id,
-    day: resizeDay,
-    direction: resizeData?.direction!,
-  } : undefined;
+  const resizeMsg = resizeDay
+    ? {
+        id: resizeData?.id,
+        day: resizeDay,
+        direction: resizeData?.direction!,
+      }
+    : undefined;
 
   return (
-    <CalendarContext.Provider value={{
-      space, listHeight, defaultListHeight, disabled, disableResize, listStyle, startListStyle,
-      warnText, onResizeStart, Drag, Drop, update, month, rowMixCount, today, year, isMobile, moreText,
-      moveTaskId,
-    }}>
-      <MonthListDiv ref={calendarRef} className="months" isMobile={isMobile} >
-        {weeks.length > 0 && weeks.map((week, weekIdx) => {
-          const levels = getLevels({ week, year, tasks, resizeMsg });
-          const rowLevel = Math.max(Math.min(levels.length, MAX_LEVEL), rowMixCount);
-          let rowHeight = rowLevel * (listHeight + space) + defaultListHeight + 4 + 22;
-          // Adaptive height when height is insufficient
-          if (levels.length === 0 || (clientHeight <= scrollHeight && (clientHeight / weeks.length) > rowHeight)) {
-            rowHeight = clientHeight / weeks.length;
-          }
-          return (
-            <Week
-              key={weekIdx}
-              week={week}
-              weekLevel={weekIdx}
-              levelTasks={levels}
-              rowHeight={rowHeight}
-            />
-          );
-        })}
+    <CalendarContext.Provider
+      value={{
+        space,
+        listHeight,
+        defaultListHeight,
+        disabled,
+        disableResize,
+        listStyle,
+        startListStyle,
+        warnText,
+        onResizeStart,
+        Drag,
+        Drop,
+        update,
+        month,
+        rowMixCount,
+        today,
+        year,
+        isMobile,
+        moreText,
+        moveTaskId,
+      }}
+    >
+      <MonthListDiv ref={calendarRef} className="months" isMobile={isMobile}>
+        {weeks.length > 0 &&
+          weeks.map((week, weekIdx) => {
+            const levels = getLevels({ week, year, tasks, resizeMsg });
+            const rowLevel = Math.max(Math.min(levels.length, MAX_LEVEL), rowMixCount);
+            let rowHeight = rowLevel * (listHeight + space) + defaultListHeight + 4 + 22;
+            // Adaptive height when height is insufficient
+            if (levels.length === 0 || (clientHeight <= scrollHeight && clientHeight / weeks.length > rowHeight)) {
+              rowHeight = clientHeight / weeks.length;
+            }
+            return <Week key={weekIdx} week={week} weekLevel={weekIdx} levelTasks={levels} rowHeight={rowHeight} />;
+          })}
       </MonthListDiv>
     </CalendarContext.Provider>
   );

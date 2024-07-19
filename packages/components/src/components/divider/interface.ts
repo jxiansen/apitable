@@ -1,5 +1,3 @@
-
-
 import { IFontVariants } from 'helper';
 import React from 'react';
 
@@ -36,9 +34,9 @@ export interface IDividerProps {
 
   /**
    * The rendered node html type, which defaults to div tag
-   * 
+   *
    */
-   component?: 'li' | 'hr' | 'div'
+  component?: 'li' | 'hr' | 'div';
 }
 
 export interface IDividerStyledType extends IDividerProps {

@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -39,8 +37,8 @@ export const RecommendWidgetPanel: React.FC<React.PropsWithChildren<IRecommendWi
   const [installingWidgetIds, setInstallingWidgetIds] = useState<null | string[]>(null);
   const dashboardId = useAppSelector((state) => state.pageParams.dashboardId)!;
   const spaceId = useAppSelector((state) => state.space.activeId);
-  const activeNodePrivate = useAppSelector((state) =>
-    state.catalogTree.treeNodesMap[dashboardId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[dashboardId]?.nodePrivate
+  const activeNodePrivate = useAppSelector(
+    (state) => state.catalogTree.treeNodesMap[dashboardId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[dashboardId]?.nodePrivate,
   );
   const [recommendList, serRecommendList] = useState<IRecentInstalledItem[]>([]);
   const [searchPanelVisible, setSearchPanelVisible] = useState(false);

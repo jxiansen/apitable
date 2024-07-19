@@ -1,5 +1,3 @@
-
-
 import { StatusCode } from 'config';
 import { Strings, t } from 'exports/i18n';
 import { ErrorCode, ErrorType } from 'types';
@@ -44,23 +42,26 @@ export const errorCapture = <T extends { event: { onError?(e: any, type?: 'modal
 
         const onError = (e: any) => {
           const code = e.code || ErrorCode.CollaSyncError;
-          this.event.onError && this.event.onError({
-            ...e,
-            type: ErrorType.CollaError,
-            code: code,
-            message: i18nMessage(code, e.message),
-          }, getErrorType(code));
+          this.event.onError &&
+            this.event.onError(
+              {
+                ...e,
+                type: ErrorType.CollaError,
+                code: code,
+                message: i18nMessage(code, e.message),
+              },
+              getErrorType(code)
+            );
 
           throw e;
         };
 
         return (...args: any[]) => {
           try {
-
             const promise = boundFn(...args);
             // If it is a promise, you need to listen catch catch
             if (promise instanceof Promise) {
-              promise.catch(e => {
+              promise.catch((e) => {
                 onError(e);
               });
             }

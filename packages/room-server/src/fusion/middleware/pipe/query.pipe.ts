@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, FieldKeyEnum, IFieldMap, IMeta } from '@apitable/core';
 import { Inject, Injectable, PipeTransform } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';

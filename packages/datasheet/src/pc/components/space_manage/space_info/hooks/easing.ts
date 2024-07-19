@@ -1,5 +1,3 @@
-
-
 // Slow motion animation
 // http://robertpenner.com/easing/
 

@@ -91,44 +91,41 @@ export const DataSourceSelectorForNode: React.FC<IDataSourceSelectorForAIProps> 
             headerConfig={
               isPc
                 ? {
-                  // eslint-disable-next-line indent
+                    // eslint-disable-next-line indent
                     title: title,
-                  // eslint-disable-next-line indent
+                    // eslint-disable-next-line indent
                     onHide,
-                }
+                  }
                 : undefined
             }
             requiredData={requiredData}
           />
           <>
-            {
-              footer ? (
-                <>
-                  <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
-                    {footer}
+            {footer ? (
+              <>
+                <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
+                  {footer}
 
-                    <div className={styles.chatbotCreateButtonGroupFooter}>
-                      <Button color={'default'} onClick={onHide}>
-                        {t(Strings.cancel)}
-                      </Button>
-                      <Button color={'primary'} disabled={disabled} onClick={onSubmit}>
-                        {t(Strings.submit)}
-                      </Button>
-                    </div>
-                  </Box>
-                </>
-
-              ): (
-                <div className={styles.chatbotCreateButtonGroup}>
-                  <Button color={'default'} onClick={onHide}>
-                    {t(Strings.cancel)}
-                  </Button>
-                  <Button color={'primary'} disabled={disabled} onClick={onSubmit}>
-                    {t(Strings.submit)}
-                  </Button>
-                </div>
-              )
-            }
+                  <div className={styles.chatbotCreateButtonGroupFooter}>
+                    <Button color={'default'} onClick={onHide}>
+                      {t(Strings.cancel)}
+                    </Button>
+                    <Button color={'primary'} disabled={disabled} onClick={onSubmit}>
+                      {t(Strings.submit)}
+                    </Button>
+                  </div>
+                </Box>
+              </>
+            ) : (
+              <div className={styles.chatbotCreateButtonGroup}>
+                <Button color={'default'} onClick={onHide}>
+                  {t(Strings.cancel)}
+                </Button>
+                <Button color={'primary'} disabled={disabled} onClick={onSubmit}>
+                  {t(Strings.submit)}
+                </Button>
+              </div>
+            )}
           </>
           {isLoadingExtraData && (
             <Loading className={'vk-absolute vk-top-0 vk-left-0 vk-right-0 vk-bottom-0 vk-bg-transparent vk-backdrop-blur-[1px]'} />

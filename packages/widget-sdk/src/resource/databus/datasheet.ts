@@ -8,9 +8,9 @@ export function loadDatasheet(
   successCb?: (datasheet?: databus.Datasheet) => void,
   overWrite = false,
   extra?: { recordIds: string[] },
-  failCb?: () => void,
+  failCb?: () => void
 ) {
-  return async(dispatch: any, getState: () => IReduxState) => {
+  return async (dispatch: any, getState: () => IReduxState) => {
     const state = getState();
     const datasheetState = Selectors.getDatasheet(state, datasheetId);
     const { shareId, templateId, embedId } = state.pageParams;

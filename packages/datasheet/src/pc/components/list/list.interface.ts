@@ -1,5 +1,3 @@
-
-
 export interface IListBase<T, L> {
   /**
    * @description Existing data

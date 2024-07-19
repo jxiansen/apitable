@@ -1,11 +1,9 @@
-
-
 import { cloneDeep, findIndex, max, min } from 'lodash';
 import { groupArray } from 'model/utils';
 import { IReduxState } from 'exports/store/interfaces';
 import { getVisibleRows, getPureVisibleRows, getPureVisibleRowsIndexMap } from 'modules/database/store/selectors/resource/datasheet/rows_calc';
 import { getVisibleColumns } from 'modules/database/store/selectors/resource/datasheet/calc';
-import { getCellUIIndex,getCellIndex, getCellByIndex } from 'modules/database/store/selectors/resource/datasheet/cell_range_calc';
+import { getCellUIIndex, getCellIndex, getCellByIndex } from 'modules/database/store/selectors/resource/datasheet/cell_range_calc';
 import { getActiveCell } from 'modules/database/store/selectors/resource/datasheet/base';
 /**
  * cell row / column UUID
@@ -15,9 +13,9 @@ export interface ICell {
    * cell row UUID
    */
   recordId: string;
-   /**
-    * cell column UUID
-    */
+  /**
+   * cell column UUID
+   */
   fieldId: string;
 }
 
@@ -72,7 +70,6 @@ const isNumberInRange = (n: number, range: readonly [number, number]) => {
  * select are range judgement
  */
 export class Range {
-
   static instance = new Range(EMPTY_CELL, EMPTY_CELL);
 
   static bindModel(range?: IRange) {
@@ -83,8 +80,10 @@ export class Range {
     return this.instance;
   }
 
-  constructor(public start: ICell, public end: ICell) {
-  }
+  constructor(
+    public start: ICell,
+    public end: ICell
+  ) {}
 
   toNumberBaseRange(state: IReduxState) {
     const rangeIndex = this.getIndexRange(state);
@@ -164,17 +163,10 @@ export class Range {
     const indexRange = this.getIndexRange(state);
     if (currentCell == null || indexRange == null) return false;
 
-    const recordIndexRange = [
-      indexRange.record.min,
-      indexRange.record.max,
-    ] as const;
-    const fieldIndexRange = [
-      indexRange.field.min,
-      indexRange.field.max,
-    ] as const;
+    const recordIndexRange = [indexRange.record.min, indexRange.record.max] as const;
+    const fieldIndexRange = [indexRange.field.min, indexRange.field.max] as const;
 
-    return isNumberInRange(currentCell.recordIndex, recordIndexRange)
-      && isNumberInRange(currentCell.fieldIndex, fieldIndexRange);
+    return isNumberInRange(currentCell.recordIndex, recordIndexRange) && isNumberInRange(currentCell.fieldIndex, fieldIndexRange);
   }
 
   /**
@@ -188,14 +180,8 @@ export class Range {
 
     if (hoverCellIndex == null || indexRange == null) return null;
 
-    const [minRecordIndex, maxRecordIndex] = [
-      indexRange.record.min,
-      indexRange.record.max,
-    ];
-    const [minFieldIndex, maxFieldIndex] = [
-      indexRange.field.min,
-      indexRange.field.max,
-    ];
+    const [minRecordIndex, maxRecordIndex] = [indexRange.record.min, indexRange.record.max];
+    const [minFieldIndex, maxFieldIndex] = [indexRange.field.min, indexRange.field.max];
 
     if (hoverCellIndex.recordIndex < minRecordIndex) return FillDirection.Top;
     if (hoverCellIndex.recordIndex > maxRecordIndex) return FillDirection.Below;
@@ -214,14 +200,8 @@ export class Range {
     const visibleRows = getVisibleRows(state);
     const visibleColumns = getVisibleColumns(state);
     if (!indexRange) return null;
-    const [minRecordIndex, maxRecordIndex] = [
-      indexRange.record.min,
-      indexRange.record.max,
-    ];
-    const [minFieldIndex, maxFieldIndex] = [
-      indexRange.field.min,
-      indexRange.field.max,
-    ];
+    const [minRecordIndex, maxRecordIndex] = [indexRange.record.min, indexRange.record.max];
+    const [minFieldIndex, maxFieldIndex] = [indexRange.field.min, indexRange.field.max];
 
     switch (direction) {
       case FillDirection.Top:
@@ -323,12 +303,12 @@ export class Range {
 
     /**
      * No action is required for the following three situations:
-      * 1. The current selection has covered the first row, and the selection is moved up
-      * 2. The current selection has covered the last line, and the selection is moved down
-      * 3. The current selection has been selected, and the current shortcut key is the selection of all selections
+     * 1. The current selection has covered the first row, and the selection is moved up
+     * 2. The current selection has covered the last line, and the selection is moved down
+     * 3. The current selection has been selected, and the current shortcut key is the selection of all selections
      */
     if (
-      (direction === RangeDirection.All && (minRangeRowIndex === 0 && maxRangeRowIndex === visibleRowsCount - 1)) ||
+      (direction === RangeDirection.All && minRangeRowIndex === 0 && maxRangeRowIndex === visibleRowsCount - 1) ||
       ([RangeDirection.Up, RangeDirection.UpEdge].includes(direction) && minRangeRowIndex === 0 && isUpExpand) ||
       ([RangeDirection.Down, RangeDirection.DownEdge].includes(direction) && maxRangeRowIndex === visibleRowsCount - 1 && isDownExpand)
     ) {
@@ -342,7 +322,7 @@ export class Range {
 
     // process the grouping
     if (breakpoints.length) {
-      const nextBreakpointIndex = findIndex(breakpoints, bp => bp > (isDownExpand ? maxRangeRowIndex : minRangeRowIndex));
+      const nextBreakpointIndex = findIndex(breakpoints, (bp) => bp > (isDownExpand ? maxRangeRowIndex : minRangeRowIndex));
       if (nextBreakpointIndex > -1) {
         const nextBreakpoint = breakpoints[nextBreakpointIndex]!;
         const currentBreakpointIndex = nextBreakpointIndex - 1;
@@ -355,17 +335,18 @@ export class Range {
          * Expand the selection area up and drop directly to the starting position of the group
          * Narrow the selection up to the end of the group
          */
-        const minRangeOffset = (isUpExpand || (isGroupRangeDownEdge && isActiveCellInCurrentGroup)) ? 0 : -1;
+        const minRangeOffset = isUpExpand || (isGroupRangeDownEdge && isActiveCellInCurrentGroup) ? 0 : -1;
         /**
          * Extend the selection down, directly to the end of the group
          * Reduce the selection area down, then it falls to the starting position of the group
          */
-        const maxRangeOffset = (isDownExpand || (isGroupRangeUpEdge && isActiveCellInCurrentGroup)) ? -1 : 0;
+        const maxRangeOffset = isDownExpand || (isGroupRangeUpEdge && isActiveCellInCurrentGroup) ? -1 : 0;
 
         minRowIndex = (isGroupRangeUpEdge ? breakpoints[currentBreakpointIndex - 1]! + minRangeOffset : currentBreakpoint + minRangeOffset) || 0;
-        maxRowIndex = (isGroupRangeDownEdge ? breakpoints[nextBreakpointIndex + 1]! + maxRangeOffset : nextBreakpoint + maxRangeOffset) || maxRowIndex;
-        minRowIndexInAllRange = (isGroupRangeUpEdge && isGroupRangeDownEdge) ? 0 : currentBreakpoint;
-        maxRowIndexInAllRange = (isGroupRangeUpEdge && isGroupRangeDownEdge) ? visibleRowsCount - 1 : nextBreakpoint - 1;
+        maxRowIndex =
+          (isGroupRangeDownEdge ? breakpoints[nextBreakpointIndex + 1]! + maxRangeOffset : nextBreakpoint + maxRangeOffset) || maxRowIndex;
+        minRowIndexInAllRange = isGroupRangeUpEdge && isGroupRangeDownEdge ? 0 : currentBreakpoint;
+        maxRowIndexInAllRange = isGroupRangeUpEdge && isGroupRangeDownEdge ? visibleRowsCount - 1 : nextBreakpoint - 1;
       }
     }
 
@@ -461,7 +442,7 @@ export class Range {
         return a - b;
       });
     const rowIndexRanges = groupArray(sortedRowIndexList);
-    const res = rowIndexRanges.map(rowIndexRange => {
+    const res = rowIndexRanges.map((rowIndexRange) => {
       const minRowIndex = min(rowIndexRange);
       const maxRowIndex = max(rowIndexRange);
       return {
@@ -478,4 +459,3 @@ export class Range {
     return res;
   }
 }
-

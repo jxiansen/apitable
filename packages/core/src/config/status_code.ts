@@ -1,5 +1,3 @@
-
-
 export const STATUS_OK = 200;
 export const UN_AUTHORIZED = 201;
 export const RESOURCE_NOT_EXIST = 210;

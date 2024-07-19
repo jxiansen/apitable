@@ -1,5 +1,3 @@
-
-
 import { ResourceType } from 'types';
 
 /**

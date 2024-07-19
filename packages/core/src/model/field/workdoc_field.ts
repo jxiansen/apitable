@@ -6,7 +6,12 @@ import {
   FOperator,
   IAddOpenWorkDocFieldProperty,
   IAttachmentValue,
-  IField, IFilterCondition, IFilterText, IFilterWorkDoc, IOpenFilterValueArray, ISegment,
+  IField,
+  IFilterCondition,
+  IFilterText,
+  IFilterWorkDoc,
+  IOpenFilterValueArray,
+  ISegment,
   IStandardValue,
   IWorkDocField,
   IWorkDocValue,
@@ -22,11 +27,14 @@ import { Strings, t } from 'exports/i18n';
 import { getFieldDefaultProperty } from './const';
 const baseWorkDocFieldSchema = {
   documentId: Joi.string().required(),
-  title: Joi.string().allow('')
+  title: Joi.string().allow(''),
 };
 
 export class WorkDocField extends ArrayValueField {
-  constructor(public override field: IWorkDocField, public override state: IReduxState) {
+  constructor(
+    public override field: IWorkDocField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -52,8 +60,8 @@ export class WorkDocField extends ArrayValueField {
             type: 'string',
             title: t(Strings.robot_variables_join_workdoc_name),
           },
-        }
-      }
+        },
+      },
     };
   }
 
@@ -62,15 +70,7 @@ export class WorkDocField extends ArrayValueField {
   }
 
   override get acceptFilterOperators(): FOperator[] {
-    return [
-      FOperator.Is,
-      FOperator.IsNot,
-      FOperator.Contains,
-      FOperator.DoesNotContain,
-      FOperator.IsEmpty,
-      FOperator.IsNotEmpty,
-      FOperator.IsRepeat,
-    ];
+    return [FOperator.Is, FOperator.IsNot, FOperator.Contains, FOperator.DoesNotContain, FOperator.IsEmpty, FOperator.IsNotEmpty, FOperator.IsRepeat];
   }
 
   override get basicValueType(): BasicValueType {
@@ -103,15 +103,12 @@ export class WorkDocField extends ArrayValueField {
       return cv1 === cv2;
     }
     return isEqual(
-      [cv1].flat().map(item => item.documentId),
-      [cv2].flat().map(item => item.documentId),
+      [cv1].flat().map((item) => item.documentId),
+      [cv2].flat().map((item) => item.documentId)
     );
   }
 
-  override compare(
-    cellValue1: IWorkDocValue[] | null,
-    cellValue2: IWorkDocValue[] | null,
-  ): number {
+  override compare(cellValue1: IWorkDocValue[] | null, cellValue2: IWorkDocValue[] | null): number {
     if (isEqual(cellValue1, cellValue2)) {
       return 0;
     }
@@ -138,8 +135,7 @@ export class WorkDocField extends ArrayValueField {
     str2 = str2.trim();
 
     // test pinyin sort
-    return str1 === str2 ? 0 :
-      zhIntlCollator ? zhIntlCollator.compare(str1, str2) : (str1.localeCompare(str2, 'zh-CN') > 0 ? 1 : -1);
+    return str1 === str2 ? 0 : zhIntlCollator ? zhIntlCollator.compare(str1, str2) : str1.localeCompare(str2, 'zh-CN') > 0 ? 1 : -1;
   }
 
   override isMeetFilter(operator: FOperator, cellValue: ISegment[] | null, conditionValue: Exclude<IFilterText, null>) {
@@ -150,31 +146,26 @@ export class WorkDocField extends ArrayValueField {
       case FOperator.IsNot:
         return cellValueTitle == null || !isEqual(cellValueTitle, conditionValue);
       case FOperator.Contains:
-        return cellValueTitle != null && cellValueTitle.some(title =>
-          conditionValue.some((v: string) => title.includes(v))
-        );
+        return cellValueTitle != null && cellValueTitle.some((title) => conditionValue.some((v: string) => title.includes(v)));
       case FOperator.DoesNotContain:
-        return cellValueTitle == null || !cellValueTitle.some(title =>
-          conditionValue.some((v: string) => title.includes(v))
-        );
+        return cellValueTitle == null || !cellValueTitle.some((title) => conditionValue.some((v: string) => title.includes(v)));
       default:
         return super.isMeetFilter(operator, cellValue, conditionValue);
     }
   }
 
   validate(value: any): value is IWorkDocValue[] {
-    return isArray(value) && (value as IWorkDocValue[]).every((doc: IWorkDocValue) => {
-      return Boolean(
-        doc &&
-        isString(doc.documentId) &&
-        isString(doc.title)
-      );
-    });
+    return (
+      isArray(value) &&
+      (value as IWorkDocValue[]).every((doc: IWorkDocValue) => {
+        return Boolean(doc && isString(doc.documentId) && isString(doc.title));
+      })
+    );
   }
 
   cellValueToArray(cellValue: ICellValue): string[] | null {
     if (this.validate(cellValue)) {
-      return cellValue.map(cur => {
+      return cellValue.map((cur) => {
         return cur.title;
       });
     }
@@ -195,7 +186,7 @@ export class WorkDocField extends ArrayValueField {
 
   cellValueToApiStandardValue(cellValue: ICellValue): any[] | null {
     if (this.validate(cellValue)) {
-      return cellValue.map(value => {
+      return cellValue.map((value) => {
         return {
           documentId: value.documentId,
           title: value.title,
@@ -220,7 +211,7 @@ export class WorkDocField extends ArrayValueField {
     };
 
     if (val != null) {
-      stdVal.data = val.map(doc => {
+      stdVal.data = val.map((doc) => {
         return {
           text: this.cellValueToString([doc]) || '',
           ...doc,
@@ -235,7 +226,7 @@ export class WorkDocField extends ArrayValueField {
     return null;
   }
 
-  override filterValueToOpenFilterValue(value: IFilterWorkDoc): IOpenFilterValueArray{
+  override filterValueToOpenFilterValue(value: IFilterWorkDoc): IOpenFilterValueArray {
     if (value === null) {
       return null;
     }
@@ -253,7 +244,7 @@ export class WorkDocField extends ArrayValueField {
     if (isNullValue(openWriteValue)) {
       return null;
     }
-    return openWriteValue.map(v => ({
+    return openWriteValue.map((v) => ({
       documentId: v.documentId,
       title: v.title,
     }));
@@ -264,7 +255,7 @@ export class WorkDocField extends ArrayValueField {
       return null;
     }
 
-    const cellValue = stdVal.data.map(val => {
+    const cellValue = stdVal.data.map((val) => {
       const { text, ...v } = val;
       return v;
     });
@@ -286,5 +277,4 @@ export class WorkDocField extends ArrayValueField {
     }
     return this.validateUpdateOpenProperty(updateProperty);
   }
-
 }

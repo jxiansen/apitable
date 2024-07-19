@@ -1,5 +1,3 @@
-
-
 import { Circle as KonvaCircle } from 'react-konva';
 
 const Circle = (props: any) => {

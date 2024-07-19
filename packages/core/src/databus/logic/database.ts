@@ -1,5 +1,3 @@
-
-
 import { CollaCommandManager, IResourceOpsCollect } from 'command_manager';
 import { CommandExecutionResultType, IEventEmitter, IResourceEvent, IResourceEventHandler, ResourceEventType } from 'databus/common/event';
 import { IReduxState } from 'exports/store/interfaces';
@@ -102,7 +100,7 @@ export class Database implements IEventEmitter {
           });
         },
       },
-      store,
+      store
     );
     this.commandManagers.set(store, commandManager);
     return commandManager;

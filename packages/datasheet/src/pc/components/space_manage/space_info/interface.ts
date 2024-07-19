@@ -1,5 +1,3 @@
-
-
 import { StaticImageData } from 'next/image';
 import { CSSProperties } from 'react';
 import { ISpaceBasicInfo, ISpaceFeatures } from '@apitable/core';

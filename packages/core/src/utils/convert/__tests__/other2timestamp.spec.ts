@@ -1,5 +1,3 @@
-
-
 import { str2timestamp } from '../other2timestamp';
 import assert from 'assert';
 import * as cases from './other2timestamp.test.json';

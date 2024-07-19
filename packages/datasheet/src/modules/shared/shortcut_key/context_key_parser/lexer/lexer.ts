@@ -1,5 +1,3 @@
-
-
 import { BOOLEAN_EXPR_GRAMMAR } from './grammar';
 import { Token, TokenType } from './token';
 

@@ -1,5 +1,3 @@
-
-
 import {
   CollaCommandManager,
   DEFAULT_EDITOR_PERMISSION,
@@ -35,8 +33,7 @@ import { Logger } from 'winston';
  */
 @Injectable()
 export class CommandService {
-  constructor(@InjectLogger() private readonly logger: Logger) {
-  }
+  constructor(@InjectLogger() private readonly logger: Logger) {}
 
   fullFillStore(datasheetPack: IServerDatasheetPack, userInfo?: IUserInfo): Store<IReduxState> {
     const store = createStore<IReduxState, any, unknown, unknown>(Reducers.rootReducers, applyMiddleware(thunkMiddleware, batchDispatchMiddleware));
@@ -48,7 +45,7 @@ export class CommandService {
     );
 
     if (datasheetPack.foreignDatasheetMap) {
-      Object.keys(datasheetPack.foreignDatasheetMap).forEach(dstId => {
+      Object.keys(datasheetPack.foreignDatasheetMap).forEach((dstId) => {
         // Don't check linked datasheet, linked datasheet should be set to connected, or linked data can not be written
         store.dispatch(StoreActions.setDatasheetConnected(dstId));
         const dataPack = datasheetPack.foreignDatasheetMap![dstId]!;
@@ -59,11 +56,11 @@ export class CommandService {
     if (datasheetPack.units) {
       // Initialize UnitMap for member fields
       const unitMap = {};
-      (datasheetPack.units as IUnitValue[]).filter(unit => unit.unitId).forEach(unit => (unitMap[unit.unitId] = unit));
+      (datasheetPack.units as IUnitValue[]).filter((unit) => unit.unitId).forEach((unit) => (unitMap[unit.unitId] = unit));
       store.dispatch(StoreActions.updateUnitMap(unitMap));
       // Initialize UserMap for CreatedBy/LastModifiedBy fields
       const userMap = {};
-      (datasheetPack.units as IUserValue[]).filter(unit => unit.uuid).forEach(user => (userMap[user.uuid!] = user));
+      (datasheetPack.units as IUserValue[]).filter((unit) => unit.uuid).forEach((user) => (userMap[user.uuid!] = user));
       store.dispatch(StoreActions.updateUserMap(userMap));
     }
     if (datasheetPack.fieldPermissionMap) {
@@ -82,9 +79,9 @@ export class CommandService {
   fillTinyStore(dstPacks: IServerDatasheetPack[]): Store<IReduxState> {
     const store = createStore<IReduxState, any, unknown, unknown>(Reducers.rootReducers, applyMiddleware(thunkMiddleware, batchDispatchMiddleware));
     // this.logger.debug('fillTinyStore.datasheetPacks', dstPacks);
-    dstPacks.forEach(datasheetPack => {
+    dstPacks.forEach((datasheetPack) => {
       if (datasheetPack.foreignDatasheetMap) {
-        Object.keys(datasheetPack.foreignDatasheetMap).forEach(dstId => {
+        Object.keys(datasheetPack.foreignDatasheetMap).forEach((dstId) => {
           // Don't check linked datasheet, linked datasheet should be set to connected, or linked data can not be written
           store.dispatch(StoreActions.setDatasheetConnected(dstId));
           const dataPack = datasheetPack.foreignDatasheetMap![dstId]!;
@@ -94,11 +91,11 @@ export class CommandService {
       if (datasheetPack.units) {
         // Initialize UnitMap for member fields
         const unitMap = {};
-        (datasheetPack.units as IUnitValue[]).filter(unit => unit.unitId).forEach(unit => (unitMap[unit.unitId] = unit));
+        (datasheetPack.units as IUnitValue[]).filter((unit) => unit.unitId).forEach((unit) => (unitMap[unit.unitId] = unit));
         store.dispatch(StoreActions.updateUnitMap(unitMap));
         // Initialize UserMap for CreatedBy/LastModifiedBy fields
         const userMap = {};
-        (datasheetPack.units as IUserValue[]).filter(unit => unit.uuid).forEach(user => (userMap[user.uuid!] = user));
+        (datasheetPack.units as IUserValue[]).filter((unit) => unit.uuid).forEach((user) => (userMap[user.uuid!] = user));
         store.dispatch(StoreActions.updateUserMap(userMap));
       }
       store.dispatch(StoreActions.setDatasheetConnected(datasheetPack.datasheet.id));
@@ -111,7 +108,7 @@ export class CommandService {
 
   fillStore(payload: { datasheet: INodeMeta; snapshot: ISnapshot }[]): Store<IReduxState> {
     const store = createStore<IReduxState, any, unknown, unknown>(Reducers.rootReducers, applyMiddleware(thunkMiddleware, batchDispatchMiddleware));
-    payload.forEach(pack => {
+    payload.forEach((pack) => {
       const datasheet = pack.datasheet;
       if (!datasheet.permissions) {
         datasheet.permissions = DEFAULT_EDITOR_PERMISSION;
@@ -130,7 +127,7 @@ export class CommandService {
     store.dispatch(StoreActions.setDashboard(payload.dashboard, payload.dashboard.id));
     store.dispatch(StoreActions.setPageParams({ dashboardId: payload.dashboard.id }));
     if (payload.widgetMap) {
-      Object.keys(payload.widgetMap).forEach(widgetId => {
+      Object.keys(payload.widgetMap).forEach((widgetId) => {
         store.dispatch(StoreActions.receiveInstallationWidget(widgetId, payload.widgetMap[widgetId] as any as IWidget));
       });
     }
@@ -148,7 +145,7 @@ export class CommandService {
     const result = manager.execute<R>(options);
     // Apply changes into store after execution succeeds
     if (result && result.result == ExecuteResult.Success) {
-      changeSets.forEach(cs => {
+      changeSets.forEach((cs) => {
         store.dispatch(StoreActions.applyJOTOperations(cs.operations, cs.resourceType, cs.resourceId));
       });
     }

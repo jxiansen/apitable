@@ -1,5 +1,3 @@
-
-
 import { ISubAdminListData, IPermissionGroup, ISpaceResource } from 'exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';
 import { Api } from 'exports/api';
@@ -31,33 +29,42 @@ export function getSubAdminList(pageNo: number) {
     sort: ConfigConstant.SORT_ASC,
   };
   return (dispatch: any) => {
-    Api.getlistRole(JSON.stringify({ ...pageObjectParams, pageNo })).then(res => {
-      const { success, data } = res.data;
-      success && dispatch(updateSubAdminListData(data));
-    }, err => {
-      console.error('API.getlistRole error', err);
-    });
+    Api.getlistRole(JSON.stringify({ ...pageObjectParams, pageNo })).then(
+      (res) => {
+        const { success, data } = res.data;
+        success && dispatch(updateSubAdminListData(data));
+      },
+      (err) => {
+        console.error('API.getlistRole error', err);
+      }
+    );
   };
 }
 
 export function getMainAdminInfo() {
   return (dispatch: any) => {
-    Api.getMainAdminInfo().then(res => {
-      const { success, data } = res.data;
-      success && dispatch(updateMainAdminInfo(data));
-    }, err => {
-      console.error('API.getMainAdminInfo', err);
-    });
+    Api.getMainAdminInfo().then(
+      (res) => {
+        const { success, data } = res.data;
+        success && dispatch(updateMainAdminInfo(data));
+      },
+      (err) => {
+        console.error('API.getMainAdminInfo', err);
+      }
+    );
   };
 }
 
 export function spaceResource() {
   return (dispatch: any) => {
-    Api.getSpaceResource().then(res => {
-      const { success, data } = res.data;
-      success && dispatch(updateSpaceResource(data));
-    }, err => {
-      console.error('API.getSpaceResource', err);
-    });
+    Api.getSpaceResource().then(
+      (res) => {
+        const { success, data } = res.data;
+        success && dispatch(updateSpaceResource(data));
+      },
+      (err) => {
+        console.error('API.getSpaceResource', err);
+      }
+    );
   };
 }

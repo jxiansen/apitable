@@ -1,5 +1,3 @@
-
-
 import { ConfigConstant } from '@apitable/core';
 import { getEnvVars } from 'get_env';
 import { browser } from 'modules/shared/browser';

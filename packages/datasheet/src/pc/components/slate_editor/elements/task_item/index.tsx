@@ -1,5 +1,3 @@
-
-
 import { useCallback, useMemo } from 'react';
 import { useSlate, ReactEditor, useReadOnly } from 'slate-react';
 // import { Transforms } from 'slate';

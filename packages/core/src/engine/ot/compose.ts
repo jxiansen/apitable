@@ -1,12 +1,10 @@
-
-
 import { IOperation, jot, OTActionName } from 'engine/ot';
 import { isEqual } from 'lodash';
 
 /**
  * Compose (Merge) operations
- * Only compose for operations that same path and single action's operation 
- * 
+ * Only compose for operations that same path and single action's operation
+ *
  * @param operations Operations Array
  */
 export function composeOperations(operations: IOperation[]): IOperation[] {

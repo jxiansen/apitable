@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 // @ts-ignore
 import { snake } from 'naming-style';

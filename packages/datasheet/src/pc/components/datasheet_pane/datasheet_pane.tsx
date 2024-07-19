@@ -1,5 +1,3 @@
-
-
 import { useToggle } from 'ahooks';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
@@ -129,23 +127,20 @@ const DatasheetMain = (props: IDatasheetMain) => {
         )}
       </div>
       <SuspensionPanel shareId={shareId} datasheetId={datasheetId} />
-      {(preview || testFunctions) && previewDstType !== PREVIEW_DATASHEET_BACKUP &&
-          <Alert
-            className={styles.previewing}
-            type="default"
-            content={(
-              <div className={styles.previewTip}>
-                <span>{preview ? t(Strings.preview_time_machine, { version: preview }) :
-                  t(Strings.experience_test_function, { testFunctions })}</span>
-                <Button
-                  size="small"
-                  color="primary"
-                  onClick={exportPreviewCsv}
-                >{t(Strings.export_current_preview_view_data)}</Button>
-              </div>
-            )}
-          />
-      }
+      {(preview || testFunctions) && previewDstType !== PREVIEW_DATASHEET_BACKUP && (
+        <Alert
+          className={styles.previewing}
+          type="default"
+          content={
+            <div className={styles.previewTip}>
+              <span>{preview ? t(Strings.preview_time_machine, { version: preview }) : t(Strings.experience_test_function, { testFunctions })}</span>
+              <Button size="small" color="primary" onClick={exportPreviewCsv}>
+                {t(Strings.export_current_preview_view_data)}
+              </Button>
+            </div>
+          }
+        />
+      )}
     </div>
   );
 };
@@ -463,13 +458,11 @@ const DataSheetPaneBase: FC<React.PropsWithChildren<{ panelLeft?: JSX.Element }>
       {({ width }) =>
         panelSize ? (
           <VikaSplitPanel
-            panelLeft={
-              datasheetMain
-            }
+            panelLeft={datasheetMain}
             panelRight={
               <div style={{ width: '100%', height: '100%' }}>
                 {isSideRecordOpen && <ExpandRecordPanel />}
-                { isCopilotPanelOpen && <Copilot onClose={setCopilotPanelOpen} /> }
+                {isCopilotPanelOpen && <Copilot onClose={setCopilotPanelOpen} />}
                 <WidgetPanel />
                 {!isShareMode && <ApiPanel />}
                 {isDevToolsOpen && <DevToolsPanel onClose={setDevToolsOpen} />}
@@ -495,18 +488,21 @@ const DataSheetPaneBase: FC<React.PropsWithChildren<{ panelLeft?: JSX.Element }>
     </AutoSizer>
   );
 
-  return <>
-    {historyDialog.dialogVisible && (
-      <AutomationHistoryPanel
-        onClose={() => {
-          setHistoryDialog((draft) => ({
-            ...draft,
-            dialogVisible: false,
-          }));
-        }}
-      />
-    )}
-    {WeixinShareWrapper ? <WeixinShareWrapper>{childComponent}</WeixinShareWrapper> : childComponent}</>;
+  return (
+    <>
+      {historyDialog.dialogVisible && (
+        <AutomationHistoryPanel
+          onClose={() => {
+            setHistoryDialog((draft) => ({
+              ...draft,
+              dialogVisible: false,
+            }));
+          }}
+        />
+      )}
+      {WeixinShareWrapper ? <WeixinShareWrapper>{childComponent}</WeixinShareWrapper> : childComponent}
+    </>
+  );
 };
 
 export const DataSheetPane = React.memo(DataSheetPaneBase);

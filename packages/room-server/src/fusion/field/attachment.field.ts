@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, getNewId, IAttachmentValue, ICellValue, IDPrefix, IField } from '@apitable/core';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { isString } from 'class-validator';

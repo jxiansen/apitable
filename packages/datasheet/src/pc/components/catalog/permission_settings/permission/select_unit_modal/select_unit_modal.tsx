@@ -1,5 +1,3 @@
-
-
 // TODO Reconstructing the address book
 import * as React from 'react';
 import { FC, useState } from 'react';

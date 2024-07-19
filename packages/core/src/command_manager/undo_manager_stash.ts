@@ -1,5 +1,3 @@
-
-
 import { UndoManager } from './undo_manager';
 import LRU from 'lru-cache';
 

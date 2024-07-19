@@ -1,5 +1,3 @@
-
-
 import { ApiProperty, ApiPropertyOptional, getSchemaPath } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
 import {
@@ -26,21 +24,21 @@ export class DatasheetFieldDto implements IApiDatasheetField {
     example: 'fldsRHWJZwFcM',
     description: 'field ID',
   })
-    id!: string;
+  id!: string;
 
   @ApiProperty({
     type: String,
     description: 'field name',
     example: 'order id',
   })
-    name!: string;
+  name!: string;
 
   @ApiProperty({
     enum: FieldTypeTextEnum,
     description: 'field type',
     example: FieldTypeTextEnum.SingleText,
   })
-    type!: FieldTypeTextEnum;
+  type!: FieldTypeTextEnum;
 
   @ApiPropertyOptional({
     type: String,
@@ -48,7 +46,7 @@ export class DatasheetFieldDto implements IApiDatasheetField {
     example: 'do not change it, it was generated automatically',
   })
   @IsOptional()
-    desc?: string;
+  desc?: string;
 
   @ApiPropertyOptional({
     description: 'field property',
@@ -69,7 +67,7 @@ export class DatasheetFieldDto implements IApiDatasheetField {
     ],
     example: '{"defaultValue":"to be added"}',
   })
-    property?:
+  property?:
     | SingleTextPropertyDto
     | NumberFieldPropertyDto
     | CurrencyFieldPropertyDto
@@ -89,5 +87,5 @@ export class DatasheetFieldDto implements IApiDatasheetField {
     description: 'user permission type of this field',
     example: FieldPermissionEnum.Edit,
   })
-    permissionLevel?: FieldPermissionEnum;
+  permissionLevel?: FieldPermissionEnum;
 }

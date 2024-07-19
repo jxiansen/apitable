@@ -1,5 +1,3 @@
-
-
 import { isObject } from 'lodash';
 import { ElementType, LIST_TYPE_DICT, LIST_ITEM_TYPE_DICT } from './constant';
 import { GENERATOR } from './elements/generator';

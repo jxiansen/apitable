@@ -13,8 +13,8 @@ test('use session should return a correct result', () => {
       userId: 'xxxx',
       memberName: 'tester',
       avatar: '',
-      email: 'email'
-    }
+      email: 'email',
+    },
   });
 
   const wrapper = createSimpleWrapper({ widgetState: mockWidgetSdkData.widgetSdkData });

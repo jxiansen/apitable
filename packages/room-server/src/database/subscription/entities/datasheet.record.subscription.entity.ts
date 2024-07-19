@@ -1,5 +1,3 @@
-
-
 import { BaseEntity } from 'shared/entities/base.entity';
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 

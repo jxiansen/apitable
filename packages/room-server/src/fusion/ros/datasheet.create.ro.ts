@@ -1,5 +1,3 @@
-
-
 import { Field, FieldType, getFieldClass, getFieldTypeByString, getNewId, IAddFieldOptions, IDPrefix, IField, IReduxState } from '@apitable/core';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
@@ -83,7 +81,7 @@ export class DatasheetCreateRo {
   transferToCommandData(): IAddFieldOptions[] {
     const fields: any[] = [];
     if (this.fields) {
-      this.fields.forEach(field => {
+      this.fields.forEach((field) => {
         const fieldType = getFieldTypeByString(field.type as any)!;
         const fieldInfo = {
           id: getNewId(IDPrefix.Field),
@@ -108,7 +106,7 @@ export class DatasheetCreateRo {
   foreignDatasheetIds(): string[] {
     const foreignDatasheetIds: string[] = [];
     if (this.fields) {
-      this.fields.forEach(field => {
+      this.fields.forEach((field) => {
         const fieldType = getFieldTypeByString(field.type as any)!;
         if ((fieldType === FieldType.Link || fieldType === FieldType.OneWayLink) && field.property) {
           foreignDatasheetIds.push(field.property['foreignDatasheetId']);

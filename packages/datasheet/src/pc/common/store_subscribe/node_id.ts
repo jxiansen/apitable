@@ -1,5 +1,3 @@
-
-
 import { NotificationStore } from 'pc/notification_store';
 import { store } from 'pc/store';
 

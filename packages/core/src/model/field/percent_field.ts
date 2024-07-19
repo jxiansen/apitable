@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { IReduxState } from '../../exports/store/interfaces';
 import { FieldType, IField, IPercentField, IPercentFieldProperty } from 'types/field_types';
@@ -11,13 +9,16 @@ import { IOpenPercentFieldProperty } from 'types/open/open_field_read_types';
 import { IUpdateOpenPercentFieldProperty } from 'types/open/open_field_write_types';
 import { getFieldDefaultProperty } from './const';
 export class PercentField extends NumberBaseField {
-  constructor(public override field: IPercentField, public override state: IReduxState) {
+  constructor(
+    public override field: IPercentField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
   static propertySchema = Joi.object({
     precision: Joi.number().min(0).max(10).required(),
-    defaultValue: Joi.string().allow('')
+    defaultValue: Joi.string().allow(''),
   }).required();
 
   // preview state data
@@ -42,10 +43,7 @@ export class PercentField extends NumberBaseField {
   }
 
   override compare(cellValue1: number | null, cellValue2: number | null): number {
-    return NumberBaseField._compare(
-      this.compareCellValue(cellValue1),
-      this.compareCellValue(cellValue2),
-    );
+    return NumberBaseField._compare(this.compareCellValue(cellValue1), this.compareCellValue(cellValue2));
   }
 
   validateProperty() {
@@ -69,7 +67,7 @@ export class PercentField extends NumberBaseField {
     const { defaultValue, precision } = this.field.property;
     return {
       defaultValue,
-      precision
+      precision,
     };
   }
 

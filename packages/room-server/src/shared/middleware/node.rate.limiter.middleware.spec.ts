@@ -1,5 +1,3 @@
-
-
 import { RedisService } from '@apitable/nestjs-redis';
 import { DeveloperService } from 'developer/services/developer.service';
 import { I18nService } from 'nestjs-i18n';
@@ -25,7 +23,7 @@ describe('FusionApiRateLimiter', () => {
   let callHandler: Mock;
   let res: any;
 
-  beforeAll(async() => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -47,7 +45,7 @@ describe('FusionApiRateLimiter', () => {
     callHandler = jest.fn();
   });
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     res = {
       setHeader: jest.fn(),
       end: jest.fn(),
@@ -56,7 +54,7 @@ describe('FusionApiRateLimiter', () => {
     await clearRedis(redisService);
   });
 
-  afterAll(async() => {
+  afterAll(async () => {
     await app.close();
   });
 
@@ -65,8 +63,7 @@ describe('FusionApiRateLimiter', () => {
   }
 
   describe('datasheet-limit', () => {
-
-    it('node-limit return 429', async() => {
+    it('node-limit return 429', async () => {
       for (let i = 0; i < 3; i++) {
         (envConfigService.getRoomConfig as jest.Mock).mockReturnValueOnce({
           points: 1,
@@ -90,7 +87,7 @@ describe('FusionApiRateLimiter', () => {
       expect(res.statusCode).toEqual(429);
     });
 
-    it('datasheet-limit return 429', async() => {
+    it('datasheet-limit return 429', async () => {
       for (let i = 0; i < 3; i++) {
         (envConfigService.getRoomConfig as jest.Mock).mockReturnValueOnce({
           points: 1,
@@ -114,7 +111,7 @@ describe('FusionApiRateLimiter', () => {
       expect(res.statusCode).toEqual(429);
     });
 
-    it('spaces-user-limit return 429', async() => {
+    it('spaces-user-limit return 429', async () => {
       for (let i = 0; i < 3; i++) {
         (envConfigService.getRoomConfig as jest.Mock).mockReturnValueOnce({
           points: 1,
@@ -138,7 +135,7 @@ describe('FusionApiRateLimiter', () => {
       expect(res.statusCode).toEqual(429);
     });
 
-    it('spaces-ids-limit return 429', async() => {
+    it('spaces-ids-limit return 429', async () => {
       for (let i = 0; i < 3; i++) {
         (envConfigService.getRoomConfig as jest.Mock).mockReturnValueOnce({
           points: 1,
@@ -161,7 +158,7 @@ describe('FusionApiRateLimiter', () => {
       expect(times).toEqual('3');
       expect(res.statusCode).toEqual(429);
     });
-    it('space-node-limit return 429', async() => {
+    it('space-node-limit return 429', async () => {
       for (let i = 0; i < 3; i++) {
         (envConfigService.getRoomConfig as jest.Mock).mockReturnValueOnce({
           points: 1,
@@ -185,14 +182,14 @@ describe('FusionApiRateLimiter', () => {
       expect(res.statusCode).toEqual(429);
     });
 
-    it('white-List-limit return 429', async() => {
+    it('white-List-limit return 429', async () => {
       for (let i = 0; i < 3; i++) {
         const whiteList = new Map<string, IBaseRateLimiter>();
         whiteList.set('aaa5', { points: 1, duration: 120 });
         (envConfigService.getRoomConfig as jest.Mock).mockReturnValueOnce({
           points: 5,
           duration: 120,
-          whiteList
+          whiteList,
         });
         await rateLimiter.use(
           {
@@ -212,14 +209,14 @@ describe('FusionApiRateLimiter', () => {
       expect(res.statusCode).toEqual(429);
     });
 
-    it('white-List-limit return 200', async() => {
+    it('white-List-limit return 200', async () => {
       for (let i = 0; i < 3; i++) {
         const whiteList = new Map<string, IBaseRateLimiter>();
         whiteList.set('aaa6', { points: 3, duration: 120 });
         (envConfigService.getRoomConfig as jest.Mock).mockReturnValueOnce({
           points: 1,
           duration: 120,
-          whiteList
+          whiteList,
         });
         await rateLimiter.use(
           {
@@ -240,4 +237,3 @@ describe('FusionApiRateLimiter', () => {
     });
   });
 });
-

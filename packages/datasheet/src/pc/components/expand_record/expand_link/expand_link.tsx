@@ -1,5 +1,3 @@
-
-
 import { isEmpty } from 'lodash';
 import * as React from 'react';
 import { forwardRef, memo, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
@@ -46,18 +44,7 @@ export enum FetchForeignTimes {
 }
 
 const ExpandLinkBase: React.ForwardRefRenderFunction<IExpandFieldEditRef, IExpandLinkProps> = (props, ref) => {
-  const {
-    field,
-    recordId,
-    onClick,
-    keyPrefix,
-    addBtnText,
-    rightLayout = true,
-    onSave,
-    datasheetId,
-    manualFetchForeignDatasheet,
-    mirrorId,
-  } = props;
+  const { field, recordId, onClick, keyPrefix, addBtnText, rightLayout = true, onSave, datasheetId, manualFetchForeignDatasheet, mirrorId } = props;
   const editable = props.editable;
   const colors = useThemeColors();
   const focusRef = useRef<HTMLDivElement>(null);
@@ -73,8 +60,8 @@ const ExpandLinkBase: React.ForwardRefRenderFunction<IExpandFieldEditRef, IExpan
   const needIgnoreFetch = !manualFetchForeignDatasheet
     ? false
     : manualFetchForeignDatasheet === FetchForeignTimes.OnlyOnce
-      ? !manualFetch.current
-      : false;
+    ? !manualFetch.current
+    : false;
   const { foreignDatasheet, foreignDatasheetErrorCode } = useAppSelector((state: IReduxState) => {
     return {
       foreignDatasheet: Selectors.getDatasheet(state, field.property.foreignDatasheetId)!,
@@ -215,13 +202,13 @@ const ExpandLinkBase: React.ForwardRefRenderFunction<IExpandFieldEditRef, IExpan
           {!editable
             ? t(Strings.add_link_record_button_disable)
             : addBtnText || (
-              <TComponent
-                tkey={t(Strings.add_link_record_button)}
-                params={{
-                  datasheetname: <span className={style.datasheetName}>{foreignDatasheetName}</span>,
-                }}
-              />
-            )}
+                <TComponent
+                  tkey={t(Strings.add_link_record_button)}
+                  params={{
+                    datasheetname: <span className={style.datasheetName}>{foreignDatasheetName}</span>,
+                  }}
+                />
+              )}
         </span>
       </Button>
     );

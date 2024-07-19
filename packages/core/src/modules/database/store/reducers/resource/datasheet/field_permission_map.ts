@@ -1,20 +1,26 @@
-
-
 import {
-  ILoadFieldPermissionMapAction, IResetFieldPermissionMapAction, IUpdateFieldPermissionMapAction, IUpdateFieldPermissionSettingAction
+  ILoadFieldPermissionMapAction,
+  IResetFieldPermissionMapAction,
+  IUpdateFieldPermissionMapAction,
+  IUpdateFieldPermissionSettingAction,
 } from 'modules/database/store/actions/resource';
 
 import {
-  LOAD_FIELD_PERMISSION_MAP, RESET_FIELD_PERMISSION_MAP, UPDATE_FIELD_PERMISSION_MAP, UPDATE_FIELD_PERMISSION_SETTING
+  LOAD_FIELD_PERMISSION_MAP,
+  RESET_FIELD_PERMISSION_MAP,
+  UPDATE_FIELD_PERMISSION_MAP,
+  UPDATE_FIELD_PERMISSION_SETTING,
 } from '../../../../../shared/store/action_constants';
 import produce from 'immer';
 import { IFieldPermissionMap } from '../../../../../../exports/store/interfaces';
 
-type IFieldPermissionAction = IUpdateFieldPermissionMapAction | IResetFieldPermissionMapAction | ILoadFieldPermissionMapAction
+type IFieldPermissionAction =
+  | IUpdateFieldPermissionMapAction
+  | IResetFieldPermissionMapAction
+  | ILoadFieldPermissionMapAction
   | IUpdateFieldPermissionSettingAction;
 
 export const fieldPermissionMap = (state = {}, action: IFieldPermissionAction) => {
-
   switch (action.type) {
     case UPDATE_FIELD_PERMISSION_MAP: {
       if (!state) {
@@ -22,11 +28,11 @@ export const fieldPermissionMap = (state = {}, action: IFieldPermissionAction) =
       }
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     }
     case RESET_FIELD_PERMISSION_MAP: {
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         if (draft[action.payload]) {
           delete draft[action.payload];
         }
@@ -51,4 +57,3 @@ export const fieldPermissionMap = (state = {}, action: IFieldPermissionAction) =
     }
   }
 };
-

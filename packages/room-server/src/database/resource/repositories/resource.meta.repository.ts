@@ -1,5 +1,3 @@
-
-
 import { IResourceMeta, IResourceRevision } from '@apitable/core';
 import { EntityRepository, In, Repository } from 'typeorm';
 import { ResourceMetaEntity } from '../entities/resource.meta.entity';
@@ -59,7 +57,7 @@ export class ResourceMetaRepository extends Repository<ResourceMetaEntity> {
       where: {
         resourceId: In(resourceIds),
         isDeleted: 0,
-      }
+      },
     });
   }
 

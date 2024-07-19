@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import classNames from 'classnames';
 import { compact } from 'lodash';
@@ -64,17 +62,20 @@ export const SelectFolder: React.FC<
     }
   });
 
-  const getWholeList = useCallback((folderId: string) => {
-    const unitType = catalog === ConfigConstant.Modules.PRIVATE ? 3 : undefined;
-    Api.getChildNodeList(folderId, ConfigConstant.NodeType.FOLDER, unitType).then((res) => {
-      const { data, success, message } = res.data;
-      if (!success) {
-        Message.error({ content: message });
-        return;
-      }
-      setWholeList(data);
-    });
-  }, [catalog]);
+  const getWholeList = useCallback(
+    (folderId: string) => {
+      const unitType = catalog === ConfigConstant.Modules.PRIVATE ? 3 : undefined;
+      Api.getChildNodeList(folderId, ConfigConstant.NodeType.FOLDER, unitType).then((res) => {
+        const { data, success, message } = res.data;
+        if (!success) {
+          Message.error({ content: message });
+          return;
+        }
+        setWholeList(data);
+      });
+    },
+    [catalog],
+  );
 
   useEffect(() => {
     if (!isWhole || !currentFolderId || (isPrivate && !catalog)) {
@@ -148,23 +149,28 @@ export const SelectFolder: React.FC<
   const showLevel = !isWhole || keyword;
   const isShowWholeButton = isMobile && !isWhole;
   const list = keyword ? searchList : isWhole ? wholeList : recentlyBrowsedList;
-  const catalogList = isPrivate ? [
-    {
-      nodeId: ConfigConstant.Modules.CATALOG,
-      nodeName: t(Strings.catalog_team),
-    },
-    {
-      nodeId: ConfigConstant.Modules.PRIVATE,
-      nodeName: t(Strings.catalog_private),
-    },
-  ] : [];
+  const catalogList = isPrivate
+    ? [
+        {
+          nodeId: ConfigConstant.Modules.CATALOG,
+          nodeName: t(Strings.catalog_team),
+        },
+        {
+          nodeId: ConfigConstant.Modules.PRIVATE,
+          nodeName: t(Strings.catalog_private),
+        },
+      ]
+    : [];
 
-  const folderCatalogTips = catalogList.length > 0 ? catalogList.filter(l => l.nodeId === catalog) : [
-    {
-      nodeId: ConfigConstant.Modules.CATALOG,
-      nodeName: t(Strings.catalog_team),
-    }
-  ];
+  const folderCatalogTips =
+    catalogList.length > 0
+      ? catalogList.filter((l) => l.nodeId === catalog)
+      : [
+          {
+            nodeId: ConfigConstant.Modules.CATALOG,
+            nodeName: t(Strings.catalog_team),
+          },
+        ];
 
   return (
     <div className={styles.selectFolder}>
@@ -185,11 +191,7 @@ export const SelectFolder: React.FC<
         <SelectFolderTips
           isWhole={isWhole}
           setIsWhole={enterWhole}
-          data={compact([
-            firstParentList,
-            ...folderCatalogTips,
-            ...restParentList
-          ])}
+          data={compact([firstParentList, ...folderCatalogTips, ...restParentList])}
           onClick={onClickItem}
         />
       )}
@@ -210,28 +212,33 @@ export const SelectFolder: React.FC<
                   icon={icon}
                   onClick={onClickItem}
                   nodePrivate={nodePrivate}
-                  level={showLevel ?
-                    // eslint-disable-next-line max-len
-                    `${spaceName} / ${nodePrivate ? t(Strings.catalog_private) : t(Strings.catalog_team)} ${(item as ApiInterface.IRecentlyBrowsedFolder).superiorPath}`
-                    : ''
+                  level={
+                    showLevel
+                      ? // eslint-disable-next-line max-len
+                        `${spaceName} / ${nodePrivate ? t(Strings.catalog_private) : t(Strings.catalog_team)} ${
+                          (item as ApiInterface.IRecentlyBrowsedFolder).superiorPath
+                        }`
+                      : ''
                   }
                 />
               );
             })}
-            {!catalog && selectedFolderId === rootId && catalogList.map((item) => {
-              const { nodeId, nodeName } = item;
-              return (
-                <div
-                  key={nodeId}
-                  className={styles.catalogItem}
-                  onClick={() => {
-                    setCatalog(nodeId);
-                  }}
-                >
-                  {nodeName}
-                </div>
-              );
-            })}
+            {!catalog &&
+              selectedFolderId === rootId &&
+              catalogList.map((item) => {
+                const { nodeId, nodeName } = item;
+                return (
+                  <div
+                    key={nodeId}
+                    className={styles.catalogItem}
+                    onClick={() => {
+                      setCatalog(nodeId);
+                    }}
+                  >
+                    {nodeName}
+                  </div>
+                );
+              })}
           </>
         )}
         <div ref={scrollShadowRef} className={styles.scrollShadow} />

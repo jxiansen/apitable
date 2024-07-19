@@ -1,5 +1,3 @@
-
-
 import React, { CSSProperties } from 'react';
 import { Emoji } from '../../_private/emoji';
 import { RatingItemStyled, RatingStyled } from './styled';

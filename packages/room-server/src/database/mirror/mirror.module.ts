@@ -1,5 +1,3 @@
-
-
 import { forwardRef, Module } from '@nestjs/common';
 import { DatasheetModule } from 'database/datasheet/datasheet.module';
 import { NodeModule } from 'node/node.module';
@@ -10,13 +8,7 @@ import { MirrorController } from './controllers/mirror.controller';
 import { MirrorService } from './services/mirror.service';
 
 @Module({
-  imports: [
-    forwardRef(()=>ResourceModule),
-    forwardRef(()=>NodeModule),
-    UserModule,
-    DatasheetModule,
-    SubscriptionDynamicModule.forRoot(),
-  ],
+  imports: [forwardRef(() => ResourceModule), forwardRef(() => NodeModule), UserModule, DatasheetModule, SubscriptionDynamicModule.forRoot()],
   providers: [MirrorService],
   controllers: [MirrorController],
   exports: [MirrorService],

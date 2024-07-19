@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined } from 'class-validator';

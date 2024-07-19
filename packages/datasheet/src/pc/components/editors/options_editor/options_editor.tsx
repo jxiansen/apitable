@@ -1,5 +1,3 @@
-
-
 import { produce } from 'immer';
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import * as React from 'react';
@@ -156,10 +154,10 @@ export const OptionsEditorBase: React.ForwardRefRenderFunction<IEditor, IEditorP
         dragOption={
           fieldPropertyEditable
             ? {
-              afterDrag: afterDrag,
-              draggingId: draggingId,
-              setDraggingId: setDraggingId,
-            }
+                afterDrag: afterDrag,
+                draggingId: draggingId,
+                setDraggingId: setDraggingId,
+              }
             : undefined
         }
         inputRef={inputRef}

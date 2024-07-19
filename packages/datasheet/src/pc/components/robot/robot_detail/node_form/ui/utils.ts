@@ -1,5 +1,3 @@
-
-
 import { IUiSchema } from '../core/interface';
 
 // export const getObjectDepth = (props: ObjectFieldTemplateProps): number => {

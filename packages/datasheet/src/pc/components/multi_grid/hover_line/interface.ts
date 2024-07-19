@@ -1,5 +1,3 @@
-
-
 export interface IElementRectProps {
   left: number;
   right: number;

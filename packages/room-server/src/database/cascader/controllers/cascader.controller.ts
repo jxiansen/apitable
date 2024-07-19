@@ -1,4 +1,3 @@
-
 import { UserService } from 'user/services/user.service';
 import { SwaggerConstants } from 'shared/common';
 import { ApiCookieAuth, ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
@@ -42,10 +41,7 @@ export class CascaderController {
   })
   @ApiProduces('application/json')
   @ApiOkResponse({ type: CascaderSnapshotVo })
-  public async cascaderSnapshot(
-    @Param() param: GetCascaderSnapshotParam,
-    @Query() query: CascaderSnapshotQueryRo
-  ): Promise<CascaderSnapshotVo> {
+  public async cascaderSnapshot(@Param() param: GetCascaderSnapshotParam, @Query() query: CascaderSnapshotQueryRo): Promise<CascaderSnapshotVo> {
     return await this.datasheetFieldCascaderSnapshotService.getCascaderSnapshot({
       datasheetId: param.dstId,
       fieldId: param.fieldId,
@@ -81,10 +77,7 @@ export class CascaderController {
   })
   @ApiProduces('application/json')
   @ApiOkResponse({ type: Boolean })
-  public async deleteCascaderSnapshot(
-    @Headers('cookie') cookie: string,
-    @Param() param: CascaderSnapshotParam,
-  ): Promise<boolean> {
+  public async deleteCascaderSnapshot(@Headers('cookie') cookie: string, @Param() param: CascaderSnapshotParam): Promise<boolean> {
     const { userId } = await this.userService.getMe({ cookie });
     await this.nodeService.checkUserForNode(userId, param.dstId);
     return await this.datasheetFieldCascaderSnapshotService.deleteCascaderSnapshot({

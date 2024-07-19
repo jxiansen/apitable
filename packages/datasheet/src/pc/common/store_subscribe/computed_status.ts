@@ -1,5 +1,3 @@
-
-
 import { message } from 'antd';
 import { Selectors, Strings, t } from '@apitable/core';
 import { store } from 'pc/store';

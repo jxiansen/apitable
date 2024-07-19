@@ -1,5 +1,3 @@
-
-
 import Color from 'color';
 import { COLOR_MAP } from './_colors';
 
@@ -50,7 +48,7 @@ export function getFieldOptionColor(index: number) {
 export const getColorNames = () => {
   const colorNames: string[] = [];
   const colorNumMax = COLOR_INDEX_NAME.length * COLOR_LEVEL_ALPHA.length;
-  for(let i=0; i<colorNumMax; i++) {
+  for (let i = 0; i < colorNumMax; i++) {
     const hue = COLOR_INDEX_NAME[i % COLOR_INDEX_NAME.length];
     const level = Math.floor(i / COLOR_INDEX_NAME.length);
     colorNames.push(`${hue}_${level}`);

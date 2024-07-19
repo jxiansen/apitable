@@ -1,5 +1,3 @@
-
-
 import { isEqual } from 'lodash';
 import { defaultEventListenerOptions } from './const';
 import { AnyObject, IEventInstance, IEventListenerMap, IEventListenerOptions, IEventManager, IOPEvent } from './interface';
@@ -49,7 +47,7 @@ export class EventManager implements IEventManager {
       options,
     };
     if (eventListeners) {
-      const listenerIndex = eventListeners.findIndex(item => {
+      const listenerIndex = eventListeners.findIndex((item) => {
         const itemSignature = {
           actionFunc: item.actionFunc.toString(),
           options: item.options,
@@ -87,7 +85,7 @@ export class EventManager implements IEventManager {
   }
 
   handleEvents(events: IEventInstance<IOPEvent>[], beforeApply: boolean, context = {}) {
-    events.forEach(event => {
+    events.forEach((event) => {
       this.dispatchEvent(event, beforeApply, context);
     });
   }

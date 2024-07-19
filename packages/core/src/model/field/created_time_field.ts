@@ -1,13 +1,8 @@
-
-
 import Joi from 'joi';
 import dayjs from 'dayjs';
 import { ICellValue } from 'model/record';
 import { IRecord } from '../../exports/store/interfaces';
-import {
-  DateFormat, FieldType, ICreatedTimeField, ICreatedTimeFieldProperty, IField,
-  TimeFormat
-} from 'types/field_types';
+import { DateFormat, FieldType, ICreatedTimeField, ICreatedTimeFieldProperty, IField, TimeFormat } from 'types/field_types';
 import { DatasheetActions } from '../../commands_actions/datasheet';
 import { DateTimeBaseField } from './date_time_base_field';
 import { datasheetIdString, enumKeyToArray, enumToArray, joiErrorResult } from './validate_schema';
@@ -18,8 +13,12 @@ import { getFieldDefaultProperty } from './const';
 export class CreatedTimeField extends DateTimeBaseField {
   static propertySchema = Joi.object({
     datasheetId: datasheetIdString().required(),
-    dateFormat: Joi.string().allow(...enumToArray(DateFormat)).required(),
-    timeFormat: Joi.string().allow(...enumToArray(TimeFormat)).required(),
+    dateFormat: Joi.string()
+      .allow(...enumToArray(DateFormat))
+      .required(),
+    timeFormat: Joi.string()
+      .allow(...enumToArray(TimeFormat))
+      .required(),
     includeTime: Joi.boolean().required(),
     timeZone: Joi.string(),
     includeTimeZone: Joi.boolean(),
@@ -74,7 +73,7 @@ export class CreatedTimeField extends DateTimeBaseField {
     return {
       dateFormat: DateFormat[dateFormat]!,
       timeFormat: TimeFormat[timeFormat]!,
-      includeTime
+      includeTime,
     };
   }
 
@@ -97,7 +96,7 @@ export class CreatedTimeField extends DateTimeBaseField {
       datasheetId: (this.field.property as ICreatedTimeFieldProperty).datasheetId,
       dateFormat: DateFormat[dateFormat],
       timeFormat: timeFormat ? TimeFormat[timeFormat] : defaultProperty.timeFormat,
-      includeTime: includeTime ?? defaultProperty.includeTime
+      includeTime: includeTime ?? defaultProperty.includeTime,
     };
   }
 }

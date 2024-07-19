@@ -1,5 +1,3 @@
-
-
 import { DatasheetApi, StoreActions, Selectors, IJOTAction, OTActionName, ResourceType } from '@apitable/core';
 import { remoteActions2Operation } from '@apitable/widget-sdk';
 import { resourceService } from 'pc/resource_service';

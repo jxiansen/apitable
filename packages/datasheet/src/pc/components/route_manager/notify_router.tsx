@@ -1,5 +1,3 @@
-
-
 import { ScreenSize } from 'pc/components/common/component_display';
 import { Notification } from 'pc/components/notification';
 import { PrivateRoute } from 'pc/components/route_manager/private_route';

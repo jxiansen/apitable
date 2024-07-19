@@ -1,5 +1,3 @@
-
-
 export const calcPercent = (used: number | undefined, total: number) => {
   if (!used || !total || total === -1) {
     return 0;

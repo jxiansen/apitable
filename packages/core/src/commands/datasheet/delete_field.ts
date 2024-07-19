@@ -1,15 +1,10 @@
-
-
 import { ExecuteResult, ICollaCommandDef, ILinkedActions } from 'command_manager';
 import { CollaCommandName } from 'commands/enum';
 import { clearOldBrotherField, setAffectFieldAttr2Action } from 'commands/common/field';
 import { IJOTAction, jot } from 'engine';
 import { Strings, t } from '../../exports/i18n';
 import { DatasheetActions } from 'commands_actions/datasheet';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { FieldType, ResourceType } from 'types';
 
 export interface IDeleteFieldOptions {

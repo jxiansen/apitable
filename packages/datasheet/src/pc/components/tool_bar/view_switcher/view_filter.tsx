@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { IViewProperty, t, Strings } from '@apitable/core';
 import { ViewItem } from './view_item';

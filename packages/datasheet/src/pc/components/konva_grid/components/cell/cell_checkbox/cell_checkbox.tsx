@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { KONVA_DATASHEET_ID } from '@apitable/core';
 import { generateTargetName } from 'pc/components/gantt_view';

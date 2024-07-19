@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { IOption } from 'components/select/interface';
 import { applyDefaultTheme } from 'theme';

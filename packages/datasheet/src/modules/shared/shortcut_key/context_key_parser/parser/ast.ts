@@ -1,5 +1,3 @@
-
-
 import { Token } from '../lexer/token';
 
 export enum AstNodeType {

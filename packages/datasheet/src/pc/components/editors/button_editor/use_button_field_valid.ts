@@ -5,31 +5,35 @@ import { getDatasheetId } from 'pc/components/automation/controller/hooks/get_da
 import { getFieldId } from 'pc/components/automation/controller/hooks/get_field_id';
 import { IRobotTrigger, ITriggerType } from 'pc/components/robot/interface';
 
-export const check = (dstId: string, button: IButtonField, buttonFieldTriggerId: ITriggerType | undefined, data: ResponseDataAutomationVO | undefined) => {
-
+export const check = (
+  dstId: string,
+  button: IButtonField,
+  buttonFieldTriggerId: ITriggerType | undefined,
+  data: ResponseDataAutomationVO | undefined,
+) => {
   if (!data && button.property.action.type === ButtonActionType.TriggerAutomation) {
     return {
       fieldId: button.id,
-      result: false
+      result: false,
     };
   }
 
   if (isNil(button.property.action.type)) {
     return {
       fieldId: button.id,
-      result: false
+      result: false,
     };
   }
   if (button.property.action.type === ButtonActionType.OpenLink) {
     if (isNil(button.property.action?.openLink?.expression)) {
       return {
         fieldId: button.id,
-        result: false
+        result: false,
       };
     }
     return {
       fieldId: button.id,
-      result: true
+      result: true,
     };
   }
 
@@ -37,37 +41,36 @@ export const check = (dstId: string, button: IButtonField, buttonFieldTriggerId:
   if (!automation) {
     return {
       fieldId: button.id,
-      result: false
+      result: false,
     };
   }
   if (!automation.isActive) {
     return {
       fieldId: button.id,
-      result: false
+      result: false,
     };
   }
-  const list = automation.triggers?.filter(item => item.triggerTypeId === buttonFieldTriggerId?.triggerTypeId);
+  const list = automation.triggers?.filter((item) => item.triggerTypeId === buttonFieldTriggerId?.triggerTypeId);
 
   if (list == null || list.length === 0) {
     return {
       fieldId: button.id,
-      result: false
+      result: false,
     };
   }
 
   // @ts-ignore
-  const found = list?.find(item => getFieldId(item) === button.id && getDatasheetId(item) === dstId);
+  const found = list?.find((item) => getFieldId(item) === button.id && getDatasheetId(item) === dstId);
 
-  if(!found) {
+  if (!found) {
     return {
       fieldId: button.id,
-      result: false
+      result: false,
     };
   }
 
   return {
     fieldId: button.id,
-    result: true
+    result: true,
   };
-
 };

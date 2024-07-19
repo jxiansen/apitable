@@ -1,5 +1,3 @@
-
-
 import { colorVars, Typography, useThemeColors } from '@apitable/components';
 import { GithubFilled } from '@apitable/icons';
 import { getEnvVariables } from '../../../../utils/env';

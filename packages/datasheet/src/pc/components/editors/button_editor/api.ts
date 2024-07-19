@@ -1,11 +1,13 @@
 import { ResponseDataAutomationVO, ResponseDataListAutomationSimpleVO } from '@apitable/api-client';
 import { automationApiClient } from 'pc/common/api-client';
 
-export const getRobotDetail = async (automationId: string, shareId?: string): Promise<ResponseDataAutomationVO | ResponseDataListAutomationSimpleVO> => {
-
+export const getRobotDetail = async (
+  automationId: string,
+  shareId?: string,
+): Promise<ResponseDataAutomationVO | ResponseDataListAutomationSimpleVO> => {
   const res = await automationApiClient.getResourceRobots({
     resourceId: automationId ?? '',
-    shareId: shareId ?? ''
+    shareId: shareId ?? '',
   });
 
   const data = res.data?.[0];
@@ -16,7 +18,7 @@ export const getRobotDetail = async (automationId: string, shareId?: string): Pr
   const automationDetail = await automationApiClient.getNodeRobot({
     resourceId: data?.resourceId ?? '',
     robotId: data?.robotId ?? '',
-    shareId: shareId ?? ''
+    shareId: shareId ?? '',
   });
 
   return automationDetail;

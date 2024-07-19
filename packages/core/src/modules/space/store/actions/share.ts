@@ -1,5 +1,3 @@
-
-
 import * as ActionConstants from 'modules/shared/store/action_constants';
 import { IShareInfo } from '../../../../exports/store/interfaces';
 
@@ -12,4 +10,3 @@ export const setShareInfo = (shareInfo: IShareInfo) => {
     payload: shareInfo,
   };
 };
-

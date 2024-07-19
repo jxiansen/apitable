@@ -18,11 +18,10 @@ function transform(tree: ITemplateTree | undefined): any {
 }
 
 export const useGetNodesMap = (customPageId: string) => {
-
   const spaceNodesMap = useAppSelector((state) => {
     const nodeItem = state.catalogTree.treeNodesMap[customPageId] || state.catalogTree.privateTreeNodesMap[customPageId];
     return {
-      [customPageId]: nodeItem
+      [customPageId]: nodeItem,
     };
   });
 

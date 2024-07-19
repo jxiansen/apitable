@@ -8,7 +8,7 @@ import { FilterInputWrap } from './styled';
 const opacityMap = {
   unChecked: 0.2,
   checked: 1,
-  willChecked: 0.6
+  willChecked: 0.6,
 };
 
 export const FilterRating: React.FC<IFilterRatingProps> = (props) => {
@@ -24,34 +24,30 @@ export const FilterRating: React.FC<IFilterRatingProps> = (props) => {
     onChange([index.toString()]);
   };
   return (
-    <FilterInputWrap
-      onMouseOut={() => setHoverIndex(-1)}
-    >
-      {
-        [...Array(max ?? 1)].map((_v, i) => {
-          const numValue = Number(_value);
-          const iValue = i + 1;
-          let opacity = 0;
-          if (iValue <= numValue) {
-            opacity = opacityMap.checked;
-          } else if (hoverIndex && hoverIndex >= iValue) {
-            opacity = opacityMap.willChecked;
-          } else {
-            opacity = opacityMap.unChecked;
-          }
-          return (
-            <Tooltip key={i} content={iValue.toString()} placement="top">
-              <span
-                style={{ opacity, cursor: 'pointer', padding: '0 2px' }}
-                onMouseOver={() => setHoverIndex(iValue)}
-                onMouseDown={() => handleClick(iValue)}
-              >
-                <Emoji emoji={icon} size={ConfigConstant.CELL_EMOJI_SIZE} />
-              </span>
-            </Tooltip>
-          );
-        })
-      }
+    <FilterInputWrap onMouseOut={() => setHoverIndex(-1)}>
+      {[...Array(max ?? 1)].map((_v, i) => {
+        const numValue = Number(_value);
+        const iValue = i + 1;
+        let opacity = 0;
+        if (iValue <= numValue) {
+          opacity = opacityMap.checked;
+        } else if (hoverIndex && hoverIndex >= iValue) {
+          opacity = opacityMap.willChecked;
+        } else {
+          opacity = opacityMap.unChecked;
+        }
+        return (
+          <Tooltip key={i} content={iValue.toString()} placement="top">
+            <span
+              style={{ opacity, cursor: 'pointer', padding: '0 2px' }}
+              onMouseOver={() => setHoverIndex(iValue)}
+              onMouseDown={() => handleClick(iValue)}
+            >
+              <Emoji emoji={icon} size={ConfigConstant.CELL_EMOJI_SIZE} />
+            </span>
+          </Tooltip>
+        );
+      })}
     </FilterInputWrap>
   );
 };

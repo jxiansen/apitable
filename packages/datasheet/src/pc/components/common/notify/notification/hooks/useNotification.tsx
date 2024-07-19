@@ -1,5 +1,3 @@
-
-
 import { ConfigConsumer, ConfigConsumerProps } from 'antd/lib/config-provider';
 import {
   NotificationInstance as RCNotificationInstance,

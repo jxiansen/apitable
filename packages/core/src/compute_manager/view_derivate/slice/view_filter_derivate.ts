@@ -10,7 +10,10 @@ import { FilterConjunction, FOperator, IFilterCondition, IFilterInfo } from 'typ
 import { BasicValueType, FieldType, IField, ILinkIds, RollUpFuncType } from 'types/field_types';
 
 export class ViewFilterDerivate {
-  constructor(private state: IReduxState, public datasheetId: string) {}
+  constructor(
+    private state: IReduxState,
+    public datasheetId: string
+  ) {}
 
   /**
    * Filter out duplicate cellValue, return the de-duplicated rows,
@@ -52,7 +55,7 @@ export class ViewFilterDerivate {
             [FieldType.MultiSelect, FieldType.Member].includes(field.type) ||
             field.type === FieldType.Link);
         if (isNeedSort) {
-          cellValue = sortBy(cellValue as any[], o => (typeof o === 'object' ? o.text : o)) as ICellValue;
+          cellValue = sortBy(cellValue as any[], (o) => (typeof o === 'object' ? o.text : o)) as ICellValue;
         }
         // Do you need to call cellValueToString to convert to string form.
         if (
@@ -72,14 +75,14 @@ export class ViewFilterDerivate {
       }
     }
     const result: string[] = [];
-    map.forEach(value => {
+    map.forEach((value) => {
       if (value.length > 1) {
         result.push(...value);
       }
     });
     if (isAnd) {
       const recordIdMap = new Map(result.map((value, key) => [value, key]));
-      return rows.filter(row => recordIdMap.has(typeof row === 'string' ? row : row.recordId));
+      return rows.filter((row) => recordIdMap.has(typeof row === 'string' ? row : row.recordId));
     }
     return result;
   }
@@ -146,11 +149,11 @@ export class ViewFilterDerivate {
     }
 
     if (filterInfo.conjunction === FilterConjunction.And) {
-      return conditions.every(condition => this.doFilterOperations(condition, record, undefined));
+      return conditions.every((condition) => this.doFilterOperations(condition, record, undefined));
     }
 
     if (filterInfo.conjunction === FilterConjunction.Or) {
-      return conditions.some(condition => this.doFilterOperations(condition, record, repeatRows));
+      return conditions.some((condition) => this.doFilterOperations(condition, record, repeatRows));
     }
 
     // never happen
@@ -165,14 +168,14 @@ export class ViewFilterDerivate {
       return rows;
     }
 
-    const isRepeatCondition = filterInfo.conditions.find(condition => condition.operator === FOperator.IsRepeat);
+    const isRepeatCondition = filterInfo.conditions.find((condition) => condition.operator === FOperator.IsRepeat);
     const isAnd = filterInfo.conjunction === FilterConjunction.And;
     let repeatRows: string[] | undefined;
 
     if (isRepeatCondition) {
       if (isAnd) {
         rows = this.findRepeatRowOrRecords(rows, isRepeatCondition.fieldId, true) as IViewRow[];
-        const filteredConditions = filterInfo.conditions.filter(condition => condition.operator !== FOperator.IsRepeat);
+        const filteredConditions = filterInfo.conditions.filter((condition) => condition.operator !== FOperator.IsRepeat);
         filterInfo = {
           ...filterInfo,
           conditions: filteredConditions,
@@ -181,7 +184,7 @@ export class ViewFilterDerivate {
         repeatRows = this.findRepeatRowOrRecords(rows, isRepeatCondition.fieldId) as string[];
       }
     }
-    const result = rows.filter(row => {
+    const result = rows.filter((row) => {
       return this.checkConditions(recordMap[row.recordId]!, filterInfo!, repeatRows);
     });
     return result;
@@ -198,7 +201,7 @@ export class ViewFilterDerivate {
     const recordMap = snapshot.recordMap;
 
     // TODO: empty data filter, subsequent data repair should be able to delete
-    const rows = view.rows.filter(row => recordMap[row.recordId]);
+    const rows = view.rows.filter((row) => recordMap[row.recordId]);
 
     const filterInfo = getFilterInfoExceptInvalid(this.state, this.datasheetId, view.filterInfo);
     const viewRows = this.getFilterRowsBase({ filterInfo, rows, recordMap });
@@ -234,13 +237,13 @@ export class ViewFilterDerivate {
     }
 
     let _linkFieldRecordIds = linkFieldRecordIds;
-    const isRepeatCondition = _filterInfo.conditions.find(condition => condition.operator === FOperator.IsRepeat);
+    const isRepeatCondition = _filterInfo.conditions.find((condition) => condition.operator === FOperator.IsRepeat);
     const isAnd = _filterInfo.conjunction === FilterConjunction.And;
     let repeatRecords: string[] | undefined;
     if (isRepeatCondition) {
       if (isAnd) {
         _linkFieldRecordIds = this.findRepeatRowOrRecords(linkFieldRecordIds, isRepeatCondition.fieldId, true) as ILinkIds;
-        const filteredConditions = _filterInfo.conditions.filter(condition => condition.operator !== FOperator.IsRepeat);
+        const filteredConditions = _filterInfo.conditions.filter((condition) => condition.operator !== FOperator.IsRepeat);
         _filterInfo = {
           ..._filterInfo,
           conditions: filteredConditions,
@@ -250,7 +253,7 @@ export class ViewFilterDerivate {
       }
     }
 
-    const result = _linkFieldRecordIds.filter(linkFieldRecordId => {
+    const result = _linkFieldRecordIds.filter((linkFieldRecordId) => {
       const record = recordMap[linkFieldRecordId];
       return this.checkConditions(record!, _filterInfo!, repeatRecords);
     });

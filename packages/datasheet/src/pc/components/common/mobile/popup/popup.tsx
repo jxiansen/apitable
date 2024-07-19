@@ -1,5 +1,3 @@
-
-
 import { Drawer } from 'antd';
 import { DrawerProps } from 'antd/lib/drawer';
 import classNames from 'classnames';

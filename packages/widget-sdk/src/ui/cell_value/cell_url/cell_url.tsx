@@ -1,5 +1,3 @@
-
-
 import React, { CSSProperties } from 'react';
 import { UrlStyled } from './styled';
 

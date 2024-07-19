@@ -1,5 +1,3 @@
-
-
 import { IElementRenderProps, IElement } from '../../interface/element';
 
 import Decorate from '../element_decorate';

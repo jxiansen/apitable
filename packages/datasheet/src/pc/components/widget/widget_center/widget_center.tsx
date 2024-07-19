@@ -1,5 +1,3 @@
-
-
 import { Tabs } from 'antd';
 import classNames from 'classnames';
 import parser from 'html-react-parser';

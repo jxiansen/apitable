@@ -1,5 +1,3 @@
-
-
 import { IAvatarProps } from './interface';
 import styled from 'styled-components';
 import { get } from 'lodash';
@@ -47,20 +45,19 @@ export const AvatarSizeConfig = {
     fontSize: 32,
     gap: 16,
   },
-
 };
 
 export const AvatarWrapper = styled.span<IAvatarProps>`
-    display: inline-block;
-    box-sizing: border-box;
-    text-align: center;
-    position: relative;
-    .avatar-icon {
-      vertical-align: -0.25em;
-    }
-    ${(props) => {
+  display: inline-block;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  .avatar-icon {
+    vertical-align: -0.25em;
+  }
+  ${(props) => {
     const sizeKey = props.size || 'm';
-    const { size, borderRadius , fontSize } = AvatarSizeConfig[sizeKey];
+    const { size, borderRadius, fontSize } = AvatarSizeConfig[sizeKey];
     return `
         width: ${size}px;
         height: ${size}px;
@@ -71,9 +68,8 @@ export const AvatarWrapper = styled.span<IAvatarProps>`
         overflow: hidden;
         color: #fff;
       `;
-  }
-}
-  `;
+  }}
+`;
 export const AvatarChildWrapper = styled.span`
   white-space: nowrap;
   transform-origin: 0 center;

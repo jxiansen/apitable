@@ -1,13 +1,4 @@
-
-
-import {
-  IDPrefix,
-  NamePrefix,
-  NamePrefixString,
-  getNewId,
-  getNewIds,
-  getUniqName,
-} from '..';
+import { IDPrefix, NamePrefix, NamePrefixString, getNewId, getNewIds, getUniqName } from '..';
 
 import { generateRandomString } from '../string';
 
@@ -22,7 +13,9 @@ function testDuplicates(id: string, ids: string[]): boolean {
 describe('test get new id', () => {
   it('should get new id correctly', () => {
     const prefix = IDPrefix.Table;
-    const ids = Array(10000).fill('').map(_ => `${prefix}${generateRandomString(7)}`);
+    const ids = Array(10000)
+      .fill('')
+      .map((_) => `${prefix}${generateRandomString(7)}`);
     const id = getNewId(prefix, ids);
     expect(testPrefix(id, prefix)).toBe(true);
     expect(testDuplicates(id, ids)).toBe(true);
@@ -38,8 +31,10 @@ describe('test get new id', () => {
 describe('test get new ids', () => {
   it('should get new ids correctly', () => {
     const prefix = IDPrefix.Table;
-    const ids = Array(10000).fill('').map(_ => `${prefix}${generateRandomString(7)}`);
-    getNewIds(prefix, 10000, ids).forEach(id => {
+    const ids = Array(10000)
+      .fill('')
+      .map((_) => `${prefix}${generateRandomString(7)}`);
+    getNewIds(prefix, 10000, ids).forEach((id) => {
       expect(testPrefix(id, prefix)).toBe(true);
       expect(testDuplicates(id, ids)).toBe(true);
       ids.push(id);
@@ -49,7 +44,7 @@ describe('test get new ids', () => {
   it('should be ok while old ids not applied', () => {
     const prefix = IDPrefix.Table;
     const ids = new Array<string>();
-    getNewIds(prefix, 10000).forEach(id => {
+    getNewIds(prefix, 10000).forEach((id) => {
       expect(testPrefix(id, prefix)).toBe(true);
       expect(testDuplicates(id, ids)).toBe(true);
       ids.push(id);
@@ -65,7 +60,9 @@ describe('test get new ids', () => {
 describe('test get default name', () => {
   it('should get default name correctly', () => {
     const prefix = NamePrefix.Field;
-    const names = Array(100).fill('').map((_, i) => `${prefix} ${i * 2}`);
+    const names = Array(100)
+      .fill('')
+      .map((_, i) => `${prefix} ${i * 2}`);
     const name = getUniqName(prefix, names);
     expect(testPrefix(name, prefix)).toBe(true);
     expect(testDuplicates(name, names)).toBe(true);

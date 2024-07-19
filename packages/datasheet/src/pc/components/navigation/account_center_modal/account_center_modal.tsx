@@ -1,5 +1,3 @@
-
-
 import { Drawer } from 'antd';
 import { compact } from 'lodash';
 import * as React from 'react';

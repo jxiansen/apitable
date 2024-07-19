@@ -1,5 +1,3 @@
-
-
 import { expressionTransform } from '../evaluate';
 import { FieldType, IField } from '../../types/field_types';
 import { mergeContext, evaluate } from './mock_state';

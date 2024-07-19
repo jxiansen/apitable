@@ -1,5 +1,3 @@
-
-
 /**
  * Do not touch, the ID in this file is for automated testing
  */

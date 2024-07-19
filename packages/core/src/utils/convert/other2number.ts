@@ -1,5 +1,3 @@
-
-
 export function str2number(value: string): number | null {
   if (value.trim() === '') {
     return null;
@@ -18,7 +16,7 @@ export function num2number(num: number): number | null {
 }
 
 /**
- * Change from scientific notation to number format 
+ * Change from scientific notation to number format
  * (because large numbers will be automatically converted back to scientific notation, recorded in string mode)
  * @param value The numbers in js will be converted to part of the data in scientific notation
  */
@@ -34,8 +32,7 @@ function e2number(value: string): string {
   const dotRight: string = num[1] || ''; // value to the right of the decimal point
 
   if (p > 0) {
-    value = dotLeft + dotRight.substr(0, p) +
-      (dotRight.length > p ? '.' + dotRight.substr(p) : '0'.repeat(p - dotRight.length));
+    value = dotLeft + dotRight.substr(0, p) + (dotRight.length > p ? '.' + dotRight.substr(p) : '0'.repeat(p - dotRight.length));
   } else {
     // Scientific notation converted by number has 1 digits to the left of the decimal point by default, so only consider this case
     const left = parseInt(dotLeft, 10);
@@ -58,9 +55,9 @@ function numberSpecification(value: string) {
 
   const demarcationLen = 15; // 15 significant digits are the cutoff point
   if (len > demarcationLen) {
-    // Use 0 for positive numbers and 1 for negative numbers, 
+    // Use 0 for positive numbers and 1 for negative numbers,
     // which is convenient for counting later, because negative numbers need to calculate one more bit of length
-    let isNegative = 0; 
+    let isNegative = 0;
     if (Number(value) < 0) {
       isNegative = 1;
     }

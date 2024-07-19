@@ -1,5 +1,3 @@
-
-
 import { LastModifiedTimeField } from 'model/field/last_modified_time_field';
 import { APIMetaFieldType, CollectType, DateFormat, FieldType, ILastModifiedTimeField, TimeFormat } from 'types';
 import { IOpenField } from 'types/open/open_field_read_types';
@@ -16,8 +14,8 @@ const lastModifiedTimeField: ILastModifiedTimeField = {
     timeFormat: TimeFormat['HH:mm'],
     includeTime: true,
     collectType: CollectType.SpecifiedFields,
-    fieldIdCollection: ['fld2222']
-  }
+    fieldIdCollection: ['fld2222'],
+  },
 };
 
 const openLastModifiedTimeField: IOpenField = {
@@ -29,8 +27,8 @@ const openLastModifiedTimeField: IOpenField = {
     timeFormat: 'HH:mm',
     includeTime: true,
     collectType: CollectType.SpecifiedFields,
-    fieldIdCollection: ['fld2222']
-  }
+    fieldIdCollection: ['fld2222'],
+  },
 };
 
 const propertyOptionalFill: IUpdateOpenLastModifiedTimeFieldProperty = {
@@ -38,7 +36,7 @@ const propertyOptionalFill: IUpdateOpenLastModifiedTimeFieldProperty = {
   timeFormat: 'HH:mm',
   includeTime: true,
   collectType: CollectType.SpecifiedFields,
-  fieldIdCollection: ['fld2222']
+  fieldIdCollection: ['fld2222'],
 };
 
 const propertyOptionalNotFill: IUpdateOpenLastModifiedTimeFieldProperty = {
@@ -79,7 +77,7 @@ describe('Modify time field update property conversion property check', () => {
       ...LastModifiedTimeField.defaultProperty(),
       dateFormat: DateFormat['YYYY-MM-DD'],
       collectType: CollectType.SpecifiedFields,
-      datasheetId: lastModifiedTimeField.property.datasheetId
+      datasheetId: lastModifiedTimeField.property.datasheetId,
     });
     expect(expectValue).toEqual(receiveValue);
   });

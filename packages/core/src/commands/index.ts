@@ -1,5 +1,3 @@
-
-
 import { ICollaCommandDef } from '../command_manager';
 import {
   addFields,

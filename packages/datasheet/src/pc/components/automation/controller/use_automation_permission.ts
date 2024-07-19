@@ -5,8 +5,7 @@ import { useAppSelector } from 'pc/store/react-redux';
 import { ScreenSize } from '../../common/component_display';
 import { automationStateAtom } from './atoms';
 
-export const useAutomationResourceNode = (): INodesMapItem=> {
-
+export const useAutomationResourceNode = (): INodesMapItem => {
   const stateValue = useAtomValue(automationStateAtom);
 
   return useAppSelector((state: IReduxState) => {
@@ -21,13 +20,13 @@ export const useAutomationResourcePermission = (): INodePermissions => {
   const isMobile = screenIsAtMost(ScreenSize.lg);
   const mirrorCreatable = useAppSelector((state: IReduxState) => {
     const resourceId = stateValue?.resourceId!;
-    const defaultValue= state.catalogTree.treeNodesMap[resourceId]?.permissions ||
+    const defaultValue = state.catalogTree.treeNodesMap[resourceId]?.permissions ||
       state.catalogTree.privateTreeNodesMap[resourceId]?.permissions || {
-      manageable: false,
-      editable: false,
-      readable: true,
-      descriptionEditable: false,
-    };
+        manageable: false,
+        editable: false,
+        readable: true,
+        descriptionEditable: false,
+      };
     if (isMobile) {
       return {
         ...defaultValue,

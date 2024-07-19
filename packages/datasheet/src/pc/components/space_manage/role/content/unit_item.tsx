@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { Box, Typography, useThemeColors } from '@apitable/components';
 import { MemberType, Strings, t } from '@apitable/core';

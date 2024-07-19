@@ -1,5 +1,3 @@
-
-
 import styled from 'styled-components';
 
 export const LinkWrapperStyled = styled.div`
@@ -10,7 +8,7 @@ export const LinkWrapperStyled = styled.div`
 export const LinkStyled = styled.div`
   display: flex;
   padding: 0 10px;
-  background-color: #E8EAED;
+  background-color: #e8eaed;
   border-radius: 4px;
   margin: 2px 8px 2px 0;
   font-size: 12px;

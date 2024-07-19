@@ -1,5 +1,3 @@
-
-
 import { Interpreter, ResolverFunction } from './interpreter/interpreter';
 import { BooleanExprLexer } from './lexer/lexer';
 import { AstNode } from './parser/ast';

@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@nestjs/common';
 import { IUserValue, MemberType } from '@apitable/core';
 import { UnitTeamRepository } from '../repositories/unit.team.repository';
@@ -7,17 +5,17 @@ import { UnitSubTeamRefDto } from 'unit/dtos/unit.sub.team.ref';
 
 /**
  * unitTeam related operations
- * 
+ *
  * @author Zoe zheng
  * @date 2020/7/30 6:31 PM
  */
 @Injectable()
 export class UnitTeamService {
-  constructor(private readonly teamRepo: UnitTeamRepository) { }
+  constructor(private readonly teamRepo: UnitTeamRepository) {}
 
   /**
    * Get team base info by team ids
-   * 
+   *
    * @param teamIds
    * @return IUnitTeamBaseInfoMap
    * @author Zoe Zheng
@@ -57,7 +55,7 @@ export class UnitTeamService {
     const subTeams: string[] = [];
     parentTeamIds.forEach((parentTeamId) => {
       teamIdSubTeamIdsMap[parentTeamId] = this.getSubTeamIdsByParentSubRefMap(parentSubRefMap, { id: String(parentTeamId), groupId: '' });
-      subTeams.push(...teamIdSubTeamIdsMap[parentTeamId] || []);
+      subTeams.push(...(teamIdSubTeamIdsMap[parentTeamId] || []));
     });
     return { teamIdSubTeamIdsMap, subTeams };
   }
@@ -65,8 +63,7 @@ export class UnitTeamService {
   /**
    *  recurse to search from parentSubRefMap, if current unitTeam is a paren team of any team, add them to the team's sub team list
    */
-  public getSubTeamIdsByParentSubRefMap(parentSubRefMap: { [parentTeamId: string]: string[] }
-    , unitTeam: { id: string; groupId: string; }): string[] {
+  public getSubTeamIdsByParentSubRefMap(parentSubRefMap: { [parentTeamId: string]: string[] }, unitTeam: { id: string; groupId: string }): string[] {
     const subTeamIds: string[] = [];
     const directSubTeamIds: string[] = parentSubRefMap[unitTeam.id] || [];
     subTeamIds.push(...directSubTeamIds);
@@ -75,5 +72,4 @@ export class UnitTeamService {
     });
     return subTeamIds;
   }
-
 }

@@ -1,5 +1,3 @@
-
-
 import { LastModifiedByField } from 'model/field/last_modified_by_field';
 import { APIMetaFieldType, CollectType, FieldType, ILastModifiedByField } from 'types';
 import { IOpenField } from 'types/open/open_field_read_types';
@@ -14,8 +12,8 @@ const lastModifiedByField: ILastModifiedByField = {
     datasheetId: 'dst1111',
     uuids: [],
     collectType: CollectType.SpecifiedFields,
-    fieldIdCollection: ['fld2222']
-  }
+    fieldIdCollection: ['fld2222'],
+  },
 };
 
 const openLastModifiedByField: IOpenField = {
@@ -24,13 +22,13 @@ const openLastModifiedByField: IOpenField = {
   type: APIMetaFieldType.LastModifiedBy,
   property: {
     collectType: CollectType.SpecifiedFields,
-    fieldIdCollection: ['fld2222']
-  }
+    fieldIdCollection: ['fld2222'],
+  },
 };
 
 const propertyOptionalFill: IUpdateOpenLastModifiedByFieldProperty = {
   collectType: CollectType.SpecifiedFields,
-  fieldIdCollection: ['fld2222']
+  fieldIdCollection: ['fld2222'],
 };
 
 const propertyOptionalNotFill: IUpdateOpenLastModifiedByFieldProperty = {
@@ -69,7 +67,7 @@ describe('Modifier field update property conversion property check', () => {
     const [expectValue, receiveValue] = valid(propertyOptionalNotFill, {
       ...LastModifiedByField.defaultProperty(),
       collectType: CollectType.AllFields,
-      datasheetId: lastModifiedByField.property.datasheetId
+      datasheetId: lastModifiedByField.property.datasheetId,
     });
     expect(expectValue).toEqual(receiveValue);
   });

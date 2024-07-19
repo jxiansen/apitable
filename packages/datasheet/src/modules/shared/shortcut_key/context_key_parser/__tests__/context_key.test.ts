@@ -1,5 +1,3 @@
-
-
 import { ContextKeyEvaluate } from '../context_key';
 
 const testEvaluate = (tests: any[]) => {

@@ -1,11 +1,16 @@
-
-
 import produce from 'immer';
 import {
-  IDragTargetAction, IGridViewDragState, IHoverRecordId, ISetHoverGroupPath, ISetHoverRowOfAddRecord,
+  IDragTargetAction,
+  IGridViewDragState,
+  IHoverRecordId,
+  ISetHoverGroupPath,
+  ISetHoverRowOfAddRecord,
 } from '../../../../../../exports/store/interfaces';
 import {
-  SET_DRAG_TARGET, SET_HOVER_GROUP_PATH, SET_HOVER_RECORD_ID, SET_HOVER_ROW_OF_ADD_RECORD,
+  SET_DRAG_TARGET,
+  SET_HOVER_GROUP_PATH,
+  SET_HOVER_RECORD_ID,
+  SET_HOVER_ROW_OF_ADD_RECORD,
 } from '../../../../../shared/store/action_constants';
 
 export const gridViewDragStateDefault: IGridViewDragState = {
@@ -16,22 +21,21 @@ export const gridViewDragStateDefault: IGridViewDragState = {
 
 type IRecordAction = IHoverRecordId | IDragTargetAction | ISetHoverGroupPath | ISetHoverRowOfAddRecord;
 
-export const gridViewDragState = produce(
-  (draft: IGridViewDragState = gridViewDragStateDefault, action: IRecordAction) => {
-    switch (action.type) {
-      case SET_DRAG_TARGET:
-        draft.dragTarget = action.payload;
-        return draft;
-      case SET_HOVER_RECORD_ID:
-        draft.hoverRecordId = action.payload;
-        return draft;
-      case SET_HOVER_GROUP_PATH:
-        draft.hoverGroupHeadRecordId = action.payload;
-        return draft;
-      case SET_HOVER_ROW_OF_ADD_RECORD:
-        draft.hoverRowOfAddRecord = action.payload;
-        return draft;
-      default:
-        return draft;
-    }
-  }, gridViewDragStateDefault);
+export const gridViewDragState = produce((draft: IGridViewDragState = gridViewDragStateDefault, action: IRecordAction) => {
+  switch (action.type) {
+    case SET_DRAG_TARGET:
+      draft.dragTarget = action.payload;
+      return draft;
+    case SET_HOVER_RECORD_ID:
+      draft.hoverRecordId = action.payload;
+      return draft;
+    case SET_HOVER_GROUP_PATH:
+      draft.hoverGroupHeadRecordId = action.payload;
+      return draft;
+    case SET_HOVER_ROW_OF_ADD_RECORD:
+      draft.hoverRowOfAddRecord = action.payload;
+      return draft;
+    default:
+      return draft;
+  }
+}, gridViewDragStateDefault);

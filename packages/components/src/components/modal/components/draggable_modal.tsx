@@ -1,5 +1,3 @@
-
-
 import React, { useState, useRef } from 'react';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import { IModalProps } from '../interface';
@@ -11,8 +9,7 @@ const CustomTitle = styled.div`
   cursor: move;
 `;
 
-export const DraggableModal: React.FC<React.PropsWithChildren<Omit<IModalProps, 'modelRender'>>> = props => {
-
+export const DraggableModal: React.FC<React.PropsWithChildren<Omit<IModalProps, 'modelRender'>>> = (props) => {
   const [disabled, setDisabled] = useState(false);
 
   const boundsRef = useRef<{
@@ -24,7 +21,7 @@ export const DraggableModal: React.FC<React.PropsWithChildren<Omit<IModalProps, 
     left: 0,
     top: 0,
     bottom: 0,
-    right: 0
+    right: 0,
   });
 
   const draggleRef = useRef<HTMLDivElement>(null);
@@ -43,23 +40,13 @@ export const DraggableModal: React.FC<React.PropsWithChildren<Omit<IModalProps, 
   return (
     <Modal
       {...props}
-      title={(
-        <CustomTitle
-          onMouseOver={() => disabled && setDisabled(false)}
-          onMouseOut={() => setDisabled(true)}
-          onFocus={() => { }}
-          onBlur={() => { }}
-        >
+      title={
+        <CustomTitle onMouseOver={() => disabled && setDisabled(false)} onMouseOut={() => setDisabled(true)} onFocus={() => {}} onBlur={() => {}}>
           Draggable Modal
         </CustomTitle>
-      )}
-
-      modalRender={modal => (
-        <Draggable
-          disabled={disabled}
-          bounds={boundsRef.current}
-          onStart={(event, uiData) => onStart(event, uiData)}
-        >
+      }
+      modalRender={(modal) => (
+        <Draggable disabled={disabled} bounds={boundsRef.current} onStart={(event, uiData) => onStart(event, uiData)}>
           <div ref={draggleRef}>{modal}</div>
         </Draggable>
       )}

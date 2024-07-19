@@ -1,5 +1,3 @@
-
-
 export const initTranslatePosition = { x: 0, y: 0 };
 
 export const MAX_SCALE = 5;

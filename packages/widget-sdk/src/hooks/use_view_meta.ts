@@ -1,5 +1,3 @@
-
-
 import { getViewTypeString, IViewProperty } from 'core';
 import { IFilterInfo, IGroupInfo, ISortInfo, ViewType } from 'interface/view_types';
 import { Datasheet } from 'model';
@@ -23,21 +21,21 @@ export const pickViewProperty = (view: IViewProperty): IViewMeta => {
     name: view.name,
     hidden: view.hidden,
     groupInfo: view.groupInfo,
-    filterInfo: view.filterInfo as (IFilterInfo | undefined),
+    filterInfo: view.filterInfo as IFilterInfo | undefined,
     sortInfo: view.sortInfo,
   };
 };
 
 /**
  * Beta API`, possible future changes.
- * 
+ *
  * Gets the metadata property of the view.
- * Pass in a viewId, and return undefined when the viewId is illegal or does not exist. 
+ * Pass in a viewId, and return undefined when the viewId is illegal or does not exist.
  * Rerendering is triggered when the metadata property changes.
- * 
+ *
  * @param viewId Need to get the view ID of the metadata property
  * @returns
- * 
+ *
  * ### Example
  * ```js
  * import { useViewMeta, useActiveViewId } from '@apitable/widget-sdk';
@@ -48,19 +46,19 @@ export const pickViewProperty = (view: IViewProperty): IViewMeta => {
  *   const viewMeta = useViewMeta(activeViewId);
  *   return <p>Current view name: {viewMeta?.name}</p>;
  * }
- * 
+ *
  * ```
- * 
+ *
  */
 export function useViewMeta(viewId: string | undefined): IViewMeta;
 
-/** 
+/**
  * ## Support getting the metadata property of the corresponding datasheet view.
- * 
+ *
  * @param datasheet Datasheet instance, by {@link useDatasheet} get.
  * @param viewId Need to get the view ID of the metadata property
  * @returns
- * 
+ *
  * ### Example
  * ```js
  * import { useViewMeta, useDatasheet } from '@apitable/widget-sdk';
@@ -72,7 +70,7 @@ export function useViewMeta(viewId: string | undefined): IViewMeta;
  *   return <p>Current view name: {viewMeta?.name}</p>;
  * }
  * ```
- * 
+ *
  */
 export function useViewMeta(datasheet: Datasheet | undefined, viewId: string | undefined): IViewMeta;
 
@@ -81,7 +79,7 @@ export function useViewMeta(param1: Datasheet | string | undefined, param2?: str
   const datasheetId = isDatasheet ? (param1 as Datasheet).datasheetId : undefined;
   const viewId = (isDatasheet ? param2 : param1) as string | undefined;
   const viewsData = useViews(datasheetId);
-  const view = viewsData.find(view => view.id === viewId);
+  const view = viewsData.find((view) => view.id === viewId);
   if (!view) {
     return undefined;
   }

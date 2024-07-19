@@ -1,4 +1,3 @@
-
 export class UnitMemberBaseInfoVo {
   memberId!: string;
   memberName!: string;

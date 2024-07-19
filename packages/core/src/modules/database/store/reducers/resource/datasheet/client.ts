@@ -1,22 +1,64 @@
-
-
 import produce from 'immer';
 import { omit } from 'lodash';
 import { combineReducers } from 'redux';
 import { ISetCloseSyncViewIdAction, ISetGridViewHoverFieldIdAction } from 'modules/database/store/actions/resource';
 import {
-  IActiveRowInfo, ICalendarViewStatus, IDatasheetClientState, IGanttViewStatus, IKanbanViewStatus, ILoadingRecord, ILoadingRecordAction,
-  IOrgChartViewStatus, IPatchViewDerivation, ISetViewDerivation, IWidgetPanelStatus, IDeleteViewDerivation
+  IActiveRowInfo,
+  ICalendarViewStatus,
+  IDatasheetClientState,
+  IGanttViewStatus,
+  IKanbanViewStatus,
+  ILoadingRecord,
+  ILoadingRecordAction,
+  IOrgChartViewStatus,
+  IPatchViewDerivation,
+  ISetViewDerivation,
+  IWidgetPanelStatus,
+  IDeleteViewDerivation,
 } from '../../../../../../exports/store/interfaces';
 import {
-  ACTIVE_EXPORT_VIEW_ID, ACTIVE_OPERATE_VIEW_ID, CHANGE_WIDGET_PANEL_WIDTH, CLEAR_ACTIVE_ROW_INFO, RESET_EXPORT_VIEW_ID, RESET_OPERATE_VIEW_ID,
-  SET_ACTIVE_ROW_INFO, SET_CALENDAR_GRID_WIDTH, SET_CALENDAR_SETTING_PANEL_WIDTH, SET_CLOSE_SYNC_VIEW_ID, SET_EDIT_STATUS, SET_GANTT_DATE_UNIT_TYPE,
-  SET_GANTT_GRID_WIDTH, SET_GANTT_SETTING_PANEL_WIDTH, SET_GRID_VIEW_HOVER_FIELD_ID, SET_GROUPING_COLLAPSE, SET_HIGHLIGHT_FIELD_ID,
-  SET_KANBAN_GROUPING_EXPAND, SET_LOADING_RECORD, SET_NEW_RECORD_EXPECT_INDEX, SET_ORG_CHART_GRID_WIDTH, SET_ORG_CHART_SETTING_PANEL_WIDTH,
-  SET_ROBOT_PANEL_STATUS, SET_SEARCH_KEYWORD, SET_SEARCH_RESULT_CURSOR_INDEX, SET_WIDGET_PANEL_LOADING, SWITCH_ACTIVE_PANEL, TOGGLE_CALENDAR_GRID,
-  TOGGLE_CALENDAR_GUIDE_STATUS, TOGGLE_CALENDAR_SETTING_PANEL, TOGGLE_GANTT_GRID, TOGGLE_GANTT_SETTING_PANEL, TOGGLE_KANBAN_GROUP_SETTING_VISIBLE,
-  TOGGLE_ORG_CHART_GRID, TOGGLE_ORG_CHART_GUIDE_STATUS, TOGGLE_ORG_CHART_SETTING_PANEL, TOGGLE_TIME_MACHINE_PANEL, TOGGLE_WIDGET_PANEL,
-  DELETE_VIEW_DERIVATION, PATCH_VIEW_DERIVATION, SET_VIEW_DERIVATION, SET_COPILOT_PANEL_STATUS
+  ACTIVE_EXPORT_VIEW_ID,
+  ACTIVE_OPERATE_VIEW_ID,
+  CHANGE_WIDGET_PANEL_WIDTH,
+  CLEAR_ACTIVE_ROW_INFO,
+  RESET_EXPORT_VIEW_ID,
+  RESET_OPERATE_VIEW_ID,
+  SET_ACTIVE_ROW_INFO,
+  SET_CALENDAR_GRID_WIDTH,
+  SET_CALENDAR_SETTING_PANEL_WIDTH,
+  SET_CLOSE_SYNC_VIEW_ID,
+  SET_EDIT_STATUS,
+  SET_GANTT_DATE_UNIT_TYPE,
+  SET_GANTT_GRID_WIDTH,
+  SET_GANTT_SETTING_PANEL_WIDTH,
+  SET_GRID_VIEW_HOVER_FIELD_ID,
+  SET_GROUPING_COLLAPSE,
+  SET_HIGHLIGHT_FIELD_ID,
+  SET_KANBAN_GROUPING_EXPAND,
+  SET_LOADING_RECORD,
+  SET_NEW_RECORD_EXPECT_INDEX,
+  SET_ORG_CHART_GRID_WIDTH,
+  SET_ORG_CHART_SETTING_PANEL_WIDTH,
+  SET_ROBOT_PANEL_STATUS,
+  SET_SEARCH_KEYWORD,
+  SET_SEARCH_RESULT_CURSOR_INDEX,
+  SET_WIDGET_PANEL_LOADING,
+  SWITCH_ACTIVE_PANEL,
+  TOGGLE_CALENDAR_GRID,
+  TOGGLE_CALENDAR_GUIDE_STATUS,
+  TOGGLE_CALENDAR_SETTING_PANEL,
+  TOGGLE_GANTT_GRID,
+  TOGGLE_GANTT_SETTING_PANEL,
+  TOGGLE_KANBAN_GROUP_SETTING_VISIBLE,
+  TOGGLE_ORG_CHART_GRID,
+  TOGGLE_ORG_CHART_GUIDE_STATUS,
+  TOGGLE_ORG_CHART_SETTING_PANEL,
+  TOGGLE_TIME_MACHINE_PANEL,
+  TOGGLE_WIDGET_PANEL,
+  DELETE_VIEW_DERIVATION,
+  PATCH_VIEW_DERIVATION,
+  SET_VIEW_DERIVATION,
+  SET_COPILOT_PANEL_STATUS,
 } from '../../../../../shared/store/action_constants';
 import { DateUnitType, WhyRecordMoveType } from '../../../../../shared/store/constants';
 import { collaborators } from './collaborators';
@@ -126,7 +168,7 @@ export const client = combineReducers<IDatasheetClientState>({
   loadingRecord: produce((state: ILoadingRecord = {}, action: ILoadingRecordAction): ILoadingRecord => {
     if (action.type === SET_LOADING_RECORD) {
       const { recordIds, loading } = action.payload;
-      recordIds.forEach(recordId => {
+      recordIds.forEach((recordId) => {
         state[recordId] = loading;
       });
     }
@@ -306,7 +348,7 @@ export const client = combineReducers<IDatasheetClientState>({
           return [action.payload];
         }
         if (state.includes(action.payload)) {
-          return state.filter(item => item !== action.payload);
+          return state.filter((item) => item !== action.payload);
         }
         return [...state, action.payload];
       }
@@ -332,7 +374,7 @@ export const client = combineReducers<IDatasheetClientState>({
       if (!state) {
         return state;
       }
-      return state.filter(item => item !== viewId);
+      return state.filter((item) => item !== viewId);
     }
 
     return state;

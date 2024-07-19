@@ -1,5 +1,3 @@
-
-
 export * from './gantt_view';
 export * from './interface';
 export * from './constant';

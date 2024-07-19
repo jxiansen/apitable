@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { get } from 'lodash';
 import RcTrigger from 'rc-trigger';
@@ -26,12 +24,8 @@ import { AddOutlined } from '@apitable/icons';
 // eslint-disable-next-line no-restricted-imports
 import { Tooltip } from 'pc/components/common';
 import { notify } from 'pc/components/common/notify';
-import {
-  DataSourceSelectorForForm,
-} from 'pc/components/data_source_selector_enhanced/data_source_selector_for_form/data_source_selector_for_preview';
-import {
-  useControlDataSourceSelectorForForm,
-} from 'pc/components/data_source_selector_enhanced/data_source_selector_for_form/hooks/use_control_data_source_selector_for_form';
+import { DataSourceSelectorForForm } from 'pc/components/data_source_selector_enhanced/data_source_selector_for_form/data_source_selector_for_preview';
+import { useControlDataSourceSelectorForForm } from 'pc/components/data_source_selector_enhanced/data_source_selector_for_form/hooks/use_control_data_source_selector_for_form';
 import { navigationToUrl } from 'pc/components/route_manager/navigation_to_url';
 import { resourceService } from 'pc/resource_service';
 import { store } from 'pc/store';

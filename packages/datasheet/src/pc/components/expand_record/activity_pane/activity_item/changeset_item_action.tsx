@@ -1,5 +1,3 @@
-
-
 import cls from 'classnames';
 import { has, intersectionWith, isEqual, xorBy } from 'lodash';
 import * as React from 'react';

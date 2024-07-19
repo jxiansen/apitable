@@ -1,5 +1,3 @@
-
-
 import { combineReducers } from 'redux';
 import { datasheetMap, widgetMap, formMap, theme } from '../../modules/database/store/reducers/resource';
 import { dashboardMap } from '../../modules/database/store/reducers/resource/dashboard';
@@ -30,12 +28,7 @@ import { billing } from '../../modules/billing/store/reducers';
 
 import { IReduxState } from './interfaces';
 
-export {
-  mirrorMap,
-  pageParams,
-  unitInfo,
-  collaborators,
-};
+export { mirrorMap, pageParams, unitInfo, collaborators };
 
 export const onlyResourceReducers = combineReducers<Partial<IReduxState>>({
   isStateRoot: () => true,
@@ -46,7 +39,7 @@ export const onlyResourceReducers = combineReducers<Partial<IReduxState>>({
   pageParams,
   space,
   unitInfo,
-  embedInfo
+  embedInfo,
 });
 
 export const rootReducers = combineReducers<IReduxState>({
@@ -78,5 +71,5 @@ export const rootReducers = combineReducers<IReduxState>({
   labs,
   subscriptions,
   previewFile,
-  embedInfo
+  embedInfo,
 });

@@ -1,5 +1,3 @@
-
-
 /**
  * Basic message of node change
  */

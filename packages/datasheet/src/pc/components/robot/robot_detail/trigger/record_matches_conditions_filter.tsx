@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import { isEqual, PropertyPath, set } from 'lodash';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
@@ -21,40 +19,33 @@ import { useAppSelector } from 'pc/store/react-redux';
 import { Select } from '../select';
 import { FieldInput } from './field_input';
 import { FieldSelect } from './field_select';
-import {
-  addNewFilter as _addNewFilter,
-  FilterTypeEnums,
-  getBooleanOptionName,
-  getFields,
-  getOperatorOptions,
-  op2fop
-} from './helper';
+import { addNewFilter as _addNewFilter, FilterTypeEnums, getBooleanOptionName, getFields, getOperatorOptions, op2fop } from './helper';
 import styles from './styles.module.less';
 
 const transformNullFilter = (filter?: IExpression | null) => {
   return filter == null || isEqual(filter, EmptyNullOperand)
     ? {
-      operator: OperatorEnums.And,
-      operands: [],
-    }
+        operator: OperatorEnums.And,
+        operands: [],
+      }
     : filter;
 };
 
 interface IRecordMatchesConditionsFilterProps {
-    filter?: IExpression;
-    datasheetId: string;
-    hasParent?: boolean;
-    path?: string;
-    onChange?: (filter: ILiteralOperand) => void;
-    readonly?: boolean;
-    depth?: number;
+  filter?: IExpression;
+  datasheetId: string;
+  hasParent?: boolean;
+  path?: string;
+  onChange?: (filter: ILiteralOperand) => void;
+  readonly?: boolean;
+  depth?: number;
 }
 
 const WarningTip = (props: any) => {
   const theme = useTheme();
   return (
     <Box display="flex" alignItems="center" gridColumn="property-start / value-end">
-      <WarnCircleFilled color={theme.color.fc10}/>
+      <WarnCircleFilled color={theme.color.fc10} />
       <Typography color={theme.color.fc10} variant="body3" style={{ marginLeft: '4px' }}>
         {props.children}
       </Typography>
@@ -73,7 +64,6 @@ const WarningTip = (props: any) => {
  *   + or / and concatenated expressions. It can be a base expression or a grouping expression
  */
 export const RecordMatchesConditionsFilter = (props: IRecordMatchesConditionsFilterProps) => {
-
   const datasheetId = props.datasheetId;
 
   const { readonly = false, hasParent = false, onChange, depth = 0 } = props;
@@ -109,10 +99,10 @@ export const RecordMatchesConditionsFilter = (props: IRecordMatchesConditionsFil
   const isBaseExpression = !isGroup;
 
   /**
-     * Modify its own value inside the component, and at the same time to synchronize it to the parent component.
-     * @param path: The path of the subcomponent
-     * @param value: The value of the subcomponent
-     */
+   * Modify its own value inside the component, and at the same time to synchronize it to the parent component.
+   * @param path: The path of the subcomponent
+   * @param value: The value of the subcomponent
+   */
   const handleChange = (path: PropertyPath, value: ILiteralOperand) => {
     // Here immer and lodash set do not match, direct json to
     const _filter = JSON.parse(JSON.stringify(filter));
@@ -187,10 +177,8 @@ export const RecordMatchesConditionsFilter = (props: IRecordMatchesConditionsFil
     const fop = op2fop(filter.operator as OperatorEnums);
     return (
       <>
-        <FieldSelect fields={fields} disabled={readonly} value={filter.operands[0].value}
-          onChange={(value) => handleFilterChange(value)}/>
-        <Select options={operatorOptions} disabled={readonly} value={filter.operator}
-          onChange={(value) => handleChange('operator', value)}/>
+        <FieldSelect fields={fields} disabled={readonly} value={filter.operands[0].value} onChange={(value) => handleFilterChange(value)} />
+        <Select options={operatorOptions} disabled={readonly} value={filter.operator} onChange={(value) => handleChange('operator', value)} />
         <div>
           {showFieldInput && (
             <FieldInput
@@ -246,7 +234,7 @@ export const RecordMatchesConditionsFilter = (props: IRecordMatchesConditionsFil
                   }}
                 />
                 {readonly ? (
-                  <Box width={'4px'} height={'100%'}/>
+                  <Box width={'4px'} height={'100%'} />
                 ) : (
                   <IconButton
                     disabled={readonly}
@@ -277,7 +265,7 @@ export const RecordMatchesConditionsFilter = (props: IRecordMatchesConditionsFil
            }}
            /> */}
             <Button
-              prefixIcon={<AddOutlined/>}
+              prefixIcon={<AddOutlined />}
               variant="fill"
               onClick={() => {
                 addNewFilter(FilterTypeEnums.Filter);

@@ -1,5 +1,3 @@
-
-
 import { RedisModuleOptions } from '@apitable/nestjs-redis';
 
 export const redisModuleOptions = (): RedisModuleOptions => {
@@ -8,7 +6,7 @@ export const redisModuleOptions = (): RedisModuleOptions => {
     port: parseInt(process.env.REDIS_PORT || '6379', 10),
     db: parseInt(process.env.REDIS_DB || '0', 10),
     password: process.env.REDIS_PASSWORD,
-    tls: Object.is(process.env.REDIS_SSL_ENABLED, 'true')
+    tls: Object.is(process.env.REDIS_SSL_ENABLED, 'true'),
   };
   const redisConfig: RedisModuleOptions = {
     host,

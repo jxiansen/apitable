@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { IMeta, WidgetApi } from '@apitable/core';

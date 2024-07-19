@@ -1,5 +1,3 @@
-
-
 // ================ Contacts related =======================
 // address book - get member details
 export const MEMBER_INFO = '/org/member/read';

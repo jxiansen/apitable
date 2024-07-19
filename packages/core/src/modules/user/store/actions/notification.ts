@@ -1,12 +1,10 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 import { INoticeDetail } from '../../../../exports/store/interfaces';
 
 /**
  * update unread notification count
- * @param count 
- * @returns 
+ * @param count
+ * @returns
  */
 export const updateUnReadMsgCount = (count: number) => {
   return {
@@ -24,30 +22,20 @@ export const updateReadMsgCount = (count: number) => {
 
 /**
  * update notification that have read
- * @param list 
- * @param unshift 
- * @param push 
- * @param updateCount 
- * @returns 
+ * @param list
+ * @param unshift
+ * @param push
+ * @param updateCount
+ * @returns
  */
-export const updateReadNoticeList = (
-  list: INoticeDetail[],
-  unshift?: boolean,
-  push?: boolean,
-  updateCount?: boolean,
-) => {
+export const updateReadNoticeList = (list: INoticeDetail[], unshift?: boolean, push?: boolean, updateCount?: boolean) => {
   return {
     type: actions.UPDATE_READ_NOTICE_LIST,
     payload: { list, unshift, push, updateCount },
   };
 };
 
-export const updateUnReadNoticeList = (
-  list: INoticeDetail[],
-  unshift?: boolean,
-  push?: boolean,
-  updateCount?: boolean,
-) => {
+export const updateUnReadNoticeList = (list: INoticeDetail[], unshift?: boolean, push?: boolean, updateCount?: boolean) => {
   return {
     type: actions.UPDATE_UNREAD_NOTICE_LIST,
     payload: { list, unshift, push, updateCount },

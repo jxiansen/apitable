@@ -1,5 +1,3 @@
-
-
 import {
   ApiTipConstant,
   ConfigConstant,
@@ -19,7 +17,7 @@ import {
   ResourceType,
   Selectors,
   StoreActions,
-  transformOpFields
+  transformOpFields,
 } from '@apitable/core';
 import { Span } from '@metinseylan/nestjs-opentelemetry';
 import { Injectable } from '@nestjs/common';
@@ -56,8 +54,7 @@ export class FormService {
     private resourceMetaService: MetaService,
     private readonly datasheetChangesetSourceService: DatasheetChangesetSourceService,
     private readonly eventEmitter: EventEmitter2,
-  ) {
-  }
+  ) {}
 
   async fetchFormData(formId: string, userId: string, auth: IAuthHeader): Promise<FormDataPack> {
     // Query node info
@@ -88,11 +85,7 @@ export class FormService {
     const beginTime = +new Date();
     this.logger.info(`Start loading form data [${formId}]`);
     // Query node info
-    const { node, fieldPermissionMap } = await this.nodeService.getNodeDetailInfo(
-      formId,
-      auth,
-      { internal: !templateId, main: true, notDst: true }
-    );
+    const { node, fieldPermissionMap } = await this.nodeService.getNodeDetailInfo(formId, auth, { internal: !templateId, main: true, notDst: true });
     const { formProps, nodeRelInfo, dstId, meta } = await this.getRelDatasheetInfo(formId);
     // Get source datasheet permission in space
     if (!templateId && !embedId) {
@@ -148,19 +141,21 @@ export class FormService {
     const dstId = nodeRelInfo.datasheetId;
     // Query meta of referenced datasheet
     const meta = await this.datasheetMetaService.getMetaDataByDstId(dstId, DatasheetException.DATASHEET_NOT_EXIST);
-    const views = meta.views.filter(i => i.id === nodeRelInfo.viewId).map(i => {
-      return { ...i, rows: [] };
-    });
+    const views = meta.views
+      .filter((i) => i.id === nodeRelInfo.viewId)
+      .map((i) => {
+        return { ...i, rows: [] };
+      });
     return { formProps, nodeRelInfo, dstId, meta: { views, fieldMap: meta.fieldMap } };
   }
 
   async addFormRecord(
     props: {
-      formId: string,
+      formId: string;
       userId: string;
       recordData: IRecordCellValue;
     },
-    auth: IAuthHeader
+    auth: IAuthHeader,
   ): Promise<void> {
     const { formId, userId, recordData } = props;
     const dstId = await this.nodeService.getMainNodeId(formId);
@@ -177,12 +172,12 @@ export class FormService {
 
   async addRecord(
     props: {
-      formId: string,
+      formId: string;
       shareId?: string;
       userId: string;
       recordData: IRecordCellValue;
     },
-    auth: IAuthHeader
+    auth: IAuthHeader,
   ): Promise<void> {
     this.logger.info(`addRecordAction start, formId: ${props.formId}`);
     const { formId, shareId, userId, recordData } = props;
@@ -201,12 +196,7 @@ export class FormService {
   }
 
   @Span()
-  private async dispatchFormSubmittedEvent(props: {
-    formId: string,
-    recordId: string,
-    dstId: string,
-    interStore: any
-  }): Promise<any> {
+  private async dispatchFormSubmittedEvent(props: { formId: string; recordId: string; dstId: string; interStore: any }): Promise<any> {
     // FIXME: dispatchEvent in other place. wrap in try block to make sure execution is normal
     const { formId, recordId, dstId, interStore } = props;
     try {
@@ -216,18 +206,18 @@ export class FormService {
         recordData: thisRecord!.data,
         state: interStore.getState(),
         datasheetId: dstId,
-        recordId
+        recordId,
       });
       const eventContext = {
         // TODO: Old structure left for Qianfan, delete later
         datasheet: {
           id: dstId,
-          name: nodeRelInfo.datasheetName
+          name: nodeRelInfo.datasheetName,
         },
         record: {
           id: recordId,
           url: getRecordUrl(dstId, recordId),
-          fields: eventFields
+          fields: eventFields,
         },
         fieldTypeMap,
         formId: formId,
@@ -236,13 +226,9 @@ export class FormService {
         datasheetName: nodeRelInfo.datasheetName,
         recordId,
         recordUrl: getRecordUrl(dstId, recordId),
-        ...eventFields
+        ...eventFields,
       };
-      this.logger.info(
-        'dispatchFormSubmittedEvent eventContext',
-        eventContext,
-        eventFields
-      );
+      this.logger.info('dispatchFormSubmittedEvent eventContext', eventContext, eventFields);
       await this.eventEmitter.emitAsync(OPEventNameEnums.FormSubmitted, {
         eventName: OPEventNameEnums.FormSubmitted,
         scope: ResourceType.Form,
@@ -261,11 +247,11 @@ export class FormService {
   private async addFormRecordAction(
     dstId: string,
     props: {
-      formId: string,
+      formId: string;
       userId: string;
       recordData: IRecordCellValue;
     },
-    auth: IAuthHeader
+    auth: IAuthHeader,
   ): Promise<any> {
     const addRecordsProfiler = this.logger.startTimer();
     const { formId, userId, recordData } = props;
@@ -277,8 +263,11 @@ export class FormService {
     if (nodeRelInfo.viewId && options['viewId']) {
       options['viewId'] = nodeRelInfo.viewId;
     }
-    const datasheetPack: IServerDatasheetPack =
-      await this.datasheetService.fetchForeignDatasheetPackWithoutCheckPermission(dstId, auth, fetchDataOptions);
+    const datasheetPack: IServerDatasheetPack = await this.datasheetService.fetchForeignDatasheetPackWithoutCheckPermission(
+      dstId,
+      auth,
+      fetchDataOptions,
+    );
     // Form submission, handle field permissions
     if (datasheetPack.fieldPermissionMap) {
       for (const fieldPermissionInfo of Object.values(datasheetPack.fieldPermissionMap)) {
@@ -298,8 +287,8 @@ export class FormService {
     // console.log('changeSets', JSON.stringify(changeSets), JSON.stringify(roomChangeSets));
     // Apply room changeset to store, the interStore is the latest sparse store.
     // Only when taking part in computation, compute fields can get correct values
-    roomChangeSets.forEach(cs => {
-      const systemOperations = cs.operations.filter(ops => ops.cmd.startsWith('System'));
+    roomChangeSets.forEach((cs) => {
+      const systemOperations = cs.operations.filter((ops) => ops.cmd.startsWith('System'));
       if (systemOperations.length > 0) {
         interStore.dispatch(StoreActions.applyJOTOperations(systemOperations, cs.resourceType, cs.resourceId));
       }
@@ -320,12 +309,12 @@ export class FormService {
   private async addRecordAction(
     dstId: string,
     props: {
-      formId: string,
+      formId: string;
       shareId?: string;
       userId: string;
       recordData: IRecordCellValue;
     },
-    auth: IAuthHeader
+    auth: IAuthHeader,
   ): Promise<any> {
     const addRecordsProfiler = this.logger.startTimer();
     const { formId, shareId, userId, recordData } = props;
@@ -337,8 +326,12 @@ export class FormService {
     if (nodeRelInfo.viewId && options['viewId']) {
       options['viewId'] = nodeRelInfo.viewId;
     }
-    const datasheetPack: IServerDatasheetPack =
-      await this.datasheetService.fetchSubmitFormForeignDatasheetPack(dstId, auth, fetchDataOptions, shareId);
+    const datasheetPack: IServerDatasheetPack = await this.datasheetService.fetchSubmitFormForeignDatasheetPack(
+      dstId,
+      auth,
+      fetchDataOptions,
+      shareId,
+    );
     // Form submission, handle field permissions
     if (datasheetPack.fieldPermissionMap) {
       for (const fieldPermissionInfo of Object.values(datasheetPack.fieldPermissionMap)) {
@@ -358,8 +351,8 @@ export class FormService {
     // console.log('changeSets', JSON.stringify(changeSets), JSON.stringify(roomChangeSets));
     // Apply room changeset to store, the interStore is the latest sparse store.
     // Only when taking part in computation, compute fields can get correct values
-    roomChangeSets.forEach(cs => {
-      const systemOperations = cs.operations.filter(ops => ops.cmd.startsWith('System'));
+    roomChangeSets.forEach((cs) => {
+      const systemOperations = cs.operations.filter((ops) => ops.cmd.startsWith('System'));
       if (systemOperations.length > 0) {
         interStore.dispatch(StoreActions.applyJOTOperations(systemOperations, cs.resourceType, cs.resourceId));
       }
@@ -384,10 +377,10 @@ export class FormService {
     const linkedRecordMap = {};
     // linked datasheet set
     const foreignDatasheetIdMap = Object.values(meta.fieldMap)
-      .filter(field => {
+      .filter((field) => {
         return field.type === FieldType.Link || field.type === FieldType.OneWayLink;
       })
-      .map(field => {
+      .map((field) => {
         const foreignDatasheetId = field.property?.foreignDatasheetId;
         if (!foreignDatasheetId) return null;
         return {
@@ -395,20 +388,19 @@ export class FormService {
           foreignDatasheetId,
         };
       })
-      .filter(v => v);
+      .filter((v) => v);
 
-    foreignDatasheetIdMap.forEach(item => {
+    foreignDatasheetIdMap.forEach((item) => {
       const { foreignDatasheetId, fieldId } = item!;
       if (recordData[fieldId]) {
         // collect self-linking recordId
         if (foreignDatasheetId === dstId) {
-          recordIds.push(...recordData[fieldId] as ILinkIds);
+          recordIds.push(...(recordData[fieldId] as ILinkIds));
           return;
         }
-        linkedRecordMap[foreignDatasheetId] =
-          Array.isArray(linkedRecordMap[foreignDatasheetId])
-            ? [...linkedRecordMap[foreignDatasheetId], ...recordData[fieldId] as ILinkIds]
-            : recordData[fieldId];
+        linkedRecordMap[foreignDatasheetId] = Array.isArray(linkedRecordMap[foreignDatasheetId])
+          ? [...linkedRecordMap[foreignDatasheetId], ...(recordData[fieldId] as ILinkIds)]
+          : recordData[fieldId];
       }
     });
     // remove duplicates
@@ -418,7 +410,7 @@ export class FormService {
     return { recordIds, linkedRecordMap };
   }
 
-  async applyChangeSet(formId: string, dstId: string, changesets: ILocalChangeset[], auth: IAuthHeader, shareId?: string, ) {
+  async applyChangeSet(formId: string, dstId: string, changesets: ILocalChangeset[], auth: IAuthHeader, shareId?: string) {
     const changeResult = await this.otService.applyRoomChangeset({ roomId: formId, sourceType: SourceTypeEnum.FORM, shareId, changesets }, auth);
     // Store changeset source
     await this.datasheetChangesetSourceService.batchCreateChangesetSource(changeResult, SourceTypeEnum.FORM, formId);

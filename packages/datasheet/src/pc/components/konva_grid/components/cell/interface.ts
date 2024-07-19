@@ -1,5 +1,3 @@
-
-
 import { IWrapTextDataProps } from '../../utils';
 
 export interface IRenderContentBase {

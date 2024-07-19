@@ -10,7 +10,7 @@ import styles from './style.module.less';
 
 interface IDataSourceSelectorForAIProps {
   onChange: IOnChange<IOnChangeParams>;
-  defaultNodeIds: ISearchPanelProps['defaultNodeIds']
+  defaultNodeIds: ISearchPanelProps['defaultNodeIds'];
 
   onHide(): void;
 }
@@ -28,24 +28,24 @@ export const DataSourceSelectorForWidget: React.FC<IDataSourceSelectorForAIProps
 
   const title = t(Strings.check_link_table);
 
-  return <DataSourceSelectorWrapper
-    hide={onHide}
-    title={title}
-  >
-    <div className={styles.container}>
-      <DataSourceSelectorBase
-        onChange={_onChange}
-        defaultNodeIds={defaultNodeIds}
-        headerConfig={isPc ? {
-          title: title,
-          onHide
-        } : undefined}
-        requiredData={['datasheetId']}
-      />
-      {
-        result && <WidgetPreview onChange={onChange} datasheetId={result.datasheetId!}/>
-      }
-
-    </div>
-  </DataSourceSelectorWrapper>;
+  return (
+    <DataSourceSelectorWrapper hide={onHide} title={title}>
+      <div className={styles.container}>
+        <DataSourceSelectorBase
+          onChange={_onChange}
+          defaultNodeIds={defaultNodeIds}
+          headerConfig={
+            isPc
+              ? {
+                  title: title,
+                  onHide,
+                }
+              : undefined
+          }
+          requiredData={['datasheetId']}
+        />
+        {result && <WidgetPreview onChange={onChange} datasheetId={result.datasheetId!} />}
+      </div>
+    </DataSourceSelectorWrapper>
+  );
 };

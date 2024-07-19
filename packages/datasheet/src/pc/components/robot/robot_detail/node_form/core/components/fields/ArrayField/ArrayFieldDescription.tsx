@@ -1,5 +1,3 @@
-
-
 export function ArrayFieldDescription({ DescriptionField, idSchema, description }: any) {
   if (!description) {
     return null;

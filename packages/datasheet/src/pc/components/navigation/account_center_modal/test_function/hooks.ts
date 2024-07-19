@@ -1,5 +1,3 @@
-
-
 import { template } from 'lodash';
 import { useCallback } from 'react';
 import { Selectors } from '@apitable/core';

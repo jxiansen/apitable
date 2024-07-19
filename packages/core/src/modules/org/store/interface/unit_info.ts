@@ -1,13 +1,11 @@
-
-
 import { MemberType } from 'types';
 import { ITeamData } from './address_list';
 
 export interface IUnitInfo {
-  unitMap: IUnitMap | null,
+  unitMap: IUnitMap | null;
   userMap: {
-    [userId: string]: string | IUserValue
-  } | null
+    [userId: string]: string | IUserValue;
+  } | null;
 }
 
 interface IUnitBase {
@@ -38,16 +36,16 @@ interface IUnitBase {
 }
 
 export interface IUnitMap {
-  [unitId: string]: IUnitValue
+  [unitId: string]: IUnitValue;
 }
 
 export interface IUserMap {
-  [userId: string]: IUserValue
+  [userId: string]: IUserValue;
 }
 
 export interface IUnitValue extends IUnitBase {
   unitId: string;
-  type: MemberType
+  type: MemberType;
   // real unitId
   originalUnitId?: string;
 }
@@ -59,4 +57,3 @@ export interface IUserValue extends IUnitBase {
   // whether member has modified member name
   isMemberNameModified?: boolean;
 }
-

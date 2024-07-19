@@ -1,10 +1,16 @@
-
-
 import { and, concatParagraph, newArray, newObject, or, concatString, getObjectProperty } from './base';
 import {
-  equal, getNodeOutput, greaterThan, greaterThanOrEqual,
-  includes, isNotNull, isNull, lessThan,
-  lessThanOrEqual, notEqual, notIncludes
+  equal,
+  getNodeOutput,
+  greaterThan,
+  greaterThanOrEqual,
+  includes,
+  isNotNull,
+  isNull,
+  lessThan,
+  lessThanOrEqual,
+  notEqual,
+  notIncludes,
 } from './context_base';
 
 export * from './base';
@@ -33,10 +39,7 @@ const makeFunction = (func: any, funcName: string) => {
 // we must redefine the name of function, otherwise the name will be random after building
 // this will be fine in local development, but will cause some strange bugs in production
 
-export const TRIGGER_INPUT_PARSER_FUNCTIONS = [
-  makeFunction(newObject, 'newObject'),
-  makeFunction(newArray, 'newArray'),
-];
+export const TRIGGER_INPUT_PARSER_FUNCTIONS = [makeFunction(newObject, 'newObject'), makeFunction(newArray, 'newArray')];
 
 // This is for front-end validation
 export const ACTION_INPUT_PARSER_BASE_FUNCTIONS = [
@@ -51,6 +54,4 @@ export const ACTION_INPUT_PARSER_BASE_FUNCTIONS = [
 ];
 
 // It is also used for the front end, without parsing dynamic parameters without knowing the context
-export const ACTION_INPUT_PARSER_PASS_THROUGH_FUNCTIONS = [
-  makeFunction(getNodeOutput, 'getNodeOutput')
-];
+export const ACTION_INPUT_PARSER_PASS_THROUGH_FUNCTIONS = [makeFunction(getNodeOutput, 'getNodeOutput')];

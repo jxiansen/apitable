@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { IReduxState } from 'exports/store/interfaces';
 import { ICellValue } from '../record';
@@ -32,13 +30,21 @@ export class AttachmentField extends ArrayValueField {
 
   static cellValueSchema = Joi.array().items(Joi.object(baseAttachmentFieldSchema).required()).allow(null).required();
 
-  static openWriteValueValueSchema = Joi.array().items(Joi.object({
-    ...baseAttachmentFieldSchema,
-    url: Joi.string(),
-    previewUrl: Joi.string(),
-  }).required()).allow(null).required();
+  static openWriteValueValueSchema = Joi.array()
+    .items(
+      Joi.object({
+        ...baseAttachmentFieldSchema,
+        url: Joi.string(),
+        previewUrl: Joi.string(),
+      }).required()
+    )
+    .allow(null)
+    .required();
 
-  constructor(public override field: IAttacheField, state: IReduxState) {
+  constructor(
+    public override field: IAttacheField,
+    state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -79,11 +85,11 @@ export class AttachmentField extends ArrayValueField {
           },
           width: {
             type: 'number',
-            title: t(Strings.robot_variables_join_attachment_widths)
+            title: t(Strings.robot_variables_join_attachment_widths),
           },
           height: {
             type: 'number',
-            title: t(Strings.robot_variables_join_attachment_heights)
+            title: t(Strings.robot_variables_join_attachment_heights),
           },
           preview: {
             type: 'string',
@@ -96,9 +102,9 @@ export class AttachmentField extends ArrayValueField {
           url: {
             type: 'string',
             title: t(Strings.robot_variables_join_attachment_URLs),
-          }
-        }
-      }
+          },
+        },
+      },
     };
   }
 
@@ -107,10 +113,7 @@ export class AttachmentField extends ArrayValueField {
   }
 
   override get acceptFilterOperators(): FOperator[] {
-    return [
-      FOperator.IsEmpty,
-      FOperator.IsNotEmpty,
-    ];
+    return [FOperator.IsEmpty, FOperator.IsNotEmpty];
   }
 
   get basicValueType(): BasicValueType {
@@ -151,28 +154,31 @@ export class AttachmentField extends ArrayValueField {
       return cv1 === cv2;
     }
     return isEqual(
-      [cv1].flat().map(item => item.token),
-      [cv2].flat().map(item => item.token),
+      [cv1].flat().map((item) => item.token),
+      [cv2].flat().map((item) => item.token)
     );
   }
 
   validate(value: any): value is IAttachmentValue[] {
-    return isArray(value) && (value as IAttachmentValue[]).every((attachment: IAttachmentValue) => {
-      return Boolean(
-        attachment &&
-        isString(attachment.id) &&
-        isString(attachment.bucket) &&
-        isString(attachment.token) &&
-        isString(attachment.mimeType) &&
-        isString(attachment.name) &&
-        isNumber(attachment.size),
-      );
-    });
+    return (
+      isArray(value) &&
+      (value as IAttachmentValue[]).every((attachment: IAttachmentValue) => {
+        return Boolean(
+          attachment &&
+            isString(attachment.id) &&
+            isString(attachment.bucket) &&
+            isString(attachment.token) &&
+            isString(attachment.mimeType) &&
+            isString(attachment.name) &&
+            isNumber(attachment.size)
+        );
+      })
+    );
   }
 
   cellValueToArray(cellValue: ICellValue): string[] | null {
     if (this.validate(cellValue)) {
-      return cellValue.map(cur => {
+      return cellValue.map((cur) => {
         const filePath: string = cellValueToImageSrc(cur);
         return `${cur.name} (${filePath})`;
       });
@@ -196,7 +202,7 @@ export class AttachmentField extends ArrayValueField {
     };
 
     if (val != null) {
-      stdVal.data = val.map(attach => {
+      stdVal.data = val.map((attach) => {
         return {
           text: this.cellValueToString([attach]) || '',
           ...attach,
@@ -212,7 +218,7 @@ export class AttachmentField extends ArrayValueField {
       return null;
     }
 
-    const cellValue = stdVal.data.map(val => {
+    const cellValue = stdVal.data.map((val) => {
       const { text, ...v } = val;
       console.log(text);
       return v;
@@ -231,7 +237,7 @@ export class AttachmentField extends ArrayValueField {
 
   cellValueToApiStandardValue(cellValue: ICellValue): any[] | null {
     if (this.validate(cellValue)) {
-      return cellValue.map(value => {
+      return cellValue.map((value) => {
         return {
           id: value.id,
           name: value.name,
@@ -254,7 +260,7 @@ export class AttachmentField extends ArrayValueField {
 
   cellValueToOpenValue(cellValue: IAttachmentValue[] | null): BasicOpenValueTypeBase | null {
     if (!isNullValue(cellValue)) {
-      return cellValue.map(value => {
+      return cellValue.map((value) => {
         return {
           // original value
           ...value,
@@ -271,7 +277,7 @@ export class AttachmentField extends ArrayValueField {
     if (isNullValue(openWriteValue)) {
       return null;
     }
-    return openWriteValue.map(v => ({
+    return openWriteValue.map((v) => ({
       id: v.id,
       name: v.name,
       mimeType: v.mimeType,
@@ -280,7 +286,7 @@ export class AttachmentField extends ArrayValueField {
       size: v.size,
       width: v?.width,
       height: v?.height,
-      preview: v?.preview
+      preview: v?.preview,
     }));
   }
 

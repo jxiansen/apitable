@@ -1,5 +1,3 @@
-
-
 import { isEmpty, isEqual, xor } from 'lodash';
 import * as React from 'react';
 import { forwardRef, memo, ReactNode, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
@@ -141,7 +139,7 @@ export const TreeViewBase: React.ForwardRefRenderFunction<ITreeViewRef, ITreeVie
       pos,
     };
 
-    if(child === null) {
+    if (child === null) {
       return null;
     }
 
@@ -240,16 +238,15 @@ export const TreeViewBase: React.ForwardRefRenderFunction<ITreeViewRef, ITreeVie
                   tkey={t(Strings.create_private_node_tip)}
                   params={{
                     link: (
-                      <LinkButton
-                        href={t(Strings.private_help_link)}
-                        target='_blank'
-                      >
+                      <LinkButton href={t(Strings.private_help_link)} target="_blank">
                         {t(Strings.know_more)}
                       </LinkButton>
                     ),
                   }}
                 />
-              ) : t(Strings.catalog_empty_tips)}
+              ) : (
+                t(Strings.catalog_empty_tips)
+              )}
             </Typography>
             <Button
               color="primary"

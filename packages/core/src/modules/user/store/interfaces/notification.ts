@@ -1,5 +1,3 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 export interface INotification {
   unReadCount: number;
@@ -21,15 +19,15 @@ export interface IUpdateReadMsgCountAction {
 }
 export interface IUpdateReadNoticeListAction {
   type: typeof actions.UPDATE_READ_NOTICE_LIST;
-  payload: {list: INoticeDetail[], unshift?: boolean, push?: boolean, updateCount?: boolean};
+  payload: { list: INoticeDetail[]; unshift?: boolean; push?: boolean; updateCount?: boolean };
 }
 export interface IUpdateUnReadNoticeListAction {
   type: typeof actions.UPDATE_UNREAD_NOTICE_LIST;
-  payload: {list: INoticeDetail[], unshift?: boolean, push?: boolean, updateCount?: boolean};
+  payload: { list: INoticeDetail[]; unshift?: boolean; push?: boolean; updateCount?: boolean };
 }
 export interface IDelUnReadNoticeListAction {
   type: typeof actions.DEL_UNREAD_NOTICE_LIST;
-  payload: {idList: string[], isAll?: boolean};
+  payload: { idList: string[]; isAll?: boolean };
 }
 export interface IUpdateNewNoticeListFromWsAction {
   type: typeof actions.UPDATE_NEW_NOTICE_LIST_FROM_WS;

@@ -14,10 +14,12 @@ test('use meta should return a correct result', () => {
   const views = getViews(mockWidgetSdkData.widgetSdkData, DEFAULT_DATASHEET_ID);
   const viewId = views?.[0]?.id;
 
-  mockWidgetSdkData.dispatch(StoreActions.setPageParams({
-    viewId,
-    datasheetId: DEFAULT_DATASHEET_ID
-  }));
+  mockWidgetSdkData.dispatch(
+    StoreActions.setPageParams({
+      viewId,
+      datasheetId: DEFAULT_DATASHEET_ID,
+    })
+  );
 
   const wrapper = createSimpleWrapper({ widgetState: mockWidgetSdkData.widgetSdkData });
   const { result } = renderHook(() => useMeta(), { wrapper });

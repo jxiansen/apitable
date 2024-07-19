@@ -1,5 +1,3 @@
-
-
 export enum ToolHandleType {
   ViewSort = 'viewSort',
   ViewSwitcher = 'viewSwitcher',

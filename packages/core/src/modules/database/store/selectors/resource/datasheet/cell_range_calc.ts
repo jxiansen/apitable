@@ -35,9 +35,9 @@ const createSelectorIgnoreState = createSelectorCreator(defaultMemoize, (pre, ne
 // TODO: memory special attention
 const getStdValueMatrixFromIds = (state: IReduxState, snapshot: ISnapshot, ids: { rows: IViewRow[]; columns: IViewColumn[] }): IStandardValue[][] => {
   const { rows, columns } = ids;
-  return rows.map(row => {
+  return rows.map((row) => {
     const recordId = row.recordId;
-    return columns.map(column => {
+    return columns.map((column) => {
       const fieldId = column.fieldId;
       const field = snapshot.meta.fieldMap[fieldId]!;
       const cellValue = getCellValue(state, snapshot, recordId, fieldId);
@@ -47,9 +47,9 @@ const getStdValueMatrixFromIds = (state: IReduxState, snapshot: ISnapshot, ids: 
 };
 
 const getCellMatrix = (rows: IViewRow[], columns: IViewColumn[]): ICell[][] => {
-  return rows.map(row => {
+  return rows.map((row) => {
     const recordId = row.recordId;
-    return columns.map(column => {
+    return columns.map((column) => {
       const fieldId = column.fieldId;
       return { recordId, fieldId };
     });
@@ -90,14 +90,14 @@ export const getSelection = (state: IReduxState) => {
   return selection;
 };
 
-export const getSelectRanges = createSelector([getSelection], selection => {
+export const getSelectRanges = createSelector([getSelection], (selection) => {
   if (!selection || !selection.ranges) {
     return [];
   }
   return selection.ranges;
 });
 
-export const getSelectionRecordRanges = createSelector([getSelection], selection => {
+export const getSelectionRecordRanges = createSelector([getSelection], (selection) => {
   return selection ? selection.recordRanges : undefined;
 });
 
@@ -112,8 +112,8 @@ export const getCellMatrixFromSelection = (state: IReduxState): ICell[][] | null
   // non-sequence selection
   if (selectionRecordRanges) {
     const visibleColumns = getVisibleColumns(state);
-    return selectionRecordRanges.map(recordId => {
-      return visibleColumns.map(column => {
+    return selectionRecordRanges.map((recordId) => {
+      return visibleColumns.map((column) => {
         return {
           recordId,
           fieldId: column.fieldId,
@@ -170,13 +170,13 @@ export const getStdValueTableFromRange = (state: IReduxState, range: IRange): IS
   const rows = getVisibleRows(state).slice(...rowSlice);
   const columns = getVisibleColumns(state).slice(...columnSlice);
   const stdValueMatrix = getStdValueMatrixFromIds(state, snapshot, { rows, columns });
-  const fieldDataArr = columns.map(column => snapshot.meta.fieldMap[column.fieldId]!);
+  const fieldDataArr = columns.map((column) => snapshot.meta.fieldMap[column.fieldId]!);
   return {
     datasheetId: state.pageParams.datasheetId,
     viewId: view.id,
     header: fieldDataArr,
     body: stdValueMatrix,
-    recordIds: rows.map(row => row.recordId),
+    recordIds: rows.map((row) => row.recordId),
   };
 };
 
@@ -190,7 +190,7 @@ export const getRangeRows = (state: IReduxState, start: number, end: number) => 
   if (groupInfo.length) {
     const groupSketch = new Group(groupInfo, getGroupBreakpoint(state));
     const depthBreakpoints = groupSketch.getDepthGroupBreakPoints();
-    const curBreakpoint = depthBreakpoints.find(bp => bp > start);
+    const curBreakpoint = depthBreakpoints.find((bp) => bp > start);
     return rows.slice(start, curBreakpoint ? Math.min(curBreakpoint, end) : end);
   }
   return rows.slice(start, end);
@@ -215,17 +215,17 @@ export const isColumnSpaceEnough = (state: IReduxState, length: number, activeCo
  * @param state
  */
 export const getSelectRecordIds = createSelectorIgnoreState(
-  [state => state, getSelectRanges, getSelectionRecordRanges],
+  [(state) => state, getSelectRanges, getSelectionRecordRanges],
   (state, ranges, checkedRecordIds) => {
     const range = ranges[0];
     // if selection area exists, return the selected records in the area
     if (range) {
       const rangeRecords = getRangeRecords(state, range);
-      return rangeRecords ? rangeRecords.map(row => row.recordId) : [];
+      return rangeRecords ? rangeRecords.map((row) => row.recordId) : [];
     }
     // otherwise return the checked records
     return checkedRecordIds || [];
-  },
+  }
 );
 
 export const isCellInSelection = (state: IReduxState, cell: ICell): boolean => {
@@ -238,7 +238,7 @@ export const isCellInSelection = (state: IReduxState, cell: ICell): boolean => {
     const inSelectRecords = new Set(selectedRecordIds).has(cell.recordId);
     return inSelectRecords;
   }
-  return selection.ranges.some(range => {
+  return selection.ranges.some((range) => {
     return Range.bindModel(range).contains(state, cell);
   });
 };
@@ -260,7 +260,7 @@ export const getCellByIndex = (
   cellIndex: {
     recordIndex: number;
     fieldIndex: number;
-  },
+  }
 ) => {
   const { recordIndex, fieldIndex } = cellIndex;
   const visibleRows = getVisibleRows(state);

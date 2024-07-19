@@ -11,8 +11,8 @@ const ellipsisDefaultStyle = {
 };
 
 const EllipsisText: FC<{
-  children: ReactElement<React.PropsWithChildren<ITypographyProps>>,
-    style?: StyleSheet,
+  children: ReactElement<React.PropsWithChildren<ITypographyProps>>;
+  style?: StyleSheet;
 }> = ({ style = {}, children }) => {
   const [hasOverflowingChildren, setHasOverflowingChildren] = useState(false);
   const [prevPropsChildren, setPrevPropsChildren] = useState(children);
@@ -26,25 +26,10 @@ const EllipsisText: FC<{
 
   const ellipsisStyle = { ...ellipsisDefaultStyle, ...style } as any;
 
-  const content =
-      cloneElement(children, {
-        style: ellipsisStyle
-      });
-  return hasOverflowingChildren ? (
-    <FloatUiTooltip
-      content={
-        <>{children}
-        </>
-      }
-    >
-      {
-        content
-      }
-    </FloatUiTooltip>
-  ) : (
-    content
-  );
+  const content = cloneElement(children, {
+    style: ellipsisStyle,
+  });
+  return hasOverflowingChildren ? <FloatUiTooltip content={<>{children}</>}>{content}</FloatUiTooltip> : content;
 };
 
 export default EllipsisText;
-

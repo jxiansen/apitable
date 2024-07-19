@@ -1,5 +1,3 @@
-
-
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { SpaceMenuTree } from 'pc/components/space_manage/space_menu_tree';

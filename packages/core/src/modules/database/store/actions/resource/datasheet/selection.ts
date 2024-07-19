@@ -1,5 +1,3 @@
-
-
 import { ICell, IFieldRanges, IRange, IRecordRanges } from 'model/view/range';
 import { Range } from 'model/view/range';
 import { IReduxState } from 'exports/store/interfaces';
@@ -13,7 +11,6 @@ import {
   SET_FILL_HANDLE_STATUS,
   SET_RECORD_SELECTION,
   SET_SELECTION,
-
 } from 'modules/shared/store/action_constants';
 import { IFillHandleStatus } from 'exports/store/interfaces';
 
@@ -22,32 +19,34 @@ import { IFillHandleStatus } from 'exports/store/interfaces';
  * @param ranges
  * @returns
  */
-export const setSelection = (ranges: IRange | IRange[]): any => (dispatch: any, getState: () => IReduxState) => {
-  const state = getState();
-  const datasheetId = state.pageParams.datasheetId;
-  const selectionState = getDatasheetClient(state)!.selection;
-  const payload = Array.isArray(ranges) ? ranges : [ranges];
-  const range = payload[0]!;
+export const setSelection =
+  (ranges: IRange | IRange[]): any =>
+  (dispatch: any, getState: () => IReduxState) => {
+    const state = getState();
+    const datasheetId = state.pageParams.datasheetId;
+    const selectionState = getDatasheetClient(state)!.selection;
+    const payload = Array.isArray(ranges) ? ranges : [ranges];
+    const range = payload[0]!;
 
-  if (!selectionState || !selectionState.ranges || !selectionState.activeCell) {
+    if (!selectionState || !selectionState.ranges || !selectionState.activeCell) {
+      return dispatch({
+        type: SET_SELECTION,
+        datasheetId,
+        payload: {
+          activeCell: range.start,
+          ranges: payload,
+        },
+      });
+    }
+
     return dispatch({
       type: SET_SELECTION,
       datasheetId,
       payload: {
-        activeCell: range.start,
         ranges: payload,
       },
     });
-  }
-
-  return dispatch({
-    type: SET_SELECTION,
-    datasheetId,
-    payload: {
-      ranges: payload,
-    },
-  });
-};
+  };
 
 /**
  * set the active cell
@@ -131,41 +130,43 @@ type ISetFillHandleStatus = Omit<IFillHandleStatus, 'fillRange'> & { hoverCell?:
  * @param payload
  * @returns
  */
-export const setFillHandleStatus = (payload: ISetFillHandleStatus): any => (dispatch: any, getState: () => IReduxState) => {
-  const state = getState();
-  const datasheetId = state.pageParams.datasheetId;
-  const selection = getSelection(state);
-  const fillHandleStatus = getFillHandleStatus(state);
-  if (!selection) return;
-  if (!selection.ranges) return;
-  const selectionRange = selection.ranges[0];
-  if (!payload.hoverCell) {
+export const setFillHandleStatus =
+  (payload: ISetFillHandleStatus): any =>
+  (dispatch: any, getState: () => IReduxState) => {
+    const state = getState();
+    const datasheetId = state.pageParams.datasheetId;
+    const selection = getSelection(state);
+    const fillHandleStatus = getFillHandleStatus(state);
+    if (!selection) return;
+    if (!selection.ranges) return;
+    const selectionRange = selection.ranges[0];
+    if (!payload.hoverCell) {
+      return dispatch({
+        type: SET_FILL_HANDLE_STATUS,
+        datasheetId,
+        payload: {
+          fillHandleStatus: payload,
+        },
+      });
+    }
+
+    // after click the fill handle, mouse can drag anywhere, hover on any cell
+    // calculate the fill direction according to `hoverCell`, and then fix the selection area.
+    const direction = Range.bindModel(selectionRange).getDirection(state, payload.hoverCell);
+    if (!direction) return;
+    const isFillHandleActive = Boolean(fillHandleStatus && fillHandleStatus.isActive);
+    const fillRange = Range.bindModel(selectionRange).getFillRange(state, payload.hoverCell, direction);
+    if (!fillRange) return;
+    if (!isFillHandleActive) return;
     return dispatch({
       type: SET_FILL_HANDLE_STATUS,
       datasheetId,
       payload: {
-        fillHandleStatus: payload,
+        fillHandleStatus: {
+          ...payload,
+          fillRange,
+          direction,
+        },
       },
     });
-  }
-
-  // after click the fill handle, mouse can drag anywhere, hover on any cell
-  // calculate the fill direction according to `hoverCell`, and then fix the selection area.
-  const direction = Range.bindModel(selectionRange).getDirection(state, payload.hoverCell);
-  if (!direction) return;
-  const isFillHandleActive = Boolean(fillHandleStatus && fillHandleStatus.isActive);
-  const fillRange = Range.bindModel(selectionRange).getFillRange(state, payload.hoverCell, direction);
-  if (!fillRange) return;
-  if (!isFillHandleActive) return;
-  return dispatch({
-    type: SET_FILL_HANDLE_STATUS,
-    datasheetId,
-    payload: {
-      fillHandleStatus: {
-        ...payload,
-        fillRange,
-        direction,
-      },
-    },
-  });
-};
+  };

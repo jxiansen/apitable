@@ -1,5 +1,3 @@
-
-
 import {
   ApiTipConstant,
   CacheManager,
@@ -51,7 +49,7 @@ import {
 import { OrderEnum } from 'shared/enums';
 import { SourceTypeEnum } from 'shared/enums/changeset.source.type.enum';
 import { ApiException, DatasheetException, ServerException } from 'shared/exception';
-import {IAuthHeader, ILinkedRecordMap, IOssConfig, IServerConfig} from 'shared/interfaces';
+import { IAuthHeader, ILinkedRecordMap, IOssConfig, IServerConfig } from 'shared/interfaces';
 import { IAPINode, IAPINodeDetail } from 'shared/interfaces/node.interface';
 import { IAPISpace } from 'shared/interfaces/space.interface';
 import { EnvConfigService } from 'shared/services/config/env.config.service';
@@ -86,8 +84,7 @@ export class FusionApiService {
     private readonly databusService: DataBusService,
     @InjectLogger() private readonly logger: Logger,
     @Inject(REQUEST) private readonly request: FastifyRequest,
-  ) {
-  }
+  ) {}
 
   public async getSpaceList(): Promise<IAPISpace[]> {
     const authHeader = { token: this.request.headers.authorization };
@@ -210,7 +207,7 @@ export class FusionApiService {
         needExtendMainDstRecords: Boolean(query.recordIds),
         recordIds: query.recordIds,
       },
-      createStore: async(dst) => {
+      createStore: async (dst) => {
         const userInfo = await this.userService.getUserInfoBySpaceId(auth, dst.datasheet.spaceId);
         return this.commandService.fullFillStore(dst, userInfo);
       },
@@ -222,7 +219,7 @@ export class FusionApiService {
     const getViewProfiler = this.logger.startTimer();
 
     const view = await datasheet.getView({
-      getViewInfo: async(state) => {
+      getViewInfo: async (state) => {
         const snapshot = Selectors.getSnapshot(state, datasheet.id);
         if (!snapshot) {
           return null;
@@ -298,7 +295,6 @@ export class FusionApiService {
 
     const recordVos = await this.getRecordViewObjects(records, query.cellFormat);
 
-
     getRecordsProfiler.done({
       message: `getRecords ${dstId} profiler`,
     });
@@ -310,7 +306,6 @@ export class FusionApiService {
       pageSize: records.length,
     };
   }
-
 
   /**
    * Query datasheet records have deleted
@@ -365,8 +360,8 @@ export class FusionApiService {
         loadBasePacks: {
           foreignDstIds: [],
           options: {
-            loadRecordMeta: true
-          }
+            loadRecordMeta: true,
+          },
         },
       },
       createStore: (dst) => this.createStoreForBaseDstPacks(dst),
@@ -439,9 +434,9 @@ export class FusionApiService {
     const recordIdSet: Set<string> = new Set(body.records.map((record) => record.recordId));
     const linkedRecordMap = Object.keys(linkDatasheet).length ? linkDatasheet : undefined;
     linkedRecordMap &&
-    linkedRecordMap[dstId]?.forEach((recordId) => {
-      recordIdSet.add(recordId);
-    });
+      linkedRecordMap[dstId]?.forEach((recordId) => {
+        recordIdSet.add(recordId);
+      });
     const recordIds = Array.from(recordIdSet);
     const rows: IViewRow[] = recordIds.map((recordId) => {
       return { recordId };
@@ -455,7 +450,7 @@ export class FusionApiService {
         // meta,
         recordIds,
         linkedRecordMap,
-        includeCommentCount: false
+        includeCommentCount: false,
       },
     });
     if (datasheet === null) {
@@ -595,7 +590,7 @@ export class FusionApiService {
         // meta,
         recordIds: [],
         linkedRecordMap: this.request[DATASHEET_LINKED],
-        includeCommentCount: false
+        includeCommentCount: false,
       },
     });
     if (datasheet === null) {
@@ -607,8 +602,8 @@ export class FusionApiService {
     }
 
     const updateFieldOperations = await this.getFieldUpdateOps(datasheet, auth);
-    let viewIndex = meta.views.findIndex(view => view.id === viewId);
-    if (viewIndex === -1){
+    let viewIndex = meta.views.findIndex((view) => view.id === viewId);
+    if (viewIndex === -1) {
       viewIndex = 0;
     }
     const result = await datasheet.addRecords(
@@ -649,8 +644,10 @@ export class FusionApiService {
   private async getRecordViewObjects(records: databus.Record[], cellFormat: CellFormatEnum = CellFormatEnum.JSON): Promise<ApiRecordDto[]> {
     const roomConfig = this.envConfigService.getRoomConfig(EnvConfigKey.OSS) as IOssConfig;
     const ossSignatureEnabled = roomConfig.ossSignatureEnabled;
-    const apiRecordDtos = records.map((record) => record.getViewObject<ApiRecordDto>((id, options) => this.transform.recordVoTransform(id, options, cellFormat)));
-    if (!ossSignatureEnabled){
+    const apiRecordDtos = records.map((record) =>
+      record.getViewObject<ApiRecordDto>((id, options) => this.transform.recordVoTransform(id, options, cellFormat)),
+    );
+    if (!ossSignatureEnabled) {
       return apiRecordDtos;
     }
 
@@ -658,11 +655,11 @@ export class FusionApiService {
     const attachmentTokens: string[] = [];
 
     // Fields for recording attachment types
-    if (records.length){
+    if (records.length) {
       const record = records[0]!;
       const voTransformOptions = record.getVoTransformOptions();
       const fieldMap = voTransformOptions.fieldMap;
-      Object.keys(fieldMap).forEach(fieldId => {
+      Object.keys(fieldMap).forEach((fieldId) => {
         const fieldValue = fieldMap[fieldId]!;
         if (fieldValue.type === FieldType.Attachment) {
           attachmentColmns.push(fieldId);
@@ -676,15 +673,15 @@ export class FusionApiService {
     }
 
     // Collect all attachment URL
-    apiRecordDtos.forEach(apiRecordDto => {
+    apiRecordDtos.forEach((apiRecordDto) => {
       const fields = apiRecordDto.fields;
-      Object.keys(fields).forEach(fieldId => {
+      Object.keys(fields).forEach((fieldId) => {
         if (attachmentColmns.includes(fieldId)) {
           const fieldValue = fields[fieldId];
           if (Array.isArray(fieldValue)) {
-            fieldValue.forEach(obj => {
+            fieldValue.forEach((obj) => {
               attachmentTokens.push(obj.token);
-              if(obj.preview){
+              if (obj.preview) {
                 attachmentTokens.push(obj.preview);
               }
             });
@@ -705,7 +702,7 @@ export class FusionApiService {
     for (let i = 0; i < attachmentTokens.length; i += batchSize) {
       const batchTokens = attachmentTokens.slice(i, i + batchSize);
       const batchSignatures = await this.restService.getSignatures(batchTokens);
-      batchSignatures.forEach(obj => {
+      batchSignatures.forEach((obj) => {
         const key = obj.resourceKey;
         const value = obj.url;
         signatureMap.set(key, value);
@@ -713,15 +710,15 @@ export class FusionApiService {
     }
 
     // Loop Replace URL
-    apiRecordDtos.forEach(apiRecordDto => {
+    apiRecordDtos.forEach((apiRecordDto) => {
       const fields = apiRecordDto.fields;
-      Object.keys(fields).forEach(fieldId => {
+      Object.keys(fields).forEach((fieldId) => {
         if (attachmentColmns.includes(fieldId)) {
           const fieldValue = fields[fieldId];
           if (Array.isArray(fieldValue)) {
-            fieldValue.forEach(obj => {
+            fieldValue.forEach((obj) => {
               obj.url = signatureMap.get(obj.token);
-              if(obj.preview){
+              if (obj.preview) {
                 obj.preview = signatureMap.get(obj.preview);
               }
             });
@@ -828,20 +825,20 @@ export class FusionApiService {
    * Customize rust command
    */
   public async executeCommandFromRust(datasheetId: string, commandBody: IRemoteChangeset[], auth: IAuthHeader): Promise<string> {
-      const linkedRecordMap = undefined;
-      const datasheet = await this.databusService.getDatasheet(datasheetId, {
-        loadOptions: {
-          auth,
-          linkedRecordMap,
-          includeCommentCount: false
-        },
-      });
-      if (datasheet === null) {
-        throw ApiException.tipError(ApiTipConstant.api_datasheet_not_exist);
-      }
-      await datasheet.nestRoomChangeFromRust(datasheetId, commandBody);
-      return 'executeCommandFromRoomServer';
+    const linkedRecordMap = undefined;
+    const datasheet = await this.databusService.getDatasheet(datasheetId, {
+      loadOptions: {
+        auth,
+        linkedRecordMap,
+        includeCommentCount: false,
+      },
+    });
+    if (datasheet === null) {
+      throw ApiException.tipError(ApiTipConstant.api_datasheet_not_exist);
     }
+    await datasheet.nestRoomChangeFromRust(datasheetId, commandBody);
+    return 'executeCommandFromRoomServer';
+  }
 
   private async addDatasheetField(dst: databus.Datasheet, fieldOptions: IAddFieldOptions, auth: IAuthHeader): Promise<string> {
     const result = await dst.addFields([fieldOptions], { auth });

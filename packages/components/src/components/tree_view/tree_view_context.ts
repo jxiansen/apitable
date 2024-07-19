@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { ExpandAction } from './tree_view';
 

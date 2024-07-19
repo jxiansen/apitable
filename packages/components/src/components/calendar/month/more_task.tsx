@@ -1,5 +1,3 @@
-
-
 import React, { useContext, useState } from 'react';
 import { Popover } from 'antd';
 import { FixedSizeList as List } from 'react-window';
@@ -33,9 +31,7 @@ export const MoreTask = (props: IMoreTask) => {
   const title = (
     <Typography variant="h6">
       {formatDayValue(curDay.month, curDay.day)}
-      <MoreHeader>
-        {detailWeeks[mIndex]}
-      </MoreHeader>
+      <MoreHeader>{detailWeeks[mIndex]}</MoreHeader>
     </Typography>
   );
   const tasksLength = moreTasks.length;
@@ -43,13 +39,7 @@ export const MoreTask = (props: IMoreTask) => {
   const _List = List as any;
   const moreList = (
     <MoreListDiv isMobile={isMobile}>
-      <_List
-        height={Math.min(500, tasksLength * itemHeight)}
-        width="100%"
-        itemCount={tasksLength}
-        itemSize={itemHeight}
-        className="moreList"
-      >
+      <_List height={Math.min(500, tasksLength * itemHeight)} width="100%" itemCount={tasksLength} itemSize={itemHeight} className="moreList">
         {({ index, style }: any) => {
           return (
             <ListItemStyled style={style}>
@@ -90,7 +80,7 @@ export const MoreTask = (props: IMoreTask) => {
       onVisibleChange={(visibleStatus) => {
         setVisible(visibleStatus);
       }}
-      content={(
+      content={
         <MoreDiv>
           <header>
             {title}
@@ -98,7 +88,7 @@ export const MoreTask = (props: IMoreTask) => {
           </header>
           {moreList}
         </MoreDiv>
-      )}
+      }
     >
       <LinkButton
         underline={false}
@@ -108,7 +98,7 @@ export const MoreTask = (props: IMoreTask) => {
           zIndex: 1,
           top: Math.min(MAX_LEVEL, takeLevelLen) * (listHeight + space) + defaultListHeight + 4 + 'px',
           left: mIndex * (100 / 7) + '%',
-          width: (100 / 7) + '%',
+          width: 100 / 7 + '%',
         }}
       >
         {moreText}

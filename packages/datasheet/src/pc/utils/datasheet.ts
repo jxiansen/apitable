@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import { DropDirectionType, IJOTAction, IListMoveAction, IMoveColumn, jot, OTActionName, Selectors } from '@apitable/core';
 import { store } from 'pc/store';

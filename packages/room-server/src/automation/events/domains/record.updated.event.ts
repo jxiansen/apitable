@@ -1,5 +1,3 @@
-
-
 import { CommonEvent, CommonEventContext, CommonEventMetaContext } from './common.event';
 
 export type RecordUpdatedEvent = CommonEvent;

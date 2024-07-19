@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Checkbox } from './index';
 import { StoryType } from '../../stories/constants';
@@ -61,6 +59,6 @@ CustomSizeToRed.args = {
 
 export const Callback = Template.bind({});
 Callback.args = {
-  onChange: val => alert(`status：${val ? 'checked': 'cancel checked'}`),
+  onChange: (val) => alert(`status：${val ? 'checked' : 'cancel checked'}`),
   children: 'listen checkbox',
 };

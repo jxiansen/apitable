@@ -1,5 +1,3 @@
-
-
 /* eslint-disable */
 // The id of the datasheet (parts of, excluding the working directory)
 

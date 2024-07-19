@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { useThemeColors, Typography } from '@apitable/components';
 import { IReduxState } from '@apitable/core';

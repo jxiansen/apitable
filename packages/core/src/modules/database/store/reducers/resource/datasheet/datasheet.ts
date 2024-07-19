@@ -1,5 +1,3 @@
-
-
 import { compensator } from 'compensator';
 import { IJOTAction } from 'engine/ot';
 import produce from 'immer';
@@ -33,7 +31,7 @@ import { JOTApply } from '../index';
 import { client } from './client';
 
 export const filterDatasheetOp = (state: IDatasheetState, action: IJOTAction[]) => {
-  return action.filter(action => {
+  return action.filter((action) => {
     // OPs that filter comments
     if (action.p[2] === 'comments' && action.p[0] === 'recordMap' && ('li' in action || 'ld' in action)) {
       return false;
@@ -50,23 +48,20 @@ export const filterDatasheetOp = (state: IDatasheetState, action: IJOTAction[]) 
 };
 
 type IDatasheetAction = (
-    ILoadedDataPackAction |
-    IUpdateRevision |
-    IJOTActionPayload |
-    IChangeViewAction |
-    IRecordNodeDesc |
-    IRecordNodeShared |
-    IUpdateDatasheetNameAction |
-    ISetNodeIcon |
-    IUpdateDatasheetAction |
-    IRefreshSnapshotAction |
-    IUpdateSnapShotAction
-    ) & { datasheetId: string };
+  | ILoadedDataPackAction
+  | IUpdateRevision
+  | IJOTActionPayload
+  | IChangeViewAction
+  | IRecordNodeDesc
+  | IRecordNodeShared
+  | IUpdateDatasheetNameAction
+  | ISetNodeIcon
+  | IUpdateDatasheetAction
+  | IRefreshSnapshotAction
+  | IUpdateSnapShotAction
+) & { datasheetId: string };
 
-export const datasheet = produce((
-  state: IDatasheetState | null = null,
-  action: IDatasheetAction,
-): IDatasheetState | null => {
+export const datasheet = produce((state: IDatasheetState | null = null, action: IDatasheetAction): IDatasheetState | null => {
   if (action.type === actions.DATAPACK_LOADED) {
     // only include part of the data payload
     // can not cover the state that contains all the data
@@ -142,7 +137,7 @@ export const datasheet = produce((
 
 export const datasheetMap = (
   state: IDatasheetMap = {},
-  action: IResetDatasheetAction | IAddDatasheetAction | ISetViewPropertyAction | AnyAction,
+  action: IResetDatasheetAction | IAddDatasheetAction | ISetViewPropertyAction | AnyAction
 ): IDatasheetMap => {
   if (!action.datasheetId) {
     return state;
@@ -154,9 +149,9 @@ export const datasheetMap = (
 
     const payload = (action as ISetViewPropertyAction).payload;
 
-    return produce(state, draft => {
+    return produce(state, (draft) => {
       const views = draft[action.datasheetId]!.datasheet?.snapshot.meta?.views ?? [];
-      const findIndex = views.findIndex(item => item.id === payload.viewId);
+      const findIndex = views.findIndex((item) => item.id === payload.viewId);
       if (findIndex > -1) {
         views.splice(findIndex, 1, payload.viewProperty);
       }
@@ -182,7 +177,6 @@ export const datasheetMap = (
 };
 
 const computedInfo = (state: IComputedInfo = {}, action: AnyAction) => {
-
   if (action.type === actions.SET_DATASHEET_COMPUTED) {
     return action.payload;
   }
@@ -196,7 +190,6 @@ const computedInfo = (state: IComputedInfo = {}, action: AnyAction) => {
 };
 
 const computedStatus = (state: IComputedStatus = {}, action: AnyAction) => {
-
   if (action.type === actions.SET_DATASHEET_COMPUTED_STATUS) {
     return { ...state, ...action.payload };
   }

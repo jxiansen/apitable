@@ -6,9 +6,12 @@ const openFilter = { [FilterConjunction.And]: openFilterInfoMock[FilterConjuncti
 
 describe('FilterInfo schema conversions & checksums', () => {
   it('Open filterInfo schema calibration - correct structure', () => {
-    const { error } = validateOpenFilter({
-      and: openFilterInfoMock[FilterConjunction.And]
-    }, true);
+    const { error } = validateOpenFilter(
+      {
+        and: openFilterInfoMock[FilterConjunction.And],
+      },
+      true
+    );
     expect(Boolean(error)).toEqual(false);
   });
 
@@ -19,7 +22,7 @@ describe('FilterInfo schema conversions & checksums', () => {
 
   it('Open filterInfo schema checksum - with redundant filter groups', () => {
     const { error } = validateOpenFilter({
-      and: openFilterInfoMock
+      and: openFilterInfoMock,
     });
     expect(Boolean(error)).toEqual(true);
   });

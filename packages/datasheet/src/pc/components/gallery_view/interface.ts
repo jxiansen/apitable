@@ -1,5 +1,3 @@
-
-
 import { DropDirectionType } from '@apitable/core';
 import { GalleryGroupItemType } from './constant';
 

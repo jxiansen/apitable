@@ -1,5 +1,3 @@
-
-
 import { DatasheetRepository } from './datasheet.repository';
 import { DatasheetEntity } from '../entities/datasheet.entity';
 import { DeepPartial, getConnection } from 'typeorm';
@@ -14,7 +12,7 @@ describe('DatasheetRepositoryTest', () => {
   let repository: DatasheetRepository;
   let entity: DatasheetEntity;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({ isGlobal: true }),
@@ -36,11 +34,11 @@ describe('DatasheetRepositoryTest', () => {
     entity = await repository.save(record);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
-  it('should get revisions by datasheet ids', async() => {
+  it('should get revisions by datasheet ids', async () => {
     const revisions = await repository.selectRevisionByDstIds([entity.dstId!]);
     expect(revisions.length).toEqual(1);
     expect(revisions[0]?.resourceId).toEqual(entity.dstId);

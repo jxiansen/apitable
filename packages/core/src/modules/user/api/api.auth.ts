@@ -1,13 +1,7 @@
-
-
 import axios from 'axios';
 import * as Url from '../../shared/api/url';
-import {
-  IApiWrapper, ILogoutResult,
-} from '../../../exports/store/interfaces';
-import {
-  ISignIn,
-} from '../../shared/api/api.interface';
+import { IApiWrapper, ILogoutResult } from '../../../exports/store/interfaces';
+import { ISignIn } from '../../shared/api/api.interface';
 
 /**
  * Login / Register (get identity token directly)
@@ -77,7 +71,7 @@ export function register(username: string, credential: string, lang = 'en-US') {
   return axios.post(Url.REGISTER, {
     username,
     credential,
-    lang
+    lang,
   });
 }
 

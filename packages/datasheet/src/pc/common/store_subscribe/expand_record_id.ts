@@ -1,5 +1,3 @@
-
-
 import { RecordVision, StoreActions } from '@apitable/core';
 import { expandRecordRoute } from 'pc/components/expand_record/expand_record.utils';
 import { clearExpandModal } from 'pc/components/expand_record/utils';

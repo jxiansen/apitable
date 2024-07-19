@@ -1,4 +1,3 @@
-
 export const pink = {
   50: '#FFE8EC',
   100: '#FFCED8',
@@ -12,4 +11,3 @@ export const pink = {
   900: '#8A2B3D',
   1000: '#6D1E2D',
 };
-

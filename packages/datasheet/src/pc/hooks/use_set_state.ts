@@ -1,5 +1,3 @@
-
-
 import { useCallback, useState } from 'react';
 
 export function useSetState<T extends object>(initialState: T = {} as T): [T, (patch: Partial<T> | ((prevState: T) => Partial<T>)) => void] {

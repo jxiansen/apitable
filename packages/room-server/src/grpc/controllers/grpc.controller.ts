@@ -1,5 +1,3 @@
-
-
 import { ResourceIdPrefix } from '@apitable/core';
 import { Controller, UseFilters } from '@nestjs/common';
 import { GrpcMethod, RpcException } from '@nestjs/microservices';
@@ -10,8 +8,14 @@ import { ApiResponse } from 'fusion/vos/api.response';
 import { Any } from 'grpc/generated/google/protobuf/any';
 import { Value } from 'grpc/generated/google/protobuf/struct';
 import {
-  DocumentAssetStatisticResult, DocumentAssetStatisticRo,
-  GetActiveCollaboratorsVo, protobufPackage, UserRoomChangeRo, UserRoomChangeVo, WatchRoomRo, WatchRoomVo,
+  DocumentAssetStatisticResult,
+  DocumentAssetStatisticRo,
+  GetActiveCollaboratorsVo,
+  protobufPackage,
+  UserRoomChangeRo,
+  UserRoomChangeVo,
+  WatchRoomRo,
+  WatchRoomVo,
 } from 'grpc/generated/serving/RoomServingService';
 import { GrpcSocketService } from 'grpc/services/grpc.socket.service';
 import { NodeService } from 'node/services/node.service';
@@ -96,9 +100,7 @@ export class GrpcController {
   }
 
   @GrpcMethod('RoomServingService', 'roomChange')
-  @SpanAddTag([
-    (args: any[]) => args[1].toJSON(),
-  ])
+  @SpanAddTag([(args: any[]) => args[1].toJSON()])
   async userRoomChange(message: UserRoomChangeRo): Promise<UserRoomChangeVo> {
     try {
       let data: IRoomChannelMessage = {

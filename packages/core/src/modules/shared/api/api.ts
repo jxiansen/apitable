@@ -1,5 +1,3 @@
-
-
 import { IGetCommentsByIdsResponse } from '../../database/api/datasheet_api.interface';
 import axios from 'axios';
 import { ConfigConstant } from 'config';
@@ -276,7 +274,7 @@ export const useTemplate = (templateId: string, parentId: string, data?: boolean
     templateId,
     parentId,
     data,
-    unitId
+    unitId,
   });
 };
 
@@ -390,10 +388,12 @@ export function enableRoleExtend(nodeId: string) {
  */
 export function disableRoleExtend(nodeId: string, includeExtend?: boolean) {
   const params = includeExtend ? { includeExtend } : {};
-  if (getBrowserDatabusApiEnabled()){
-    WasmApi.getInstance().delete_cache(nodeId).then((result) => {
-      console.log('delete indexDb cache', result);
-    });
+  if (getBrowserDatabusApiEnabled()) {
+    WasmApi.getInstance()
+      .delete_cache(nodeId)
+      .then((result) => {
+        console.log('delete indexDb cache', result);
+      });
   }
   return axios.post(Url.DISABLE_ROLE_EXTEND + `?nodeId=${nodeId}`, params);
 }
@@ -824,7 +824,7 @@ export function applyResourceChangesets(changesets: ILocalChangeset[], roomId: s
     },
     {
       baseURL: nestBaseURL,
-    },
+    }
   );
 }
 

@@ -1,4 +1,3 @@
-
 import { DeepPartial, getConnection } from 'typeorm';
 import { NodeDescRepository } from './node.desc.repository';
 import { NodeDescEntity } from '../entities/node.desc.entity';
@@ -13,7 +12,7 @@ describe('Test NodeDescRepository', () => {
   let repository: NodeDescRepository;
   let entity: NodeDescEntity;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({ isGlobal: true }),
@@ -35,11 +34,11 @@ describe('Test NodeDescRepository', () => {
     entity = await repository.save(record);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
-  it('should be return description', async() => {
+  it('should be return description', async () => {
     const description = await repository.selectDescriptionByNodeId('nodeId');
     expect(description?.description).toEqual(entity.description);
   });

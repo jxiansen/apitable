@@ -1,5 +1,3 @@
-
-
 import { CollaCommandName, ExecuteResult, getUniqName, IViewProperty, Selectors, Strings, t, DatasheetActions, StoreActions } from '@apitable/core';
 import { notify } from 'pc/components/common/notify';
 import { changeView, useDispatch } from 'pc/hooks';

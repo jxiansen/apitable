@@ -1,5 +1,3 @@
-
-
 export const state = {
   datasheetMap: {
     dst2CXiPKQRdfgZBsa: {
@@ -60,11 +58,11 @@ export const state = {
           viewLayoutEditable: true,
           viewStyleEditable: true,
           viewKeyFieldEditable: true,
-          viewColorOptionEditable: true
+          viewColorOptionEditable: true,
         },
         nodeFavorite: false,
         extra: {
-          showRecordHistory: true
+          showRecordHistory: true,
         },
         snapshot: {
           meta: {
@@ -74,48 +72,48 @@ export const state = {
                 name: 'Grid View',
                 rows: [
                   {
-                    recordId: 'recFD450czfVo'
+                    recordId: 'recFD450czfVo',
                   },
                   {
-                    recordId: 'recnXP0aC4Lzp'
+                    recordId: 'recnXP0aC4Lzp',
                   },
                   {
-                    recordId: 'recrBFLL0kbWc'
+                    recordId: 'recrBFLL0kbWc',
                   },
                   {
-                    recordId: 'recI5esdo8gbj'
+                    recordId: 'recI5esdo8gbj',
                   },
                   {
-                    recordId: 'recU0WTDTeAtE'
+                    recordId: 'recU0WTDTeAtE',
                   },
                   {
-                    recordId: 'rec8S99sTR4XO'
+                    recordId: 'rec8S99sTR4XO',
                   },
                   {
-                    recordId: 'recYbbp4CF5KO'
+                    recordId: 'recYbbp4CF5KO',
                   },
                   {
-                    recordId: 'recZETurPQkcq'
-                  }
+                    recordId: 'recZETurPQkcq',
+                  },
                 ],
                 type: 1,
                 columns: [
                   {
                     fieldId: 'fldBSXiPB3UQY',
-                    statType: 1
+                    statType: 1,
                   },
                   {
-                    fieldId: 'fld3uEu7eLKB9'
+                    fieldId: 'fld3uEu7eLKB9',
                   },
                   {
-                    fieldId: 'fldoDkVedlBgt'
+                    fieldId: 'fldoDkVedlBgt',
                   },
                   {
-                    fieldId: 'fldDNg0HTVFGD'
-                  }
+                    fieldId: 'fldDNg0HTVFGD',
+                  },
                 ],
-                frozenColumnCount: 1
-              }
+                frozenColumnCount: 1,
+              },
             ],
             fieldMap: {
               fld3uEu7eLKB9: {
@@ -127,28 +125,28 @@ export const state = {
                     {
                       id: 'opt6Bjso8bkyV',
                       name: 'A',
-                      color: 0
+                      color: 0,
                     },
                     {
                       id: 'optY1cLqdBDOr',
                       name: 'B',
-                      color: 1
+                      color: 1,
                     },
                     {
                       id: 'optkpdgG5lLj9',
                       name: 'C',
-                      color: 2
-                    }
-                  ]
-                }
+                      color: 2,
+                    },
+                  ],
+                },
               },
               fldBSXiPB3UQY: {
                 id: 'fldBSXiPB3UQY',
                 name: 'title',
                 type: 19,
                 property: {
-                  defaultValue: ''
-                }
+                  defaultValue: '',
+                },
               },
               fldDNg0HTVFGD: {
                 id: 'fldDNg0HTVFGD',
@@ -156,256 +154,219 @@ export const state = {
                 type: 16,
                 property: {
                   expression: '{fldBSXiPB3UQY}+{fld3uEu7eLKB9}',
-                  datasheetId: 'dst2CXiPKQRdfgZBsa'
-                }
+                  datasheetId: 'dst2CXiPKQRdfgZBsa',
+                },
               },
               fldoDkVedlBgt: {
                 id: 'fldoDkVedlBgt',
                 name: 'file',
-                type: 6
-              }
-            }
+                type: 6,
+              },
+            },
           },
           recordMap: {
             rec8S99sTR4XO: {
               id: 'rec8S99sTR4XO',
               data: {
-                fld3uEu7eLKB9: [
-                  'optkpdgG5lLj9'
-                ],
+                fld3uEu7eLKB9: ['optkpdgG5lLj9'],
                 fldBSXiPB3UQY: [
                   {
                     text: '3',
-                    type: 1
-                  }
-                ]
+                    type: 1,
+                  },
+                ],
               },
               createdAt: 1629110805000,
               updatedAt: 1629110812000,
-              revisionHistory: [
-                22,
-                24
-              ],
+              revisionHistory: [22, 24],
               recordMeta: {
                 createdAt: 1629110805275,
                 createdBy: 'eeb620a54e2248c69c25de68e6eb668c',
                 fieldUpdatedMap: {
                   fld3uEu7eLKB9: {
                     at: 1629110812874,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
                   },
                   fldBSXiPB3UQY: {
                     at: 1629110812874,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
-                  }
-                }
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
+                  },
+                },
               },
-              commentCount: 0
+              commentCount: 0,
             },
             recFD450czfVo: {
               id: 'recFD450czfVo',
               data: {
-                fld3uEu7eLKB9: [
-                  'opt6Bjso8bkyV'
-                ],
+                fld3uEu7eLKB9: ['opt6Bjso8bkyV'],
                 fldBSXiPB3UQY: [
                   {
                     text: '1',
-                    type: 1
-                  }
-                ]
+                    type: 1,
+                  },
+                ],
               },
               createdAt: 1629109953000,
               updatedAt: 1629110046000,
-              revisionHistory: [
-                0,
-                8,
-                13
-              ],
+              revisionHistory: [0, 8, 13],
               recordMeta: {
                 createdAt: 1629109953927,
                 createdBy: 'eeb620a54e2248c69c25de68e6eb668c',
                 fieldUpdatedMap: {
                   fld3uEu7eLKB9: {
                     at: 1629110035976,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
                   },
                   fldBSXiPB3UQY: {
                     at: 1629110046037,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
-                  }
-                }
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
+                  },
+                },
               },
-              commentCount: 0
+              commentCount: 0,
             },
             recI5esdo8gbj: {
               id: 'recI5esdo8gbj',
               data: {
-                fld3uEu7eLKB9: [
-                  'optkpdgG5lLj9'
-                ],
+                fld3uEu7eLKB9: ['optkpdgG5lLj9'],
                 fldBSXiPB3UQY: [
                   {
                     text: '3',
-                    type: 1
-                  }
-                ]
+                    type: 1,
+                  },
+                ],
               },
               createdAt: 1629110050000,
               updatedAt: 1629110781000,
-              revisionHistory: [
-                15,
-                20
-              ],
+              revisionHistory: [15, 20],
               recordMeta: {
                 createdAt: 1629110050658,
                 createdBy: 'eeb620a54e2248c69c25de68e6eb668c',
                 fieldUpdatedMap: {
                   fld3uEu7eLKB9: {
                     at: 1629110781860,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
                   },
                   fldBSXiPB3UQY: {
                     at: 1629110781860,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
-                  }
-                }
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
+                  },
+                },
               },
-              commentCount: 0
+              commentCount: 0,
             },
             recnXP0aC4Lzp: {
               id: 'recnXP0aC4Lzp',
               data: {
-                fld3uEu7eLKB9: [
-                  'optY1cLqdBDOr'
-                ],
+                fld3uEu7eLKB9: ['optY1cLqdBDOr'],
                 fldBSXiPB3UQY: [
                   {
                     text: '2',
-                    type: 1
-                  }
-                ]
+                    type: 1,
+                  },
+                ],
               },
               createdAt: 1629109953000,
               updatedAt: 1629110047000,
-              revisionHistory: [
-                0,
-                10,
-                14
-              ],
+              revisionHistory: [0, 10, 14],
               recordMeta: {
                 createdAt: 1629109953927,
                 createdBy: 'eeb620a54e2248c69c25de68e6eb668c',
                 fieldUpdatedMap: {
                   fld3uEu7eLKB9: {
                     at: 1629110040182,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
                   },
                   fldBSXiPB3UQY: {
                     at: 1629110047036,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
-                  }
-                }
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
+                  },
+                },
               },
-              commentCount: 0
+              commentCount: 0,
             },
             recrBFLL0kbWc: {
               id: 'recrBFLL0kbWc',
               data: {
-                fld3uEu7eLKB9: [
-                  'optkpdgG5lLj9'
-                ],
+                fld3uEu7eLKB9: ['optkpdgG5lLj9'],
                 fldBSXiPB3UQY: [
                   {
                     text: '3',
-                    type: 1
-                  }
-                ]
+                    type: 1,
+                  },
+                ],
               },
               createdAt: 1629109953000,
               updatedAt: 1629110773000,
-              revisionHistory: [
-                0,
-                12,
-                19
-              ],
+              revisionHistory: [0, 12, 19],
               recordMeta: {
                 createdAt: 1629109953927,
                 createdBy: 'eeb620a54e2248c69c25de68e6eb668c',
                 fieldUpdatedMap: {
                   fld3uEu7eLKB9: {
                     at: 1629110043308,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
                   },
                   fldBSXiPB3UQY: {
                     at: 1629110773010,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
-                  }
-                }
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
+                  },
+                },
               },
-              commentCount: 0
+              commentCount: 0,
             },
             recU0WTDTeAtE: {
               id: 'recU0WTDTeAtE',
               data: {
-                fld3uEu7eLKB9: [
-                  'optkpdgG5lLj9'
-                ],
+                fld3uEu7eLKB9: ['optkpdgG5lLj9'],
                 fldBSXiPB3UQY: [
                   {
                     text: '3',
-                    type: 1
-                  }
-                ]
+                    type: 1,
+                  },
+                ],
               },
               createdAt: 1629110804000,
               updatedAt: 1629110812000,
-              revisionHistory: [
-                21,
-                24
-              ],
+              revisionHistory: [21, 24],
               recordMeta: {
                 createdAt: 1629110804320,
                 createdBy: 'eeb620a54e2248c69c25de68e6eb668c',
                 fieldUpdatedMap: {
                   fld3uEu7eLKB9: {
                     at: 1629110812874,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
                   },
                   fldBSXiPB3UQY: {
                     at: 1629110812874,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
-                  }
-                }
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
+                  },
+                },
               },
-              commentCount: 0
+              commentCount: 0,
             },
             recZETurPQkcq: {
               id: 'recZETurPQkcq',
               data: {},
               createdAt: 1629110806000,
               updatedAt: 1629110806000,
-              revisionHistory: [
-                23
-              ],
+              revisionHistory: [23],
               recordMeta: {
                 createdAt: 1629110806552,
-                createdBy: 'eeb620a54e2248c69c25de68e6eb668c'
+                createdBy: 'eeb620a54e2248c69c25de68e6eb668c',
               },
-              commentCount: 0
+              commentCount: 0,
             },
             recYbbp4CF5KO: {
               id: 'recYbbp4CF5KO',
               data: {
-                fld3uEu7eLKB9: [
-                  'optkpdgG5lLj9'
-                ],
+                fld3uEu7eLKB9: ['optkpdgG5lLj9'],
                 fldBSXiPB3UQY: [
                   {
                     text: '3',
-                    type: 1
-                  }
-                ]
+                    type: 1,
+                  },
+                ],
               },
               commentCount: 0,
               comments: [],
@@ -415,26 +376,26 @@ export const state = {
                 fieldUpdatedMap: {
                   fld3uEu7eLKB9: {
                     at: 1629256103437,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
                   },
                   fldBSXiPB3UQY: {
                     at: 1629256103437,
-                    by: 'eeb620a54e2248c69c25de68e6eb668c'
-                  }
-                }
-              }
-            }
+                    by: 'eeb620a54e2248c69c25de68e6eb668c',
+                  },
+                },
+              },
+            },
           },
-          datasheetId: 'dst2CXiPKQRdfgZBsa'
+          datasheetId: 'dst2CXiPKQRdfgZBsa',
         },
         isPartOfData: false,
-        activeView: 'viwjtHpVDnJaq'
+        activeView: 'viwjtHpVDnJaq',
       },
       client: {
         gridViewDragState: {
           dragTarget: {},
           hoverRecordId: null,
-          hoverRowOfAddRecord: null
+          hoverRowOfAddRecord: null,
         },
         gridViewActiveFieldState: {
           fieldId: '',
@@ -443,25 +404,25 @@ export const state = {
           clickLogOffsetX: 0,
           fieldIndex: -1,
           tempSelection: [],
-          operate: null
+          operate: null,
         },
         selection: {
           ranges: [
             {
               start: {
                 recordId: 'recYbbp4CF5KO',
-                fieldId: 'fldBSXiPB3UQY'
+                fieldId: 'fldBSXiPB3UQY',
               },
               end: {
                 recordId: 'recYbbp4CF5KO',
-                fieldId: 'fldBSXiPB3UQY'
-              }
-            }
+                fieldId: 'fldBSXiPB3UQY',
+              },
+            },
           ],
           activeCell: {
             recordId: 'recYbbp4CF5KO',
-            fieldId: 'fldBSXiPB3UQY'
-          }
+            fieldId: 'fldBSXiPB3UQY',
+          },
         },
         collaborators: [
           {
@@ -470,8 +431,8 @@ export const state = {
             memberName: 'Clark Mophie Yuro',
             avatar: 'https://s1.vika.cn/image/2020/02/05/RTWB7/3m6e9bmDIlbYNrwA==.jpeg',
             userId: 'eeb620a54e2248c69c25de68e6eb668c',
-            createTime: 1463493227
-          }
+            createTime: 1463493227,
+          },
         ],
         newRecordExpectIndex: null,
         activeRowInfo: {
@@ -480,7 +441,7 @@ export const state = {
             fieldId: 'fldBSXiPB3UQY',
             recordId: 'recYbbp4CF5KO',
             visibleRowIndex: 6,
-            isInit: false
+            isInit: false,
           },
           recordSnapshot: {
             meta: {
@@ -494,28 +455,28 @@ export const state = {
                       {
                         id: 'opt6Bjso8bkyV',
                         name: 'A',
-                        color: 0
+                        color: 0,
                       },
                       {
                         id: 'optY1cLqdBDOr',
                         name: 'B',
-                        color: 1
+                        color: 1,
                       },
                       {
                         id: 'optkpdgG5lLj9',
                         name: 'C',
-                        color: 2
-                      }
-                    ]
-                  }
+                        color: 2,
+                      },
+                    ],
+                  },
                 },
                 fldBSXiPB3UQY: {
                   id: 'fldBSXiPB3UQY',
                   name: 'title',
                   type: 19,
                   property: {
-                    defaultValue: ''
-                  }
+                    defaultValue: '',
+                  },
                 },
                 fldDNg0HTVFGD: {
                   id: 'fldDNg0HTVFGD',
@@ -523,37 +484,35 @@ export const state = {
                   type: 16,
                   property: {
                     expression: '{fldBSXiPB3UQY}+{fld3uEu7eLKB9}',
-                    datasheetId: 'dst2CXiPKQRdfgZBsa'
-                  }
+                    datasheetId: 'dst2CXiPKQRdfgZBsa',
+                  },
                 },
                 fldoDkVedlBgt: {
                   id: 'fldoDkVedlBgt',
                   name: 'file',
-                  type: 6
-                }
-              }
+                  type: 6,
+                },
+              },
             },
             recordMap: {
               recYbbp4CF5KO: {
                 id: 'recYbbp4CF5KO',
                 data: {
-                  fld3uEu7eLKB9: [
-                    'optkpdgG5lLj9'
-                  ],
+                  fld3uEu7eLKB9: ['optkpdgG5lLj9'],
                   fldBSXiPB3UQY: [
                     {
                       text: '3',
-                      type: 1
-                    }
+                      type: 1,
+                    },
                   ],
-                  fldDNg0HTVFGD: '3C'
+                  fldDNg0HTVFGD: '3C',
                 },
                 commentCount: 0,
-                comments: []
-              }
+                comments: [],
+              },
             },
-            datasheetId: 'dst2CXiPKQRdfgZBsa'
-          }
+            datasheetId: 'dst2CXiPKQRdfgZBsa',
+          },
         },
         searchResultCursorIndex: 0,
         searchKeyword: '',
@@ -565,22 +524,22 @@ export const state = {
           opening: false,
           width: 320,
           activePanelId: null,
-          loading: false
+          loading: false,
         },
         ganttViewStatus: {
           gridWidth: 256,
           gridVisible: true,
           settingPanelWidth: 328,
           settingPanelVisible: true,
-          dateUnitType: 'Month'
+          dateUnitType: 'Month',
         },
         gridViewHoverFieldId: null,
         highlightFiledId: null,
-        closeSyncViewIds: []
+        closeSyncViewIds: [],
       },
       fieldPermissionMap: {},
       computedInfo: {},
-      computedStatus: {}
-    }
-  }
+      computedStatus: {},
+    },
+  },
 };

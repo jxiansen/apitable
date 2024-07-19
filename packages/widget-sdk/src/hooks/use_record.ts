@@ -1,5 +1,3 @@
-
-
 import { useContext, useMemo } from 'react';
 import { IWidgetContext } from 'interface';
 import { WidgetContext } from '../context';

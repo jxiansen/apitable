@@ -1,5 +1,3 @@
-
-
 import classnames from 'classnames';
 import * as React from 'react';
 import { Tooltip, useThemeColors } from '@apitable/components';
@@ -30,7 +28,7 @@ interface IPreviewItemProps {
 }
 
 const useGetRole = (currentDatasheetId: string | undefined) => {
-  const { mirrorId, datasheetId } = useAppSelector(state => state.pageParams);
+  const { mirrorId, datasheetId } = useAppSelector((state) => state.pageParams);
   const datasheetRole = useAppSelector((state) => Selectors.getDatasheet(state, currentDatasheetId))?.role;
   const mirrorRole = useAppSelector((state) => Selectors.getMirror(state, mirrorId))?.role;
 
@@ -102,12 +100,12 @@ export const PreviewItem: React.FC<React.PropsWithChildren<IPreviewItemProps>> =
         <div className={styles.toolBar}>
           {allowDownload && (
             <div className={styles.iconDownload} onClick={() => download(file!)}>
-              <DownloadOutlined color={colors.black[50]}/>
+              <DownloadOutlined color={colors.black[50]} />
             </div>
           )}
           {!readonly && (
             <div className={styles.iconDelete} onClick={() => onChange(deleteFile(id))}>
-              <DeleteOutlined color={colors.black[50]}/>
+              <DeleteOutlined color={colors.black[50]} />
             </div>
           )}
         </div>

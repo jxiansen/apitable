@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { useCallback, useContext, useMemo } from 'react';
 import { indigo } from '@apitable/components';

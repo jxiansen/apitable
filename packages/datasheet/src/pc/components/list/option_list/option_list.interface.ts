@@ -1,5 +1,3 @@
-
-
 import { ISelectFieldOption, IFieldProperty, ICollaCommandExecuteResult } from '@apitable/core';
 import { IListBase } from '../list.interface';
 

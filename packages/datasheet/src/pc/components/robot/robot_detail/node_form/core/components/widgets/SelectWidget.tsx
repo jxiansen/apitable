@@ -1,5 +1,3 @@
-
-
 import { JSONSchema7 } from 'json-schema';
 
 import { asNumber, guessType } from '../../utils';

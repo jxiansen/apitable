@@ -1,5 +1,3 @@
-
-
 import { forwardRef, useImperativeHandle, useRef, memo } from 'react';
 import * as React from 'react';
 import { IAttacheField, IAttachmentValue } from '@apitable/core';

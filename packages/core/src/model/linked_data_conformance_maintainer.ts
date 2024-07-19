@@ -1,5 +1,3 @@
-
-
 import { DatasheetActions } from '../commands_actions/datasheet';
 import { without } from 'lodash';
 import { BasicValueType, FieldType, ILinkField } from 'types/field_types';
@@ -24,7 +22,7 @@ enum ActionFlag {
  * And also, add or delete recordId
  *
  */
-type ILinkedChange = Map<string, Map<string, Map<string, { add: Set<string>, del: Set<string> }>>>;
+type ILinkedChange = Map<string, Map<string, Map<string, { add: Set<string>; del: Set<string> }>>>;
 
 /**
  * a common class that use to maintain relation fields' data consistency
@@ -37,14 +35,7 @@ export class LinkedDataConformanceMaintainer {
    * compare value and oldValue, auto calculate the changelog of relation records, and mark them down.
    * during one command cycle, can call insert many times.
    */
-  insert(
-    state: IReduxState,
-    linkedSnapshot: ISnapshot,
-    recordId: string,
-    field: ILinkField,
-    value: string[] | null,
-    oldValue: string[] | null,
-  ) {
+  insert(state: IReduxState, linkedSnapshot: ISnapshot, recordId: string, field: ILinkField, value: string[] | null, oldValue: string[] | null) {
     const { brotherFieldId = field.id, foreignDatasheetId } = field.property!;
 
     if (!value && !oldValue) {
@@ -56,25 +47,13 @@ export class LinkedDataConformanceMaintainer {
     // oldValue exists,  but value don't exist, need to delete
     const toDel = without(oldValue, ...(value || []));
 
-    toAdd.forEach(linkedRecordId => {
-      this.insertLinkedRecordChange(
-        foreignDatasheetId,
-        brotherFieldId!,
-        linkedRecordId,
-        recordId,
-        ActionFlag.Add,
-      );
+    toAdd.forEach((linkedRecordId) => {
+      this.insertLinkedRecordChange(foreignDatasheetId, brotherFieldId!, linkedRecordId, recordId, ActionFlag.Add);
     });
-    toDel.forEach(linkedRecordId => {
-      const cellValueInLinkedCell = getCellValue(
-        state,
-        linkedSnapshot,
-        linkedRecordId,
-        brotherFieldId!,
-        undefined,
-        undefined,
-        true
-      ) as string[] | null;
+    toDel.forEach((linkedRecordId) => {
+      const cellValueInLinkedCell = getCellValue(state, linkedSnapshot, linkedRecordId, brotherFieldId!, undefined, undefined, true) as
+        | string[]
+        | null;
 
       if (!cellValueInLinkedCell) {
         console.error(`The content of the related-record is empty, this record: ${recordId}`);
@@ -86,23 +65,11 @@ export class LinkedDataConformanceMaintainer {
         return;
       }
 
-      this.insertLinkedRecordChange(
-        foreignDatasheetId,
-        brotherFieldId!,
-        linkedRecordId,
-        recordId,
-        ActionFlag.Del,
-      );
+      this.insertLinkedRecordChange(foreignDatasheetId, brotherFieldId!, linkedRecordId, recordId, ActionFlag.Del);
     });
   }
 
-  private insertLinkedRecordChange(
-    datasheetId: string,
-    brotherFieldId: string,
-    linkedRecordId: string,
-    recordId: string,
-    actionFlag: ActionFlag,
-  ) {
+  private insertLinkedRecordChange(datasheetId: string, brotherFieldId: string, linkedRecordId: string, recordId: string, actionFlag: ActionFlag) {
     let datasheet = this.linkedChange.get(datasheetId);
     if (!datasheet) {
       datasheet = new Map();
@@ -157,15 +124,14 @@ export class LinkedDataConformanceMaintainer {
 
             const fieldType = snapshot.meta.fieldMap[fieldId] && snapshot.meta.fieldMap[fieldId]!.type;
             // Make sure that the cell is populated only when the foreign key field is indeed the relation field type.
-            const cellValueInLinkedCell = (fieldType === FieldType.Link || fieldType === FieldType.OneWayLink) ?
-              getCellValue(state, snapshot, recordId, fieldId, undefined, undefined, true) as string[] || [] : [];
+            const cellValueInLinkedCell =
+              fieldType === FieldType.Link || fieldType === FieldType.OneWayLink
+                ? (getCellValue(state, snapshot, recordId, fieldId, undefined, undefined, true) as string[]) || []
+                : [];
             let newLinkedCellValue: string[] | null = without(cellValueInLinkedCell, ...changeIds.del, ...changeIds.add);
             newLinkedCellValue.push(...changeIds.add);
             newLinkedCellValue = handleEmptyCellValue(newLinkedCellValue, BasicValueType.Array);
-            const action = DatasheetActions.setRecord2Action(
-              snapshot,
-              { recordId, fieldId, value: newLinkedCellValue },
-            );
+            const action = DatasheetActions.setRecord2Action(snapshot, { recordId, fieldId, value: newLinkedCellValue });
 
             action && linkedAction.actions.push(action);
           });

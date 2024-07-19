@@ -1,5 +1,3 @@
-
-
 import { useAtom, useSetAtom } from 'jotai';
 import { useCallback, useContext } from 'react';
 import { useResponsive } from '../../../hooks';
@@ -16,7 +14,8 @@ import {
   automationLocalMap,
   automationTriggerDatasheetAtom,
   formListDstIdAtom,
-  getResourceAutomationDetailIntegrated, automationCacheAtom
+  getResourceAutomationDetailIntegrated,
+  automationCacheAtom,
 } from './index';
 export const useAutomationNavigateController = () => {
   const [, setShowAtom] = useAtom(automationDrawerVisibleAtom);
@@ -35,9 +34,9 @@ export const useAutomationNavigateController = () => {
 
   const navigateDatasheetAutomation = async (resourceId: string, robotId: string) => {
     const itemDetail = await getResourceAutomationDetailIntegrated(resourceId, robotId, {
-      shareId: shareInfo?.shareId
+      shareId: shareInfo?.shareId,
     });
-    const newState : IRobotContext= {
+    const newState: IRobotContext = {
       scenario: AutomationScenario.datasheet,
       robot: itemDetail,
       currentRobotId: robotId,
@@ -46,17 +45,17 @@ export const useAutomationNavigateController = () => {
     setFormListAtom(resourceId);
     setDataSheet({
       formId: undefined,
-      id: resourceId
+      id: resourceId,
     });
 
     await setAutomationAtom(newState);
     await setShowAtom(true);
     updateLocalState(new Map());
-    await setPanel((p) => ({ ...p, panelName: isMobile? undefined: PanelName.BasicInfo }));
+    await setPanel((p) => ({ ...p, panelName: isMobile ? undefined : PanelName.BasicInfo }));
   };
-  const createNewRobot = async (resourceId ?: string) => {
+  const createNewRobot = async (resourceId?: string) => {
     const rId = resourceId ?? automationState?.resourceId;
-    if(!rId) {
+    if (!rId) {
       return;
     }
     reset();
@@ -71,7 +70,6 @@ export const useAutomationNavigateController = () => {
   const setAutomationLocalState = useSetAtom(automationLocalMap);
 
   const initialize = useCallback(() => {
-
     setAutomationLocalState(new Map());
   }, [setAutomationLocalState]);
 

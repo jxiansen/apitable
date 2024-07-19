@@ -7,12 +7,10 @@ export const FilterInputWrap = styled.div<{ pointer?: boolean }>`
   border-radius: 4px;
   height: 40px;
   background: var(--lowestBg);
-  
-  ${(props) => 
-    css`
-        cursor: ${props.pointer ? 'pointer' : 'default'};
-      `
-}
+
+  ${(props) => css`
+    cursor: ${props.pointer ? 'pointer' : 'default'};
+  `}
   .widgetFilterTextInput {
     background: var(--lowestBg);
   }
@@ -22,7 +20,7 @@ export const SelectPopupContainer = styled.div`
   background: var(--highestBg);
   border-radius: 4px;
   box-shadow: var(--shadowCommonHighest);
-  max-height: 300px; 
+  max-height: 300px;
   overflow-y: auto;
   cursor: pointer;
   &:focus {
@@ -40,6 +38,6 @@ export const OptionItemWrap = styled.div`
   @media (any-hover: hover) {
     &:hover {
       background: var(--rowSelectedBg);
-    } 
+    }
   }
 `;

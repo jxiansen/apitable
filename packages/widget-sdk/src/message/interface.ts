@@ -6,7 +6,7 @@ import { IWidgetConfigIframe, IWidgetState } from 'interface';
 // }
 
 export type IInitData = IWidgetState & {
-  widgetConfig: IWidgetConfigIframe
+  widgetConfig: IWidgetConfigIframe;
 };
 
 export interface ISubscribeView {

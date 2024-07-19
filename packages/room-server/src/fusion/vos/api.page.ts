@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { IPaginateInfo } from 'shared/interfaces';
 

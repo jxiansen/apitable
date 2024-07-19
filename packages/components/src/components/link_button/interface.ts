@@ -1,5 +1,3 @@
-
-
 import React, { ElementType } from 'react';
 
 export interface ILinkButtonProps extends React.LinkHTMLAttributes<any> {
@@ -11,11 +9,11 @@ export interface ILinkButtonProps extends React.LinkHTMLAttributes<any> {
   /**
    * Whether disabled or not
    */
-   disabled?: boolean;
+  disabled?: boolean;
   /**
    * Use the specified HTML element to render the component
    */
-   component?: ElementType;
+  component?: ElementType;
   /**
    * Prefix icon component
    */
@@ -23,7 +21,7 @@ export interface ILinkButtonProps extends React.LinkHTMLAttributes<any> {
   /**
    * Suffix icon component
    */
-   suffixIcon?: React.ReactNode;
+  suffixIcon?: React.ReactNode;
   /**
    * link href
    */

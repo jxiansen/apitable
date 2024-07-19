@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import SocketIO from 'socket.io-client';
 import { INodeChangeSocketData, INoticeDetail, Navigation, StoreActions, Strings, t, Url } from '@apitable/core';
@@ -69,7 +67,7 @@ export class NotificationStore {
     ws.on('NOTIFY', (data: INoticeDetail) => {
       console.log('Receive real-time messages: ', data);
       const templateId = data.templateId;
-      if(['subscribed_record_archived', 'subscribed_record_unarchived'].includes(templateId)) return;
+      if (['subscribed_record_archived', 'subscribed_record_unarchived'].includes(templateId)) return;
       // Browser notifications
       if (!PublishNotifyList.includes(templateId)) {
         requestWebNotification({

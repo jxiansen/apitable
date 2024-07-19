@@ -1,5 +1,3 @@
-
-
 import { useSize, useLocalStorageState } from 'ahooks';
 import { IFuncUpdater } from 'ahooks/lib/createUseStorageState';
 import { Fragment, FC, useEffect, useMemo, useRef, useState } from 'react';
@@ -24,7 +22,8 @@ import {
   IDPrefix,
   OrgChartStyleKeyType,
   getUniqName,
-  ISetRecordOptions, IOneWayLinkField,
+  ISetRecordOptions,
+  IOneWayLinkField,
 } from '@apitable/core';
 import { ReactFlowProvider } from '@apitable/react-flow';
 import { TriggerCommands } from 'modules/shared/apphook/trigger_commands';
@@ -179,7 +178,8 @@ export const OrgChartView: FC<React.PropsWithChildren<IOrgChartViewProps>> = ({ 
   });
 
   const hasLinkField = activeView.columns.some(
-    (c) => [FieldType.Link, FieldType.OneWayLink].includes(fieldMap[c.fieldId].type) && fieldMap[c.fieldId].property.foreignDatasheetId === datasheetId,
+    (c) =>
+      [FieldType.Link, FieldType.OneWayLink].includes(fieldMap[c.fieldId].type) && fieldMap[c.fieldId].property.foreignDatasheetId === datasheetId,
   );
 
   const setMenuVisible = (visible: boolean) => {

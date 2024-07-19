@@ -1,5 +1,3 @@
-
-
 export enum RobotNotificationTypeEnum {
   TEXT = 'text',
   LINK = 'link',

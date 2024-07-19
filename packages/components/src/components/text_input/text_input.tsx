@@ -1,5 +1,3 @@
-
-
 import { ITextInputProps } from './text_input.interface';
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme, ITheme } from 'theme';
@@ -14,7 +12,7 @@ const sizeHeightMap = {
 };
 
 type IInputWrapperProps = Pick<ITextInputProps, 'size' | 'block' | 'error' | 'lineStyle' | 'disabled'>;
-const InputWrapper = styled.div.attrs(applyDefaultTheme) <IInputWrapperProps>`
+const InputWrapper = styled.div.attrs(applyDefaultTheme)<IInputWrapperProps>`
   ${(props) => {
     const theme = props.theme as ITheme;
     const { color } = theme;
@@ -31,66 +29,75 @@ const InputWrapper = styled.div.attrs(applyDefaultTheme) <IInputWrapperProps>`
     `;
     if (lineStyle) {
       return [
-        ...commonCSS, ...css`
-        border-bottom: 1px solid ${color.fc2};
-        &:focus-within {
-          border-bottom: 1px solid ${color.primaryColor};
-      } 
-      `];
+        ...commonCSS,
+        ...css`
+          border-bottom: 1px solid ${color.fc2};
+          &:focus-within {
+            border-bottom: 1px solid ${color.primaryColor};
+          }
+        `,
+      ];
     }
     const focusBorderColor = error ? color.errorColor : color.primaryColor;
     return [
-      ...commonCSS, ...css`
-      border: 1px solid ${borderColor};
-      ${PrefixWrapper} svg,
+      ...commonCSS,
+      ...css`
+        border: 1px solid ${borderColor};
+        ${PrefixWrapper} svg,
       ${SuffixWrapper} svg {
-        width: 16px;
-        height: 16px;
-        fill: ${props.theme.color.fc4};
-      }
-      ${!disabled && !error && css`
-        &:hover {
-          border-color: ${color.primaryColor};
-          background-color: ${color.bgControlsElevateDefault};   
+          width: 16px;
+          height: 16px;
+          fill: ${props.theme.color.fc4};
         }
-      `}
-      ${!disabled && css`
-        &:hover {
+        ${!disabled &&
+        !error &&
+        css`
+          &:hover {
+            border-color: ${color.primaryColor};
+            background-color: ${color.bgControlsElevateDefault};
+          }
+        `}
+        ${!disabled &&
+        css`
+          &:hover {
+            background-color: ${color.bgControlsElevateDefault};
+          }
+        `}
+      :focus-within {
+          border-color: ${focusBorderColor};
           background-color: ${color.bgControlsElevateDefault};
         }
-      `}
-      :focus-within {
-        border-color: ${focusBorderColor};
-        background-color: ${color.bgControlsElevateDefault};
-      }
-      // Error status
-      ${error && css`
-        &.error {
-          border-color: ${color.errorColor};
+        // Error status
+        ${error &&
+        css`
+          &.error {
+            border-color: ${color.errorColor};
+
+            ${PrefixWrapper} svg {
+              fill: ${color.errorColor};
+            }
+          }
+        `}
+        &.focused {
+          border-color: ${focusBorderColor};
+          background-color: ${color.bgCommonHigh};
 
           ${PrefixWrapper} svg {
-            fill: ${color.errorColor};
+            fill: ${color.primaryColor};
           }
         }
-      `}
-      &.focused {
-        border-color: ${focusBorderColor};
-        background-color: ${color.bgCommonHigh};
-
-        ${PrefixWrapper} svg {
-          fill: ${color.primaryColor};
-        }
-      }
-      ${disabled && css`
-        ${InputInner} {
+        ${disabled &&
+        css`
+          ${InputInner} {
+            cursor: not-allowed;
+            color: ${color.fc3};
+            opacity: 1;
+            -webkit-text-fill-color: ${color.fc3};
+          }
           cursor: not-allowed;
-          color: ${color.fc3};
-          opacity: 1;
-          -webkit-text-fill-color: ${color.fc3};
-        }
-        cursor: not-allowed;
-      `}
-    `];
+        `}
+      `,
+    ];
   }}
   font-size: 14px;
   display: flex;
@@ -119,7 +126,7 @@ const InputInner = styled.input.attrs(applyDefaultTheme)`
     color: ${(props) => props.theme.color.fc4};
   }
   ::selection {
-    background-color: ${props => Color(props.theme.color.primaryColor).alpha(0.2).string()};
+    background-color: ${(props) => Color(props.theme.color.primaryColor).alpha(0.2).string()};
   }
 `;
 
@@ -141,58 +148,65 @@ const InputInnerWrapper = styled.div`
   flex: 1;
 `;
 
-export const TextInput = React.forwardRef(({
-  value, type = 'text', error = false, block, size,
-  placeholder, lineStyle, prefix, suffix, disabled, className,
-  addonAfter, addonBefore,
-  onChange, onBlur, onFocus, wrapperRef, ...rest
-}: ITextInputProps, ref: React.Ref<HTMLInputElement>) => {
-  const [focus, setFocus] = useState(false);
+export const TextInput = React.forwardRef(
+  (
+    {
+      value,
+      type = 'text',
+      error = false,
+      block,
+      size,
+      placeholder,
+      lineStyle,
+      prefix,
+      suffix,
+      disabled,
+      className,
+      addonAfter,
+      addonBefore,
+      onChange,
+      onBlur,
+      onFocus,
+      wrapperRef,
+      ...rest
+    }: ITextInputProps,
+    ref: React.Ref<HTMLInputElement>
+  ) => {
+    const [focus, setFocus] = useState(false);
 
-  const handleFocus = (e: React.FocusEvent) => {
-    e.stopPropagation();
-    e.nativeEvent.stopPropagation();
-    setFocus(true);
-    // @ts-ignore
-    onFocus?.(e);
-  };
+    const handleFocus = (e: React.FocusEvent) => {
+      e.stopPropagation();
+      e.nativeEvent.stopPropagation();
+      setFocus(true);
+      // @ts-ignore
+      onFocus?.(e);
+    };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    e.stopPropagation();
-    e.nativeEvent.stopPropagation();
-    setFocus(false);
-    onBlur && onBlur(e);
-  };
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      e.stopPropagation();
+      e.nativeEvent.stopPropagation();
+      setFocus(false);
+      onBlur && onBlur(e);
+    };
 
-  return (
-    <InputWrapper
-      ref={wrapperRef}
-      size={size}
-      block={block}
-      error={error}
-      lineStyle={lineStyle}
-      disabled={disabled}
-      className={classnames(className, { error: error, focused: focus })}
-    >
-      {addonBefore}
-      {prefix &&
-        <PrefixWrapper>{prefix}</PrefixWrapper>
-      }
-      <InputInnerWrapper onFocus={handleFocus} onBlur={handleBlur}>
-        <InputInner
-          ref={ref}
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          disabled={disabled}
-          {...rest}
-        />
-      </InputInnerWrapper>
-      {suffix &&
-        <SuffixWrapper>{suffix}</SuffixWrapper>
-      }
-      {addonAfter}
-    </InputWrapper>
-  );
-});
+    return (
+      <InputWrapper
+        ref={wrapperRef}
+        size={size}
+        block={block}
+        error={error}
+        lineStyle={lineStyle}
+        disabled={disabled}
+        className={classnames(className, { error: error, focused: focus })}
+      >
+        {addonBefore}
+        {prefix && <PrefixWrapper>{prefix}</PrefixWrapper>}
+        <InputInnerWrapper onFocus={handleFocus} onBlur={handleBlur}>
+          <InputInner ref={ref} type={type} placeholder={placeholder} value={value} onChange={onChange} disabled={disabled} {...rest} />
+        </InputInnerWrapper>
+        {suffix && <SuffixWrapper>{suffix}</SuffixWrapper>}
+        {addonAfter}
+      </InputWrapper>
+    );
+  }
+);

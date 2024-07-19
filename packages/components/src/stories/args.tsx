@@ -1,5 +1,3 @@
-
-
 // https://storybook.js.org/docs/react/essentials/controls
 
 import React from 'react';

@@ -1,5 +1,3 @@
-
-
 import { Span } from '@metinseylan/nestjs-opentelemetry';
 import { Injectable } from '@nestjs/common';
 import { isEmpty } from 'lodash';

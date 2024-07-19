@@ -1,5 +1,3 @@
-
-
 import { ICatalogTree } from '../../modules/space/store/interfaces/catalog_tree';
 import { IUser } from '../../modules/user/store/interfaces/user';
 import { IAddressList } from '../../modules/org/store/interface/address_list';
@@ -12,7 +10,13 @@ import { INotification } from '../../modules/user/store/interfaces/notification'
 import { IHooks, IBilling } from '../../modules/enterprise';
 import { IToolBar } from '../../modules/org/store/interface/tool_bar';
 import {
-  IDashboardMap, IDatasheetMap, IPageParams, IWidgetMap, IFormMap, IMirrorMap, ThemeName
+  IDashboardMap,
+  IDatasheetMap,
+  IPageParams,
+  IWidgetMap,
+  IFormMap,
+  IMirrorMap,
+  ThemeName,
 } from '../../modules/database/store/interfaces/resource';
 import { ITemplateCentre } from '../../modules/space/store/interfaces/template_centre';
 import { IShareInfo } from '../../modules/space/store/interfaces/share';
@@ -50,7 +54,6 @@ export * from '../../modules/embed/store/interfaces/embed';
 export * from '../../modules/billing/store/interfaces';
 
 export interface IReduxState {
-
   // a mark that indicates `state` is root
   isStateRoot: true;
 

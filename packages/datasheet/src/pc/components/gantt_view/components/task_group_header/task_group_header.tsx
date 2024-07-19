@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { FC, useContext } from 'react';
 import { black, ILightOrDarkThemeColors, indigo } from '@apitable/components';

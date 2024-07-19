@@ -15,8 +15,8 @@ interface IParams {
 export const useNodeClick = ({ localDispatch, localState, searchDatasheetMetaData, secondConfirmType }: IParams) => {
   const dispatch = useDispatch();
   const activeNodeId = useAppSelector((state) => Selectors.getNodeId(state));
-  const activeNodePrivate = useAppSelector((state) =>
-    state.catalogTree.treeNodesMap[activeNodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[activeNodeId]?.nodePrivate
+  const activeNodePrivate = useAppSelector(
+    (state) => state.catalogTree.treeNodesMap[activeNodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[activeNodeId]?.nodePrivate,
   );
 
   const onNodeClick = (nodeType: 'Mirror' | 'Datasheet' | 'View' | 'Folder' | 'Form', id: string) => {

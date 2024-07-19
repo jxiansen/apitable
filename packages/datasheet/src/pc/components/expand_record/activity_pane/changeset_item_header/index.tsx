@@ -1,5 +1,3 @@
-
-
 import cls from 'classnames';
 import * as React from 'react';
 import { IField } from '@apitable/core';

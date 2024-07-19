@@ -1,5 +1,3 @@
-
-
 import { useClickAway } from 'ahooks';
 import classNames from 'classnames';
 import * as React from 'react';
@@ -106,7 +104,7 @@ export const FilterGeneralSelect: React.FC<React.PropsWithChildren<IFilterGenera
     <div className={styles.select} ref={refSelect}>
       <ComponentDisplay minWidthCompatible={ScreenSize.md}>
         <Dropdown
-          options={{ disabled: isViewLock, autoWidth: true, zIndex:CONST_INITIAL_DROPDOWN_INDEX }}
+          options={{ disabled: isViewLock, autoWidth: true, zIndex: CONST_INITIAL_DROPDOWN_INDEX }}
           trigger={
             <div className={classNames(styles.displayBox, styles.option, { [styles.disabled]: isViewLock })}>
               {!cellValue && placeholder ? (

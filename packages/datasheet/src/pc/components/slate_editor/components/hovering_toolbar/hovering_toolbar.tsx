@@ -1,5 +1,3 @@
-
-
 import { useRef, useEffect } from 'react';
 import { Range, Editor } from 'slate';
 import { useSlate, ReactEditor } from 'slate-react';

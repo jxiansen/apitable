@@ -1,10 +1,6 @@
-
 import { ICollaCommandDef, ExecuteResult, ILinkedActions } from 'command_manager';
 import { CollaCommandName } from 'commands/enum';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { IJOTAction, OTActionName } from 'engine/ot';
 import { FieldType, ResourceType } from 'types';
@@ -38,21 +34,21 @@ export const deleteArchivedRecords: ICollaCommandDef<IDeleteArchivedRecordsOptio
       const _linkedActions: IJOTAction[] = [];
       if (field.type === FieldType.Link && field.property.brotherFieldId && field.property.foreignDatasheetId !== datasheetId) {
         const linkedSnapshot = getSnapshot(state, field.property.foreignDatasheetId)!;
-        data.forEach(record => {
+        data.forEach((record) => {
           const recordId = record.id;
           const value = record.data[fieldId] as string[] | null;
           if (value) {
-            value.forEach(id => {
+            value.forEach((id) => {
               const oldValue = getCellValue(state, linkedSnapshot, id, field.property.brotherFieldId!) as string[] | null;
-              const value = oldValue ? oldValue.filter(v => v !== recordId) : null;
+              const value = oldValue ? oldValue.filter((v) => v !== recordId) : null;
               if (isEqual(value, oldValue)) {
                 return;
               }
               const path = ['recordMap', id, 'data', field.property.brotherFieldId!];
-              const samePathIndex = _linkedActions.findIndex(action => isEqual(action.p, path));
+              const samePathIndex = _linkedActions.findIndex((action) => isEqual(action.p, path));
               if (samePathIndex > -1) {
                 // @ts-ignore
-                _linkedActions[samePathIndex].oi = _linkedActions[samePathIndex].oi.filter(v => v !== recordId);
+                _linkedActions[samePathIndex].oi = _linkedActions[samePathIndex].oi.filter((v) => v !== recordId);
               } else {
                 _linkedActions.push({
                   n: OTActionName.ObjectReplace,
@@ -73,8 +69,8 @@ export const deleteArchivedRecords: ICollaCommandDef<IDeleteArchivedRecordsOptio
 
     const unarchiveRecordsActions = DatasheetActions.deleteArchivedRecords2Action(snapshot, { recordsData: data });
 
-    if(unarchiveRecordsActions) {
-      unarchiveRecordsActions.forEach(action => {
+    if (unarchiveRecordsActions) {
+      unarchiveRecordsActions.forEach((action) => {
         actions.push(action);
       });
     }
@@ -86,5 +82,5 @@ export const deleteArchivedRecords: ICollaCommandDef<IDeleteArchivedRecordsOptio
       actions,
       linkedActions,
     };
-  }
+  },
 };

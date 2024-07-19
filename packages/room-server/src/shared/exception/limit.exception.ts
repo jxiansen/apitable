@@ -1,5 +1,3 @@
-
-
 import { IBaseException } from './base.exception';
 
 /**
@@ -10,13 +8,16 @@ export class LimitException implements IBaseException {
 
   // Exception Type =================================================================
   // 1501 is a public code. This code can be used when the front end does not require specific prompts.
-  static readonly OVER_LIMIT= new LimitException(1501, 'exceed over limit');
+  static readonly OVER_LIMIT = new LimitException(1501, 'exceed over limit');
 
-  static readonly CREDIT_OVER_LIMIT= new LimitException(1504, 'credit over limit');
+  static readonly CREDIT_OVER_LIMIT = new LimitException(1504, 'credit over limit');
 
   // Exception Type =================================================================
 
-  private constructor(public readonly code: number, public readonly message: string) {
+  private constructor(
+    public readonly code: number,
+    public readonly message: string,
+  ) {
     LimitException.AllValues[message] = this;
   }
 

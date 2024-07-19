@@ -1,14 +1,10 @@
-
-
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { CollaCommandName } from '..';
 import { ResourceType } from 'types';
 import { isEmpty } from 'lodash';
 import { IJOTAction } from '../../engine';
-import {
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 export interface IFixOneWayLinkDstId {
   cmd: CollaCommandName.FixOneWayLinkDstId;
   data: IFixOneWayLinkOptions[];
@@ -48,7 +44,7 @@ export const fixOneWayLinkDstId: ICollaCommandDef<IFixOneWayLinkDstId> = {
         },
       };
 
-      const action = DatasheetActions.changeOneWayLinkDstId2Action(snapshot,{ fieldId: fieldId, newField });
+      const action = DatasheetActions.changeOneWayLinkDstId2Action(snapshot, { fieldId: fieldId, newField });
       action && collected.push(action);
       return collected;
     }, []);
@@ -61,7 +57,7 @@ export const fixOneWayLinkDstId: ICollaCommandDef<IFixOneWayLinkDstId> = {
       result: ExecuteResult.Success,
       resourceId: datasheetId,
       resourceType: ResourceType.Datasheet,
-      actions
+      actions,
     };
   },
 };

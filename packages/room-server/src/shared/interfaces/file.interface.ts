@@ -1,5 +1,3 @@
-
-
 export interface IFileInterface {
   /** Field name specified in the form */
   fieldName: string;

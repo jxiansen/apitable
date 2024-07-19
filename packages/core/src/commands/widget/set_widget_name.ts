@@ -1,12 +1,10 @@
-
-
 import { ExecuteResult, ICollaCommandDef, ICommandOptionBase } from 'command_manager';
 import { WidgetActions } from 'commands_actions/widget';
 import { ResourceType } from 'types';
 import { getResourcePack } from 'modules/database/store/selectors/resource';
 
 export interface ISetWidgetName extends ICommandOptionBase {
-  newWidgetName: string
+  newWidgetName: string;
 }
 
 export const setWidgetName: ICollaCommandDef<ISetWidgetName> = {

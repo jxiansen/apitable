@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { Modal } from '@apitable/components';
 import { ConfigConstant, isPrivateDeployment } from '@apitable/core';

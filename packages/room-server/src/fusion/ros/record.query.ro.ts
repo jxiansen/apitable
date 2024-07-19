@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, CellFormatEnum, FieldKeyEnum } from '@apitable/core';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
@@ -15,7 +13,7 @@ export class RecordQueryRo extends PageRo {
     description: 'If this parameter is included, the specified single record is returned.',
   })
   @IsOptional()
-  @Transform(value => stringToArray(value), { toClassOnly: true })
+  @Transform((value) => stringToArray(value), { toClassOnly: true })
   recordIds?: string[];
 
   @ApiPropertyOptional({
@@ -37,7 +35,7 @@ export class RecordQueryRo extends PageRo {
       '\nExample of reading multiple columns：&fields[]=fld4jt0XoRm2h&fields[]=fld8RI3QY4Wdz',
   })
   @IsOptional()
-  @Transform(value => stringToArray(value), { toClassOnly: true })
+  @Transform((value) => stringToArray(value), { toClassOnly: true })
   fields?: string[];
 
   @ApiPropertyOptional({

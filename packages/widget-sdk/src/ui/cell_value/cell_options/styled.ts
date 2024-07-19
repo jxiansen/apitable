@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { IOptionItem } from './interface';
 
@@ -21,7 +19,7 @@ export const OptionItemStyled = styled.div<IOptionItemStyled>`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  ${props => {
+  ${(props) => {
     const { bg, textColor } = props;
     return css`
       color: ${textColor};

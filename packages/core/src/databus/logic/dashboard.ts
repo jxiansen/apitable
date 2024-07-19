@@ -1,5 +1,3 @@
-
-
 import { CollaCommandManager, ExecuteResult } from 'command_manager';
 import { CollaCommandName, ICollaCommandOptions } from 'commands';
 import { IDataSaver, ILoadDashboardPackOptions, IStoreOptions } from 'databus/providers';
@@ -10,7 +8,7 @@ import { Store } from 'redux';
 import { ResourceType } from 'types';
 import { ICommandExecutionResult, ISaveOptions } from './datasheet';
 import { IResource } from './resource.interface';
-import { updateRevision,receiveInstallationWidget } from 'modules/database/store/actions/resource';
+import { updateRevision, receiveInstallationWidget } from 'modules/database/store/actions/resource';
 
 type IDashboardWidgetMap = { [widgetId: string]: IWidget };
 
@@ -35,7 +33,10 @@ export class Dashboard implements IResource {
    *
    * @deprecated This constructor is not intended for public use.
    */
-  public constructor(public readonly id: string, options: IDashboardCtorOptions) {
+  public constructor(
+    public readonly id: string,
+    options: IDashboardCtorOptions
+  ) {
     const { store, saver, commandManager, widgetMap } = options;
     this.store = store;
     this.saver = saver;
@@ -99,7 +100,7 @@ export class Dashboard implements IResource {
         dashboardId: this.id,
         widgetIds,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -117,7 +118,7 @@ export class Dashboard implements IResource {
         resourceType: ResourceType.Widget,
         dstId: options.dstId,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -134,7 +135,7 @@ export class Dashboard implements IResource {
         dashboardId: this.id,
         widgetId,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -144,9 +145,9 @@ export class Dashboard implements IResource {
         cmd: CollaCommandName.SetWidgetName,
         resourceId: widgetId,
         resourceType: ResourceType.Widget,
-        newWidgetName
+        newWidgetName,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -155,9 +156,9 @@ export class Dashboard implements IResource {
       {
         cmd: CollaCommandName.ChangeDashboardLayout,
         dashboardId: this.id,
-        layout: options
+        layout: options,
       },
-      saveOptions,
+      saveOptions
     );
   }
 }

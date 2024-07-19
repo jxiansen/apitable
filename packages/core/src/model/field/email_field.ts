@@ -1,5 +1,3 @@
-
-
 import { IReduxState } from '../../exports/store/interfaces';
 import { FieldType, IEmailField, IField } from 'types/field_types';
 import { DatasheetActions } from '../../commands_actions/datasheet';
@@ -7,7 +5,10 @@ import { TextBaseField } from './text_base_field';
 import { getFieldDefaultProperty } from './const';
 import { IEmailProperty } from 'types/field_types';
 export class EmailField extends TextBaseField {
-  constructor(public override field: IEmailField, public override state: IReduxState) {
+  constructor(
+    public override field: IEmailField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 

@@ -1,5 +1,3 @@
-
-
 import { useMount, useToggle } from 'ahooks';
 import { TriggerCommands } from 'modules/shared/apphook/trigger_commands';
 import { useEffect, useState } from 'react';

@@ -1,5 +1,3 @@
-
-
 import { mockRecordValues, mockRecords, mockDefaultRecord, mockRecordVoTransformer } from './mock.record';
 import { MockDataBus, resetDataLoader } from './mock.databus';
 import { IRecord } from 'exports/store/interfaces';
@@ -50,7 +48,7 @@ describe('record operations', () => {
 
       expect(records).toBeTruthy();
 
-      const recordVos = records.map(record => record.getViewObject(mockRecordVoTransformer));
+      const recordVos = records.map((record) => record.getViewObject(mockRecordVoTransformer));
 
       expect(recordVos).toStrictEqual([
         {
@@ -130,7 +128,7 @@ describe('record operations', () => {
             },
           ],
         },
-        {},
+        {}
       );
 
       expect(succeeded.result).toStrictEqual(ExecuteResult.Success);
@@ -163,7 +161,7 @@ describe('record operations', () => {
           index: 0,
           recordValues: [mockRecordValues[0]!],
         },
-        {},
+        {}
       );
 
       expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -200,7 +198,7 @@ describe('record operations', () => {
           index: 1,
           recordValues: [mockRecordValues[0]!],
         },
-        {},
+        {}
       );
 
       expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -237,7 +235,7 @@ describe('record operations', () => {
           index: 1,
           recordValues: mockRecordValues,
         },
-        {},
+        {}
       );
 
       expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -255,8 +253,8 @@ describe('record operations', () => {
       expect(records).toBeTruthy();
       expect(records.length).toBe(8);
 
-      let recordVos = records.slice(1, 4).map(record => record.getViewObject(mockRecordVoTransformer));
-      recordVos = assertRecordIds(recordVos, i => `rec${i + 4}`);
+      let recordVos = records.slice(1, 4).map((record) => record.getViewObject(mockRecordVoTransformer));
+      recordVos = assertRecordIds(recordVos, (i) => `rec${i + 4}`);
 
       expect(recordVos).toStrictEqual(mockRecords);
     });
@@ -274,7 +272,7 @@ describe('record operations', () => {
           index: 1,
           count: 3,
         },
-        {},
+        {}
       );
 
       expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -292,7 +290,7 @@ describe('record operations', () => {
       expect(records).toBeTruthy();
       expect(records.length).toBe(8);
 
-      const recordVos = records.slice(1, 4).map(record => record.getViewObject(mockRecordVoTransformer));
+      const recordVos = records.slice(1, 4).map((record) => record.getViewObject(mockRecordVoTransformer));
       let recordVo = assertRecordId(recordVos[0]!, 'rec4');
       expect(recordVo).toStrictEqual(mockDefaultRecord);
 
@@ -319,7 +317,7 @@ describe('record operations', () => {
           cellValues: [mockRecordValues[0]!],
           ignoreFieldPermission: true,
         },
-        {},
+        {}
       );
 
       expect(result.result).toStrictEqual(ExecuteResult.Success);

@@ -1,5 +1,3 @@
-
-
 import { useMemo } from 'react';
 import { useMobileScroller, useScroller, AreaType } from 'pc/components/gantt_view';
 import { isTouchDevice } from 'pc/utils';

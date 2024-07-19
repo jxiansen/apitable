@@ -1,5 +1,3 @@
-
-
 import { LinkButton, colorVars } from '@apitable/components';
 import { Strings, t } from '@apitable/core';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@apitable/icons';

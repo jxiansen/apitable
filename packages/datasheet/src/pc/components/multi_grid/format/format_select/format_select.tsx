@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import produce from 'immer';
 import { omit } from 'lodash';
@@ -178,9 +176,9 @@ const FormatSelectBase = (props: IFormatSelect) => {
             onChange={(val) => {
               const property: ISelectFieldProperty = val
                 ? {
-                  ...currentField.property,
-                  defaultValue: val,
-                }
+                    ...currentField.property,
+                    defaultValue: val,
+                  }
                 : omit(currentField.property, 'defaultValue');
               setCurrentField({
                 ...currentField,

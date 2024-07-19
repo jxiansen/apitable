@@ -1,7 +1,3 @@
-
-
 export class CommentEmojiDto {
-
-  [commentId: string]:any;
-
+  [commentId: string]: any;
 }

@@ -1,5 +1,3 @@
-
-
 import { OPEventCellUpdated } from './cell_updated';
 import { OPEventFieldUpdated } from './field_updated';
 import { OPEventRecordCreated } from './record_created';

@@ -1,5 +1,3 @@
-
-
 export enum ElementType {
   PARAGRAPH = 'paragraph',
   HEADING_ONE = 'headingOne',

@@ -1,5 +1,3 @@
-
-
 import { Popover } from 'antd';
 import classNames from 'classnames';
 import { find, isEqual, values } from 'lodash';
@@ -96,15 +94,15 @@ export const CollaboratorStatus: React.FC<
           const unit = find(values(unitMap), { userId: collaborator.userId });
           const title = unit
             ? getSocialWecomUnitName?.({
-              name: unit.name,
-              isModified: unit.isMemberNameModified,
-              spaceInfo,
-            }) || unit.name
+                name: unit.name,
+                isModified: unit.isMemberNameModified,
+                spaceInfo,
+              }) || unit.name
             : getSocialWecomUnitName?.({
-              name: backCorrectName(collaborator),
-              isModified: false,
-              spaceInfo,
-            }) || backCorrectName(collaborator);
+                name: backCorrectName(collaborator),
+                isModified: false,
+                spaceInfo,
+              }) || backCorrectName(collaborator);
           return (
             <UserCardTrigger
               userId={collaborator.userId}

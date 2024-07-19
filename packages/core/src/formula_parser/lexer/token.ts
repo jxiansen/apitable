@@ -1,5 +1,3 @@
-
-
 export enum TokenType {
   Call = 'Call',
   PureValue = 'PureValue',
@@ -29,7 +27,11 @@ export enum TokenType {
 }
 
 export class Token {
-  constructor(readonly type: TokenType, readonly index: number, readonly value: string) {
+  constructor(
+    readonly type: TokenType,
+    readonly index: number,
+    readonly value: string
+  ) {
     // String and Value need to remove quotes and braces
     this.value = value;
   }

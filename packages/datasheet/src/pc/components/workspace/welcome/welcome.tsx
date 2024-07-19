@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { shallowEqual } from 'react-redux';
 import { IReduxState } from '@apitable/core';
@@ -35,7 +33,7 @@ export const Welcome: FC<React.PropsWithChildren<unknown>> = () => {
           <MobileBar />
         </ComponentDisplay>
       }
-      {hasChildren ? (getEnvVariables().IS_AITABLE ? <ChatWelcome /> : <Guide/>) : <CreateDatasheet />}
+      {hasChildren ? getEnvVariables().IS_AITABLE ? <ChatWelcome /> : <Guide /> : <CreateDatasheet />}
     </>
   );
 };

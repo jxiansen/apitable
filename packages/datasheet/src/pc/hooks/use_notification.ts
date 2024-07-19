@@ -1,5 +1,3 @@
-
-
 import { useDispatch } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import { Api, INoticeDetail, Navigation, StoreActions, Strings, t } from '@apitable/core';

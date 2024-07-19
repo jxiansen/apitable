@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, FieldKeyEnum, FieldType, ICellValue, IField, IMeta, ISelectField, SelectField } from '@apitable/core';
 import { ArgumentMetadata, Inject, Injectable, PipeTransform } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
@@ -30,8 +28,7 @@ export class FieldPipe implements PipeTransform {
     private readonly recordService: DatasheetRecordService,
     @InjectLogger() private readonly logger: Logger,
     @Inject(REQUEST) private readonly request: FastifyRequest,
-  ) {
-  }
+  ) {}
 
   // no use function
   async transform(value: any, _: ArgumentMetadata): Promise<any> {
@@ -59,15 +56,17 @@ export class FieldPipe implements PipeTransform {
               fields[field.id] = null;
               continue;
             }
-            const transformedOptionIds = flatten([fieldValue]).filter(value => !isEmpty(value)).map(optionValue => {
-              const { option, isCreated } = SelectField.getOrCreateNewOption({ name: optionValue }, existOptions);
-              if (isCreated) {
-                existOptions.push(option);
-                (field as ISelectField).property.options = existOptions;
-                this.request[DATASHEET_ENRICH_SELECT_FIELD][field.id] = field;
-              }
-              return option.id;
-            });
+            const transformedOptionIds = flatten([fieldValue])
+              .filter((value) => !isEmpty(value))
+              .map((optionValue) => {
+                const { option, isCreated } = SelectField.getOrCreateNewOption({ name: optionValue }, existOptions);
+                if (isCreated) {
+                  existOptions.push(option);
+                  (field as ISelectField).property.options = existOptions;
+                  this.request[DATASHEET_ENRICH_SELECT_FIELD][field.id] = field;
+                }
+                return option.id;
+              });
             fields[field.id] = field.type === FieldType.SingleSelect ? transformedOptionIds[0]! : transformedOptionIds;
           } else {
             // transform

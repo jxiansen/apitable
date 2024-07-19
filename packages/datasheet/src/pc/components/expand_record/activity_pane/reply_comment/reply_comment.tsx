@@ -1,5 +1,3 @@
-
-
 import { Tooltip } from 'antd';
 import cls from 'classnames';
 import { get } from 'lodash';

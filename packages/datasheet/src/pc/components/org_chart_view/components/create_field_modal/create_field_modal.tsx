@@ -1,5 +1,3 @@
-
-
 import { Modal } from 'antd';
 import Image from 'next/image';
 import * as React from 'react';

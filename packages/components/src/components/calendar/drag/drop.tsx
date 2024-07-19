@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { useDrop } from 'react-dnd';
 import { TYPE } from '../constants';
@@ -39,7 +37,7 @@ export const Drop = ({ children, date, update }: IDrop) => {
         isOverCurrent: monitor.isOver({ shallow: true }),
       }),
     }),
-    [],
+    []
   );
   const active = isOver || isOverCurrent;
   return (

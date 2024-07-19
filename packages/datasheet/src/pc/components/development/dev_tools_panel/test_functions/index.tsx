@@ -1,5 +1,3 @@
-
-
 import { Checkbox } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { useEffect, useRef, useState } from 'react';

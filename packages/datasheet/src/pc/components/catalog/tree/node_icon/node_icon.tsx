@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { colorVars } from '@apitable/components';
 import { ConfigConstant } from '@apitable/core';
@@ -83,7 +81,9 @@ export const getNodeIcon = (
         }}
         alt=""
       />
-    ) :<Emoji emoji={icon} size={emojiSize} />;
+    ) : (
+      <Emoji emoji={icon} size={emojiSize} />
+    );
   }
   const nodeConfig = nodeConfigData.find((item) => item.type === type);
   if (!nodeConfig) return;

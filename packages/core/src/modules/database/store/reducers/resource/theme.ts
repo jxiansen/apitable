@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import { IThemeAction, ThemeName } from '../../../../../exports/store/interfaces';
 import { SET_THEME } from '../../../../shared/store/action_constants';

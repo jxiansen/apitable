@@ -1,11 +1,24 @@
-
-
 import { produce } from 'immer';
 import {
-  ISetActiveSpaceIdAction, ISetEnvs, ISetMarketplaceAppsAction, ISetPreviewModalVisibleAction, ISetQuitSpaceIdAction, ISetScreenWidth,
-  ISetShortcutKeyPanelVisibleAction, ISetSideBarVisibleAction, ISetSpaceConnectedAction, ISetSpaceErrAction, ISetSpaceFeaturesAction,
-  ISetSpaceInfoAction, ISetSpaceLoadingAction, ISetSpaceReconnectingAction, ISpace, ISpaceListAction, IToggleApiPanelAction, IToggleRecordFullScreen,
-  IToggleSideRecordPanelAction
+  ISetActiveSpaceIdAction,
+  ISetEnvs,
+  ISetMarketplaceAppsAction,
+  ISetPreviewModalVisibleAction,
+  ISetQuitSpaceIdAction,
+  ISetScreenWidth,
+  ISetShortcutKeyPanelVisibleAction,
+  ISetSideBarVisibleAction,
+  ISetSpaceConnectedAction,
+  ISetSpaceErrAction,
+  ISetSpaceFeaturesAction,
+  ISetSpaceInfoAction,
+  ISetSpaceLoadingAction,
+  ISetSpaceReconnectingAction,
+  ISpace,
+  ISpaceListAction,
+  IToggleApiPanelAction,
+  IToggleRecordFullScreen,
+  IToggleSideRecordPanelAction,
 } from '../../../../exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';
 
@@ -27,14 +40,28 @@ const defaultSpace: ISpace = {
   marketplaceApps: [],
   previewModalVisible: false,
   activeId: null,
-  envs: {}
+  envs: {},
 };
 
-type SpaceAction = ISpaceListAction | ISetQuitSpaceIdAction | ISetSpaceErrAction |
-  ISetSpaceLoadingAction | ISetSpaceInfoAction | ISetSpaceReconnectingAction |
-  ISetSpaceConnectedAction | ISetScreenWidth | ISetSideBarVisibleAction | ISetShortcutKeyPanelVisibleAction
-  | IToggleApiPanelAction | IToggleSideRecordPanelAction | ISetMarketplaceAppsAction | ISetPreviewModalVisibleAction | ISetActiveSpaceIdAction |
-  ISetSpaceFeaturesAction | ISetEnvs | IToggleRecordFullScreen;
+type SpaceAction =
+  | ISpaceListAction
+  | ISetQuitSpaceIdAction
+  | ISetSpaceErrAction
+  | ISetSpaceLoadingAction
+  | ISetSpaceInfoAction
+  | ISetSpaceReconnectingAction
+  | ISetSpaceConnectedAction
+  | ISetScreenWidth
+  | ISetSideBarVisibleAction
+  | ISetShortcutKeyPanelVisibleAction
+  | IToggleApiPanelAction
+  | IToggleSideRecordPanelAction
+  | ISetMarketplaceAppsAction
+  | ISetPreviewModalVisibleAction
+  | ISetActiveSpaceIdAction
+  | ISetSpaceFeaturesAction
+  | ISetEnvs
+  | IToggleRecordFullScreen;
 
 export const space = produce((spaceDraft: ISpace = defaultSpace, action: SpaceAction) => {
   switch (action.type) {

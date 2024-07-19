@@ -1,5 +1,3 @@
-
-
 import { IJOTAction, IOperation } from 'engine/ot/interface';
 import { ResourceType } from '../../types/resource_types';
 import { EventAtomTypeEnums, EventRealTypeEnums, EventSourceTypeEnums, OPEventNameEnums } from '../enum';
@@ -15,7 +13,7 @@ export interface IEventBase {
 
 export interface IEventTestResult<T> {
   pass: boolean; // whether the event fires
-  context: null | AnyObject & T; // custom context returned by the event
+  context: null | (AnyObject & T); // custom context returned by the event
 }
 
 export interface IRealAtomEvent extends IEventBase {
@@ -43,7 +41,7 @@ export type ICombEvent = IRealCombEvent | IVirtualCombEvent;
 export type IOPEvent = IAtomEvent | ICombEvent;
 
 export type IEventInstance<T> = T & {
-  context: AnyObject,
+  context: AnyObject;
   sourceType: EventSourceTypeEnums;
 };
 

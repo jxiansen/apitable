@@ -1,4 +1,3 @@
-
 import { FieldType, IReduxState, Selectors, StoreActions } from '@apitable/core';
 import { store } from 'pc/store';
 
@@ -17,8 +16,11 @@ export const getDatasheetOrLoad = (
   const datasheetErrorCode = Selectors.getDatasheetErrorCode(state, foreignDatasheetId);
   const fieldMap = datasheet?.snapshot.meta?.fieldMap;
   // check if foreign datasheet has link relationship
-  const isforeignDatasheetIdRelated = fieldMap ? Object.values(fieldMap).some(field =>
-    [FieldType.Link, FieldType.OneWayLink].includes(field.type) && field.property.foreignDatasheetId === foreignDatasheetId) : true;
+  const isforeignDatasheetIdRelated = fieldMap
+    ? Object.values(fieldMap).some(
+        (field) => [FieldType.Link, FieldType.OneWayLink].includes(field.type) && field.property.foreignDatasheetId === foreignDatasheetId,
+      )
+    : true;
 
   if (
     isforeignDatasheetIdRelated &&

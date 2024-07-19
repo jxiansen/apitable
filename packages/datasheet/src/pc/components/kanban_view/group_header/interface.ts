@@ -1,5 +1,3 @@
-
-
 import { DraggableProvided } from 'react-beautiful-dnd';
 import { IRecord, IField, IMemberField, ISelectField } from '@apitable/core';
 

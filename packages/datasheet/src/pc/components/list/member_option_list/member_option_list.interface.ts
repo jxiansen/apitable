@@ -1,5 +1,3 @@
-
-
 import { IUnitIds, IUnitMap, IUnitValue, IUserValue } from '@apitable/core';
 import { IListBase } from '../list.interface';
 

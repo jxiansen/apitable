@@ -1,5 +1,3 @@
-
-
 export * from './attachment.field';
 export * from './checkbox.field';
 export * from './currency.field';

@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { ButtonActionType, evaluate, IButtonField, ICellValue, IReduxState, OpenLinkType, Strings, t, IRecord } from '@apitable/core';
 import { executeWithMinimumTime } from 'pc/components/editors/button_editor/buton_item';

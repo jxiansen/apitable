@@ -1,5 +1,3 @@
-
-
 import {
   IActionOutput,
   IActionType,
@@ -105,17 +103,17 @@ export class AutomationRobotRunner extends IAutomationRobotRunner {
       } catch (error: any) {
         console.log(
           `actionId:${actionId} actionType:${JSON.stringify(
-            omit(actionType, 'inputJSONSchema', 'outputJSONSchema'),
+            omit(actionType, 'inputJSONSchema', 'outputJSONSchema')
           )} AutomationRobotRunner:executeAction:getRuntimeActionInput error`,
-          error,
+          error
         );
         throw new Error('action input is invalid');
       }
       if (!this.validateActionInput(actionType, actionRuntimeInput)) {
         console.log(
           `actionId:${actionId} actionType:${JSON.stringify(
-            omit(actionType, 'inputJSONSchema', 'outputJSONSchema'),
-          )} AutomationRobotRunner:executeAction:validateActionInput failed`,
+            omit(actionType, 'inputJSONSchema', 'outputJSONSchema')
+          )} AutomationRobotRunner:executeAction:validateActionInput failed`
         );
         throw new Error('action input is invalid');
       }
@@ -126,9 +124,9 @@ export class AutomationRobotRunner extends IAutomationRobotRunner {
         // execute action failed, most likely because of network error
         console.log(
           `actionId:${actionId} actionType:${JSON.stringify(
-            omit(actionType, 'inputJSONSchema', 'outputJSONSchema'),
+            omit(actionType, 'inputJSONSchema', 'outputJSONSchema')
           )} AutomationRobotRunner:executeAction:requestActionOutput error`,
-          error,
+          error
         );
         throw new Error(error.message);
       }

@@ -1,5 +1,3 @@
-
-
 import { useAtomValue } from 'jotai';
 import { nanoid } from 'nanoid';
 import qs from 'qs';
@@ -27,7 +25,6 @@ export interface ExecutedAction {
 }
 
 export const useGetTaskHistory = () => {
-
   const { shareInfo } = useContext(ShareContext);
   const automationState = useAtomValue(automationStateAtom);
 
@@ -38,8 +35,11 @@ export const useGetTaskHistory = () => {
 
   const [key, setKey] = useState(() => nanoid());
   const { data, isLoading, isValidating, error, size, setSize, mutate } = useSWRInfinite(
-    (index) => `/automation/${automationState?.resourceId}/roots/${automationState?.currentRobotId}/run-history?pageNum=${index + 1}&pageSize=${PAGE_SIZE}&key=${key}&${query}`,
-    getRobotApiHistoryList
+    (index) =>
+      `/automation/${automationState?.resourceId}/roots/${automationState?.currentRobotId}/run-history?pageNum=${
+        index + 1
+      }&pageSize=${PAGE_SIZE}&key=${key}&${query}`,
+    getRobotApiHistoryList,
   );
 
   const reset = useCallback(() => {

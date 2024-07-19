@@ -1,5 +1,3 @@
-
-
 import { has, isEqual } from 'lodash';
 import { Events, ITemporaryView, IViewProperty, Player, Selectors, StoreActions, ViewPropertyFilter } from '@apitable/core';
 import { browser } from 'modules/shared/browser';

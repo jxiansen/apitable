@@ -1,5 +1,3 @@
-
-
 import { OP2Event } from 'event_manager/op2event';
 import { IChangeset } from './../../engine/ot/interface';
 import { OPEventNameEnums } from './../enum';

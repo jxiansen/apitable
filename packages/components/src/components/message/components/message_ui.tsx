@@ -1,5 +1,3 @@
-
-
 import React, { useRef, useEffect } from 'react';
 import { applyDefaultTheme } from 'theme';
 import styled, { css, keyframes } from 'styled-components';
@@ -26,18 +24,18 @@ const MessageMoveIn = keyframes`
 
 type IContentWrapper = Pick<IMessageUIProps, 'type'>;
 
-const MessageWrapper = styled.div.attrs(applyDefaultTheme) <Partial<IMessageUIProps>>`
+const MessageWrapper = styled.div.attrs(applyDefaultTheme)<Partial<IMessageUIProps>>`
   animation-duration: 0.3s;
   margin: 8px;
   pointer-events: none;
-  ${props=>{
+  ${(props) => {
     const motionCls = props.motionClassName;
-    if(motionCls && motionCls.includes('appear')){
+    if (motionCls && motionCls.includes('appear')) {
       return css`
-         animation-name: ${MessageMoveIn};
+        animation-name: ${MessageMoveIn};
       `;
     }
-    if(motionCls && motionCls.includes('leave')){
+    if (motionCls && motionCls.includes('leave')) {
       return css`
         animation-name: ${MessageMoveOut};
       `;
@@ -46,7 +44,7 @@ const MessageWrapper = styled.div.attrs(applyDefaultTheme) <Partial<IMessageUIPr
   }}
 `;
 
-const ContentWrapper = styled.div.attrs(applyDefaultTheme) <IContentWrapper>`
+const ContentWrapper = styled.div.attrs(applyDefaultTheme)<IContentWrapper>`
   padding: 8px 24px;
   font-size: 14px;
   border-radius: 4px;
@@ -57,7 +55,7 @@ const ContentWrapper = styled.div.attrs(applyDefaultTheme) <IContentWrapper>`
   display: inline-flex;
   align-items: center;
   pointer-events: auto;
-  ${props => {
+  ${(props) => {
     const color = FourStatusColorMap[props.type];
     return css`
       background: ${color};
@@ -69,9 +67,9 @@ const IconWrapper = styled.span`
   display: inline-flex;
 `;
 const TextWrapper = styled.span.attrs(applyDefaultTheme)`
-  ${props => {
+  ${(props) => {
     return css`
-      color: ${props.theme.color.staticWhite0}
+      color: ${props.theme.color.staticWhite0};
     `;
   }}
 `;
@@ -83,13 +81,12 @@ export const MessageUI: React.FC<React.PropsWithChildren<IMessageUIProps>> = ({
   duration = 3,
   icon,
 }: IMessageUIProps) => {
-
   const timerRef = useRef<number>();
   const Icon: React.ReactNode = React.useMemo(() => {
-    if(typeof icon === 'object' && !icon) return <></>;
-    if(icon) return icon;
+    if (typeof icon === 'object' && !icon) return <></>;
+    if (icon) return icon;
     const TypeIcon = IconMap[type];
-    return <TypeIcon size={24} color={['#fff', FourStatusColorMap[type]]}/>;
+    return <TypeIcon size={24} color={['#fff', FourStatusColorMap[type]]} />;
   }, [type, icon]);
   const clearTimer = React.useCallback(() => {
     window.clearTimeout(timerRef.current);
@@ -106,7 +103,7 @@ export const MessageUI: React.FC<React.PropsWithChildren<IMessageUIProps>> = ({
     // eslint-disable-next-line
   }, [duration]);
 
-  useEffect(()=>{
+  useEffect(() => {
     return () => {
       clearTimer();
     };
@@ -116,11 +113,8 @@ export const MessageUI: React.FC<React.PropsWithChildren<IMessageUIProps>> = ({
     <MessageWrapper motionClassName={motionClassName}>
       <ContentWrapper type={type}>
         <IconWrapper>{Icon}</IconWrapper>
-        {
-          typeof content === 'string' ? <TextWrapper>{content}</TextWrapper> : content
-        }
+        {typeof content === 'string' ? <TextWrapper>{content}</TextWrapper> : content}
       </ContentWrapper>
     </MessageWrapper>
   );
 };
-

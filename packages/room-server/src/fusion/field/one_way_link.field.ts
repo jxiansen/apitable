@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, ICellValue, IField } from '@apitable/core';
 import { Injectable, OnApplicationBootstrap, OnModuleInit } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
@@ -38,8 +36,11 @@ export class OneWayLinkField extends BaseField implements OnModuleInit, OnApplic
     // Deduplicate data
     const cellValue: string[] = Array.from(new Set(fieldValue as string[]));
     // Verify presence
-    await this.recordService!.validateRecordExists(field.property.foreignDatasheetId, cellValue,
-      ApiTipConstant.api_params_link_field_recordids_not_exists);
+    await this.recordService!.validateRecordExists(
+      field.property.foreignDatasheetId,
+      cellValue,
+      ApiTipConstant.api_params_link_field_recordids_not_exists,
+    );
     return fieldValue as ICellValue;
   }
 

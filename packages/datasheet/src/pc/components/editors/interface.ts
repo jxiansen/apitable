@@ -1,5 +1,3 @@
-
-
 import { ICell, ICellValue, IField, IRecordAlarmClient, WithOptional } from '@apitable/core';
 
 export interface IEditor {

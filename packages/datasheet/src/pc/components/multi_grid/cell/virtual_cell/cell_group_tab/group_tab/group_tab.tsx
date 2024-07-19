@@ -1,5 +1,3 @@
-
-
 /*
  * @doc https://www.notion.so/vikadata/50b41920a64f4bffaf55f7f9b4427985
  */

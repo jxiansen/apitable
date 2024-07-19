@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { IWrapperDivProps } from './interface';
 import { applyDefaultTheme } from 'theme';
@@ -10,8 +8,8 @@ const INPUT_SIZE = {
   large: '40px',
 };
 
-export const StyledSearchInputContainer = styled.div.attrs(applyDefaultTheme) <IWrapperDivProps>`
-  ${props => css`
+export const StyledSearchInputContainer = styled.div.attrs(applyDefaultTheme)<IWrapperDivProps>`
+  ${(props) => css`
     color: ${props.theme.color.fc1};
     background: ${props.theme.color.highestBg};
     border-bottom: 1px solid ${props.theme.color.lineColor};
@@ -21,11 +19,15 @@ export const StyledSearchInputContainer = styled.div.attrs(applyDefaultTheme) <I
   padding: 0 20px 0;
   position: relative;
 
-  ${props => {
+  ${(props) => {
     if (props.size) {
-      return css`height: ${INPUT_SIZE[props.size]};`;
+      return css`
+        height: ${INPUT_SIZE[props.size]};
+      `;
     }
-    return css`height: ${INPUT_SIZE['default']};`;
+    return css`
+      height: ${INPUT_SIZE['default']};
+    `;
   }};
 
   svg {
@@ -40,7 +42,7 @@ export const StyledSearchInputContainer = styled.div.attrs(applyDefaultTheme) <I
     text-overflow: ellipsis;
     white-space: nowrap;
     background: transparent;
-    ${props => css`
+    ${(props) => css`
       color: ${props.theme.color.fc1};
     `}
 
@@ -55,10 +57,14 @@ export const StyledSearchInputContainer = styled.div.attrs(applyDefaultTheme) <I
   }
 
   &:focus-within {
-    ${props => css`border-bottom: 1px solid ${props.theme.color.deepPurple[500]};`}
+    ${(props) => css`
+      border-bottom: 1px solid ${props.theme.color.deepPurple[500]};
+    `}
     .prefixIcon {
       svg {
-        ${props => css`fill: ${props.theme.color.deepPurple[500]};`}
+        ${(props) => css`
+          fill: ${props.theme.color.deepPurple[500]};
+        `}
       }
     }
   }

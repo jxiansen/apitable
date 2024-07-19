@@ -236,7 +236,11 @@ export { FormulaOutlined, FormulaOutlined as ColumnFormulaFilled } from './formu
 export { NumberOutlined, NumberOutlined as ColumnFigureFilled } from './number_outlined';
 export { AttachmentOutlined, AttachmentOutlined as ColumnAttachmentFilled } from './attachment_outlined';
 export { SelectMultipleOutlined, SelectMultipleOutlined as ColumnMultipleFilled } from './select_multiple_outlined';
-export { SelectSingleOutlined, SelectSingleOutlined as ColumnSingleFilled, SelectSingleOutlined as ColumnSingleNonzeroFilled } from './select_single_outlined';
+export {
+  SelectSingleOutlined,
+  SelectSingleOutlined as ColumnSingleFilled,
+  SelectSingleOutlined as ColumnSingleNonzeroFilled,
+} from './select_single_outlined';
 export { CheckboxOutlined, CheckboxOutlined as ColumnCheckboxFilled } from './checkbox_outlined';
 export { TextOutlined, TextOutlined as ColumnTextFilled } from './text_outlined';
 export { DashboardFilled } from './dashboard_filled';

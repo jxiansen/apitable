@@ -1,5 +1,3 @@
-
-
 import { createContext } from 'react';
 import { ResourceServiceEnhanced } from './service';
 

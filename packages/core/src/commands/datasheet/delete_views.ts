@@ -1,12 +1,7 @@
-
-
 import { find, isEmpty } from 'lodash';
 import { IJOTAction, jot } from 'engine/ot';
 import { DatasheetActions } from 'commands_actions/datasheet';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { Strings, t } from '../../exports/i18n';
 import { ResourceType } from 'types';
 import { CollaCommandName } from 'commands/enum';
@@ -24,11 +19,9 @@ export interface IDeleteViewsOptions {
 }
 
 export const deleteViews: ICollaCommandDef<IDeleteViewsOptions> = {
-
   undoable: true,
 
   execute: (context, options) => {
-
     const { state: state } = context;
     const { data } = options;
     const datasheetId = getActiveDatasheetId(state)!;

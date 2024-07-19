@@ -1,5 +1,3 @@
-
-
 import { useClickAway } from 'ahooks';
 import { Modal, Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio';

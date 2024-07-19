@@ -1,11 +1,9 @@
-
-
 import { FieldType, IOneWayLinkField } from '@apitable/core';
 import { DatasheetRecordService } from 'database/datasheet/services/datasheet.record.service';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../../app.module';
-import {OneWayLinkField} from "./one_way_link.field";
+import { OneWayLinkField } from './one_way_link.field';
 
 describe('OneWayLinkField', () => {
   let app: NestFastifyApplication;
@@ -13,7 +11,7 @@ describe('OneWayLinkField', () => {
   let field: IOneWayLinkField;
   let recordService: any;
 
-  beforeAll(async() => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -29,7 +27,7 @@ describe('OneWayLinkField', () => {
     };
   });
 
-  afterAll(async() => {
+  afterAll(async () => {
     await app.close();
   });
 

@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
 import { IListProps } from './interface';
@@ -7,7 +5,7 @@ import { IListProps } from './interface';
 export const ListStyled = styled.div.attrs(applyDefaultTheme)<IListProps>`
   box-sizing: border-box;
   font-size: 14px;
-  ${props => {
+  ${(props) => {
     if (props.bordered) {
       return css`
         border: 1px solid ${props.theme.color.borderCommonDefault};

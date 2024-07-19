@@ -1,4 +1,3 @@
-
 export const tangerine = {
   50: '#FFEAD6',
   100: '#FFD2A8',
@@ -12,4 +11,3 @@ export const tangerine = {
   900: '#753500',
   1000: '#4D2300',
 };
-

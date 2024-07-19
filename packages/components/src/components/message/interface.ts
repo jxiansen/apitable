@@ -1,5 +1,3 @@
-
-
 export type IMessageType = 'default' | 'error' | 'warning' | 'success';
 export interface IMessageUIProps {
   /**
@@ -9,10 +7,10 @@ export interface IMessageUIProps {
   /**
    * Message content
    */
-  content: string| React.ReactNode;
+  content: string | React.ReactNode;
   /**
    * Message icon
-  */
+   */
   icon?: React.ReactNode | null;
   /**
    * Delay of automatic closing, in seconds. Do not close automatically when set to 0
@@ -22,7 +20,6 @@ export interface IMessageUIProps {
    * Message primary key
    */
   messageKey?: React.Key;
-  onDestroy?: ()=> void;
+  onDestroy?: () => void;
   motionClassName?: string;
 }
-

@@ -1,5 +1,3 @@
-
-
 import { forwardRef, Module } from '@nestjs/common';
 import { CommandModule } from 'database/command/command.module';
 import { DatasheetModule } from 'database/datasheet/datasheet.module';
@@ -12,14 +10,7 @@ import { FormController } from './controllers/form.controller';
 import { FormService } from './services/form.service';
 
 @Module({
-  imports: [
-    forwardRef(()=>ResourceModule),
-    CommandModule,
-    forwardRef(()=>NodeModule),
-    UserModule,
-    DatasheetModule,
-    forwardRef(()=>OtModule),
-  ],
+  imports: [forwardRef(() => ResourceModule), CommandModule, forwardRef(() => NodeModule), UserModule, DatasheetModule, forwardRef(() => OtModule)],
   controllers: [FormController],
   providers: [FormService, FusionApiTransformer],
 })

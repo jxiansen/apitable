@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import { FC } from 'react';
 import { Events, Player, Strings, t } from '@apitable/core';

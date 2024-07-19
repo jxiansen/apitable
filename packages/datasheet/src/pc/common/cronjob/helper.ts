@@ -1,5 +1,3 @@
-
-
 import { ComputeRefManager, getComputeRefManager, FieldType, Selectors } from '@apitable/core';
 import { store } from 'pc/store';
 

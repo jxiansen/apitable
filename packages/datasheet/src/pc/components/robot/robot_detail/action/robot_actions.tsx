@@ -1,5 +1,3 @@
-
-
 import { useSetAtom, useAtomValue } from 'jotai';
 import React, { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
@@ -50,12 +48,14 @@ export const RobotActions = ({ robotId, triggerTypes }: { robotId: string; trigg
       ? Array.from({ length: triggers.length }, () => activeDstId)
       : ((dataList1 ?? []) as IFetchedDatasheet[]);
 
-  const triggerDataSheetMap : Record<string, string> = triggers.map((trigger, index) => ({ trigger, index })).reduce((p, c) => {
-    return {
-      ...p,
-      [c.trigger.triggerId]: triggerDataSheetIds[c.index]
-    };
-  }, {});
+  const triggerDataSheetMap: Record<string, string> = triggers
+    .map((trigger, index) => ({ trigger, index }))
+    .reduce((p, c) => {
+      return {
+        ...p,
+        [c.trigger.triggerId]: triggerDataSheetIds[c.index],
+      };
+    }, {});
 
   const nodeOutputSchemaList = getNodeOutputSchemaList({
     actionList,

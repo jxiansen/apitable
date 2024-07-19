@@ -1,5 +1,3 @@
-
-
 import { useCallback, useMemo } from 'react';
 import { ToolTip } from 'pc/components/konva_components';
 import { useSetState } from 'pc/hooks';

@@ -1,5 +1,3 @@
-
-
 import { Body, Controller, Delete, Get, Headers, Param, Patch, Post, Query } from '@nestjs/common';
 import { UserService } from 'user/services/user.service';
 import { AutomationRobotRepository } from '../repositories/automation.robot.repository';
@@ -20,7 +18,7 @@ export class RobotController {
     private readonly robotService: RobotRobotService,
     private readonly userService: UserService,
     private readonly nodeService: NodeService,
-  ) { }
+  ) {}
 
   @Get(['/'])
   async getRobotListByResourceId(@Query('resourceId') resourceId: string, @Headers('cookie') cookie: string) {
@@ -37,7 +35,7 @@ export class RobotController {
   }
 
   @Get(['/:robotId'])
-  getDatePack(@Param('robotId') robotId: string,) {
+  getDatePack(@Param('robotId') robotId: string) {
     return this.robotService.getRobotDetailById(robotId);
   }
 
@@ -48,11 +46,7 @@ export class RobotController {
   }
 
   @Patch(['/:robotId'])
-  async updateRobot(
-    @Param('robotId') robotId: string,
-    @Body() robot: { name?: string, description?: string },
-    @Headers('cookie') cookie: string
-  ) {
+  async updateRobot(@Param('robotId') robotId: string, @Body() robot: { name?: string; description?: string }, @Headers('cookie') cookie: string) {
     const { userId } = await this.userService.getMe({ cookie });
     const { name, description } = robot;
     if (name) {
@@ -78,7 +72,7 @@ export class RobotController {
   public async getRobotActions(@Param('robotId') robotId: string) {
     const actions = await this.automationActionRepository.selectActionInfosByRobotId(robotId);
     // The iRobot interface's action's action id named id, and action type id named type id.
-    actions.forEach(action => {
+    actions.forEach((action) => {
       action.id = action.actionId;
       action.typeId = action.actionTypeId;
     });

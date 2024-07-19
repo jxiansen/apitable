@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import { FC } from 'react';
 import { Modal, Typography, colorVars } from '@apitable/components';

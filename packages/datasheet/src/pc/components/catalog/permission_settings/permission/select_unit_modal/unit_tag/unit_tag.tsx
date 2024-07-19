@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { FC } from 'react';
 import { CloseOutlined } from '@apitable/icons';

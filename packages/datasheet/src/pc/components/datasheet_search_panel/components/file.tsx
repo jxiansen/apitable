@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import * as React from 'react';
 import { useThemeColors } from '@apitable/components';
@@ -64,14 +62,14 @@ export const File: React.FC<
 };
 
 export const FormSearchItem: React.FC<
-    React.PropsWithChildren<{
-        disable?: { budget: string; message: string };
-        active?: boolean;
-        id: string;
-        onClick?: (id: string) => void;
-        richContent?: boolean;
-        isMirror?: boolean;
-    }>
+  React.PropsWithChildren<{
+    disable?: { budget: string; message: string };
+    active?: boolean;
+    id: string;
+    onClick?: (id: string) => void;
+    richContent?: boolean;
+    isMirror?: boolean;
+  }>
 > = (props) => {
   const colors = useThemeColors();
   const { children, disable, id, onClick, richContent, active, isMirror } = props;

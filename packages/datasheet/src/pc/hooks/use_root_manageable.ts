@@ -1,11 +1,9 @@
-
-
 import { useAppSelector } from 'pc/store/react-redux';
 
 export function useRootManageable(): {
   rootManageable: boolean;
   isRootNodeId: (nodeId: string) => boolean;
-  } {
+} {
   const spacePermissions = useAppSelector((state) => state.spacePermissionManage.spaceResource?.permissions);
   const isSpaceAdmin = spacePermissions && spacePermissions.includes('MANAGE_WORKBENCH');
   const spaceFeatures = useAppSelector((state) => state.space.spaceFeatures);

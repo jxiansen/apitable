@@ -24,37 +24,35 @@ const StyledBox = styled(Box)`
   }
 `;
 export const EditableText: FC<{
-    className?: string,
-    value: string, placeholder?: string,
-    onChange?: (v: string) => void
+  className?: string;
+  value: string;
+  placeholder?: string;
+  onChange?: (v: string) => void;
 }> = ({ value, placeholder, className, onChange }) => {
-
   const [isEditing, setEditing] = useState(false);
 
   if (isEditing) {
-
-    return (<TextInput
-      size="small"
-      placeholder={placeholder}
-      autoFocus
-      block
-      defaultValue={value}
-      onBlur={(e) => {
-        onChange?.(e.target.value);
-        setEditing(false);
-      }}/>);
+    return (
+      <TextInput
+        size="small"
+        placeholder={placeholder}
+        autoFocus
+        block
+        defaultValue={value}
+        onBlur={(e) => {
+          onChange?.(e.target.value);
+          setEditing(false);
+        }}
+      />
+    );
   }
   return (
-
-    <StyledBox onClick={() => setEditing(true)} onDoubleClick={() => setEditing(true)} display={'inline-flex'}
-      alignItems={'center'}>
-
+    <StyledBox onClick={() => setEditing(true)} onDoubleClick={() => setEditing(true)} display={'inline-flex'} alignItems={'center'}>
       <Typography variant="h6" className={className}>
         {value ?? placeholder}
       </Typography>
 
-      <StyledOutlined/>
-
+      <StyledOutlined />
     </StyledBox>
   );
 };

@@ -1,9 +1,7 @@
-
-
 import React from 'react';
 
 export interface IRadio {
-  /** 
+  /**
    * Child elements
    */
   children?: React.ReactNode;
@@ -14,19 +12,19 @@ export interface IRadio {
   /**
    * Whether checked or unchecked
    */
-  checked?: boolean,
+  checked?: boolean;
   /**
    * Change Event
    */
-  onChange?: (e: React.ChangeEvent) => void,
+  onChange?: (e: React.ChangeEvent) => void;
   /**
    * readonly
    */
-  readOnly?: boolean,
+  readOnly?: boolean;
   /**
    * Value
    */
-  value?: any,
+  value?: any;
   /**
    * Whether disabled or not
    */

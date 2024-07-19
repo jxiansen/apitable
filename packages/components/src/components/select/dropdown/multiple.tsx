@@ -1,4 +1,3 @@
-
 import { CheckOutlined, ChevronDownOutlined } from '@apitable/icons';
 import { useToggle } from 'ahooks';
 import Color from 'color';
@@ -161,10 +160,10 @@ const MultipleSelectComp: FC<
               searchProps={
                 openSearch
                   ? {
-                    inputRef: inputRef,
-                    onSearchChange: inputOnChange,
-                    placeholder: searchPlaceholder,
-                  }
+                      inputRef: inputRef,
+                      onSearchChange: inputOnChange,
+                      placeholder: searchPlaceholder,
+                    }
                   : undefined
               }
               noDataTip={noDataTip}
@@ -343,9 +342,9 @@ export function OptionItem({
         item={
           isChecked
             ? {
-              suffixIcon: <CheckOutlined color={colors.textBrandDefault} />,
-              ...item,
-            }
+                suffixIcon: <CheckOutlined color={colors.textBrandDefault} />,
+                ...item,
+              }
             : item
         }
         renderValue={_renderValue}

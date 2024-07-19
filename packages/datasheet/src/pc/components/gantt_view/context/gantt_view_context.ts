@@ -1,5 +1,3 @@
-
-
 import { createContext } from 'react';
 import { IGanttViewStatus, IGanttViewStyle, IViewColumn } from '@apitable/core';
 import { IGanttGroupMap, ISplitterProps, ITaskLineSetting, IRowsCellValueMap, ITargetTaskInfo } from '../interface';

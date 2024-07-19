@@ -1,5 +1,3 @@
-
-
 import classnames from 'classnames';
 import isNumber from 'lodash/isNumber';
 import * as React from 'react';
@@ -83,24 +81,24 @@ export const FormFieldUI: React.FC<React.PropsWithChildren<IFormFieldUIProps>> =
         {formState?.permissions?.manageable &&
           formState?.sourceInfo?.datasheetPermissions?.manageable &&
           !formState?.fieldPermissionMap?.[fieldId] && (
-          <div className={classnames(styles.buttonsGroup, isTouchDevice() && styles.touchDevice)}>
-            <Tooltip title={t(Strings.insert_new_field_below)}>
+            <div className={classnames(styles.buttonsGroup, isTouchDevice() && styles.touchDevice)}>
+              <Tooltip title={t(Strings.insert_new_field_below)}>
+                <IconButton
+                  component="button"
+                  shape="square"
+                  icon={() => <AddOutlined size={16} color={colorVars.fc3} />}
+                  onClick={(e) => onAppendField(e, Number(colIndex))}
+                  style={{ marginRight: 8 }}
+                />
+              </Tooltip>
               <IconButton
                 component="button"
                 shape="square"
-                icon={() => <AddOutlined size={16} color={colorVars.fc3} />}
-                onClick={(e) => onAppendField(e, Number(colIndex))}
-                style={{ marginRight: 8 }}
+                icon={() => <MoreOutlined size={16} color={colorVars.fc3} />}
+                onClick={(e) => onShowMenu(e)}
               />
-            </Tooltip>
-            <IconButton
-              component="button"
-              shape="square"
-              icon={() => <MoreOutlined size={16} color={colorVars.fc3} />}
-              onClick={(e) => onShowMenu(e)}
-            />
-          </div>
-        )}
+            </div>
+          )}
       </h4>
       {/* {errorMsg && <div className={styles.errorMsg}>{errorMsg}</div>} */}
       {!descIsEmpty && (
@@ -120,9 +118,7 @@ export const FormFieldUI: React.FC<React.PropsWithChildren<IFormFieldUIProps>> =
             </LinkButton>
           )}
         >
-          <pre className={styles.fieldDesc}>
-            {desc}
-          </pre>
+          <pre className={styles.fieldDesc}>{desc}</pre>
         </Clamp>
       )}
       {children}

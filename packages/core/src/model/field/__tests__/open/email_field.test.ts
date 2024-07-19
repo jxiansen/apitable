@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType } from 'types/field_api_enums';
 import { IOpenField, IOpenFieldProperty } from 'types/open/open_field_read_types';
 import { FieldType, IEmailField } from 'types/field_types';
@@ -9,21 +7,21 @@ const emailField: IEmailField = {
   name: 'Email field',
   id: 'fld1111',
   type: FieldType.Email,
-  property: null
+  property: null,
 };
 
 const openTextField: IOpenField = {
   name: 'Email field',
   id: 'fld1111',
   type: APIMetaFieldType.Email,
-  property: null
+  property: null,
 };
 
 const writeOpenProperty: IOpenFieldProperty = null;
 
 describe('Email field read property format check', () => {
   const valid = getOpenFieldProperty(emailField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid(openTextField.property);
     expect(receiveValue).toEqual(expectValue);
   });

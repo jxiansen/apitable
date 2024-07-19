@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { useThemeColors } from '@apitable/components';
 import { CheckOutlined } from '@apitable/icons';

@@ -1,5 +1,3 @@
-
-
 import { forwardRef } from 'react';
 import * as React from 'react';
 import { ICellValue } from '@apitable/core';

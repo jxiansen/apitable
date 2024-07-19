@@ -1,5 +1,3 @@
-
-
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { Strings, t } from 'exports/i18n';
 import { IReduxState } from 'exports/store/interfaces';
@@ -38,7 +36,7 @@ export const AutomationConstant = {
 export class ButtonField extends Field {
   constructor(
     public override field: IButtonField,
-    public override state: IReduxState,
+    public override state: IReduxState
   ) {
     super(field, state);
   }
@@ -74,7 +72,7 @@ export class ButtonField extends Field {
       type: Joi.number().valid(ButtonFieldStyleNameEnum.Background, ButtonFieldStyleNameEnum.OnlyText),
       color: Joi.object({
         name: Joi.string(),
-        value: Joi.string()
+        value: Joi.string(),
       }),
     }),
     action: Joi.object({
@@ -94,20 +92,22 @@ export class ButtonField extends Field {
         type: property.style.type === ButtonStyleType.OnlyText ? ButtonFieldStyleNameEnum.OnlyText : ButtonFieldStyleNameEnum.Background,
         color: getFieldOptionColor(property.style.color),
       },
-      action: {}
+      action: {},
     } as IAPIMetaButtonFieldProperty;
-  
+
     if (property.action) {
       const action = {} as any;
       if (property.action.type) {
-        action.type = property.action.type === ButtonActionType.TriggerAutomation
-          ? ButtonFieldActionNameEnum.TriggerAutomation : ButtonFieldActionNameEnum.OpenLink;
+        action.type =
+          property.action.type === ButtonActionType.TriggerAutomation
+            ? ButtonFieldActionNameEnum.TriggerAutomation
+            : ButtonFieldActionNameEnum.OpenLink;
       }
       if (property.action.openLink) {
         action.openLink = {
-          type: property.action.openLink.type === OpenLinkType.Url
-            ? ButtonFieldActionOpenLinkNameEnum.Url : ButtonFieldActionOpenLinkNameEnum.Expression,
-          expression: property.action.openLink.expression
+          type:
+            property.action.openLink.type === OpenLinkType.Url ? ButtonFieldActionOpenLinkNameEnum.Url : ButtonFieldActionOpenLinkNameEnum.Expression,
+          expression: property.action.openLink.expression,
         };
       }
       if (property.action.automation) {
@@ -178,12 +178,7 @@ export class ButtonField extends Field {
   }
 
   validateProperty() {
-    const newProperty = pick(this.field.property,
-      'datasheetId',
-      'text',
-      'style',
-      'action',
-    );
+    const newProperty = pick(this.field.property, 'datasheetId', 'text', 'style', 'action');
     return ButtonField.propertySchema.validate(newProperty);
   }
 
@@ -270,20 +265,20 @@ export class ButtonField extends Field {
   }
 
   getStyleTypeByName(name?: string) {
-    if(name === ButtonFieldStyleNameEnum.Background) {
+    if (name === ButtonFieldStyleNameEnum.Background) {
       return ButtonStyleType.Background;
     }
-    if(name === ButtonFieldStyleNameEnum.OnlyText) {
+    if (name === ButtonFieldStyleNameEnum.OnlyText) {
       return ButtonStyleType.OnlyText;
     }
     return ButtonStyleType.Background;
   }
 
   getOpenLinkTypeByName(name?: string) {
-    if(name === ButtonFieldActionOpenLinkNameEnum.Url) {
+    if (name === ButtonFieldActionOpenLinkNameEnum.Url) {
       return OpenLinkType.Url;
     }
-    if(name === ButtonFieldActionOpenLinkNameEnum.Expression) {
+    if (name === ButtonFieldActionOpenLinkNameEnum.Expression) {
       return OpenLinkType.Expression;
     }
     return OpenLinkType.Url;

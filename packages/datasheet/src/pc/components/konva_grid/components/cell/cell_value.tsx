@@ -1,5 +1,3 @@
-
-
 import { ShapeConfig } from 'konva/lib/Shape';
 import { FC, memo } from 'react';
 import { CollaCommandName, FieldType, ICellValue, IField } from '@apitable/core';

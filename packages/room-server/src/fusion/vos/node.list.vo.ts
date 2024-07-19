@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { NodeListDto } from '../dtos/node.list.dto';
 import { ApiResponse } from './api.response';

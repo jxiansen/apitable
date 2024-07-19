@@ -1,5 +1,1 @@
-
-
-export class RoomConstants {
-
-}
+export class RoomConstants {}

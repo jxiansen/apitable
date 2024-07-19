@@ -1,5 +1,3 @@
-
-
 import { IDashboardLayout, IDashboardSnapshot } from '../exports/store/interfaces';
 import { IJOTAction } from 'engine';
 import { OTActionName } from '../engine/ot';
@@ -10,7 +8,7 @@ export class DashboardAction {
     snapshot: IDashboardSnapshot,
     options: {
       layout: IDashboardLayout[];
-    },
+    }
   ): IJOTAction[] | null {
     const widgetInstallations = snapshot.widgetInstallations;
     const widgetCount = widgetInstallations.layout?.length;
@@ -42,7 +40,7 @@ export class DashboardAction {
   // delete widget
   static deleteWidget2Action(snapshot: IDashboardSnapshot, widgetId: string): IJOTAction[] | null {
     const layout = snapshot.widgetInstallations.layout!;
-    const layoutIndex = layout.findIndex(item => item.id === widgetId);
+    const layoutIndex = layout.findIndex((item) => item.id === widgetId);
 
     return [
       {

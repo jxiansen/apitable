@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import { ILabs, ILabsAction } from '../../../../exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';

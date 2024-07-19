@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { useThemeColors } from '@apitable/components';
 import { IAttachmentValue, IUserInfo, Settings, Strings, t } from '@apitable/core';

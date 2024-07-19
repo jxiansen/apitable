@@ -1,5 +1,3 @@
-
-
 import { get, keyBy, sortBy } from 'lodash';
 import LRU from 'lru-cache';
 import { colors, ThemeName } from '@apitable/components';
@@ -1238,7 +1236,7 @@ export class CellHelper extends KonvaDrawer {
     const emptyRecords: string[] = [];
 
     if (!linkRecordIds?.length) return DEFAULT_RENDER_DATA;
-    let linkInfoList: { recordId: string; text: string | symbol | null, disabled?: boolean }[] = [];
+    let linkInfoList: { recordId: string; text: string | symbol | null; disabled?: boolean }[] = [];
     linkInfoList = linkRecordIds.map((recordId) => {
       if (!snapshot) {
         return {
@@ -1252,21 +1250,21 @@ export class CellHelper extends KonvaDrawer {
           return {
             recordId,
             text: ARCHIVED_DATA,
-            disabled: true
+            disabled: true,
           };
         }
         if (!isLoading && datasheetClient!.loadingRecord[recordId] === 'error') {
           return {
             recordId,
             text: ERROR_DATA,
-            disabled: true
+            disabled: true,
           };
         }
         emptyRecords.push(recordId);
         return {
           recordId,
           text: NO_DATA,
-          disabled: true
+          disabled: true,
         };
       }
       return {

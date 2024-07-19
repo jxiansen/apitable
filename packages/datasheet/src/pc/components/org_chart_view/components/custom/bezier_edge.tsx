@@ -1,5 +1,3 @@
-
-
 import { FC, memo } from 'react';
 import { useThemeColors } from '@apitable/components';
 import { EdgeProps, getBezierPath } from '@apitable/react-flow';

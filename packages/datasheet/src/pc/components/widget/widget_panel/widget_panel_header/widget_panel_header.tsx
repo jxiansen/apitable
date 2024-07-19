@@ -1,5 +1,3 @@
-
-
 import RcTrigger from 'rc-trigger';
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';

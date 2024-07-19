@@ -1,5 +1,3 @@
-
-
 import { IExpression, OperandTypeEnums } from 'automation_manager/interface';
 import { MagicVariableParserABC } from 'automation_manager/interface/magic_variable.interface';
 
@@ -36,7 +34,7 @@ export class MagicVariableParser<T> extends MagicVariableParserABC<T> {
       throw Error(`${expression.operator} not implemented.`);
     }
     const { operands } = expression;
-    const args = operands.map(operand => {
+    const args = operands.map((operand) => {
       if (typeof operand === 'string') {
         return operand;
       }

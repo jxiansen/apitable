@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Radio } from './index';
 import { StoryType } from '../../stories/constants';
@@ -18,8 +16,8 @@ export default {
   },
   args: {
     children: 'Radio',
-    value: '1'
-  }
+    value: '1',
+  },
 };
 
 const Template: Story<any> = (args) => <Radio {...args} />;
@@ -46,5 +44,5 @@ export const ChangeCallback = Template.bind({});
 ChangeCallback.args = {
   onChange: () => {
     alert('Checked 😁');
-  }
+  },
 };

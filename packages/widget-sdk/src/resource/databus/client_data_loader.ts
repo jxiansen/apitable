@@ -12,7 +12,7 @@ export class ClientDataLoader implements databus.IDataLoader {
     const state = getState();
 
     dispatch(StoreActions.requestDatasheetPack(datasheetId));
-    let response: {data: IApiWrapper & { data: IServerDatasheetPack }};
+    let response: { data: IApiWrapper & { data: IServerDatasheetPack } };
     try {
       response = await StoreActions.fetchDatasheetApi(datasheetId, shareId, templateId, embedId, recordIds);
       if (!response.data.success && state.catalogTree.treeNodesMap[datasheetId]) {

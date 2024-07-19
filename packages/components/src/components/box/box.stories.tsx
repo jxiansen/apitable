@@ -1,5 +1,3 @@
-
-
 import styled from 'styled-components';
 import React from 'react';
 import { StoryType } from '../../stories/constants';
@@ -20,7 +18,7 @@ export const TmpComponent = () => {
     border: '1px solid #f6f6f6',
     boxShadow: '0 2px 4px rgba(0, 0, 0, .125)',
     minHeight: '100px',
-    padding: '16px'
+    padding: '16px',
   });
   return <Card>Card component</Card>;
 };

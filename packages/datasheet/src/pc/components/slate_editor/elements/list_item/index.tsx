@@ -1,5 +1,3 @@
-
-
 import cx from 'classnames';
 import { useMemo } from 'react';
 import { IElementRenderProps, IElement } from '../../interface/element';

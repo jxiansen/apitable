@@ -1,5 +1,3 @@
-
-
 import { RedisService } from '@apitable/nestjs-redis';
 import { Injectable } from '@nestjs/common';
 import * as util from 'util';
@@ -10,9 +8,7 @@ import { CacheKeys, STORAGE_EXPIRE_TIME } from '../../common';
  */
 @Injectable()
 export class ClientStorage {
-  constructor(
-    private readonly redisService: RedisService,
-  ) { }
+  constructor(private readonly redisService: RedisService) {}
 
   /**
    * Obtain socket info by socket ID
@@ -32,9 +28,9 @@ export class ClientStorage {
    */
   async mget<T>(socketIds: string[]): Promise<T[]> {
     const client = this.redisService.getClient();
-    const ids = socketIds.map(id => util.format(CacheKeys.SOCKET, id));
+    const ids = socketIds.map((id) => util.format(CacheKeys.SOCKET, id));
     const raws = await client.mget(...ids);
-    return raws.map(raw => {
+    return raws.map((raw) => {
       if (raw) {
         return JSON.parse(raw);
       }

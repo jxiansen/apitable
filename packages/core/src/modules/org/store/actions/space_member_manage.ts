@@ -1,12 +1,4 @@
-
-
-import {
-  ISelectedTeamInfoInSpace,
-  IMemberInfoInSpace,
-  ISubTeamListInSpaceBase,
-  ITeamListInSpace,
-  IInviteMemberList,
-} from 'exports/store/interfaces';
+import { ISelectedTeamInfoInSpace, IMemberInfoInSpace, ISubTeamListInSpaceBase, ITeamListInSpace, IInviteMemberList } from 'exports/store/interfaces';
 import { Api } from 'exports/api';
 import * as actions from '../../../shared/store/action_constants';
 import { ConfigConstant } from 'config';
@@ -83,16 +75,22 @@ export function selecteTeamRowsInModal(arr: ISubTeamListInSpaceBase[]) {
  */
 export function getTeamInfo(_spaceId: string, teamId: string) {
   return (dispatch: any) => {
-    Api.readTeam(teamId).then(res => {
-      const { success, data } = res.data;      
-      success && dispatch(updateSelectedTeamInfoInSpace({
-        teamTitle: data.teamName,
-        memberCount: data.memberCount,
-        teamId: data.teamId,
-      }));
-    }, err => {
-      console.error('API.readTeam', err);
-    });
+    Api.readTeam(teamId).then(
+      (res) => {
+        const { success, data } = res.data;
+        success &&
+          dispatch(
+            updateSelectedTeamInfoInSpace({
+              teamTitle: data.teamName,
+              memberCount: data.memberCount,
+              teamId: data.teamId,
+            })
+          );
+      },
+      (err) => {
+        console.error('API.readTeam', err);
+      }
+    );
   };
 }
 /**
@@ -101,24 +99,33 @@ export function getTeamInfo(_spaceId: string, teamId: string) {
  */
 export function sendInviteEmail(spaceId: string, invite: IInviteMemberList[]) {
   return (dispatch: any) => {
-    Api.sendInvite(spaceId, invite).then(res => {
-      const { success } = res.data;
-      dispatch(updateInviteStatus(true));
-      if (success) {
-        Api.readTeam('0').then(res => {
-          const { success, data } = res.data;
-          success && dispatch(updateSelectedTeamInfoInSpace({
-            teamTitle: data.teamName,
-            memberCount: data.memberCount,
-            teamId: data.teamId,
-          }));
-        }, err => {
-          console.error('API.readTeam', err);
-        });
+    Api.sendInvite(spaceId, invite).then(
+      (res) => {
+        const { success } = res.data;
+        dispatch(updateInviteStatus(true));
+        if (success) {
+          Api.readTeam('0').then(
+            (res) => {
+              const { success, data } = res.data;
+              success &&
+                dispatch(
+                  updateSelectedTeamInfoInSpace({
+                    teamTitle: data.teamName,
+                    memberCount: data.memberCount,
+                    teamId: data.teamId,
+                  })
+                );
+            },
+            (err) => {
+              console.error('API.readTeam', err);
+            }
+          );
+        }
+      },
+      (err) => {
+        console.error('API.sendInvite', err);
       }
-    }, err => {
-      console.error('API.sendInvite', err);
-    });
+    );
   };
 }
 /**
@@ -132,15 +139,18 @@ export function getMemberListDataInSpace(pageNo: number, teamId?: string) {
     sort: ConfigConstant.SORT_ASC,
   };
   return (dispatch: any) => {
-    Api.getMemberListInSpace(JSON.stringify({ ...pageObjectParams, pageNo }), teamId).then(res => {
-      const { success, data } = res.data;
-      if (success) {
-        const memberListInSpace: IMemberInfoInSpace[] = data.records;
-        dispatch(updateMemberListInSpace(memberListInSpace));
+    Api.getMemberListInSpace(JSON.stringify({ ...pageObjectParams, pageNo }), teamId).then(
+      (res) => {
+        const { success, data } = res.data;
+        if (success) {
+          const memberListInSpace: IMemberInfoInSpace[] = data.records;
+          dispatch(updateMemberListInSpace(memberListInSpace));
+        }
+      },
+      (err) => {
+        console.error('API.getMemberListInSpace', err);
       }
-    }, err => {
-      console.error('API.getMemberListInSpace', err);
-    });
+    );
   };
 }
 
@@ -150,13 +160,16 @@ export function getMemberListDataInSpace(pageNo: number, teamId?: string) {
  */
 export function getEditMemberInfo(memberId: string) {
   return (dispatch: any) => {
-    Api.getMemberInfo({ memberId }).then(res => {
-      if (res.data.success) {
-        dispatch(updateMemberInfoInSpace(res.data.data));
+    Api.getMemberInfo({ memberId }).then(
+      (res) => {
+        if (res.data.success) {
+          dispatch(updateMemberInfoInSpace(res.data.data));
+        }
+      },
+      (err) => {
+        console.error('API.getMemberInfo', err);
       }
-    }, err => {
-      console.error('API.getMemberInfo', err);
-    });
+    );
   };
 }
 
@@ -166,14 +179,16 @@ export function getEditMemberInfo(memberId: string) {
  */
 export function getSubTeamListDataInSpace(teamId: string) {
   return (dispatch: any) => {
-    Api.getSubTeams(teamId).then(res => {
-      const { success, data } = res.data;
-      if (success) {
-        dispatch(updateSubTeamListInSpace(data));
+    Api.getSubTeams(teamId).then(
+      (res) => {
+        const { success, data } = res.data;
+        if (success) {
+          dispatch(updateSubTeamListInSpace(data));
+        }
+      },
+      (err) => {
+        console.error('API.getSubTeams', err);
       }
-    }, err => {
-      console.error('API.getSubTeams', err);
-    });
+    );
   };
 }
-

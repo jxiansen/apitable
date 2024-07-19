@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { Tooltip, useThemeColors } from '@apitable/components';
 import { ConfigConstant, Selectors, Strings, t } from '@apitable/core';

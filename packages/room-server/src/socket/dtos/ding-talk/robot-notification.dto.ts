@@ -1,5 +1,3 @@
-
-
 import { RobotNotificationTypeEnum } from 'shared/enums/ding-talk/robot-notification-type.enum';
 
 interface INotificationAt {

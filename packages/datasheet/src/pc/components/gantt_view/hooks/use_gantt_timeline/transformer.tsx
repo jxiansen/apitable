@@ -1,5 +1,3 @@
-
-
 import { Transformer as TransformerComponent } from 'react-konva';
 
 const Transformer = (props: any) => {

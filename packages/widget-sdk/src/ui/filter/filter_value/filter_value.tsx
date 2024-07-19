@@ -9,7 +9,7 @@ import { FilterRating } from './filter_rating';
 import { FilterSelect } from './filter_select';
 import { FilterDate } from './filter_date/filter_date';
 
-export const FilterValue: React.FC<IFilterValueProps> = props => {
+export const FilterValue: React.FC<IFilterValueProps> = (props) => {
   const { onChange, value, field: _field, operator } = props;
 
   let field = _field;
@@ -35,66 +35,22 @@ export const FilterValue: React.FC<IFilterValueProps> = props => {
   function Editor(editorType: EditorType) {
     switch (editorType) {
       case EditorType.Text:
-        return (
-          (
-            <FilterText
-              value={value}
-              field={field}
-              onChange={onChange}
-            />
-          )
-        );
+        return <FilterText value={value} field={field} onChange={onChange} />;
       case EditorType.Boolean:
-        return (
-          <FilterCheckbox
-            value={value}
-            field={field}
-            onChange={onChange}
-          />
-        );
+        return <FilterCheckbox value={value} field={field} onChange={onChange} />;
       case EditorType.Number:
       case EditorType.Currency:
       case EditorType.Percent:
-        return (
-          (
-            <FilterNumber
-              field={field}
-              value={value}
-              onChange={onChange}
-            />
-          )
-        );
+        return <FilterNumber field={field} value={value} onChange={onChange} />;
       case EditorType.None:
         return <div />;
       case EditorType.Rating:
-        return (
-          (
-            <FilterRating
-              field={field}
-              value={value}
-              onChange={onChange}
-            />
-          )
-        );
+        return <FilterRating field={field} value={value} onChange={onChange} />;
       case EditorType.Options: {
-        return (
-          <FilterSelect
-            field={field}
-            value={value}
-            onChange={onChange}
-            operator={operator}
-          />
-        );
+        return <FilterSelect field={field} value={value} onChange={onChange} operator={operator} />;
       }
       case EditorType.DateTime: {
-        return (
-          <FilterDate
-            field={field}
-            value={value}
-            onChange={onChange}
-            operator={operator}
-          />
-        );
+        return <FilterDate field={field} value={value} onChange={onChange} operator={operator} />;
       }
       default:
         console.error('%s is not a never type', field.type);
@@ -105,9 +61,5 @@ export const FilterValue: React.FC<IFilterValueProps> = props => {
   // Determine if a field of this type requires an input box.
   const isDisplay = ![FOperator.IsEmpty, FOperator.IsNotEmpty].includes(operator);
 
-  return (
-    <div>
-      {isDisplay && Editor(editorType)}
-    </div>
-  );
+  return <div>{isDisplay && Editor(editorType)}</div>;
 };

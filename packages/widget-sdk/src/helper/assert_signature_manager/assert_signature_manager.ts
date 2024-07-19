@@ -24,7 +24,7 @@ export class AssertSignatureManager {
   private _batchUpdateAssertSignatureMap;
 
   constructor() {
-    this._batchUpdateAssertSignatureMap = debounce(async(strings) => {
+    this._batchUpdateAssertSignatureMap = debounce(async (strings) => {
       this.fetchQueue.clear();
       const subscribeSignatureSet = [...this.subscribeSignatureSet];
       this.subscribeSignatureSet.clear();

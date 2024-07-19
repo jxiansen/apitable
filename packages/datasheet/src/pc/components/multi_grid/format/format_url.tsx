@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { Dispatch, SetStateAction } from 'react';
 import { Switch } from '@apitable/components';

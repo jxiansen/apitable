@@ -61,7 +61,7 @@ const StyleIcon = styled(Box)`
   }
 `;
 
-export const AutomationPanel: FC<{ onClose?: () => void; resourceId?: string, panel?: IAutomationPanel }> = memo(({ onClose, panel, resourceId }) => {
+export const AutomationPanel: FC<{ onClose?: () => void; resourceId?: string; panel?: IAutomationPanel }> = memo(({ onClose, panel, resourceId }) => {
   const { show } = useContextMenu({ id: MenuID });
 
   const { currentRobotId } = useAutomationRobot();
@@ -90,9 +90,9 @@ export const AutomationPanel: FC<{ onClose?: () => void; resourceId?: string, pa
     }
   });
 
-  const [loading, setLoading] =useState(true);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(()=> {
+  useEffect(() => {
     setLoading(true);
   }, [resourceId]);
 
@@ -101,7 +101,7 @@ export const AutomationPanel: FC<{ onClose?: () => void; resourceId?: string, pa
       setLoading(false);
       return;
     }
-    if(!loading){
+    if (!loading) {
       return;
     }
     setLoading(true);
@@ -114,9 +114,9 @@ export const AutomationPanel: FC<{ onClose?: () => void; resourceId?: string, pa
           shareId: shareInfo?.shareId,
         });
 
-        if(panel) {
+        if (panel) {
           setPanel(panel);
-        }else {
+        } else {
           if (cache.id !== resourceId) {
             setPanel({
               panelName: isLg ? undefined : PanelName.BasicInfo,
@@ -150,7 +150,8 @@ export const AutomationPanel: FC<{ onClose?: () => void; resourceId?: string, pa
       })
       .catch((e) => {
         console.log(e);
-      }).finally(()=> {
+      })
+      .finally(() => {
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -222,9 +223,7 @@ export const AutomationPanel: FC<{ onClose?: () => void; resourceId?: string, pa
     return null;
   }
   if (currentRobotId == null && !loading) {
-    return (
-      <NoPermission />
-    );
+    return <NoPermission />;
   }
 
   return (
@@ -280,16 +279,14 @@ export const AutomationPanel: FC<{ onClose?: () => void; resourceId?: string, pa
                   <InputTitle />
                   {automationState?.scenario === AutomationScenario.node && (
                     <>
-                      {
-                        nodeItem && (
-                          <OrEmpty visible={shareInfo?.shareId == null}>
-                            <NodeFavoriteStatus
-                              nodeId={automationState?.resourceId ?? ''}
-                              enabled={nodeItem?.nodeFavorite || favoriteTreeNodeIds.includes(nodeItem.nodeId)}
-                            />
-                          </OrEmpty>
-                        )
-                      }
+                      {nodeItem && (
+                        <OrEmpty visible={shareInfo?.shareId == null}>
+                          <NodeFavoriteStatus
+                            nodeId={automationState?.resourceId ?? ''}
+                            enabled={nodeItem?.nodeFavorite || favoriteTreeNodeIds.includes(nodeItem.nodeId)}
+                          />
+                        </OrEmpty>
+                      )}
                       {!templateId && (
                         <Box marginX={'4px'}>
                           <Tag

@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 
 export interface ILineSearchInputProps {
@@ -8,11 +6,11 @@ export interface ILineSearchInputProps {
   placeholder?: string;
   className?: string;
   showCloseIcon?: boolean;
-  onChange?(e: React.ChangeEvent): void
-  onPressEnter?(e: KeyboardEvent): void
-  onFocus?(e: React.FocusEvent): void
+  onChange?(e: React.ChangeEvent): void;
+  onPressEnter?(e: KeyboardEvent): void;
+  onFocus?(e: React.FocusEvent): void;
   style?: React.CSSProperties;
-  showClearIcon?: boolean
+  showClearIcon?: boolean;
   clearClick?(): void;
 }
 

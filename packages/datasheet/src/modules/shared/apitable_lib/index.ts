@@ -1,5 +1,3 @@
-
-
 import { t, Player } from '@apitable/core';
 import * as nav from './nav';
 

@@ -1,5 +1,3 @@
-
-
 import { IFormProps } from '../exports/store/interfaces';
 import { IJOTAction } from 'engine';
 import { OTActionName } from '../engine/ot';
@@ -10,7 +8,7 @@ export class FormAction {
   static updatePropsAction(
     formProps: IFormProps,
     options: {
-      partialProps: Partial<IFormProps>
+      partialProps: Partial<IFormProps>;
     }
   ): IJOTAction[] {
     const { partialProps } = options;
@@ -29,5 +27,4 @@ export class FormAction {
     }
     return actions;
   }
-
 }

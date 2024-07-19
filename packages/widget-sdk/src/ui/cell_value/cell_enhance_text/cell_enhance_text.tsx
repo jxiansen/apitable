@@ -1,5 +1,3 @@
-
-
 import { string2Segment, SegmentType } from '@apitable/core';
 import React, { CSSProperties } from 'react';
 import { CellEmail } from '../cell_email';
@@ -27,7 +25,7 @@ export const CellEnhanceText = (props: ICellEnhanceText) => {
         if (enhanceText.type === SegmentType.Email) {
           return <CellEmail key={index} value={enhanceText.link} />;
         }
-        return <CellText key={index} text={enhanceText.text}/>;
+        return <CellText key={index} text={enhanceText.text} />;
       })}
     </div>
   );

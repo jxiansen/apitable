@@ -1,5 +1,3 @@
-
-
 import { Strings, t } from '../../exports/i18n';
 import { ViewType } from '../../modules/shared/store/constants';
 import { IGridViewProperty, ISnapshot, IViewColumn, IViewProperty } from '../../exports/store/interfaces';
@@ -32,11 +30,11 @@ export class GridView extends View {
 
     if (srcView) {
       if (srcView.type === ViewType.Grid) {
-        columns = srcView.columns.map(item => {
+        columns = srcView.columns.map((item) => {
           return { fieldId: item.fieldId, width: item.width };
         });
       } else {
-        columns = (srcView.columns as IViewColumn[]).map(item => {
+        columns = (srcView.columns as IViewColumn[]).map((item) => {
           return { fieldId: item.fieldId };
         });
       }
@@ -52,7 +50,7 @@ export class GridView extends View {
       columns,
       rows: this.defaultRows(srcView),
       frozenColumnCount: 1,
-      displayHiddenColumnWithinMirror: false
+      displayHiddenColumnWithinMirror: false,
     };
   }
 

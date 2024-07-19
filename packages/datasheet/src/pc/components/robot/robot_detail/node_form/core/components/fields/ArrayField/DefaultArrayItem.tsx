@@ -1,5 +1,3 @@
-
-
 import IconButton from '../../common/IconButton';
 
 // Used in the two templates

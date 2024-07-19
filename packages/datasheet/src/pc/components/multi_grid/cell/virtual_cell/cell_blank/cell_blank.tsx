@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { ILinearRowBlank } from '@apitable/core';
 import { GRAY_COLOR_BORDER } from '../cell_group_tab/cell_group_tab';

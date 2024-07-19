@@ -1,5 +1,3 @@
-
-
 import { compact } from 'lodash';
 import { ActionType } from 'pc/components/home/pc_home';
 import { getEnvVariables } from 'pc/utils/env';
@@ -7,7 +5,7 @@ import styles from './style.module.less';
 
 interface INavBar {
   action?: ActionType;
-  gap?: number
+  gap?: number;
 }
 
 export const NavBar: React.FC<React.PropsWithChildren<INavBar>> = (props) => {

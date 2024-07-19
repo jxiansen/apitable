@@ -11,7 +11,7 @@ const db = MockDataBus.getDatabase();
 describe('dashboard info', () => {
   beforeAll(resetDataLoader);
 
-  test('basic dashboard info', async() => {
+  test('basic dashboard info', async () => {
     const dsb1 = await db.getDashboard('dsb1', {
       loadOptions: {},
       storeOptions: {},
@@ -27,7 +27,7 @@ describe('dashboard info', () => {
 });
 
 describe('getFields', () => {
-  it('should not include hidden fields by default', async() => {
+  it('should not include hidden fields by default', async () => {
     const dst1 = await db.getDatasheet('dst1', {
       loadOptions: {},
       storeOptions: {},
@@ -41,12 +41,12 @@ describe('getFields', () => {
 
     const fields = await view2!.getFields({});
 
-    const fieldIds = fields.map(field => field.id);
+    const fieldIds = fields.map((field) => field.id);
 
     expect(fieldIds).toStrictEqual(['fld1']);
   });
 
-  it('should include hidden fields if includeHidden is true', async() => {
+  it('should include hidden fields if includeHidden is true', async () => {
     const dst1 = await db.getDatasheet('dst1', {
       loadOptions: {},
       storeOptions: {},
@@ -62,7 +62,7 @@ describe('getFields', () => {
       includeHidden: true,
     });
 
-    const fieldIds = fields.map(field => field.id);
+    const fieldIds = fields.map((field) => field.id);
 
     expect(fieldIds).toStrictEqual(['fld1', 'fld2']);
   });
@@ -71,7 +71,7 @@ describe('getFields', () => {
 describe('add widget', () => {
   beforeEach(resetDataLoader);
 
-  test('add single widget to empty dashboard', async() => {
+  test('add single widget to empty dashboard', async () => {
     const dsb1 = await db.getDashboard('dsb1', {
       loadOptions: {},
       storeOptions: {},
@@ -134,7 +134,7 @@ describe('add widget', () => {
     });
   });
 
-  test('add single widget to non-empty dashboard', async() => {
+  test('add single widget to non-empty dashboard', async () => {
     const dsb2 = await db.getDashboard('dsb2', {
       loadOptions: {},
       storeOptions: {},
@@ -199,7 +199,7 @@ describe('add widget', () => {
 describe('delete widget', () => {
   beforeEach(resetDataLoader);
 
-  test('delete single widget', async() => {
+  test('delete single widget', async () => {
     const dsb2 = await db.getDashboard('dsb2', {
       loadOptions: {},
       storeOptions: {},
@@ -260,7 +260,7 @@ describe('delete widget', () => {
     });
   });
 
-  test('delete non-existent widget', async() => {
+  test('delete non-existent widget', async () => {
     const dsb2 = await db.getDashboard('dsb2', {
       loadOptions: {},
       storeOptions: {},
@@ -276,7 +276,7 @@ describe('delete widget', () => {
 describe('set widget dependency datasheet', () => {
   beforeEach(resetDataLoader);
 
-  test('set single widget', async() => {
+  test('set single widget', async () => {
     const dsb2 = await db.getDashboard('dsb2', {
       loadOptions: {},
       storeOptions: {},
@@ -304,7 +304,7 @@ describe('set widget dependency datasheet', () => {
           od: undefined,
           oi: 'dst1',
           p: ['datasheetId'],
-        }
+        },
       ],
     };
 

@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react';
 import { IFieldProps } from '../../interface';
 import { asNumber } from '../../utils';

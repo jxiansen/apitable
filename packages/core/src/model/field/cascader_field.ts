@@ -23,7 +23,7 @@ export class CascaderField extends TextBaseField {
           id: Joi.string().required(),
           name: Joi.string().required(),
           type: Joi.number().required(),
-        }),
+        })
       )
       .required(),
     fullLinkedFields: Joi.array()
@@ -32,7 +32,7 @@ export class CascaderField extends TextBaseField {
           id: Joi.string().required(),
           name: Joi.string().required(),
           type: Joi.number().required(),
-        }),
+        })
       )
       .required(),
   }).required();

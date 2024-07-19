@@ -1,5 +1,3 @@
-
-
 import { Tooltip } from 'antd';
 import * as React from 'react';
 import { useContext, useMemo } from 'react';
@@ -17,7 +15,13 @@ import {
   t,
 } from '@apitable/core';
 import {
-  AddOutlined, ChevronRightOutlined, ClassOutlined, CloseOutlined, OneWayLinkOutlined, TwoWayLinkOutlined, QuestionCircleOutlined
+  AddOutlined,
+  ChevronRightOutlined,
+  ClassOutlined,
+  CloseOutlined,
+  OneWayLinkOutlined,
+  TwoWayLinkOutlined,
+  QuestionCircleOutlined,
 } from '@apitable/icons';
 import { TriggerCommands } from 'modules/shared/apphook/trigger_commands';
 import { FieldPermissionLock } from 'pc/components/field_permission';
@@ -69,8 +73,12 @@ export const OrgChartSettingPanel: React.FC<React.PropsWithChildren<IOrgChartSet
           value: column.fieldId,
           label: fieldMap[column.fieldId].name,
           disabled: (fieldMap[column.fieldId] as ILinkField).property.foreignDatasheetId !== datasheetId,
-          prefixIcon: fieldMap[column.fieldId].type === FieldType.Link ?
-            <TwoWayLinkOutlined color={colors.thirdLevelText} /> : <OneWayLinkOutlined color={colors.thirdLevelText} />,
+          prefixIcon:
+            fieldMap[column.fieldId].type === FieldType.Link ? (
+              <TwoWayLinkOutlined color={colors.thirdLevelText} />
+            ) : (
+              <OneWayLinkOutlined color={colors.thirdLevelText} />
+            ),
           disabledTip: t(Strings.org_chart_choose_a_self_link_field),
         });
       });

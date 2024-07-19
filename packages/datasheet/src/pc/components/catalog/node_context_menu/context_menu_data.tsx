@@ -1,5 +1,3 @@
-
-
 import { ShortcutActionName } from 'modules/shared/shortcut_key';
 import { getShortcutKeyString } from 'modules/shared/shortcut_key/keybinding_config';
 import { isMobile } from 'react-device-detect';

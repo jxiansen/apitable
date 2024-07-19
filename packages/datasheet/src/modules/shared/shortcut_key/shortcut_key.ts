@@ -1,5 +1,3 @@
-
-
 import { isEmpty } from 'lodash';
 import { ContextName, ShortcutActionName } from 'modules/shared/shortcut_key/enum';
 import {

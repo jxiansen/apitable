@@ -1,5 +1,3 @@
-
-
 interface ILabelInputProps {
   label: string;
   id: string;

@@ -1,10 +1,18 @@
-
-
 import { Store } from 'redux';
 import without from 'lodash/without';
 import {
-  ExpCache, Field, FieldType, LookUpField, ResourceType, Selectors, StoreActions,
-  IDatasheetMap, IFieldMap, ILinkField, ILookUpField, IReduxState,
+  ExpCache,
+  Field,
+  FieldType,
+  LookUpField,
+  ResourceType,
+  Selectors,
+  StoreActions,
+  IDatasheetMap,
+  IFieldMap,
+  ILinkField,
+  ILookUpField,
+  IReduxState,
 } from 'core';
 import { IResourceService } from '../resource/interface';
 
@@ -12,9 +20,10 @@ export function eqSet<T>(as: Set<T>, bs: Set<T>): boolean {
   if (as.size !== bs.size) {
     return false;
   }
-  for (const a of as) if (!bs.has(a)) {
-    return false;
-  }
+  for (const a of as)
+    if (!bs.has(a)) {
+      return false;
+    }
   return true;
 }
 
@@ -40,7 +49,7 @@ export const subscribeDatasheetMap = (store: Store<IReduxState>, datasheetServic
       return store.dispatch(StoreActions.fetchDatasheet(datasheetId) as any);
     }
     const fieldMap = Selectors.getFieldMap(state, datasheetId)!;
-    const lookUpFields = Object.values(fieldMap).filter(field => field.type === FieldType.LookUp) as ILookUpField[];
+    const lookUpFields = Object.values(fieldMap).filter((field) => field.type === FieldType.LookUp) as ILookUpField[];
     let index = 1;
 
     const findNextLookUpField = (field: ILookUpField, fieldMap: IFieldMap, visitedField?: Set<string>) => {
@@ -88,9 +97,11 @@ export const subscribeDatasheetMap = (store: Store<IReduxState>, datasheetServic
       return;
     }
 
-    datasheetIdSet = new Set(Object.keys(datasheetMap).filter(id => {
-      return Boolean(datasheetMap![id]!.datasheet) && !datasheetMap![id]!.datasheet?.preview;
-    }));
+    datasheetIdSet = new Set(
+      Object.keys(datasheetMap).filter((id) => {
+        return Boolean(datasheetMap![id]!.datasheet) && !datasheetMap![id]!.datasheet?.preview;
+      })
+    );
     if (eqSet(previousDatasheetIdSet, datasheetIdSet)) {
       return;
     }
@@ -101,28 +112,23 @@ export const subscribeDatasheetMap = (store: Store<IReduxState>, datasheetServic
     const entityDatasheetIds = [...collaEngineKeys];
     const diff = without(currentDatasheetIds, ...entityDatasheetIds);
     // console.log('create datasheetService', diff);
-    diff.forEach(id => {
+    diff.forEach((id) => {
       datasheetService.instance!.createCollaEngine(id, ResourceType.Datasheet);
     });
     const computeRefManager = datasheetService.instance!.computeRefManager;
     const newList = diff.reduce((p: string[], c) => {
-      return p.concat(
-        c,
-        ...computeRefManager.getToComputeDsts(c)
-      );
+      return p.concat(c, ...computeRefManager.getToComputeDsts(c));
     }, []);
     const uniqueList = Array.from(new Set(newList).values());
     // Why should I clear the cache of formula parsing? See also:
     // https://www.notion.so/Debug-2021-03-29-a5a756dc2c9640e2957103c9bb5eeebd#bd1ef9866f504b8c85be4c27088f9ada.
     ExpCache.clearAll();
-    uniqueList.forEach(id => {
+    uniqueList.forEach((id) => {
       linkLookUpField(id);
       const fieldMap = datasheetMap[id]!.datasheet!.snapshot.meta.fieldMap;
       datasheetService.instance!.computeRefManager.computeRefMap(fieldMap, id, state);
     });
 
-    diff.forEach(item =>
-      computeRefManager.setDstComputed(item)
-    );
+    diff.forEach((item) => computeRefManager.setDstComputed(item));
   });
 };

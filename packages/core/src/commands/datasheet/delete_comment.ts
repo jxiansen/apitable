@@ -1,5 +1,3 @@
-
-
 import { ResourceType } from 'types';
 import { getRecord } from 'modules/database/store/selectors/resource/datasheet/base';
 import { ExecuteResult, ICollaCommandDef, ICollaCommandExecuteContext } from 'command_manager';
@@ -29,7 +27,9 @@ export const deleteComment: ICollaCommandDef<IDeleteComment> = {
 
     const deleteCommentAction = DatasheetActions.deleteComment2Action({ datasheetId, recordId, comments: [comment] });
 
-    if (!deleteCommentAction) { return null; }
+    if (!deleteCommentAction) {
+      return null;
+    }
 
     actions.push(...deleteCommentAction);
 

@@ -1,5 +1,3 @@
-
-
 /*
  * read strings.auto.json,  go translation
  */
@@ -26,7 +24,7 @@ declare const global: any;
 
 const _global = global || window;
 const getBrowserLanguage = (): string | undefined => {
-  if (_global.browserLang){
+  if (_global.browserLang) {
     return _global.browserLang;
   }
   // @ts-ignore
@@ -36,7 +34,7 @@ const getBrowserLanguage = (): string | undefined => {
     return undefined;
   }
   let userLanguage: string | undefined = _global.navigator.language as string;
-  if (userLanguage){
+  if (userLanguage) {
     userLanguage = userLanguage.replace(/-(.+)/g, (match, group1) => {
       return '-' + group1.toUpperCase();
     });
@@ -71,8 +69,11 @@ export function getLanguage() {
   }
   const browserLang = getBrowserLanguage();
   // console.log('browser language is', browserLang);
-  const language = typeof _global == 'object' && _global.__initialization_data__ &&
-    _global.__initialization_data__.locale != 'und' && _global.__initialization_data__.locale;
+  const language =
+    typeof _global == 'object' &&
+    _global.__initialization_data__ &&
+    _global.__initialization_data__.locale != 'und' &&
+    _global.__initialization_data__.locale;
   const defaultLang = (typeof _global == 'object' && _global.__initialization_data__?.envVars?.SYSTEM_CONFIGURATION_DEFAULT_LANGUAGE) || 'zh-CN';
   return clientLang || browserLang || language || defaultLang;
 }
@@ -112,11 +113,10 @@ const rewriteI18nForEdition = () => {
     if (_global.apitable_i18n_edition?.[k]) {
       _global.apitable_i18n[k] = {
         ..._global.apitable_i18n[k],
-        ..._global.apitable_i18n_edition[k]
+        ..._global.apitable_i18n_edition[k],
       };
     }
   }
-
 };
 
 // browser only
@@ -139,4 +139,3 @@ export function t(stringKey: keyof StringKeysMapType | unknown, options: any = n
   const text = i18n.getText(stringKey as string, options, isPlural);
   return text;
 }
-

@@ -1,5 +1,3 @@
-
-
 import { useThemeColors } from './use_theme_colors';
 import { useMemo } from 'react';
 

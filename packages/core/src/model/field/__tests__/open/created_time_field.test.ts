@@ -1,5 +1,3 @@
-
-
 import { CreatedTimeField } from 'model/field/created_time_field';
 import { APIMetaFieldType, DateFormat, FieldType, ICreatedTimeField, TimeFormat } from 'types';
 import { IOpenField } from 'types/open/open_field_read_types';
@@ -17,8 +15,8 @@ const createdTimeField: ICreatedTimeField = {
     /** Time format */
     timeFormat: TimeFormat['HH:mm'],
     /** Whether to include time */
-    includeTime: true
-  }
+    includeTime: true,
+  },
 };
 
 const openCreatedTimeField: IOpenField = {
@@ -29,7 +27,7 @@ const openCreatedTimeField: IOpenField = {
     dateFormat: 'YYYY-MM-DD',
     timeFormat: 'HH:mm',
     includeTime: true,
-  }
+  },
 };
 
 const propertyOptionalFill: IUpdateOpenCreatedTimeFieldProperty = {
@@ -39,7 +37,7 @@ const propertyOptionalFill: IUpdateOpenCreatedTimeFieldProperty = {
 };
 
 const propertyOptionalNotFill: IUpdateOpenCreatedTimeFieldProperty = {
-  dateFormat: 'YYYY-MM-DD'
+  dateFormat: 'YYYY-MM-DD',
 };
 
 describe('Create time field read property format check', () => {
@@ -74,7 +72,7 @@ describe('Create time field update property transform property check', () => {
     const [expectValue, receiveValue] = valid(propertyOptionalNotFill, {
       ...CreatedTimeField.defaultProperty(),
       dateFormat: DateFormat['YYYY-MM-DD'],
-      datasheetId: createdTimeField.property.datasheetId
+      datasheetId: createdTimeField.property.datasheetId,
     });
     expect(expectValue).toEqual(receiveValue);
   });

@@ -4,16 +4,7 @@ import { useAtom } from 'jotai';
 import Image from 'next/image';
 import React, { useEffect, useMemo } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
-import {
-  Box,
-  IconButton,
-  LinkButton,
-  Loading,
-  TextButton,
-  Typography,
-  useTheme,
-  useThemeColors
-} from '@apitable/components';
+import { Box, IconButton, LinkButton, Loading, TextButton, Typography, useTheme, useThemeColors } from '@apitable/components';
 import { Strings, t, ThemeName } from '@apitable/core';
 import { DownloadOutlined, LoadingOutlined, RefreshOutlined } from '@apitable/icons';
 import { RobotRunHistoryItemDetail, useRunTaskDetail } from 'pc/components/robot/robot_detail/robot_run_history/robot_run_history_item_detail';
@@ -84,9 +75,7 @@ export const RunHistoryDetail = () => {
   if (!currentHistoryState) return null;
 
   return (
-    <Box flex={'0 0 54px'} display={'flex'}
-      marginBottom={'16px'}
-      alignItems={'flex-start'} flexDirection={'row'} justifyContent={'space-between'}>
+    <Box flex={'0 0 54px'} display={'flex'} marginBottom={'16px'} alignItems={'flex-start'} flexDirection={'row'} justifyContent={'space-between'}>
       <Box display={'flex'} flexDirection={'column'} alignItems={'start'}>
         <Typography variant="h5" color={colors.textCommonPrimary}>
           {t(Strings.robot_run_history_title)}
@@ -94,35 +83,25 @@ export const RunHistoryDetail = () => {
 
         <Box marginTop={'4px'}>
           <>
-            {
-              !isLoading && (
-                <>
-                  {
-                    dataItem == null ? (
-                      <Typography variant="body3" color={colors.textCommonTertiary} >
-                        {
-                          t(Strings.error)
-                        }
-                      </Typography>
-                    ): (
-                      <Typography variant="body3" color={colors.textCommonTertiary} >
-                        {t(Strings.automation_run_history_item_description, {
-                          RESULT: resultText,
-                          NUM: Math.ceil(
-                            dayjs.duration(
-                              getTime.end?.diff(getTime.start, 'milliseconds') ?? 0
-                            ).asSeconds()
-                          ),
+            {!isLoading && (
+              <>
+                {dataItem == null ? (
+                  <Typography variant="body3" color={colors.textCommonTertiary}>
+                    {t(Strings.error)}
+                  </Typography>
+                ) : (
+                  <Typography variant="body3" color={colors.textCommonTertiary}>
+                    {t(Strings.automation_run_history_item_description, {
+                      RESULT: resultText,
+                      NUM: Math.ceil(dayjs.duration(getTime.end?.diff(getTime.start, 'milliseconds') ?? 0).asSeconds()),
 
-                          START_TIME: getTime.start?.format(CONST_DATETIME_FORMAT) ?? '',
-                          END_TIME: getTime.end?.format(CONST_DATETIME_FORMAT) ?? '',
-                        })}
-                      </Typography>
-                    )
-                  }
-                </>
-              )
-            }
+                      START_TIME: getTime.start?.format(CONST_DATETIME_FORMAT) ?? '',
+                      END_TIME: getTime.end?.format(CONST_DATETIME_FORMAT) ?? '',
+                    })}
+                  </Typography>
+                )}
+              </>
+            )}
           </>
         </Box>
       </Box>
@@ -198,11 +177,16 @@ export const HistoryModalContent = () => {
   }, [setCurrentHistoryState, currentHistoryState, items]);
 
   return (
-    <Box height={'calc(80vh - 58px)'}
-      display={'flex'} flexDirection={'row'} ref={rootRef}>
-      <Box overflowY={'auto'} padding={'8px'} width={'256px'} flex={'0 0 256px'} backgroundColor={colors.bgCommonDefault} alignSelf={isEmpty ? 'center': undefined}>
-
-        <TaskList list={items} isSummary activeId={currentHistoryState.taskId}/>
+    <Box height={'calc(80vh - 58px)'} display={'flex'} flexDirection={'row'} ref={rootRef}>
+      <Box
+        overflowY={'auto'}
+        padding={'8px'}
+        width={'256px'}
+        flex={'0 0 256px'}
+        backgroundColor={colors.bgCommonDefault}
+        alignSelf={isEmpty ? 'center' : undefined}
+      >
+        <TaskList list={items} isSummary activeId={currentHistoryState.taskId} />
 
         {isEmpty && <Image src={EmptyResultImage} alt="" />}
         {isEmpty ? (

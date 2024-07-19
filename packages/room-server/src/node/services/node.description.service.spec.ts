@@ -1,4 +1,3 @@
-
 import { NodeDescriptionService } from './node.description.service';
 import { NodeDescRepository } from '../repositories/node.desc.repository';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -8,7 +7,7 @@ describe('Test NodeDescriptionService', () => {
   let repository: NodeDescRepository;
   let service: NodeDescriptionService;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       providers: [
         {
@@ -25,11 +24,11 @@ describe('Test NodeDescriptionService', () => {
     jest.spyOn(repository, 'selectDescriptionByNodeId').mockResolvedValue({ description: 'node description' });
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
-  it('should be return node description', async() => {
+  it('should be return node description', async () => {
     const nodeDescription = await service.getDescription('nodeId');
     expect(nodeDescription).toEqual('node description');
   });

@@ -3,15 +3,19 @@ import { Field } from 'model/field';
 import { ViewFilterDerivate } from './slice/view_filter_derivate';
 import { ViewGroupDerivate } from './slice/view_group_derivate';
 
+import { IActiveRowInfo, IRecordSnapshot, IReduxState, IViewDerivation, IViewProperty, IViewRow, Role } from 'exports/store/interfaces';
 import {
-  IActiveRowInfo,
-  IRecordSnapshot, IReduxState,
-  IViewDerivation, IViewProperty, IViewRow, Role,
-} from 'exports/store/interfaces';
-import {
-  getActiveRecordId, getActiveRowInfo, getActiveViewFilterInfo,
-  getCellValue, getFieldMap, getFieldRoleByFieldId,
-  getActiveViewSortInfo, getGroupFields, getIsSearching, getRecordSnapshot, getCurrentView,
+  getActiveRecordId,
+  getActiveRowInfo,
+  getActiveViewFilterInfo,
+  getCellValue,
+  getFieldMap,
+  getFieldRoleByFieldId,
+  getActiveViewSortInfo,
+  getGroupFields,
+  getIsSearching,
+  getRecordSnapshot,
+  getCurrentView,
 } from 'modules/database/store/selectors/resource/datasheet';
 import { RecordMoveType, WhyRecordMoveType } from 'modules/shared/store/constants';
 import { handleEmptyCellValue } from 'model/utils';
@@ -21,16 +25,17 @@ export class ViewDerivateGrid extends ViewDerivateBase {
   override viewFilterDerivate: ViewFilterDerivate;
   viewGroupDerivate: ViewGroupDerivate;
 
-  constructor(protected override state: IReduxState, public override datasheetId: string) {
+  constructor(
+    protected override state: IReduxState,
+    public override datasheetId: string
+  ) {
     super(state, datasheetId);
     this.viewFilterDerivate = new ViewFilterDerivate(state, datasheetId);
     this.viewGroupDerivate = new ViewGroupDerivate(state, datasheetId);
   }
 
   // including the visibleRows of the pre-sorted results, the original getVisibleRowsInner.
-  getVisibleRowsWithLazySort(
-    visibleRows: IViewRow[], recordMoveType: RecordMoveType, activeRowInfo: IActiveRowInfo | undefined,
-  ) {
+  getVisibleRowsWithLazySort(visibleRows: IViewRow[], recordMoveType: RecordMoveType, activeRowInfo: IActiveRowInfo | undefined) {
     const snapshot = this.state.datasheetMap[this.datasheetId]!.datasheet!.snapshot;
     const recordMap = snapshot.recordMap;
 
@@ -40,11 +45,13 @@ export class ViewDerivateGrid extends ViewDerivateBase {
     if (!activeRowInfo) {
       return visibleRows;
     }
-    const { positionInfo: { recordId, visibleRowIndex } } = activeRowInfo;
-    const nextVisibleRows = produce(visibleRows, draftVisibleRows => {
+    const {
+      positionInfo: { recordId, visibleRowIndex },
+    } = activeRowInfo;
+    const nextVisibleRows = produce(visibleRows, (draftVisibleRows) => {
       if ([RecordMoveType.OutOfView, RecordMoveType.WillMove].includes(recordMoveType)) {
         if (RecordMoveType.WillMove === recordMoveType) {
-          const nextVisibleRowIndex = draftVisibleRows.findIndex(row => row.recordId === recordId);
+          const nextVisibleRowIndex = draftVisibleRows.findIndex((row) => row.recordId === recordId);
           draftVisibleRows.splice(nextVisibleRowIndex, 1);
         }
         // Insert it only when the record still exists.
@@ -58,8 +65,10 @@ export class ViewDerivateGrid extends ViewDerivateBase {
   }
 
   getRecordMoveType(
-    view: IViewProperty, visibleRowsIndexMap: Map<string, number>,
-    activeRecordId: string | undefined, activeRowInfo: IActiveRowInfo | undefined
+    view: IViewProperty,
+    visibleRowsIndexMap: Map<string, number>,
+    activeRecordId: string | undefined,
+    activeRowInfo: IActiveRowInfo | undefined
   ) {
     const datasheetId = this.datasheetId;
     const snapshot = this.state.datasheetMap[this.datasheetId]?.datasheet!.snapshot;
@@ -112,27 +121,25 @@ export class ViewDerivateGrid extends ViewDerivateBase {
     const sortInfo = getActiveViewSortInfo(this.state);
     const isSearching = getIsSearching(this.state);
 
-    const isRecordEffectPositionCellValueChanged = (
-      recordSnapshot: IRecordSnapshot,
-    ) => {
+    const isRecordEffectPositionCellValueChanged = (recordSnapshot: IRecordSnapshot) => {
       // Whether the record is pre-sorted is determined by the group, filter,
       // and sort fields that have auto-sorting turned on.
-      const fieldsWhichMakeRecordMove: string[] = groupField.map(field => field.id);
+      const fieldsWhichMakeRecordMove: string[] = groupField.map((field) => field.id);
       if (sortInfo?.keepSort) {
-        sortInfo?.rules.forEach(rule => fieldsWhichMakeRecordMove.push(rule.fieldId));
+        sortInfo?.rules.forEach((rule) => fieldsWhichMakeRecordMove.push(rule.fieldId));
       }
-      filterInfo?.conditions.forEach(cond => fieldsWhichMakeRecordMove.push(cond.fieldId));
-      const _fieldsWhichMakeRecordMove = [...new Set(fieldsWhichMakeRecordMove)].filter(fieldId => {
+      filterInfo?.conditions.forEach((cond) => fieldsWhichMakeRecordMove.push(cond.fieldId));
+      const _fieldsWhichMakeRecordMove = [...new Set(fieldsWhichMakeRecordMove)].filter((fieldId) => {
         const fieldRole = getFieldRoleByFieldId(fieldPermissionMap, fieldId);
         return fieldRole !== Role.None;
       });
-      return _fieldsWhichMakeRecordMove.some(fieldId => {
+      return _fieldsWhichMakeRecordMove.some((fieldId) => {
         /**
-        * The recordSnapshot passed in by getCellValue will not work for the formula,
-        * which is always up-to-date.
-        * So store the value of the calculated field in the old recordSnapshot.
-        * Used to handle the case of pre-sorted calculated fields.
-        */
+         * The recordSnapshot passed in by getCellValue will not work for the formula,
+         * which is always up-to-date.
+         * So store the value of the calculated field in the old recordSnapshot.
+         * Used to handle the case of pre-sorted calculated fields.
+         */
         const field = fieldMap[fieldId]!;
         let cv1 = recordSnapshot.recordMap[activeRecordId]?.data[fieldId] ?? null;
         cv1 = handleEmptyCellValue(cv1, Field.bindContext(field!, this.state).basicValueType);
@@ -159,14 +166,15 @@ export class ViewDerivateGrid extends ViewDerivateBase {
    * @returns viewDerivationPatch partial derivation data
    */
   getViewDerivationPatchByLazySort(
-    view: IViewProperty, prevViewDerivation: IViewDerivation, activeRowInfo: IActiveRowInfo | undefined
+    view: IViewProperty,
+    prevViewDerivation: IViewDerivation,
+    activeRowInfo: IActiveRowInfo | undefined
   ): Partial<IViewDerivation> {
     const activeRecordId = getActiveRecordId(this.state);
     const recordMoveType = this.getRecordMoveType(view, prevViewDerivation.pureVisibleRowsIndexMap, activeRecordId, activeRowInfo);
     const visibleRows = this.getVisibleRowsWithLazySort(prevViewDerivation.pureVisibleRows, recordMoveType, activeRowInfo);
 
-    const { groupBreakpoint, linearRows, pureLinearRows } =
-      this.viewGroupDerivate.getGroupDerivation(view, visibleRows, recordMoveType);
+    const { groupBreakpoint, linearRows, pureLinearRows } = this.viewGroupDerivate.getGroupDerivation(view, visibleRows, recordMoveType);
 
     return {
       visibleRows,
@@ -184,7 +192,7 @@ export class ViewDerivateGrid extends ViewDerivateBase {
     const { rowsWithoutSearch } = super.getViewDerivation(view);
     return {
       rowsWithoutSearch,
-      ...this.getViewDerivationWithSearch(view!, rowsWithoutSearch)
+      ...this.getViewDerivationWithSearch(view!, rowsWithoutSearch),
     };
   }
 
@@ -197,12 +205,11 @@ export class ViewDerivateGrid extends ViewDerivateBase {
     const recordMoveType = this.getRecordMoveType(view!, rowsWithoutLazyShortIndexMap, activeRecordId, activeRowInfo);
     const visibleRows = this.getVisibleRowsWithLazySort(rowsWithoutLazyShort, recordMoveType, activeRowInfo);
 
-    const { groupBreakpoint, linearRows, pureLinearRows } =
-      this.viewGroupDerivate.getGroupDerivation(view!, visibleRows, recordMoveType);
+    const { groupBreakpoint, linearRows, pureLinearRows } = this.viewGroupDerivate.getGroupDerivation(view!, visibleRows, recordMoveType);
 
     return {
       // Raw rows of data, grouped without any filtering sorting.
-      rowsIndexMap:  new Map(view!.rows!.map((item, index) => [item.recordId, index])),
+      rowsIndexMap: new Map(view!.rows!.map((item, index) => [item.recordId, index])),
 
       // Excluding pre-sorted row data, including filtered sorted grouped search
       pureVisibleRows: rowsWithoutLazyShort,
@@ -223,35 +230,35 @@ export class ViewDerivateGrid extends ViewDerivateBase {
 
       // Grouping breakpoint data
       /**
-      * groupBreakpoint
-      * field1 Grouping Breakpoints 0---------10---------20
-      * field2 level Grouping Breakpoints 0--3-5-6--10----15---20
-      *
-      * field1: [0, 10, 20]
-      * field2: [0, 3, 5, 6, 10, 15, 20]
-      */
+       * groupBreakpoint
+       * field1 Grouping Breakpoints 0---------10---------20
+       * field2 level Grouping Breakpoints 0--3-5-6--10----15---20
+       *
+       * field1: [0, 10, 20]
+       * field2: [0, 3, 5, 6, 10, 15, 20]
+       */
       groupBreakpoint,
 
       /**
-      * Guide the table view to draw the structured data of the table,
-      * with the hierarchical structure reflected by depth.
-      * [
-      *    Blank 0
-      *    GroupTab 0
-      *      GroupTab 1
-      *        GroupTab 2
-      *          Record 3
-      *        Add 2
-      *        Blank 2
-      *      Blank 1
-      *    Blank 0
-      * ]
-      */
+       * Guide the table view to draw the structured data of the table,
+       * with the hierarchical structure reflected by depth.
+       * [
+       *    Blank 0
+       *    GroupTab 0
+       *      GroupTab 1
+       *        GroupTab 2
+       *          Record 3
+       *        Add 2
+       *        Blank 2
+       *      Blank 1
+       *    Blank 0
+       * ]
+       */
       linearRows,
 
       /**
-      * [`${row.type}_${row.recordId}`, index]
-      */
+       * [`${row.type}_${row.recordId}`, index]
+       */
       linearRowsIndexMap: new Map(linearRows.map((row, index) => [`${row.type}_${row.recordId}`, index])),
 
       // Gantt Chart view of ui row information

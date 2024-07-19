@@ -1,2 +1,1 @@
-export class TableBundleSnapshot{
-}
+export class TableBundleSnapshot {}

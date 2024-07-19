@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, cellValueToImageSrc, IAttachmentValue } from '@apitable/core';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';

@@ -1,5 +1,3 @@
-
-
 import { t, Strings, getLanguage } from '@apitable/core';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { getPanelData, formatDate, date2Month } from './utils';

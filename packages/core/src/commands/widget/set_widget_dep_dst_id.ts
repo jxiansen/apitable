@@ -1,5 +1,3 @@
-
-
 import { ExecuteResult, ICollaCommandDef, ICommandOptionBase } from 'command_manager';
 import { WidgetActions } from 'commands_actions/widget';
 import { ResourceType } from 'types';

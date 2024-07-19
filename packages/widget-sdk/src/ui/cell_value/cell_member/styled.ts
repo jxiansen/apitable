@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 
 export const CellMemberWrapperStyled = styled.div`
@@ -24,15 +22,15 @@ export const AvatarStyled = styled.div<{ avatar?: string; bg?: string }>`
   border: 1px solid var(--shadowColor);
   background-position: center;
   background-color: rgb(255, 255, 255);
-  ${props => {
+  ${(props) => {
     if (props.avatar) {
       return css`
-        background-image: url(${props.avatar})
+        background-image: url(${props.avatar});
       `;
     }
     return css``;
   }}
-  ${props => {
+  ${(props) => {
     if (props.bg) {
       return css`
         display: flex;
@@ -55,4 +53,3 @@ export const NameStyled = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
-

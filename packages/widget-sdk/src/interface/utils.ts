@@ -1,5 +1,3 @@
-
-
 export interface IUploadProgress {
   /** How many bytes have been transferred */
   loaded: number;

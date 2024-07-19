@@ -9,7 +9,7 @@ import { APIMetaFieldType, FieldType } from 'types';
 import { IExpression, IExpressionOperand, IOperand, OperandTypeEnums, OperatorEnums } from 'automation_manager/interface';
 import { isEmpty } from 'lodash';
 import { IReduxState } from 'exports/store/interfaces';
-import { IFieldMap,IMeta } from 'modules/database/store/interfaces/resource/datasheet/datasheet';
+import { IFieldMap, IMeta } from 'modules/database/store/interfaces/resource/datasheet/datasheet';
 
 const getConjunctionsByGroup = (conditionGroup: IOpenFilterConditionGroup) => {
   const conjunctions = Object.keys(conditionGroup);
@@ -23,12 +23,14 @@ const getConjunctionsByGroup = (conditionGroup: IOpenFilterConditionGroup) => {
 };
 
 const parseConditionsOrGroupBase = (conditions: any, parseConditionGroup: (...props: any) => any, parseCondition: (...props: any) => any) => {
-  return conditions.map((item: any) => {
-    if (Object.keys(item).some(v => enumToArray(FilterConjunction).includes(v))) {
-      return parseConditionGroup(item);
-    }
-    return parseCondition(item);
-  }).filter((v: any) => !isEmpty(v));
+  return conditions
+    .map((item: any) => {
+      if (Object.keys(item).some((v) => enumToArray(FilterConjunction).includes(v))) {
+        return parseConditionGroup(item);
+      }
+      return parseCondition(item);
+    })
+    .filter((v: any) => !isEmpty(v));
 };
 
 /**
@@ -49,14 +51,14 @@ export function validateOpenFilter(filterInfo: IOpenFilterInfo, canGroup: boolea
       }
       // Detects if it is an object with a fieldType of key.
       const fieldTypeArray = enumToArray(APIMetaFieldType);
-      const fieldType = Object.keys(valueObj).find(i => fieldTypeArray.includes(i));
+      const fieldType = Object.keys(valueObj).find((i) => fieldTypeArray.includes(i));
       if (!fieldType) {
         return helper.error('No fieldType exists');
       }
       // Check if it is an object with FOperator as key.
       const opObj = valueObj[fieldType];
       const opArray = enumToArray(FOperator);
-      const op = Object.keys(opObj).find(i => opArray.includes(i));
+      const op = Object.keys(opObj).find((i) => opArray.includes(i));
       if (!op) {
         return helper.error('No operator exists');
       }
@@ -73,7 +75,7 @@ export function validateOpenFilter(filterInfo: IOpenFilterInfo, canGroup: boolea
         return helper.error('Only the or or and operator is supported');
       }
       const fcArray = enumToArray(FilterConjunction);
-      const filterConjunction = Object.keys(value).find(i => fcArray.includes(i));
+      const filterConjunction = Object.keys(value).find((i) => fcArray.includes(i));
       if (!filterConjunction) {
         return value;
       }
@@ -86,8 +88,8 @@ export function validateOpenFilter(filterInfo: IOpenFilterInfo, canGroup: boolea
         return helper.error('Array invalid');
       }
       let errorMessage: string | undefined;
-      const validateConditionGroupValueSuccess = conditionGroupValue.every(item => {
-        const isGroup = Object.prototype.toString.call(value) === '[object Object]' && Object.keys(item).every(k => fcArray.includes(k));
+      const validateConditionGroupValueSuccess = conditionGroupValue.every((item) => {
+        const isGroup = Object.prototype.toString.call(value) === '[object Object]' && Object.keys(item).every((k) => fcArray.includes(k));
         // Temporarily block out group.
         if (isGroup && !canGroup) {
           errorMessage = 'Not support group condition';
@@ -113,7 +115,7 @@ export function validateOpenFilter(filterInfo: IOpenFilterInfo, canGroup: boolea
  * @param state
  */
 export function parseOpenFilter(meta: IMeta, viewId: string, state: IReduxState): IOpenFilterInfo {
-  const view = meta.views.find(v => v.id === viewId);
+  const view = meta.views.find((v) => v.id === viewId);
   if (!view || !view.filterInfo) {
     return {};
   }
@@ -136,19 +138,21 @@ export function parseOpenFilter(meta: IMeta, viewId: string, state: IReduxState)
     return {
       fieldKey: fieldId,
       [getFieldTypeString(fieldType)]: {
-        [operator]: field.filterValueToOpenFilterValue(value)
-      }
+        [operator]: field.filterValueToOpenFilterValue(value),
+      },
     } as IOpenFilterCondition;
   };
   const parseConditionGroup = (conditionGroup: IFilterInfo) => {
     const { conditions, conjunction } = conditionGroup;
     return {
-      [conjunction]: conditions.map(item => {
-        // TODO If it's a filter group, you only need to determine whether
-        // the item is a filter condition or a filter group, and if it's a filter group,
-        // recursively parseConditionGroup.
-        return parseCondition(item);
-      }).filter(v => Object.keys(v).length > 0)
+      [conjunction]: conditions
+        .map((item) => {
+          // TODO If it's a filter group, you only need to determine whether
+          // the item is a filter condition or a filter group, and if it's a filter group,
+          // recursively parseConditionGroup.
+          return parseCondition(item);
+        })
+        .filter((v) => Object.keys(v).length > 0),
     };
   };
   return parseConditionGroup(view.filterInfo);
@@ -159,9 +163,13 @@ export function parseOpenFilter(meta: IMeta, viewId: string, state: IReduxState)
  * @param filterInfo
  * @param context
  */
-export function parseInnerFilter(filterInfo: IOpenFilterInfo, context: {
-  fieldMap: IFieldMap, state: IReduxState
-}): IFilterInfo | null {
+export function parseInnerFilter(
+  filterInfo: IOpenFilterInfo,
+  context: {
+    fieldMap: IFieldMap;
+    state: IReduxState;
+  }
+): IFilterInfo | null {
   const { fieldMap, state } = context;
   const exitIds: string[] = [];
   const parseCondition = (condition: IOpenFilterCondition) => {
@@ -183,8 +191,9 @@ export function parseInnerFilter(filterInfo: IOpenFilterInfo, context: {
     const isSingleContains = field.type === FieldType.SingleSelect && operator === FOperator.Contains;
     let value;
     if (isSingleContains) {
-      value = Array.isArray(fieldValue) ?
-        fieldValue.map(item => fieldBind.openFilterValueToFilterValue(item)).flat() : fieldBind.openFilterValueToFilterValue(fieldValue);
+      value = Array.isArray(fieldValue)
+        ? fieldValue.map((item) => fieldBind.openFilterValueToFilterValue(item)).flat()
+        : fieldBind.openFilterValueToFilterValue(fieldValue);
     } else {
       value = fieldBind.openFilterValueToFilterValue(fieldValue);
     }
@@ -193,36 +202,37 @@ export function parseInnerFilter(filterInfo: IOpenFilterInfo, context: {
       fieldId: fieldKey,
       fieldType: field.type,
       operator,
-      value: value
+      value: value,
     } as IFilterCondition;
   };
   const parseConditionGroup = (conditionGroup: IOpenFilterConditionGroup) => {
     const conjunctions = getConjunctionsByGroup(conditionGroup);
 
-    return conjunctions ? {
-      conjunction: conjunctions[0] as FilterConjunction,
-      conditions: parseConditionsOrGroupBase(conditionGroup[conjunctions[0]!], parseConditionGroup, parseCondition)
-    } : null;
+    return conjunctions
+      ? {
+          conjunction: conjunctions[0] as FilterConjunction,
+          conditions: parseConditionsOrGroupBase(conditionGroup[conjunctions[0]!], parseConditionGroup, parseCondition),
+        }
+      : null;
   };
   return parseConditionGroup(filterInfo);
 }
 
-function openFilterValueToFilterValueInterceptor(fieldModel: Field, fieldValue: IFilterSingleSelect, operator: OperatorEnums, fieldType: FieldType){
-  const ensuredArrayValue = Array.isArray(fieldValue)? fieldValue: [fieldValue];
+function openFilterValueToFilterValueInterceptor(fieldModel: Field, fieldValue: IFilterSingleSelect, operator: OperatorEnums, fieldType: FieldType) {
+  const ensuredArrayValue = Array.isArray(fieldValue) ? fieldValue : [fieldValue];
   if (fieldType === FieldType.SingleSelect && operator === OperatorEnums.Contains) {
-    return ensuredArrayValue.map(item => fieldModel.openFilterValueToFilterValue(item)).flat();
+    return ensuredArrayValue.map((item) => fieldModel.openFilterValueToFilterValue(item)).flat();
   }
   return fieldModel.openFilterValueToFilterValue(fieldValue);
 }
 
-function filterValueToOpenFilterValueInterceptor(fieldModel: Field, value: IFilterSingleSelect, operator: OperatorEnums, fieldType: FieldType){
-  if(value == null) {
+function filterValueToOpenFilterValueInterceptor(fieldModel: Field, value: IFilterSingleSelect, operator: OperatorEnums, fieldType: FieldType) {
+  if (value == null) {
     return fieldModel.filterValueToOpenFilterValue(value);
   }
   const arrayValue: IFilterSingleSelect = Array.isArray(value) ? value : [value];
   if (operator === OperatorEnums.Contains && fieldType == FieldType.SingleSelect) {
-    return arrayValue.map((option: string) => fieldModel.filterValueToOpenFilterValue([option]))
-      .filter(Boolean);
+    return arrayValue.map((option: string) => fieldModel.filterValueToOpenFilterValue([option])).filter(Boolean);
   }
 
   return fieldModel.filterValueToOpenFilterValue(value);
@@ -233,10 +243,13 @@ function filterValueToOpenFilterValueInterceptor(fieldModel: Field, value: IFilt
  * @param filterExpress
  * @param context
  */
-export function parseOpenFilterByExpress(filterExpress: IExpressionOperand, context: {
-
-  meta: IMeta, state: IReduxState
-}) {
+export function parseOpenFilterByExpress(
+  filterExpress: IExpressionOperand,
+  context: {
+    meta: IMeta;
+    state: IReduxState;
+  }
+) {
   const { meta, state } = context;
 
   const { fieldMap } = meta;
@@ -246,7 +259,7 @@ export function parseOpenFilterByExpress(filterExpress: IExpressionOperand, cont
     const value = operands[1]?.value;
 
     const field = fieldMap[fieldId];
-    if(!field) {
+    if (!field) {
       return;
     }
     const fieldModel = Field.bindContext(field, state);
@@ -259,8 +272,8 @@ export function parseOpenFilterByExpress(filterExpress: IExpressionOperand, cont
     return {
       fieldKey: fieldId,
       [getFieldTypeString(field.type)]: {
-        [operator]: filterValueToOpenFilterValueInterceptor(fieldModel, value, operator, field.type)
-      }
+        [operator]: filterValueToOpenFilterValueInterceptor(fieldModel, value, operator, field.type),
+      },
     } as IOpenFilterCondition;
   };
   const parseConditionGroup = (conditionGroup: IExpression): IOpenFilterInfo => {
@@ -269,12 +282,14 @@ export function parseOpenFilterByExpress(filterExpress: IExpressionOperand, cont
     }
     const { operator, operands } = conditionGroup;
     return {
-      [operator]: operands.map((item: IOperand) => {
-        if (enumToArray(FilterConjunction).includes(item.value.operator)) {
-          return parseConditionGroup(item.value);
-        }
-        return parseCondition(item.value);
-      }).filter((v: any) => Object.keys(v).length > 0)
+      [operator]: operands
+        .map((item: IOperand) => {
+          if (enumToArray(FilterConjunction).includes(item.value.operator)) {
+            return parseConditionGroup(item.value);
+          }
+          return parseCondition(item.value);
+        })
+        .filter((v: any) => Object.keys(v).length > 0),
     };
   };
   return parseConditionGroup(filterExpress.value);
@@ -285,9 +300,13 @@ export function parseOpenFilterByExpress(filterExpress: IExpressionOperand, cont
  * @param filterInfo
  * @param context
  */
-export function parseFilterExpressByOpenFilter(filterInfo: IOpenFilterInfo, context: {
-  fieldMap: IFieldMap, state: IReduxState
-}) {
+export function parseFilterExpressByOpenFilter(
+  filterInfo: IOpenFilterInfo,
+  context: {
+    fieldMap: IFieldMap;
+    state: IReduxState;
+  }
+) {
   const { fieldMap, state } = context;
   const parseCondition = (condition: IOpenFilterCondition) => {
     const { fieldKey, ...valueMap } = condition;
@@ -313,26 +332,28 @@ export function parseFilterExpressByOpenFilter(filterInfo: IOpenFilterInfo, cont
         operands: [
           {
             type: OperandTypeEnums.Literal,
-            value: field.id
+            value: field.id,
           },
           {
             type: OperandTypeEnums.Literal,
-            value: checkedFieldValue
-          }
-        ]
-      }
+            value: checkedFieldValue,
+          },
+        ],
+      },
     };
   };
   const parseConditionGroup = (conditionGroup: IOpenFilterConditionGroup) => {
     const conjunctions = getConjunctionsByGroup(conditionGroup);
 
-    return conjunctions ? {
-      type: OperandTypeEnums.Expression,
-      value: {
-        operator: conjunctions[0],
-        operands: parseConditionsOrGroupBase(conditionGroup[conjunctions[0]!], parseConditionGroup, parseCondition)
-      }
-    } as IExpressionOperand : null;
+    return conjunctions
+      ? ({
+          type: OperandTypeEnums.Expression,
+          value: {
+            operator: conjunctions[0],
+            operands: parseConditionsOrGroupBase(conditionGroup[conjunctions[0]!], parseConditionGroup, parseCondition),
+          },
+        } as IExpressionOperand)
+      : null;
   };
 
   return parseConditionGroup(filterInfo);

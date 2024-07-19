@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import { IShareInfo, IShareInfoAction } from '../../../../exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';
@@ -11,7 +9,7 @@ export const share = produce((shareInfoDraft: IShareInfo = defaultShareInfo, act
     case actions.SET_SHARE_INFO: {
       return {
         ...shareInfoDraft,
-        ...action.payload
+        ...action.payload,
       };
     }
 

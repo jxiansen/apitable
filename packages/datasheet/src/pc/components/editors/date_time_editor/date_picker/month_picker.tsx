@@ -1,5 +1,3 @@
-
-
 // @ts-ignore
 import MonthCalendar from 'rc-calendar/es/MonthCalendar';
 import * as React from 'react';

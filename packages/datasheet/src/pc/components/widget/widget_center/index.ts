@@ -1,5 +1,3 @@
-
-
 export * from './widget_center';
 export { WidgetPackageItem } from './widget_package_item';
 export { InstallPosition } from './enum';

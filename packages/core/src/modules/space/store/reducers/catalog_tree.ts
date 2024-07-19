@@ -1,5 +1,3 @@
-
-
 import { ConfigConstant } from 'config';
 import { produce } from 'immer';
 import { collectProperty, findNode, getUniqName } from 'utils';
@@ -21,7 +19,8 @@ import {
   IOptNode,
   IRefreshTreeAction,
   IRemoveFavoriteNodeAction,
-  ISetActiveNodeErrorAction, ISetActiveTreeType,
+  ISetActiveNodeErrorAction,
+  ISetActiveTreeType,
   ISetAllVisibleAction,
   ISetCopyNodeIdAction,
   ISetDelNodeIdAction,
@@ -348,8 +347,8 @@ export const catalogTree = produce((draftCatalogTree: ICatalogTree = defaultStat
       return draftCatalogTree;
     }
     case actions.UPDATE_HAS_CHILDREN: {
-      const nodesMap = action.payload.module === ConfigConstant.Modules.PRIVATE ?
-        draftCatalogTree.privateTreeNodesMap : draftCatalogTree.treeNodesMap;
+      const nodesMap =
+        action.payload.module === ConfigConstant.Modules.PRIVATE ? draftCatalogTree.privateTreeNodesMap : draftCatalogTree.treeNodesMap;
       updateHasChildren(nodesMap, action.payload.nodeId);
       return draftCatalogTree;
     }
@@ -490,25 +489,28 @@ const deleteNode = (catalogTree: ICatalogTree, optNode: IOptNode) => {
   } = catalogTree;
   const nodesMap = module === ConfigConstant.Modules.PRIVATE ? privateTreeNodesMap : treeNodesMap;
   // the nodeIDs collection that is operating
-  const operationsIdArr = module === ConfigConstant.Modules.PRIVATE ? [
-    privateDelNodeId,
-    privateEditNodeId,
-    favoriteEditNodeId,
-    favoriteDelNodeId,
-    permissionModalNodeId,
-    shareModalNodeId,
-    saveAsTemplateModalNodeId,
-    importModalNodeId,
-  ] : [
-    delNodeId,
-    editNodeId,
-    favoriteEditNodeId,
-    favoriteDelNodeId,
-    permissionModalNodeId,
-    shareModalNodeId,
-    saveAsTemplateModalNodeId,
-    importModalNodeId,
-  ];
+  const operationsIdArr =
+    module === ConfigConstant.Modules.PRIVATE
+      ? [
+          privateDelNodeId,
+          privateEditNodeId,
+          favoriteEditNodeId,
+          favoriteDelNodeId,
+          permissionModalNodeId,
+          shareModalNodeId,
+          saveAsTemplateModalNodeId,
+          importModalNodeId,
+        ]
+      : [
+          delNodeId,
+          editNodeId,
+          favoriteEditNodeId,
+          favoriteDelNodeId,
+          permissionModalNodeId,
+          shareModalNodeId,
+          saveAsTemplateModalNodeId,
+          importModalNodeId,
+        ];
 
   const parentNode = nodesMap[parentId];
 

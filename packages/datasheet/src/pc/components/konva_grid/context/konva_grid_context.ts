@@ -1,5 +1,3 @@
-
-
 import { TooltipPlacement } from 'antd/lib/tooltip';
 import * as React from 'react';
 import { ITheme } from '@apitable/components';

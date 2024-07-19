@@ -4,7 +4,7 @@ import { IFilterTextProps } from './interface';
 import { EditorNumber } from './editor/editor_number';
 import { FilterInputWrap } from './styled';
 
-export const FilterNumber: React.FC<IFilterTextProps> = props => {
+export const FilterNumber: React.FC<IFilterTextProps> = (props) => {
   const { value: _value, onChange: _onChange, field } = props;
 
   const value = useMemo(() => {
@@ -32,7 +32,7 @@ export const FilterNumber: React.FC<IFilterTextProps> = props => {
     }
   }, [field.type]);
 
-  const onChange = (_value: string | null ) => {
+  const onChange = (_value: string | null) => {
     let value = _value;
     if (field.type === FieldType.Percent) {
       value = value == null ? '' : value;
@@ -43,13 +43,7 @@ export const FilterNumber: React.FC<IFilterTextProps> = props => {
 
   return (
     <FilterInputWrap>
-      <EditorNumber
-        tooltip={toolTip}
-        value={value}
-        placeholder=' '
-        onChange={onChange}
-        validate
-      />
+      <EditorNumber tooltip={toolTip} value={value} placeholder=" " onChange={onChange} validate />
     </FilterInputWrap>
   );
 };

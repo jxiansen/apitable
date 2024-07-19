@@ -1,5 +1,3 @@
-
-
 import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { CacheStore, CacheStoreFactory, CacheStoreSetOptions, LiteralObject } from '@nestjs/common';
 import { BaseOssStore } from 'shared/cache/base.oss.store';
@@ -46,7 +44,7 @@ export class S3Store extends BaseOssStore implements CacheStore {
         Key: this.getFileNameByKey(key), // The name of the object. For example, 'sample_upload.txt'.
         Body: stream, // The content of the object. For example, 'Hello world!".
         Expires: date,
-        CacheControl: `max-age=${ttl}`
+        CacheControl: `max-age=${ttl}`,
       };
       this.s3Client.send(new PutObjectCommand(params), this.handleResponse(cb));
     });

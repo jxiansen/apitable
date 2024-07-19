@@ -1,5 +1,3 @@
-
-
 import { ExecuteResult, ICollaCommandDef, ILinkedActions } from 'command_manager';
 import { IJOTAction, IObjectReplaceAction } from 'engine';
 import { isEqual, omit } from 'lodash';
@@ -10,12 +8,9 @@ import { ICellValue } from 'model/record';
 import { IRecordAlarm } from '../../exports/store/interfaces';
 import { ViewType } from 'modules/shared/store/constants';
 import { AlarmUsersType } from 'modules/database/store/interfaces/resource/datasheet/datasheet';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getRangeRecords } from 'modules/database/store/selectors/resource/datasheet/cell_range_calc';
-import { getDateTimeCellAlarm,getRangeFields } from 'modules/database/store/selectors/resource/datasheet/calc';
+import { getDateTimeCellAlarm, getRangeFields } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { IViewColumn, IViewRow } from '../../exports/store/interfaces';
 import { getViewById } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getRangeRows, getSelectRanges } from 'modules/database/store/selectors/resource/datasheet/cell_range_calc';
@@ -89,8 +84,8 @@ export const pasteSetRecords: ICollaCommandDef<IPasteSetRecordsOptions> = {
       if (datasheetId === state.pageParams.datasheetId) {
         const cutRows = cut.rows;
         const cutColumns = cut.columns;
-        cutRows.forEach(row => {
-          cutColumns.forEach(column => {
+        cutRows.forEach((row) => {
+          cutColumns.forEach((column) => {
             const field = fieldMap[column.fieldId];
             if (field && field.type !== FieldType.NotSupport && field.type !== FieldType.WorkDoc) {
               recordValues.push({
@@ -111,7 +106,7 @@ export const pasteSetRecords: ICollaCommandDef<IPasteSetRecordsOptions> = {
     if (columnsToPaste.length === 0) {
       return null;
     }
-    const recordIdsToPaste = getRangeRows(state, row, row + newRecordCount).map(r => r.recordId);
+    const recordIdsToPaste = getRangeRows(state, row, row + newRecordCount).map((r) => r.recordId);
 
     function addAlarm(cv: ICellValue, field: IField, recordId: string, oldRecordId: string) {
       if (field.type === FieldType.DateTime && cv && snapshot) {
@@ -124,10 +119,15 @@ export const pasteSetRecords: ICollaCommandDef<IPasteSetRecordsOptions> = {
               id: getNewId(IDPrefix.DateTimeAlarm),
               ...omit(alarm, 'id'),
               // If the copy is another member, the alarm set by others will be changed to himself
-              alarmUsers: userInfo && alarm.alarmUsers?.[0]!.type === AlarmUsersType.Member ? [{
-                type: AlarmUsersType.Member,
-                data: userInfo.unitId,
-              }] : alarm.alarmUsers,
+              alarmUsers:
+                userInfo && alarm.alarmUsers?.[0]!.type === AlarmUsersType.Member
+                  ? [
+                      {
+                        type: AlarmUsersType.Member,
+                        data: userInfo.unitId,
+                      },
+                    ]
+                  : alarm.alarmUsers,
             } as IRecordAlarm,
           }) as IObjectReplaceAction[];
           if (curAlarmActions) {
@@ -180,7 +180,6 @@ export const pasteSetRecords: ICollaCommandDef<IPasteSetRecordsOptions> = {
 
       // Paste the cell as a date type, with a value and with an alarm
       oldRecordId && addAlarm(value, field, recordId, oldRecordId);
-
     }
 
     // In the case where only one cell is copied, paste over the selection
@@ -262,7 +261,7 @@ export const pasteSetRecords: ICollaCommandDef<IPasteSetRecordsOptions> = {
 
         const newRecordIds = rst.data as string[];
         recordValues.forEach((rv, cvIndex) => {
-          Object.keys(rv).forEach(fId => {
+          Object.keys(rv).forEach((fId) => {
             addAlarm(rv[fId]!, fieldMap[fId]!, newRecordIds[cvIndex]!, oldRecordIds[cvIndex]!);
           });
         });
@@ -280,7 +279,7 @@ export const pasteSetRecords: ICollaCommandDef<IPasteSetRecordsOptions> = {
       resourceType: ResourceType.Datasheet,
       actions,
       linkedActions,
-      fieldMapSnapshot
+      fieldMapSnapshot,
     };
   },
 };

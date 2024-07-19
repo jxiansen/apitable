@@ -1,5 +1,3 @@
-
-
 import { Api } from '../exports/api';
 import { IResourceOpsCollect } from 'command_manager/command_manager';
 import { ConfigConstant, StatusCode } from 'config';

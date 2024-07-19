@@ -1,5 +1,3 @@
-
-
 import RcCalendar from 'rc-calendar';
 import * as React from 'react';
 import createPicker from './create_picker';

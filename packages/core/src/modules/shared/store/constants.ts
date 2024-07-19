@@ -1,5 +1,3 @@
-
-
 import { Strings, t } from 'exports/i18n';
 import { FieldType, IField } from 'types';
 import { IPermissions } from 'exports/store/interfaces';
@@ -51,7 +49,7 @@ export const DEFAULT_PERMISSION: IPermissions = {
   viewKeyFieldEditable: false,
   viewColorOptionEditable: false,
   viewManualSaveManageable: false,
-  viewOptionSaveEditable: false
+  viewOptionSaveEditable: false,
 };
 
 /**
@@ -104,7 +102,7 @@ export const DEFAULT_MANAGER_PERMISSION: IPermissions = {
   viewKeyFieldEditable: true,
   viewColorOptionEditable: true,
   viewManualSaveManageable: true,
-  viewOptionSaveEditable: true
+  viewOptionSaveEditable: true,
 };
 
 /**
@@ -157,7 +155,7 @@ export const DEFAULT_EDITOR_PERMISSION: IPermissions = {
   viewKeyFieldEditable: true,
   viewColorOptionEditable: true,
   viewManualSaveManageable: false,
-  viewOptionSaveEditable: true
+  viewOptionSaveEditable: true,
 };
 
 /**
@@ -210,7 +208,7 @@ export const DEFAULT_READ_ONLY_PERMISSION: IPermissions = {
   viewKeyFieldEditable: false,
   viewColorOptionEditable: false,
   viewManualSaveManageable: false,
-  viewOptionSaveEditable: false
+  viewOptionSaveEditable: false,
 };
 
 export const NotSupportFieldInstance: IField = {
@@ -375,7 +373,7 @@ export enum BindAccount {
   DINGDING,
   WECHAT,
   QQ,
-  WECOM
+  WECOM,
 }
 
 export enum QrAction {
@@ -427,5 +425,5 @@ export const PREVIEW_DATASHEET_BACKUP = 'previewDatasheetBackup';
 export enum DispatchToStore {
   Local = 'local',
   Remote = 'remote',
-  All = 'all'
+  All = 'all',
 }

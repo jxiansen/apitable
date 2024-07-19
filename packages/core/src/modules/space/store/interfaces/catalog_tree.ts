@@ -1,5 +1,3 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 import { Role } from 'config/constant';
 import { ConfigConstant } from 'config';
@@ -32,7 +30,7 @@ export interface ICatalogTree {
   privateEditNodeId: string;
   privateDelNodeId: string;
   privateTreeNodesMap: ITreeNodesMap;
-  privateExpandedKeys:string[];
+  privateExpandedKeys: string[];
   // favorite
   favoriteEditNodeId: string;
   favoriteDelNodeId: string;
@@ -262,7 +260,7 @@ export interface ISetNodeErrorTypeAction {
 export interface IOptNode {
   nodeId: string;
   parentId: string;
-  module?: ConfigConstant.Modules
+  module?: ConfigConstant.Modules;
 }
 
 export interface INewNode extends INode {

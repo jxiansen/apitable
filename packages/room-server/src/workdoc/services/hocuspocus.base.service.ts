@@ -1,12 +1,9 @@
-
-
 import { Hocuspocus } from '@hocuspocus/server';
 import { Injectable } from '@nestjs/common';
 import { getIPAddress } from 'shared/helpers/system.helper';
 
 @Injectable()
 export abstract class HocuspocusBaseService {
-
   init(port: number): Hocuspocus {
     return new Hocuspocus({
       port,
@@ -16,7 +13,6 @@ export abstract class HocuspocusBaseService {
 
 @Injectable()
 export class HocuspocusService extends HocuspocusBaseService {
-
   constructor() {
     super();
   }

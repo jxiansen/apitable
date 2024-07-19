@@ -1,5 +1,3 @@
-
-
 function TextareaWidget(props: any) {
   const { id, options, placeholder, value, required, disabled, readonly, autofocus, onChange, onBlur, onFocus } = props;
   const _onChange = ({ target: { value } }: any) => {

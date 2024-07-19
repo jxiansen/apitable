@@ -1,5 +1,3 @@
-
-
 import { Field } from 'model/field';
 import { IField, IFieldProperty } from 'types/field_types';
 import { IAddOpenFieldProperty, IEffectOption, IUpdateOpenFieldProperty } from 'types/open/open_field_write_types';

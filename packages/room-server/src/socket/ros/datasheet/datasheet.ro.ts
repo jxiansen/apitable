@@ -1,5 +1,3 @@
-
-
 import { IsArray, IsEnum, IsInt, IsObject, IsOptional, IsString } from 'class-validator';
 import { BroadcastTypes } from 'shared/enums/broadcast-types.enum';
 

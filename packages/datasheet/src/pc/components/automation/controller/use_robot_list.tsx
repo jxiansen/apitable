@@ -6,19 +6,22 @@ import { getResourceAutomations } from '../../robot/api';
 
 export const useAutomationList = () => {
   const datasheetId = useAppSelector(Selectors.getActiveDatasheetId);
-  const { data: automationList, error, mutate: mutateRefresh }
-        = useSWR(`getResourceAutomations-${datasheetId}`, () => getResourceAutomations(datasheetId!));
+  const {
+    data: automationList,
+    error,
+    mutate: mutateRefresh,
+  } = useSWR(`getResourceAutomations-${datasheetId}`, () => getResourceAutomations(datasheetId!));
 
-  return useMemo(() => (
-    {
+  return useMemo(
+    () => ({
       state: {
         data: automationList,
-        error
+        error,
       },
       api: {
         refresh: mutateRefresh,
-      }
-    }
-  ), [automationList, error, mutateRefresh]);
-
+      },
+    }),
+    [automationList, error, mutateRefresh],
+  );
 };

@@ -1,5 +1,3 @@
-
-
 import { RedisService } from '@apitable/nestjs-redis';
 import { Injectable } from '@nestjs/common';
 import { difference, intersection } from 'lodash';
@@ -13,13 +11,16 @@ import { Logger } from 'winston';
  */
 @Injectable()
 export class ComputeFieldReferenceManager {
-  constructor(@InjectLogger() private readonly logger: Logger, private readonly redisService: RedisService) {}
+  constructor(
+    @InjectLogger() private readonly logger: Logger,
+    private readonly redisService: RedisService,
+  ) {}
 
   /**
    * Create field reference by covering, original remaining part will break mutual reference
    * @returns original mapped datasheet : field set
    */
-  createReference = async(mainDstId: string, field: string, foreignDstId: string, refFieldIds: string[]): Promise<string[]> => {
+  createReference = async (mainDstId: string, field: string, foreignDstId: string, refFieldIds: string[]): Promise<string[]> => {
     if (this.logger.isDebugEnabled()) {
       this.logger.debug('CreateComputeFieldReference', { mainDstId, field, refFieldIds });
     }
@@ -27,7 +28,7 @@ export class ComputeFieldReferenceManager {
     const refKeySuf = util.format('%s:%s', mainDstId, field);
     // Build reference value
     const refValues = await Promise.all(
-      refFieldIds.map(async fieldId => {
+      refFieldIds.map(async (fieldId) => {
         const refValue = util.format('%s:%s', foreignDstId, fieldId);
         // Maintain backward reference
         const reRefKey = util.format(CacheKeys.DATASHEET_FIELD_RE_REF, refValue);
@@ -81,7 +82,7 @@ export class ComputeFieldReferenceManager {
     return await this.getRefFieldIds(members);
   };
 
-  deleteReference = async(mainDstId: string, field: string, foreignDstId: string, refFieldIds: string[]) => {
+  deleteReference = async (mainDstId: string, field: string, foreignDstId: string, refFieldIds: string[]) => {
     if (this.logger.isDebugEnabled()) {
       this.logger.debug(`CreateComputeFieldReference:deleteReference mainDstId: ${mainDstId},field: ${field},Values: [${refFieldIds}]`);
     }
@@ -90,7 +91,7 @@ export class ComputeFieldReferenceManager {
     const refKeySuf = util.format('%s:%s', mainDstId, field);
     // Build reference value
     const refValues = await Promise.all(
-      refFieldIds.map(async fieldId => {
+      refFieldIds.map(async (fieldId) => {
         const refValue = util.format('%s:%s', foreignDstId, fieldId);
         const reRefKey = util.format(CacheKeys.DATASHEET_FIELD_RE_REF, refValue);
         const exist = await client.sismember(reRefKey, refKeySuf);
@@ -135,7 +136,7 @@ export class ComputeFieldReferenceManager {
     }
     const dstToFiledMap = new Map<string, string[]>();
     const members = await client.smembers(refKey);
-    members.forEach(val => {
+    members.forEach((val) => {
       const [datasheetId, fieldId] = val.split(':') as [string, string];
       if (dstToFiledMap.has(datasheetId)) {
         dstToFiledMap.set(datasheetId, [...dstToFiledMap.get(datasheetId)!, ...[fieldId]]);
@@ -155,7 +156,7 @@ export class ComputeFieldReferenceManager {
     }
     const dstToFiledMap = new Map<string, string[]>();
     const members = await client.smembers(reRefKey);
-    members.forEach(val => {
+    members.forEach((val) => {
       const [datasheetId, fieldId] = val.split(':') as [string, string];
       if (dstToFiledMap.has(datasheetId)) {
         dstToFiledMap.set(datasheetId, [...dstToFiledMap.get(datasheetId)!, ...[fieldId]]);
@@ -170,7 +171,7 @@ export class ComputeFieldReferenceManager {
     if (!members.length) {
       return [];
     }
-    return members.map(member => {
+    return members.map((member) => {
       const [, fieldId] = member.split(':') as [string, string];
       return fieldId;
     });

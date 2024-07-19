@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import { ConfigConstant } from 'config';
 import urlcat from 'urlcat';
@@ -139,7 +137,7 @@ export function nodeMove(nodeId: string, parentId: string, preNodeId?: string, u
     nodeId,
     parentId,
     preNodeId,
-    unitId
+    unitId,
   });
 }
 
@@ -268,7 +266,7 @@ export function searchNode(spaceId: string, keyword: string, unitType?: number) 
     params: {
       spaceId,
       keyword,
-      unitType
+      unitType,
     },
   });
 }

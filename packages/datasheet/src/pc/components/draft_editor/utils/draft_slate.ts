@@ -1,5 +1,3 @@
-
-
 import { get, cloneDeep, isEmpty } from 'lodash';
 
 export const EMPTY_CONTENT = [

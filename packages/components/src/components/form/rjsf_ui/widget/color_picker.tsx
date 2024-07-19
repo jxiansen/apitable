@@ -1,5 +1,3 @@
-
-
 import { WidgetProps } from '@rjsf/core';
 import Color from 'color';
 import React, { useState } from 'react';
@@ -14,16 +12,14 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const StyledColor = styled.div<{ rgbaColor: RGBColor }>(props => (
-  {
-    width: '36px',
-    height: '14px',
-    borderRadius: '2px',
-    background: `rgba(${props.rgbaColor.r}, ${props.rgbaColor.g}, ${props.rgbaColor.b}, ${props.rgbaColor.a})`,
-  }
-));
+const StyledColor = styled.div<{ rgbaColor: RGBColor }>((props) => ({
+  width: '36px',
+  height: '14px',
+  borderRadius: '2px',
+  background: `rgba(${props.rgbaColor.r}, ${props.rgbaColor.g}, ${props.rgbaColor.b}, ${props.rgbaColor.a})`,
+}));
 
-const StyledSwatch = styled.div.attrs(applyDefaultTheme)(props => ({
+const StyledSwatch = styled.div.attrs(applyDefaultTheme)((props) => ({
   padding: '5px',
   background: props.theme.color.bgCommonHigh,
   borderRadius: '1px',
@@ -42,15 +38,10 @@ export const ColorWidget = ({ value, onChange }: WidgetProps) => {
     a: _color.alpha(),
   });
 
-  const {
-    renderLayer,
-    triggerProps,
-    layerProps,
-    arrowProps
-  } = useLayer({
+  const { renderLayer, triggerProps, layerProps, arrowProps } = useLayer({
     isOpen: displayColorPicker,
     auto: true,
-    onOutsideClick: () => setDisplayColorPicker(false)
+    onOutsideClick: () => setDisplayColorPicker(false),
   });
 
   const handleClick = () => {
@@ -73,13 +64,13 @@ export const ColorWidget = ({ value, onChange }: WidgetProps) => {
       <StyledSwatch onClick={handleClick} {...triggerProps}>
         <StyledColor rgbaColor={color} />
       </StyledSwatch>
-      { displayColorPicker && renderLayer(
-        <div {...layerProps}>
-          <_SketchPicker color={color} onChange={handleChange} />
-          <Arrow {...arrowProps} size={5} roundness={0} />
-        </div>
-      )}
+      {displayColorPicker &&
+        renderLayer(
+          <div {...layerProps}>
+            <_SketchPicker color={color} onChange={handleChange} />
+            <Arrow {...arrowProps} size={5} roundness={0} />
+          </div>
+        )}
     </div>
   );
 };
-

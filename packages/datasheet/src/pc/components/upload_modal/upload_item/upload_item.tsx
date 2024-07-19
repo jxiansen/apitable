@@ -1,5 +1,3 @@
-
-
 import { Progress } from 'antd';
 import Image from 'next/image';
 import * as React from 'react';

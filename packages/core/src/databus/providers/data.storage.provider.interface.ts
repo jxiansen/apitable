@@ -1,5 +1,3 @@
-
-
 import { IDataLoader } from './data.loader.interface';
 import { IDataSaver } from './data.saver.interface';
 

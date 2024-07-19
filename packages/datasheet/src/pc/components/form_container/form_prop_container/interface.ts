@@ -1,5 +1,3 @@
-
-
 import { IFormProps } from '@apitable/core';
 
 export enum IModeEnum {

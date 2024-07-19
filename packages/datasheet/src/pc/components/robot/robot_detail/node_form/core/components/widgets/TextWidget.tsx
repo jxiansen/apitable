@@ -1,5 +1,3 @@
-
-
 interface ITextWidgetProps {
   registry: any;
   id: string;

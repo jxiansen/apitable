@@ -1,5 +1,3 @@
-
-
 import { Steps } from 'antd';
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';

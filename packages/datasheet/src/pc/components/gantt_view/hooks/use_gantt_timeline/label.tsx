@@ -1,5 +1,3 @@
-
-
 import { Label as KonvaLabel } from 'react-konva';
 
 const Label = (props: any) => {

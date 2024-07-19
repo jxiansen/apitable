@@ -1,5 +1,3 @@
-
-
 import { ITheme } from './../theme/theme.interface';
 import { defaultTheme } from 'theme';
 import { useTheme as useScTheme } from 'styled-components';

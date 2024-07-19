@@ -1,5 +1,3 @@
-
-
 import { evaluate, FieldType, getNewId, IDPrefix, IFormulaField, IViewRow, Selectors, ViewDerivateBase } from '@apitable/core';
 import { IWorkerGetVisibleRowsJobData, IWorkerJob, WorkerJobType } from './types';
 
@@ -22,7 +20,7 @@ export const getVisibleRows = (data: IWorkerGetVisibleRowsJobData): IViewRow[] =
         expression: filterByFormula,
       },
     };
-    view.rows = view.rows.filter(row => {
+    view.rows = view.rows.filter((row) => {
       const result = evaluate(
         filterByFormula,
         {

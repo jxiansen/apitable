@@ -1,5 +1,3 @@
-
-
 import { CollaCommandName } from 'commands/index';
 import { ExecuteResult, ICollaCommandDef, ICollaCommandExecuteContext } from 'command_manager';
 import { IJOTAction } from 'engine';
@@ -32,7 +30,7 @@ export const addWidgetToPanel: ICollaCommandDef<IAddWidgetToPanel> = {
       const rct = addWidgetPanel.execute(context, {
         cmd: CollaCommandName.AddWidgetPanel,
         resourceId,
-        resourceType
+        resourceType,
       });
       if (rct && rct.result !== ExecuteResult.Fail) {
         actions.push(...rct.actions);
@@ -40,7 +38,7 @@ export const addWidgetToPanel: ICollaCommandDef<IAddWidgetToPanel> = {
     } else {
       const widgetPanelStatus = getResourceWidgetPanelStatus(state, resourceId, resourceType);
       const activePanelId = widgetPanelStatus?.activePanelId || widgetPanels[0]!.id;
-      panelIndex = widgetPanels.findIndex(item => item.id === activePanelId);
+      panelIndex = widgetPanels.findIndex((item) => item.id === activePanelId);
 
       if (panelIndex < 0) {
         return null;
@@ -49,9 +47,10 @@ export const addWidgetToPanel: ICollaCommandDef<IAddWidgetToPanel> = {
       installationIndex = widgetPanels[panelIndex]!.widgets.length;
     }
 
-    const addWidgetToPanelAction = resourceType === ResourceType.Datasheet ?
-      DatasheetActions.addWidgetToPanel2Action(state, { installationIndex, panelIndex, widgetId }) :
-      DatasheetActions.addWidgetToPanelWithMirror2Action(state, { installationIndex, panelIndex, widgetId });
+    const addWidgetToPanelAction =
+      resourceType === ResourceType.Datasheet
+        ? DatasheetActions.addWidgetToPanel2Action(state, { installationIndex, panelIndex, widgetId })
+        : DatasheetActions.addWidgetToPanelWithMirror2Action(state, { installationIndex, panelIndex, widgetId });
 
     if (!addWidgetToPanelAction) {
       return null;

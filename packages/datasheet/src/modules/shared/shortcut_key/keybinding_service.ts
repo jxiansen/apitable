@@ -1,5 +1,3 @@
-
-
 import { ShortcutActionName } from 'modules/shared/shortcut_key/enum';
 import { ContextKeyEvaluate } from './context_key_parser/context_key';
 import { SimpleKeybinding } from './key_codes';

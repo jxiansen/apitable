@@ -24,6 +24,5 @@ export class ClientDataStorageProvider extends ClientDataLoader implements datab
     this.operationExecuted(ops);
   }
 
-  async nestRoomChangeFromRust(_roomId: string, _data: any) {
-  }
+  async nestRoomChangeFromRust(_roomId: string, _data: any) {}
 }

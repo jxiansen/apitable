@@ -1,5 +1,3 @@
-
-
 import { useKeyPress } from 'ahooks';
 import type { InputRef } from 'antd';
 import { Input, message } from 'antd';
@@ -195,12 +193,12 @@ const FieldSettingBase: FC<PropsWithChildren<IFieldSettingProps>> = (props) => {
   const fieldInfoForState = field
     ? field
     : ({
-      id: getNewId(IDPrefix.Field),
-      // New fields are added and no longer populated with a field name by default
-      name: '',
-      type: FieldType.Text,
-      property: getFieldClass(FieldType.Text).defaultProperty(),
-    } as IField);
+        id: getNewId(IDPrefix.Field),
+        // New fields are added and no longer populated with a field name by default
+        name: '',
+        type: FieldType.Text,
+        property: getFieldClass(FieldType.Text).defaultProperty(),
+      } as IField);
   const [currentField, setCurrentField] = useState(fieldInfoForState);
   const [baseErrMsg, setBaseErrMsg] = useState('');
   const [optionErrMsg, setOptionErrMsg] = useState<string | object>('');
@@ -438,7 +436,7 @@ const FieldSettingBase: FC<PropsWithChildren<IFieldSettingProps>> = (props) => {
       const _checkResult = checkResult.errors ? (Object.values(checkResult.errors)[0] as string) : checkResult;
       isModal && renderModal(_checkResult);
 
-      if(!isModal && currentField.type === FieldType.Button) {
+      if (!isModal && currentField.type === FieldType.Button) {
         message.error(_checkResult);
       }
       return;
@@ -533,11 +531,11 @@ const FieldSettingBase: FC<PropsWithChildren<IFieldSettingProps>> = (props) => {
             from={activeFieldState.from}
             currentField={currentField}
             onCreate={(field) => {
-              const integractedItem: IField = produce(field, draft => {
+              const integractedItem: IField = produce(field, (draft) => {
                 draft.property.action = field.property.action;
               });
 
-              const checkResult : IField= checkFactory[currentField.type]
+              const checkResult: IField = checkFactory[currentField.type]
                 ? checkFactory[currentField.type](integractedItem, propDatasheetId)
                 : CheckFieldSettingBase.checkStream(integractedItem, propDatasheetId);
 
@@ -557,12 +555,10 @@ const FieldSettingBase: FC<PropsWithChildren<IFieldSettingProps>> = (props) => {
                 addField(checkResult);
               }
               return;
-            }
-            }
+            }}
             onUpdate={(field) => {
               modifyFieldType(field);
-            }
-            }
+            }}
             setCurrentField={setCurrentField}
             hideOperateBox={hideOperateBox}
             datasheetId={propDatasheetId}

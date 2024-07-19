@@ -1,5 +1,3 @@
-
-
 import { FormulaFunc, IFormulaParam, IFormulaContext } from './basic';
 import { BasicValueType, FormulaFuncType } from 'types';
 import { AstNode } from 'formula_parser/parser';

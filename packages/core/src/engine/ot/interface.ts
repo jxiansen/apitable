@@ -1,5 +1,3 @@
-
-
 import { FieldType, ResourceType } from 'types';
 
 // Use words' first letter as the identifier to save network transmission bytes
@@ -29,8 +27,8 @@ export interface INumberAddAction {
 }
 
 /**
- * {p:[path,idx], li:obj} before the `path` value array's `idx` index, insert object `obj` 
- * 
+ * {p:[path,idx], li:obj} before the `path` value array's `idx` index, insert object `obj`
+ *
  */
 export interface IListInsertAction {
   n: OTActionName.ListInsert;
@@ -48,7 +46,7 @@ export interface IListDeleteAction {
 }
 
 /**
- * {p:[path,idx], ld:before, li:after} use `after` to replace `path`'s `idx` index value `before` 
+ * {p:[path,idx], ld:before, li:after} use `after` to replace `path`'s `idx` index value `before`
  */
 export interface IListReplaceAction {
   n: OTActionName.ListReplace;
@@ -108,14 +106,23 @@ export interface ITextDeleteAction {
   sd: string;
 }
 
-export type IJOTAction = INumberAddAction | IListInsertAction | IListDeleteAction |
-  IListReplaceAction | IListMoveAction | IObjectInsertAction | IObjectDeleteAction |
-  IObjectReplaceAction | ISubTypeAction | ITextInsertAction | ITextDeleteAction;
+export type IJOTAction =
+  | INumberAddAction
+  | IListInsertAction
+  | IListDeleteAction
+  | IListReplaceAction
+  | IListMoveAction
+  | IObjectInsertAction
+  | IObjectDeleteAction
+  | IObjectReplaceAction
+  | ISubTypeAction
+  | ITextInsertAction
+  | ITextDeleteAction;
 
 export type IAnyAction = { [key: string]: any };
 
 /**
- * save the `cmd` name to associate each modification with the user operation, 
+ * save the `cmd` name to associate each modification with the user operation,
  * to facilitate history backtracking and tracking
  */
 export interface IOperation {
@@ -123,15 +130,15 @@ export interface IOperation {
   actions: IJOTAction[];
   mainLinkDstId?: string;
   fieldTypeMap?: {
-    [fieldId: string]: FieldType
+    [fieldId: string]: FieldType;
   };
-  resourceType?: ResourceType,
+  resourceType?: ResourceType;
   revision?: number;
 }
 
 export interface IChangeset {
   /**
-   * random string, 
+   * random string,
    */
   messageId: string; // random string used to uniquely mark the current id to prevent repeated consumption
   resourceType: ResourceType;
@@ -140,10 +147,10 @@ export interface IChangeset {
 }
 
 /**
-  * A packet sent by the changeset client to the server, which is characterized by version information. 
-  * Describes all actions performed by the user over a period of time.
-  * The changeset sent locally to the server has baseRevision, indicating that this changeset is generated based on the snapshot of this version.
-  */
+ * A packet sent by the changeset client to the server, which is characterized by version information.
+ * Describes all actions performed by the user over a period of time.
+ * The changeset sent locally to the server has baseRevision, indicating that this changeset is generated based on the snapshot of this version.
+ */
 export interface ILocalChangeset extends IChangeset {
   baseRevision: number;
 }

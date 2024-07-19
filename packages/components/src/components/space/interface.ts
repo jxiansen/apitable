@@ -1,5 +1,3 @@
-
-
 import { ElementType } from 'react';
 import { FLEX_ALIGN } from './constant';
 

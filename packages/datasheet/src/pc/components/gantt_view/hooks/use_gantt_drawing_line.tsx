@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { useContext, useRef, useState } from 'react';
 import { Message } from '@apitable/components';

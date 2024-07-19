@@ -1,5 +1,3 @@
-
-
 import { getEnvVariables } from 'pc/utils/env';
 import { Block } from '../components';
 import { ILayoutProps } from '../interface';

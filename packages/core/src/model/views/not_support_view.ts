@@ -1,5 +1,3 @@
-
-
 import { View } from './views';
 import { ISnapshot } from '../../exports/store/interfaces';
 

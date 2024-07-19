@@ -1,5 +1,3 @@
-
-
 export const eventRecordCreated = [
   {
     eventName: 'RecordCreated',
@@ -9,10 +7,10 @@ export const eventRecordCreated = [
     context: {
       datasheetId: 'dst2CXiPKQRdfgZBsa',
       recordId: 'recL3avIg0ydn',
-      fields: {}
+      fields: {},
     },
-    sourceType: 'LOCAL'
-  }
+    sourceType: 'LOCAL',
+  },
 ];
 
 export const eventRecordDuplicated = [
@@ -26,11 +24,11 @@ export const eventRecordDuplicated = [
       recordId: 'recYbbp4CF5KO',
       fields: {
         fld3uEu7eLKB9: ['optkpdgG5lLj9'],
-        fldBSXiPB3UQY: [{ text: '3', type: 1 }]
-      }
+        fldBSXiPB3UQY: [{ text: '3', type: 1 }],
+      },
     },
-    sourceType: 'LOCAL'
-  }
+    sourceType: 'LOCAL',
+  },
 ];
 
 export const eventRecordDeleted = [
@@ -40,6 +38,6 @@ export const eventRecordDeleted = [
     atomType: 'ATOM',
     scope: 0,
     context: { datasheetId: 'dst2CXiPKQRdfgZBsa', recordId: 'recL3avIg0ydn' },
-    sourceType: 'LOCAL'
-  }
+    sourceType: 'LOCAL',
+  },
 ];

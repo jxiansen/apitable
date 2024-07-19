@@ -1,5 +1,3 @@
-
-
 /* eslint-disable */
 export enum ScreenSize {
   xs = 'xs', // 0

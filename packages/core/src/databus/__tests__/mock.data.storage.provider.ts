@@ -1,18 +1,13 @@
-
-
 import { IResourceOpsCollect, resourceOpsToChangesets } from 'command_manager';
 import { IDataStorageProvider, ISaveOpsOptions } from '../providers';
 import { IBaseDatasheetPack, IServerDashboardPack, IServerDatasheetPack } from 'exports/store/interfaces';
-import {
-  getSnapshot,
-  getDatasheet,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getSnapshot, getDatasheet } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getDashboard } from 'modules/database/store/selectors/resource/dashboard';
 
 import { mockDatasheetMap } from './mock.datasheets';
 import { ResourceType } from '../../types';
 import { mockDashboardMap } from './mock.dashboards';
-import { applyJOTOperations,updateRevision } from 'modules/database/store/actions/resource';
+import { applyJOTOperations, updateRevision } from 'modules/database/store/actions/resource';
 
 export class MockDataStorageProvider implements IDataStorageProvider {
   datasheets!: Record<string, IBaseDatasheetPack>;
@@ -44,7 +39,7 @@ export class MockDataStorageProvider implements IDataStorageProvider {
   saveOps(ops: IResourceOpsCollect[], options: ISaveOpsOptions): Promise<any> {
     const { store } = options;
     const changesets = resourceOpsToChangesets(ops, store.getState());
-    changesets.forEach(cs => {
+    changesets.forEach((cs) => {
       store.dispatch(applyJOTOperations(cs.operations, cs.resourceType, cs.resourceId));
       if (cs.baseRevision !== undefined) {
         store.dispatch(updateRevision(cs.baseRevision + 1, cs.resourceId, cs.resourceType));
@@ -67,6 +62,5 @@ export class MockDataStorageProvider implements IDataStorageProvider {
     return Promise.resolve(changesets);
   }
 
-  async nestRoomChangeFromRust(_roomId: string, _data: any) {
-  }
+  async nestRoomChangeFromRust(_roomId: string, _data: any) {}
 }

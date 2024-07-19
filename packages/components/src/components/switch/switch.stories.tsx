@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Switch } from './index';
 import { StoryType } from '../../stories/constants';
@@ -27,34 +25,34 @@ export const Default = Template.bind({});
 
 export const DefaultChecked = Template.bind({});
 DefaultChecked.args = {
-  defaultChecked: true
+  defaultChecked: true,
 };
 
 export const SmallSize = Template.bind({});
 SmallSize.args = {
-  size: 'small'
+  size: 'small',
 };
 
 export const CloseDisabled = Template.bind({});
 CloseDisabled.args = {
-  disabled: true
+  disabled: true,
 };
 
 export const OpenDisabled = Template.bind({});
 OpenDisabled.args = {
   disabled: true,
-  defaultChecked: true
+  defaultChecked: true,
 };
 
 export const CloseLoading = Template.bind({});
 CloseLoading.args = {
-  loading: true
+  loading: true,
 };
 
 export const OpenLoading = Template.bind({});
 OpenLoading.args = {
   loading: true,
-  defaultChecked: true
+  defaultChecked: true,
 };
 
 export const ChangeStatus = () => {

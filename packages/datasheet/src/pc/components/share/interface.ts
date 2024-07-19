@@ -1,5 +1,3 @@
-
-
 import { ConfigConstant } from '@apitable/core';
 
 export interface IShareSpaceInfo {

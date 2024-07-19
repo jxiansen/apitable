@@ -1,5 +1,3 @@
-
-
 import { IRobotTrigger } from 'pc/components/robot/interface';
 
 export const getDatasheetId = (trigger?: Pick<IRobotTrigger, 'input'>) => {

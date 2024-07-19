@@ -1,5 +1,3 @@
-
-
 import { IDPrefix, IField, IFieldMap, IMeta } from '@apitable/core';
 import { Span } from '@metinseylan/nestjs-opentelemetry';
 import { Injectable } from '@nestjs/common';

@@ -1,5 +1,3 @@
-
-
 import React, { FC, useState } from 'react';
 import { StoryType } from '../../stories/constants';
 import { Box } from '../box';

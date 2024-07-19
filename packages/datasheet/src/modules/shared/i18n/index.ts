@@ -1,5 +1,3 @@
-
-
 import LanguageDetector from './browserDetector';
 import { getSupportedLang } from './getSupportedLang';
 

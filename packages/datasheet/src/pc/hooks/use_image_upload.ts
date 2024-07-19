@@ -1,5 +1,3 @@
-
-
 import { shallowEqual } from 'react-redux';
 import { getImageThumbSrc, Strings, t } from '@apitable/core';
 import { uploadAttachToS3, UploadType } from '@apitable/widget-sdk';

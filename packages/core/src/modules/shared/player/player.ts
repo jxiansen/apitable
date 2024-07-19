@@ -1,9 +1,7 @@
-
-
 /*
- * 
+ *
  * Player user system, including novice guide, event system binding, red dot, notification and other managers closely related to user experience
- * Provide an initialization function, which can execute the initialization (init) function during restart, 
+ * Provide an initialization function, which can execute the initialization (init) function during restart,
  * and read and explain the player configuration table
  *
  * @Author: Kelly Peilin Chan (kelly@apitable.com)
@@ -12,7 +10,9 @@
  * @Last Modified time: 2020-03-21 17:58:29
  */
 import {
-  AppHook, TriggerCommand, FilterCommand,
+  AppHook,
+  TriggerCommand,
+  FilterCommand,
   // ITrigger,
 } from 'apphook';
 
@@ -86,10 +86,7 @@ export function applyFilters(event: IEvent, defaultValue: any, eventState?: any)
   return apphook.applyFilters(eventStr, defaultValue, eventState);
 }
 
-export function bindFilter(
-  event: IEvent, command: FilterCommand, commandArg: any,
-  priority = 0, force = false,
-) {
+export function bindFilter(event: IEvent, command: FilterCommand, commandArg: any, priority = 0, force = false) {
   const eventStr = _getEventName(event);
   if (!force && apphook.hasAnyFilters(eventStr)) {
     console.error(`Event ${eventStr} has triggers, cannot bind anymore`);

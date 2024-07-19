@@ -1,5 +1,3 @@
-
-
 import { useState, FC, useRef, useEffect, useContext, memo } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Field, IMeta, IViewColumn, FieldType } from '@apitable/core';

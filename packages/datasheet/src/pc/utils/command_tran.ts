@@ -1,5 +1,3 @@
-
-
 import { Strings, t, CollaCommandName } from '@apitable/core';
 
 export const CollaCommandTran = {

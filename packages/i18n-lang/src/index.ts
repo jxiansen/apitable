@@ -1,4 +1,3 @@
-
 import languageManifest from './config/language.manifest.json';
 
 declare const window: any;
@@ -8,7 +7,7 @@ function loadAllLang() {
   let strings = {};
   if (typeof window !== 'undefined') {
     strings = (window as any).apitable_i18n || {};
-  }else {
+  } else {
     strings = (global as any).apitable_i18n || {};
   }
   // console.log('language package keys: ', Object.keys(strings));
@@ -26,4 +25,3 @@ function loadAllLang() {
 }
 
 loadAllLang();
-

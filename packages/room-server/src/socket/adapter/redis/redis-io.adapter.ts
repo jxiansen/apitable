@@ -1,5 +1,3 @@
-
-
 import { INestApplicationContext, Logger, WebSocketAdapter } from '@nestjs/common';
 import { isNil } from '@nestjs/common/utils/shared.utils';
 import { IoAdapter } from '@nestjs/platform-socket.io';
@@ -18,7 +16,7 @@ export class RedisIoAdapter extends IoAdapter implements WebSocketAdapter {
 
   constructor(
     app: INestApplicationContext,
-    private readonly socketIoService: SocketIoService
+    private readonly socketIoService: SocketIoService,
   ) {
     super(app);
   }
@@ -62,10 +60,10 @@ export class RedisIoAdapter extends IoAdapter implements WebSocketAdapter {
     });
 
     // record error log
-    server.of(GatewayConstants.SOCKET_NAMESPACE).adapter.on('error', function(error: any) {
+    server.of(GatewayConstants.SOCKET_NAMESPACE).adapter.on('error', function (error: any) {
       _nestedLogger.error(error.message, error?.stack);
     });
-    server.of(GatewayConstants.ROOM_NAMESPACE).adapter.on('error', function(error: any) {
+    server.of(GatewayConstants.ROOM_NAMESPACE).adapter.on('error', function (error: any) {
       _nestedLogger.error(error.message, error?.stack);
     });
     return server;
@@ -87,13 +85,13 @@ export class RedisIoAdapter extends IoAdapter implements WebSocketAdapter {
 
   override bindClientDisconnect(socket: IAuthenticatedSocket, callback: (socket: IAuthenticatedSocket) => {}) {
     // Client disconnecting
-    socket.on(SocketEventEnum.DISCONNECTING, async args => {
+    socket.on(SocketEventEnum.DISCONNECTING, async (args) => {
       // Move out of the room, determine whether the number of people inside the room is empty, if the room is empty, delete the room
       this.logger.log({ message: 'RedisIoAdapter:clientDisconnecting', userId: socket.auth?.userId, socketId: socket.id, args });
       await this.socketIoService.leaveRoom(socket);
     });
     // Client disconnect
-    socket.on(SocketEventEnum.DISCONNECTION, args => {
+    socket.on(SocketEventEnum.DISCONNECTION, (args) => {
       this.logger.warn({ message: 'RedisIoAdapter:clientDisconnect', userId: socket.auth?.userId, socketId: socket.id, args });
       socket.removeAllListeners('disconnect');
       callback(socket);

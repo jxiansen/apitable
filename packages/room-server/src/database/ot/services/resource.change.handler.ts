@@ -1,5 +1,3 @@
-
-
 import { IViewProperty, ResourceIdPrefix, ResourceType, ViewType } from '@apitable/core';
 import { Span } from '@metinseylan/nestjs-opentelemetry';
 import { Injectable } from '@nestjs/common';
@@ -25,15 +23,14 @@ export class ResourceChangeHandler {
     private readonly nodeService: NodeService,
     private readonly datasheetWidgetService: DatasheetWidgetService,
     private readonly datasheetFieldHandler: DatasheetFieldHandler,
-    private readonly restService: RestService
-  ) {
-  }
+    private readonly restService: RestService,
+  ) {}
 
   @Span()
   async handleResourceChange(roomId: string, values: any[]) {
     this.logger.info(
       `HandleResourceChange. roomId: ${roomId} values: ${JSON.stringify(
-        values.map(value => ({
+        values.map((value) => ({
           resourceId: value.commonData.resourceId,
           dstId: value.commonData.dstId,
         })),
@@ -122,7 +119,7 @@ export class ResourceChangeHandler {
     if (addResourceIds.length) {
       await this.roomResourceRelService.createOrUpdateRel(dstId, addResourceIds);
       // Update related node resource asynchronously
-      await Promise.all(relNodeIds.map(nodeId => this.roomResourceRelService.createOrUpdateRel(nodeId, addResourceIds)));
+      await Promise.all(relNodeIds.map((nodeId) => this.roomResourceRelService.createOrUpdateRel(nodeId, addResourceIds)));
     }
     // Break Room - Resource bijection
     if (delResourceIds.length) {
@@ -132,7 +129,7 @@ export class ResourceChangeHandler {
       }
       await this.roomResourceRelService.removeRel(dstId, delResourceIds);
       // Update related node resource asynchronously
-      await Promise.all(relNodeIds.map(nodeId => this.roomResourceRelService.removeRel(nodeId, delResourceIds)));
+      await Promise.all(relNodeIds.map((nodeId) => this.roomResourceRelService.removeRel(nodeId, delResourceIds)));
     }
     await this.handleSpaceStatistics(resultSet);
   }

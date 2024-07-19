@@ -10,13 +10,13 @@ test('use records all should return a correct result', () => {
     rec1111: {
       id: 'rec1111',
       data: {},
-      commentCount: 0
+      commentCount: 0,
     },
     rec2222: {
       id: 'rec2222',
       data: {},
-      commentCount: 0
-    }
+      commentCount: 0,
+    },
   };
   mockWidgetSdkData.addRecords(recordMap);
 

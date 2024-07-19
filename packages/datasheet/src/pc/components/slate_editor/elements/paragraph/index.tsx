@@ -1,5 +1,3 @@
-
-
 import { memo } from 'react';
 import { IElementRenderProps, IElement } from '../../interface/element';
 

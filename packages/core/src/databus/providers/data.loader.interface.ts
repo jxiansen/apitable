@@ -23,7 +23,7 @@ export interface IDataLoader {
    *
    * @returns If the dashboard is not found, null is returned.
    */
-  loadDashboardPack(dashboardId: string, options: ILoadDashboardPackOptions): Promise<IServerDashboardPack | null>
+  loadDashboardPack(dashboardId: string, options: ILoadDashboardPackOptions): Promise<IServerDashboardPack | null>;
 }
 
 /**

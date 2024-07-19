@@ -1,8 +1,4 @@
-
-
-import {
-  str2single,
-} from '..';
+import { str2single } from '..';
 import { IReduxState } from '../../../exports/store/interfaces';
 
 import {
@@ -22,11 +18,9 @@ function getField(): [SingleSelectField, string[], any[], IField] {
     name: 'test',
   };
   const field: SingleSelectField = new SingleSelectField(table, {} as IReduxState);
-  const names: any[] = [
-    '123', 'xxx', 'ccc',
-  ];
+  const names: any[] = ['123', 'xxx', 'ccc'];
   const ids: any[] = [];
-  names.forEach(name => ids.push(field.addOption(name)));
+  names.forEach((name) => ids.push(field.addOption(name)));
   return [field, names, ids, table];
 }
 
@@ -40,7 +34,7 @@ describe('文本转单选 field 对应的 record 值', () => {
       { args: ids[2], expected: ids[2] },
       { args: null, expected: null },
     ];
-    test.forEach(t => {
+    test.forEach((t) => {
       expect(str2single(t.args, field, oldField)).toEqual(t.expected);
     });
   });
@@ -53,7 +47,7 @@ describe('文本转单选 field 对应的 record 值', () => {
       { args: ids[2], expected: ids[2] },
       { args: null, expected: null },
     ];
-    test.forEach(t => {
+    test.forEach((t) => {
       expect(str2single(t.args, field, oldField)).toEqual(t.expected);
     });
   });
@@ -66,7 +60,7 @@ describe('文本转单选 field 对应的 record 值', () => {
       { args: ids[2], expected: ids[2] },
       { args: null, expected: null },
     ];
-    test.forEach(t => {
+    test.forEach((t) => {
       expect(str2single(t.args, field, oldField)).toEqual(t.expected);
     });
   });
@@ -80,7 +74,7 @@ describe('文本转单选 field 对应的 record 值', () => {
       { args: [ids[2]], expected: ids[2] },
       { args: null, expected: null },
     ];
-    test.forEach(t => {
+    test.forEach((t) => {
       expect(str2single(t.args, field, oldField)).toEqual(t.expected);
     });
   });
@@ -92,7 +86,7 @@ describe('文本转单选 field 对应的 record 值', () => {
       { args: [ids[0]], type: FieldType.Number, expected: ids[0] },
       { args: [ids[1]], type: FieldType.MultiSelect, expected: ids[1] },
     ];
-    test.forEach(t => {
+    test.forEach((t) => {
       expect(str2single(t.args, field, oldField)).toEqual(t.expected);
     });
   });

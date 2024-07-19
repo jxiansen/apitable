@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType, FieldType, IPercentField } from 'types';
 import { IOpenField } from 'types/open/open_field_read_types';
 import { IUpdateOpenPercentFieldProperty } from 'types/open/open_field_write_types';
@@ -11,8 +9,8 @@ const percentField: IPercentField = {
   type: FieldType.Percent,
   property: {
     defaultValue: '1',
-    precision: 1
-  }
+    precision: 1,
+  },
 };
 
 const openPercentField: IOpenField = {
@@ -21,22 +19,22 @@ const openPercentField: IOpenField = {
   type: APIMetaFieldType.Percent,
   property: {
     defaultValue: '1',
-    precision: 1
-  }
+    precision: 1,
+  },
 };
 
 const propertyOptionalFill: IUpdateOpenPercentFieldProperty = {
   defaultValue: '1',
-  precision: 1
+  precision: 1,
 };
 
 const propertyOptionalNotFill: IUpdateOpenPercentFieldProperty = {
-  precision: 1
+  precision: 1,
 };
 
 describe('Percentage field read property format check', () => {
   const valid = getOpenFieldProperty(percentField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid(openPercentField.property);
     expect(receiveValue).toEqual(expectValue);
   });

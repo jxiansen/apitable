@@ -1,5 +1,3 @@
-
-
 import { debounce } from 'lodash';
 import { createRoot } from 'react-dom/client';
 import { Field, ICellValue, IField, Navigation, PREVIEW_DATASHEET_ID, Selectors, StoreActions, Strings, t } from '@apitable/core';

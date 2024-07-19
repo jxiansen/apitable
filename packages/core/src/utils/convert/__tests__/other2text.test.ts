@@ -1,5 +1,3 @@
-
-
 import { str2text } from '..';
 import assert from 'assert';
 import * as cases from './other2text.test.json';

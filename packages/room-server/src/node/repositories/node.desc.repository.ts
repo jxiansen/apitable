@@ -1,5 +1,3 @@
-
-
 import { NodeDescEntity } from '../entities/node.desc.entity';
 import { EntityRepository, Repository } from 'typeorm';
 

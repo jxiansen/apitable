@@ -1,5 +1,3 @@
-
-
 // apitableA
 export const getNodeOutputExpr = {
   operator: 'getObjectProperty',
@@ -11,16 +9,16 @@ export const getNodeOutputExpr = {
         operands: [
           {
             type: 'Literal',
-            value: 'triggerId1'
-          }
-        ]
+            value: 'triggerId1',
+          },
+        ],
       },
     },
     {
       type: 'Literal',
-      value: ['datasheet', 'name']
-    }
-  ]
+      value: ['datasheet', 'name'],
+    },
+  ],
 };
 
 export const dynamicStrExpr = {
@@ -36,9 +34,9 @@ export const dynamicStrExpr = {
     },
     {
       type: 'Literal',
-      value: '",\n      "title": "doge: automation test",\n      "picUrl": "",\n      "messageUrl": "https://example.com"\n  }\n}\n'
-    }
-  ]
+      value: '",\n      "title": "doge: automation test",\n      "picUrl": "",\n      "messageUrl": "https://example.com"\n  }\n}\n',
+    },
+  ],
 };
 
 // ["apitableA","apitableB"]
@@ -51,9 +49,9 @@ export const dynamicArrayExpr = {
     },
     {
       type: 'Literal',
-      value: 'apitableB'
-    }
-  ]
+      value: 'apitableB',
+    },
+  ],
 };
 
 // { "apitableA": "apitableA", "apitableB": "apitableB" }
@@ -75,8 +73,8 @@ export const dynamicObjectExpr = {
     {
       type: 'Literal',
       value: 'apitableB',
-    }
-  ]
+    },
+  ],
 };
 
 // { "apitableA": { "apitableA": "apitableA", "apitableB": "apitableB" }, "apitableB": "apitableB" }
@@ -98,8 +96,8 @@ export const dynamicNestedObjectExpr = {
     {
       type: 'Literal',
       value: 'apitableB',
-    }
-  ]
+    },
+  ],
 };
 
 // { "apitableA": "apitableA Value", "apitableB": "apitableB" }
@@ -121,6 +119,6 @@ export const dynamicKeyObjectExpr = {
     {
       type: 'Literal',
       value: 'apitableB',
-    }
-  ]
+    },
+  ],
 };

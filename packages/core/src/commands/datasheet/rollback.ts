@@ -1,5 +1,3 @@
-
-
 import { IJOTAction, IOperation, jot, IAnyAction } from 'engine/ot';
 import { xor, cloneDeep } from 'lodash';
 import { FieldType, IField, ILinkField, ResourceType } from 'types';
@@ -44,7 +42,7 @@ export const getRollbackActions = (operations: IOperation[], state: IReduxState,
       }
     });
     const sortedActions = [...updateFieldActions, ...otherActions, ...addFieldActions];
-    sortedActions.forEach(item => {
+    sortedActions.forEach((item) => {
       const action = item as IAnyAction;
       if (['comments', 'commentCount'].includes(action.p[2])) {
         return;
@@ -106,7 +104,6 @@ export const getRollbackActions = (operations: IOperation[], state: IReduxState,
 };
 
 export const rollback: ICollaCommandDef<IRollbackOptions> = {
-
   undoable: false,
 
   execute: (context, options) => {
@@ -134,7 +131,7 @@ export const rollback: ICollaCommandDef<IRollbackOptions> = {
         return;
       }
 
-      const la = linkedActions.find(la => la.datasheetId === datasheetId);
+      const la = linkedActions.find((la) => la.datasheetId === datasheetId);
       if (la) {
         la.actions.push(...actions);
       } else {
@@ -151,7 +148,7 @@ export const rollback: ICollaCommandDef<IRollbackOptions> = {
 
     console.log({ deletedLinkFields, newLinkFields, normalLinkFields });
     /* 3. [patch], re-establish bidirectional associations for all associated fields and align the data */
-    deletedLinkFields.forEach(sourceField => {
+    deletedLinkFields.forEach((sourceField) => {
       const foreignDatasheetId = sourceField.property.foreignDatasheetId;
       const foreignSnapshot = getSnapshot(state, foreignDatasheetId)!;
       const foreignField = getField(state, sourceField.property.brotherFieldId!, foreignDatasheetId);
@@ -164,11 +161,11 @@ export const rollback: ICollaCommandDef<IRollbackOptions> = {
       setLinkedActions(foreignDatasheetId, actions);
     });
 
-    const newForeignField = newLinkFields.map(sourceField => {
+    const newForeignField = newLinkFields.map((sourceField) => {
       const foreignDatasheetId = sourceField.property.foreignDatasheetId;
       let brotherFieldId = sourceField.property.brotherFieldId!;
       const foreignSnapshot = getSnapshot(state, foreignDatasheetId)!;
-      if(!foreignSnapshot){
+      if (!foreignSnapshot) {
         // one-way association
         return;
       }
@@ -191,7 +188,7 @@ export const rollback: ICollaCommandDef<IRollbackOptions> = {
         sourceField.property.brotherFieldId = brotherFieldId;
 
         const ac = DatasheetActions.setFieldAttr2Action(postSnapshot, {
-          field: sourceField
+          field: sourceField,
         });
         if (ac) {
           actions.push(ac);
@@ -200,11 +197,14 @@ export const rollback: ICollaCommandDef<IRollbackOptions> = {
         const newField: ILinkField = {
           id: brotherFieldId,
           type: FieldType.Link,
-          name: getUniqName(preDatasheet.name, foreignFieldIds.map(id => foreignSnapshot.meta.fieldMap[id]!.name)),
+          name: getUniqName(
+            preDatasheet.name,
+            foreignFieldIds.map((id) => foreignSnapshot.meta.fieldMap[id]!.name)
+          ),
           property: {
             foreignDatasheetId: datasheetId,
             brotherFieldId: sourceField.id,
-          }
+          },
         };
 
         const newFieldActions = createNewField(foreignSnapshot, newField);
@@ -219,7 +219,7 @@ export const rollback: ICollaCommandDef<IRollbackOptions> = {
         property: {
           foreignDatasheetId: datasheetId,
           brotherFieldId: sourceField.id,
-        }
+        },
       };
 
       const { actions: modifiedFieldActions } = setField(context, foreignSnapshot, foreignField, modifiedField);
@@ -229,7 +229,7 @@ export const rollback: ICollaCommandDef<IRollbackOptions> = {
 
     newLinkFields.forEach((sourceField, index) => {
       console.log('newLinkFields: ', sourceField);
-      if(!newForeignField[index]){
+      if (!newForeignField[index]) {
         // one-way direction
         return;
       }
@@ -238,7 +238,7 @@ export const rollback: ICollaCommandDef<IRollbackOptions> = {
       setLinkedActions(sourceField.property.foreignDatasheetId, result.foreignActions);
     });
 
-    normalLinkFields.forEach(sourceField => {
+    normalLinkFields.forEach((sourceField) => {
       const result = patchFieldValues(state, postSnapshot, sourceField);
       actions.push(...result.sourceActions);
       setLinkedActions(sourceField.property.foreignDatasheetId, result.foreignActions);
@@ -267,21 +267,21 @@ function getLinkFieldChange(preFieldMap: Record<string, IField>, postFieldMap: R
   let newLinkFields: ILinkField[] = [];
   let normalLinkFields: ILinkField[] = [];
   /**
-    * The three cases are regarded as deletedLinkFields. After preFieldMap gets a field, it is matched with fieldId in postFieldMap
-    * pre is linkField, this field cannot be matched in post
-    * pre is a linkField, and it is not a link field that is converted in post
-    * pre is a linkField, the post is converted into another link field, or the sibling fields are inconsistent,
-    * (the link field in the post is considered new at this time)
-    *
-    * Three cases are treated as newLinkFields
-    * post is a linkField, this field does not exist in pre
-    * post is a linkField, pre is not a linkField
-    * pre is a linkField, the post is converted into another link field, or the sibling fields are inconsistent, (same as the third item above)
-    *
-    * One case is treated as normalLinkFields
-    * exists in both pre and post, and the associated table and sibling fields have not changed
-    */
-  Object.values(preFieldMap).forEach(preField => {
+   * The three cases are regarded as deletedLinkFields. After preFieldMap gets a field, it is matched with fieldId in postFieldMap
+   * pre is linkField, this field cannot be matched in post
+   * pre is a linkField, and it is not a link field that is converted in post
+   * pre is a linkField, the post is converted into another link field, or the sibling fields are inconsistent,
+   * (the link field in the post is considered new at this time)
+   *
+   * Three cases are treated as newLinkFields
+   * post is a linkField, this field does not exist in pre
+   * post is a linkField, pre is not a linkField
+   * pre is a linkField, the post is converted into another link field, or the sibling fields are inconsistent, (same as the third item above)
+   *
+   * One case is treated as normalLinkFields
+   * exists in both pre and post, and the associated table and sibling fields have not changed
+   */
+  Object.values(preFieldMap).forEach((preField) => {
     const postField = postFieldMap[preField.id];
     // post is linkField, pre is not linkField, you need to push a record to newLinkFields;
     if (postField && postField.type === FieldType.Link) {
@@ -326,13 +326,13 @@ function getLinkFieldChange(preFieldMap: Record<string, IField>, postFieldMap: R
   });
 
   // post is a linkField, this field does not exist in pre
-  const newInPostFields = Object.values(postFieldMap).filter(postField => !preFieldMap[postField.id] && postField.type === FieldType.Link);
-  newLinkFields.push(...newInPostFields as ILinkField[]);
+  const newInPostFields = Object.values(postFieldMap).filter((postField) => !preFieldMap[postField.id] && postField.type === FieldType.Link);
+  newLinkFields.push(...(newInPostFields as ILinkField[]));
 
   // Filter out the fields where brotherFieldId is empty, that is, the fields associated with the table
-  deletedLinkFields = deletedLinkFields.filter(field => field.property.brotherFieldId);
-  newLinkFields = newLinkFields.filter(field => field.property.brotherFieldId);
-  normalLinkFields = normalLinkFields.filter(field => field.property.brotherFieldId);
+  deletedLinkFields = deletedLinkFields.filter((field) => field.property.brotherFieldId);
+  newLinkFields = newLinkFields.filter((field) => field.property.brotherFieldId);
+  normalLinkFields = normalLinkFields.filter((field) => field.property.brotherFieldId);
 
   return { deletedLinkFields, newLinkFields, normalLinkFields };
 }
@@ -368,7 +368,7 @@ function patchFieldValues(
     if (!linkCellValue) {
       return;
     }
-    const filteredLinkCellValue = linkCellValue.filter(rid => {
+    const filteredLinkCellValue = linkCellValue.filter((rid) => {
       // If the associated cell summary rid does not exist in the associated table, delete this rid
       if (!foreignSnapshot.recordMap[rid]) {
         return false;
@@ -393,27 +393,28 @@ function patchFieldValues(
   console.log({ foreignLinkRecordValueMap });
 
   // Traverse the association table, replace the existing ones, delete the ones that don't exist, and add the missing ones
-  foreignSnapshot && eachFieldValue(foreignField.id, foreignSnapshot.recordMap, (recordId, linkCellValue) => {
-    let action: IJOTAction | null = null;
-    const newCellValue = foreignLinkRecordValueMap[recordId];
-    if (newCellValue) {
-      // need to be replaced if there are different values in the array
-      if (xor(linkCellValue, newCellValue)) {
+  foreignSnapshot &&
+    eachFieldValue(foreignField.id, foreignSnapshot.recordMap, (recordId, linkCellValue) => {
+      let action: IJOTAction | null = null;
+      const newCellValue = foreignLinkRecordValueMap[recordId];
+      if (newCellValue) {
+        // need to be replaced if there are different values in the array
+        if (xor(linkCellValue, newCellValue)) {
+          action = DatasheetActions.setRecord2Action(foreignSnapshot, {
+            fieldId: foreignField.id,
+            recordId: recordId,
+            value: newCellValue,
+          });
+        }
+      } else {
         action = DatasheetActions.setRecord2Action(foreignSnapshot, {
           fieldId: foreignField.id,
           recordId: recordId,
-          value: newCellValue,
+          value: null,
         });
       }
-    } else {
-      action = DatasheetActions.setRecord2Action(foreignSnapshot, {
-        fieldId: foreignField.id,
-        recordId: recordId,
-        value: null,
-      });
-    }
-    action && foreignActions.push(action);
-  });
+      action && foreignActions.push(action);
+    });
 
   return { sourceActions, foreignActions };
 }

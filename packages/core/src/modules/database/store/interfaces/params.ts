@@ -1,5 +1,3 @@
-
-
 import { ActivityListParamsType } from 'config/constant';
 
 export interface IActivityListParams {

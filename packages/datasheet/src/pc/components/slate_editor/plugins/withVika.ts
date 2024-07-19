@@ -1,5 +1,3 @@
-
-
 import { message } from 'antd';
 import { Transforms, Text, Range, Editor, Element, Point, Path, Node, Selection, Operation } from 'slate';
 import { ReactEditor } from 'slate-react';

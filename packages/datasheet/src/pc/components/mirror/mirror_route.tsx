@@ -1,5 +1,3 @@
-
-
 import { useEffect } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { Skeleton } from '@apitable/components';

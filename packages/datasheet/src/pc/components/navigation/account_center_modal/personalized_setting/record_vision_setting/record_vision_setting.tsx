@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 // eslint-disable-next-line no-restricted-imports

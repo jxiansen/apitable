@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { ITextInputProps, TextInput } from '@apitable/components';
 import styles from './style.module.less';

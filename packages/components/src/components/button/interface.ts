@@ -1,5 +1,3 @@
-
-
 export type IButtonType = 'default' | 'danger' | 'primary' | 'warning';
 export interface IButtonBaseProps {
   shape?: 'round';
@@ -10,7 +8,7 @@ export interface IButtonBaseProps {
   block?: boolean;
 }
 
-type IButtonHTMLAttributes = Omit<React.ButtonHTMLAttributes<any>, | 'color'>;
+type IButtonHTMLAttributes = Omit<React.ButtonHTMLAttributes<any>, 'color'>;
 
 export interface IButtonProps extends IButtonHTMLAttributes {
   htmlType?: 'submit' | 'reset' | 'button';

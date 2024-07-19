@@ -1,5 +1,3 @@
-
-
 import { getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { IJOTAction } from 'engine';
 import { DatasheetActions } from 'commands_actions/datasheet';
@@ -46,7 +44,6 @@ export class MemberFieldMaintainer {
     const unitIds = memberFieldMap.get(fieldId) || [];
     memberFieldMap.set(fieldId, [...new Set([...unitIds, ...insertUnitIds])]);
     this.memberDataChanges.set(datasheetId, memberFieldMap);
-
   }
 
   /**
@@ -95,7 +92,6 @@ export class MemberFieldMaintainer {
 
         actions.push(action);
       });
-
     });
 
     this.memberDataChanges.clear();

@@ -1,5 +1,3 @@
-
-
 import { Events, IUserInfo, Player } from '@apitable/core';
 import { NotificationStore } from 'pc/notification_store';
 import { store } from 'pc/store';

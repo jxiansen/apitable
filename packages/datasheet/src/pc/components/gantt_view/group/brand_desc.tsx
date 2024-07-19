@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { ILightOrDarkThemeColors } from '@apitable/components';
 import { Strings, t } from '@apitable/core';

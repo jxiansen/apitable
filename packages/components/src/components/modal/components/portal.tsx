@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 export interface IPortalProps {
@@ -7,12 +5,10 @@ export interface IPortalProps {
   children?: React.ReactNode;
 }
 
-const Portal: React.FC<React.PropsWithChildren<IPortalProps>> = props => {
+const Portal: React.FC<React.PropsWithChildren<IPortalProps>> = (props) => {
   const { getContainer, children } = props;
 
-  return getContainer
-    ? ReactDOM.createPortal(children, getContainer)
-    : null;
+  return getContainer ? ReactDOM.createPortal(children, getContainer) : null;
 };
 
 export default Portal;

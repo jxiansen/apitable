@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Story } from '@storybook/react';
 import { DownloadOutlined, LinktableOutlined } from '@apitable/icons';
@@ -26,8 +24,8 @@ export default {
     },
   },
   args: {
-    children: BUTTON_TEXT
-  }
+    children: BUTTON_TEXT,
+  },
 };
 
 const Template: Story<ILinkButtonProps> = (args) => <LinkButton {...args} />;
@@ -38,45 +36,45 @@ export const ButtonHref = Template.bind({});
 ButtonHref.args = {
   href: 'https://apitable.com/',
   children: 'https://apitable.com/',
-  target: '_blank'
+  target: '_blank',
 };
 
 export const ButtonIcon = Template.bind({});
 ButtonIcon.args = {
-  component: 'button'
+  component: 'button',
 };
 
 export const LeftIcon = Template.bind({});
 LeftIcon.args = {
-  prefixIcon: <LinktableOutlined currentColor />
+  prefixIcon: <LinktableOutlined currentColor />,
 };
 
 export const RightIcon = Template.bind({});
 RightIcon.args = {
-  suffixIcon: <DownloadOutlined currentColor/>
+  suffixIcon: <DownloadOutlined currentColor />,
 };
 
 export const Color = Template.bind({});
 Color.args = {
-  color: '#FF7A00'
+  color: '#FF7A00',
 };
 
 export const HideUnderline = Template.bind({});
 HideUnderline.args = {
-  underline: false
+  underline: false,
 };
 
 export const Block = Template.bind({});
 Block.args = {
   component: 'button',
-  block: true
+  block: true,
 };
 
 export const Click = Template.bind({});
 Click.args = {
   onClick: () => {
     alert('client event');
-  }
+  },
 };
 
 export const Href = Template.bind({});
@@ -87,6 +85,5 @@ HideUnderline.args = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  disabled: true
+  disabled: true,
 };
-

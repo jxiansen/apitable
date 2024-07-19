@@ -1,5 +1,3 @@
-
-
 export const enum ResourceEventType {
   /**
    * The data of the resource has changed.

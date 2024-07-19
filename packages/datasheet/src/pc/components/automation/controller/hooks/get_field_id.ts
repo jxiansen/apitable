@@ -1,5 +1,3 @@
-
-
 import { IRobotTrigger } from 'pc/components/robot/interface';
 
 // TODO refactor rename  extract as a parameter

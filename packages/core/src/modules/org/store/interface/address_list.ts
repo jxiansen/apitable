@@ -1,5 +1,3 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 import { ITeamTreeNode } from './invite';
 
@@ -29,10 +27,10 @@ export interface IUpdateSingleMemberInMemberListAction {
 
 export interface IUpdateAddressTreeAction {
   type: typeof actions.UPDATE_ADDRESS_TREE;
-  payload: {parentId: string, childrenTree: ITeamTreeNode[]};
+  payload: { parentId: string; childrenTree: ITeamTreeNode[] };
 }
 
-export interface IUpdateMemberListPageNoAction { 
+export interface IUpdateMemberListPageNoAction {
   type: typeof actions.UPDATE_MEMBER_LIST_PAGE_NO;
   payload: number;
 }
@@ -47,7 +45,7 @@ export interface IUpdateMemberListLodingAction {
   payload: boolean;
 }
 
-export interface IUpdateMemberListPageAction { 
+export interface IUpdateMemberListPageAction {
   type: typeof actions.UPDATE_MEMBER_LIST_PAGE;
   payload: IMemberInfoInAddressList[];
 }

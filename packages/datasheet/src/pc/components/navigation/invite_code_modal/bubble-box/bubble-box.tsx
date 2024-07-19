@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import { FC } from 'react';
 import { Strings, t } from '@apitable/core';

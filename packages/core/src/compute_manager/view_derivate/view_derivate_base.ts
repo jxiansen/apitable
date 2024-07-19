@@ -1,18 +1,23 @@
-
 import { Field } from 'model/field';
 import { ViewFilterDerivate } from './slice/view_filter_derivate';
+import { IReduxState, ISearchResult, IViewDerivation, IViewProperty, IViewRow } from 'exports/store/interfaces';
 import {
-  IReduxState, ISearchResult, IViewDerivation, IViewProperty, IViewRow,
-} from 'exports/store/interfaces';
-import {
-  getCellValue, getCurrentView, getGroupFields, getSearchKeyword, getStringifyCellValue, sortRowsBySortInfo,
+  getCellValue,
+  getCurrentView,
+  getGroupFields,
+  getSearchKeyword,
+  getStringifyCellValue,
+  sortRowsBySortInfo,
 } from 'modules/database/store/selectors/resource/datasheet';
 import { FieldType } from 'types/field_types';
 
 export class ViewDerivateBase {
   viewFilterDerivate: ViewFilterDerivate;
 
-  constructor(protected state: IReduxState, public datasheetId: string) {
+  constructor(
+    protected state: IReduxState,
+    public datasheetId: string
+  ) {
     this.viewFilterDerivate = new ViewFilterDerivate(state, datasheetId);
   }
 
@@ -42,29 +47,31 @@ export class ViewDerivateBase {
 
     // rows sorted by group
     return rows.sort((row1, row2) => {
-      return groups.reduce((prev, field, index) => {
-        if (prev !== 0) {
-          return prev;
-        }
-        let fieldInstance = fieldInstanceMap[field.id];
-        if (!fieldInstance) {
-          fieldInstance = Field.bindContext(field, state);
-          fieldInstanceMap[field.id] = fieldInstance;
-        }
-        const cv1 = getCellValue(state, snapshot, row1.recordId, field.id);
-        const cv2 = getCellValue(state, snapshot, row2.recordId, field.id);
-        const key = `${cv1}${cv2}`;
-        let res = 0;
-        if (key in cacheSortRes) {
-          res = cacheSortRes[key];
-        } else {
-          res = fieldInstance.compare(cv1, cv2);
-          typeof cv1 !== 'object' && typeof cv2 !== 'object' && (cacheSortRes[key] = res);
-        }
-        const sign = descOrders[index] ? -1 : 1;
+      return (
+        groups.reduce((prev, field, index) => {
+          if (prev !== 0) {
+            return prev;
+          }
+          let fieldInstance = fieldInstanceMap[field.id];
+          if (!fieldInstance) {
+            fieldInstance = Field.bindContext(field, state);
+            fieldInstanceMap[field.id] = fieldInstance;
+          }
+          const cv1 = getCellValue(state, snapshot, row1.recordId, field.id);
+          const cv2 = getCellValue(state, snapshot, row2.recordId, field.id);
+          const key = `${cv1}${cv2}`;
+          let res = 0;
+          if (key in cacheSortRes) {
+            res = cacheSortRes[key];
+          } else {
+            res = fieldInstance.compare(cv1, cv2);
+            typeof cv1 !== 'object' && typeof cv2 !== 'object' && (cacheSortRes[key] = res);
+          }
+          const sign = descOrders[index] ? -1 : 1;
 
-        return res * sign;
-      }, 0) || 1;
+          return res * sign;
+        }, 0) || 1
+      );
     });
   }
 
@@ -79,7 +86,7 @@ export class ViewDerivateBase {
     return sortRowsBySortInfo(this.state, rows, view.sortInfo.rules, snapshot);
   }
 
-  protected getSearchRows(rows: IViewRow[], view: IViewProperty | undefined): { visibleRows: IViewRow[], searchResults?: ISearchResult } {
+  protected getSearchRows(rows: IViewRow[], view: IViewProperty | undefined): { visibleRows: IViewRow[]; searchResults?: ISearchResult } {
     const searchKeyword = getSearchKeyword(this.state);
     if (!searchKeyword) {
       return { visibleRows: rows };
@@ -90,11 +97,11 @@ export class ViewDerivateBase {
     }
     const lowerCaseSearchKeyword = searchKeyword.toLowerCase();
     const searchResults: ISearchResult = [];
-    const visibleColumns = !view?.columns ? [] : view.columns.filter(item => !item.hidden).map(item => item.fieldId);
-    const visibleRows = rows.filter(row => {
+    const visibleColumns = !view?.columns ? [] : view.columns.filter((item) => !item.hidden).map((item) => item.fieldId);
+    const visibleRows = rows.filter((row) => {
       const { recordId } = row;
       let isRecordDataMatchKeyword = false;
-      visibleColumns.forEach(fieldId => {
+      visibleColumns.forEach((fieldId) => {
         let cellValue = getStringifyCellValue(this.state, snapshot, recordId, fieldId);
         const field = snapshot.meta.fieldMap[fieldId];
         // currency and number fields ignore units when searching
@@ -121,7 +128,7 @@ export class ViewDerivateBase {
       return [];
     }
     // where exact match by field
-    const filteredRows = this.viewFilterDerivate.getFilteredRows(view).filter(item => !item.hidden);
+    const filteredRows = this.viewFilterDerivate.getFilteredRows(view).filter((item) => !item.hidden);
     // order by
     const sortedRows = this.getSortRows(view, filteredRows);
     // group by
@@ -145,7 +152,7 @@ export class ViewDerivateBase {
 
     return {
       rowsWithoutSearch: rowsInView,
-      ...this.getViewDerivationWithSearch(view, rowsInView)
+      ...this.getViewDerivationWithSearch(view, rowsInView),
     };
   }
 
@@ -164,7 +171,7 @@ export class ViewDerivateBase {
 
     return {
       // Raw rows of data, grouped without any filtering sorting.
-      rowsIndexMap:  new Map(view.rows.map((item, index) => [item.recordId, index])),
+      rowsIndexMap: new Map(view.rows.map((item, index) => [item.recordId, index])),
 
       // Excluding pre-sorted row data, including filtered sorted grouped search.
       pureVisibleRows: visibleRows,
@@ -179,7 +186,7 @@ export class ViewDerivateBase {
       // A map with recordId as key and order as value.
       visibleRowsIndexMap: visibleRowsIndexMap,
 
-      searchResults
+      searchResults,
     };
   }
 }

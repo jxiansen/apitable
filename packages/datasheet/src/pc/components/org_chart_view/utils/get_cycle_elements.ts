@@ -1,5 +1,3 @@
-
-
 import { lightColors } from '@apitable/components';
 import { ArrowHeadType, Elements } from '@apitable/react-flow';
 import { CYCLE_NODE_WIDTH, CYCLE_NODE_HEIGHT, NodeType } from '../constants';

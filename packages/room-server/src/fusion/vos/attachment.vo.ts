@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { AttachmentDto } from 'database/attachment/dtos/attachment.dto';
 import { ApiResponse } from './api.response';
@@ -10,7 +8,6 @@ export class AttachmentVo extends ApiResponse<AttachmentDto> {
 }
 
 export class AssetVo {
-
   @ApiProperty({ type: String, description: 'Resource name, file access relative path' })
   token!: string;
 
@@ -19,7 +16,6 @@ export class AssetVo {
 
   @ApiProperty({ type: String, description: 'Upload request method' })
   uploadRequestMethod!: string;
-
 }
 
 export class AssetResults {

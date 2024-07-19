@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { Button, black, ContextMenu, useContextMenu } from '@apitable/components';
 import { Settings, Strings, t } from '@apitable/core';

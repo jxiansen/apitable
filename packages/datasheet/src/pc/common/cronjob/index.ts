@@ -1,5 +1,3 @@
-
-
 import { fixData } from './jobs';
 
 type IJob = [(store: any) => void, number];

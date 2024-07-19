@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Story } from '@storybook/react';
 import { WarnCircleFilled } from '@apitable/icons';
@@ -80,25 +78,20 @@ export const Resizable = () => {
     },
   ]);
   const update = (id, startDate, endDate) => {
-    setTasks(tasks.map(t => {
-      if (t.id === id) {
-        return {
-          ...t,
-          startDate,
-          endDate,
-        };
-      }
-      return t;
-    }));
+    setTasks(
+      tasks.map((t) => {
+        if (t.id === id) {
+          return {
+            ...t,
+            startDate,
+            endDate,
+          };
+        }
+        return t;
+      })
+    );
   };
-  return (
-    <Calendar
-      tasks={tasks}
-      update={update}
-      resizable
-      defaultDate={new Date('2021/07/01')}
-    />
-  );
+  return <Calendar tasks={tasks} update={update} resizable defaultDate={new Date('2021/07/01')} />;
 };
 
 export const ResizableWithEn = () => {
@@ -126,7 +119,7 @@ export const ResizableWithEn = () => {
       title: 'Sleep 😴',
       startDate: new Date('2021/07/07'),
       endDate: new Date('2021/07/10'),
-    }, 
+    },
     {
       id: 5,
       title: 'Study 🙇',
@@ -147,26 +140,20 @@ export const ResizableWithEn = () => {
     },
   ]);
   const update = (id, startDate, endDate) => {
-    setTasks(tasks.map(t => {
-      if (t.id === id) {
-        return {
-          ...t,
-          startDate,
-          endDate,
-        };
-      }
-      return t;
-    }));
+    setTasks(
+      tasks.map((t) => {
+        if (t.id === id) {
+          return {
+            ...t,
+            startDate,
+            endDate,
+          };
+        }
+        return t;
+      })
+    );
   };
-  return (
-    <Calendar
-      tasks={tasks}
-      lang="en"
-      update={update}
-      resizable
-      defaultDate={new Date('2021/07/01')}
-    />
-  );
+  return <Calendar tasks={tasks} lang="en" update={update} resizable defaultDate={new Date('2021/07/01')} />;
 };
 
 export const DraggableAndResizable = () => {
@@ -194,7 +181,7 @@ export const DraggableAndResizable = () => {
       title: 'Sleep 😴',
       startDate: new Date('2021/07/07'),
       endDate: new Date('2021/07/10'),
-    }, 
+    },
     {
       id: 5,
       title: 'Study 🙇',
@@ -215,26 +202,22 @@ export const DraggableAndResizable = () => {
     },
   ]);
   const update = (id, startDate, endDate) => {
-    setTasks(tasks.map(t => {
-      if (t.id === id) {
-        return {
-          ...t,
-          startDate,
-          endDate,
-        };
-      }
-      return t;
-    }));
+    setTasks(
+      tasks.map((t) => {
+        if (t.id === id) {
+          return {
+            ...t,
+            startDate,
+            endDate,
+          };
+        }
+        return t;
+      })
+    );
   };
   return (
     <DndProvider backend={HTML5Backend}>
-      <Calendar
-        dnd={[Drag, Drop]}
-        tasks={tasks}
-        update={update}
-        resizable
-        defaultDate={new Date('2021/07/01')}
-      />
+      <Calendar dnd={[Drag, Drop]} tasks={tasks} update={update} resizable defaultDate={new Date('2021/07/01')} />
     </DndProvider>
   );
 };
@@ -242,12 +225,14 @@ export const DraggableAndResizable = () => {
 export const DisabledTask = Template.bind({});
 
 DisabledTask.args = {
-  tasks: [{
-    id: 1,
-    title: 'Eating 🍚',
-    startDate: new Date('2021/07/14'),
-    endDate: new Date('2021/07/20'),
-  }],
+  tasks: [
+    {
+      id: 1,
+      title: 'Eating 🍚',
+      startDate: new Date('2021/07/14'),
+      endDate: new Date('2021/07/20'),
+    },
+  ],
   defaultDate: new Date('2021/07/01'),
   disabled: true,
 };
@@ -255,41 +240,46 @@ DisabledTask.args = {
 export const WarningTask = Template.bind({});
 
 WarningTask.args = {
-  tasks: [{
-    id: 1,
-    title: 'Eating 🍚',
-    startDate: new Date('2021/07/15'),
-    endDate: new Date('2021/07/06'),
-  }],
+  tasks: [
+    {
+      id: 1,
+      title: 'Eating 🍚',
+      startDate: new Date('2021/07/15'),
+      endDate: new Date('2021/07/06'),
+    },
+  ],
   defaultDate: new Date('2021/07/01'),
   warnText: (
     <Tooltip content="End date is earlier than start date">
       <span className="warning">
-        <WarnCircleFilled size={14} color="#FFAB00"/>
+        <WarnCircleFilled size={14} color="#FFAB00" />
       </span>
     </Tooltip>
-  )
+  ),
 };
 
 export const SetTaskStyle = Template.bind({});
 SetTaskStyle.args = {
-  tasks: [{
-    id: 1,
-    title: 'Eating 🍚',
-    startDate: new Date('2021/07/15'),
-    endDate: new Date('2021/07/19'),
-  },{
-    id: 2,
-    title: 'Sleep 😴',
-    startDate: new Date('2021/07/17'),
-    endDate: new Date('2021/07/17'),
-  }],
+  tasks: [
+    {
+      id: 1,
+      title: 'Eating 🍚',
+      startDate: new Date('2021/07/15'),
+      endDate: new Date('2021/07/19'),
+    },
+    {
+      id: 2,
+      title: 'Sleep 😴',
+      startDate: new Date('2021/07/17'),
+      endDate: new Date('2021/07/17'),
+    },
+  ],
   defaultDate: new Date('2021/07/01'),
   listStyle: {
     border: '1px dashed #AB45FB',
     lineHeight: '60px',
-    height: '60px'
-  }
+    height: '60px',
+  },
 };
 SetTaskStyle.parameters = {
   chromatic: { viewports: [375, 1000] },

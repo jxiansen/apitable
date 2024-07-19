@@ -1,5 +1,3 @@
-
-
 // https://github.com/airbnb/is-touch-device/blob/master/src/index.js
 export function isTouchDevice() {
   return (

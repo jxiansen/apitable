@@ -1,5 +1,3 @@
-
-
 import { Controller, Headers, Get, Param, UseInterceptors, Query, Body, Post, Delete } from '@nestjs/common';
 import { ResourceDataInterceptor } from 'database/resource/middleware/resource.data.interceptor';
 import type { DatasheetPack, MirrorInfo } from '../../interfaces';
@@ -49,11 +47,7 @@ export class MirrorController {
 
   @Get('mirrors/:mirrorId/dataPack')
   @UseInterceptors(ResourceDataInterceptor)
-  async getDataPack(
-    @Headers('cookie') cookie: string,
-    @Param('mirrorId') mirrorId: string,
-    @Query() query: DatasheetPackRo,
-  ): Promise<DatasheetPack> {
+  async getDataPack(@Headers('cookie') cookie: string, @Param('mirrorId') mirrorId: string, @Query() query: DatasheetPackRo): Promise<DatasheetPack> {
     const isTemplate = await this.nodeService.isTemplate(mirrorId);
     if (!isTemplate) {
       // if it is not a template, check if it belongs to this space

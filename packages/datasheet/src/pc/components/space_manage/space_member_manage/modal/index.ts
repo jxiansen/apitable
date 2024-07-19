@@ -1,5 +1,3 @@
-
-
 export * from './create_team_modal';
 export * from './rename_team_modal';
 export * from './edit_member_modal';

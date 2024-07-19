@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import * as React from 'react';
 import { useThemeColors } from '@apitable/components';

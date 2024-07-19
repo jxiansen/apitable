@@ -1,5 +1,3 @@
-
-
 import classnames from 'classnames';
 import Image, { StaticImageData } from 'next/image';
 import { FC, useState } from 'react';

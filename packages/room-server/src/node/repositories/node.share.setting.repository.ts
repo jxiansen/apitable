@@ -1,11 +1,8 @@
-
-
 import { NodeShareSettingEntity } from '../entities/node.share.setting.entity';
 import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(NodeShareSettingEntity)
 export class NodeShareSettingRepository extends Repository<NodeShareSettingEntity> {
-
   /**
    * Obtain the sharing setting with a sharing ID
    */

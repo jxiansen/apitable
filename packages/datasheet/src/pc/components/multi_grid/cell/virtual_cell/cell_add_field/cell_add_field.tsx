@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import * as React from 'react';
 import { CellType, IGroupInfo, ILinearRow, IPermissions } from '@apitable/core';

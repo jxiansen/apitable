@@ -1,5 +1,3 @@
-
-
 import { BeforeInsert, Column, Entity, PrimaryColumn } from 'typeorm';
 import { IdWorker } from 'shared/helpers';
 

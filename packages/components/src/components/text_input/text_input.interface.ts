@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 export interface ITextInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
   className?: string;

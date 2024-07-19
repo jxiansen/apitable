@@ -1,10 +1,6 @@
-
-
 import { AnyAction, Store } from 'redux';
 import { IReduxState } from '../exports/store/interfaces';
-import {
-  getField,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getField } from 'modules/database/store/selectors/resource/datasheet/base';
 import { IJOTAction } from 'engine';
 import { FieldType, IField } from 'types';
 
@@ -12,7 +8,7 @@ import { FieldType, IField } from 'types';
 export class LinkIntegrityChecker {
   constructor(private store: Store<IReduxState, AnyAction>) {}
 
-  parse(actions: IJOTAction[], datasheetId: string, linkedActions?: { actions: IJOTAction[], datasheetId: string }[]) {
+  parse(actions: IJOTAction[], datasheetId: string, linkedActions?: { actions: IJOTAction[]; datasheetId: string }[]) {
     if (linkedActions?.length) {
       return actions;
     }

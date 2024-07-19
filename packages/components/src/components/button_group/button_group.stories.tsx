@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { ButtonGroup } from './index';
 import { StoryType } from '../../stories/constants';
@@ -35,7 +33,7 @@ Default.args = {
       <Button>Button2</Button>
       <Button>Button3</Button>
     </>
-  )
+  ),
 };
 
 export const WithSeparate = Template.bind({});
@@ -47,7 +45,7 @@ WithSeparate.args = {
       <Button>Button2</Button>
       <Button>Button3</Button>
     </>
-  )
+  ),
 };
 
 export const LinkButtonWithSeparate = Template.bind({});
@@ -55,11 +53,17 @@ LinkButtonWithSeparate.args = {
   withSeparate: true,
   children: (
     <>
-      <LinkButton component="button" underline={false}>Button1</LinkButton>
-      <LinkButton component="button" underline={false}>Button2</LinkButton>
-      <LinkButton component="button" underline={false}>Button3</LinkButton>
+      <LinkButton component="button" underline={false}>
+        Button1
+      </LinkButton>
+      <LinkButton component="button" underline={false}>
+        Button2
+      </LinkButton>
+      <LinkButton component="button" underline={false}>
+        Button3
+      </LinkButton>
     </>
-  )
+  ),
 };
 
 export const WithIcon = Template.bind({});
@@ -68,10 +72,10 @@ WithIcon.args = {
   withBorder: true,
   children: (
     <>
-      <IconButton icon={LockOutlined}/>
-      <IconButton icon={ShareFilled}/>
-      <IconButton icon={RankFilled}/>
-      <IconButton icon={WebOutlined}/>
+      <IconButton icon={LockOutlined} />
+      <IconButton icon={ShareFilled} />
+      <IconButton icon={RankFilled} />
+      <IconButton icon={WebOutlined} />
     </>
-  )
+  ),
 };

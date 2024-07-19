@@ -1,5 +1,3 @@
-
-
 import { mockDatasheetMap } from './mock.datasheets';
 import { MockDataBus, resetDataLoader } from './mock.databus';
 import { DateFormat, FieldType, ResourceType, SegmentType, TimeFormat } from 'types';
@@ -74,7 +72,7 @@ describe('doCommand', () => {
         index: 3,
         count: 1,
       },
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -95,7 +93,7 @@ describe('doCommand', () => {
         count: 1,
         cellValues: [],
       },
-      {},
+      {}
     );
 
     expect(result).toStrictEqual({
@@ -120,7 +118,7 @@ describe('doCommand', () => {
         index: 3,
         count: 0,
       },
-      {},
+      {}
     );
 
     expect(result).toStrictEqual({
@@ -147,7 +145,7 @@ describe('addRecords', () => {
         index: 3,
         count: 2,
       },
-      {},
+      {}
     );
 
     // TODO these assertions are almost identical to those in view.test, refactor them out.
@@ -231,7 +229,7 @@ describe('addRecords', () => {
           },
         ],
       },
-      {},
+      {}
     );
 
     // TODO these assertions are almost identical to those in view.test, refactor them out.
@@ -320,7 +318,7 @@ describe('updateRecords', () => {
           value: ['opt3', 'opt2'],
         },
       ],
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -492,7 +490,7 @@ describe('addFields', () => {
           },
         },
       ],
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -595,7 +593,7 @@ describe('deleteFields', () => {
           fieldId: 'fld2',
         },
       ],
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -738,7 +736,7 @@ describe('updateField', () => {
           defaultValue: ['opt1'],
         },
       },
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -861,7 +859,7 @@ describe('addViews', () => {
           },
         },
       ],
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -939,7 +937,7 @@ describe('addViews', () => {
           },
         },
       ],
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);

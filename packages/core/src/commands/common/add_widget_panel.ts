@@ -1,5 +1,3 @@
-
-
 import { CollaCommandName } from 'commands/index';
 import { ExecuteResult, ICollaCommandDef, ICollaCommandExecuteContext } from 'command_manager';
 import { Strings, t } from '../../exports/i18n';
@@ -23,8 +21,8 @@ export const addWidgetPanel: ICollaCommandDef<IAddWidgetPanel> = {
     const { state: state } = context;
     const { resourceId, resourceType } = options;
     const snapshot = resourceType === ResourceType.Datasheet ? getSnapshot(state, resourceId)! : getMirrorSnapshot(state, resourceId)!;
-    const widgetPanels = (resourceType === ResourceType.Datasheet ? (snapshot as ISnapshot).meta.widgetPanels :
-      (snapshot as IMirrorSnapshot).widgetPanels) || [];
+    const widgetPanels =
+      (resourceType === ResourceType.Datasheet ? (snapshot as ISnapshot).meta.widgetPanels : (snapshot as IMirrorSnapshot).widgetPanels) || [];
 
     const panelCount = widgetPanels.length;
 
@@ -32,11 +30,11 @@ export const addWidgetPanel: ICollaCommandDef<IAddWidgetPanel> = {
       return null;
     }
 
-    const existPanelIds = widgetPanels.map(item => {
+    const existPanelIds = widgetPanels.map((item) => {
       return item.id;
     });
 
-    const existPanelName = widgetPanels.map(item => {
+    const existPanelName = widgetPanels.map((item) => {
       return item.name;
     });
 
@@ -52,9 +50,10 @@ export const addWidgetPanel: ICollaCommandDef<IAddWidgetPanel> = {
       };
     };
 
-    const addWidgetPanelAction = resourceType === ResourceType.Datasheet ?
-      DatasheetActions.addWidgetPanel2Action(snapshot as ISnapshot, generateStdValue(newPanelId, newPanelName)) :
-      DatasheetActions.addWidgetPanelWithMirror2Action(snapshot as IMirrorSnapshot, generateStdValue(newPanelId, newPanelName));
+    const addWidgetPanelAction =
+      resourceType === ResourceType.Datasheet
+        ? DatasheetActions.addWidgetPanel2Action(snapshot as ISnapshot, generateStdValue(newPanelId, newPanelName))
+        : DatasheetActions.addWidgetPanelWithMirror2Action(snapshot as IMirrorSnapshot, generateStdValue(newPanelId, newPanelName));
 
     if (!addWidgetPanelAction) {
       return null;

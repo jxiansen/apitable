@@ -1,5 +1,3 @@
-
-
 import DescriptionField from '../common/DescriptionField';
 import ArrayField from './ArrayField/ArrayField';
 import BooleanField from './BooleanField';

@@ -1,4 +1,3 @@
-
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { ApiTipConstant } from '@apitable/core';
@@ -19,6 +18,6 @@ export class CascaderQueryRo {
     example: 'fld***, fld***',
     description: 'Field IDs',
   })
-  @Transform(value => stringToArray(value), { toClassOnly: true })
+  @Transform((value) => stringToArray(value), { toClassOnly: true })
   linkedFieldIds!: string[];
 }

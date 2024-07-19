@@ -1,5 +1,3 @@
-
-
 import { SET_RIGHT_PANE_WIDTH } from '../../../shared/store/action_constants';
 
 export interface IRightPane {

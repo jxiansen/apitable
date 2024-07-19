@@ -1,5 +1,3 @@
-
-
 // built-in functions which are not related to runtime context, just pure functions
 
 export const getArrayLength = (_context: any, array: any[]): number => {
@@ -9,9 +7,9 @@ export const getArrayLength = (_context: any, array: any[]): number => {
 
 /**
  * reduce dimension of array
- * @param context 
- * @param array 
- * @returns 
+ * @param context
+ * @param array
+ * @returns
  */
 export const flatten = (_context: any, array: any[]): any[] => {
   return array?.flat();
@@ -46,8 +44,8 @@ export const getObjectProperty = (_context: any, obj: object, paths: string[]) =
 
 /**
  * concat paragraph with '\n'
- * @param args 
- * @returns 
+ * @param args
+ * @returns
  */
 export const concatParagraph = (...args: string[]) => {
   const [, ...paragraphs] = args;
@@ -107,7 +105,7 @@ export const or = (...args: any[]) => {
 /**
  * just json stringify
  * @param args
- * @returns 
+ * @returns
  */
 export const JSONStringify = (_context: any, obj: object) => {
   // console.log('JSONStringify', obj);
@@ -116,8 +114,8 @@ export const JSONStringify = (_context: any, obj: object) => {
 
 /**
  * get length of iterable object
- * @param _context 
- * @param obj 
+ * @param _context
+ * @param obj
  */
 export const length = (_context: any, obj: string | any[]) => {
   return obj?.length;

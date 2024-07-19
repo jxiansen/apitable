@@ -2,10 +2,7 @@ import { createWidgetContextWrapper } from 'context/__tests__/create_widget_cont
 import { noop } from 'lodash';
 import { MockWidgetSdkData } from '__tests__/mocks/mock_data';
 
-export const createSimpleWrapper = (props?: {
-  config?: any,
-  widgetState?: any
-}) => {
+export const createSimpleWrapper = (props?: { config?: any; widgetState?: any }) => {
   const {
     config = {
       isFullscreen: false,
@@ -14,7 +11,7 @@ export const createSimpleWrapper = (props?: {
       toggleSettings: noop,
       expandRecord: noop,
     },
-    widgetState = MockWidgetSdkData.simpleDatasheetExample().widgetSdkData
+    widgetState = MockWidgetSdkData.simpleDatasheetExample().widgetSdkData,
   } = props || {};
   return createWidgetContextWrapper(config, widgetState);
 };

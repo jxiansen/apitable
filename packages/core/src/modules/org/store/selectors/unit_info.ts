@@ -1,5 +1,3 @@
-
-
 import { IReduxState, IUnitMap } from '../../../../exports/store/interfaces';
 import { createSelector } from 'reselect';
 
@@ -11,30 +9,28 @@ const getUserMapBase = (state: IReduxState) => {
   return state.unitInfo.userMap;
 };
 
-export const getUserMap = createSelector(
-  [getUnitMap, getUserMapBase], (unitMap, userMap) => {
-    if (!userMap) {
-      return null;
+export const getUserMap = createSelector([getUnitMap, getUserMapBase], (unitMap, userMap) => {
+  if (!userMap) {
+    return null;
+  }
+  const _userMap = {};
+  for (const userId in userMap) {
+    const userValue = userMap[userId];
+    if (userValue == null) {
+      continue;
     }
-    const _userMap = {};
-    for (const userId in userMap) {
-      const userValue = userMap[userId];
-      if (userValue == null) {
+    if (typeof userValue === 'string') {
+      if (!unitMap) {
         continue;
       }
-      if (typeof userValue === 'string') {
-        if (!unitMap) {
-          continue;
-        }
-        const unit = unitMap[userValue];
-        if (!unit) {
-          continue;
-        }
-        _userMap[userId] = unit;
-      } else {
-        _userMap[userId] = userValue;
+      const unit = unitMap[userValue];
+      if (!unit) {
+        continue;
       }
+      _userMap[userId] = unit;
+    } else {
+      _userMap[userId] = userValue;
     }
-    return _userMap;
   }
-);
+  return _userMap;
+});

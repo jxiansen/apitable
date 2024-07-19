@@ -7,13 +7,10 @@ export interface IAddDatasheetAction {
   payload: IWidgetDatasheetState;
 }
 
-export const addDatasheet = ((
-  datasheetId: string,
-  datasheetPack: IWidgetDatasheetState,
-) => {
+export const addDatasheet = (datasheetId: string, datasheetPack: IWidgetDatasheetState) => {
   return {
     type: ADD_DATASHEET,
     datasheetId,
     payload: datasheetPack,
   };
-});
+};

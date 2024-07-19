@@ -1,5 +1,3 @@
-
-
 import { max, min } from 'lodash';
 import { FormulaFunc, IFormulaParam } from './basic';
 import { BasicValueType, FormulaFuncType } from 'types';
@@ -33,8 +31,8 @@ function isArrayNodes(nodes?: AstNode[]) {
   return false;
 }
 /**
-  * Tool class for some public functions
-  */
+ * Tool class for some public functions
+ */
 export class NumericUtilsFunc extends NumericFunc {
   static override getReturnType(params?: AstNode[]) {
     params && this.validateParams(params);
@@ -45,10 +43,7 @@ export class NumericUtilsFunc extends NumericFunc {
    * CEILING, FLOOR
    * The output result is aligned with Excel
    */
-  static calc2RoundFC(
-    params: [IFormulaParam<number>, IFormulaParam<number>],
-    calcFn: (collection: any) => any,
-  ): NumericType {
+  static calc2RoundFC(params: [IFormulaParam<number>, IFormulaParam<number>], calcFn: (collection: any) => any): NumericType {
     if (params[0].value == null) {
       return null;
     }
@@ -65,7 +60,7 @@ export class NumericUtilsFunc extends NumericFunc {
   static calc2RoundDU(
     params: [IFormulaParam<number>, IFormulaParam<number>],
     calcFn1: (collection: any) => any,
-    calcFn2: (collection: any) => any,
+    calcFn2: (collection: any) => any
   ): NumericType {
     if (params[0].value == null) {
       return null;
@@ -154,22 +149,27 @@ export class Average extends NumericFunc {
       if (!params[0].value) {
         return 0;
       }
-      return params[0].value.reduce((pre, cur) => {
-        return plus(pre, noNaN(Number(cur)));
-      }, 0) / (params[0].value.length || 1);
+      return (
+        params[0].value.reduce((pre, cur) => {
+          return plus(pre, noNaN(Number(cur)));
+        }, 0) / (params[0].value.length || 1)
+      );
     }
 
-    const total = params.filter(cur => {
-      // Product requirement, the cell is empty, the cell is not counted in the total
-      if (cur.value == null) {
-        return false;
-      }
-      return !Number.isNaN(Number(cur.value));
-    }).length || 1;
+    const total =
+      params.filter((cur) => {
+        // Product requirement, the cell is empty, the cell is not counted in the total
+        if (cur.value == null) {
+          return false;
+        }
+        return !Number.isNaN(Number(cur.value));
+      }).length || 1;
 
-    return params.reduce((pre, cur) => {
-      return plus(pre, noNaN(Number(cur.value)));
-    }, 0) / total;
+    return (
+      params.reduce((pre, cur) => {
+        return plus(pre, noNaN(Number(cur.value)));
+      }, 0) / total
+    );
   }
 }
 
@@ -215,7 +215,7 @@ export class Round extends NumericFunc {
       return null;
     }
     const num = Number(value);
-    const precision = params[1] && Math.floor(params[1].value) || 0;
+    const precision = (params[1] && Math.floor(params[1].value)) || 0;
     const offset = Math.pow(10, precision);
     return divide(Math.round(times(num, offset)), offset);
   }
@@ -243,7 +243,7 @@ export class Max extends NumericFunc {
     }
 
     // All parameters are date type, return date type
-    if (params.every(node => node.valueType === BasicValueType.DateTime)) {
+    if (params.every((node) => node.valueType === BasicValueType.DateTime)) {
       return BasicValueType.DateTime;
     }
 
@@ -260,17 +260,17 @@ export class Max extends NumericFunc {
       if (!params[0].value) {
         return null;
       }
-      const v = calcFn(params[0].value.map(Number).filter(d => !isNaN(d)));
+      const v = calcFn(params[0].value.map(Number).filter((d) => !isNaN(d)));
       return v == null ? null : Number(v);
     }
 
     // If the return value is DateTime, the node of DateTime type should be filtered out,
     // otherwise the timestamp will be introduced to disturb the calculation result
-    if (this.getReturnType(params.map(p => p.node)) !== BasicValueType.DateTime) {
-      params = params.filter(p => p.node.valueType !== BasicValueType.DateTime);
+    if (this.getReturnType(params.map((p) => p.node)) !== BasicValueType.DateTime) {
+      params = params.filter((p) => p.node.valueType !== BasicValueType.DateTime);
     }
 
-    const v = calcFn(params.map(p => Number(p.value)).filter(d => !isNaN(d)));
+    const v = calcFn(params.map((p) => Number(p.value)).filter((d) => !isNaN(d)));
     return v == null ? 0 : Number(v);
   }
 }
@@ -489,7 +489,7 @@ export class Mod extends NumericFunc {
     const mod = num % divisor;
 
     if ((num ^ divisor) < 0) {
-      return mod * (-1);
+      return mod * -1;
     }
     return mod;
   }
@@ -511,11 +511,8 @@ export class Value extends NumericFunc {
     const text = String(params[0].value);
     const regNumber = /[^0-9.+-]/g;
     const regSymbol = /(\+|-|\.)+/g;
-    const value = text
-      .replace(regNumber, '')
-      .replace(regSymbol, '$1');
+    const value = text.replace(regNumber, '').replace(regSymbol, '$1');
 
     return parseFloat(value);
   }
 }
-

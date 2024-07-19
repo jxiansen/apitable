@@ -1,5 +1,3 @@
-
-
 // FIXME:THEME
 import GraphemeSplitter from 'grapheme-splitter';
 import { colors, ThemeName } from '@apitable/components';

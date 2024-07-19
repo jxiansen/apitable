@@ -1,5 +1,3 @@
-
-
 import React, { CSSProperties } from 'react';
 import { CellEnhanceText } from '../cell_enhance_text';
 

@@ -1,5 +1,3 @@
-
-
 import { forwardRef, Module } from '@nestjs/common';
 import { DatabaseModule } from 'database/database.module';
 import { GrpcClientModule } from 'grpc/client/grpc.client.module';
@@ -10,22 +8,9 @@ import { GrpcController } from './controllers/grpc.controller';
 import { DocumentServiceDynamicModule } from 'workdoc/services/document.service.dynamic.module';
 
 @Module({
-  imports: [
-    forwardRef(() => DatabaseModule),
-    UserModule,
-    forwardRef(() => NodeModule),
-    GrpcClientModule,
-    DocumentServiceDynamicModule.forRoot(),
-  ],
+  imports: [forwardRef(() => DatabaseModule), UserModule, forwardRef(() => NodeModule), GrpcClientModule, DocumentServiceDynamicModule.forRoot()],
   controllers: [GrpcController],
-  providers: [
-    GrpcSocketService,
-  ],
-  exports: [
-    GrpcSocketService,
-    GrpcClientModule,
-  ],
+  providers: [GrpcSocketService],
+  exports: [GrpcSocketService, GrpcClientModule],
 })
-export class GrpcModule {
-}
-
+export class GrpcModule {}

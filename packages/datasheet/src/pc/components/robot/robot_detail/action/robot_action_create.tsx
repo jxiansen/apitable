@@ -1,10 +1,6 @@
-
-
 import { useAtomValue, useAtom } from 'jotai';
 import { ReactElement, useCallback, useMemo } from 'react';
-import {
-  SearchSelect,
-} from '@apitable/components';
+import { SearchSelect } from '@apitable/components';
 import { integrateCdnHost, Strings, t } from '@apitable/core';
 import { getActionList } from 'pc/components/robot/robot_detail/utils';
 import { useAutomationController } from '../../../automation/controller';
@@ -16,66 +12,69 @@ import { EditType } from '../trigger/robot_trigger';
 import itemStyle from '../trigger/select_styles.module.less';
 import { debounce } from 'lodash';
 
-export const getNextAction = (actionList: IRobotAction[], preActionId ?: string) => {
-  const actionIndex = actionList.findIndex(action => action.actionId === preActionId);
+export const getNextAction = (actionList: IRobotAction[], preActionId?: string) => {
+  const actionIndex = actionList.findIndex((action) => action.actionId === preActionId);
   const r = actionList[actionIndex + 1];
   return r;
 };
-export const CreateNewAction = ({ robotId, actionTypes, prevActionId, disabled = false, nodeOutputSchemaList }: {
+export const CreateNewAction = ({
+  robotId,
+  actionTypes,
+  prevActionId,
+  disabled = false,
+  nodeOutputSchemaList,
+}: {
   robotId: string;
-  disabled?:boolean;
+  disabled?: boolean;
   actionTypes: IActionType[];
   nodeOutputSchemaList: INodeOutputSchema[];
   prevActionId?: string;
 }) => {
-
   const [, setAutomationPanel] = useAtom(automationPanelAtom);
-  const automationState= useAtomValue(automationStateAtom);
-  const { api: { refresh } } = useAutomationController();
-  const createNewAction = useCallback(async (action: {
-    actionTypeId: string;
-    robotId: string;
-    prevActionId?: string;
-    input?: any;
-  }) => {
-    if(!automationState?.resourceId) {
-      console.error('resourceId is empty');
-      return;
-    }
-    const res = await createAction(automationState.resourceId, action);
-    if(!automationState?.resourceId) {
-      return;
-    }
-    await refresh({
-      resourceId: automationState?.resourceId!,
-      robotId: robotId,
-    });
-
-    const data = getNextAction(getActionList(res.data.data), prevActionId);
-
-    if(data) {
-      setAutomationPanel({
-        panelName: PanelName.Action,
-        dataId: data.actionId,
-        data: {
-          // @ts-ignore
-          robotId: action.robotId,
-          editType: EditType.detail,
-          nodeOutputSchemaList: nodeOutputSchemaList,
-          action: { ...data, id: data.actionId, typeId: data.actionTypeId },
-        }
+  const automationState = useAtomValue(automationStateAtom);
+  const {
+    api: { refresh },
+  } = useAutomationController();
+  const createNewAction = useCallback(
+    async (action: { actionTypeId: string; robotId: string; prevActionId?: string; input?: any }) => {
+      if (!automationState?.resourceId) {
+        console.error('resourceId is empty');
+        return;
       }
-      );
-    }else {
-
-      setAutomationPanel({
-        panelName: PanelName.BasicInfo,
-        dataId: undefined,
-        data: undefined
+      const res = await createAction(automationState.resourceId, action);
+      if (!automationState?.resourceId) {
+        return;
+      }
+      await refresh({
+        resourceId: automationState?.resourceId!,
+        robotId: robotId,
       });
-    }
-    return res.data;
-  }, [automationState?.resourceId, nodeOutputSchemaList, prevActionId, refresh, robotId, setAutomationPanel]);
+
+      const data = getNextAction(getActionList(res.data.data), prevActionId);
+
+      if (data) {
+        setAutomationPanel({
+          panelName: PanelName.Action,
+          dataId: data.actionId,
+          data: {
+            // @ts-ignore
+            robotId: action.robotId,
+            editType: EditType.detail,
+            nodeOutputSchemaList: nodeOutputSchemaList,
+            action: { ...data, id: data.actionId, typeId: data.actionTypeId },
+          },
+        });
+      } else {
+        setAutomationPanel({
+          panelName: PanelName.BasicInfo,
+          dataId: undefined,
+          data: undefined,
+        });
+      }
+      return res.data;
+    },
+    [automationState?.resourceId, nodeOutputSchemaList, prevActionId, refresh, robotId, setAutomationPanel],
+  );
 
   const debouncedCreateAction = debounce(createNewAction, 1000);
 
@@ -83,7 +82,7 @@ export const CreateNewAction = ({ robotId, actionTypes, prevActionId, disabled =
     <SearchSelect
       clazz={{
         item: itemStyle.item,
-        icon: itemStyle.icon
+        icon: itemStyle.icon,
       }}
       disabled={disabled}
       options={{
@@ -91,51 +90,55 @@ export const CreateNewAction = ({ robotId, actionTypes, prevActionId, disabled =
         noDataText: t(Strings.empty_data),
         minWidth: '384px',
       }}
-      list={actionTypes.map(item => ({
+      list={actionTypes.map((item) => ({
         label: item.name,
         value: item.actionTypeId,
-        prefixIcon: <img src={integrateCdnHost(item.service.logo)} width={20} alt={''} style={{ marginRight: 4 }} />
-      }))} onChange={(item) => {
-      debouncedCreateAction({
+        prefixIcon: <img src={integrateCdnHost(item.service.logo)} width={20} alt={''} style={{ marginRight: 4 }} />,
+      }))}
+      onChange={(item) => {
+        debouncedCreateAction({
           robotId,
           actionTypeId: String(item.value),
-          prevActionId
+          prevActionId,
         });
-      }}>
-
+      }}
+    >
       <NewItem disabled={disabled} itemId={'CONST_ROBOT_ACTION_CREATE'}>
         {t(Strings.robot_new_action)}
       </NewItem>
-    </SearchSelect>);
+    </SearchSelect>
+  );
 };
 
-export const CreateNewActionLineButton = ({ robotId, actionTypes, prevActionId, disabled = false, children, nodeOutputSchemaList }: {
+export const CreateNewActionLineButton = ({
+  robotId,
+  actionTypes,
+  prevActionId,
+  disabled = false,
+  children,
+  nodeOutputSchemaList,
+}: {
   robotId: string;
   children: ReactElement;
-  disabled?:boolean;
+  disabled?: boolean;
   nodeOutputSchemaList: INodeOutputSchema[];
   actionTypes: IActionType[];
   prevActionId?: string;
 }) => {
-
-  const automationState= useAtomValue(automationStateAtom);
+  const automationState = useAtomValue(automationStateAtom);
   const [, setAutomationPanel] = useAtom(automationPanelAtom);
-  const { api: { refresh } } = useAutomationController();
+  const {
+    api: { refresh },
+  } = useAutomationController();
 
-  const createNewAction = async (action: {
-    actionTypeId: string;
-    robotId: string;
-    prevActionId?: string;
-    input?: any;
-  }) => {
-
-    if(!automationState?.resourceId) {
+  const createNewAction = async (action: { actionTypeId: string; robotId: string; prevActionId?: string; input?: any }) => {
+    if (!automationState?.resourceId) {
       console.error('resourceId is empty');
       return;
     }
     const res = await createAction(automationState.resourceId, action);
 
-    if(!automationState?.resourceId) {
+    if (!automationState?.resourceId) {
       return;
     }
     await refresh({
@@ -145,7 +148,7 @@ export const CreateNewActionLineButton = ({ robotId, actionTypes, prevActionId, 
 
     const newAction = getNextAction(getActionList(res.data.data), prevActionId);
 
-    if(newAction) {
+    if (newAction) {
       setAutomationPanel({
         panelName: PanelName.Action,
         dataId: newAction.actionId,
@@ -154,19 +157,18 @@ export const CreateNewActionLineButton = ({ robotId, actionTypes, prevActionId, 
           robotId: action.robotId,
           editType: EditType.detail,
           nodeOutputSchemaList: nodeOutputSchemaList,
-          action:  { ...newAction, id: newAction.actionId, typeId: newAction.actionTypeId },
-        }
+          action: { ...newAction, id: newAction.actionId, typeId: newAction.actionTypeId },
+        },
       });
-    }else {
+    } else {
       setAutomationPanel({
         panelName: PanelName.BasicInfo,
         dataId: undefined,
-        data: undefined
+        data: undefined,
       });
     }
 
     return res.data;
-
   };
 
   return (
@@ -174,26 +176,27 @@ export const CreateNewActionLineButton = ({ robotId, actionTypes, prevActionId, 
       disabled={disabled}
       clazz={{
         item: itemStyle.item,
-        icon: itemStyle.icon
+        icon: itemStyle.icon,
       }}
       options={{
         placeholder: t(Strings.search_field),
         noDataText: t(Strings.empty_data),
         minWidth: '384px',
       }}
-      list={actionTypes.map(item => ({
+      list={actionTypes.map((item) => ({
         label: item.name,
         value: item.actionTypeId,
-        prefixIcon: <img src={integrateCdnHost(item.service.logo)} width={20} alt={''} style={{ marginRight: 4 }} />
-      }))} onChange={(item) => {
+        prefixIcon: <img src={integrateCdnHost(item.service.logo)} width={20} alt={''} style={{ marginRight: 4 }} />,
+      }))}
+      onChange={(item) => {
         createNewAction({
           robotId,
           actionTypeId: String(item.value),
-          prevActionId
+          prevActionId,
         });
-      }}>
-      {
-        children
-      }
-    </SearchSelect>);
+      }}
+    >
+      {children}
+    </SearchSelect>
+  );
 };

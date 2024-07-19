@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, ICellValue, IField, IHyperlinkSegment, SegmentType } from '@apitable/core';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { isObject } from 'class-validator';
@@ -33,7 +31,7 @@ export class UrlField extends BaseTextField implements OnApplicationBootstrap {
       text: fieldValue['text'],
       title: fieldValue['title'],
       type: SegmentType.Url,
-      favicon: fieldValue['favicon']
+      favicon: fieldValue['favicon'],
     };
     return [cellValue];
   }

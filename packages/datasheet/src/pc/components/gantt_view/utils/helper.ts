@@ -1,5 +1,3 @@
-
-
 import { CellType, defaultGanttViewStatus, IGanttViewStatus, ViewType } from '@apitable/core';
 import { GANTT_HEADER_HEIGHT, GANTT_HORIZONTAL_DEFAULT_SPACING, GANTT_VERTICAL_DEFAULT_SPACING, IScrollOptions } from 'pc/components/gantt_view';
 import { getStorage, StorageName } from 'pc/utils/storage';

@@ -1,20 +1,17 @@
 import { Field } from 'model/field';
 
-import {
-  ILinearRow, IReduxState, IViewProperty, IViewRow,
-} from 'exports/store/interfaces';
-import {
-  getActiveRecordId, getActiveRowInfo, getGroupingCollapseIds, getField,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { ILinearRow, IReduxState, IViewProperty, IViewRow } from 'exports/store/interfaces';
+import { getActiveRecordId, getActiveRowInfo, getGroupingCollapseIds, getField } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getCellValue } from 'modules/database/store/selectors/resource/datasheet/cell_calc';
 import { CellType, RecordMoveType } from 'modules/shared/store/constants';
 import { handleEmptyCellValue } from 'model/utils';
 import { Group } from 'model/view/group';
 
 export class ViewGroupDerivate {
-
-  constructor(private state: IReduxState, public datasheetId: string) {
-  }
+  constructor(
+    private state: IReduxState,
+    public datasheetId: string
+  ) {}
 
   private getFixedCellValue(recordMoveType: RecordMoveType, recordId: string, fieldId: string) {
     const snapshot = this.state.datasheetMap[this.datasheetId]?.datasheet?.snapshot;
@@ -75,11 +72,7 @@ export class ViewGroupDerivate {
         const field = getField(state, fieldId, this.datasheetId);
         const cv1 = this.getFixedCellValue(recordMoveType, preRow.recordId, fieldId);
         const cv2 = this.getFixedCellValue(recordMoveType, row.recordId, fieldId);
-        if (
-          !row.recordId ||
-          !preRow.recordId ||
-          !(Field.bindContext(field, state).compare(cv1, cv2) === 0)
-        ) {
+        if (!row.recordId || !preRow.recordId || !(Field.bindContext(field, state).compare(cv1, cv2) === 0)) {
           shouldGenGroupLinearRows = true;
           // Because the breakpoint of the upper layer must be the breakpoint of the lower layer,
           // so here we have to iterate through them and add a line to each one.
@@ -90,9 +83,7 @@ export class ViewGroupDerivate {
       });
       if (shouldGenGroupLinearRows) {
         groupHeadRecordId = row.recordId;
-        const groupLinearRows = groupSketch.genGroupLinearRows(
-          index, row.recordId, preRow.recordId,
-        );
+        const groupLinearRows = groupSketch.genGroupLinearRows(index, row.recordId, preRow.recordId);
         linearRows.push(...groupLinearRows);
         displayRowIndex = 0;
       }
@@ -152,32 +143,30 @@ export class ViewGroupDerivate {
     }
     const groupingCollapseSet: Set<string> = new Set(groupingCollapseIds);
 
-    const res = linearRows.reduce<{collapsedLinearRows: ILinearRow[], skip: boolean, depth: number}>((ctx, linearRow) => {
-      if (ctx.skip) {
-        // A black with the same level as the skipped group is encountered, indicating that the group has ended
-        if (
-          linearRow.type === CellType.Blank &&
-          linearRow.depth === ctx.depth
-        ) {
-          // Resetting the collapsed state
-          ctx.depth = Infinity;
-          ctx.skip = false;
-          ctx.collapsedLinearRows.push(linearRow);
+    const res = linearRows.reduce<{ collapsedLinearRows: ILinearRow[]; skip: boolean; depth: number }>(
+      (ctx, linearRow) => {
+        if (ctx.skip) {
+          // A black with the same level as the skipped group is encountered, indicating that the group has ended
+          if (linearRow.type === CellType.Blank && linearRow.depth === ctx.depth) {
+            // Resetting the collapsed state
+            ctx.depth = Infinity;
+            ctx.skip = false;
+            ctx.collapsedLinearRows.push(linearRow);
+          }
+          return ctx;
         }
+
+        // Enable skip mode by if the grouping header hits the fold.
+        if (linearRow.type === CellType.GroupTab && groupingCollapseSet.has(linearRow.recordId + '_' + linearRow.depth)) {
+          ctx.skip = true;
+          ctx.depth = linearRow.depth;
+        }
+
+        ctx.collapsedLinearRows.push(linearRow);
         return ctx;
-      }
-
-      // Enable skip mode by if the grouping header hits the fold.
-      if (linearRow.type === CellType.GroupTab &&
-        groupingCollapseSet.has(linearRow.recordId + '_' + linearRow.depth)
-      ) {
-        ctx.skip = true;
-        ctx.depth = linearRow.depth;
-      }
-
-      ctx.collapsedLinearRows.push(linearRow);
-      return ctx;
-    }, { collapsedLinearRows: [], skip: false, depth: Infinity });
+      },
+      { collapsedLinearRows: [], skip: false, depth: Infinity }
+    );
 
     return res.collapsedLinearRows;
   }
@@ -192,34 +181,34 @@ export class ViewGroupDerivate {
     return {
       // Grouping breakpoint data
       /**
-      * groupBreakpoint
-      * field1 Grouping Breakpoints 0---------10---------20
-      * field2 level Grouping Breakpoints 0--3-5-6--10----15---20
-      *
-      * field1: [0, 10, 20]
-      * field2: [0, 3, 5, 6, 10, 15, 20]
-      */
+       * groupBreakpoint
+       * field1 Grouping Breakpoints 0---------10---------20
+       * field2 level Grouping Breakpoints 0--3-5-6--10----15---20
+       *
+       * field1: [0, 10, 20]
+       * field2: [0, 3, 5, 6, 10, 15, 20]
+       */
       groupBreakpoint: groupSketch.groupBreakpoint,
       /**
-      * Guide the grid view to draw the structured data of the table,
-      * with the hierarchical structure reflected by depth.
-      * [
-      *    Blank 0
-      *    GroupTab 0
-      *      GroupTab 1
-      *        GroupTab 2
-      *          Record 3
-      *        Add 2
-      *        Blank 2
-      *      Blank 1
-      *    Blank 0
-      * ]
-      */
+       * Guide the grid view to draw the structured data of the table,
+       * with the hierarchical structure reflected by depth.
+       * [
+       *    Blank 0
+       *    GroupTab 0
+       *      GroupTab 1
+       *        GroupTab 2
+       *          Record 3
+       *        Add 2
+       *        Blank 2
+       *      Blank 1
+       *    Blank 0
+       * ]
+       */
       linearRows: visibleLinearRows,
 
       /**
-      * [`${row.type}_${row.recordId}`, index]
-      */
+       * [`${row.type}_${row.recordId}`, index]
+       */
       linearRowsIndexMap: new Map(pureLinearRows.map((row, index) => [`${row.type}_${row.recordId}`, index])),
 
       // Gantt Chart view of ui row information

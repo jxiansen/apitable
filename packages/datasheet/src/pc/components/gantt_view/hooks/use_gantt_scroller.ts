@@ -1,5 +1,3 @@
-
-
 import { useMemo } from 'react';
 import { isTouchDevice } from 'pc/utils';
 import { AreaType } from '../interface';

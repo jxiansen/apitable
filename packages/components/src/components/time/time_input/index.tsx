@@ -1,5 +1,3 @@
-
-
 import React, { FC, memo, useMemo, useState } from 'react';
 import { ListDropdown } from '../../select/dropdown/list_dropdown';
 import { stopPropagation } from '../../../helper';
@@ -76,7 +74,7 @@ const StyledSelectTrigger = styled.div.attrs(applyDefaultTheme)<{ disabled: bool
   user-select: none;
   outline: none;
   transition: all 0.3s;
-  
+
   color: ${(props) => props.theme.color.textCommonPrimary};
 
   ${(props) => {
@@ -84,7 +82,7 @@ const StyledSelectTrigger = styled.div.attrs(applyDefaultTheme)<{ disabled: bool
     if (props.disabled) {
       return css`
         cursor: not-allowed;
-        color: ${props.theme.color.textCommonDisabled}
+        color: ${props.theme.color.textCommonDisabled};
       `;
     }
     return (

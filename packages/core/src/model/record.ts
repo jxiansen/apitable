@@ -1,5 +1,3 @@
-
-
 import { IAttachmentValue, ILinkIds, IMultiSelectedIds, ISegment, ITimestamp, IUnitIds, IWorkDocValue } from 'types/field_types';
 
 export type ICellValueBase =

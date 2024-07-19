@@ -1,5 +1,3 @@
-
-
 import { ExecuteFailReason, ExecuteResult, ICollaCommandExecuteContext, ICollaCommandExecuteResultBase } from './types';
 import { IJOTAction } from 'engine/ot/interface';
 import { CollaCommandName } from 'commands/enum';

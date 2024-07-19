@@ -1,5 +1,3 @@
-
-
 import { IReduxState } from 'exports/store';
 import Joi from 'joi';
 import { difference, has, isString, keyBy, memoize, range } from 'lodash';
@@ -19,23 +17,29 @@ export const isOptionId = (optionId: string) => {
 };
 
 export abstract class SelectField extends Field {
-
-  constructor(public override field: ISelectField, state: IReduxState) {
+  constructor(
+    public override field: ISelectField,
+    state: IReduxState
+  ) {
     super(field, state);
   }
 
   static propertySchema = Joi.object({
-    options: Joi.array().items(Joi.object({
-      id: Joi.string().required(),
-      name: Joi.string().required(),
-      color: Joi.number().integer().min(0).required(),
-    })).required(),
+    options: Joi.array()
+      .items(
+        Joi.object({
+          id: Joi.string().required(),
+          name: Joi.string().required(),
+          color: Joi.number().integer().min(0).required(),
+        })
+      )
+      .required(),
     defaultValue: Joi.custom((_prototype, helpers) => {
       if (helpers.prefs['context']?.['fieldType'] === FieldType.SingleSelect) {
         return Joi.string();
       }
       return Joi.array().items(Joi.string());
-    })
+    }),
   }).required();
 
   static defaultProperty(): ISelectFieldProperty {
@@ -43,7 +47,7 @@ export abstract class SelectField extends Field {
   }
 
   get apiMetaProperty(): IAPIMetaSingleSelectFieldProperty {
-    const options = this.field.property.options.map(option => {
+    const options = this.field.property.options.map((option) => {
       return {
         id: option.id,
         name: option.name,
@@ -54,21 +58,26 @@ export abstract class SelectField extends Field {
   }
 
   validateProperty(): Joi.ValidationResult {
-    return SelectField.propertySchema.validate(this.field.property, { context: {
-      fieldType: this.field.type,
-    } });
+    return SelectField.propertySchema.validate(this.field.property, {
+      context: {
+        fieldType: this.field.type,
+      },
+    });
   }
 
-  static _createNewOption(option: { name: string, color?: number }, existOptions: ISelectFieldOption[]) {
-    const optionId = getNewId(IDPrefix.Option, existOptions.map(op => op.id));
+  static _createNewOption(option: { name: string; color?: number }, existOptions: ISelectFieldOption[]) {
+    const optionId = getNewId(
+      IDPrefix.Option,
+      existOptions.map((op) => op.id)
+    );
     return {
       id: optionId,
-      color: option.color || getOptionColor(existOptions.map(op => op.color)),
+      color: option.color || getOptionColor(existOptions.map((op) => op.color)),
       name: option.name,
     };
   }
 
-  static _getOption(option: { name: string, color?: number }, existOptions: ISelectFieldOption[]) {
+  static _getOption(option: { name: string; color?: number }, existOptions: ISelectFieldOption[]) {
     for (const opt of existOptions) {
       const exist = option.color ? opt.name === option.name && opt.color === option.color : opt.name === option.name;
       if (exist) {
@@ -78,9 +87,12 @@ export abstract class SelectField extends Field {
     return;
   }
 
-  static getOrCreateNewOption(option: { name: string, color?: number }, existOptions: ISelectFieldOption[]): {
-    option: ISelectFieldOption,
-    isCreated: boolean
+  static getOrCreateNewOption(
+    option: { name: string; color?: number },
+    existOptions: ISelectFieldOption[]
+  ): {
+    option: ISelectFieldOption;
+    isCreated: boolean;
   } {
     // get exist
     const opt = SelectField._getOption(option, existOptions);
@@ -121,11 +133,11 @@ export abstract class SelectField extends Field {
    * @memberof SingleSelectField
    */
   findOptionByName(name: string) {
-    return this.field.property.options.find(option => option.name === name) || null;
+    return this.field.property.options.find((option) => option.name === name) || null;
   }
 
   findOptionById(id: string): ISelectFieldOption | null {
-    return this.field.property.options.find(option => option.id === id) || null;
+    return this.field.property.options.find((option) => option.id === id) || null;
   }
 
   getOption(index: number) {
@@ -140,10 +152,7 @@ export abstract class SelectField extends Field {
     return mapOptions;
   });
 
-  override compare(
-    cellValue1: string | string[] | null,
-    cellValue2: string | string[] | null,
-  ): number {
+  override compare(cellValue1: string | string[] | null, cellValue2: string | string[] | null): number {
     if (cellValue1 === cellValue2) {
       return 0;
     }
@@ -186,18 +195,17 @@ export abstract class SelectField extends Field {
     }
     // The two maps are because there are multiple options corresponding to one id
     const options = [...this.field.property.options];
-    const optionColor = options.map(op => op.color);
+    const optionColor = options.map((op) => op.color);
     const optionNameMap = keyBy(this.field.property.options, 'name');
     const optionIdMap = keyBy(this.field.property.options, 'id');
     for (const stdVal of stdVals) {
       const sourceType = stdVal && stdVal.sourceType;
-      const isSelect2Multi = isSelectType(sourceType) &&
-        this.field.type === FieldType.MultiSelect;
+      const isSelect2Multi = isSelectType(sourceType) && this.field.type === FieldType.MultiSelect;
       const data = stdVal && stdVal.data;
       if (!data || data.length === 0) {
         continue;
       }
-      data.forEach(d => {
+      data.forEach((d) => {
         const { text, id } = d;
         let textList;
         if (isSelect2Multi) {
@@ -205,7 +213,7 @@ export abstract class SelectField extends Field {
         } else {
           textList = this.field.type === FieldType.MultiSelect ? text.split(/, ?/) : [text];
         }
-        textList.forEach(text => {
+        textList.forEach((text) => {
           const existOption = optionNameMap[text];
           // TODO: reuse ID and Color
           // When there is a creation option, two cases with the same option have id, such as the color field added later
@@ -230,12 +238,12 @@ export abstract class SelectField extends Field {
   }
 
   filterBlankOption(options: ISelectFieldOption[]) {
-    return options.filter(item => item.name.trim().length);
+    return options.filter((item) => item.name.trim().length);
   }
 
   override get openFieldProperty(): IOpenSelectBaseFieldProperty {
     const { defaultValue } = this.field.property;
-    const options = this.field.property.options.map(option => {
+    const options = this.field.property.options.map((option) => {
       return {
         id: option.id,
         name: option.name,
@@ -246,24 +254,30 @@ export abstract class SelectField extends Field {
   }
 
   static openUpdatePropertySchema = Joi.object({
-    options: Joi.array().items(Joi.object({
-      id: Joi.string(),
-      name: Joi.string().required(),
-      color: Joi.string(),
-    })).required(),
+    options: Joi.array()
+      .items(
+        Joi.object({
+          id: Joi.string(),
+          name: Joi.string().required(),
+          color: Joi.string(),
+        })
+      )
+      .required(),
   }).required();
 
   validateWriteOpenOptionsEffect(updateProperty: IWriteOpenSelectBaseFieldProperty, effectOption?: IEffectOption): Joi.ValidationResult {
     // Not allowed to pass option parameter with ID but no color
-    if (updateProperty.options.some(option => option.id && !has(option, 'color'))) {
+    if (updateProperty.options.some((option) => option.id && !has(option, 'color'))) {
       return joiErrorResult('Option object is not supported. It has id but no color');
     }
     // Check if this update removes options
-    const updateOptionIds = updateProperty.options.map(option => option.id);
-    const isDeleteOption = this.field.property.options.some(option => !updateOptionIds.includes(option.id));
+    const updateOptionIds = updateProperty.options.map((option) => option.id);
+    const isDeleteOption = this.field.property.options.some((option) => !updateOptionIds.includes(option.id));
     if (isDeleteOption && !effectOption?.enableSelectOptionDelete) {
-      return joiErrorResult('Removing options is not supported by default, '
-  + 'When updating property, include all existing options or pass the `enableSelectOptionDelete` option to allow options to be deleted.');
+      return joiErrorResult(
+        'Removing options is not supported by default, ' +
+          'When updating property, include all existing options or pass the `enableSelectOptionDelete` option to allow options to be deleted.'
+      );
     }
     return { error: undefined, value: undefined };
   }
@@ -272,7 +286,7 @@ export abstract class SelectField extends Field {
     const { options, defaultValue } = openFieldProperty;
     const newOptions: ISelectFieldOption[] = [];
     let transformedDefaultValue = defaultValue;
-    const transformedOptions = options.map(option => {
+    const transformedOptions = options.map((option) => {
       if (!option.id || !option.color) {
         const color = option.color ? (typeof option.color === 'number' ? option.color : this.getOptionColorNumberByName(option.color)) : undefined;
         // prevent duplicate option IDs
@@ -289,7 +303,7 @@ export abstract class SelectField extends Field {
     });
     return {
       defaultValue: transformedDefaultValue,
-      options: transformedOptions
+      options: transformedOptions,
     };
   }
 
@@ -297,21 +311,21 @@ export abstract class SelectField extends Field {
    * If the defaultValue is option.name, it needs to be processed as option.id
    */
   private transformDefaultValue(option: ISelectFieldOption, defaultValue: string | IMultiSelectedIds | undefined) {
-    if(this.matchSingleSelectName(option.name, defaultValue)) {
+    if (this.matchSingleSelectName(option.name, defaultValue)) {
       return option.id;
     }
-    if(typeof defaultValue === 'object'){ // for MultiSelect
+    if (typeof defaultValue === 'object') {
+      // for MultiSelect
       const idx = defaultValue.indexOf(option.name);
-      if(idx > -1) {
+      if (idx > -1) {
         defaultValue[idx] = option.id;
       }
     }
     return defaultValue;
   }
 
-  private matchSingleSelectName(name: string, defaultValue: any): boolean{
-    return typeof defaultValue === 'string'
-      && name === defaultValue;
+  private matchSingleSelectName(name: string, defaultValue: any): boolean {
+    return typeof defaultValue === 'string' && name === defaultValue;
   }
 }
 

@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from 'react';
 import { ThemeName, ThemeProvider } from '@apitable/components';
 import { getTheme, switchTheme } from './theme';

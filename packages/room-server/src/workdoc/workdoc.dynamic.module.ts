@@ -1,14 +1,10 @@
-
-
 import { DynamicModule, Module } from '@nestjs/common';
 import path from 'path';
 import * as fs from 'fs';
 import { HocuspocusBaseService, HocuspocusService } from './services/hocuspocus.base.service';
 
-@Module({
-})
+@Module({})
 export class WorkDocDynamicModule {
-
   static forRoot(): DynamicModule {
     const enterpriseModulePath = path.join(__dirname, '../enterprise/workdoc');
     const isEnterpriseLevel: boolean = fs.existsSync(enterpriseModulePath);
@@ -18,27 +14,24 @@ export class WorkDocDynamicModule {
         module: WorkDocEnterpriseModule,
       };
     }
-    return { 
+    return {
       module: WorkDocModule,
-    }; 
+    };
   }
-
 }
 
 @Module({
   providers: [
     {
       provide: HocuspocusBaseService,
-      useClass: HocuspocusService
+      useClass: HocuspocusService,
     },
   ],
   exports: [
     {
       provide: HocuspocusBaseService,
-      useClass: HocuspocusService
+      useClass: HocuspocusService,
     },
   ],
 })
-export class WorkDocModule {
-
-}
+export class WorkDocModule {}

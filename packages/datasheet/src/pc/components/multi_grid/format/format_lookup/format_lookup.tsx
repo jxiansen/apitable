@@ -1,5 +1,3 @@
-
-
 import { isNumber } from 'util';
 import classNames from 'classnames';
 import * as React from 'react';
@@ -354,9 +352,9 @@ export const FormateLookUp: React.FC<React.PropsWithChildren<IFormateLookUpProps
                     {!filterInfo?.conditions.length && !sortInfo?.rules.length
                       ? t(Strings.lookup_filter_sort_description)
                       : t(Strings.rollup_conditions_num, {
-                        FILTER_NUM: filterInfo?.conditions.length || 0,
-                        ORDER_BY_NUM: sortInfo?.rules.length || 0,
-                      })}
+                          FILTER_NUM: filterInfo?.conditions.length || 0,
+                          ORDER_BY_NUM: sortInfo?.rules.length || 0,
+                        })}
                   </span>
                 </div>
                 <div className={settingStyles.arrow}>

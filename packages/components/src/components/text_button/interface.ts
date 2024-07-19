@@ -1,5 +1,3 @@
-
-
 type IButtonHTMLAttributes = Omit<React.ButtonHTMLAttributes<any>, 'color'>;
 
 export interface ITextButtonProps extends IButtonHTMLAttributes {

@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { t, Strings } from '@apitable/core';
 import { StarOutlined, StarFilled } from '@apitable/icons';

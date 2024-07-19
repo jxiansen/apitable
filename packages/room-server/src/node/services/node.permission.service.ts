@@ -1,7 +1,10 @@
-
-
 import {
-  ConfigConstant, DEFAULT_EDITOR_PERMISSION, DEFAULT_MANAGER_PERMISSION, DEFAULT_PERMISSION, DEFAULT_READ_ONLY_PERMISSION, IDPrefix,
+  ConfigConstant,
+  DEFAULT_EDITOR_PERMISSION,
+  DEFAULT_MANAGER_PERMISSION,
+  DEFAULT_PERMISSION,
+  DEFAULT_READ_ONLY_PERMISSION,
+  IDPrefix,
 } from '@apitable/core';
 import { Span } from '@metinseylan/nestjs-opentelemetry';
 import { Injectable } from '@nestjs/common';

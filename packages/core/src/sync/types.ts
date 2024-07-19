@@ -1,5 +1,3 @@
-
-
 import { ILocalChangeset, IRemoteChangeset } from 'engine/ot';
 import { IApiWrapper, IFieldPermission, IFieldRoleSetting, IWatchResult } from '../exports/store/interfaces';
 import { Role } from 'config/constant';

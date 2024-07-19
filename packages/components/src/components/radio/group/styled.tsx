@@ -1,33 +1,31 @@
-
-
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
 import { IRadioGroup } from './interface';
 
-export const RadioGroupStyled = styled.div.attrs(applyDefaultTheme) <IRadioGroup>`
+export const RadioGroupStyled = styled.div.attrs(applyDefaultTheme)<IRadioGroup>`
   display: flex;
   label {
-    ${props => {
-    if (props.block) {
-      return css`
+    ${(props) => {
+      if (props.block) {
+        return css`
           flex: 1;
         `;
-    }
-    return '';
-  }}
+      }
+      return '';
+    }}
     .radio-text {
-      ${props => {
-    if (props.block && props.isBtn) {
-      return css`
+      ${(props) => {
+        if (props.block && props.isBtn) {
+          return css`
             font-size: 13px;
             margin: 0 auto;
           `;
-    }
-    return '';
-  }}
+        }
+        return '';
+      }}
     }
   }
-  ${props => {
+  ${(props) => {
     if (props.isBtn) {
       const { color } = props.theme;
       return css`
@@ -46,7 +44,7 @@ export const RadioGroupStyled = styled.div.attrs(applyDefaultTheme) <IRadioGroup
       flex-flow: column wrap;
     `;
   }}
-  ${props => {
+  ${(props) => {
     if (props.isBtn) {
       return `
         border-radius: 4px;

@@ -1,5 +1,3 @@
-
-
 import { batchActions } from 'redux-batched-actions';
 import { Api, ApiInterface, ConfigConstant, IReduxState, IUnitValue, Navigation, StatusCode, StoreActions, Strings, t } from '@apitable/core';
 import { uploadAttachToS3, UploadType } from '@apitable/widget-sdk';
@@ -332,14 +330,14 @@ export const useUserRequest = () => {
       }
       if (languageMap[userLanguage]) {
         return userLanguage;
-      } 
+      }
       const langArr = Object.keys(languageMap);
       for (let i = 0; i < langArr.length; i++) {
         if (langArr[i].indexOf(userLanguage) > -1) {
           return langArr[i];
         }
       }
-      
+
       return 'en-US';
     };
     return Api.register(username, credential, defaultLang()).then((res) => {

@@ -1,12 +1,10 @@
-
-
 import { getComputeRefManager } from 'compute_manager';
 import { ViewFilterDerivate } from 'compute_manager/view_derivate/slice/view_filter_derivate';
 import { Strings, t } from 'exports/i18n';
 import { sortRowsBySortInfo } from 'modules/database/store/selectors/resource/datasheet/rows_calc';
 import { getUserTimeZone } from 'modules/user/store/selectors/user';
 import { getCellValue, _getLookUpTreeValue } from 'modules/database/store/selectors/resource/datasheet/cell_calc';
-import { getFieldMap }from 'modules/database/store/selectors/resource/datasheet/calc';
+import { getFieldMap } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { ROLLUP_KEY_WORDS } from 'formula_parser/consts';
 import { evaluate, parse } from 'formula_parser/evaluate';
@@ -106,7 +104,7 @@ const filterInfoSchema = () =>
         operator: Joi.valid(...enumToArray(FOperator)).required(),
         fieldType: Joi.valid(...enumToArray(FieldType)).required(),
         value: Joi.any(),
-      }),
+      })
     ),
   });
 
@@ -123,9 +121,9 @@ const apiFilterInfoSchema = (isBackend: boolean) =>
         ...(isBackend
           ? {}
           : {
-            fieldType: Joi.valid(...enumToArray(APIMetaFieldType)).required(),
-          }),
-      }),
+              fieldType: Joi.valid(...enumToArray(APIMetaFieldType)).required(),
+            }),
+      })
     ),
   });
 
@@ -136,14 +134,17 @@ const sortInfoSchema = () =>
         Joi.object({
           fieldId: Joi.string().required(),
           desc: Joi.boolean().required(),
-        }),
+        })
       )
       .length(1)
       .required(),
   });
 
 export class LookUpField extends ArrayValueField {
-  constructor(public override field: ILookUpField, public override state: IReduxState) {
+  constructor(
+    public override field: ILookUpField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -412,8 +413,9 @@ export class LookUpField extends ArrayValueField {
   getLinkFields(): (ILinkField | IOneWayLinkField)[] {
     const snapshot = getSnapshot(this.state, this.field.property.datasheetId);
     const fieldMap = snapshot?.meta.fieldMap;
-    return fieldMap ? (Object.values(fieldMap).filter((field) =>
-      [FieldType.Link, FieldType.OneWayLink].includes(field.type)) as (ILinkField | IOneWayLinkField)[]) : [];
+    return fieldMap
+      ? (Object.values(fieldMap).filter((field) => [FieldType.Link, FieldType.OneWayLink].includes(field.type)) as (ILinkField | IOneWayLinkField)[])
+      : [];
   }
 
   getRelatedLinkField(): ILinkField | IOneWayLinkField | undefined {
@@ -432,7 +434,7 @@ export class LookUpField extends ArrayValueField {
   // Returns entity fields and the depth of the fields.
   getLookUpEntityFieldInfo(
     visitedFields?: Set<string>,
-    depth?: number,
+    depth?: number
   ):
     | {
         field: IField;
@@ -666,14 +668,14 @@ export class LookUpField extends ArrayValueField {
 
     return recordIds && recordIds.length
       ? recordIds.map((recordId: string) => {
-        const cellValue = _getLookUpTreeValue(this.state, foreignSnapshot, recordId, lookUpTargetFieldId, foreignDatasheetId);
-        return {
-          field: lookUpTargetField,
-          recordId,
-          cellValue,
-          datasheetId: foreignDatasheetId,
-        };
-      })
+          const cellValue = _getLookUpTreeValue(this.state, foreignSnapshot, recordId, lookUpTargetFieldId, foreignDatasheetId);
+          return {
+            field: lookUpTargetField,
+            recordId,
+            cellValue,
+            datasheetId: foreignDatasheetId,
+          };
+        })
       : [];
   }
 
@@ -886,26 +888,26 @@ export class LookUpField extends ArrayValueField {
     return cellValue == null
       ? null
       : (cellValue as ILookUpValue).reduce<any[]>((result, value) => {
-        // number|boolean|datetime type does not need any conversion
-        if (basicValueType === BasicValueType.Number || basicValueType === BasicValueType.Boolean || basicValueType === BasicValueType.DateTime) {
-          result.push(value);
-          return result;
-        }
+          // number|boolean|datetime type does not need any conversion
+          if (basicValueType === BasicValueType.Number || basicValueType === BasicValueType.Boolean || basicValueType === BasicValueType.DateTime) {
+            result.push(value);
+            return result;
+          }
 
-        if (isTextBaseType(entityField.type)) {
+          if (isTextBaseType(entityField.type)) {
+            result.push(Field.bindContext(entityField!, this.state).cellValueToString(value));
+            return result;
+          }
+          // BasicValueType.Array & value is of Array type and needs to be processed
+          if (Array.isArray(value) || (value != null && basicValueType === BasicValueType.Array)) {
+            [value].flat(Infinity).forEach((v) => {
+              result.push(Field.bindContext(entityField!, this.state).cellValueToString([v as any]));
+            });
+            return result;
+          }
           result.push(Field.bindContext(entityField!, this.state).cellValueToString(value));
           return result;
-        }
-        // BasicValueType.Array & value is of Array type and needs to be processed
-        if (Array.isArray(value) || (value != null && basicValueType === BasicValueType.Array)) {
-          [value].flat(Infinity).forEach((v) => {
-            result.push(Field.bindContext(entityField!, this.state).cellValueToString([v as any]));
-          });
-          return result;
-        }
-        result.push(Field.bindContext(entityField!, this.state).cellValueToString(value));
-        return result;
-      }, []);
+        }, []);
   }
 
   arrayValueToString(cellValue: any[] | null, options?: ICellToStringOption): string | null {
@@ -934,29 +936,29 @@ export class LookUpField extends ArrayValueField {
     return cellValue == null
       ? null
       : (cellValue as ILookUpValue)
-        .map<string | null>((value) => {
-          if (value == null) {
-            return null;
-          }
-          // Date type should use the format configured by the lookup field
-          if (basicValueType === BasicValueType.DateTime) {
-            const formatting = (this.field.property.formatting as IDateTimeFieldProperty) || entityField.property;
-            return dateTimeFormat(value, formatting, getUserTimeZone(this.state));
-          }
-
-          // The number|boolean type should use the format configured by the lookup field
-          if (basicValueType === BasicValueType.Number || basicValueType === BasicValueType.Boolean) {
-            if (!NOT_FORMAT_FUNC_SET.has(this.rollUpType)) {
-              const property = (this.field.property.formatting as INumberFormatFieldProperty) || entityField.property;
-              return numberFormat(value, property);
+          .map<string | null>((value) => {
+            if (value == null) {
+              return null;
+            }
+            // Date type should use the format configured by the lookup field
+            if (basicValueType === BasicValueType.DateTime) {
+              const formatting = (this.field.property.formatting as IDateTimeFieldProperty) || entityField.property;
+              return dateTimeFormat(value, formatting, getUserTimeZone(this.state));
             }
 
-            return Field.bindContext(entityField, this.state).cellValueToString(Number(value));
-          }
+            // The number|boolean type should use the format configured by the lookup field
+            if (basicValueType === BasicValueType.Number || basicValueType === BasicValueType.Boolean) {
+              if (!NOT_FORMAT_FUNC_SET.has(this.rollUpType)) {
+                const property = (this.field.property.formatting as INumberFormatFieldProperty) || entityField.property;
+                return numberFormat(value, property);
+              }
 
-          return String(value);
-        })
-        .filter((i) => i != null);
+              return Field.bindContext(entityField, this.state).cellValueToString(Number(value));
+            }
+
+            return String(value);
+          })
+          .filter((i) => i != null);
   }
 
   cellValueToStdValue(cellValue: ICellValue | null): IStandardValue {
@@ -1129,7 +1131,7 @@ export class LookUpField extends ArrayValueField {
       // In the robot scene, the values input by the UI are currently spliced into strings, so it doesn't matter much.
       const _cellValue = isDoubleArray ? [(cellValue as any[]).filter((cv) => cv != null)] : cellValue;
       const result: BasicOpenValueTypeBase[] = (_cellValue as ILookUpValue).map(
-        (item) => targetField.cellValueToOpenValue(item) as BasicOpenValueTypeBase,
+        (item) => targetField.cellValueToOpenValue(item) as BasicOpenValueTypeBase
       );
       if (result.length) {
         return result;

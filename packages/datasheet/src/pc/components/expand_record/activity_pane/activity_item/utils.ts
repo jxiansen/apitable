@@ -1,5 +1,3 @@
-
-
 import { find, get, has, values } from 'lodash';
 import { IField, IMemberField, IMultiSelectField, ISelectField } from '@apitable/core';
 

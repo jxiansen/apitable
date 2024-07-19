@@ -1,5 +1,3 @@
-
-
 import { OtErrorCode } from '@apitable/core';
 import { IBaseException } from './base.exception';
 
@@ -7,7 +5,6 @@ import { IBaseException } from './base.exception';
  * handle changeset exception
  */
 export class OtException implements IBaseException {
-
   private static AllValues: { [name: string]: OtException } = {};
 
   // Exception type -------------------------------
@@ -24,7 +21,10 @@ export class OtException implements IBaseException {
   static readonly DATA_FORMAT_ERROR = new OtException(OtErrorCode.DATA_FORMAT_ERROR, 'Data format error');
   // Exception type -------------------------------
 
-  constructor(public readonly code: number, public readonly message: string) {
+  constructor(
+    public readonly code: number,
+    public readonly message: string,
+  ) {
     OtException.AllValues[message] = this;
   }
 

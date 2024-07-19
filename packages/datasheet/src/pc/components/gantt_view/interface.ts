@@ -1,5 +1,3 @@
-
-
 import { Dayjs } from 'dayjs';
 import { DateUnitType, ILinearRow } from '@apitable/core';
 import { ICoordinate } from 'pc/components/konva_grid';

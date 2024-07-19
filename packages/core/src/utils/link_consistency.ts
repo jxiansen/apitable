@@ -120,7 +120,7 @@ export function checkLinkConsistency(state: IReduxState, _loadedForeignDstId: st
     const {
       snapshot: {
         recordMap: foreignRecordMap,
-        meta: { archivedRecordIds }
+        meta: { archivedRecordIds },
       },
     } = getDatasheet(state, foreignDatasheetId)!;
 
@@ -193,7 +193,7 @@ export function generateFixLinkConsistencyChangesets(error: ILinkConsistencyErro
       const oldRecordIds = (record.data[fieldId] as ILinkIds) ?? [];
       let newRecordIds = oldRecordIds;
       if (redundant) {
-        newRecordIds = newRecordIds.filter(newRecordIds => !redundant.has(newRecordIds));
+        newRecordIds = newRecordIds.filter((newRecordIds) => !redundant.has(newRecordIds));
       }
       if (missing) {
         newRecordIds = [...newRecordIds, ...missing];

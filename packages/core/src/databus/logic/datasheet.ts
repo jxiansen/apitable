@@ -1,5 +1,3 @@
-
-
 import {
   CollaCommandManager,
   ExecuteResult,
@@ -15,15 +13,12 @@ import {
   IDeleteFieldData,
   IModifyView,
   IMoveView,
-  ISetRecordOptions
+  ISetRecordOptions,
 } from 'commands';
 import { IRecordMap, IReduxState, IServerDatasheetPack, ISnapshot, IViewProperty } from 'exports/store/interfaces';
-import {
-  getSnapshot,
-  getDatasheet,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getSnapshot, getDatasheet } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getResourceRevision } from 'modules/database/store/selectors/resource';
-import { getStringifyCellValue,getViewById } from 'modules/database/store/selectors/resource/datasheet';
+import { getStringifyCellValue, getViewById } from 'modules/database/store/selectors/resource/datasheet';
 
 import { Store } from 'redux';
 import { IField, ResourceType } from 'types';
@@ -51,7 +46,10 @@ export class Datasheet implements IResource {
    *
    * @deprecated This constructor is not intended for public use.
    */
-  public constructor(public readonly id: string, options: IDatasheetCtorOptions) {
+  public constructor(
+    public readonly id: string,
+    options: IDatasheetCtorOptions
+  ) {
     const { store, saver, commandManager } = options;
     this.store = store;
     this.saver = saver;
@@ -148,7 +146,7 @@ export class Datasheet implements IResource {
         ignoreFieldPermission: recordOptions.ignoreFieldPermission,
         datasheetId: this.id,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -177,7 +175,7 @@ export class Datasheet implements IResource {
         datasheetId: this.id,
         data: recordOptions,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -189,7 +187,7 @@ export class Datasheet implements IResource {
         data: recordMap,
         store: this.store,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -205,7 +203,7 @@ export class Datasheet implements IResource {
         cmd: CollaCommandName.DeleteRecords,
         data: recordIds,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -224,7 +222,7 @@ export class Datasheet implements IResource {
         data: fieldOptions,
         datasheetId: this.id,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -241,7 +239,7 @@ export class Datasheet implements IResource {
         data: fields,
         datasheetId: this.id,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -259,7 +257,7 @@ export class Datasheet implements IResource {
         data: field,
         datasheetId: this.id,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -275,7 +273,7 @@ export class Datasheet implements IResource {
         cmd: CollaCommandName.AddViews,
         data: views,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -288,9 +286,9 @@ export class Datasheet implements IResource {
     return this.doCommand<void>(
       {
         cmd: CollaCommandName.DeleteViews,
-        data: viewIds.map(viewId => ({ viewId })),
+        data: viewIds.map((viewId) => ({ viewId })),
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -306,7 +304,7 @@ export class Datasheet implements IResource {
         cmd: CollaCommandName.ModifyViews,
         data: views,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -322,7 +320,7 @@ export class Datasheet implements IResource {
         cmd: CollaCommandName.MoveViews,
         data: views,
       },
-      saveOptions,
+      saveOptions
     );
   }
 

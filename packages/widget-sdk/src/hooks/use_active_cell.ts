@@ -1,5 +1,3 @@
-
-
 import { useSelector } from 'react-redux';
 import { useMeta } from './use_meta';
 import { ICell, IWidgetState } from 'interface';
@@ -15,13 +13,13 @@ const getActiveCell = (state: IWidgetState, currentDatasheetId?: string) => {
 
 /**
  * Get the coordinates of cell where the cursor is currently active, return a {@link ICell}.
- * Rerendering is triggered, When the cursor is moved or the view is switched. 
+ * Rerendering is triggered, When the cursor is moved or the view is switched.
  *
  * If you need to information not only about the activated cell, but also the selection,
  * please use {@link useSelection}.
- * 
- * @param 
- * 
+ *
+ * @param
+ *
  * @returns
  *
  * ### Example
@@ -41,7 +39,7 @@ const getActiveCell = (state: IWidgetState, currentDatasheetId?: string) => {
  */
 export function useActiveCell(): ICell | undefined {
   const { datasheetId } = useMeta();
-  return useSelector(state => {
+  return useSelector((state) => {
     return getActiveCell(state, datasheetId);
   });
 }

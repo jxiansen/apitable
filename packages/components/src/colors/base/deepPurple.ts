@@ -1,4 +1,3 @@
-
 export const deepPurple = {
   50: '#EDEAFF',
   100: '#DCD6FF',
@@ -12,4 +11,3 @@ export const deepPurple = {
   900: '#312479',
   1000: '#160F3F',
 };
-

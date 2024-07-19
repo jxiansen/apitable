@@ -1,5 +1,3 @@
-
-
 import { ExceptionFilter, Catch, ArgumentsHost, HttpException } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
 

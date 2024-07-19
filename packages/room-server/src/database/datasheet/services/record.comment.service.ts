@@ -1,5 +1,3 @@
-
-
 import { ICommentContent, ICommentMsg, IListInsertAction } from '@apitable/core';
 import { Span } from '@metinseylan/nestjs-opentelemetry';
 import { Injectable } from '@nestjs/common';
@@ -29,24 +27,19 @@ export class RecordCommentService {
 
   async recoverComments(comments: RecordCommentEntity[]) {
     if (comments) {
-      comments.forEach(comment => {
+      comments.forEach((comment) => {
         comment.id = IdWorker.nextId() + '';
         comment.revision = 0;
-      }
-      );
-      await this.repo
-        .createQueryBuilder()
-        .insert()
-        .values(comments)
-        .execute();
+      });
+      await this.repo.createQueryBuilder().insert().values(comments).execute();
     }
   }
 
   async getAllCommentsByDstId(dstId: string) {
     return await this.repo.find({
       where: {
-        dstId: dstId
-      }
+        dstId: dstId,
+      },
     });
   }
 
@@ -123,7 +116,7 @@ export class RecordCommentService {
   async getRecordCommentRevisions(dstId: string, recordId: string, excludeDeleted = true): Promise<string[]> {
     const result = await this.repo.selectRevisionsByDstIdAndRecordId(dstId, recordId, excludeDeleted);
     if (result) {
-      return result.map(entity => entity.revision);
+      return result.map((entity) => entity.revision);
     }
     return [];
   }
@@ -197,15 +190,18 @@ export class RecordCommentService {
   async getEmojisByRevisions(dstId: string, recordId: string, revisions: number[]) {
     const rows = await this.repo.selectEmojisByRevisions(dstId, recordId, revisions);
     if (rows) {
-      return rows.reduce((pre, cur) => {
-        if (cur?.emojis) {
-          const pickEmojis: any = pickBy(cur.emojis, v => !isEmpty(v));
-          if (!isEmpty(pickEmojis)) {
-            pre[cur.commentId] = pickEmojis;
+      return rows.reduce(
+        (pre, cur) => {
+          if (cur?.emojis) {
+            const pickEmojis: any = pickBy(cur.emojis, (v) => !isEmpty(v));
+            if (!isEmpty(pickEmojis)) {
+              pre[cur.commentId] = pickEmojis;
+            }
           }
-        }
-        return pre;
-      }, {} as { [commentId: string]: true });
+          return pre;
+        },
+        {} as { [commentId: string]: true },
+      );
     }
     return {};
   }
@@ -252,5 +248,4 @@ export class RecordCommentService {
     }
     return acc;
   }
-
 }

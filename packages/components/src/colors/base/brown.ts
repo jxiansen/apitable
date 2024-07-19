@@ -1,4 +1,3 @@
-
 export const brown = {
   50: '#E8DFDD',
   100: '#D1BFBC',
@@ -12,4 +11,3 @@ export const brown = {
   900: '#371C16',
   1000: '#2C1612',
 };
-

@@ -1,5 +1,3 @@
-
-
 import { FieldTemplateProps } from '@rjsf/core';
 import React from 'react';
 import { FormItemTitle } from '../common/form_item_title';
@@ -30,11 +28,14 @@ export const FieldTemplate = (props: FieldTemplateProps) => {
 
   return (
     <div className={classNames} style={{ width: '100%', paddingTop }}>
-      {
-        showTitle() && <FormItemTitle>
-          <label htmlFor={id}>{label}{required ? '*' : null}</label>
+      {showTitle() && (
+        <FormItemTitle>
+          <label htmlFor={id}>
+            {label}
+            {required ? '*' : null}
+          </label>
         </FormItemTitle>
-      }
+      )}
       {/* {description} */}
       {children}
       {/* {errors} */}

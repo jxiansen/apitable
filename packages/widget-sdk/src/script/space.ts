@@ -39,7 +39,7 @@ export class Space {
 
   /**
    * Get the active datasheet for the space.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -60,7 +60,7 @@ export class Space {
 
   /**
    * Get the specified datasheet in the space.
-   * 
+   *
    * @param datasheetId The ID of the datasheet.
    * @returns
    *

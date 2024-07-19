@@ -1,5 +1,3 @@
-
-
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { CollaCommandName } from 'commands/enum';
 import { IJOTAction, jot } from 'engine/ot';
@@ -21,7 +19,6 @@ export interface IAddViewsOptions {
 }
 
 export const addViews: ICollaCommandDef<IAddViewsOptions> = {
-
   undoable: true,
 
   execute: (context, options) => {
@@ -70,7 +67,7 @@ export const addViews: ICollaCommandDef<IAddViewsOptions> = {
 
       // Check if viewId exists,
       // The newly added viewid should not conflict with the current and future ids
-      if (views.findIndex(item => item.id === view.id) !== -1) {
+      if (views.findIndex((item) => item.id === view.id) !== -1) {
         throw new Error(t(Strings.error_create_view_failed_duplicate_view_id));
       }
       // checkViewCount(view.type);

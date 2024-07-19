@@ -1,4 +1,3 @@
-
 export const purple = {
   50: '#F4E9FE',
   100: '#E4C5FB',
@@ -12,4 +11,3 @@ export const purple = {
   900: '#7531AC',
   1000: '#482662',
 };
-

@@ -1,5 +1,3 @@
-
-
 import { getLanguage } from './language';
 
 export interface IString {

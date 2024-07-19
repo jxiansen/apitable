@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { useState } from 'react';
 import * as React from 'react';
@@ -27,21 +25,9 @@ export const CellRating: React.FC<React.PropsWithChildren<ICellRating>> = (props
   return (
     <div onClickCapture={() => setLock(false)} className={classNames(className, styles.ratingCell, 'ratingCell', { [styles.activeCell]: isActive })}>
       {isActive && !readonly ? (
-        <Rate
-          value={cellValue as number}
-          character={emoji}
-          max={field.property.max}
-          onChange={handleChange}
-        />
+        <Rate value={cellValue as number} character={emoji} max={field.property.max} onChange={handleChange} />
       ) : (
-        Boolean(cellValue) && (
-          <Rate
-            value={cellValue as number}
-            character={emoji}
-            max={field.property.max}
-            disabled
-          />
-        )
+        Boolean(cellValue) && <Rate value={cellValue as number} character={emoji} max={field.property.max} disabled />
       )}
     </div>
   );

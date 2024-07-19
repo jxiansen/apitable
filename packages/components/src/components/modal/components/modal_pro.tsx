@@ -1,5 +1,3 @@
-
-
 import React, { FC } from 'react';
 import { IModalProps } from '../interface';
 import { Modal } from '../modal';
@@ -13,35 +11,26 @@ interface IModalProProps extends IModalProps {
   optArea?: React.ReactElement;
 }
 
-export const ModalPro: FC<React.PropsWithChildren<IModalProProps>> = props => {
-
-  const {
-    direction = 'row-reverse',
-    optArea,
-  } = props;
+export const ModalPro: FC<React.PropsWithChildren<IModalProProps>> = (props) => {
+  const { direction = 'row-reverse', optArea } = props;
 
   return (
     <Modal
       {...props}
       footer={null}
       closeIcon={null}
-      modalRender={modal => (
+      modalRender={(modal) => (
         <Box>
-          {optArea &&
-            <Box
-              display="flex"
-              flexDirection={direction}
-              onClick={stopPropagation}
-            >
+          {optArea && (
+            <Box display="flex" flexDirection={direction} onClick={stopPropagation}>
               <p>this is a paragraph</p>
             </Box>
-          }
+          )}
           {modal}
         </Box>
       )}
     >
       {props.children}
     </Modal>
-
   );
 };

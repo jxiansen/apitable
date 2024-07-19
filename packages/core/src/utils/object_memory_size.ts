@@ -1,5 +1,3 @@
-
-
 export function memorySizeOf(obj: any) {
   let bytes = 0;
 

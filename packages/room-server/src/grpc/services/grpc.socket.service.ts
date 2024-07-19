@@ -1,5 +1,3 @@
-
-
 import { ICollaborator, OtErrorCode } from '@apitable/core';
 import { RedisService } from '@apitable/nestjs-redis';
 import { Span } from '@metinseylan/nestjs-opentelemetry';
@@ -45,8 +43,7 @@ export class GrpcSocketService implements OnApplicationBootstrap, OnApplicationS
     private readonly clientStorage: ClientStorage,
     @InjectLogger() private readonly logger: Logger,
     private readonly redisService: RedisService,
-  ) {
-  }
+  ) {}
 
   /**
    * Applies pub/sub mechanism here to ensure the IP registry is real-time.
@@ -105,7 +102,7 @@ export class GrpcSocketService implements OnApplicationBootstrap, OnApplicationS
       // Filter exception that isn't necessary to be reported.
       message.cookie = undefined;
       message.token = undefined;
-      Sentry.captureException(e, { extra: { message }});
+      Sentry.captureException(e, { extra: { message } });
     }
     return ApiResponse.error(errMsg, statusCode);
   }
@@ -170,15 +167,15 @@ export class GrpcSocketService implements OnApplicationBootstrap, OnApplicationS
     // Obtain collaborator list of the room, ordered by join-time.
     let collaborators = (await this.watchRoomLogger('mget', this.clientStorage.mget<ICollaborator>(socketIds))).filter(Boolean).sort();
     // Filter users who are not logged in
-    const roomUserIds = collaborators.map(collaborator => collaborator.userId).filter(Boolean);
+    const roomUserIds = collaborators.map((collaborator) => collaborator.userId).filter(Boolean);
     if (roomUserIds.length) {
       spaceId = await this.watchRoomLogger('getSpaceIdByNodeId', this.nodeService.getSpaceIdByNodeId(nodeId));
       const userInfos = await this.watchRoomLogger('getUserInfo', this.userService.getUserInfo(spaceId, roomUserIds as string[]));
       // Fill in info for logged-in users.
       collaborators
-        .filter(collaborator => collaborator.userId)
-        .forEach(collaborator => {
-          const user = userInfos.find(user => collaborator.userId === user.userId);
+        .filter((collaborator) => collaborator.userId)
+        .forEach((collaborator) => {
+          const user = userInfos.find((user) => collaborator.userId === user.userId);
           if (!user) {
             return;
           }
@@ -191,12 +188,12 @@ export class GrpcSocketService implements OnApplicationBootstrap, OnApplicationS
         });
       // Current user info
       if (userId) {
-        collaborator = collaborators.find(collaborator => collaborator.userId === userId);
+        collaborator = collaborators.find((collaborator) => collaborator.userId === userId);
       }
     }
     // filter anonymous person in embed
     if (!showAnonymous) {
-      collaborators = collaborators.filter(i => i.userId);
+      collaborators = collaborators.filter((i) => i.userId);
     }
     // Obtain latest revision numbers of resources in the room
     const resourceRevisions = await this.watchRoomLogger('getResourceRevisions', this.relService.getResourceRevisions(message.roomId));
@@ -221,14 +218,14 @@ export class GrpcSocketService implements OnApplicationBootstrap, OnApplicationS
     // Obtain collaborator list of the room, ordered by join-time.
     let collaborators = (await this.clientStorage.mget<ICollaborator>(socketIds)).filter(Boolean).sort();
     // Filter users who are not logged in
-    const roomUserIds = collaborators.map(collaborator => collaborator.userId).filter(Boolean);
+    const roomUserIds = collaborators.map((collaborator) => collaborator.userId).filter(Boolean);
     if (roomUserIds.length) {
       const userInfos = await this.userService.getUserInfo(spaceId, roomUserIds as string[]);
       // Fill in info for logged-in users.
       collaborators
-        .filter(collaborator => collaborator.userId)
-        .forEach(collaborator => {
-          const user = userInfos.find(user => collaborator.userId === user.userId);
+        .filter((collaborator) => collaborator.userId)
+        .forEach((collaborator) => {
+          const user = userInfos.find((user) => collaborator.userId === user.userId);
           if (!user) {
             return;
           }
@@ -241,7 +238,7 @@ export class GrpcSocketService implements OnApplicationBootstrap, OnApplicationS
         });
     }
     if (!showAnonymous) {
-      collaborators = collaborators.filter(i => i.userId);
+      collaborators = collaborators.filter((i) => i.userId);
     }
     return { collaborators };
   }
@@ -277,7 +274,7 @@ export class GrpcSocketService implements OnApplicationBootstrap, OnApplicationS
     const ipAddress = getIPAddress();
     const data: IPublishRoomAddressMessage = {
       address: `${ipAddress}:${BootstrapConstants.ROOM_GRPC_PORT}:${BootstrapConstants.SERVER_PORT}`,
-      action
+      action,
     };
     const message = JSON.stringify(data);
     try {
@@ -286,22 +283,25 @@ export class GrpcSocketService implements OnApplicationBootstrap, OnApplicationS
       const number = await redis.publish(RedisConstants.ROOM_POOL_CHANNEL, message);
       if (!number) {
         this.logger.warn({
-          message: 'socket service isn\'t started',
+          message: "socket service isn't started",
           channel: RedisConstants.ROOM_POOL_CHANNEL,
-          number
+          number,
         });
       } else {
-        this.logger.info(`Room Client(grpc) [${ipAddress}:${BootstrapConstants.ROOM_GRPC_PORT}] publish succeeded`,
-          { action: data.action, channel: RedisConstants.ROOM_POOL_CHANNEL }
-        );
+        this.logger.info(`Room Client(grpc) [${ipAddress}:${BootstrapConstants.ROOM_GRPC_PORT}] publish succeeded`, {
+          action: data.action,
+          channel: RedisConstants.ROOM_POOL_CHANNEL,
+        });
       }
       // Disconnect manually
       redis.disconnect();
       return number;
     } catch (e) {
-      this.logger.info(`Room Client(grpc) [${ipAddress}:${BootstrapConstants.ROOM_GRPC_PORT}] publish failed`,
-        { e: (e as Error).message, stack: (e as Error)?.stack, message }
-      );
+      this.logger.info(`Room Client(grpc) [${ipAddress}:${BootstrapConstants.ROOM_GRPC_PORT}] publish failed`, {
+        e: (e as Error).message,
+        stack: (e as Error)?.stack,
+        message,
+      });
       throw e;
     }
   }

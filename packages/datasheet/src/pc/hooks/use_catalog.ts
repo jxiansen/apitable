@@ -1,5 +1,3 @@
-
-
 import { useDispatch } from 'react-redux';
 import { IReduxState, StoreActions, Selectors, ConfigConstant, t, Strings, ResourceIdPrefix } from '@apitable/core';
 import { useRequest } from 'pc/hooks';
@@ -18,10 +16,9 @@ export enum NodeChangeInfoType {
 }
 
 export const useCatalog = () => {
-  const {
-    treeNodesMap, rootId, expandedKeys, editNodeId,
-    privateTreeNodesMap, privateEditNodeId
-  } = useAppSelector((state: IReduxState) => state.catalogTree);
+  const { treeNodesMap, rootId, expandedKeys, editNodeId, privateTreeNodesMap, privateEditNodeId } = useAppSelector(
+    (state: IReduxState) => state.catalogTree,
+  );
   const activeNodeId = useAppSelector((state) => Selectors.getNodeId(state));
   const catalogTreeActiveType = useAppSelector((state) => state.catalogTree.activeType);
   const isPrivate = catalogTreeActiveType === ConfigConstant.Modules.PRIVATE;

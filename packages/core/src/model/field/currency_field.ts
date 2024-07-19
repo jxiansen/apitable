@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { IReduxState } from '../../exports/store/interfaces';
 import { DatasheetActions } from '../../commands_actions/datasheet';
@@ -26,7 +24,10 @@ export const getSymbolAlignStr = (symbolAlign?: SymbolAlign.default | SymbolAlig
 };
 
 export class CurrencyField extends NumberBaseField {
-  constructor(public override field: ICurrencyField, public override state: IReduxState) {
+  constructor(
+    public override field: ICurrencyField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -49,7 +50,6 @@ export class CurrencyField extends NumberBaseField {
 
   // the data of preview, includes (positive or negative sign) + currency symbol + scientific notation number or normal number + thousand separator
   override cellValueToString(cellValue: ICellValue, cellToStringOption?: ICellToStringOption): string | null {
-
     if (this.validate(cellValue)) {
       const { symbol, precision, symbolAlign } = this.field.property;
       let cellString: string | null;
@@ -76,10 +76,7 @@ export class CurrencyField extends NumberBaseField {
   }
 
   override compare(cellValue1: number, cellValue2: number): number {
-    return NumberBaseField._compare(
-      this.compareCellValue(cellValue1),
-      this.compareCellValue(cellValue2),
-    );
+    return NumberBaseField._compare(this.compareCellValue(cellValue1), this.compareCellValue(cellValue2));
   }
 
   validateProperty() {
@@ -112,7 +109,7 @@ export class CurrencyField extends NumberBaseField {
       defaultValue,
       symbol,
       precision,
-      symbolAlign: getSymbolAlignStr(symbolAlign)
+      symbolAlign: getSymbolAlignStr(symbolAlign),
     };
   }
 
@@ -128,7 +125,7 @@ export class CurrencyField extends NumberBaseField {
       defaultValue,
       symbol: symbol || defaultProperty.symbol,
       precision: precision || defaultProperty.precision,
-      symbolAlign: symbolAlign
+      symbolAlign: symbolAlign,
     };
   }
 }

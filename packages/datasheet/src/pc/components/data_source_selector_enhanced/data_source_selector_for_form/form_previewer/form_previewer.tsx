@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import classnames from 'classnames';
 import Image from 'next/image';

@@ -1,5 +1,3 @@
-
-
 import { Strings, t } from '../../../exports/i18n';
 import Joi from 'joi';
 import { find, isArray, isString, uniq, uniqBy } from 'lodash';
@@ -17,7 +15,10 @@ import { isOptionId, SelectField } from './common_select_field';
 import { IOpenFilterValueMultiSelect } from 'types/open/open_filter_types';
 
 export class MultiSelectField extends SelectField {
-  constructor(public override field: IMultiSelectField, public override state: IReduxState) {
+  constructor(
+    public override field: IMultiSelectField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -35,23 +36,28 @@ export class MultiSelectField extends SelectField {
     if (!isArray(optionIds)) {
       return helpers.message({ en: 'cellValue is not array' });
     }
-    if (!optionIds.every(id => (field.property as ISelectFieldProperty).options.some(option => option.id === id))) {
+    if (!optionIds.every((id) => (field.property as ISelectFieldProperty).options.some((option) => option.id === id))) {
       return helpers.message({ en: 'option not exist field property' });
     }
     return optionIds;
-  }).allow(null).required();
+  })
+    .allow(null)
+    .required();
 
-  static openWriteValueSchema = Joi.array().custom((owv: string[] | ISelectFieldBaseOpenValue[], helpers) => {
-    const field = helpers.prefs['context']?.['field'];
-    const optionIdsOrNames = (owv as any).map((v: string | ISelectFieldBaseOpenValue) => isString(v) ? v : (v.id || v.name));
-    if (!optionIdsOrNames) {
-      return helpers.error('value format error');
-    }
-    if ((field.property as ISelectFieldProperty).options.every(option => option.id === optionIdsOrNames || option.name === optionIdsOrNames)) {
-      return helpers.error('option not exist field property');
-    }
-    return optionIdsOrNames;
-  }).allow(null).required();
+  static openWriteValueSchema = Joi.array()
+    .custom((owv: string[] | ISelectFieldBaseOpenValue[], helpers) => {
+      const field = helpers.prefs['context']?.['field'];
+      const optionIdsOrNames = (owv as any).map((v: string | ISelectFieldBaseOpenValue) => (isString(v) ? v : v.id || v.name));
+      if (!optionIdsOrNames) {
+        return helpers.error('value format error');
+      }
+      if ((field.property as ISelectFieldProperty).options.every((option) => option.id === optionIdsOrNames || option.name === optionIdsOrNames)) {
+        return helpers.error('option not exist field property');
+      }
+      return optionIdsOrNames;
+    })
+    .allow(null)
+    .required();
 
   validateCellValue(cv: ICellValue): Joi.ValidationResult {
     return MultiSelectField.cellValueSchema.validate(cv, { context: { field: this.field } });
@@ -78,15 +84,7 @@ export class MultiSelectField extends SelectField {
   }
 
   get acceptFilterOperators(): FOperator[] {
-    return [
-      FOperator.Is,
-      FOperator.IsNot,
-      FOperator.Contains,
-      FOperator.DoesNotContain,
-      FOperator.IsEmpty,
-      FOperator.IsNotEmpty,
-      FOperator.IsRepeat,
-    ];
+    return [FOperator.Is, FOperator.IsNot, FOperator.Contains, FOperator.DoesNotContain, FOperator.IsEmpty, FOperator.IsNotEmpty, FOperator.IsRepeat];
   }
 
   get openValueJsonSchema() {
@@ -97,7 +95,7 @@ export class MultiSelectField extends SelectField {
         properties: {
           id: {
             type: 'string',
-            title: t(Strings.robot_variables_join_option_IDs)
+            title: t(Strings.robot_variables_join_option_IDs),
           },
           name: {
             type: 'string',
@@ -114,11 +112,11 @@ export class MultiSelectField extends SelectField {
               value: {
                 type: 'string',
                 title: t(Strings.robot_variables_join_color_values),
-              }
-            }
+              },
+            },
           },
         },
-      }
+      },
     };
   }
 
@@ -126,9 +124,7 @@ export class MultiSelectField extends SelectField {
     return true;
   }
 
-  defaultValueForCondition(
-    condition: IFilterCondition<FieldType.MultiSelect>,
-  ): string[] | null {
+  defaultValueForCondition(condition: IFilterCondition<FieldType.MultiSelect>): string[] | null {
     const { value } = condition;
     if (condition.operator === FOperator.Is) {
       if (!value || value.length === 0) {
@@ -164,11 +160,7 @@ export class MultiSelectField extends SelectField {
     return super.compare(cellValue1, cellValue2);
   }
 
-  override isMeetFilter(
-    operator: FOperator,
-    cellValue: string[] | null,
-    conditionValue: Exclude<IFilterMultiSelect, null>,
-  ) {
+  override isMeetFilter(operator: FOperator, cellValue: string[] | null, conditionValue: Exclude<IFilterMultiSelect, null>) {
     switch (operator) {
       case FOperator.Is: {
         return cellValue != null && isSameSet(cellValue, conditionValue);
@@ -199,8 +191,8 @@ export class MultiSelectField extends SelectField {
     };
 
     if (Array.isArray(val)) {
-      stdVal.data = val.map(currOptId => {
-        const option = find(this.field.property.options, opt => {
+      stdVal.data = val.map((currOptId) => {
+        const option = find(this.field.property.options, (opt) => {
           return opt.id === currOptId;
         }) as any;
         return {
@@ -215,13 +207,13 @@ export class MultiSelectField extends SelectField {
 
   stdValueToCellValue(stdValue: IStandardValue): string[] | null {
     // filter the empty text
-    let data = stdValue.data.filter(d => d.text);
+    let data = stdValue.data.filter((d) => d.text);
     data = uniqBy(data, 'text');
     const isSelect2multi = isSelectType(stdValue.sourceType);
     const ids = data.reduce((ids, { text }) => {
       const textTmp = isSelect2multi ? [text] : uniq(text.split(/, ?/));
-      textTmp.forEach(text => {
-        const option = this.field.property.options.find(option => option.name === text);
+      textTmp.forEach((text) => {
+        const option = this.field.property.options.find((option) => option.name === text);
         if (option) {
           ids.push(option.id);
         }
@@ -269,7 +261,7 @@ export class MultiSelectField extends SelectField {
   }
 
   validate(value: any): value is string[] {
-    return isArray(value) && value.every(id => this.field.property.options.some(option => option.id === id));
+    return isArray(value) && value.every((id) => this.field.property.options.some((option) => option.id === id));
   }
 
   cellValueToApiStandardValue(cellValue: string[]): string[] | null {
@@ -292,7 +284,7 @@ export class MultiSelectField extends SelectField {
         prev.push({
           id: option.id,
           name: option.name,
-          color: getFieldOptionColor(option.color)
+          color: getFieldOptionColor(option.color),
         });
       }
       return prev;
@@ -304,10 +296,10 @@ export class MultiSelectField extends SelectField {
       return null;
     }
     const isSimple = openWriteValue.length && typeof openWriteValue[0] === 'string';
-    const writeValue = isSimple ? openWriteValue as string[] : (openWriteValue as ISelectFieldBaseOpenValue[]).map(v => v.id || v.name);
+    const writeValue = isSimple ? (openWriteValue as string[]) : (openWriteValue as ISelectFieldBaseOpenValue[]).map((v) => v.id || v.name);
     const optionIds: string[] = [];
-    writeValue.forEach(value => {
-      this.field.property.options.forEach(option => {
+    writeValue.forEach((value) => {
+      this.field.property.options.forEach((option) => {
         if (isOptionId(value) && value === option.id) {
           optionIds.push(option.id);
         } else if (value === option.name) {
@@ -319,12 +311,16 @@ export class MultiSelectField extends SelectField {
   }
 
   static override openUpdatePropertySchema = Joi.object({
-    options: Joi.array().items(Joi.object({
-      id: Joi.string(),
-      name: Joi.string().required(),
-      color: Joi.alternatives(Joi.number(), Joi.string())
-    })).required(),
-    defaultValue: Joi.array().items(Joi.string())
+    options: Joi.array()
+      .items(
+        Joi.object({
+          id: Joi.string(),
+          name: Joi.string().required(),
+          color: Joi.alternatives(Joi.number(), Joi.string()),
+        })
+      )
+      .required(),
+    defaultValue: Joi.array().items(Joi.string()),
   }).required();
 
   override validateUpdateOpenProperty(updateProperty: IWriteOpenSelectBaseFieldProperty, effectOption?: IEffectOption): Joi.ValidationResult {
@@ -337,7 +333,7 @@ export class MultiSelectField extends SelectField {
 
   override filterValueToOpenFilterValue(value: IFilterMultiSelect): IOpenFilterValueMultiSelect {
     if (Array.isArray(value)) {
-      const _value = value.filter(v => this.findOptionById(v));
+      const _value = value.filter((v) => this.findOptionById(v));
       return _value.length ? _value : null;
     }
     return value;
@@ -345,7 +341,7 @@ export class MultiSelectField extends SelectField {
 
   override openFilterValueToFilterValue(value: IOpenFilterValueMultiSelect): IFilterMultiSelect {
     if (Array.isArray(value)) {
-      const _value = value.filter(v => this.findOptionById(v));
+      const _value = value.filter((v) => this.findOptionById(v));
       return _value.length ? _value : null;
     }
     return value;

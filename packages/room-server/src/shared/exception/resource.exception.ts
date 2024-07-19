@@ -1,5 +1,3 @@
-
-
 import { IBaseException } from './base.exception';
 
 /**
@@ -19,7 +17,10 @@ export class ResourceException implements IBaseException {
 
   // Exception Type ------------------------------
 
-  private constructor(public readonly code: number, public readonly message: string) {
+  private constructor(
+    public readonly code: number,
+    public readonly message: string,
+  ) {
     ResourceException.AllValues[message] = this;
   }
 

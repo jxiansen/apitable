@@ -1,5 +1,3 @@
-
-
 import { useContext } from 'react';
 import { EditorContext } from '../../context';
 import { hotkeyMap } from '../../hotkeys/map';

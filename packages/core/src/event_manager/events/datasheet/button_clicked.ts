@@ -1,5 +1,3 @@
-
-
 import { EventRealTypeEnums, IAtomEventType, OPEventNameEnums } from 'event_manager';
 import { AnyObject, IOPBaseContext } from 'event_manager/interface';
 import { ResourceType } from 'types';
@@ -25,7 +23,7 @@ export class OPEventButtonClicked extends IAtomEventType<IButtonClicked> {
   test(_opContext: IOPBaseContext) {
     return {
       pass: false,
-      context: null
+      context: null,
     };
   }
 }

@@ -1,5 +1,3 @@
-
-
 import { Settings } from 'config';
 import { Strings, t } from '../../exports/i18n';
 import { DatasheetActions } from 'commands_actions/datasheet';
@@ -11,12 +9,10 @@ import { CardView } from './card_view';
 import { integrateCdnHost } from 'utils';
 
 export class KanbanView extends CardView {
-
   static findGroupFieldId(srcView: IViewProperty, fieldMap: IFieldMap) {
-    const column = srcView.columns.find(item => {
+    const column = srcView.columns.find((item) => {
       const field = fieldMap[item.fieldId]!;
-      return field.type === FieldType.SingleSelect ||
-        (field.type === FieldType.Member && !field.property.isMulti);
+      return field.type === FieldType.SingleSelect || (field.type === FieldType.Member && !field.property.isMulti);
     });
     return column?.fieldId;
   }
@@ -30,10 +26,9 @@ export class KanbanView extends CardView {
       return field.property.unitIds;
     }
     if (field.type === FieldType.SingleSelect) {
-      return field.property.options.map(item => item.id);
+      return field.property.options.map((item) => item.id);
     }
     return [];
-
   }
 
   static getHiddenGroupMap(field: IField | undefined) {
@@ -44,11 +39,11 @@ export class KanbanView extends CardView {
     const hiddenGroupMap = {};
 
     if (field.type === FieldType.SingleSelect) {
-      field.property.options.forEach(item => {
+      field.property.options.forEach((item) => {
         hiddenGroupMap[item.id] = false;
       });
     } else {
-      (field.property as IMemberProperty).unitIds.forEach(id => {
+      (field.property as IMemberProperty).unitIds.forEach((id) => {
         hiddenGroupMap[id] = false;
       });
     }
@@ -84,7 +79,7 @@ export class KanbanView extends CardView {
       rows: this.defaultRows(srcView),
       style: this.defaultStyle(snapshot, activeViewId!),
       groupInfo: [{ fieldId: this.findGroupFieldId(srcView, snapshot.meta.fieldMap)!, desc: false }],
-      displayHiddenColumnWithinMirror: true
+      displayHiddenColumnWithinMirror: true,
     };
   }
 

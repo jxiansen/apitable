@@ -1,5 +1,3 @@
-
-
 import { IEventInstance, IOPEvent } from '@apitable/core';
 import { IOtEventContext } from 'database/ot/interfaces/ot.interface';
 

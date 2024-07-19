@@ -1,5 +1,3 @@
-
-
 import { SystemConfig, FieldType } from '@apitable/core';
 
 export const getFieldDocs = (

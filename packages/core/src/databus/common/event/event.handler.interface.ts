@@ -1,5 +1,3 @@
-
-
 import { IResourceCommandExecutedEvent, IResourceDataChangeEvent } from './event.interface';
 import { ResourceEventType } from './event.type.enum';
 

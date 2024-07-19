@@ -1,11 +1,9 @@
-
-
 import * as React from 'react';
 import { IconButtonStyle } from './styled';
 import { IIconButtonProps } from './interface';
 
 export const IconButton: React.FC<React.PropsWithChildren<IIconButtonProps>> = ({
-  icon: IconComponent, 
+  icon: IconComponent,
   size = 'small',
   variant = 'default',
   disabled = false,
@@ -16,12 +14,12 @@ export const IconButton: React.FC<React.PropsWithChildren<IIconButtonProps>> = (
   if (!IconComponent) return null;
   const sizeMap = {
     small: 16,
-    large: 24
+    large: 24,
   };
   const extraProps = component === 'button' ? { type: 'button' } : {};
   return (
     <IconButtonStyle as={component as any} size={size} variant={variant} disabled={disabled} active={active} {...restProps} {...extraProps}>
       <IconComponent size={sizeMap[size]} currentColor />
-    </IconButtonStyle >
+    </IconButtonStyle>
   );
 };

@@ -1,6 +1,4 @@
-
-
-import { OPEventNameEnums, EventRealTypeEnums, EventAtomTypeEnums,EventSourceTypeEnums } from 'event_manager/enum';
+import { OPEventNameEnums, EventRealTypeEnums, EventAtomTypeEnums, EventSourceTypeEnums } from 'event_manager/enum';
 import { IOPBaseContext, IEventTestResult, IEventInstance, IAtomEvent, IOPEvent } from 'event_manager/interface/event.interface';
 import { ResourceType } from 'types';
 
@@ -33,6 +31,6 @@ export interface ICellUpdatedContext {
   change: {
     from: any;
     to: any;
-  }
+  };
   linkDatasheetId?: string;
 }

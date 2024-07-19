@@ -1,5 +1,3 @@
-
-
 import * as actions from 'modules/shared/store/action_constants';
 import { ToolBarMenuCardOpenState } from 'modules/shared/store/constants';
 

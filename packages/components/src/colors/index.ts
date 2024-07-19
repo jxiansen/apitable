@@ -1,5 +1,3 @@
-
-
 import * as _lightColors from './light';
 import * as _darkColors from './dark';
 export * from './base';
@@ -11,7 +9,7 @@ export interface IColor {
 
 // FIXME:THEME
 const lightMaskColor = {
-  lightMaskColor: 'rgba(38,38,38,0.1)'
+  lightMaskColor: 'rgba(38,38,38,0.1)',
 };
 
 export const lightColors = { ..._lightColors, ...baseColors, ...lightMaskColor };

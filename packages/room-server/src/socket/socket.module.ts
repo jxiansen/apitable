@@ -1,5 +1,3 @@
-
-
 import { HttpModule } from '@nestjs/axios';
 import { DynamicModule, Module } from '@nestjs/common';
 import { TerminusModule } from '@nestjs/terminus';
@@ -28,28 +26,9 @@ export class SocketModule {
 
     return {
       module: SocketModule,
-      imports: [
-        GrpcClientModule,
-        GrpcModule,
-        HttpModule,
-        RedisModule,
-        TerminusModule,
-      ],
-      controllers: [
-        SocketController,
-        NodeController,
-        DatasheetController,
-        SocketGrpcController,
-      ],
-      providers: [
-        SocketIoService,
-        RoomService,
-        NotificationService,
-        NestService,
-        NotificationGateway,
-        RoomGateway,
-      ],
+      imports: [GrpcClientModule, GrpcModule, HttpModule, RedisModule, TerminusModule],
+      controllers: [SocketController, NodeController, DatasheetController, SocketGrpcController],
+      providers: [SocketIoService, RoomService, NotificationService, NestService, NotificationGateway, RoomGateway],
     };
   }
 }
-

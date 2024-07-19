@@ -1,5 +1,3 @@
-
-
 import * as actions from 'modules/shared/store/action_constants';
 import { IAttachmentValue } from 'types';
 import { IPreviewFile } from 'exports/store/interfaces';

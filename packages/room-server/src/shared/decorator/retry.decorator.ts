@@ -1,5 +1,3 @@
-
-
 /**
  * fork : https://github.com/vcfvct/typescript-retry-decorator
  */
@@ -18,7 +16,7 @@ export function Retryable(options: IRetryOptions): Function {
     if (options.doRetry && !options.doRetry(e)) {
       return false;
     }
-    return !(options.value?.length && !options.value.some(errorType => e instanceof errorType));
+    return !(options.value?.length && !options.value.some((errorType) => e instanceof errorType));
   }
 
   async function retryAsync(fn: () => any, args: any[], maxAttempts: number, backOff?: number): Promise<any> {
@@ -26,18 +24,18 @@ export function Retryable(options: IRetryOptions): Function {
       // @ts-ignore
       return await fn.apply(this, args);
     } catch (e) {
-      if (--maxAttempts < 0 || !canRetry((e as Error))) {
+      if (--maxAttempts < 0 || !canRetry(e as Error)) {
         // Last exception, or exception that allows retries
         throw e;
       }
 
-      const _captureContext = { tags: { exceptionType: 'retryException', remainNumber: maxAttempts }};
+      const _captureContext = { tags: { exceptionType: 'retryException', remainNumber: maxAttempts } };
       const outLoggerTag = [];
       // Custom extended parameter reporting
       const sentryScopeContext = options?.sentryScopeContext;
       if (sentryScopeContext && (sentryScopeContext.hasOwnProperty('tags') || sentryScopeContext.hasOwnProperty('extra'))) {
         for (const sentryScopeContextKey in sentryScopeContext) {
-          const sscOutResult: (string[] | { [key: string]: {} }) = sentryScopeContext[sentryScopeContextKey](args);
+          const sscOutResult: string[] | { [key: string]: {} } = sentryScopeContext[sentryScopeContextKey](args);
           if (Array.isArray(sscOutResult)) {
             // Get the value of args dynamically through expressions
             for (const path of sscOutResult) {
@@ -69,7 +67,7 @@ export function Retryable(options: IRetryOptions): Function {
     }
   }
 
-  return function(_target: Record<string, any>, propertyKey: string, descriptor: PropertyDescriptor) {
+  return function (_target: Record<string, any>, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalFn = descriptor.value;
     // set default parameters
     !options.backOff && (options.backOff = 1000);
@@ -78,11 +76,11 @@ export function Retryable(options: IRetryOptions): Function {
       ...options.exponentialOption,
     };
 
-    descriptor.value = async function(...args: any[]) {
+    descriptor.value = async function (...args: any[]) {
       try {
         return await retryAsync.apply(this, [originalFn, args, options.maxAttempts, options.backOff]);
       } catch (e) {
-        const error = (e as Error);
+        const error = e as Error;
         const msgPrefix = `、Retry execution method：'${propertyKey}'，Failed：${options.maxAttempts} times。`;
         error.message = error.message ? `${msgPrefix} OriginalError: ${error.message}` : msgPrefix;
         logger.error(error.message, error?.stack);
@@ -115,7 +113,7 @@ interface IRetryOptions {
     /**
      * Incremental multiplier per retry
      */
-    multiplier?: number
+    multiplier?: number;
   };
 
   /**
@@ -132,8 +130,8 @@ interface IRetryOptions {
    * Report sentry extension parameters
    */
   sentryScopeContext?: {
-    tags?: (args?: any[]) => string[] | { [key: string]: {} },
-    extra?: (args?: any[]) => string[] | { [key: string]: {} }
+    tags?: (args?: any[]) => string[] | { [key: string]: {} };
+    extra?: (args?: any[]) => string[] | { [key: string]: {} };
   };
 
   /**

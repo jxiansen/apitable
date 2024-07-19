@@ -1,5 +1,3 @@
-
-
 import { IElementRectProps, MoveType } from '../hover_line/interface';
 
 export interface IDragProps {

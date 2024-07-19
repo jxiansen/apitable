@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { RowChecked } from 'pc/components/multi_grid/operate_column';
 import style from './style.module.less';

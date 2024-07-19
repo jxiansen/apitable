@@ -1,11 +1,4 @@
-import {
-  filterDatasheetOp,
-  IDeleteViewDerivation,
-  IPatchViewDerivation,
-  ISetViewDerivation,
-  JOTApply,
-  selection
-} from '@apitable/core';
+import { filterDatasheetOp, IDeleteViewDerivation, IPatchViewDerivation, ISetViewDerivation, JOTApply, selection } from '@apitable/core';
 import { ActionConstants } from 'core';
 import { IDatasheetClient, IDatasheetMain, IDatasheetMap, IWidgetDatasheetState } from 'interface';
 import { AnyAction, combineReducers } from 'redux';
@@ -13,10 +6,7 @@ import { IAddDatasheetAction } from './action';
 import { produce } from 'immer';
 import { omit } from 'lodash';
 
-export const datasheetMapReducer = (
-  state: IDatasheetMap = {},
-  action: AnyAction,
-): IDatasheetMap => {
+export const datasheetMapReducer = (state: IDatasheetMap = {}, action: AnyAction): IDatasheetMap => {
   if (!action.datasheetId) {
     return state;
   }
@@ -44,7 +34,7 @@ export const datasheetPack = combineReducers<IWidgetDatasheetState>({
     if (!state) {
       return null;
     }
-    switch(action.type) {
+    switch (action.type) {
       case ActionConstants.DATAPACK_LOADED: {
         state = { ...state, ...action.payload };
         return state;
@@ -73,7 +63,7 @@ export const datasheetPack = combineReducers<IWidgetDatasheetState>({
       if (action.type === ActionConstants.SET_VIEW_DERIVATION) {
         return { ...state, [action.payload.viewId]: action.payload.viewDerivation };
       }
-  
+
       if (action.type === ActionConstants.PATCH_VIEW_DERIVATION) {
         const oldState = state[action.payload.viewId];
         if (oldState) {
@@ -91,6 +81,5 @@ export const datasheetPack = combineReducers<IWidgetDatasheetState>({
 
       return state;
     },
-  })
+  }),
 });
-  

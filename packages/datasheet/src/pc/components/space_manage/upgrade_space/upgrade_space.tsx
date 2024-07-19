@@ -1,5 +1,3 @@
-
-
 import { useEffect, useRef, useState } from 'react';
 import { Skeleton } from '@apitable/components';
 import { Api, Strings, t } from '@apitable/core';

@@ -1,5 +1,3 @@
-
-
 import { ICloudStorageData, ICloudStorageValue, IPermissionResult } from 'interface';
 import { CollaCommandName, ExecuteResult, ResourceType } from 'core';
 import { cmdExecute } from 'message/utils';
@@ -7,18 +5,18 @@ import { cmdExecute } from 'message/utils';
 /**
  * @hidden
  * CloudStorage is a simple KV storage center, and this class belongs to the underlying base method class.
- * 
+ *
  * Receive a string type key, value can be used to store object / number / string / null JSON type data.
- * 
+ *
  * When the get operation is performed, all collaborators get same data.
- * 
- * When the set operation is performed, all collaborators receive this data and 
+ *
+ * When the set operation is performed, all collaborators receive this data and
  * update the view(if the view has dependencies on the corresponding data).
- * 
+ *
  * When the widget is deleted, the data in the corresponding CloudStorage is also deleted.
- * 
+ *
  * You can use {@link useCloudStorage}.
- * 
+ *
  */
 export class CloudStorage {
   /**
@@ -27,15 +25,15 @@ export class CloudStorage {
   constructor(
     private storage: ICloudStorageData,
     private widgetId: string
-  ) { }
+  ) {}
 
   /**
    * Check if the key exists in storage.
-   * @param key 
+   * @param key
    */
   has(key: string) {
     return this.storage && key in this.storage;
-  } 
+  }
   /**
    * Get the value corresponding to the key value.
    *
@@ -55,7 +53,7 @@ export class CloudStorage {
 
   /**
    * Determine if you have permission to set cloudStorage.
-   * 
+   *
    * Only users with edit permission can modify cloudStorage.
    *
    * #### Example
@@ -73,7 +71,7 @@ export class CloudStorage {
 
   /**
    * Set the value to the key passed in.
-   * 
+   *
    * If the key setting fails, an error will be thrown.
    *
    * @param key A string type key.
@@ -91,13 +89,16 @@ export class CloudStorage {
    * ```
    */
   set(key: string, value?: ICloudStorageValue): void {
-    cmdExecute({
-      cmd: CollaCommandName.SetGlobalStorage,
-      key,
-      value,
-      resourceType: ResourceType.Widget,
-      resourceId: this.widgetId,
-    }, this.widgetId).then(result => {
+    cmdExecute(
+      {
+        cmd: CollaCommandName.SetGlobalStorage,
+        key,
+        value,
+        resourceType: ResourceType.Widget,
+        resourceId: this.widgetId,
+      },
+      this.widgetId
+    ).then((result) => {
       if (result.result !== ExecuteResult.Success) {
         // TODO: replace with toast
         alert('Operation execution failed');

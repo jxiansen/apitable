@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useThemeMode } from '@apitable/components';

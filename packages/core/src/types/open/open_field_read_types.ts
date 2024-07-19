@@ -1,5 +1,3 @@
-
-
 import type { APIMetaFieldPropertyFormatEnums, APIMetaMemberType, TSymbolAlign } from '../field_api_enums';
 import type { IFormat } from '../field_api_property_types';
 import type { BasicValueType, CollectType, ILookUpSortInfo, IMultiSelectedIds, LookUpLimitType, RollUpFuncType } from '../field_types';
@@ -23,7 +21,8 @@ export interface IOpenField {
   required?: boolean;
 }
 
-export type IOpenFieldProperty = IOpenTextFieldProperty
+export type IOpenFieldProperty =
+  | IOpenTextFieldProperty
   | IOpenURLFieldProperty
   | IOpenEmailFieldProperty
   | IOpenPhoneFieldProperty
@@ -105,8 +104,8 @@ export interface IOpenSelectBaseFieldProperty {
     color: {
       name: string;
       value: string;
-    }
-  }[]
+    };
+  }[];
 }
 
 export interface IOpenMemberOption {
@@ -164,7 +163,7 @@ export interface IOpenMagicLinkFieldProperty {
 
 export interface IOpenComputedFormat {
   type: APIMetaFieldPropertyFormatEnums;
-  format: IFormat
+  format: IFormat;
 }
 
 export interface IOpenMagicLookUpFieldProperty {

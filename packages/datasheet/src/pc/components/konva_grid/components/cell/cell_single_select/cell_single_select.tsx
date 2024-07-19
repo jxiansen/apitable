@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { FC, useContext, useState } from 'react';
 import { getNextShadeColor, ThemeName } from '@apitable/components';

@@ -1,5 +1,3 @@
-
-
 import styled from 'styled-components';
 import { Box, useTheme } from '@apitable/components';
 import { t } from '@apitable/core';

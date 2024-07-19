@@ -1,5 +1,3 @@
-
-
 import { Strings, t } from 'exports/i18n';
 import { isString } from 'lodash';
 import type { ICellValue } from 'model/record';
@@ -10,11 +8,7 @@ import type { ICellValue } from 'model/record';
  */
 export function convertToNumber(value: ICellValue): number | null {
   const num = Number(value);
-  if (
-    value == null ||
-    !Number.isFinite(num) ||
-    (isString(value) && value.trim() === '')
-  ) {
+  if (value == null || !Number.isFinite(num) || (isString(value) && value.trim() === '')) {
     return null;
   }
   return num;
@@ -33,8 +27,7 @@ export function e2number(value: string) {
   const dotRight: string = num[1] || ''; // right value of decimal point
 
   if (p > 0) {
-    value = dotLeft + dotRight.substr(0, p) +
-      (dotRight.length > p ? '.' + dotRight.substr(p) : '0'.repeat(p - dotRight.length));
+    value = dotLeft + dotRight.substr(0, p) + (dotRight.length > p ? '.' + dotRight.substr(p) : '0'.repeat(p - dotRight.length));
   } else {
     // Scientific notation converted by number has 1 digits to the left of the decimal point by default, so only consider this case
     const left = parseInt(dotLeft, 10);
@@ -169,7 +162,7 @@ export function normalByteMGArr(bytes: number) {
   }
   if (i === 2 || i === 3) {
     const res = normalDecimal(bytes / Math.pow(1024, i));
-    return (res === 1024 && i === 2) ? [1, CapacityUnit[i + 1]] : [res, CapacityUnit[i]];
+    return res === 1024 && i === 2 ? [1, CapacityUnit[i + 1]] : [res, CapacityUnit[i]];
   }
   if (i > 3) {
     const res = normalDecimal(bytes / Math.pow(1024, 3));
@@ -183,7 +176,7 @@ export function normalByteMGArr(bytes: number) {
 // There are only two units of 'MB' and 'GB'. The returned arr[2] is the corresponding bytes value after the decimal point is advanced by 1.
 // Example: interval (greater than 0 and less than 0.1mb) returns ['0.1', 'MB', 104857.6]
 // Example: If the incoming storage size is 0.13mb, then return ['0.2','MB', 209715.2]
-export function byteMGArr(bytes: number, isCell = true) :[number, string, number]{
+export function byteMGArr(bytes: number, isCell = true): [number, string, number] {
   const minMb = 104857.6;
   if (bytes <= minMb) {
     // 0-0.1MB directly displays 0.1MB, <0MB directly displays 0MB
@@ -199,8 +192,7 @@ export function byteMGArr(bytes: number, isCell = true) :[number, string, number
   if (i === 2 || i === 3) {
     const num = bytes / Math.pow(1024, i);
     const res = isCell ? decimalCeil(num) : normalDecimal(num);
-    return (res === 1024 && i === 2) ? [1, CapacityUnit[i + 1]!, Math.pow(1024, 3)]
-      : [res, CapacityUnit[i]!, res * Math.pow(1024, i)];
+    return res === 1024 && i === 2 ? [1, CapacityUnit[i + 1]!, Math.pow(1024, 3)] : [res, CapacityUnit[i]!, res * Math.pow(1024, i)];
   }
   if (i > 3) {
     const num = bytes / Math.pow(1024, 3);
@@ -267,8 +259,8 @@ export function times(num1: number, num2: number): number {
 
 /**
  * Exact division (to resolve loss of precision)
-  * @param num1 dividend
-  * @param num2 divisor
+ * @param num1 dividend
+ * @param num2 divisor
  */
 export function divide(num1: number, num2: number): number {
   const intNum1 = float2Fixed(num1);

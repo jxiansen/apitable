@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
 import { ISwitchProps } from './interface';
@@ -27,10 +25,10 @@ export const SIZE_MAP = {
     height: 48,
     width: 116,
     innerSize: 40,
-  }
+  },
 };
 
-export const SwitchBase = styled.button.attrs(applyDefaultTheme) <ISwitchProps>`
+export const SwitchBase = styled.button.attrs(applyDefaultTheme)<ISwitchProps>`
   position: relative;
   display: inline-block;
   box-sizing: border-box;
@@ -39,20 +37,25 @@ export const SwitchBase = styled.button.attrs(applyDefaultTheme) <ISwitchProps>`
   vertical-align: middle;
   border-radius: 20px 20px;
   transition: all 0.3s;
-  ${props => css`background-color: ${props.theme.color.defaultTag};`}
+  ${(props) => css`
+    background-color: ${props.theme.color.defaultTag};
+  `}
   cursor: pointer;
-
 
   &:focus {
     outline: none;
   }
-  ${props => props.disabled && css`
-    cursor: not-allowed;
-    opacity: 0.4;
-  `}
-  ${props => props.checked && css`
-    background: ${props.theme.color.deepPurple[500]};
-  `}
+  ${(props) =>
+    props.disabled &&
+    css`
+      cursor: not-allowed;
+      opacity: 0.4;
+    `}
+  ${(props) =>
+    props.checked &&
+    css`
+      background: ${props.theme.color.deepPurple[500]};
+    `}
   ${(props) => {
     const propsSize = props.size || 'default';
     const sizeMap = SIZE_MAP[propsSize];
@@ -62,24 +65,28 @@ export const SwitchBase = styled.button.attrs(applyDefaultTheme) <ISwitchProps>`
     `;
   }}
 `;
-export const SwitchInnerBase = styled.span <ISwitchProps>`
-  color:#fff;
+export const SwitchInnerBase = styled.span<ISwitchProps>`
+  color: #fff;
   font-size: 12px;
   position: absolute;
   left: 24px;
   top: 0;
-  ${props => props.checked && css`
-    left: 6px;
-  `}
-  ${props => props.disabled && css`
-    left: 6px;
-    cursor: ${props.disabled ? 'not-allowed' : 'pointer'};
-  `}
+  ${(props) =>
+    props.checked &&
+    css`
+      left: 6px;
+    `}
+  ${(props) =>
+    props.disabled &&
+    css`
+      left: 6px;
+      cursor: ${props.disabled ? 'not-allowed' : 'pointer'};
+    `}
 `;
-export const SwitchBeforeBase = styled.span.attrs(applyDefaultTheme) <ISwitchProps>`
+export const SwitchBeforeBase = styled.span.attrs(applyDefaultTheme)<ISwitchProps>`
   display: inline-block;
   position: absolute;
-  content: " ";
+  content: ' ';
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
   transition: left ${duration} cubic-bezier(0.35, 0, 0.25, 1);
   border-radius: 50%;
@@ -97,7 +104,7 @@ export const SwitchBeforeBase = styled.span.attrs(applyDefaultTheme) <ISwitchPro
       width: ${innerSize}px;
       height: ${innerSize}px;
       border-radius: ${innerSize / 2}px;
-      top:  ${innerSpace}px;
+      top: ${innerSpace}px;
       left: ${props.checked ? width - innerSize - innerSpace : innerSpace}px;
       transition: all 0.3s ease-in-out;
       font-size: ${fontSize};

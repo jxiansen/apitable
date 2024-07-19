@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { IRadio } from '../interface';
 
@@ -11,7 +9,7 @@ type IRadioGroupAll = {
   /**
    * Arrange by Line
    */
-  row?: boolean
+  row?: boolean;
   /**
    * Child element
    */
@@ -34,20 +32,20 @@ type IRadioGroupAll = {
   disabled?: boolean;
   /**
    * Radio name
-  */
+   */
   name?: string;
   /**
    * Whether use button style or not
-  */
+   */
   isBtn?: boolean;
   /**
    * Whether full width
-  */
+   */
   block?: boolean;
 };
 
 type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
-type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
+type XOR<T, U> = T | U extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
 
 /**
  * Row and isBtn are mutually exclusive

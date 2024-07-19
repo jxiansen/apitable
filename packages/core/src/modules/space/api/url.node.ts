@@ -1,5 +1,3 @@
-
-
 // =============== Node related =======================
 // get the root node
 export const GET_ROOT_NODE = '/node/root';

@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import $loadjs from 'loadjs';
 import axios from 'axios';
@@ -25,7 +23,7 @@ export enum WidgetLoadError {
   // widget-cli too low version
   CliLowVersion = 5,
   // unknown version
-  UnknownError = -1
+  UnknownError = -1,
 }
 
 export function loadWidget(url: string, widgetPackageId: string, refresh?: boolean) {
@@ -52,10 +50,10 @@ export function loadWidget(url: string, widgetPackageId: string, refresh?: boole
           console.log('widgetPackage: %s loaded', widgetPackageId);
         });
       },
-      error: async() => {
+      error: async () => {
         const error = await checkCretInvalid(url);
         reject(error);
-      }
+      },
     });
   });
 }
@@ -98,9 +96,10 @@ interface IWidgetConfig {
 export function getWidgetConfig(bundleUrl: string) {
   const url = new URL(bundleUrl);
   return new Promise<IWidgetConfig>((resolve, reject) => {
-    axios.get(`${url.origin}/widgetConfig?v=${Date.now()}`)
-      .then(res => resolve(res.data))
-      .catch(async() => {
+    axios
+      .get(`${url.origin}/widgetConfig?v=${Date.now()}`)
+      .then((res) => resolve(res.data))
+      .catch(async () => {
         /**
          * reasons for loading failure
          * 1. service is not available
@@ -119,20 +118,24 @@ export function getWidgetConfig(bundleUrl: string) {
  */
 export function loadWidgetCheck(bundleUrl: string, widgetPackageId: string) {
   return new Promise<IWidgetConfig>((resolve, reject) => {
-    checkCliVersion(bundleUrl).then(() => {
-      getWidgetConfig(bundleUrl).then(res => {
-        if (res.packageId === widgetPackageId) {
-          resolve(res);
-        } else {
-          reject(WidgetLoadError.PackageIdNotMatch);
-        }
-      }).catch(reject);
-    }).catch(reject);
+    checkCliVersion(bundleUrl)
+      .then(() => {
+        getWidgetConfig(bundleUrl)
+          .then((res) => {
+            if (res.packageId === widgetPackageId) {
+              resolve(res);
+            } else {
+              reject(WidgetLoadError.PackageIdNotMatch);
+            }
+          })
+          .catch(reject);
+      })
+      .catch(reject);
   });
 }
 
 interface ICliInfo {
-  version: string
+  version: string;
 }
 
 /**
@@ -144,8 +147,8 @@ interface ICliInfo {
  * @param b
  */
 function checkVersion(a: string, b: string) {
-  const x = a.split('.').map(e => parseInt(e, 10));
-  const y = b.split('.').map(e => parseInt(e, 10));
+  const x = a.split('.').map((e) => parseInt(e, 10));
+  const y = b.split('.').map((e) => parseInt(e, 10));
 
   for (const i in x) {
     y[i] = y[i] || 0;
@@ -165,8 +168,9 @@ function checkVersion(a: string, b: string) {
  */
 export function checkCliVersion(bundleUrl: string) {
   return new Promise<ICliInfo>((resolve, reject) => {
-    axios.get<ICliInfo>(`${getDevWidgetHttpOrigin(bundleUrl)}/widget-cli/info?v=${Date.now()}`)
-      .then(res => {
+    axios
+      .get<ICliInfo>(`${getDevWidgetHttpOrigin(bundleUrl)}/widget-cli/info?v=${Date.now()}`)
+      .then((res) => {
         const cliInfo = res.data;
         const minSupportVersion = SystemConfig.settings.widget_cli_miumum_version.value;
         if (checkVersion(cliInfo.version, minSupportVersion) === -1) {

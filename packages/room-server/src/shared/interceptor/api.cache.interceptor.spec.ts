@@ -1,4 +1,3 @@
-
 import { ApiCacheInterceptor } from 'shared/interceptor/api.cache.interceptor';
 
 describe('ApiCacheInterceptor', () => {
@@ -52,7 +51,7 @@ describe('ApiCacheInterceptor', () => {
       jest.mock('app.environment', () => mockTrue);
       (context.switchToHttp().getRequest as jest.Mock).mockReturnValue({
         method: 'GET',
-        headers: {}
+        headers: {},
       });
       const result = interceptor.isRequestCacheable(context);
       expect(result).toEqual(false);
@@ -64,8 +63,8 @@ describe('ApiCacheInterceptor', () => {
       (context.switchToHttp().getRequest as jest.Mock).mockReturnValue({
         method: 'GET',
         headers: {
-          'x-max-age': 10
-        }
+          'x-max-age': 10,
+        },
       });
       const result = interceptor.isRequestCacheable(context);
       expect(result).toEqual(false);

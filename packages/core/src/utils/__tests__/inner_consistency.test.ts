@@ -76,8 +76,8 @@ const mockDefaultView = (viewId: string): IViewProperty => ({
   id: viewId,
   name: viewId.toUpperCase(),
   type: ViewType.Grid,
-  rows: range(1, 101).map(i => ({ recordId: 'rec' + i })),
-  columns: [1, 2, 3].map(i => ({ fieldId: 'fld' + i })),
+  rows: range(1, 101).map((i) => ({ recordId: 'rec' + i })),
+  columns: [1, 2, 3].map((i) => ({ fieldId: 'fld' + i })),
   frozenColumnCount: 1,
 });
 
@@ -90,11 +90,11 @@ describe('consistent', () => {
           id: 'viw2',
           name: 'View 2',
           type: ViewType.Grid,
-          rows: range(100, 0, -1).map(i => ({ recordId: 'rec' + i })),
-          columns: [2, 3, 1].map(i => ({ fieldId: 'fld' + i })),
+          rows: range(100, 0, -1).map((i) => ({ recordId: 'rec' + i })),
+          columns: [2, 3, 1].map((i) => ({ fieldId: 'fld' + i })),
           frozenColumnCount: 1,
         },
-      ]),
+      ])
     );
     expect(result).toStrictEqual(null);
   });
@@ -106,7 +106,7 @@ describe('consistent', () => {
         name: 'View 1',
         type: ViewType.Grid,
         rows: [],
-        columns: [1, 2, 3].map(i => ({ fieldId: 'fld' + i })),
+        columns: [1, 2, 3].map((i) => ({ fieldId: 'fld' + i })),
         frozenColumnCount: 1,
       },
     ]);
@@ -125,12 +125,12 @@ describe('duplicate views', () => {
           id: 'viw2',
           name: 'View 2',
           type: ViewType.Grid,
-          rows: range(100, 0, -1).map(i => ({ recordId: 'rec' + i })),
-          columns: [2, 3, 1].map(i => ({ fieldId: 'fld' + i })),
+          rows: range(100, 0, -1).map((i) => ({ recordId: 'rec' + i })),
+          columns: [2, 3, 1].map((i) => ({ fieldId: 'fld' + i })),
           frozenColumnCount: 1,
         },
         mockDefaultView('viw1'),
-      ]),
+      ])
     );
     expect(result).toStrictEqual([
       {
@@ -144,8 +144,8 @@ describe('duplicate views', () => {
       id: 'viw3',
       name: 'View 3',
       type: ViewType.Grid,
-      rows: range(100, 0, -1).map(i => ({ recordId: 'rec' + i })),
-      columns: [2, 3, 1].map(i => ({ fieldId: 'fld' + i })),
+      rows: range(100, 0, -1).map((i) => ({ recordId: 'rec' + i })),
+      columns: [2, 3, 1].map((i) => ({ fieldId: 'fld' + i })),
       frozenColumnCount: 1,
     };
     const result = checkInnerConsistency(
@@ -156,15 +156,15 @@ describe('duplicate views', () => {
           id: 'viw2',
           name: 'View 2',
           type: ViewType.Grid,
-          rows: range(100, 0, -1).map(i => ({ recordId: 'rec' + i })),
-          columns: [2, 3, 1].map(i => ({ fieldId: 'fld' + i })),
+          rows: range(100, 0, -1).map((i) => ({ recordId: 'rec' + i })),
+          columns: [2, 3, 1].map((i) => ({ fieldId: 'fld' + i })),
           frozenColumnCount: 1,
         },
         view3,
         mockDefaultView('viw1'),
         mockDefaultView('viw4'),
         mockDefaultView('viw1'),
-      ]),
+      ])
     );
     expect(result).toStrictEqual([
       {
@@ -178,13 +178,13 @@ describe('view rows errors', () => {
   describe('view rows different from snapshot.recordMap', () => {
     test('view missing rows', () => {
       const view1 = mockDefaultView('viw1');
-      view1.rows = view1.rows.filter(row => !['rec2', 'rec12', 'rec7'].includes(row.recordId));
+      view1.rows = view1.rows.filter((row) => !['rec2', 'rec12', 'rec7'].includes(row.recordId));
       const result = checkInnerConsistency(mockSnapshot([view1]));
       expect(result).toStrictEqual([
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           notExistInViewRow: ['rec2', 'rec7', 'rec12'],
           notExistInRecordMap: [],
         },
@@ -201,7 +201,7 @@ describe('view rows errors', () => {
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           notExistInRecordMap: ['rec5555', 'recABC', 'rec300'],
           notExistInViewRow: [],
         },
@@ -210,7 +210,7 @@ describe('view rows errors', () => {
 
     test('view rows diff', () => {
       const view1 = mockDefaultView('viw1');
-      view1.rows = view1.rows.filter(row => !['rec2', 'rec12', 'rec7'].includes(row.recordId));
+      view1.rows = view1.rows.filter((row) => !['rec2', 'rec12', 'rec7'].includes(row.recordId));
       view1.rows.push({ recordId: 'rec300' });
       view1.rows.splice(74, 0, { recordId: 'recABC' });
       view1.rows.unshift({ recordId: 'rec5555' });
@@ -219,7 +219,7 @@ describe('view rows errors', () => {
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           notExistInViewRow: ['rec2', 'rec7', 'rec12'],
           notExistInRecordMap: ['rec5555', 'recABC', 'rec300'],
         },
@@ -229,14 +229,14 @@ describe('view rows errors', () => {
     test('replaceRows', () => {
       const view1 = mockDefaultView('viw1');
       view1.rows = range(1000, 1200)
-        .map(i => ({ recordId: 'rec' + i }))
+        .map((i) => ({ recordId: 'rec' + i }))
         .concat([{ recordId: 'rec3' }]);
       const result = checkInnerConsistency(mockSnapshot([view1]));
       expect(result).toStrictEqual([
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           replaceRows: true,
         },
       ]);
@@ -252,7 +252,7 @@ describe('view rows errors', () => {
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           duplicateRows: [78],
         },
       ]);
@@ -268,7 +268,7 @@ describe('view rows errors', () => {
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           duplicateRows: [100, 12, 79],
         },
       ]);
@@ -286,7 +286,7 @@ describe('view columns errors', () => {
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           notExistInViewColumn: ['fld1', 'fld3'],
           notExistInFieldMap: [],
         },
@@ -303,7 +303,7 @@ describe('view columns errors', () => {
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           notExistInFieldMap: ['fldC', 'fldB', 'fldA'],
           notExistInViewColumn: [],
         },
@@ -312,13 +312,13 @@ describe('view columns errors', () => {
 
     test('view columns diff', () => {
       const view1 = mockDefaultView('viw1');
-      view1.columns = ['fldA', 'fld3', 'fldB', 'fldC'].map(id => ({ fieldId: id }));
+      view1.columns = ['fldA', 'fld3', 'fldB', 'fldC'].map((id) => ({ fieldId: id }));
       const result = checkInnerConsistency(mockSnapshot([view1]));
       expect(result).toStrictEqual([
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           notExistInViewColumn: ['fld1', 'fld2'],
           notExistInFieldMap: ['fldA', 'fldB', 'fldC'],
         },
@@ -335,7 +335,7 @@ describe('view columns errors', () => {
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           duplicateColumns: [3],
         },
       ]);
@@ -343,13 +343,13 @@ describe('view columns errors', () => {
 
     it('multiple duplicate columns', () => {
       const view1 = mockDefaultView('viw1');
-      view1.columns = ['fld3', 'fld1', 'fld3', 'fld2', 'fld2', 'fld3'].map(id => ({ fieldId: id }));
+      view1.columns = ['fld3', 'fld1', 'fld3', 'fld2', 'fld2', 'fld3'].map((id) => ({ fieldId: id }));
       const result = checkInnerConsistency(mockSnapshot([view1]));
       expect(result).toStrictEqual([
         {
           viewId: 'viw1',
           viewName: 'VIW1',
-          recordsInMap: range(1, 101).map(i => 'rec' + i),
+          recordsInMap: range(1, 101).map((i) => 'rec' + i),
           duplicateColumns: [2, 4, 5],
         },
       ]);
@@ -362,20 +362,20 @@ describe('multiple errors', () => {
     const view1 = mockDefaultView('viw1');
     view1.rows = range(1, 81)
       .concat([117, 164, 1, 123, 164])
-      .map(i => ({ recordId: 'rec' + i }));
-    view1.columns = ['fldA', 'fld3', 'fldA'].map(id => ({ fieldId: id }));
+      .map((i) => ({ recordId: 'rec' + i }));
+    view1.columns = ['fldA', 'fld3', 'fldA'].map((id) => ({ fieldId: id }));
     const result = checkInnerConsistency(mockSnapshot([view1]));
     expect(result).toStrictEqual([
       {
         viewId: 'viw1',
         viewName: 'VIW1',
-        recordsInMap: range(1, 101).map(i => 'rec' + i),
+        recordsInMap: range(1, 101).map((i) => 'rec' + i),
         duplicateRows: [82, 84],
         duplicateColumns: [2],
         notExistInViewColumn: ['fld1', 'fld2'],
         notExistInFieldMap: ['fldA'],
-        notExistInViewRow: range(81, 101).map(i => 'rec' + i),
-        notExistInRecordMap: [117, 164, 123].map(i => 'rec' + i),
+        notExistInViewRow: range(81, 101).map((i) => 'rec' + i),
+        notExistInRecordMap: [117, 164, 123].map((i) => 'rec' + i),
       },
     ]);
   });
@@ -384,11 +384,11 @@ describe('multiple errors', () => {
     const view1 = mockDefaultView('viw1');
     view1.rows = range(1, 81)
       .concat([117, 164, 1, 123, 164])
-      .map(i => ({ recordId: 'rec' + i }));
+      .map((i) => ({ recordId: 'rec' + i }));
 
     const view2 = mockDefaultView('viw2');
     view2.rows = [{ recordId: 'recA' }];
-    view2.columns = ['fldA', 'fld3', 'fldA'].map(id => ({ fieldId: id }));
+    view2.columns = ['fldA', 'fld3', 'fldA'].map((id) => ({ fieldId: id }));
 
     const result = checkInnerConsistency(mockSnapshot([view1, view2, mockDefaultView('viw3'), mockDefaultView('viw2')]));
     expect(result).toStrictEqual([
@@ -398,15 +398,15 @@ describe('multiple errors', () => {
       {
         viewId: 'viw1',
         viewName: 'VIW1',
-        recordsInMap: range(1, 101).map(i => 'rec' + i),
+        recordsInMap: range(1, 101).map((i) => 'rec' + i),
         duplicateRows: [82, 84],
-        notExistInViewRow: range(81, 101).map(i => 'rec' + i),
-        notExistInRecordMap: [117, 164, 123].map(i => 'rec' + i),
+        notExistInViewRow: range(81, 101).map((i) => 'rec' + i),
+        notExistInRecordMap: [117, 164, 123].map((i) => 'rec' + i),
       },
       {
         viewId: 'viw2',
         viewName: 'VIW2',
-        recordsInMap: range(1, 101).map(i => 'rec' + i),
+        recordsInMap: range(1, 101).map((i) => 'rec' + i),
         replaceRows: true,
         duplicateColumns: [2],
         notExistInViewColumn: ['fld1', 'fld2'],
@@ -575,12 +575,12 @@ describe('generateFixInnerConsistencyChangesets', () => {
                 n: OTActionName.ObjectReplace,
                 od: ['rec1-4', 'rec1-6'],
                 oi: ['rec1-4'],
-                p: ['recordMap', 'rec1-2', 'data', 'fld1-2']
+                p: ['recordMap', 'rec1-2', 'data', 'fld1-2'],
               },
               {
                 n: OTActionName.ObjectDelete,
                 od: ['rec1-17', 'rec1-19'],
-                p: ['recordMap', 'rec1-3', 'data', 'fld1-2']
+                p: ['recordMap', 'rec1-3', 'data', 'fld1-2'],
               },
             ],
           } as any,

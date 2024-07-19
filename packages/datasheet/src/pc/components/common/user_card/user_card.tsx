@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { FC, useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
@@ -54,8 +52,8 @@ export const UserCard: FC<React.PropsWithChildren<IUserCard>> = ({
   const [tagType, setTagType] = useState('');
   const spaceInfo = useAppSelector((state) => state.space.curSpaceInfo);
   const activeNodeId = useAppSelector((state) => Selectors.getNodeId(state));
-  const activeNodePrivate = useAppSelector((state) =>
-    state.catalogTree.treeNodesMap[activeNodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[activeNodeId]?.nodePrivate
+  const activeNodePrivate = useAppSelector(
+    (state) => state.catalogTree.treeNodesMap[activeNodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[activeNodeId]?.nodePrivate,
   );
   const { shareSettingsReq } = useCatalogTreeRequest();
   const { data: memberInfo, loading } = useRequest(getMemberInfo);
@@ -207,13 +205,13 @@ export const UserCard: FC<React.PropsWithChildren<IUserCard>> = ({
                       <div className={styles.teamList}>
                         {memberInfo
                           ? memberInfo?.teamData?.map((item, index) => {
-                            return (
-                              <div key={index} className={styles.teamItem}>
-                                <p>-</p>
-                                <p className={styles.teamText}>{item.fullHierarchyTeamName}</p>
-                              </div>
-                            );
-                          })
+                              return (
+                                <div key={index} className={styles.teamItem}>
+                                  <p>-</p>
+                                  <p className={styles.teamText}>{item.fullHierarchyTeamName}</p>
+                                </div>
+                              );
+                            })
                           : '-'}
                       </div>
                     </>

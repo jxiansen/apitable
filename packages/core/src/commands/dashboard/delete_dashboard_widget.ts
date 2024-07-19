@@ -1,8 +1,6 @@
-
-
 import { CollaCommandName } from 'commands/enum';
 import { ExecuteResult, ICollaCommandDef, ICollaCommandExecuteContext } from 'command_manager';
-import { getInstalledWidgetInDashboard,getDashboardSnapshot } from 'modules/database/store/selectors/resource/dashboard';
+import { getInstalledWidgetInDashboard, getDashboardSnapshot } from 'modules/database/store/selectors/resource/dashboard';
 
 import { ResourceType } from 'types';
 import { DashboardAction } from '../../commands_actions/dashboard';

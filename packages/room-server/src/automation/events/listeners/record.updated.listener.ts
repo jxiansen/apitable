@@ -1,5 +1,3 @@
-
-
 import { defaultEventListenerOptions, IEventListenerOptions, OPEventNameEnums } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';

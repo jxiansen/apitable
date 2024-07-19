@@ -1,5 +1,3 @@
-
-
 import generatePicker from 'antd/es/date-picker/generatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
@@ -46,12 +44,11 @@ class LocalHelper {
       lang: {
         ...local.lang,
         monthFormat: 'M月',
-        shortWeekDays: ['日', '一', '二', '三', '四', '五', '六']
-      }
+        shortWeekDays: ['日', '一', '二', '三', '四', '五', '六'],
+      },
     };
     return definedChineseLocal;
   }
 }
 
 export const LocalFormat = new LocalHelper();
-

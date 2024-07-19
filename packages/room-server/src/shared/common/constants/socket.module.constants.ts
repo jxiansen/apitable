@@ -1,5 +1,3 @@
-
-
 import { CronExpression } from '@nestjs/schedule';
 
 export class SocketConstants {
@@ -79,7 +77,6 @@ export class GatewayConstants {
   public static readonly PING_TIMEOUT = parseInt(process.env.PING_TIMEOUT || '120000', 10);
 
   public static readonly SOCKET_SERVER_NOTIFY_PATH = '/socket/notify';
-
 }
 
 export class HealthConstants {

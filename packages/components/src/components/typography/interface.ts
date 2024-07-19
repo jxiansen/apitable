@@ -1,5 +1,3 @@
-
-
 import { IFontVariants } from 'helper';
 import { ElementType } from 'react';
 

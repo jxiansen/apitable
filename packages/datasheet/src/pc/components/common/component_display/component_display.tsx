@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { useResponsive } from 'pc/hooks/use_responsive';
 import { ScreenSize } from './enum';

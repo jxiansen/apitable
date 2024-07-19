@@ -1,5 +1,3 @@
-
-
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -51,8 +49,8 @@ export class DatabaseConfigService implements TypeOrmOptionsFactory {
       retryDelay,
       verboseRetryLog: true,
       extra: {
-        connectionLimit
-      }
+        connectionLimit,
+      },
     };
   }
 }

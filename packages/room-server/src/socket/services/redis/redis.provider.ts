@@ -1,5 +1,3 @@
-
-
 import { Provider } from '@nestjs/common';
 import Redis from 'ioredis';
 import { RedisConstants } from 'shared/common/constants/socket.module.constants';

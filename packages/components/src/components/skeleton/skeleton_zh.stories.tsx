@@ -1,5 +1,3 @@
-
-
 import { Skeleton, ISkeletonProps } from './index';
 import { StoryType } from '../../stories/constants';
 import { Story } from '@storybook/react';
@@ -19,7 +17,7 @@ const Template: Story<ISkeletonProps> = (args) => <Skeleton {...args} />;
 export const PrimarySkeleton = Template.bind({});
 PrimarySkeleton.args = {
   count: 2,
-  duration: 1
+  duration: 1,
 };
 
 export const Multi = () => {
@@ -45,7 +43,7 @@ export const Paragraph = () => {
     <>
       <Skeleton count={1} width="38%" />
       <Skeleton count={2} />
-      <Skeleton count={1} width="61%"/>
+      <Skeleton count={1} width="61%" />
     </>
   );
 };
@@ -58,7 +56,7 @@ export const ImageWithParagraph = () => {
         <div style={{ flexGrow: 1, marginLeft: 8 }}>
           <Skeleton count={1} width="38%" />
           <Skeleton count={2} />
-          <Skeleton count={1} width="61%"/>
+          <Skeleton count={1} width="61%" />
         </div>
       </div>
     </>

@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { difference } from 'lodash';
 import Image from 'next/image';

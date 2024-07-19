@@ -1,5 +1,3 @@
-
-
 import { Label } from './Label';
 import { WrapIfAdditional } from './WrapIfAdditional';
 

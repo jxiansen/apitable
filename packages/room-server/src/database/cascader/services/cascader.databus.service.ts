@@ -1,5 +1,3 @@
-
-
 import { databus, Field, IFieldPermissionMap, Selectors, ViewFilterDerivate } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { CommandService } from 'database/command/services/command.service';
@@ -15,15 +13,17 @@ export class CascaderDatabusService {
   private readonly databus: databus.DataBus;
   private readonly database: databus.Database;
 
-  constructor(readonly datasheetService: DatasheetService,
-              readonly unitService: UnitService,
-              private readonly restService: RestService,
-              readonly commandService: CommandService) {
+  constructor(
+    readonly datasheetService: DatasheetService,
+    readonly unitService: UnitService,
+    private readonly restService: RestService,
+    readonly commandService: CommandService,
+  ) {
     this.databus = databus.DataBus.create({
       dataStorageProvider: new CascaderDataStorageProvider(datasheetService, unitService),
       storeProvider: {
-        createDatasheetStore: datasheetPack => Promise.resolve(commandService.fullFillStore(datasheetPack)),
-        createDashboardStore: dashboardPack => {
+        createDatasheetStore: (datasheetPack) => Promise.resolve(commandService.fullFillStore(datasheetPack)),
+        createDashboardStore: (dashboardPack) => {
           throw new Error('unreachable ' + dashboardPack.dashboard.id);
         },
       },
@@ -46,7 +46,7 @@ export class CascaderDatabusService {
     const fieldPermissionMap: IFieldPermissionMap = await this.restService.getFieldPermission(auth, datasheet.id);
     const fieldMethods: IFieldMethods = {};
     const selectedView = await datasheet.getView({
-      getViewInfo: state => {
+      getViewInfo: (state) => {
         const datasheetState = Selectors.getDatasheet(state, datasheet.id);
         const snapshot = Selectors.getSnapshot(state, datasheet.id)!;
         // The fieldMap after permission processing

@@ -1,5 +1,3 @@
-
-
 // data subscription (follow) store interface
 import { SET_SUBSCRIPTIONS } from '../../../shared/store/action_constants';
 

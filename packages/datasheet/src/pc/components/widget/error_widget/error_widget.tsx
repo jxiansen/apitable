@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { LinkButton } from '@apitable/components';
 import { Strings, t } from '@apitable/core';

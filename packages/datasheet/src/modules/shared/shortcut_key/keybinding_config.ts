@@ -1,5 +1,3 @@
-
-
 import { SystemConfig } from '@apitable/core';
 import { ShortcutKey } from '@apitable/core/src/config/system_config.interface';
 import { ShortcutActionName } from 'modules/shared/shortcut_key/enum';

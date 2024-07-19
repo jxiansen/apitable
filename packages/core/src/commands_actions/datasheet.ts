@@ -1,5 +1,3 @@
-
-
 import { compensator } from '../compensator';
 import { IJOTAction, IObjectInsertAction, IObjectReplaceAction, OTActionName } from 'engine/ot/interface';
 import { ViewPropertyFilter } from 'engine/view_property_filter';

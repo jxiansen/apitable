@@ -1,5 +1,3 @@
-
-
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutomationRobotRepository } from 'automation/repositories/automation.robot.repository';

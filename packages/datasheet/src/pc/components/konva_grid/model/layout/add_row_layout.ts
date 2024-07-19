@@ -1,5 +1,3 @@
-
-
 import { colors } from '@apitable/components';
 import { ILinearRow, Strings, t } from '@apitable/core';
 import { AddOutlined } from '@apitable/icons';

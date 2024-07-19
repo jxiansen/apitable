@@ -1,5 +1,3 @@
-
-
 import { useLocalStorageState, useMount, useUpdateEffect } from 'ahooks';
 import { Drawer } from 'antd';
 import classNames from 'classnames';
@@ -307,7 +305,7 @@ export const Dashboard = () => {
         hidden: embedId,
         disabled: (arg: any) => {
           const {
-            props: { widgetId }
+            props: { widgetId },
           } = arg;
 
           return !widgetHasBindDstId(widgetId);

@@ -1,5 +1,3 @@
-
-
 import cls from 'classnames';
 import Image from 'next/image';
 import * as React from 'react';
@@ -7,11 +5,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Box, IconButton, FloatUiTooltip as Tooltip, Typography } from '@apitable/components';
 import { integrateCdnHost, Strings, t } from '@apitable/core';
-import {
-  WarnCircleFilled,
-  ChevronRightOutlined,
-  ChevronDownOutlined
-} from '@apitable/icons';
+import { WarnCircleFilled, ChevronRightOutlined, ChevronDownOutlined } from '@apitable/icons';
 import styles from 'style.module.less';
 import { ItemStatus } from 'pc/components/automation/run_history/list/item_status';
 import { INodeType, IRobotRunHistoryDetail } from '../../interface';
@@ -65,19 +59,19 @@ export const RobotRunHistoryNodeWrapper = (props: React.PropsWithChildren<IRobot
       <Box display="flex" position="relative" alignItems="flex-start" width={'100%'}>
         <Box display={'flex'} alignItems={'center'} onClick={() => setShowDetail(!showDetail)} height={'32px'}>
           <span className={cls(styles.arrowIcon)}>
-            <IconButton shape={'square'}
-              icon={showDetail ? ChevronDownOutlined: ChevronRightOutlined} className={styles.dropIcon} onClick={() => setShowDetail(!showDetail)} />
+            <IconButton
+              shape={'square'}
+              icon={showDetail ? ChevronDownOutlined : ChevronRightOutlined}
+              className={styles.dropIcon}
+              onClick={() => setShowDetail(!showDetail)}
+            />
           </span>
           <Box marginX={'8px'} display="flex" alignItems="center" zIndex={2}>
             <ItemStatus status={status} variant={'filled'} />
           </Box>
         </Box>
 
-        {
-          index === 0 && (
-            <VerticalLine2/>
-          )
-        }
+        {index === 0 && <VerticalLine2 />}
 
         {!isLast && <VerticalLine />}
 
@@ -99,7 +93,14 @@ export const RobotRunHistoryNodeWrapper = (props: React.PropsWithChildren<IRobot
           </Box>
 
           {showDetail && (
-            <Box padding={'16px 16px'} borderRadius={'4px'} width={'100%'} marginBottom='16px' marginTop="16px" backgroundColor={colors.bgCommonDefault}>
+            <Box
+              padding={'16px 16px'}
+              borderRadius={'4px'}
+              width={'100%'}
+              marginBottom="16px"
+              marginTop="16px"
+              backgroundColor={colors.bgCommonDefault}
+            >
               {children}
             </Box>
           )}

@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import React, { useEffect, useMemo } from 'react';
 import { TextButton, useThemeColors } from '@apitable/components';
@@ -198,11 +196,11 @@ export const EditorContainer: React.FC<React.PropsWithChildren<IEditorContainerP
               <h5 className={styles.typography}>
                 {!showHiddenField
                   ? t(Strings.show_hidden_fields_by_count, {
-                    count: hiddenFields.length,
-                  })
+                      count: hiddenFields.length,
+                    })
                   : t(Strings.folds_hidden_fields_by_count, {
-                    count: hiddenFields.length,
-                  })}
+                      count: hiddenFields.length,
+                    })}
               </h5>
             </div>
           </TextButton>

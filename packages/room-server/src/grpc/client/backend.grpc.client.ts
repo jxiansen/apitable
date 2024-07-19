@@ -1,5 +1,3 @@
-
-
 import { Inject, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { BasicResult } from 'grpc/generated/common/Core';

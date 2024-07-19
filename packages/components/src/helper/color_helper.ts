@@ -1,5 +1,3 @@
-
-
 /**
  * WCAG 2.0 divides the color contrast into three grades, Grade A, Grade AA and Grade AAA.
  * The higher the grade, the higher the color contrast and the greater the visual pressure:
@@ -17,7 +15,7 @@ type IHex = keyof typeof allColors;
 
 type IHueShade = [IHex, number];
 type IHexHueShadeMap = {
-  [hex: string]: IHueShade
+  [hex: string]: IHueShade;
 };
 
 const allColors = {
@@ -39,12 +37,13 @@ const allColors = {
 
 const getColorHexHueShadeMap = () => {
   const colorHexHueShadeMap: IHexHueShadeMap = {};
-  Object.entries(allColors).forEach(item => {
+  Object.entries(allColors).forEach((item) => {
     const [hue, colorObj] = item;
-    colorObj && Object.entries(colorObj).forEach(colorItem => {
-      const [shade, value] = colorItem;
-      colorHexHueShadeMap[value.toUpperCase()] = [(hue as IHex), parseInt(shade, 10)];
-    });
+    colorObj &&
+      Object.entries(colorObj).forEach((colorItem) => {
+        const [shade, value] = colorItem;
+        colorHexHueShadeMap[value.toUpperCase()] = [hue as IHex, parseInt(shade, 10)];
+      });
   });
   return colorHexHueShadeMap;
 };
@@ -64,7 +63,7 @@ export const getActionColor = (color: string) => {
   const hueShade = colorHexHueShadeMap[color.toUpperCase()];
   if (hueShade) {
     const [hue, currentShade] = hueShade;
-    const currentLevel = shadeLevel.findIndex(shade => shade === currentShade);
+    const currentLevel = shadeLevel.findIndex((shade) => shade === currentShade);
     if (currentLevel > 7) {
       return {
         hover: allColors[hue][shadeLevel[currentLevel - 2]!],
@@ -91,7 +90,7 @@ export const getNextShadeColor = (color: string, gap: number): string => {
   const hueShade = colorHexHueShadeMap[color.toUpperCase()];
   if (hueShade) {
     const [hue, currentShade] = hueShade;
-    const currentLevel = shadeLevel.findIndex(shade => shade === currentShade);
+    const currentLevel = shadeLevel.findIndex((shade) => shade === currentShade);
     const nextLevel = currentLevel + gap;
     const nextShade = shadeLevel[nextLevel];
     if (nextShade) return allColors[hue][nextShade]!;
@@ -102,34 +101,29 @@ export const getNextShadeColor = (color: string, gap: number): string => {
 };
 
 /**
- * 
+ *
  * Automatically generate foreground text color according to background color: light/dark
  * @param background `string` Like #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla()
  * @param contrastThreshold `number` Contrast Threshold
- * @returns 
+ * @returns
  */
-export function getContrastText(
-  background: string, 
-  contrastThreshold: number,
-) {
-  return getContrastRatio(background, darkColors.fc1) >= contrastThreshold
-    ? darkColors.fc1
-    : lightColors.fc1;
+export function getContrastText(background: string, contrastThreshold: number) {
+  return getContrastRatio(background, darkColors.fc1) >= contrastThreshold ? darkColors.fc1 : lightColors.fc1;
 }
 
-export function decomposeColor(color: string): { type: string, values: number[] } {
+export function decomposeColor(color: string): { type: string; values: number[] } {
   if (color.charAt(0) === '#') {
     return decomposeColor(convertHexToRGB(color));
   }
   const marker = color.indexOf('(');
   const type = color.substring(0, marker);
   const strValues = color.substring(marker + 1, color.length - 1).split(',');
-  const values = strValues.map(value => parseFloat(value));
+  const values = strValues.map((value) => parseFloat(value));
   return { type, values };
 }
 
 /**
- * 
+ *
  * @param color Hex color
  * @param opacity
  */
@@ -140,10 +134,10 @@ export function convertHexToRGB(color: string, opacity?: number) {
   let colors = color.match(re) as string[];
 
   if (colors && colors[0]!.length === 1) {
-    colors = colors.map(n => n + n);
+    colors = colors.map((n) => n + n);
   }
 
-  return colors ? `${opacity !== undefined ? 'rgba' : 'rgb'}(${colors.map(n => parseInt(n, 16)).join(', ')}${opacity ? ', ' + opacity : ''})` : '';
+  return colors ? `${opacity !== undefined ? 'rgba' : 'rgb'}(${colors.map((n) => parseInt(n, 16)).join(', ')}${opacity ? ', ' + opacity : ''})` : '';
 }
 
 export function getContrastRatio(foreground: string, background: string) {
@@ -155,7 +149,7 @@ export function getContrastRatio(foreground: string, background: string) {
 export function getLuminance(color: string) {
   const decomposedColor = decomposeColor(color);
   if (decomposedColor.type.indexOf('rgb') !== -1) {
-    const rgb = decomposedColor.values.map(val => {
+    const rgb = decomposedColor.values.map((val) => {
       val /= 255; // normalized
       return val <= 0.03928 ? val / 12.92 : ((val + 0.055) / 1.055) ** 2.4;
     });

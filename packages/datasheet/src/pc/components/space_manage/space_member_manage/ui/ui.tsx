@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import * as React from 'react';
 import { TextButton } from '@apitable/components';
@@ -12,7 +10,7 @@ import { Identity } from '../../identity';
 import { getSocialWecomUnitName } from 'enterprise/home/social_platform/utils';
 import styles from './style.module.less';
 
-export const Reinvite: FC<React.PropsWithChildren<{ spaceId: string, record: IMemberInfoInSpace }>> = ({ spaceId, record }) => {
+export const Reinvite: FC<React.PropsWithChildren<{ spaceId: string; record: IMemberInfoInSpace }>> = ({ spaceId, record }) => {
   const reSendEmail = (spaceId, record: IMemberInfoInSpace) => {
     Api.reSendInvite(spaceId, record.email).then((res) => {
       const { success, message } = res.data;

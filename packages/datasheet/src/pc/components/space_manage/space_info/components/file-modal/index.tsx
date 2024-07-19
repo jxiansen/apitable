@@ -1,5 +1,3 @@
-
-
 import { ConfigProvider, Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React, { FC, useEffect, useState } from 'react';
@@ -140,7 +138,9 @@ export const FileModal: FC<React.PropsWithChildren<IFileModalProps>> = ({ onCanc
             onClick={() => {
               window.open(`/space/${spaceId}/upgrade`, '_blank', 'noopener,noreferrer');
             }}
-          >{t(Strings.capacity_file_upgrade)}</LinkButton>
+          >
+            {t(Strings.capacity_file_upgrade)}
+          </LinkButton>
         </Typography>
         {TableEl}
       </div>

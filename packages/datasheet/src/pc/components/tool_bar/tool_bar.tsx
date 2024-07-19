@@ -1,5 +1,3 @@
-
-
 import { useMount, useSize, useThrottleFn } from 'ahooks';
 import classNames from 'classnames';
 import { get } from 'lodash';
@@ -439,7 +437,7 @@ const ToolbarBase = () => {
       ),
       label: 'Copilot',
       key: 'copilot',
-      show:  getEnvVariables().AI_ENTRANCE_VISIBLE && getEnvVariables().IS_APITABLE && !shareId
+      show: getEnvVariables().AI_ENTRANCE_VISIBLE && getEnvVariables().IS_APITABLE && !shareId,
     },
     {
       component: <ForeignForm key="foreignForm" className={styles.toolbarItem} showLabel={showIconBarLabel} />,
@@ -517,11 +515,7 @@ const ToolbarBase = () => {
       show: !mirrorId && !shareId && !templateId && embedSetting.historyBtn && getEnvVariables().TIME_MACHINE_VISIBLE,
     },
     {
-      component: <ArchivedRecords
-        key="archived-records"
-        className={styles.toolbarItem}
-        showLabel={showIconBarLabel}
-      />,
+      component: <ArchivedRecords key="archived-records" className={styles.toolbarItem} showLabel={showIconBarLabel} />,
       key: 'archivedRecords',
       show: !shareId && !mirrorId && !shareId && !templateId && permissions.manageable,
     },
@@ -671,8 +665,8 @@ const ToolbarBase = () => {
               text={
                 isExitGroup
                   ? t(Strings.group_amount, {
-                    amount: (activeView as IGridViewProperty).groupInfo!.length,
-                  })
+                      amount: (activeView as IGridViewProperty).groupInfo!.length,
+                    })
                   : t(Strings.group)
               }
             />
@@ -823,8 +817,8 @@ function FilterNode(props: { showLabel: boolean; disabled: boolean }) {
         isMobile
           ? t(Strings.filter)
           : t(Strings.filters_amount, {
-            amount: actualFilterCont,
-          })
+              amount: actualFilterCont,
+            })
       }
     />
   );

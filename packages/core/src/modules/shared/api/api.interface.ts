@@ -1,5 +1,3 @@
-
-
 import { ConfigConstant } from 'config';
 import { TestFunction } from 'config/system_config.interface';
 import { IPageDataBase } from '../../database/store/interfaces/common';
@@ -17,9 +15,9 @@ export interface ICreateNotification {
     extras: {
       viewId?: string; // Datasheet View ID
       recordIds?: string; // the Records Rows ID
-      nodeName?: string // when templateId = "datasheet_record_limit"
-      specification?: number | string
-      usage?: number | string
+      nodeName?: string; // when templateId = "datasheet_record_limit"
+      specification?: number | string;
+      usage?: number | string;
     };
   };
 }

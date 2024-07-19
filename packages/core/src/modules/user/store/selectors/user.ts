@@ -1,5 +1,3 @@
-
-
 import { IReduxState } from 'exports/store/interfaces';
 
 export function getUserState(state: IReduxState) {

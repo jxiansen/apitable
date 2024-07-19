@@ -1,5 +1,3 @@
-
-
 import {
   FieldType,
   IDatasheetUnits,
@@ -51,8 +49,8 @@ interface IAnalysisState {
 
 export type IFieldAnalysisResult = IForeignDatasheetMap &
   IDatasheetUnits & {
-  mainDstRecordMap: IRecordMap;
-};
+    mainDstRecordMap: IRecordMap;
+  };
 
 export interface IFieldAnalysisOptions {
   auth: IAuthHeader;
@@ -84,8 +82,7 @@ export class DatasheetFieldHandler {
     private readonly datasheetRepository: DatasheetRepository,
     private readonly computeFieldReferenceManager: ComputeFieldReferenceManager,
     private readonly roomResourceRelService: RoomResourceRelService,
-  ) {
-  }
+  ) {}
 
   initAnalysisState(mainDstId: string, options: IFieldAnalysisOptions): IAnalysisState {
     const { auth, origin, withoutPermission, needExtendMainDstRecords, mainDstMeta, mainDstRecordMap } = options;
@@ -156,7 +153,7 @@ export class DatasheetFieldHandler {
     }
     this.logger.info(
       `Finished processing special field, duration [${mainDstId}]: ${endTime - beginTime}ms. ` +
-      `Loaded datasheets and number of records: ${JSON.stringify(numRecords)}`,
+        `Loaded datasheets and number of records: ${JSON.stringify(numRecords)}`,
     );
     return result;
   }

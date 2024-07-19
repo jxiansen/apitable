@@ -1,5 +1,3 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 import { ISpaceResource } from 'exports/store/interfaces';
 
@@ -130,7 +128,7 @@ export interface ISpaceBasicInfo {
   isCreatorNameModified?: boolean;
   isOwnerNameModified?: boolean;
   usedCredit: number;
-  userResource:ISpaceResource;
+  userResource: ISpaceResource;
   seatUsage: {
     total: number;
     chatBotCount: number;

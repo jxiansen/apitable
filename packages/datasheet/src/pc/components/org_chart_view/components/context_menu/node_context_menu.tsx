@@ -1,4 +1,3 @@
-
 import parser from 'html-react-parser';
 import { FC, useContext } from 'react';
 import { ContextMenu, useThemeColors } from '@apitable/components';
@@ -12,7 +11,7 @@ import {
   ExpandOutlined,
   EyeCloseOutlined,
   EyeOpenOutlined,
-  ArchiveOutlined
+  ArchiveOutlined,
 } from '@apitable/icons';
 import { Message } from 'pc/components/common';
 import { Modal } from 'pc/components/common/modal/modal/modal';
@@ -81,7 +80,6 @@ export const NodeContextMenu: FC<React.PropsWithChildren<unknown>> = () => {
 
     if (ExecuteResult.Success === result) {
       Message.success({ content: t(Strings.archive_record_success) });
-
     }
   }
 

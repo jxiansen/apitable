@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, FieldKeyEnum } from '@apitable/core';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
@@ -44,6 +42,6 @@ export class RecordUpdateRo {
 
   @Expose()
   getRecordIds() {
-    return this.records.map(record => record.recordId);
+    return this.records.map((record) => record.recordId);
   }
 }

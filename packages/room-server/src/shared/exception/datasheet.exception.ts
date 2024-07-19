@@ -1,5 +1,3 @@
-
-
 import { IBaseException } from './base.exception';
 
 /**

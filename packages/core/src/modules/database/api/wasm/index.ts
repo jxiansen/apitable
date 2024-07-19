@@ -1,5 +1,3 @@
-
-
 // import * as databusWasmServer from '@apitable/databus-wasm-nodejs';
 import { DataBusBridge } from '@apitable/databus-wasm-web';
 import { isClient } from '../../../../utils/env';
@@ -24,25 +22,19 @@ const envVars = () => {
   return {};
 };
 
-const CONST_SKIP_FETCH_INTERCEPTOR = ['print', '__destroy_into_raw', 'constructor', 'free' , 'json0_apply'];
+const CONST_SKIP_FETCH_INTERCEPTOR = ['print', '__destroy_into_raw', 'constructor', 'free', 'json0_apply'];
 
 // Get all properties of DataBusBridge that return a Promise
-const promiseProperties = Object.getOwnPropertyNames(DataBusBridge?.prototype ?? {})
-  .filter((property) => {
-    if (CONST_SKIP_FETCH_INTERCEPTOR.includes(property)) {
-      return false;
-    }
-    const propertyDescriptor = Object.getOwnPropertyDescriptor(
-      DataBusBridge.prototype,
-      property
-    );
-    return (
-      propertyDescriptor?.value?.constructor?.name === 'Function'
-    );
-  });
+const promiseProperties = Object.getOwnPropertyNames(DataBusBridge?.prototype ?? {}).filter((property) => {
+  if (CONST_SKIP_FETCH_INTERCEPTOR.includes(property)) {
+    return false;
+  }
+  const propertyDescriptor = Object.getOwnPropertyDescriptor(DataBusBridge.prototype, property);
+  return propertyDescriptor?.value?.constructor?.name === 'Function';
+});
 
 const handler = {
-// @ts-ignore
+  // @ts-ignore
   get(target, prop, receiver) {
     if (promiseProperties.includes(prop)) {
       const originalMethod = Reflect.get(target, prop, receiver);
@@ -53,11 +45,11 @@ const handler = {
       };
     }
     return Reflect.get(target, prop, receiver);
-  }
+  },
 };
 
 async function getDatasheetPack<T>(dstId: string) {
-  return await databus.get_datasheet_pack(dstId) as AxiosResponse<IApiWrapper & { data: T }>;
+  return (await databus.get_datasheet_pack(dstId)) as AxiosResponse<IApiWrapper & { data: T }>;
 }
 
 function isInitialized() {
@@ -78,12 +70,16 @@ async function fetchInterceptor<T>(fetch: () => Promise<any>): Promise<AxiosResp
   }
 
   if (isClient() && window.__global_handle_response) {
-    return window.__global_handle_response({
-      data: respData,
-    }, undefined, undefined);
+    return window.__global_handle_response(
+      {
+        data: respData,
+      },
+      undefined,
+      undefined
+    );
   }
   return {
-    data: respData
+    data: respData,
   } as unknown as AxiosResponse<IApiWrapper & { data: T }>;
 }
 
@@ -114,7 +110,6 @@ const getInstance = () => {
     throw new Error('databus not initialized');
   }
   return databus;
-
 };
 
 const getBrowserDatabusApiEnabled = () => {

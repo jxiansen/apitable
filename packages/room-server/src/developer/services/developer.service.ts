@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@nestjs/common';
 import { UserEntity } from 'user/entities/user.entity';
 import { DeveloperRepository } from '../repositories/developer.repository';
@@ -10,8 +8,7 @@ export class DeveloperService {
   constructor(
     private readonly developerRepo: DeveloperRepository,
     private readonly userService: UserService,
-  ) {
-  }
+  ) {}
 
   /**
    * Get User base info by api key
@@ -28,5 +25,4 @@ export class DeveloperService {
     }
     return null;
   }
-
 }

@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { DatasheetFieldDto } from 'fusion/dtos/datasheet.field.dto';
 import { IFieldList } from 'shared/interfaces';

@@ -1,5 +1,3 @@
-
-
 import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { BasicResult } from 'grpc/generated/common/Core';
 import { Any } from 'grpc/generated/google/protobuf/any';

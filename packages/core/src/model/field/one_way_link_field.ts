@@ -5,9 +5,9 @@ import { createSelector } from 'reselect';
 import { IReduxState } from '../../exports/store/interfaces';
 import { ISnapshot } from '../../exports/store/interfaces';
 import { getCellValue } from 'modules/database/store/selectors/resource/datasheet/cell_calc';
-import { getCurrentView, getFieldMap }from 'modules/database/store/selectors/resource/datasheet/calc';
+import { getCurrentView, getFieldMap } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { getDatasheet, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
-import { getRowsIndexMap }from 'modules/database/store/selectors/resource/datasheet/rows_calc';
+import { getRowsIndexMap } from 'modules/database/store/selectors/resource/datasheet/rows_calc';
 import { FOperator, IAPIMetaOneWayLinkFieldProperty, IFilterCondition, IFilterText } from 'types';
 import { BasicValueType, FieldType, IOneWayLinkField, IOneWayLinkFieldProperty, IStandardValue } from 'types/field_types';
 import { ArrayValueField } from './array_field';
@@ -21,27 +21,34 @@ import { IOpenOneWayLinkFieldProperty } from 'types/open/open_field_read_types';
 import { IOpenFilterValueString } from 'types/open/open_filter_types';
 import { TextBaseField } from './text_base_field';
 import { getFieldDefaultProperty } from './const';
-export const getTextRecordMap =
-  createSelector<IReduxState, string | void, IReduxState | undefined, ISnapshot | undefined, { [text: string]: string }>(
-    [state => state, (state, datasheetId?: string | void) => getSnapshot(state, datasheetId)], (state, snapshot) => {
-      if (!snapshot) {
-        return {};
-      }
-      const fieldId = snapshot.meta.views[0]!.columns[0]!.fieldId;
-      const field = snapshot.meta.fieldMap[fieldId]!;
-      const textRecordMap = {};
-      Object.values(snapshot.recordMap).forEach(record => {
-        const value = getCellValue(state!, snapshot, record.id, fieldId);
-        const text = Field.bindContext(field, state!).cellValueToString(value);
-        if (text) {
-          textRecordMap[text] = record.id;
-        }
-      });
-      return textRecordMap;
-    });
+export const getTextRecordMap = createSelector<
+  IReduxState,
+  string | void,
+  IReduxState | undefined,
+  ISnapshot | undefined,
+  { [text: string]: string }
+>([(state) => state, (state, datasheetId?: string | void) => getSnapshot(state, datasheetId)], (state, snapshot) => {
+  if (!snapshot) {
+    return {};
+  }
+  const fieldId = snapshot.meta.views[0]!.columns[0]!.fieldId;
+  const field = snapshot.meta.fieldMap[fieldId]!;
+  const textRecordMap = {};
+  Object.values(snapshot.recordMap).forEach((record) => {
+    const value = getCellValue(state!, snapshot, record.id, fieldId);
+    const text = Field.bindContext(field, state!).cellValueToString(value);
+    if (text) {
+      textRecordMap[text] = record.id;
+    }
+  });
+  return textRecordMap;
+});
 
 export class OneWayLinkField extends ArrayValueField {
-  constructor(public override field: IOneWayLinkField, public override state: IReduxState) {
+  constructor(
+    public override field: IOneWayLinkField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -58,18 +65,24 @@ export class OneWayLinkField extends ArrayValueField {
     limitSingleRecord: Joi.boolean(),
   }).required();
 
-  static cellValueSchema = Joi.array().items(Joi.string().pattern(/^rec.+/).required()).allow(null).required();
+  static cellValueSchema = Joi.array()
+    .items(
+      Joi.string()
+        .pattern(/^rec.+/)
+        .required()
+    )
+    .allow(null)
+    .required();
 
-  static openWriteValueSchema = Joi.array().custom((value: ILinkFieldOpenValue[] | string[] | null, helpers) => {
-    if (
-      (value as any).map((item: string | ILinkFieldOpenValue) => (
-        /^rec.+/.test((item as ILinkFieldOpenValue).recordId || (item as string))
-      ))
-    ) {
-      return value;
-    }
-    return helpers.error('valid date');
-  }).allow(null).required();
+  static openWriteValueSchema = Joi.array()
+    .custom((value: ILinkFieldOpenValue[] | string[] | null, helpers) => {
+      if ((value as any).map((item: string | ILinkFieldOpenValue) => /^rec.+/.test((item as ILinkFieldOpenValue).recordId || (item as string)))) {
+        return value;
+      }
+      return helpers.error('valid date');
+    })
+    .allow(null)
+    .required();
 
   static defaultProperty(): Omit<IOneWayLinkFieldProperty, 'foreignDatasheetId'> {
     return getFieldDefaultProperty(FieldType.OneWayLink) as Omit<IOneWayLinkFieldProperty, 'foreignDatasheetId'>;
@@ -98,20 +111,14 @@ export class OneWayLinkField extends ArrayValueField {
           title: {
             type: 'string',
             title: t(Strings.robot_variables_join_linked_record_titles),
-          }
-        }
-      }
+          },
+        },
+      },
     };
   }
 
   override get statTypeList(): StatType[] {
-    return [
-      StatType.None,
-      StatType.Empty,
-      StatType.Filled,
-      StatType.PercentEmpty,
-      StatType.PercentFilled,
-    ];
+    return [StatType.None, StatType.Empty, StatType.Filled, StatType.PercentEmpty, StatType.PercentFilled];
   }
 
   get basicValueType(): BasicValueType {
@@ -123,13 +130,7 @@ export class OneWayLinkField extends ArrayValueField {
   }
 
   override get acceptFilterOperators(): FOperator[] {
-    return [
-      FOperator.Contains,
-      FOperator.DoesNotContain,
-      FOperator.IsEmpty,
-      FOperator.IsNotEmpty,
-      FOperator.IsRepeat,
-    ];
+    return [FOperator.Contains, FOperator.DoesNotContain, FOperator.IsEmpty, FOperator.IsNotEmpty, FOperator.IsRepeat];
   }
 
   filterRecordIds(value: any): string[] {
@@ -139,7 +140,7 @@ export class OneWayLinkField extends ArrayValueField {
     }
     const archivedRecordIds = snapshot.meta.archivedRecordIds || [];
     if (Array.isArray(value)) {
-      return value.filter(recordId => snapshot.recordMap[recordId] || archivedRecordIds.includes(recordId));
+      return value.filter((recordId) => snapshot.recordMap[recordId] || archivedRecordIds.includes(recordId));
     }
     return [];
   }
@@ -151,9 +152,8 @@ export class OneWayLinkField extends ArrayValueField {
     }
     const archivedRecordIds = snapshot.meta.archivedRecordIds || [];
     if (Array.isArray(value)) {
-      return value.every(recordId => {
+      return value.every((recordId) => {
         return !!(snapshot.recordMap[recordId] || archivedRecordIds.includes(recordId));
-
       });
     }
     return false;
@@ -197,18 +197,14 @@ export class OneWayLinkField extends ArrayValueField {
   }
 
   cellValue2TextArray(cellValue: string[] | null) {
-    return cellValue ? cellValue.map(recordId => this.getLinkedRecordCellString(recordId) || '') : [];
+    return cellValue ? cellValue.map((recordId) => this.getLinkedRecordCellString(recordId) || '') : [];
   }
 
   /**
    * @orderInCellValueSensitive {boolean} optional parameter,
    * to determine whether to only do normal sorting for the associated field, without preprocessing the cell content
    */
-  override compare(
-    cellValue1: string[] | null,
-    cellValue2: string[] | null,
-    orderInCellValueSensitive?: boolean,
-  ): number {
+  override compare(cellValue1: string[] | null, cellValue2: string[] | null, orderInCellValueSensitive?: boolean): number {
     const rowIndexMap = getRowsIndexMap(this.state, this.field.property.foreignDatasheetId);
     if (!orderInCellValueSensitive) {
       cellValue1 = this.sortValueByForeignRowOrder(cellValue1, rowIndexMap);
@@ -217,11 +213,7 @@ export class OneWayLinkField extends ArrayValueField {
     return super.compare(cellValue1, cellValue2);
   }
 
-  override isMeetFilter(
-    operator: FOperator,
-    cellValue: string[] | null,
-    conditionValue: Exclude<IFilterText, null>,
-  ): boolean {
+  override isMeetFilter(operator: FOperator, cellValue: string[] | null, conditionValue: Exclude<IFilterText, null>): boolean {
     if (operator === FOperator.IsEmpty) {
       return cellValue == null;
     }
@@ -233,11 +225,11 @@ export class OneWayLinkField extends ArrayValueField {
 
     switch (operator) {
       case FOperator.Contains: {
-        return cellValue != null && cellTextArray.some(text => this.stringInclude(text, filterValue));
+        return cellValue != null && cellTextArray.some((text) => this.stringInclude(text, filterValue));
       }
 
       case FOperator.DoesNotContain: {
-        return cellValue == null || !cellTextArray.some(text => this.stringInclude(text, filterValue));
+        return cellValue == null || !cellTextArray.some((text) => this.stringInclude(text, filterValue));
       }
 
       default: {
@@ -257,17 +249,16 @@ export class OneWayLinkField extends ArrayValueField {
   }
 
   stdValueToCellValue(stdValue: IStandardValue): ICellValue {
-
     // If it is data from the current field, write it directly.
     if (stdValue.data[0] && stdValue.data[0].datasheetId === this.field.property.foreignDatasheetId) {
-      return stdValue.data.map(val => {
-        return (val as {text:string,recordId:string}).recordId;
+      return stdValue.data.map((val) => {
+        return (val as { text: string; recordId: string }).recordId;
       });
     }
 
     // Try to find the same value as the primary key text from the association table, if found, create the association.
     const textRecordMap = getTextRecordMap(this.state, this.field.property.foreignDatasheetId);
-    let texts = [stdValue.data.map(d => d.text).join(', ')];
+    let texts = [stdValue.data.map((d) => d.text).join(', ')];
     // Determine whether the current configuration item allows adding multiple associated records,
     // and if it is allowed, cut it according to ","
     if (!this.field.property.limitSingleRecord) {
@@ -295,7 +286,7 @@ export class OneWayLinkField extends ArrayValueField {
     };
 
     if (recordIds) {
-      stdVal.data = recordIds.map(recordId => {
+      stdVal.data = recordIds.map((recordId) => {
         const text = this.getLinkedRecordCellString(recordId) || t(Strings.record_unnamed);
         return {
           text,
@@ -316,7 +307,7 @@ export class OneWayLinkField extends ArrayValueField {
    */
   cellValueToArray(recordIds: string[] | null): string[] | null {
     const _filter = this.filterRecordIds(recordIds);
-    return _filter.map(recordId => {
+    return _filter.map((recordId) => {
       return this.getLinkedRecordCellString(recordId) || t(Strings.record_unnamed);
     });
   }
@@ -360,10 +351,10 @@ export class OneWayLinkField extends ArrayValueField {
 
   cellValueToOpenValue(recordIds: string[] | null): ILinkFieldOpenValue[] | null {
     const _filter = this.filterRecordIds(recordIds);
-    return _filter.map(recordId => {
+    return _filter.map((recordId) => {
       return {
         recordId,
-        title: this.getLinkedRecordCellString(recordId) || t(Strings.record_unnamed)
+        title: this.getLinkedRecordCellString(recordId) || t(Strings.record_unnamed),
       };
     });
   }
@@ -373,20 +364,20 @@ export class OneWayLinkField extends ArrayValueField {
       return null;
     }
     const isSimple = openWriteValue.length && typeof openWriteValue[0] === 'string';
-    return (isSimple ? openWriteValue : (openWriteValue as ILinkFieldOpenValue[]).map(v => v.recordId)) as string[];
+    return (isSimple ? openWriteValue : (openWriteValue as ILinkFieldOpenValue[]).map((v) => v.recordId)) as string[];
   }
 
   static openUpdatePropertySchema = Joi.object({
     foreignDatasheetId: Joi.string().required(),
     limitToViewId: Joi.string().pattern(/^viw.+/, 'viewId'),
     limitSingleRecord: Joi.boolean(),
-    conversion: Joi.valid(...enumToArray(Conversion))
+    conversion: Joi.valid(...enumToArray(Conversion)),
   }).required();
 
   static openAddPropertySchema = Joi.object({
     foreignDatasheetId: Joi.string().required(),
     limitToViewId: Joi.string().pattern(/^viw.+/, 'viewId'),
-    limitSingleRecord: Joi.boolean()
+    limitSingleRecord: Joi.boolean(),
   }).required();
 
   override get openFieldProperty(): IOpenOneWayLinkFieldProperty {
@@ -411,7 +402,7 @@ export class OneWayLinkField extends ArrayValueField {
     return {
       foreignDatasheetId,
       limitToView,
-      limitSingleRecord
+      limitSingleRecord,
     };
   }
 

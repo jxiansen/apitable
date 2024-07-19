@@ -1,5 +1,3 @@
-
-
 import { CacheManager, getFieldTypeString, IReduxState } from '@apitable/core';
 import { ConfigConstant, Field, Selectors, Strings, t } from 'core';
 import { FieldType, IWidgetContext } from 'interface';
@@ -16,7 +14,11 @@ export class Record {
   /**
    * @hidden
    */
-  constructor(public datasheetId: string, protected wCtx: IWidgetContext, public recordId: string) {}
+  constructor(
+    public datasheetId: string,
+    protected wCtx: IWidgetContext,
+    public recordId: string
+  ) {}
 
   private getRecordData() {
     const state = this.wCtx.widgetStore.getState() as any as IReduxState;

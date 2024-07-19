@@ -1,5 +1,3 @@
-
-
 import { getNextShadeColor, getContrastText } from 'helper/color_helper';
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
@@ -9,7 +7,7 @@ import { ILightOrDarkThemeColors } from '../../colors';
 const SIZE_MARGIN_MAP = {
   small: 4,
   middle: 8,
-  large: 8
+  large: 8,
 };
 
 const SIZE_ATTR_MAP = {
@@ -30,7 +28,7 @@ const SIZE_ATTR_MAP = {
     padding: '13px 16px',
     borderRadius: 8,
     fontSize: 14,
-  }
+  },
 };
 
 const getColors = (color: ILightOrDarkThemeColors) => (btnTypeOrColor: IButtonType | string) => {
@@ -68,14 +66,14 @@ const getColors = (color: ILightOrDarkThemeColors) => (btnTypeOrColor: IButtonTy
     textSuccessDefault,
     bgBrandDefault,
     bgBrandHover,
-    bgBrandActive
+    bgBrandActive,
   } = color;
   switch (btnTypeOrColor) {
     case 'default':
       return {
         fill: bgControlsDefault,
         fillHover: bgControlsHover,
-        fillActive:bgControlsActive,
+        fillActive: bgControlsActive,
         jelly: bgBrandLightDefault,
         jellyHover: bgBrandLightHover,
         jellyActive: bgBrandLightActive,
@@ -86,7 +84,7 @@ const getColors = (color: ILightOrDarkThemeColors) => (btnTypeOrColor: IButtonTy
       return {
         fill: bgBrandDefault,
         fillHover: bgBrandHover,
-        fillActive:bgBrandActive,
+        fillActive: bgBrandActive,
         jelly: bgBrandLightDefault,
         jellyHover: bgBrandLightHover,
         jellyActive: bgBrandLightActive,
@@ -97,7 +95,7 @@ const getColors = (color: ILightOrDarkThemeColors) => (btnTypeOrColor: IButtonTy
       return {
         fill: bgDangerDefault,
         fillHover: bgDangerHover,
-        fillActive:bgDangerActive,
+        fillActive: bgDangerActive,
         jelly: bgDangerLightDefault,
         jellyHover: bgDangerLightHover,
         jellyActive: bgWarnLightActive,
@@ -107,7 +105,7 @@ const getColors = (color: ILightOrDarkThemeColors) => (btnTypeOrColor: IButtonTy
       return {
         fill: bgWarnDefault,
         fillHover: bgWarnHover,
-        fillActive:bgWarnActive,
+        fillActive: bgWarnActive,
         jelly: bgWarnLightDefault,
         jellyHover: bgWarnLightHover,
         jellyActive: bgDangerLightActive,
@@ -117,7 +115,7 @@ const getColors = (color: ILightOrDarkThemeColors) => (btnTypeOrColor: IButtonTy
       return {
         fill: bgSuccessDefault,
         fillHover: bgSuccessHover,
-        fillActive:bgSuccessActive,
+        fillActive: bgSuccessActive,
         jelly: bgSuccessLightDefault,
         jellyHover: bgSuccessLightHover,
         jellyActive: bgSuccessLightActive,
@@ -127,7 +125,7 @@ const getColors = (color: ILightOrDarkThemeColors) => (btnTypeOrColor: IButtonTy
       return {
         fill: deepPurple[500],
         fillHover: deepPurple[500],
-        fillActive:deepPurple[500],
+        fillActive: deepPurple[500],
         jelly: bgBrandDefault,
         jellyHover: bgBrandLightHover,
         jellyActive: bgBrandLightActive,
@@ -142,31 +140,31 @@ const getColors = (color: ILightOrDarkThemeColors) => (btnTypeOrColor: IButtonTy
 };
 
 export const IconSpanStyled = styled.span<IIconSpanStyled>`
-  display:inline-block;
-  vertical-align:-0.225em;
+  display: inline-block;
+  vertical-align: -0.225em;
   line-height: 1;
-  ${props => {
+  ${(props) => {
     if (!props.existIcon) {
       return '';
     }
     const marginWithSize = SIZE_MARGIN_MAP[props.size || 'middle'];
     if (props.position === 'suffix') {
       return css`
-        margin-left:${marginWithSize}px;
-        `;
+        margin-left: ${marginWithSize}px;
+      `;
     }
     return css`
-    margin-right:${marginWithSize}px;
+      margin-right: ${marginWithSize}px;
     `;
   }};
 `;
 
 export const TextSpanStyled = styled.span`
-  display:inline-block;
-  line-height:100%;
+  display: inline-block;
+  line-height: 100%;
 `;
 
-export const ButtonBase = styled.button.attrs(applyDefaultTheme) <IButtonBaseProps>`
+export const ButtonBase = styled.button.attrs(applyDefaultTheme)<IButtonBaseProps>`
   cursor: pointer;
   transition: background-color 100ms linear;
   border: none;
@@ -178,23 +176,26 @@ export const ButtonBase = styled.button.attrs(applyDefaultTheme) <IButtonBasePro
   &:focus {
     box-shadow: none;
     outline: none;
-  };
+  }
   &:active {
     box-shadow: none;
     outline: none;
-  };
+  }
   .loading {
     display: inline-block;
     vertical-align: middle;
     ${(props) => {
-    const marginWithSize = SIZE_MARGIN_MAP[props.size || 'middle'];
-    return css`
-    margin-right:${marginWithSize}px;
-    `;
-  }}
+      const marginWithSize = SIZE_MARGIN_MAP[props.size || 'middle'];
+      return css`
+        margin-right: ${marginWithSize}px;
+      `;
+    }}
   }
   ${(props) => {
-    if (props.block) return css`width:100%;`;
+    if (props.block)
+      return css`
+        width: 100%;
+      `;
     return;
   }}
   ${(props) => {
@@ -257,14 +258,14 @@ export const ButtonBase = styled.button.attrs(applyDefaultTheme) <IButtonBasePro
       hoverBgColor = bgColor;
       activeBgColor = bgColor;
     }
-    
+
     return css`
       background: ${bgColor};
       color: ${textColor};
       &:hover {
         color: ${hoverTextColor};
         background: ${hoverBgColor};
-      };
+      }
       &:active {
         color: ${activeTextColor};
         background: ${activeBgColor};

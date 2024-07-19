@@ -1,5 +1,3 @@
-
-
 import { AnyAction, Store } from 'redux';
 import { IFieldMap, IReduxState } from 'exports/store/interfaces';
 import { getSnapshot, getField } from 'modules/database/store/selectors/resource/datasheet/base';
@@ -55,7 +53,7 @@ export class CellFormatChecker {
       return actions;
     }
     const fieldIds = Object.keys(fieldMapSnapshot);
-    return produce<IJOTAction[]>(actions, draft => {
+    return produce<IJOTAction[]>(actions, (draft) => {
       for (const action of draft) {
         if (!action.p.includes('recordMap')) {
           continue;
@@ -74,7 +72,6 @@ export class CellFormatChecker {
           action['oi'] = this.convertValue(fieldId, recordId, cellValue, fieldMapSnapshot, datasheetId);
         }
         if (action.p.length === 2 && 'data' in action['oi']) {
-
           for (const fieldId of fieldIds) {
             const cellValue = action['oi'].data[fieldId];
 
@@ -87,4 +84,3 @@ export class CellFormatChecker {
     });
   }
 }
-

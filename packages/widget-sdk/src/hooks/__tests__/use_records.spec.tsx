@@ -10,7 +10,7 @@ jest.mock('../../view_computed', () => {
   return {
     __esModule: true, // this property makes it work
     ...originalModule,
-    useReferenceCount: () => {}
+    useReferenceCount: () => {},
   };
 });
 
@@ -22,13 +22,13 @@ test('use records should return the correct result', () => {
     rec1111: {
       id: 'rec1111',
       data: {},
-      commentCount: 0
+      commentCount: 0,
     },
     rec2222: {
       id: 'rec2222',
       data: {},
-      commentCount: 0
-    }
+      commentCount: 0,
+    },
   };
   mockWidgetSdkData.addRecords(recordMap);
 

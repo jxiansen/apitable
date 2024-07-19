@@ -1,5 +1,3 @@
-
-
 import { Strings, t } from 'exports/i18n';
 import type { IUnitIds } from 'types/field_types';
 import type { FieldType, ITimestamp } from './field_types';
@@ -11,8 +9,8 @@ export interface ISortedField {
 
 export type IGroupInfo = ISortedField[];
 export type ISortInfo = {
-  rules: ISortedField[],
-  keepSort: boolean,
+  rules: ISortedField[];
+  keepSort: boolean;
 };
 
 export enum FOperator {
@@ -70,10 +68,10 @@ export type IFilterWorkDoc = IFilterValue[] | null;
 export type IFilterMember = IUnitIds | null;
 
 export type IFilterDateTime =
-  [Exclude<FilterDuration, FilterDuration.ExactDate | FilterDuration.DateRange>] |
-  [FilterDuration.ExactDate, ITimestamp | null] |
-  [FilterDuration.DateRange, string | null] |
-  null;
+  | [Exclude<FilterDuration, FilterDuration.ExactDate | FilterDuration.DateRange>]
+  | [FilterDuration.ExactDate, ITimestamp | null]
+  | [FilterDuration.DateRange, string | null]
+  | null;
 
 export interface IFilterBaseCondition {
   conditionId: string;

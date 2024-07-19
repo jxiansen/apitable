@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Dropdown } from './index';
 import { Dropdown as FloatDropdown } from './float_ui';

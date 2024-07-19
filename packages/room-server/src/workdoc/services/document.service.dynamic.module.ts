@@ -1,5 +1,3 @@
-
-
 import { DynamicModule, Module } from '@nestjs/common';
 import path from 'path';
 import * as fs from 'fs';
@@ -9,20 +7,17 @@ import { DocumentBaseService } from './document.base.service';
   providers: [
     {
       provide: DocumentBaseService,
-      useClass: class DefaultDocumentService extends DocumentBaseService {
-      }
+      useClass: class DefaultDocumentService extends DocumentBaseService {},
     },
   ],
   exports: [
     {
       provide: DocumentBaseService,
-      useClass: class DefaultDocumentService extends DocumentBaseService {
-      }
+      useClass: class DefaultDocumentService extends DocumentBaseService {},
     },
   ],
 })
 export class DocumentServiceDynamicModule {
-
   static forRoot(): DynamicModule {
     const enterpriseModulePath = path.join(__dirname, '../../enterprise/workdoc');
     const isEnterpriseLevel: boolean = fs.existsSync(enterpriseModulePath);
@@ -32,9 +27,8 @@ export class DocumentServiceDynamicModule {
         module: DocumentEnterpriseModule,
       };
     }
-    return { 
+    return {
       module: DocumentServiceDynamicModule,
-    }; 
+    };
   }
-
 }

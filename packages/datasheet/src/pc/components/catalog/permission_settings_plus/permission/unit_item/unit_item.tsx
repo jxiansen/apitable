@@ -1,5 +1,3 @@
-
-
 import { Dropdown } from 'antd';
 import classnames from 'classnames';
 import { get } from 'lodash';

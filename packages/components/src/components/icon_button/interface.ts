@@ -1,5 +1,3 @@
-
-
 import React, { ElementType } from 'react';
 import { IIconProps } from '@apitable/icons';
 
@@ -24,7 +22,7 @@ export interface IIconButtonProps extends React.HTMLAttributes<HTMLDivElement> {
    * Variant type
    */
   variant?: 'default' | 'background' | 'blur';
-  /** 
+  /**
    * Icon component
    */
   icon: React.FC<React.PropsWithChildren<IIconProps>>;
@@ -47,4 +45,3 @@ export interface IIconButtonProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export type IIconButtonWrapperProps = Pick<IIconButtonProps, 'disabled' | 'variant' | 'size' | 'active' | 'shape'>;
-

@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { TextInput } from './index';
 import { StoryType } from '../../stories/constants';
@@ -28,69 +26,69 @@ export const Default = Template.bind({});
 
 export const Placeholder = Template.bind({});
 Placeholder.args = {
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };
 
 export const Block = Template.bind({});
 Block.args = {
   block: true,
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };
 
 export const LineStyle = Template.bind({});
 LineStyle.args = {
   lineStyle: true,
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };
 
 export const SmallSize = Template.bind({});
 SmallSize.args = {
   size: 'small',
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };
 
 export const LargeSize = Template.bind({});
 LargeSize.args = {
   size: 'large',
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };
 
 export const Prefix = Template.bind({});
 Prefix.args = {
   prefix: <TelephoneOutlined />,
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };
 
 export const Suffix = Template.bind({});
 Suffix.args = {
   suffix: <TelephoneOutlined />,
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };
 
 export const AddonBefore = Template.bind({});
 AddonBefore.args = {
   addonBefore: <div>http://</div>,
   prefix: <TelephoneOutlined />,
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };
 
 export const AddonAfter = Template.bind({});
 AddonAfter.args = {
   addonAfter: <div>.com</div>,
   prefix: <TelephoneOutlined />,
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };
 
 export const ErrorStatus = Template.bind({});
 ErrorStatus.args = {
   error: true,
   prefix: <TelephoneOutlined />,
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true,
   prefix: <TelephoneOutlined />,
-  placeholder: 'please input something'
+  placeholder: 'please input something',
 };

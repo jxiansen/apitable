@@ -1,7 +1,15 @@
 import { Strings, t } from 'exports/i18n';
 
 import {
-  IFieldPermissionMap, IMirror, IRecord, IReduxState, ISnapshot, IViewDerivation, IViewProperty, IViewRow, Role,
+  IFieldPermissionMap,
+  IMirror,
+  IRecord,
+  IReduxState,
+  ISnapshot,
+  IViewDerivation,
+  IViewProperty,
+  IViewRow,
+  Role,
 } from 'exports/store/interfaces';
 
 import { Field } from 'model/field';
@@ -41,60 +49,63 @@ export function sortRowsBySortInfo(state: IReduxState, rows: IViewRow[], sortRul
   return shallowRows;
 }
 
-export const getFilterInfo = createCachedSelector<IReduxState,
+export const getFilterInfo = createCachedSelector<
+  IReduxState,
   string | undefined | void,
   ISnapshot | undefined,
   string | undefined,
   IMirror | undefined | null,
-  IFilterInfo | undefined>([getSnapshot, getActiveViewId, state => getMirror(state)], (snapshot, viewId, mirror) => {
-    if (!snapshot || !viewId) {
-      return;
-    }
-    const view = getViewById(snapshot, viewId);
-    if (!view) {
-      return;
-    }
-    if (mirror?.id) {
-      const originViewConditionIds = view.filterInfo?.conditions.map(item => item.conditionId) || [];
-      const filterInfo = mirror.temporaryView?.filterInfo;
-      const mirrorConditions = filterInfo?.conditions.filter(item => {
-        return !originViewConditionIds.includes(item.conditionId);
-      });
+  IFilterInfo | undefined
+>([getSnapshot, getActiveViewId, (state) => getMirror(state)], (snapshot, viewId, mirror) => {
+  if (!snapshot || !viewId) {
+    return;
+  }
+  const view = getViewById(snapshot, viewId);
+  if (!view) {
+    return;
+  }
+  if (mirror?.id) {
+    const originViewConditionIds = view.filterInfo?.conditions.map((item) => item.conditionId) || [];
+    const filterInfo = mirror.temporaryView?.filterInfo;
+    const mirrorConditions = filterInfo?.conditions.filter((item) => {
+      return !originViewConditionIds.includes(item.conditionId);
+    });
 
-      if (!mirrorConditions) {
-        return filterInfo;
-      }
-      return {
-        conjunction: filterInfo!.conjunction,
-        conditions: mirrorConditions,
-      };
+    if (!mirrorConditions) {
+      return filterInfo;
     }
-    return view.filterInfo;
-  })({
-    keySelector: (state, datasheetId) => state.pageParams.mirrorId || datasheetId || getActiveDatasheetId(state),
-  });
+    return {
+      conjunction: filterInfo!.conjunction,
+      conditions: mirrorConditions,
+    };
+  }
+  return view.filterInfo;
+})({
+  keySelector: (state, datasheetId) => state.pageParams.mirrorId || datasheetId || getActiveDatasheetId(state),
+});
 
 /* clipboard for clipboard */
 export const getGroupFields = (view: IViewProperty, fieldMap: { [id: string]: IField }, fieldPermissionMap?: IFieldPermissionMap): IField[] => {
   const fields: IField[] = [];
-  view.groupInfo && view.groupInfo.forEach(gp => {
-    const fieldRole = getFieldRoleByFieldId(fieldPermissionMap, gp.fieldId);
-    if (fieldRole === Role.None) {
-      fields.push({
-        id: gp.fieldId,
-        type: FieldType.NotSupport,
-        name: t(Strings.crypto_field),
-        property: null,
-      });
-      return;
-    }
-    const field = fieldMap[gp.fieldId];
-    if (field) {
-      fields.push(field);
-    } else {
-      console.warn('! can\'t find group field %s on datasheet', gp.fieldId);
-    }
-  });
+  view.groupInfo &&
+    view.groupInfo.forEach((gp) => {
+      const fieldRole = getFieldRoleByFieldId(fieldPermissionMap, gp.fieldId);
+      if (fieldRole === Role.None) {
+        fields.push({
+          id: gp.fieldId,
+          type: FieldType.NotSupport,
+          name: t(Strings.crypto_field),
+          property: null,
+        });
+        return;
+      }
+      const field = fieldMap[gp.fieldId];
+      if (field) {
+        fields.push(field);
+      } else {
+        console.warn("! can't find group field %s on datasheet", gp.fieldId);
+      }
+    });
   return fields;
 };
 
@@ -123,7 +134,7 @@ export const EMPTY_DERATION: IViewDerivation = {
   rowsIndexMap: new Map(),
   pureVisibleRows: [],
   pureVisibleRowsIndexMap: new Map(),
-  kanbanGroupMap: {}
+  kanbanGroupMap: {},
 };
 
 export const getViewDerivation = (state: IReduxState, datasheetId?: string, viewId?: string): IViewDerivation => {
@@ -208,7 +219,7 @@ export const getPureLinearRows = (state: IReduxState) => {
 };
 
 export const getVisibleRowIds = createSelector([getVisibleRows], (visibleRows) => {
-  return visibleRows.map(row => row.recordId);
+  return visibleRows.map((row) => row.recordId);
 });
 
 export const getGalleryGroupedRows = (state: IReduxState) => {

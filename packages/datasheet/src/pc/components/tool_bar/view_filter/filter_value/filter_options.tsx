@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import { FieldType, FOperator } from '@apitable/core';

@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Loading } from './index';
 import { StoryType } from '../../stories/constants';
@@ -27,12 +25,12 @@ export const Default = Template.bind({});
 export const InheritColor = () => {
   return (
     <div style={{ color: 'red' }}>
-      <Loading currentColor/>
+      <Loading currentColor />
     </div>
   );
 };
 
 export const SetStrokeWidth = Template.bind({});
 SetStrokeWidth.args = {
-  strokeWidth: 1
+  strokeWidth: 1,
 };

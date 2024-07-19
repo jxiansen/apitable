@@ -1,5 +1,3 @@
-
-
 import cls from 'classnames';
 import Image from 'next/image';
 import * as React from 'react';

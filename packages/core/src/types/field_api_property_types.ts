@@ -1,5 +1,3 @@
-
-
 /**
  * API Meta open interface definition
  */
@@ -60,20 +58,20 @@ export interface IAPIMetaSingleSelectFieldProperty {
 export interface IAPIMetaButtonFieldProperty {
   text: string;
   style: {
-    type: ButtonFieldStyleNameEnum,
-    color: object
-  },
+    type: ButtonFieldStyleNameEnum;
+    color: object;
+  };
   action: {
-    type?: ButtonFieldActionNameEnum,
+    type?: ButtonFieldActionNameEnum;
     openLink?: {
-      type: ButtonFieldActionOpenLinkNameEnum,
-      expression: string
-    },
+      type: ButtonFieldActionOpenLinkNameEnum;
+      expression: string;
+    };
     automation?: {
-      automationId: string,
-      triggerId: string
-    }
-  }
+      automationId: string;
+      triggerId: string;
+    };
+  };
 }
 
 export type IAPIMetaMultiSelectFieldProperty = IAPIMetaSingleSelectFieldProperty;

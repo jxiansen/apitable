@@ -1,5 +1,3 @@
-
-
 import { FC, useContext } from 'react';
 import { ContextMenu, useThemeColors } from '@apitable/components';
 import { CollaCommandName, t, Strings } from '@apitable/core';

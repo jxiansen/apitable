@@ -12,7 +12,7 @@ import { widgetMessage } from './widget_message';
 export const isSafeOrigin = (origin: string) => {
   const SAFE_ORIGIN_END = [window.location.origin];
   const LOCAL = ['https://localhost', 'http://localhost'];
-  return SAFE_ORIGIN_END.some(str => origin.endsWith(str)) || LOCAL.some(str => origin.startsWith(str));
+  return SAFE_ORIGIN_END.some((str) => origin.endsWith(str)) || LOCAL.some((str) => origin.startsWith(str));
 };
 
 export const cmdExecute = (cmdOptions: ICollaCommandOptions, widgetId?: string): Promise<ICollaCommandExecuteResult<any>> => {
@@ -20,19 +20,21 @@ export const cmdExecute = (cmdOptions: ICollaCommandOptions, widgetId?: string):
     return widgetMessage.syncCmd(cmdOptions);
   }
   if (!widgetId) {
-    return new Promise((resolve) => resolve({
-      result: ExecuteResult.None,
-      resourceId: '',
-      resourceType: ResourceType.Widget
-    }));
+    return new Promise((resolve) =>
+      resolve({
+        result: ExecuteResult.None,
+        resourceId: '',
+        resourceType: ResourceType.Widget,
+      })
+    );
   }
   return eventMessage.syncCmd(cmdOptions, widgetId!);
 };
 
 /**
  * Receiving Message Interceptor.
- * @param res 
- * @param callback 
+ * @param res
+ * @param callback
  */
 export const interceptor = (callback?: (data: any, messageId?: string) => void) => {
   return (res: IResponse<any>, messageId?: string) => {
@@ -41,9 +43,10 @@ export const interceptor = (callback?: (data: any, messageId?: string) => void) 
       return;
     }
     callback?.(res.data, messageId);
-    messageId && messageMap.pop(messageId, { 
-      success: true,
-      data: res.data
-    });
+    messageId &&
+      messageMap.pop(messageId, {
+        success: true,
+        data: res.data,
+      });
   };
 };

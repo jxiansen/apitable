@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from 'react';
 import { imageCache } from 'pc/components/konva_grid';
 

@@ -1,5 +1,3 @@
-
-
 import { APITipConfigInterface, Tips } from 'config/api_tip_config.interface';
 import * as apiTipConfigJson from './api_tip_config.source.json';
 import * as systemConfigJson from './system_config.source.json';
@@ -31,7 +29,7 @@ const jsonToObject = (object: object) => {
   });
   return obj;
 };
-const Notifications = (SystemConfig.notifications as any) as Notifications;
+const Notifications = SystemConfig.notifications as any as Notifications;
 
 const NotificationTypes = Notifications.types;
 const NotificationTemplates = Notifications.templates;

@@ -1,5 +1,3 @@
-
-
 import { isEmpty } from 'lodash';
 import { IJOTAction, jot } from 'engine/ot';
 import { DatasheetActions } from 'commands_actions/datasheet';
@@ -10,10 +8,7 @@ import { ResourceType } from 'types';
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { CollaCommandName } from 'commands/enum';
 
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 
 export interface IMoveColumn {
   fieldId: string; // the id of the column that needs to be dragged
@@ -40,7 +35,7 @@ export const moveColumn: ICollaCommandDef<IMoveColumnOptions> = {
       return null;
     }
 
-    const view = snapshot.meta.views.find(view => view.id === viewId);
+    const view = snapshot.meta.views.find((view) => view.id === viewId);
 
     const getColumnIndexMap = () => {
       const columnsMap: { [id: string]: number } = {};
@@ -90,10 +85,10 @@ export const moveColumn: ICollaCommandDef<IMoveColumnOptions> = {
 
       if (frozenColumnCount) {
         if (targetIndex < frozenColumnCount && originColumnIndex >= frozenColumnCount) {
-          finalFrozenColumnCount ++;
+          finalFrozenColumnCount++;
         }
         if (targetIndex >= frozenColumnCount && originColumnIndex < frozenColumnCount) {
-          finalFrozenColumnCount --;
+          finalFrozenColumnCount--;
         }
       }
 

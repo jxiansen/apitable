@@ -1,5 +1,3 @@
-
-
 import { useToggle } from 'ahooks';
 import { Badge } from 'antd';
 import classNames from 'classnames';
@@ -96,9 +94,8 @@ export const Navigation: FC<React.PropsWithChildren<unknown>> = () => {
     const list = env.SIDEBAR_CUSTOM_BUTTON_LIST;
     if (!list) {
       return [];
-    } 
+    }
     return JSON.parse(list);
-    
   }, []);
   useRequest(notificationStatistics);
 

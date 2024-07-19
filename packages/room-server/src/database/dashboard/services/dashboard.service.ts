@@ -1,5 +1,3 @@
-
-
 import { IDashboardLayout, IDashboardWidgetMap, IResourceMeta, IServerDashboardPack } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { MetaService } from 'database/resource/services/meta.service';
@@ -15,8 +13,7 @@ export class DashboardService {
     private readonly nodeService: NodeService,
     private readonly restService: RestService,
     private readonly resourceMetaService: MetaService,
-  ) {
-  }
+  ) {}
 
   async fetchDashboardPack(dashboardId: string, auth: IAuthHeader): Promise<IServerDashboardPack> {
     const baseNodeInfo = await this.nodeService.getNodeDetailInfo(dashboardId, auth, { internal: true, notDst: true, main: true });
@@ -54,7 +51,7 @@ export class DashboardService {
       return {};
     }
     const layout: IDashboardLayout[] = meta['layout'] || [];
-    const installWidgetIds = layout.map(v => v.id);
+    const installWidgetIds = layout.map((v) => v.id);
     if (!installWidgetIds.length) {
       return {};
     }

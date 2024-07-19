@@ -1,5 +1,3 @@
-
-
 export enum ApiExceptionEnum {
   /**
    * unauthorized, httpStatus code is 401

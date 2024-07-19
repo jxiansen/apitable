@@ -1,13 +1,13 @@
-
-
 import React, { CSSProperties } from 'react';
 import { LinkStyled, LinkWrapperStyled } from './styled';
 
 interface ICellLink {
-  options: {
-    recordId: string;
-    title: string;
-  }[] | null;
+  options:
+    | {
+        recordId: string;
+        title: string;
+      }[]
+    | null;
   className?: string;
   style?: CSSProperties;
   cellClassName?: string;
@@ -21,7 +21,7 @@ export const CellLink = (props: ICellLink) => {
   }
   return (
     <LinkWrapperStyled className={className} style={style}>
-      {options.map(opt => (
+      {options.map((opt) => (
         <LinkStyled className={cellClassName} style={cellStyle} key={opt.recordId}>
           {opt.title}
         </LinkStyled>

@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@apitable/components';
 import { PrivateRoute } from 'pc/components/route_manager/private_route';

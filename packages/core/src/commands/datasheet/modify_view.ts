@@ -1,5 +1,3 @@
-
-
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { CollaCommandName } from 'commands/enum';
 import { getCustomConfig } from 'config';
@@ -10,10 +8,7 @@ import { ResourceType } from 'types';
 import { Strings, t } from '../../exports/i18n';
 import { IViewColumn } from '../../exports/store/interfaces';
 
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 
 export interface IModifyViewBase {
   viewId: string;

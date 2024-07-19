@@ -1,5 +1,3 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 
 export interface ITemplateCentre {
@@ -7,7 +5,7 @@ export interface ITemplateCentre {
    * template category
    */
   category: ITemplateCategory[];
-  
+
   /**
    * some template's template directory
    */

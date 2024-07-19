@@ -1,9 +1,12 @@
-
-
 import { IJOTAction } from 'engine/ot';
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { ISortInfo, ResourceType } from 'types';
-import { getActiveDatasheetId, getDatasheet, getFieldPermissionMap, getFieldRoleByFieldId } from 'modules/database/store/selectors/resource/datasheet/base';
+import {
+  getActiveDatasheetId,
+  getDatasheet,
+  getFieldPermissionMap,
+  getFieldRoleByFieldId,
+} from 'modules/database/store/selectors/resource/datasheet/base';
 import { getCurrentView } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { IGridViewProperty } from '../../exports/store/interfaces';
 import { Strings, t } from '../../exports/i18n';
@@ -26,21 +29,23 @@ export const setSortInfo: ICollaCommandDef<ISetSortInfoOptions> = {
     const { data, viewId, applySort } = options;
     const datasheetId = getActiveDatasheetId(state)!;
     const datasheet = getDatasheet(state, datasheetId);
-    const fieldIds = (getCurrentView(state, datasheetId)! as IGridViewProperty).columns.map(item => item.fieldId);
+    const fieldIds = (getCurrentView(state, datasheetId)! as IGridViewProperty).columns.map((item) => item.fieldId);
     const fieldPermissionMap = getFieldPermissionMap(state, datasheetId);
     if (!state || !datasheet) {
       return null;
     }
 
-    const hasInvalidSort = data && data.rules.some(sortField => {
-      const fieldRole = getFieldRoleByFieldId(fieldPermissionMap, sortField.fieldId);
+    const hasInvalidSort =
+      data &&
+      data.rules.some((sortField) => {
+        const fieldRole = getFieldRoleByFieldId(fieldPermissionMap, sortField.fieldId);
 
-      // If the column permission is set, the current column does not exist in the view data, so ignore this situation
-      if (fieldRole === ConfigConstant.Role.None) {
-        return false;
-      }
-      return !fieldIds.includes(sortField.fieldId);
-    });
+        // If the column permission is set, the current column does not exist in the view data, so ignore this situation
+        if (fieldRole === ConfigConstant.Role.None) {
+          return false;
+        }
+        return !fieldIds.includes(sortField.fieldId);
+      });
 
     // Determine whether the FieldId of the current operation exists or not
     if (hasInvalidSort) {

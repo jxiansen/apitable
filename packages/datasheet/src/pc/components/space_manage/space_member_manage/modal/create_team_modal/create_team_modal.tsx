@@ -1,5 +1,3 @@
-
-
 import { FC, useState } from 'react';
 import * as React from 'react';
 import { shallowEqual } from 'react-redux';

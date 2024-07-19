@@ -1,5 +1,3 @@
-
-
 import { IRobotDto, IRobotNotificationType } from 'socket/dtos/ding-talk/robot-notification.dto';
 
 export interface IRobotNotificationRo extends IRobotNotificationType {

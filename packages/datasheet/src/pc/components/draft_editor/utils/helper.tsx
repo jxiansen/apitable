@@ -1,5 +1,3 @@
-
-
 import { ISpaceBasicInfo, LINK_REG } from '@apitable/core';
 // @ts-ignore
 import { getSocialWecomUnitName, isSocialWecom } from 'enterprise/home';
@@ -147,10 +145,10 @@ export function serialize(nodes: ITextNode | ITextNode[], spaceInfo?: ISpaceBasi
         const isMemberNameModified = nodes?.data?.isMemberNameModified;
         const title = spaceInfo
           ? getSocialWecomUnitName?.({
-            name: nodes?.data?.name,
-            isModified: isMemberNameModified,
-            spaceInfo,
-          }) || nodes?.data?.name
+              name: nodes?.data?.name,
+              isModified: isMemberNameModified,
+              spaceInfo,
+            }) || nodes?.data?.name
           : nodes?.data?.name;
         let memberName: string | JSX.Element = '';
         if (isRemind && spaceInfo && isSocialWecom?.(spaceInfo) && !isMemberNameModified) {

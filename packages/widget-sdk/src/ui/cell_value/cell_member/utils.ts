@@ -1,5 +1,3 @@
-
-
 // rc(series colors)
 const FC_COLORS = [
   '#30C28B',

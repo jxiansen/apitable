@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { FC, memo, useContext, useMemo, useRef } from 'react';
 import { Field, FieldType, IField, KONVA_DATASHEET_ID, Strings, t, ViewType } from '@apitable/core';

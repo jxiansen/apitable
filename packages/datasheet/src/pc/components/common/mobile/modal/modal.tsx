@@ -1,5 +1,3 @@
-
-
 import { Modal as AntdMobileModal } from 'antd-mobile';
 import * as React from 'react';
 import { colorVars } from '@apitable/components';

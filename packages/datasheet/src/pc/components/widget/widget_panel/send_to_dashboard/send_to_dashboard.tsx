@@ -1,5 +1,3 @@
-
-
 import { copyWidgetsToNode } from 'api/widget/api';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -144,10 +142,12 @@ const SentToDashboard: React.FC<React.PropsWithChildren<ISentToDashboardProps>> 
                   }}
                   key={item.nodeId}
                 >
-                  {item.icon ? getNodeIcon(item.icon, ConfigConstant.NodeType.DATASHEET, {
-                    size: 16,
-                    emojiSize: 16,
-                  }) : (
+                  {item.icon ? (
+                    getNodeIcon(item.icon, ConfigConstant.NodeType.DATASHEET, {
+                      size: 16,
+                      emojiSize: 16,
+                    })
+                  ) : (
                     <DashboardOutlined color={isActive ? colors.primaryColor : colors.fourthLevelText} />
                   )}
                   <span>{item.nodeName}</span>

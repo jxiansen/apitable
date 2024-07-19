@@ -1,5 +1,3 @@
-
-
 export interface ICheckboxProps {
   /**
    * whether the checkbox should be checked

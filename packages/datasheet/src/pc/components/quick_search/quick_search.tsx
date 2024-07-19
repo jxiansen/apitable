@@ -1,5 +1,3 @@
-
-
 import { ErrorBoundary } from '@sentry/nextjs';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';

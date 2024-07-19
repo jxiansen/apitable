@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType } from 'types/field_api_enums';
 import { IOpenField, IOpenRatingFieldProperty } from 'types/open/open_field_read_types';
 import { FieldType, IRatingField } from 'types/field_types';
@@ -11,8 +9,8 @@ const ratingField: IRatingField = {
   type: FieldType.Rating,
   property: {
     max: 2,
-    icon: 'flag-ni'
-  }
+    icon: 'flag-ni',
+  },
 };
 
 const openRatingField: IOpenField = {
@@ -21,18 +19,18 @@ const openRatingField: IOpenField = {
   type: APIMetaFieldType.Rating,
   property: {
     max: 2,
-    icon: '🇳🇮'
-  }
+    icon: '🇳🇮',
+  },
 };
 
 const writeOpenProperty: IOpenRatingFieldProperty = {
   max: 2,
-  icon: 'flag-ni'
+  icon: 'flag-ni',
 };
 
 describe('The rating field reads the property format check', () => {
   const valid = getOpenFieldProperty(ratingField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid(openRatingField.property);
     expect(receiveValue).toEqual(expectValue);
   });

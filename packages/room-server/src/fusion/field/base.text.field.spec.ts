@@ -1,5 +1,3 @@
-
-
 import { FieldType, ITextField } from '@apitable/core';
 import { TextField } from 'fusion/field/text.field';
 

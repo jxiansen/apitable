@@ -1,5 +1,3 @@
-
-
 import { numberToShow, toFixed, numbersBetween } from '../number';
 
 describe('number utils tests', () => {
@@ -193,4 +191,3 @@ describe('number utils tests', () => {
     expect(numbersBetween(0, 7)).toEqual([1, 2, 3, 4, 5, 6]);
   });
 });
-

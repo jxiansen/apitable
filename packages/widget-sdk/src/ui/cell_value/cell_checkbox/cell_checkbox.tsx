@@ -1,5 +1,3 @@
-
-
 import { compact } from 'lodash';
 import React, { CSSProperties } from 'react';
 import { Emoji } from 'ui/_private/emoji';
@@ -7,7 +5,7 @@ import { CheckboxStyled, CheckboxWrapperStyled } from './styled';
 
 interface ICellCheckbox {
   field: {
-    icon: string
+    icon: string;
   };
   checked: boolean | boolean[];
   className?: string;
@@ -27,5 +25,7 @@ export const CellCheckbox = (props: ICellCheckbox) => {
     <CheckboxWrapperStyled className={className} style={style}>
       {compact(checked).map(renderCheckbox)}
     </CheckboxWrapperStyled>
-  ) : renderCheckbox(checked);
+  ) : (
+    renderCheckbox(checked)
+  );
 };

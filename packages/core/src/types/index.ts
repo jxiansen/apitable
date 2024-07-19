@@ -1,5 +1,3 @@
-
-
 export * from './view_types';
 export * from './error_types';
 export * from './field_types';

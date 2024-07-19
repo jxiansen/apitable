@@ -1,5 +1,3 @@
-
-
 import { Typography, useTheme } from '@apitable/components';
 
 interface IErrorListProps {

@@ -27,9 +27,9 @@ import { IWidgetState } from 'interface';
 const transformNullFilter = (filter?: IExpression) => {
   return filter == null || isEqual(filter, EmptyNullOperand)
     ? {
-      operator: OperatorEnums.And,
-      operands: [],
-    }
+        operator: OperatorEnums.And,
+        operands: [],
+      }
     : filter;
 };
 interface IFilterProps {

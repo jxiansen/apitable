@@ -1,5 +1,3 @@
-
-
 // core/api is a compatible layer after modularize
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import * as Api from '../../modules/shared/api/api';
@@ -67,13 +65,17 @@ const onResponse = (response: AxiosResponse<IServerResponse>) => {
   } else {
     return response.data;
   }
-
 };
 const createAxios = (config: AxiosRequestConfig) => {
-  const http = axios.create(Object.assign({
-    timeout: 60 * 1000,
-    withCredentials: true,
-  }, config));
+  const http = axios.create(
+    Object.assign(
+      {
+        timeout: 60 * 1000,
+        withCredentials: true,
+      },
+      config
+    )
+  );
   http.interceptors.response.use(onResponse, onResponseError);
   return http;
 };

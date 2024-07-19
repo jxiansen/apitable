@@ -1,5 +1,3 @@
-
-
 import { ApiInterface } from '@apitable/core';
 
 export type IRoleItem = ApiInterface.IGetRoleListResponseItem;

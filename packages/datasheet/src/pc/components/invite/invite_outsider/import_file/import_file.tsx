@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { FC, useEffect, useState } from 'react';
 import { Api, StatusCode, Strings, t } from '@apitable/core';

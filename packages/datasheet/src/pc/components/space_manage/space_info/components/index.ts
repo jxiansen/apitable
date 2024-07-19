@@ -1,5 +1,3 @@
-
-
 export * from './basic_info';
 export * from './change_logo/change_logo';
 export * from './change_name/change_name';

@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react';
 import { StoreActions, Api, ConfigConstant, IMemberInfoInSpace, IUpdateMemberInfo, Strings, t, ISelectedTeamInfoInSpace } from '@apitable/core';
 import { Message } from 'pc/components/common/message/message';

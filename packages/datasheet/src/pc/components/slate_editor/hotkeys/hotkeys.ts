@@ -1,5 +1,3 @@
-
-
 import { throttle, omit } from 'lodash';
 import { Editor, Range, Point, Transforms, Node, Element } from 'slate';
 import { toggleMark, toggleBlock, removeAllMarks, addElementsIndent, descElementIndent, setNodeWithNewId, updateElementData } from '../commands';

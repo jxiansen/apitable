@@ -1,5 +1,3 @@
-
-
 import { getResourceWidgetPanels } from 'modules/database/store/selectors/resource';
 import { ResourceType } from 'types';
 import { ExecuteResult, ICollaCommandDef, ICollaCommandExecuteContext } from '../../command_manager';
@@ -31,7 +29,7 @@ export const moveWidgetPanel: ICollaCommandDef<IMoveWidgetPanel> = {
       return null;
     }
 
-    const sourceIndex = widgetPanels.findIndex(item => item.id === panelId);
+    const sourceIndex = widgetPanels.findIndex((item) => item.id === panelId);
 
     if (sourceIndex < 0) {
       return null;

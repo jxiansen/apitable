@@ -1,5 +1,3 @@
-
-
 import { useMemo } from 'react';
 import { IReduxState, Role, Selectors } from '@apitable/core';
 
@@ -76,7 +74,7 @@ export const useAllColumns = (dstId: string, withNoPermissionField?: boolean) =>
 
 export const useAllColumnsOrEmpty = (dstId?: string, withNoPermissionField?: boolean) => {
   const value = useAllColumns(dstId ?? '', withNoPermissionField);
-  if(!dstId) {
+  if (!dstId) {
     return [];
   }
 

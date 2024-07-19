@@ -1,5 +1,3 @@
-
-
 import {
   BasicValueType,
   ButtonFieldActionNameEnum,
@@ -19,13 +17,13 @@ export class ButtonFieldActionOpenLinkDto {
     example: ButtonFieldActionOpenLinkNameEnum.Url,
     description: 'Link type: Url, Expression',
   })
-    type!: ButtonFieldActionOpenLinkNameEnum;
+  type!: ButtonFieldActionOpenLinkNameEnum;
 
   @ApiProperty({
     type: String,
     description: 'Pure url or The expression of the url',
   })
-    expression!: string;
+  expression!: string;
 }
 
 export class ButtonFieldActionTriggerAutomationDto {
@@ -33,26 +31,26 @@ export class ButtonFieldActionTriggerAutomationDto {
     example: 'aut***',
     description: 'Automation node id',
   })
-    automationId!: string;
+  automationId!: string;
 
   @ApiProperty({
     example: 'atr***',
     description: 'The Trigger id to be triggered',
   })
-    triggerId!: string;
+  triggerId!: string;
 }
 export class ColorProperty {
   @ApiProperty({
     example: 'red_0',
     description: 'color name',
   })
-    name!: string;
+  name!: string;
 
   @ApiProperty({
     example: '#FF0000',
     description: 'color value',
   })
-    value!: string;
+  value!: string;
 }
 
 export class ButtonFieldPropertyStyleDto {
@@ -60,14 +58,14 @@ export class ButtonFieldPropertyStyleDto {
     type: ColorProperty,
     description: 'Color',
   })
-    color!: ColorProperty;
+  color!: ColorProperty;
 
   @ApiProperty({
     enum: ButtonFieldStyleNameEnum,
     example: ButtonFieldStyleNameEnum.Background,
     description: 'Button style type: Background, OnlyText',
   })
-    type!: ButtonFieldStyleNameEnum;
+  type!: ButtonFieldStyleNameEnum;
 }
 
 export class ButtonFieldPropertyActionDto {
@@ -76,21 +74,21 @@ export class ButtonFieldPropertyActionDto {
     example: ButtonFieldActionNameEnum.OpenLink,
     description: 'Button action type: OpenLink, TriggerAutomation',
   })
-    type!: ButtonFieldActionNameEnum;
+  type!: ButtonFieldActionNameEnum;
 
   @ApiPropertyOptional({
     type: ButtonFieldActionOpenLinkDto,
     description: 'Click to open a link',
   })
   @IsOptional()
-    openLink?: ButtonFieldActionOpenLinkDto;
+  openLink?: ButtonFieldActionOpenLinkDto;
 
   @ApiPropertyOptional({
     type: ButtonFieldActionTriggerAutomationDto,
     description: 'Click to trigger an automation',
   })
   @IsOptional()
-    automation?: ButtonFieldActionTriggerAutomationDto;
+  automation?: ButtonFieldActionTriggerAutomationDto;
 }
 
 class MemberProperty {
@@ -99,21 +97,21 @@ class MemberProperty {
     example: '1217029313010270209',
     description: 'member ID',
   })
-    id!: string;
+  id!: string;
 
   @ApiProperty({
     type: String,
     example: 'LiLei',
     description: 'member name',
   })
-    name!: string;
+  name!: string;
 
   @ApiProperty({
     enum: UnitTypeTextEnum,
     example: UnitTypeTextEnum.Member,
     description: 'unit type: member and team',
   })
-    type!: UnitTypeTextEnum;
+  type!: UnitTypeTextEnum;
 
   @ApiPropertyOptional({
     type: String,
@@ -121,7 +119,7 @@ class MemberProperty {
     description: 'avatar',
   })
   @IsOptional()
-    avatar?: string;
+  avatar?: string;
 }
 
 class UserProperty {
@@ -130,21 +128,21 @@ class UserProperty {
     example: 'eeb620a54e2248c69c25de68e6eb668c',
     description: 'user id. special ID for Anonymous and robot',
   })
-    id!: string;
+  id!: string;
 
   @ApiProperty({
     type: String,
     example: 'LiLei',
     description: 'user name',
   })
-    name!: string;
+  name!: string;
 
   @ApiProperty({
     type: String,
     example: 'https://aitable.ai/default/avatar001.jpg',
     description: 'avatar',
   })
-    avatar!: string;
+  avatar!: string;
 }
 
 class DatasheetField {
@@ -153,7 +151,7 @@ class DatasheetField {
     example: 'dstxxxxxxx',
     description: 'reference datasheet ID',
   })
-    datasheetId!: string;
+  datasheetId!: string;
 
   @ApiProperty({
     type: () => DatasheetFieldDto,
@@ -162,7 +160,7 @@ class DatasheetField {
       '{"id": "fldsRHWJZwFcM","name": "order number","type": "SingleText","desc": "automatically",' +
       '"property": {"defaultValue": "to be added"},"permissionLevel": "edit" }',
   })
-    field!: DatasheetFieldDto;
+  field!: DatasheetFieldDto;
 }
 
 class SingleSelectProperty {
@@ -171,21 +169,21 @@ class SingleSelectProperty {
     example: 'opt8QSSURh52T',
     description: 'option ID',
   })
-    id!: string;
+  id!: string;
 
   @ApiProperty({
     type: String,
     example: 'magical',
     description: 'option name',
   })
-    name!: string;
+  name!: string;
 
   @ApiProperty({
     type: Object,
     example: '{"name":"red_0", "value":"#ff0000"}',
     description: 'option color',
   })
-    color!: Object;
+  color!: Object;
 }
 
 @ApiExtraModels(ExtraModel)
@@ -195,7 +193,7 @@ export class SingleTextPropertyDto {
     example: 'to be added',
     description: 'default value',
   })
-    defaultValue?: string;
+  defaultValue?: string;
 }
 
 @ApiExtraModels(ExtraModel)
@@ -205,14 +203,14 @@ export class NumberFieldPropertyDto {
     example: 'to be added',
     description: 'default value',
   })
-    defaultValue?: string;
+  defaultValue?: string;
 
   @ApiProperty({
     type: Number,
     example: 2,
     description: 'digital display accuracy 0-4',
   })
-    precision!: number;
+  precision!: number;
 }
 
 @ApiExtraModels(ExtraModel)
@@ -222,7 +220,7 @@ export class CurrencyFieldPropertyDto extends NumberFieldPropertyDto {
     example: '$',
     description: 'Currency symbols, customizable to any character',
   })
-    symbol?: string;
+  symbol?: string;
 }
 
 @ApiExtraModels(ExtraModel)
@@ -231,7 +229,7 @@ export class SelectFieldPropertyDto {
     type: [SingleSelectProperty],
     description: 'Radio Field Properties',
   })
-    options!: SingleSelectProperty[];
+  options!: SingleSelectProperty[];
 }
 
 @ApiExtraModels(ExtraModel)
@@ -240,7 +238,7 @@ export class MemberFieldPropertyDto {
     type: [MemberProperty],
     description: 'Member Field Properties',
   })
-    options!: MemberProperty[];
+  options!: MemberProperty[];
 }
 
 @ApiExtraModels(ExtraModel)
@@ -249,7 +247,7 @@ export class UserPropertyDto {
     type: [UserProperty],
     description: 'CreateBy｜LastModifiedBy Field Properties',
   })
-    options!: UserProperty[];
+  options!: UserProperty[];
 }
 
 @ApiExtraModels(ExtraModel)
@@ -259,7 +257,7 @@ export class CheckboxFieldPropertyDto {
     example: '✅',
     description: 'emoji character',
   })
-    icon!: string;
+  icon!: string;
 }
 
 @ApiExtraModels(ExtraModel)
@@ -269,7 +267,7 @@ export class RatingFieldPropertyDto extends CheckboxFieldPropertyDto {
     example: 5,
     description: 'Rating Maximum 1-10',
   })
-    max!: number;
+  max!: number;
 }
 
 @ApiExtraModels(ExtraModel)
@@ -285,7 +283,7 @@ export class DateTimeFieldPropertyDto {
       "\n If you don't want to deal with date formatting and want the returned results to be consistent with the view display, " +
       'you can assign cellFormat to string in the query parameters, and the returned content will all be strings',
   })
-    format!: string;
+  format!: string;
 
   @ApiProperty({
     type: Boolean,
@@ -293,7 +291,7 @@ export class DateTimeFieldPropertyDto {
     example: true,
     description: 'Whether the time is automatically filled when a new record is created',
   })
-    autoFill!: boolean;
+  autoFill!: boolean;
 
   @ApiProperty({
     type: Boolean,
@@ -301,7 +299,7 @@ export class DateTimeFieldPropertyDto {
     example: true,
     description: 'Whether to display the time',
   })
-    includeTime!: boolean;
+  includeTime!: boolean;
 
   @ApiProperty({
     required: false,
@@ -309,7 +307,7 @@ export class DateTimeFieldPropertyDto {
     example: 'America/Toronto',
     description: 'The time zone of the date time',
   })
-    timeZone!: string;
+  timeZone!: string;
 
   @ApiProperty({
     required: false,
@@ -317,7 +315,7 @@ export class DateTimeFieldPropertyDto {
     example: true,
     description: 'Whether to show time zone',
   })
-    includeTimeZone?: boolean;
+  includeTimeZone?: boolean;
 }
 
 @ApiExtraModels(ExtraModel)
@@ -327,14 +325,14 @@ export class LinkFieldPropertyDto {
     example: 'dstg3kerxz9DYzGjvs',
     description: 'related datasheet Id',
   })
-    foreignDatasheetId!: string;
+  foreignDatasheetId!: string;
 
   @ApiProperty({
     type: String,
     example: 'fidxxxxxxx',
     description: 'related datasheet brother field Id',
   })
-    brotherFieldId!: string;
+  brotherFieldId!: string;
 }
 
 @ApiExtraModels(ExtraModel)
@@ -344,13 +342,13 @@ export class LookupFieldPropertyDto {
     example: 'fidxxxxxxx',
     description: 'Referencing dependent association field Id',
   })
-    relatedLinkFieldId!: string;
+  relatedLinkFieldId!: string;
 
   @ApiProperty({
     type: DatasheetField,
     description: 'Reference field',
   })
-    targetField!: DatasheetField;
+  targetField!: DatasheetField;
 
   @ApiPropertyOptional({
     type: Boolean,
@@ -358,28 +356,28 @@ export class LookupFieldPropertyDto {
     description:
       'When the associated field of a `lookup` dependency is deleted or converted to a type, the reference value may not be obtained properly',
   })
-    hasError?: boolean;
+  hasError?: boolean;
 
   @ApiPropertyOptional({
     type: DatasheetField,
     description:
       'The entity field that is eventually referenced does not contain a field of type `lookup`. In case of an error, the entity field may not exist',
   })
-    entityField?: DatasheetField;
+  entityField?: DatasheetField;
 
   @ApiProperty({
     enum: RollUpFuncType,
     example: RollUpFuncType.VALUES,
     description: 'rollup function',
   })
-    rollupFunction!: RollUpFuncType;
+  rollupFunction!: RollUpFuncType;
 
   @ApiProperty({
     enum: BasicValueType,
     example: BasicValueType.String,
     description: 'Return Value Type: String,Boolean,Number,DateTime,Array',
   })
-    valueType!: BasicValueType;
+  valueType!: BasicValueType;
 }
 
 @ApiExtraModels(ExtraModel)
@@ -389,14 +387,14 @@ export class FormulaFieldPropertyDto {
     example: '{fidxxxxxx}',
     description: 'Formula expression',
   })
-    expression!: string;
+  expression!: string;
 
   @ApiProperty({
     enum: BasicValueType,
     example: BasicValueType.String,
     description: 'Return Value Type: String,Boolean,Number,DateTime,Array',
   })
-    valueType!: BasicValueType;
+  valueType!: BasicValueType;
 
   @ApiPropertyOptional({
     type: Boolean,
@@ -404,7 +402,7 @@ export class FormulaFieldPropertyDto {
     description:
       'When the associated field of a `lookup` dependency is deleted or converted to a type, the reference value may not be obtained properly',
   })
-    hasError?: boolean;
+  hasError?: boolean;
 }
 
 @ApiExtraModels(ExtraModel)
@@ -414,18 +412,17 @@ export class ButtonFieldPropertyDto {
     example: 'Click Button',
     description: 'Button text',
   })
-    text!: string;
+  text!: string;
 
   @ApiProperty({
     type: ButtonFieldPropertyStyleDto,
     description: 'Button field style',
   })
-    style!: ButtonFieldPropertyStyleDto;
+  style!: ButtonFieldPropertyStyleDto;
 
   @ApiPropertyOptional({
     type: ButtonFieldPropertyActionDto,
     description: 'Button field action',
   })
-    action?: ButtonFieldPropertyActionDto;
+  action?: ButtonFieldPropertyActionDto;
 }
-

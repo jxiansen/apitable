@@ -10,9 +10,11 @@ test('use active view id should return a viewId', () => {
   const mockWidgetSdkData = MockWidgetSdkData.simpleDatasheetExample();
   const views = getViews(mockWidgetSdkData.widgetSdkData, DEFAULT_DATASHEET_ID);
   const viewId = views?.[0]?.id;
-  mockWidgetSdkData.dispatch(StoreActions.setPageParams({
-    viewId
-  }));
+  mockWidgetSdkData.dispatch(
+    StoreActions.setPageParams({
+      viewId,
+    })
+  );
 
   const wrapper = createSimpleWrapper({ widgetState: mockWidgetSdkData.widgetSdkData });
   const { result } = renderHook(() => useActiveViewId(), { wrapper });

@@ -7,7 +7,7 @@ import styles from './style.module.less';
 interface IDataSourceSelectorWrapperProps {
   title: string;
 
-  hide(): void
+  hide(): void;
 }
 
 export const DataSourceSelectorWrapper: React.FC<React.PropsWithChildren<IDataSourceSelectorWrapperProps>> = ({ children, title, hide }) => {
@@ -16,11 +16,10 @@ export const DataSourceSelectorWrapper: React.FC<React.PropsWithChildren<IDataSo
 
   return (
     <>
-      {!isMobile ? <PcWrapper hidePanel={hide}>
-        {children}
-      </PcWrapper> : (
-        <Popup title={title} open height="90%" bodyStyle={{ padding: 0 }} onClose={hide}
-          className={styles.portalContainerDrawer}>
+      {!isMobile ? (
+        <PcWrapper hidePanel={hide}>{children}</PcWrapper>
+      ) : (
+        <Popup title={title} open height="90%" bodyStyle={{ padding: 0 }} onClose={hide} className={styles.portalContainerDrawer}>
           {children}
         </Popup>
       )}

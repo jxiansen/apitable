@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { FC } from 'react';
 import { getLanguage, Strings, t } from '@apitable/core';

@@ -1,5 +1,3 @@
-
-
 import { colorVars } from '@apitable/components';
 import { ViewType } from '@apitable/core';
 import {

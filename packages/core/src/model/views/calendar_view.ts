@@ -1,5 +1,3 @@
-
-
 import { Settings } from 'config/system_config';
 import { integrateCdnHost } from 'utils';
 import { Field } from 'model/field';
@@ -14,12 +12,11 @@ import {
   ISnapshot,
   IViewProperty,
 } from '../../exports/store/interfaces';
-import { GanttColorType,ViewType } from 'modules/shared/store/constants';
+import { GanttColorType, ViewType } from 'modules/shared/store/constants';
 import { DatasheetActions } from '../../commands_actions/datasheet';
 import { View } from './views';
 
 export class CalendarView extends View {
-
   override get recordShowName() {
     return t(Strings.calendar_record);
   }
@@ -33,10 +30,12 @@ export class CalendarView extends View {
   }
 
   static findDateTimeFieldIds(srcView: IViewProperty, fieldMap: IFieldMap, state?: IReduxState) {
-    const filterIds = srcView.columns.filter(({ fieldId }) => {
-      const field = fieldMap[fieldId]!;
-      return Field.bindModel(field, state).basicValueType === BasicValueType.DateTime;
-    }).map(column => column.fieldId);
+    const filterIds = srcView.columns
+      .filter(({ fieldId }) => {
+        const field = fieldMap[fieldId]!;
+        return Field.bindModel(field, state).basicValueType === BasicValueType.DateTime;
+      })
+      .map((column) => column.fieldId);
     return filterIds;
   }
 
@@ -52,7 +51,7 @@ export class CalendarView extends View {
         type: GanttColorType.Custom,
         fieldId: '',
         color: -1,
-      }
+      },
     };
   }
 
@@ -85,8 +84,7 @@ export class CalendarView extends View {
       rows: this.defaultRows(srcView),
       frozenColumnCount: 1,
       style: this.defaultStyle(snapshot, activeViewId, state),
-      displayHiddenColumnWithinMirror: true
+      displayHiddenColumnWithinMirror: true,
     };
   }
-
 }

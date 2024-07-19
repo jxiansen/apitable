@@ -1,5 +1,3 @@
-
-
 import { DateUnitType, FieldOperateType } from '../../../../../shared/store/constants';
 import { ISelectFieldOption } from 'types/field_types';
 import * as actions from '../../../../../shared/store/action_constants';

@@ -1,5 +1,3 @@
-
-
 /* eslint-disable */
 let cookie = {
   create: function (name, value, minutes, domain) {

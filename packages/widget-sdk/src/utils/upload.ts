@@ -1,5 +1,3 @@
-
-
 import { uploadAttachToS3, UploadType } from './private/upload_attach_to_S3';
 import { cellValueToImageSrc } from 'core';
 import { IAttachmentValue, IUploadProgress } from 'interface';
@@ -52,13 +50,13 @@ import { identity, pickBy } from 'lodash';
  * ```
  */
 export function upload(params: {
-  file: File,
+  file: File;
   datasheetId: string;
   /** */
   onProgress?: (response: IUploadProgress) => void;
 }): Promise<IAttachmentValue> {
   const { file, datasheetId, onProgress } = params;
-  return new Promise(async(resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if (!file || !datasheetId) {
       reject({ message: 'file or datasheetId is required' });
     }
@@ -77,23 +75,28 @@ export function upload(params: {
     const { success, data, message } = res.data;
     if (!success) {
       reject({
-        message
+        message,
       });
       return;
     }
 
-    resolve(pickBy({
-      id: data.token,
-      name: data.name || file.name,
-      mimeType: data.mimeType,
-      token: data.token,
-      bucket: data.bucket,
-      size: data.size,
-      width: data.width,
-      height: data.height,
-      preview: data.preview,
-      previewUrl: data.preview ? cellValueToImageSrc(data, { isPreview: true }) : undefined,
-      url: cellValueToImageSrc(data),
-    }, identity) as IAttachmentValue);
+    resolve(
+      pickBy(
+        {
+          id: data.token,
+          name: data.name || file.name,
+          mimeType: data.mimeType,
+          token: data.token,
+          bucket: data.bucket,
+          size: data.size,
+          width: data.width,
+          height: data.height,
+          preview: data.preview,
+          previewUrl: data.preview ? cellValueToImageSrc(data, { isPreview: true }) : undefined,
+          url: cellValueToImageSrc(data),
+        },
+        identity
+      ) as IAttachmentValue
+    );
   });
 }

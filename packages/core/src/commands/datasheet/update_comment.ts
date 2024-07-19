@@ -1,5 +1,3 @@
-
-
 import { ResourceType } from 'types';
 import { getRecord } from 'modules/database/store/selectors/resource/datasheet/base';
 import { ExecuteResult, ICollaCommandDef, ICollaCommandExecuteContext } from 'command_manager';
@@ -32,10 +30,12 @@ export const updateComment: ICollaCommandDef<IUpdateComment> = {
       datasheetId,
       recordId,
       updateComments: [comments],
-      emojiAction
+      emojiAction,
     });
 
-    if (!updateCommentAction) { return null; }
+    if (!updateCommentAction) {
+      return null;
+    }
 
     actions.push(...updateCommentAction);
     return {
@@ -46,4 +46,3 @@ export const updateComment: ICollaCommandDef<IUpdateComment> = {
     };
   },
 };
-

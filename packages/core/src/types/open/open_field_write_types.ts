@@ -1,5 +1,3 @@
-
-
 import type { CollectType, ILookUpSortInfo, IMultiSelectedIds, LookUpLimitType, RollUpFuncType } from '../field_types';
 import type {
   IOpenCheckboxFieldProperty,
@@ -180,19 +178,19 @@ export interface IAddOpenLastModifiedByFieldProperty {
 export interface IAddOpenButtonFieldProperty {
   text?: string;
   style?: {
-    type?: string,
+    type?: string;
     color?: {
-      name: string,
-      value: string
-    }
-  },
+      name: string;
+      value: string;
+    };
+  };
   action?: {
-    type: string,
+    type: string;
     openLink?: {
-      type?: string,
-      expression?: string
-    }
-  }
+      type?: string;
+      expression?: string;
+    };
+  };
 }
 
 export type IAddOpenFieldProperty =

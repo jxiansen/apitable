@@ -1,5 +1,3 @@
-
-
 import { handleNullArray } from 'model/utils';
 import { FieldType } from 'types';
 import { IFormulaParam } from './functions/basic';
@@ -11,11 +9,12 @@ import { produce } from 'immer';
  * When the formula refers to the lookup field as a parameter, some functions need to convert the null value to make it as expected.
  */
 export const handleLookupNullValue = (params: IFormulaParam<any>[]) => {
-  return produce(params, draftParams => {
-    draftParams.forEach(param => {
-      if (param.node.name === AstNodeType.ValueOperandNode
-        && (param.node as ValueOperandNode).field.type === FieldType.LookUp
-        && handleNullArray(param.value) == null
+  return produce(params, (draftParams) => {
+    draftParams.forEach((param) => {
+      if (
+        param.node.name === AstNodeType.ValueOperandNode &&
+        (param.node as ValueOperandNode).field.type === FieldType.LookUp &&
+        handleNullArray(param.value) == null
       ) {
         param.value = null;
       }

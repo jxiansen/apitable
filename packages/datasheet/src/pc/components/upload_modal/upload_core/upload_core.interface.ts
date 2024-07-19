@@ -1,5 +1,3 @@
-
-
 import { IAttacheField, IAttachmentValue, RowHeightLevel } from '@apitable/core';
 import { UploadStatus } from '../../../utils/upload_manager';
 

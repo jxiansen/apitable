@@ -1,5 +1,3 @@
-
-
 import React, { memo, useContext, useMemo } from 'react';
 import format from 'date-fns/format';
 import { FORMAT, MAX_LEVEL } from '../constants';
@@ -30,8 +28,8 @@ export const WeekBase = (props: IWeek) => {
   const { moreTasks, more } = useMemo(() => {
     const more = new Array(7).fill(0);
     const moreTasks = new Array(7).fill([]);
-    levelTasks.forEach(level => {
-      level.forEach(levelItem => {
+    levelTasks.forEach((level) => {
+      level.forEach((levelItem) => {
         const { left, len } = levelItem;
         for (let i = 0; i < len; i++) {
           const mIdx = left + i - 1;
@@ -54,18 +52,14 @@ export const WeekBase = (props: IWeek) => {
             const showMonth = m > 12 ? m % 12 : m;
             dayValue = formatDayValue(showMonth, day);
           }
-          const dayContent = (
-            <DaySpan className="day-value">
-              {dayValue}
-            </DaySpan>
-          );
+          const dayContent = <DaySpan className="day-value">{dayValue}</DaySpan>;
           return (
             <DayDiv
               key={`${m}-${day}`}
               className={classNames('day', {
                 weekend: [0, 6].includes((idx + 1) % 7),
                 curMonth: m === month,
-                today: isToday
+                today: isToday,
               })}
             >
               {Drop ? <Drop children={dayContent} date={currDay} update={update} disabled={disabled} /> : dayContent}
@@ -87,15 +81,7 @@ export const WeekBase = (props: IWeek) => {
           return null;
         }
         const curDay = week[mIndex]!;
-        return (
-          <MoreTask
-            key={mIndex}
-            mIndex={mIndex}
-            curDay={curDay}
-            moreTasks={moreTasks[mIndex]}
-            takeLevelLen={takeLevels.length}
-          />
-        );
+        return <MoreTask key={mIndex} mIndex={mIndex} curDay={curDay} moreTasks={moreTasks[mIndex]} takeLevelLen={takeLevels.length} />;
       })}
     </div>
   );

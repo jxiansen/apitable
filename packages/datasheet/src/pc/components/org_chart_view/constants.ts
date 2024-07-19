@@ -1,5 +1,3 @@
-
-
 export const COVER_HEIGHT = 140;
 export const CARD_WIDTH = 246;
 export const DRAG_ITEM_WIDTH = 232;

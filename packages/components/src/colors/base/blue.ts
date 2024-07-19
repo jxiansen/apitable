@@ -1,4 +1,3 @@
-
 export const blue = {
   50: '#E4F7FF',
   100: '#C9EFFF',
@@ -12,4 +11,3 @@ export const blue = {
   900: '#0B5F83',
   1000: '#093F55',
 };
-

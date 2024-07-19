@@ -1,5 +1,3 @@
-
-
 import { ExecuteResult, ExecuteType, ICollaCommandExecuteSuccessResult } from 'command_manager';
 import { ICommandExecutionSuccessResult } from '../logic';
 import { ViewType } from 'modules/shared/store/constants';
@@ -47,7 +45,7 @@ describe('getFields', () => {
 
     const fields = await view2!.getFields({});
 
-    const fieldIds = fields.map(field => field.id);
+    const fieldIds = fields.map((field) => field.id);
 
     expect(fieldIds).toStrictEqual(['fld1']);
   });
@@ -68,7 +66,7 @@ describe('getFields', () => {
       includeHidden: true,
     });
 
-    const fieldIds = fields.map(field => field.id);
+    const fieldIds = fields.map((field) => field.id);
 
     expect(fieldIds).toStrictEqual(['fld1', 'fld2']);
   });
@@ -87,7 +85,7 @@ describe('getRecords', () => {
 
     const records = await view2!.getRecords({});
 
-    const recordIds = records.map(record => record.id);
+    const recordIds = records.map((record) => record.id);
 
     expect(recordIds).toStrictEqual(['rec2', 'rec3', 'rec5', 'rec1', 'rec4']);
   });
@@ -106,7 +104,7 @@ describe('getRecords', () => {
       maxRecords: 3,
     });
 
-    const recordIds = records.map(record => record.id);
+    const recordIds = records.map((record) => record.id);
 
     expect(recordIds).toStrictEqual(['rec2', 'rec3', 'rec5']);
   });
@@ -125,7 +123,7 @@ describe('getRecords', () => {
       maxRecords: 20,
     });
 
-    const recordIds = records.map(record => record.id);
+    const recordIds = records.map((record) => record.id);
 
     expect(recordIds).toStrictEqual(['rec2', 'rec3', 'rec5', 'rec1', 'rec4']);
   });
@@ -148,7 +146,7 @@ describe('getRecords', () => {
         },
       });
 
-      const recordIds = records.map(record => record.id);
+      const recordIds = records.map((record) => record.id);
 
       expect(recordIds).toStrictEqual(['rec2', 'rec3', 'rec5']);
     });
@@ -170,7 +168,7 @@ describe('getRecords', () => {
         },
       });
 
-      const recordIds = records.map(record => record.id);
+      const recordIds = records.map((record) => record.id);
 
       expect(recordIds).toStrictEqual([]);
     });
@@ -192,7 +190,7 @@ describe('getRecords', () => {
         },
       });
 
-      const recordIds = records.map(record => record.id);
+      const recordIds = records.map((record) => record.id);
 
       expect(recordIds).toStrictEqual([]);
     });
@@ -214,7 +212,7 @@ describe('getRecords', () => {
         },
       });
 
-      const recordIds = records.map(record => record.id);
+      const recordIds = records.map((record) => record.id);
 
       expect(recordIds).toStrictEqual(['rec5', 'rec1']);
     });
@@ -236,7 +234,7 @@ describe('getRecords', () => {
         },
       });
 
-      const recordIds = records.map(record => record.id);
+      const recordIds = records.map((record) => record.id);
 
       expect(recordIds).toStrictEqual(['rec1', 'rec4']);
     });
@@ -258,7 +256,7 @@ describe('getRecords', () => {
         },
       });
 
-      const recordIds = records.map(record => record.id);
+      const recordIds = records.map((record) => record.id);
 
       expect(recordIds).toStrictEqual([]);
     });
@@ -282,7 +280,7 @@ describe('getRecords', () => {
       },
     });
 
-    const recordIds = records.map(record => record.id);
+    const recordIds = records.map((record) => record.id);
 
     expect(recordIds).toStrictEqual(['rec1']);
   });
@@ -306,7 +304,7 @@ describe('addRecords', () => {
         index: 3,
         count: 2,
       },
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -391,7 +389,7 @@ describe('addRecords', () => {
           },
         ],
       },
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -479,7 +477,7 @@ describe('modify view', () => {
         key: 'name',
         value: 'VIEW_1',
       },
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);
@@ -544,7 +542,7 @@ describe('modify view', () => {
         key: 'columns',
         value: [{ fieldId: 'fld2', hidden: true }],
       },
-      {},
+      {}
     );
 
     expect(result.result).toStrictEqual(ExecuteResult.Success);

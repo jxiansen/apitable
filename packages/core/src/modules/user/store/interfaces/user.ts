@@ -1,5 +1,3 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 import { BindAccount } from '../../../shared/store/constants';
 
@@ -42,7 +40,7 @@ export interface IUserInfo {
   isNickNameModified: boolean;
   spaceLogo: string;
   uuid: string; // user global ID
-  userId: string; // this is deprecated but compatible, name mistake before 
+  userId: string; // this is deprecated but compatible, name mistake before
   memberId: string; // member id (user in the space as member)
   memberName: string;
   isMemberNameModified: boolean;
@@ -179,8 +177,8 @@ export interface IAddWizardNumberAction {
 }
 
 export interface ILocateIdMap {
-  spaceId?: string | null,
-  nodeId?: string | null
+  spaceId?: string | null;
+  nodeId?: string | null;
 }
 
 export interface ISetActiveRecordId {

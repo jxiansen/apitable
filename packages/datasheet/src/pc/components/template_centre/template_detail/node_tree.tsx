@@ -1,5 +1,3 @@
-
-
 import { Tree } from 'antd';
 import { FC, ReactText } from 'react';
 import { ILightOrDarkThemeColors, useThemeColors } from '@apitable/components';

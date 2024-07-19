@@ -1,5 +1,3 @@
-
-
 import { EntityRepository, Repository } from 'typeorm';
 import { AssetEntity } from '../entities/asset.entity';
 

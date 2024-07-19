@@ -1,5 +1,3 @@
-
-
 export enum ComputeServices {
   PureVisibleRows = 'pureVisibleRows',
   VisibleColumns = 'visibleColumns',

@@ -1,5 +1,3 @@
-
-
 import { Spin } from 'antd';
 import axios, { CancelTokenSource } from 'axios';
 import { clone, find, get, has, isEmpty, keyBy, set, toPairs, uniq, values } from 'lodash';
@@ -176,7 +174,7 @@ export const ActivityListItems: FC<
           set(
             newEmojis,
             `${commentId}.${emojiKey}`,
-            newUserIds.filter(id => id !== emojiUserIds?.[0]),
+            newUserIds.filter((id) => id !== emojiUserIds?.[0]),
           );
           setEmojis(newEmojis);
           return;

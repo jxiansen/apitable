@@ -6,16 +6,16 @@ import { ViewType } from 'modules/shared/store/constants';
 import { FieldType, ResourceType, SegmentType } from 'types';
 import { ILinkConsistencyError, checkLinkConsistency, generateFixLinkConsistencyChangesets } from 'utils/link_consistency';
 
-const mockStateLinkDeletedRecordsAndMissingRecordIdsInBothDatasheets: IReduxState = ({
+const mockStateLinkDeletedRecordsAndMissingRecordIdsInBothDatasheets: IReduxState = {
   pageParams: {
     datasheetId: 'dst1',
   } as IPageParams,
-  datasheetMap: ({
+  datasheetMap: {
     dst1: {
       loading: false,
       connected: false,
       syncing: false,
-      datasheet: ({
+      datasheet: {
         id: 'dst1',
         name: 'Dst 1',
         isPartOfData: false,
@@ -76,13 +76,13 @@ const mockStateLinkDeletedRecordsAndMissingRecordIdsInBothDatasheets: IReduxStat
         permissions: {
           editable: true,
         },
-      } as any) as IDatasheetState,
+      } as any as IDatasheetState,
     },
     dst2: {
       loading: false,
       connected: false,
       syncing: false,
-      datasheet: ({
+      datasheet: {
         id: 'dst2',
         name: 'Dst 2',
         isPartOfData: false,
@@ -138,23 +138,23 @@ const mockStateLinkDeletedRecordsAndMissingRecordIdsInBothDatasheets: IReduxStat
         permissions: {
           editable: true,
         },
-      } as any) as IDatasheetState,
+      } as any as IDatasheetState,
     },
-  } as any) as IDatasheetMap,
-} as any) as IReduxState;
+  } as any as IDatasheetMap,
+} as any as IReduxState;
 
 describe('checkLinkConsistency', () => {
   test('datasheet without link fields', () => {
-    const mockState: IReduxState = ({
+    const mockState: IReduxState = {
       pageParams: {
         datasheetId: 'dst1',
       } as IPageParams,
-      datasheetMap: ({
+      datasheetMap: {
         dst1: {
           loading: false,
           connected: false,
           syncing: false,
-          datasheet: ({
+          datasheet: {
             id: 'dst1',
             name: 'Dst 1',
             isPartOfData: false,
@@ -213,26 +213,26 @@ describe('checkLinkConsistency', () => {
             permissions: {
               editable: true,
             },
-          } as any) as IDatasheetState,
+          } as any as IDatasheetState,
         },
-      } as any) as IDatasheetMap,
-    } as any) as IReduxState;
+      } as any as IDatasheetMap,
+    } as any as IReduxState;
     const result = checkLinkConsistency(mockState, 'dst1');
     expect(result).toStrictEqual(undefined);
   });
 
   describe('one link field', () => {
     test('no missing recordIds', () => {
-      const mockState: IReduxState = ({
+      const mockState: IReduxState = {
         pageParams: {
           datasheetId: 'dst1',
         } as IPageParams,
-        datasheetMap: ({
+        datasheetMap: {
           dst1: {
             loading: false,
             connected: false,
             syncing: false,
-            datasheet: ({
+            datasheet: {
               id: 'dst1',
               name: 'Dst 1',
               isPartOfData: false,
@@ -288,13 +288,13 @@ describe('checkLinkConsistency', () => {
               permissions: {
                 editable: true,
               },
-            } as any) as IDatasheetState,
+            } as any as IDatasheetState,
           },
           dst2: {
             loading: false,
             connected: false,
             syncing: false,
-            datasheet: ({
+            datasheet: {
               id: 'dst2',
               name: 'Dst 2',
               isPartOfData: false,
@@ -350,25 +350,25 @@ describe('checkLinkConsistency', () => {
               permissions: {
                 editable: true,
               },
-            } as any) as IDatasheetState,
+            } as any as IDatasheetState,
           },
-        } as any) as IDatasheetMap,
-      } as any) as IReduxState;
+        } as any as IDatasheetMap,
+      } as any as IReduxState;
       const result = checkLinkConsistency(mockState, 'dst2');
       expect(result).toStrictEqual(undefined);
     });
 
     describe('with missing recordIds', () => {
-      const mockState: IReduxState = ({
+      const mockState: IReduxState = {
         pageParams: {
           datasheetId: 'dst1',
         } as IPageParams,
-        datasheetMap: ({
+        datasheetMap: {
           dst1: {
             loading: false,
             connected: false,
             syncing: false,
-            datasheet: ({
+            datasheet: {
               id: 'dst1',
               name: 'Dst 1',
               isPartOfData: false,
@@ -429,13 +429,13 @@ describe('checkLinkConsistency', () => {
               permissions: {
                 editable: true,
               },
-            } as any) as IDatasheetState,
+            } as any as IDatasheetState,
           },
           dst2: {
             loading: false,
             connected: false,
             syncing: false,
-            datasheet: ({
+            datasheet: {
               id: 'dst2',
               name: 'Dst 2',
               isPartOfData: false,
@@ -491,10 +491,10 @@ describe('checkLinkConsistency', () => {
               permissions: {
                 editable: true,
               },
-            } as any) as IDatasheetState,
+            } as any as IDatasheetState,
           },
-        } as any) as IDatasheetMap,
-      } as any) as IReduxState;
+        } as any as IDatasheetMap,
+      } as any as IReduxState;
 
       test('missing recordIds in foreign datasheet', () => {
         const result = checkLinkConsistency(mockState, 'dst2');
@@ -521,7 +521,7 @@ describe('checkLinkConsistency', () => {
               datasheetId: 'dst2',
             },
           },
-          'dst1',
+          'dst1'
         );
         expect(result).toStrictEqual({
           mainDstId: 'dst2',
@@ -539,16 +539,16 @@ describe('checkLinkConsistency', () => {
       });
 
       test('missing recordIds in both datasheets', () => {
-        const mockState: IReduxState = ({
+        const mockState: IReduxState = {
           pageParams: {
             datasheetId: 'dst1',
           } as IPageParams,
-          datasheetMap: ({
+          datasheetMap: {
             dst1: {
               loading: false,
               connected: false,
               syncing: false,
-              datasheet: ({
+              datasheet: {
                 id: 'dst1',
                 name: 'Dst 1',
                 isPartOfData: false,
@@ -609,13 +609,13 @@ describe('checkLinkConsistency', () => {
                 permissions: {
                   editable: true,
                 },
-              } as any) as IDatasheetState,
+              } as any as IDatasheetState,
             },
             dst2: {
               loading: false,
               connected: false,
               syncing: false,
-              datasheet: ({
+              datasheet: {
                 id: 'dst2',
                 name: 'Dst 2',
                 isPartOfData: false,
@@ -671,10 +671,10 @@ describe('checkLinkConsistency', () => {
                 permissions: {
                   editable: true,
                 },
-              } as any) as IDatasheetState,
+              } as any as IDatasheetState,
             },
-          } as any) as IDatasheetMap,
-        } as any) as IReduxState;
+          } as any as IDatasheetMap,
+        } as any as IReduxState;
         const result = checkLinkConsistency(mockState, 'dst2');
         expect(result).toStrictEqual({
           mainDstId: 'dst1',
@@ -716,7 +716,7 @@ describe('checkLinkConsistency', () => {
                 },
               } as IDatasheetMap,
             },
-            'dst2',
+            'dst2'
           );
           expect(result).toStrictEqual(undefined);
         });
@@ -738,7 +738,7 @@ describe('checkLinkConsistency', () => {
                 },
               } as IDatasheetMap,
             },
-            'dst2',
+            'dst2'
           );
           expect(result).toStrictEqual(undefined);
         });
@@ -760,7 +760,7 @@ describe('checkLinkConsistency', () => {
                 },
               } as IDatasheetMap,
             },
-            'dst2',
+            'dst2'
           );
           expect(result).toStrictEqual(undefined);
         });
@@ -780,7 +780,7 @@ describe('checkLinkConsistency', () => {
                 },
               } as IDatasheetMap,
             },
-            'dst2',
+            'dst2'
           );
           expect(result).toStrictEqual(undefined);
         });
@@ -817,16 +817,16 @@ describe('checkLinkConsistency', () => {
 
   describe('two link fields references different datasheets', () => {
     test('no missing recordIds', () => {
-      const mockState: IReduxState = ({
+      const mockState: IReduxState = {
         pageParams: {
           datasheetId: 'dst1',
         } as IPageParams,
-        datasheetMap: ({
+        datasheetMap: {
           dst1: {
             loading: false,
             connected: false,
             syncing: false,
-            datasheet: ({
+            datasheet: {
               id: 'dst1',
               name: 'Dst 1',
               isPartOfData: false,
@@ -891,13 +891,13 @@ describe('checkLinkConsistency', () => {
               permissions: {
                 editable: true,
               },
-            } as any) as IDatasheetState,
+            } as any as IDatasheetState,
           },
           dst2: {
             loading: false,
             connected: false,
             syncing: false,
-            datasheet: ({
+            datasheet: {
               id: 'dst2',
               name: 'Dst 2',
               isPartOfData: false,
@@ -963,13 +963,13 @@ describe('checkLinkConsistency', () => {
               permissions: {
                 editable: true,
               },
-            } as any) as IDatasheetState,
+            } as any as IDatasheetState,
           },
           dst3: {
             loading: false,
             connected: false,
             syncing: false,
-            datasheet: ({
+            datasheet: {
               id: 'dst3',
               isPartOfData: false,
               snapshot: {
@@ -1033,26 +1033,26 @@ describe('checkLinkConsistency', () => {
               permissions: {
                 editable: true,
               },
-            } as any) as IDatasheetState,
+            } as any as IDatasheetState,
           },
-        } as any) as IDatasheetMap,
-      } as any) as IReduxState;
+        } as any as IDatasheetMap,
+      } as any as IReduxState;
 
       const result = checkLinkConsistency(mockState, 'dst3');
       expect(result).toStrictEqual(undefined);
     });
 
     test('missing recordIds in all datasheets', () => {
-      const mockState: IReduxState = ({
+      const mockState: IReduxState = {
         pageParams: {
           datasheetId: 'dst1',
         } as IPageParams,
-        datasheetMap: ({
+        datasheetMap: {
           dst1: {
             loading: false,
             connected: false,
             syncing: false,
-            datasheet: ({
+            datasheet: {
               id: 'dst1',
               name: 'Dst 1',
               isPartOfData: false,
@@ -1122,13 +1122,13 @@ describe('checkLinkConsistency', () => {
               permissions: {
                 editable: true,
               },
-            } as any) as IDatasheetState,
+            } as any as IDatasheetState,
           },
           dst2: {
             loading: false,
             connected: false,
             syncing: false,
-            datasheet: ({
+            datasheet: {
               id: 'dst2',
               name: 'Dst 2',
               isPartOfData: false,
@@ -1189,13 +1189,13 @@ describe('checkLinkConsistency', () => {
               permissions: {
                 editable: true,
               },
-            } as any) as IDatasheetState,
+            } as any as IDatasheetState,
           },
           dst3: {
             loading: false,
             connected: false,
             syncing: false,
-            datasheet: ({
+            datasheet: {
               id: 'dst3',
               isPartOfData: false,
               snapshot: {
@@ -1250,10 +1250,10 @@ describe('checkLinkConsistency', () => {
               permissions: {
                 editable: true,
               },
-            } as any) as IDatasheetState,
+            } as any as IDatasheetState,
           },
-        } as any) as IDatasheetMap,
-      } as any) as IReduxState;
+        } as any as IDatasheetMap,
+      } as any as IReduxState;
 
       const result = checkLinkConsistency(mockState, 'dst3');
       expect(result).toStrictEqual({
@@ -1362,16 +1362,16 @@ describe('generateFixLinkConsistencyChangesets', () => {
   });
 
   test('changesets contain oi & od', () => {
-    const mockState: IReduxState = ({
+    const mockState: IReduxState = {
       pageParams: {
         datasheetId: 'dst1',
       } as IPageParams,
-      datasheetMap: ({
+      datasheetMap: {
         dst1: {
           loading: false,
           connected: false,
           syncing: false,
-          datasheet: ({
+          datasheet: {
             id: 'dst1',
             name: 'Dst 1',
             isPartOfData: false,
@@ -1422,13 +1422,13 @@ describe('generateFixLinkConsistencyChangesets', () => {
             permissions: {
               editable: true,
             },
-          } as any) as IDatasheetState,
+          } as any as IDatasheetState,
         },
         dst2: {
           loading: false,
           connected: false,
           syncing: false,
-          datasheet: ({
+          datasheet: {
             id: 'dst2',
             name: 'Dst 2',
             isPartOfData: false,
@@ -1479,10 +1479,10 @@ describe('generateFixLinkConsistencyChangesets', () => {
             permissions: {
               editable: true,
             },
-          } as any) as IDatasheetState,
+          } as any as IDatasheetState,
         },
-      } as any) as IDatasheetMap,
-    } as any) as IReduxState;
+      } as any as IDatasheetMap,
+    } as any as IReduxState;
     const error = checkLinkConsistency(mockState, 'dst2');
     expect(error).toBeTruthy();
     const changesets = generateFixLinkConsistencyChangesets(error!, mockState);
@@ -1597,16 +1597,16 @@ describe('generateFixLinkConsistencyChangesets', () => {
   });
 
   test('changesets contain oi & od', () => {
-    const mockState: IReduxState = ({
+    const mockState: IReduxState = {
       pageParams: {
         datasheetId: 'dst1',
       } as IPageParams,
-      datasheetMap: ({
+      datasheetMap: {
         dst1: {
           loading: false,
           connected: false,
           syncing: false,
-          datasheet: ({
+          datasheet: {
             id: 'dst1',
             name: 'Dst 1',
             isPartOfData: false,
@@ -1657,13 +1657,13 @@ describe('generateFixLinkConsistencyChangesets', () => {
             permissions: {
               editable: true,
             },
-          } as any) as IDatasheetState,
+          } as any as IDatasheetState,
         },
         dst2: {
           loading: false,
           connected: false,
           syncing: false,
-          datasheet: ({
+          datasheet: {
             id: 'dst2',
             name: 'Dst 2',
             isPartOfData: false,
@@ -1714,10 +1714,10 @@ describe('generateFixLinkConsistencyChangesets', () => {
             permissions: {
               editable: true,
             },
-          } as any) as IDatasheetState,
+          } as any as IDatasheetState,
         },
-      } as any) as IDatasheetMap,
-    } as any) as IReduxState;
+      } as any as IDatasheetMap,
+    } as any as IReduxState;
     const error = checkLinkConsistency(mockState, 'dst2');
     expect(error).toBeTruthy();
     const changesets = generateFixLinkConsistencyChangesets(error!, mockState);

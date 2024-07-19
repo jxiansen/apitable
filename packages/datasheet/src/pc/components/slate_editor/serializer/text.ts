@@ -1,5 +1,3 @@
-
-
 import { Node } from 'slate';
 import { ElementType } from '../constant';
 import { EditorValue } from '../interface/editor';

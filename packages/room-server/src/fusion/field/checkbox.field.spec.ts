@@ -1,5 +1,3 @@
-
-
 import { FieldType, ICheckboxField } from '@apitable/core';
 import { CheckboxField } from 'fusion/field/checkbox.field';
 
@@ -13,7 +11,7 @@ describe('CheckBoxField', () => {
       id: 'fldpRxaCC8Mhe',
       name: 'Multi-select',
       type: FieldType.Checkbox,
-      property: { icon: 'haha' }
+      property: { icon: 'haha' },
     };
   });
 

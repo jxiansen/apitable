@@ -1,5 +1,3 @@
-
-
 import { FC, useContext, useState } from 'react';
 import { IAttachmentValue, KONVA_DATASHEET_ID } from '@apitable/core';
 import { AddOutlined } from '@apitable/icons';

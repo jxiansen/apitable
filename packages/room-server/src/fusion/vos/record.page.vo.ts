@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { ApiResponse } from './api.response';
 import { PageVo } from './page.vo';

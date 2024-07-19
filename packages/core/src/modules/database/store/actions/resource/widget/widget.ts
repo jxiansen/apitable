@@ -1,38 +1,37 @@
-
-
 import { readInstallationWidgets } from 'modules/widget/api/widget_api';
 import { Events, Player } from 'modules/shared/player';
 import { batchActions } from 'redux-batched-actions';
-import {
-  getLinkId,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getLinkId } from 'modules/database/store/selectors/resource/datasheet/base';
 import { RECEIVE_INSTALLATIONS_WIDGET, RESET_WIDGET } from 'modules/shared/store/action_constants';
 import { IReduxState, IUnMountWidget, IWidget } from 'exports/store/interfaces';
 
-export const fetchWidgetsByWidgetIds = (
-  widgetIds: string[],
-  successCb?: (props: { responseBody: any; dispatch: any, getState: any }) => void
-) => {
+export const fetchWidgetsByWidgetIds = (widgetIds: string[], successCb?: (props: { responseBody: any; dispatch: any; getState: any }) => void) => {
   return (dispatch: any, getState: () => IReduxState) => {
     // dispatch(setWidgetPanelLoading(true));
     const state = getState();
     const linkId = getLinkId(state);
 
-    readInstallationWidgets(widgetIds, linkId).then(res => {
-      return Promise.resolve({ responseBody: res.data, dispatch, getState });
-    }).catch(e => {
-      // dispatch(setWidgetPanelLoading(false));
-      Player.doTrigger(Events.app_error_logger, {
-        error: new Error(`widgetMap request error ${widgetIds.join(',')}`),
-        metaData: { widgetIds: widgetIds.join(',') },
-      });
-      throw e;
-    }).then(props => {
-      fetchInstallationWidgetSuccess(props);
-      successCb?.(props);
-    }, e => {
-      console.error('fetchWidgetsByWidgetIds error', e);
-    });
+    readInstallationWidgets(widgetIds, linkId)
+      .then((res) => {
+        return Promise.resolve({ responseBody: res.data, dispatch, getState });
+      })
+      .catch((e) => {
+        // dispatch(setWidgetPanelLoading(false));
+        Player.doTrigger(Events.app_error_logger, {
+          error: new Error(`widgetMap request error ${widgetIds.join(',')}`),
+          metaData: { widgetIds: widgetIds.join(',') },
+        });
+        throw e;
+      })
+      .then(
+        (props) => {
+          fetchInstallationWidgetSuccess(props);
+          successCb?.(props);
+        },
+        (e) => {
+          console.error('fetchWidgetsByWidgetIds error', e);
+        }
+      );
   };
 };
 
@@ -44,20 +43,16 @@ export const receiveInstallationWidget = (widgetId: string, widget: IWidget) => 
   };
 };
 
-export const fetchInstallationWidgetSuccess = ({ responseBody, dispatch }: { responseBody: any, dispatch: any }) => {
+export const fetchInstallationWidgetSuccess = ({ responseBody, dispatch }: { responseBody: any; dispatch: any }) => {
   const { data, success } = responseBody;
   // dispatch(setWidgetPanelLoading(false));
   if (success) {
     const _batchActions: any[] = [];
 
     for (const v of data) {
-      _batchActions.push(
-        receiveInstallationWidget(v.id, v)
-      );
+      _batchActions.push(receiveInstallationWidget(v.id, v));
     }
-    dispatch(
-      batchActions(_batchActions)
-    );
+    dispatch(batchActions(_batchActions));
   } else {
     Player.doTrigger(Events.app_error_logger, {
       error: new Error('widgetMap error'),

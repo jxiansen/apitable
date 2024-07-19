@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { IToolBarWrapperProps, ToolBarWrapper } from './tool_bar_wrapper';
 

@@ -1,5 +1,3 @@
-
-
 import { CellType, FieldType, ISegment } from '@apitable/core';
 
 export type IFontWeight = 'normal' | 'bold' | 'bolder' | 'lighter';

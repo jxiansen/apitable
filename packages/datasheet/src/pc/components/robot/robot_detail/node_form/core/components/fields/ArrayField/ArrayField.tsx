@@ -1,5 +1,3 @@
-
-
 import { JSONSchema7 } from 'json-schema';
 import { cloneDeep } from 'lodash';
 import { /* useEffect,  */ useState } from 'react';
@@ -276,9 +274,9 @@ const ArrayField = (props: IFieldProps) => {
         transArray,
         errorSchema &&
           props.errorSchema && {
-          ...props.errorSchema,
-          [index]: errorSchema,
-        },
+            ...props.errorSchema,
+            [index]: errorSchema,
+          },
       );
     };
   };
@@ -482,8 +480,8 @@ const ArrayField = (props: IFieldProps) => {
         const itemUiSchema = additional
           ? uiSchema.additionalItems || {}
           : Array.isArray(uiSchema.items)
-            ? uiSchema.items[index]
-            : uiSchema.items || {};
+          ? uiSchema.items[index]
+          : uiSchema.items || {};
         const itemErrorSchema = errorSchema ? errorSchema[index] : undefined;
 
         return renderArrayFieldItem({

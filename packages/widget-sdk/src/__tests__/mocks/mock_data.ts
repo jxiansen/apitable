@@ -39,20 +39,22 @@ export class MockWidgetSdkData {
     if (!snapshot || !snapshot?.datasheetId) {
       throw new Error(`Can't find ${datasheetId || 'datasheetId'} in widgetSdkData`);
     }
-    
-    this.dispatch(StoreActions.updateSnapshot(snapshot!.datasheetId, {
-      ...snapshot,
-      recordMap, 
-      meta: {
-        ...snapshot.meta,
-        views: snapshot.meta.views.map(view => {
-          return {
-            ...view,
-            rows: (view.rows || []).concat(Object.keys(recordMap).map(recordId => ({ recordId })))
-          };
-        })
-      }
-    }));
+
+    this.dispatch(
+      StoreActions.updateSnapshot(snapshot!.datasheetId, {
+        ...snapshot,
+        recordMap,
+        meta: {
+          ...snapshot.meta,
+          views: snapshot.meta.views.map((view) => {
+            return {
+              ...view,
+              rows: (view.rows || []).concat(Object.keys(recordMap).map((recordId) => ({ recordId }))),
+            };
+          }),
+        },
+      })
+    );
 
     this.updateViewDerivation(snapshot.datasheetId);
   }
@@ -71,9 +73,11 @@ export class MockWidgetSdkData {
     const viewDerivate = ViewDerivateFactory.createViewDerivate(this.widgetSdkData as any, snapshot.datasheetId, ViewType.Grid);
     const view = getViewById(this.widgetSdkData, snapshot.datasheetId, _viewId!)!;
     const viewDerivation = viewDerivate.getViewDerivation(view);
-    this.dispatch(StoreActions.setViewDerivation(snapshot.datasheetId, {
-      viewId: view.id,
-      viewDerivation
-    }));
+    this.dispatch(
+      StoreActions.setViewDerivation(snapshot.datasheetId, {
+        viewId: view.id,
+        viewDerivation,
+      })
+    );
   }
 }

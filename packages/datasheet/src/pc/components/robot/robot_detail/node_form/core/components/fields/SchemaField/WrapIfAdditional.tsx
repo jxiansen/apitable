@@ -1,5 +1,3 @@
-
-
 import { ADDITIONAL_PROPERTY_FLAG } from '../../../const';
 import IconButton from '../../common/IconButton';
 import { Label } from './Label';

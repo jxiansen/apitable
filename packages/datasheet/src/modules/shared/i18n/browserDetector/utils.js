@@ -1,5 +1,3 @@
-
-
 /* eslint-disable */
 let arr = [];
 let each = arr.forEach;

@@ -8,7 +8,7 @@ export interface IAddNodeParams {
   aiCreateParams?: {
     datasheet: {
       id: string;
-      viewId: string
-    }[]
-  }
+      viewId: string;
+    }[];
+  };
 }

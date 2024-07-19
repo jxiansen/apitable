@@ -1,10 +1,8 @@
-
-
 import { BaseEntity } from 'shared/entities/base.entity';
 import { Column, Entity } from 'typeorm';
 
 export interface IAutomationProps {
-  failureNotifyEnable?: boolean
+  failureNotifyEnable?: boolean;
 }
 
 @Entity('automation_robot')

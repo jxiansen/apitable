@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, DEFAULT_TIME_ZONE, ICellValue, IField } from '@apitable/core';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { isISO8601 } from 'class-validator';

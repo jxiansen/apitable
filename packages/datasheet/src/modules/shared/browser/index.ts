@@ -1,5 +1,3 @@
-
-
 import Bowser from 'bowser';
 
 let _browser;

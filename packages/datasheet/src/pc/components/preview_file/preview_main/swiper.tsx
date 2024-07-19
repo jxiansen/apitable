@@ -1,5 +1,3 @@
-
-
 import { FC, useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 import { IAttachmentValue, IUserInfo } from '@apitable/core';

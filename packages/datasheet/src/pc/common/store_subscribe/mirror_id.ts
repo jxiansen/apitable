@@ -1,5 +1,3 @@
-
-
 import { batchActions } from 'redux-batched-actions';
 import { ResourceType, StoreActions } from '@apitable/core';
 import { resourceService } from 'pc/resource_service';

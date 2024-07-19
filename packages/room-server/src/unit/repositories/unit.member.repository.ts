@@ -1,5 +1,3 @@
-
-
 import { omit } from 'lodash';
 import { EntityRepository, In, Repository } from 'typeorm';
 import { UnitMemberBaseInfoDto } from '../dtos/unit.member.base.info.dto';
@@ -42,7 +40,7 @@ export class UnitMemberRepository extends Repository<UnitMemberEntity> {
       .addSelect('vum.user_id', 'userId')
       .addSelect('vum.is_active', 'isActive')
       .addSelect('vum.is_deleted', 'isDeleted')
-    //  WeCom requires this field
+      //  WeCom requires this field
       .addSelect('IFNULL(vum.is_social_name_modified, 2) > 0', 'isMemberNameModified')
       .addSelect('vu.id', 'unitId')
       .where('vum.space_id = :spaceId', { spaceId })
@@ -52,24 +50,24 @@ export class UnitMemberRepository extends Repository<UnitMemberEntity> {
       query.andWhere('vum.is_deleted = 0').andWhere('vu.is_deleted = 0');
     }
     const members = await query.getRawMany<{
-            memberName: string;
-            id: string;
-            userId: string;
-            isActive: number;
-            isDeleted: boolean;
-            isMemberNameModified: '0' | '1';
-            unitId: string;
-        }>();
+      memberName: string;
+      id: string;
+      userId: string;
+      isActive: number;
+      isDeleted: boolean;
+      isMemberNameModified: '0' | '1';
+      unitId: string;
+    }>();
     return members.reduce((pre, cur) => {
       const item: {
-                memberName: string;
-                id: string;
-                userId: string;
-                isActive: number;
-                isDeleted: boolean;
-                isMemberNameModified?: boolean;
-                unitId: string;
-            } = omit(cur, 'isMemberNameModified');
+        memberName: string;
+        id: string;
+        userId: string;
+        isActive: number;
+        isDeleted: boolean;
+        isMemberNameModified?: boolean;
+        unitId: string;
+      } = omit(cur, 'isMemberNameModified');
       item.isMemberNameModified = Number(cur.isMemberNameModified) === 1;
       pre.push(item);
       return pre;
@@ -77,6 +75,6 @@ export class UnitMemberRepository extends Repository<UnitMemberEntity> {
   }
 
   async selectMemberNameByUserIdAndSpaceId(userId: string, spaceId: string): Promise<string | undefined> {
-    return await this.findOne({ select: ['memberName'], where: { userId, spaceId } }).then(result => result?.memberName);
+    return await this.findOne({ select: ['memberName'], where: { userId, spaceId } }).then((result) => result?.memberName);
   }
 }

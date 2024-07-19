@@ -1,5 +1,3 @@
-
-
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { IResourceMeta, ResourceType } from '@apitable/core';
 import { WidgetService } from 'database/widget/services/widget.service';
@@ -20,7 +18,7 @@ export class MetaService {
     private readonly datasheetService: DatasheetService,
     private readonly widgetService: WidgetService,
     private readonly resourceMetaRepository: ResourceMetaRepository,
-  ) { }
+  ) {}
 
   async getResourceInfo(resourceId: string, resourceType: ResourceType): Promise<IResourceInfo> {
     switch (resourceType) {

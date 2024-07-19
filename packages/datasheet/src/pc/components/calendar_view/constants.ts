@@ -1,5 +1,3 @@
-
-
 export const RECORD = 'RECORD';
 
 export const PRE_RECORD = 'PRE_RECORD';

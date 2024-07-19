@@ -1,5 +1,3 @@
-
-
 import { Strings, t } from '../../exports/i18n';
 import { ViewType } from '../../modules/shared/store/constants';
 import { IOrgChartViewProperty, ISnapshot, IViewProperty, IOrgChartViewColumn } from '../../exports/store/interfaces';
@@ -20,13 +18,10 @@ export class OrgChartView extends View {
   }
 
   static defaultStyle(snapshot: ISnapshot, srcView: IViewProperty) {
-
     // the first attachment field set as default cover field
-    const initCoverField = srcView.columns.find(col =>
-      snapshot.meta.fieldMap[col.fieldId]!.type === FieldType.Attachment,
-    );
+    const initCoverField = srcView.columns.find((col) => snapshot.meta.fieldMap[col.fieldId]!.type === FieldType.Attachment);
 
-    const linkField = srcView.columns.find(col => {
+    const linkField = srcView.columns.find((col) => {
       const field = snapshot.meta.fieldMap[col.fieldId]!;
       return field.type === FieldType.Link && field.property.foreignDatasheetId === snapshot.datasheetId;
     })!;
@@ -74,7 +69,7 @@ export class OrgChartView extends View {
       columns: this.defaultColumns(srcView),
       rows: this.defaultRows(srcView),
       style: this.defaultStyle(snapshot, srcView),
-      displayHiddenColumnWithinMirror: true
+      displayHiddenColumnWithinMirror: true,
     };
   }
 

@@ -1,9 +1,7 @@
-
-
 import { MemberType } from '@apitable/core';
 
 /**
- * unit member type reference ID 
+ * unit member type reference ID
  * @author Zoe zheng
  * @date 2020/7/30 5:16 PM
  */
@@ -46,7 +44,7 @@ export interface IMemberBaseInfo {
    */
   uuid?: string;
 
-  isMemberNameModified?: boolean; 
+  isMemberNameModified?: boolean;
 
   isActive: number;
 }

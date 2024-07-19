@@ -1,5 +1,3 @@
-
-
 import { IAnyAction } from 'engine';
 import { isString } from 'lodash';
 
@@ -25,13 +23,13 @@ export enum ActionType {
   AddCommentCount = 'addCommentCount',
   DelComment = 'delComment',
   DescCommentCount = 'descCommentCount',
-  Unknown = 'unknown'
+  Unknown = 'unknown',
 }
 
-type TContext = { viewIndex?: number, viewProperty?: string, propertyIndex?: number, recordId?: string, fieldId?: string, data?: any };
+type TContext = { viewIndex?: number; viewProperty?: string; propertyIndex?: number; recordId?: string; fieldId?: string; data?: any };
 
 export interface IParseActionRes {
-  type: ActionType,
+  type: ActionType;
   context: TContext;
 }
 
@@ -66,12 +64,12 @@ export const parseAction = (action: IAnyAction): IParseActionRes => {
     if (hasLi && !hasLd) {
       return {
         type: ActionType.AddRow,
-        context: { viewIndex, viewProperty, propertyIndex }
+        context: { viewIndex, viewProperty, propertyIndex },
       };
     } else if (hasLd) {
       return {
         type: ActionType.DelRow,
-        context: { viewIndex, viewProperty, propertyIndex }
+        context: { viewIndex, viewProperty, propertyIndex },
       };
     } else if (hasLm) {
       return {
@@ -80,7 +78,7 @@ export const parseAction = (action: IAnyAction): IParseActionRes => {
           viewIndex,
           viewProperty,
           propertyIndex,
-        }
+        },
       };
     }
     // The changed path is meta -> views -> vIdx -> columns, changing the columns of a view
@@ -88,26 +86,27 @@ export const parseAction = (action: IAnyAction): IParseActionRes => {
     if (hasLi && hasLd) {
       return {
         type: ActionType.UpdateColumn,
-        context: { viewIndex, viewProperty, propertyIndex }
+        context: { viewIndex, viewProperty, propertyIndex },
       };
-    } if (hasLi && !hasLd) {
+    }
+    if (hasLi && !hasLd) {
       return {
         type: ActionType.AddColumn,
-        context: { viewIndex, viewProperty, propertyIndex }
+        context: { viewIndex, viewProperty, propertyIndex },
       };
     } else if (hasLd) {
       return {
         type: ActionType.DelColumn,
-        context: { viewIndex, viewProperty, propertyIndex, fieldId: action.ld.fieldId }
+        context: { viewIndex, viewProperty, propertyIndex, fieldId: action.ld.fieldId },
       };
     }
-  // Change the path to meta -> views -> vIdx -> xxx, change the view
+    // Change the path to meta -> views -> vIdx -> xxx, change the view
   } else if (metaField === 'views') {
     // add view
     if (viewProperty == null && hasLi && !hasLd) {
       return {
         type: ActionType.AddView,
-        context: { viewIndex }
+        context: { viewIndex },
       };
     }
 
@@ -115,13 +114,13 @@ export const parseAction = (action: IAnyAction): IParseActionRes => {
     if (viewProperty == null && !hasLi && hasLd) {
       return {
         type: ActionType.DelView,
-        context: { viewIndex }
+        context: { viewIndex },
       };
     }
     if (viewProperty === 'name' && hasOD && hasOi) {
       return {
         type: ActionType.ModifyViewName,
-        context: { viewIndex, viewProperty }
+        context: { viewIndex, viewProperty },
       };
     }
 
@@ -130,29 +129,29 @@ export const parseAction = (action: IAnyAction): IParseActionRes => {
         type: ActionType.SetViewProperty,
         context: {
           viewIndex,
-          viewProperty
-        }
+          viewProperty,
+        },
       };
     }
-  // The changed path is meta -> fieldMap -> fieldId, changing the field data
+    // The changed path is meta -> fieldMap -> fieldId, changing the field data
   } else if (fieldId) {
     // add field
     if (hasOi && !hasOD) {
       return {
         type: ActionType.AddField,
-        context: { fieldId }
+        context: { fieldId },
       };
       // delete field
     } else if (hasOD && !hasOi) {
       return {
         type: ActionType.DelField,
-        context: { fieldId }
+        context: { fieldId },
       };
       // update field
     } else if (hasOi && hasOD) {
       return {
         type: ActionType.UpdateField,
-        context: { fieldId }
+        context: { fieldId },
       };
     }
   } else if (recordId) {
@@ -160,55 +159,55 @@ export const parseAction = (action: IAnyAction): IParseActionRes => {
     if (hasOi && !hasOD && !recordPropertyData) {
       return {
         type: ActionType.AddRecord,
-        context: { recordId }
+        context: { recordId },
       };
       // delete record
     } else if (hasOD && !hasOi && !recordPropertyData) {
       return {
         type: ActionType.DelRecord,
-        context: { recordId }
+        context: { recordId },
       };
       // insert comment
     } else if (recordProperty === 'comments' && hasLi && !recordPropertyData) {
       return {
         type: ActionType.InsertComment,
-        context: { recordId, data: action.li }
+        context: { recordId, data: action.li },
       };
       // update comment(or like)
     } else if (recordProperty === 'comments' && hasLi && recordPropertyData) {
       return {
         type: ActionType.UpdateComment,
-        context: { recordId, data: action.li }
+        context: { recordId, data: action.li },
       };
       // delete comment
     } else if (recordProperty === 'comments' && hasLd) {
       return {
         type: ActionType.DelComment,
-        context: { recordId, data: action.li }
+        context: { recordId, data: action.li },
       };
       // add comment number
     } else if (recordProperty === 'commentCount' && hasNa && action.na > 0) {
       return {
         type: ActionType.AddCommentCount,
-        context: { recordId }
+        context: { recordId },
       };
       // reduce comments
     } else if (recordProperty === 'commentCount' && hasNa && action.na < 0) {
       return {
         type: ActionType.DescCommentCount,
-        context: { recordId }
+        context: { recordId },
       };
       // update records
     } else if (recordProperty === 'data' && recordPropertyData) {
       return {
         type: ActionType.UpdateRecord,
-        context: { recordId, fieldId: recordPropertyData }
+        context: { recordId, fieldId: recordPropertyData },
       };
     }
   }
   return {
     type: ActionType.Unknown,
-    context: {}
+    context: {},
   };
 };
 
@@ -221,6 +220,6 @@ export const effectResourceAction = (type: ActionType): boolean => {
     ActionType.DelColumn,
     ActionType.DelRecord,
     ActionType.UpdateRecord,
-    ActionType.UpdateField
+    ActionType.UpdateField,
   ].includes(type);
-}; 
+};

@@ -1,5 +1,3 @@
-
-
 import { shallowEqual, useSelector } from 'react-redux';
 import { useMeta } from './use_meta';
 import { IWidgetState } from 'interface';
@@ -22,13 +20,13 @@ const getSelectedFieldIds = (state: IWidgetState, currentDatasheetId?: string) =
   const fieldIds: string[] = [];
   const recordIds: string[] = [];
   const columnsCell = matrix[0] || [];
-  matrix.forEach(row => {
+  matrix.forEach((row) => {
     if (!row[0]) {
       return;
     }
     recordIds.push(row[0].recordId);
   });
-  columnsCell.forEach(col => {
+  columnsCell.forEach((col) => {
     fieldIds.push(col.fieldId);
   });
   return {
@@ -38,13 +36,13 @@ const getSelectedFieldIds = (state: IWidgetState, currentDatasheetId?: string) =
 };
 
 /**
- * Get the recordId and fieldId of the region selected by the current cell cursor. 
+ * Get the recordId and fieldId of the region selected by the current cell cursor.
  * Rerendering is triggered when the cursor is moved or the view is switched.
  *
  * If you only need information about the active cell, please use {@link useActiveCell}.
  *
  * @returns
- * 
+ *
  * ### Example
  * ```js
  * import { useSelection, useRecords, useFields, useActiveViewId } from '@apitable/widget-sdk';
@@ -74,11 +72,11 @@ const getSelectedFieldIds = (state: IWidgetState, currentDatasheetId?: string) =
  *   </table>);
  * }
  * ```
- * 
+ *
  */
 export function useSelection() {
   const { datasheetId } = useMeta();
-  return useSelector(state => {
+  return useSelector((state) => {
     return getSelectedFieldIds(state, datasheetId);
   }, shallowEqual);
 }

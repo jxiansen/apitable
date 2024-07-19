@@ -1,5 +1,3 @@
-
-
 import { WidgetProps } from '@rjsf/core';
 import React from 'react';
 import { RadioGroup } from '../../../radio';

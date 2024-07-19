@@ -1,5 +1,3 @@
-
-
 import cx from 'classnames';
 import * as React from 'react';
 import { AddOutlined } from '@apitable/icons';

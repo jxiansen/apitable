@@ -1,5 +1,3 @@
-
-
 import { AvatarSizeConfig } from './styled';
 
 export type IAvatarSizeConfigKey = keyof typeof AvatarSizeConfig;

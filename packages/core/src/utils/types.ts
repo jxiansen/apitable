@@ -1,5 +1,3 @@
-
-
 import { IField, ISelectField, FieldType, ISingleSelectField, IMultiSelectField } from 'types/field_types';
 import { FOperator, IGroupInfo } from 'types';
 import type { ISnapshot } from 'exports/store/interfaces';

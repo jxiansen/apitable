@@ -1,5 +1,3 @@
-
-
 import { ComputeRefManager, getComputeRefManager, IReduxState, Selectors } from '@apitable/core';
 
 /**

@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import * as Url from './url.data';
 import Qs from 'qs';
@@ -16,11 +14,11 @@ export const fetchMirrorDataPack = (mirrorId: string, recordIds?: string[]) => {
   return axios.get<IApiWrapper & { data: IServerMirror }>(urlcat(Url.READ_MIRROR_DATA_PACK, { mirrorId }), {
     baseURL,
     params: {
-      recordIds
+      recordIds,
     },
-    paramsSerializer: params => {
+    paramsSerializer: (params) => {
       return Qs.stringify(params, { arrayFormat: 'repeat' });
-    }
+    },
   });
 };
 
@@ -31,4 +29,3 @@ export const fetchShareMirrorInfo = (shareId: string, mirrorId: string) => {
 export const fetchShareMirrorDataPack = (shareId: string, mirrorId: string) => {
   return axios.get<IApiWrapper & { data: IServerMirror }>(urlcat(Url.READ_SHARE_MIRROR_DATA_PACK, { shareId, mirrorId }), { baseURL });
 };
-

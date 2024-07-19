@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { colorVars } from '@apitable/components';
 import {

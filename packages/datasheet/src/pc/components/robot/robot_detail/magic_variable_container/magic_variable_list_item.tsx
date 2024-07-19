@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import { isValidElement, memo, useRef } from 'react';
 import styled from 'styled-components';
@@ -12,32 +10,31 @@ import { useCssColors } from '../trigger/use_css_colors';
 import { ISchemaPropertyListItem, ISchemaPropertyListItemClickFunc } from './helper';
 
 const StyledBox = styled(Box)`
-    p {
-      width: 100%;
-    }
-  `;
+  p {
+    width: 100%;
+  }
+`;
 interface ISchemaPropertyListItemProps {
-  currentStep: number
+  currentStep: number;
   item: ISchemaPropertyListItem;
   isActive?: boolean;
   disabled?: boolean;
   handleItemClick: ISchemaPropertyListItemClickFunc;
 }
 
-const StyledButton = styled(Button)`
-`;
+const StyledButton = styled(Button)``;
 const StyledTypography = styled(Typography)`
   padding-top: 0;
-  `;
+`;
 
-const RowItem= styled(ListDeprecate.Item)`
+const RowItem = styled(ListDeprecate.Item)`
   ${StyledButton} {
     visibility: hidden;
   }
   padding: 8px 8px !important;
   border-radius: 4px !important;
   height: inherit !important;
-  
+
   &:hover {
     ${StyledButton} {
       visibility: visible;
@@ -62,7 +59,7 @@ export const SchemaPropertyListItem = memo((props: ISchemaPropertyListItemProps)
         onClick={(e) => {
           if (disabled) return;
           stopPropagation(e);
-          if(item.hasChildren) {
+          if (item.hasChildren) {
             handleItemClick(item, true);
           } else {
             handleItemClick(item);
@@ -79,43 +76,39 @@ export const SchemaPropertyListItem = memo((props: ISchemaPropertyListItemProps)
           style={
             disabled
               ? {
-                opacity: 0.5,
-                cursor: 'not-allowed',
-              }
+                  opacity: 0.5,
+                  cursor: 'not-allowed',
+                }
               : {}
           }
         >
-
-          <Box display={'flex'} alignItems='center' flex={'1 1 auto'} overflowX={'hidden'} ba>
+          <Box display={'flex'} alignItems="center" flex={'1 1 auto'} overflowX={'hidden'} ba>
             <Box flex={`0 0 ${imgSize}px`} display={'flex'} alignItesm={'center'} justifyContent={'center'}>
-              {
-                item.icon ? (isValidElement(item.icon) ? item.icon :
-                  <Image src={String(item.icon)}
-                    width={imgSize}
-                    height={imgSize}
-                    alt=""
-                  />)
-                  :
-                  <NumberOutlined size={16} color={colors.textCommonTertiary}/>
-              }
+              {item.icon ? (
+                isValidElement(item.icon) ? (
+                  item.icon
+                ) : (
+                  <Image src={String(item.icon)} width={imgSize} height={imgSize} alt="" />
+                )
+              ) : (
+                <NumberOutlined size={16} color={colors.textCommonTertiary} />
+              )}
             </Box>
 
             <Box paddingLeft={'8px'} width={'100%'} flex={'1 1 auto'} overflowX={'hidden'}>
               <StyledBox width={'100%'} alignItems={'flex-start'} display={'flex'} flexDirection={'column'} overflowX={'hidden'}>
                 <EllipsisText>
-                  <Typography variant={'body3'} color={colors.textCommonPrimary} >
+                  <Typography variant={'body3'} color={colors.textCommonPrimary}>
                     {item.label}
                   </Typography>
                 </EllipsisText>
-                {
-                  item.description && (
-                    <EllipsisText>
-                      <StyledTypography variant={'body4'} color={colors.textCommonTertiary}>
-                        {item.description}
-                      </StyledTypography>
-                    </EllipsisText>
-                  )
-                }
+                {item.description && (
+                  <EllipsisText>
+                    <StyledTypography variant={'body4'} color={colors.textCommonTertiary}>
+                      {item.description}
+                    </StyledTypography>
+                  </EllipsisText>
+                )}
               </StyledBox>
             </Box>
           </Box>

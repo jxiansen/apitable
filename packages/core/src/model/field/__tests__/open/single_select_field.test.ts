@@ -1,12 +1,15 @@
-
-
 import { getFieldOptionColor } from 'model/color';
 import { ISelectField } from 'types';
 import { APIMetaFieldType } from 'types/field_api_enums';
 import { IOpenField } from 'types/open/open_field_read_types';
 import { IUpdateOpenSingleSelectFieldProperty } from 'types/open/open_field_write_types';
-import { getOpenFieldProperty, transformProperty
-  , updateOpenFieldPropertyTransformProperty, validAddOpenProperty, validUpdateOpenProperty } from './common';
+import {
+  getOpenFieldProperty,
+  transformProperty,
+  updateOpenFieldPropertyTransformProperty,
+  validAddOpenProperty,
+  validUpdateOpenProperty,
+} from './common';
 
 const singleSelectField: ISelectField = {
   name: 'single select field',
@@ -17,15 +20,15 @@ const singleSelectField: ISelectField = {
       {
         id: 'opt000',
         name: 'Test Label 1',
-        color: 1
+        color: 1,
       },
       {
         id: 'opt001',
         name: 'Test Label 2',
-        color: 2
-      }
-    ]
-  }
+        color: 2,
+      },
+    ],
+  },
 };
 const invalidIdField: ISelectField = {
   name: 'single select field',
@@ -36,16 +39,16 @@ const invalidIdField: ISelectField = {
       {
         id: '',
         name: 'Test Label 1',
-        color: 0
+        color: 0,
       },
       {
         id: '',
         name: 'Test Label 2',
-        color: 0
-      }
+        color: 0,
+      },
     ],
-    defaultValue: 'Test Label 1'
-  }
+    defaultValue: 'Test Label 1',
+  },
 };
 
 const openSingleSelectField: IOpenField = {
@@ -57,35 +60,40 @@ const openSingleSelectField: IOpenField = {
       {
         id: 'opt000',
         name: 'Test Label 1',
-        color: getFieldOptionColor(1)
+        color: getFieldOptionColor(1),
       },
       {
         id: 'opt001',
         name: 'Test Label 2',
-        color: getFieldOptionColor(2)
-      }
-    ]
-  }
+        color: getFieldOptionColor(2),
+      },
+    ],
+  },
 };
 
 const writeOpenPropertyDelete: IUpdateOpenSingleSelectFieldProperty = {
-  options: [{
-    id: 'opt000',
-    name: 'Test Label 1',
-    color: 1
-  }]
+  options: [
+    {
+      id: 'opt000',
+      name: 'Test Label 1',
+      color: 1,
+    },
+  ],
 };
 
 const writeOpenProperty: IUpdateOpenSingleSelectFieldProperty = {
-  options: [{
-    id: 'opt000',
-    name: 'Test Label 1',
-    color: 1
-  }, {
-    id: 'opt001',
-    name: 'Test Label 2',
-    color: 2
-  }]
+  options: [
+    {
+      id: 'opt000',
+      name: 'Test Label 1',
+      color: 1,
+    },
+    {
+      id: 'opt001',
+      name: 'Test Label 2',
+      color: 2,
+    },
+  ],
 };
 
 describe('Radio field read property format check', () => {
@@ -161,5 +169,4 @@ describe('transform property', () => {
   it('missing id, should change defaultValue to option.id', () => {
     expect(property).toHaveProperty(['options', 0, 'id'], property.defaultValue);
   });
-
 });

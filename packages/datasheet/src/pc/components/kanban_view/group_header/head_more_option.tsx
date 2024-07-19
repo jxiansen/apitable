@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { ContextMenu, useThemeColors } from '@apitable/components';
 import { Selectors, Strings, t, UN_GROUP } from '@apitable/core';

@@ -1,5 +1,3 @@
-
-
 import { IRobotTrigger } from 'pc/components/robot/interface';
 
 export const getDataParameter = <T>(trigger: IRobotTrigger['input'] | undefined, fieldName: string) => {

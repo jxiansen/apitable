@@ -1,5 +1,3 @@
-
-
 import { Editor } from 'slate';
 import { IEventBusEditor, EventHandle } from '../interface/editor';
 

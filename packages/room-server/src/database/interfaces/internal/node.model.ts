@@ -1,5 +1,3 @@
-
-
 import { INodeMeta, IPermissions, Role } from '@apitable/core';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { FieldPermissionMap } from './datasheet.model';
@@ -24,15 +22,15 @@ export class NodeInfo implements INodeMeta {
 
 export class NodeBaseInfo {
   @ApiProperty()
-    id!: string;
+  id!: string;
   @ApiProperty()
-    nodeName!: string;
+  nodeName!: string;
   @ApiProperty()
-    icon!: string;
+  icon!: string;
   @ApiPropertyOptional()
-    revision?: number;
+  revision?: number;
   @ApiProperty()
-    parentId!: string;
+  parentId!: string;
 }
 
 export class NodeDetailInfo extends FieldPermissionMap {

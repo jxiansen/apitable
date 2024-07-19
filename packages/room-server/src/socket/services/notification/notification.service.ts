@@ -1,5 +1,3 @@
-
-
 import { Injectable, Logger } from '@nestjs/common';
 import { isNil } from '@nestjs/common/utils/shared.utils';
 import { BackendGrpcClient } from 'grpc/client/backend.grpc.client';
@@ -15,9 +13,7 @@ import { WatchSpaceRo } from 'socket/ros/notification/watch-space.ro';
 export class NotificationService {
   private readonly logger = new Logger(NotificationService.name);
 
-  constructor(
-    private readonly backendGrpcClient: BackendGrpcClient
-  ) {}
+  constructor(private readonly backendGrpcClient: BackendGrpcClient) {}
 
   broadcastNotify(message: INotificationRo, client: Socket): boolean {
     if (isNil(message.toUuid)) {

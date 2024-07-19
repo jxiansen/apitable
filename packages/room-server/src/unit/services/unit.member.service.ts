@@ -1,5 +1,3 @@
-
-
 import { IUserValue, MemberType } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { isEmpty } from 'lodash';
@@ -53,9 +51,9 @@ export class UnitMemberService {
   }
 
   /**
-   * 
-   * @param memberIds 
-   * @returns 
+   *
+   * @param memberIds
+   * @returns
    */
   public async getMemberBasicInfo(memberIds: number[]): Promise<{ [memberId: number]: IUserValue }> {
     if (memberIds.length > 0) {
@@ -107,8 +105,13 @@ export class UnitMemberService {
     if (!members || !members.length) return {};
     return members.reduce<{
       [userId: string]: {
-        memberId: string, memberName: string; isActive: boolean; isDeleted: boolean; isMemberNameModified: boolean; unitId: string
-      }
+        memberId: string;
+        memberName: string;
+        isActive: boolean;
+        isDeleted: boolean;
+        isMemberNameModified: boolean;
+        unitId: string;
+      };
     }>((pre, cur) => {
       pre[cur.userId] = {
         memberId: cur.id,

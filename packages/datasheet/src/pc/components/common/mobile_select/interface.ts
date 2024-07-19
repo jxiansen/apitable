@@ -1,5 +1,3 @@
-
-
 import { SelectProps } from 'antd/lib/select';
 import * as React from 'react';
 

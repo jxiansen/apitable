@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { getThemeColors, getThemeName, lightColors } from '@apitable/components';
 import { CutMethod, getImageThumbSrc, integrateCdnHost } from '@apitable/core';
@@ -34,7 +32,7 @@ export const getAvatarRandomColor = (str: string) => {
 };
 
 export function getFirstWordFromString(str: string) {
-  if(!str) return '';
+  if (!str) return '';
   const word = str.trim();
   if (!word.length) return '';
   const codePoint = word.codePointAt(0);
@@ -95,10 +93,10 @@ const AvatarHoc = (Component: any) => {
     const avatarSrc =
       isGzip && _src
         ? getImageThumbSrc(integrateCdnHost(_src), {
-          method: CutMethod.CUT,
-          quality: 100,
-          size: size * ratio,
-        })
+            method: CutMethod.CUT,
+            quality: 100,
+            size: size * ratio,
+          })
         : _src;
     const firstWord = getFirstWordFromString(title);
     const avatarBg = avatarSrc ? colors.defaultBg : avatarColor != null ? bgColorList[avatarColor] : getAvatarRandomColor(id);

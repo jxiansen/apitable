@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { useThemeColors } from '@apitable/components';
 import { IViewColumn, Selectors } from '@apitable/core';
@@ -57,12 +55,12 @@ const RecordCardBase: React.FC<React.PropsWithChildren<IRecordCardProps>> = (pro
   }
   const currentSearchItemStyle = isCurrentSearchItem
     ? {
-      border: `1px solid ${colors.borderWarnDefault}`,
-      background: 'linear-gradient(0deg, var(--bgWarnLightDefault) 0%, var(--bgWarnLightDefault) 100%), var(--bgCommonDefault)',
-    }
+        border: `1px solid ${colors.borderWarnDefault}`,
+        background: 'linear-gradient(0deg, var(--bgWarnLightDefault) 0%, var(--bgWarnLightDefault) 100%), var(--bgCommonDefault)',
+      }
     : {
-      background: colors.defaultBg,
-    };
+        background: colors.defaultBg,
+      };
 
   if (!datasheetId) {
     return null;

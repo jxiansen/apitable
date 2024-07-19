@@ -1,5 +1,3 @@
-
-
 import { CacheStore, CacheStoreFactory, CacheStoreSetOptions, LiteralObject } from '@nestjs/common';
 import { Client } from 'minio';
 import { BaseOssStore } from 'shared/cache/base.oss.store';

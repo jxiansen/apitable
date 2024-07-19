@@ -1,5 +1,3 @@
-
-
 import { StatusCode } from 'config';
 import { Strings, t } from 'exports/i18n';
 import { DateUnitType } from 'modules/shared/store/constants';
@@ -222,7 +220,7 @@ const mergeRecordMap = (snapshot: ISnapshot, recordMap: IRecordMap) => {
 
 export function receiveDataPack<T extends IServerDatasheetPack = IServerDatasheetPack>(
   payload: T,
-  options?: { isPartOfData?: boolean; fixConsistency?: boolean; toMergeRecordMap?: IRecordMap; getState?: () => IReduxState },
+  options?: { isPartOfData?: boolean; fixConsistency?: boolean; toMergeRecordMap?: IRecordMap; getState?: () => IReduxState }
 ): ILoadedDataPackAction {
   const { snapshot, datasheet } = payload;
   const { isPartOfData = false, fixConsistency = true, toMergeRecordMap, getState } = options ?? {};
@@ -903,7 +901,7 @@ export const setViewProperty = (
   payload: {
     viewId: string;
     viewProperty: IViewProperty;
-  },
+  }
 ) => {
   return {
     datasheetId,

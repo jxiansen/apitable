@@ -1,5 +1,3 @@
-
-
 /* eslint-disable */
 let hasLocalStorageSupport;
 try {

@@ -1,5 +1,3 @@
-
-
 import { compensator } from '../../../../../../compensator';
 
 import { CellType } from 'modules/shared/store/constants';
@@ -61,10 +59,12 @@ export const getLinearRowsFormComputed = (state: IReduxState, dsId?: string) => 
       return !compensator.checkWillRemoveRecord(record.recordId);
     });
   }
-  return linearRows.filter((item) => filterConditions.reduce((pass, check) => {
-    if (!pass) {
-      return pass;
-    }
-    return check(item);
-  }, true));
+  return linearRows.filter((item) =>
+    filterConditions.reduce((pass, check) => {
+      if (!pass) {
+        return pass;
+      }
+      return check(item);
+    }, true)
+  );
 };

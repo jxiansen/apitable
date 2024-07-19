@@ -1,5 +1,3 @@
-
-
 import { Modal as ModalComponent, Spin } from 'antd';
 import * as React from 'react';
 import { useMemo, useState } from 'react';

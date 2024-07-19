@@ -1,5 +1,3 @@
-
-
 import { Store } from 'redux';
 import { BroadcastTypes, IReduxState, Selectors } from '@apitable/core';
 import { IServiceError, ResourceService } from '@apitable/widget-sdk';

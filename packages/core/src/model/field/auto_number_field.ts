@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { IRecord } from '../../exports/store/interfaces';
 import { FieldType, IField, IAutoNumberField } from 'types/field_types';

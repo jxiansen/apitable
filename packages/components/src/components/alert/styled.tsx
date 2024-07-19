@@ -1,20 +1,18 @@
-
-
 import Color from 'color';
 import styled, { css } from 'styled-components';
 import { IAlertWrapper } from './interface';
 import { applyDefaultTheme } from 'theme';
 import { rgba2hex } from 'helper';
 
-export const AlertWrapper = styled.div.attrs(applyDefaultTheme) <IAlertWrapper>`
+export const AlertWrapper = styled.div.attrs(applyDefaultTheme)<IAlertWrapper>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: ${props => props.title ? '16px' : '8px 16px'};
+  padding: ${(props) => (props.title ? '16px' : '8px 16px')};
   width: 100%;
   box-sizing: border-box;
   border-radius: 4px;
-  ${props => {
+  ${(props) => {
     const colorMap = {
       default: props.theme.color.primaryColor,
       error: props.theme.color.errorColor,

@@ -1,5 +1,3 @@
-
-
 import { Datasheet } from 'model';
 import { FieldType } from './field_types';
 import { ViewType } from './view_types';
@@ -9,9 +7,9 @@ export interface IFieldPicker {
   allowedTypes?: FieldType[];
   /** A function to be called when the selected field changes. */
   onChange?: (option: IOption) => void;
-  /** 
-   * The corresponding view ID, after specifying the view, 
-   * the order of the options in the field selector will be in the order of the fields in that view, 
+  /**
+   * The corresponding view ID, after specifying the view,
+   * the order of the options in the field selector will be in the order of the fields in that view,
    * and the fields hidden by that view will also appear in the options.
    */
   viewId: string | undefined;
@@ -27,7 +25,7 @@ export interface IFieldPicker {
 
 export interface IOption {
   label: string;
-  value: string
+  value: string;
 }
 
 export interface IViewPicker {
@@ -45,17 +43,17 @@ export interface IViewPicker {
   datasheet?: Datasheet;
   /**
    * `Beta API`, possible feature changes.
-   * 
-   * If this option is turned on, the selected view in this ViewPicker will be used as 
+   *
+   * If this option is turned on, the selected view in this ViewPicker will be used as
    * the target view for "Jump to link datasheet" in the dashboard.
-   * 
+   *
    * The jump to the link datasheet can only be the datasheet to which the widget is bound.
-   * 
-   * Note: In the same widget, the controlJump option can only be set in one ViewPicker; 
+   *
+   * Note: In the same widget, the controlJump option can only be set in one ViewPicker;
    * if the controlJump option is set in multiple ViewPickers, the function will not be guaranteed to work properly.
-   * 
-   * Recommendation: When this feature is enabled, 
+   *
+   * Recommendation: When this feature is enabled,
    * you should use useCloudStorage to do persistent storage for the selected view, otherwise it may cause exceptions.
-  */
+   */
   controlJump?: boolean;
 }

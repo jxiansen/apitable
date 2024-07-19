@@ -1,5 +1,3 @@
-
-
 import { useContext } from 'react';
 import * as React from 'react';
 import { DropTargetMonitor, useDrop } from 'react-dnd';

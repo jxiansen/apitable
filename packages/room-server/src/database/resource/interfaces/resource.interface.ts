@@ -1,6 +1,4 @@
-
-
-export interface IResourceInfo { 
-  nodeId?: string,
-  resourceRevision?: number, 
+export interface IResourceInfo {
+  nodeId?: string;
+  resourceRevision?: number;
 }

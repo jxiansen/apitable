@@ -1,5 +1,3 @@
-
-
 import { Remote } from 'comlink';
 import { Store, AnyAction, Dispatch } from 'redux';
 import { DispatchToStore, IReduxState } from '@apitable/core';

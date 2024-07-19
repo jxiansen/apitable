@@ -1,5 +1,3 @@
-
-
 import { createKeybinding, Keybinding, KeyCode, KeyMod, SimpleKeybinding } from '../key_codes';
 
 describe('keyCodes', () => {

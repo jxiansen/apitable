@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import * as React from 'react';
 import { Button, Checkbox, Skeleton, Typography, useThemeColors } from '@apitable/components';
@@ -58,8 +56,8 @@ export const MirrorListInner: React.FC<React.PropsWithChildren<IMirrorListInner>
 
   const mirrorCreatable = useAppSelector((state) => {
     const { manageable } = Selectors.getPermissions(state);
-    const { manageable: folderManageable } = state.catalogTree.treeNodesMap[folderId!]?.permissions ||
-    state.catalogTree.privateTreeNodesMap[folderId!]?.permissions || {};
+    const { manageable: folderManageable } =
+      state.catalogTree.treeNodesMap[folderId!]?.permissions || state.catalogTree.privateTreeNodesMap[folderId!]?.permissions || {};
     return manageable && folderManageable;
   });
   const execute = (cmd: ICollaCommandOptions) => resourceService.instance!.commandManager.execute(cmd);

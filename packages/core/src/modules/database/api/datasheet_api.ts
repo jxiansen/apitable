@@ -1,5 +1,3 @@
-
-
 import {
   IDatasheetTablebundles,
   IRecoverDatasheetTablebundles,
@@ -34,7 +32,7 @@ const baseURL = process.env.NEXT_PUBLIC_NEXT_API;
  */
 export function fetchDatasheetPack(
   dstId: string,
-  recordIds?: string | string[],
+  recordIds?: string | string[]
 ): Promise<AxiosResponse<IApiWrapper & { data: IServerDatasheetPack }>> {
   if (getBrowserDatabusApiEnabled()) {
     if (recordIds == null || (Array.isArray(recordIds) && recordIds.length === 0)) {
@@ -124,7 +122,7 @@ export function fetchChangesets<T>(
   startRevision: number,
   endRevision: number,
   sourceId?: string,
-  shareId?: string,
+  shareId?: string
 ) {
   const url = shareId ? urlcat(Url.READ_SHARE_CHANGESET, { shareId, resourceId }) : urlcat(Url.READ_CHANGESET, { resourceId });
   return axios.get<T>(url, {
@@ -342,7 +340,7 @@ export function getCommentsByIds(dstId: string, recordId: string, commentIds: st
     urlcat(Url.GET_COMMENTS_BY_IDS, { dstId, recordId }) + `?commentIds=${commentIds}`,
     {
       baseURL,
-    },
+    }
   );
 }
 
@@ -404,7 +402,7 @@ export const getCascaderData = ({ spaceId, datasheetId, linkedViewId, linkedFiel
         linkedViewId,
         linkedFieldIds,
       },
-    },
+    }
   );
 
 // get cascader snapshot data
@@ -419,7 +417,7 @@ export const getCascaderSnapshot = ({ datasheetId, fieldId, linkedFieldIds }: IG
       params: {
         linkedFieldIds,
       },
-    },
+    }
   );
 
 // update cascader snapshot data
@@ -443,7 +441,7 @@ export const updateCascaderSnapshot = ({
         linkedDatasheetId,
         linkedViewId,
       },
-    },
+    }
   );
 
 // create datasheet snapshot
@@ -471,7 +469,7 @@ export const recoverDatasheetTablebundle = (nodeId: string, tablebundleId: strin
   return axios.post<IApiWrapper & { data: IRecoverDatasheetTablebundles }>(
     urlcat(Url.RECOVER_DATASHEET_TABLEBUNDLE, { nodeId, tablebundleId, folderId, name: recoverNameSuffix }),
     undefined,
-    { baseURL },
+    { baseURL }
   );
 };
 

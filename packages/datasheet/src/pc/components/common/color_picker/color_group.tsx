@@ -1,5 +1,3 @@
-
-
 import { Tooltip } from 'antd';
 import classNames from 'classnames';
 import * as React from 'react';
@@ -32,8 +30,7 @@ const StyledFloatUiTooltip = styled(FloatUiTooltip)`
   padding: 0 !important;
 `;
 
-const StyledTooltipBase = styled(TooltipBase)`
-`;
+const StyledTooltipBase = styled(TooltipBase)``;
 
 export const ColorGroup: FC<React.PropsWithChildren<IColorGroupProps>> = (props) => {
   const { colorGroup, options, option, onChange, style, disabled, itemStyle } = props;
@@ -96,11 +93,7 @@ export const ColorGroup: FC<React.PropsWithChildren<IColorGroupProps>> = (props)
                         </Typography>
                       </Box>
                     ) : (
-                      <Box
-                        backgroundColor={colors.bgCommonDefault}
-                        padding={'6px 12px'}
-                        borderRadius={'4px'}
-                      >
+                      <Box backgroundColor={colors.bgCommonDefault} padding={'6px 12px'} borderRadius={'4px'}>
                         <Typography variant={'body4'} color={colorList[colorIndex]}>
                           {props?.options?.content}
                         </Typography>

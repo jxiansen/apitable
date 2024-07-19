@@ -1,5 +1,3 @@
-
-
 import { ICellValue, IField } from '@apitable/core';
 
 export interface ICellComponentProps {

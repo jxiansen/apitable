@@ -1,5 +1,3 @@
-
-
 import { Tooltip } from 'antd';
 import { FC } from 'react';
 import { ScreenSize } from 'pc/components/common/component_display';

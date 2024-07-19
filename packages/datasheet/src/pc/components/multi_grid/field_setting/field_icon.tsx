@@ -1,5 +1,3 @@
-
-
 import { ReactElement } from 'react';
 import { colorVars } from '@apitable/components';
 import { FieldType } from '@apitable/core';

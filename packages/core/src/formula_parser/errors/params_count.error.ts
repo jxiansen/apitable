@@ -1,5 +1,3 @@
-
-
 import { t, Strings } from 'exports/i18n';
 
 /**
@@ -11,13 +9,11 @@ export enum ParamsErrorType {
 }
 
 export class ParamsCountError extends Error {
-
-  private _type: ParamsErrorType; 
+  private _type: ParamsErrorType;
   private _paramsName: string;
   private _paramsCount: number;
 
   constructor(type: ParamsErrorType, paramsName: string, paramsCount: number) {
-    
     // ideally, don't translation in `super` constructor
     // for compatibility of front-end i18n messages
     super(ParamsCountError.parseI18NMessage(type, paramsName, paramsCount));
@@ -34,13 +30,14 @@ export class ParamsCountError extends Error {
     let errorMessage: string;
     switch (type) {
       case ParamsErrorType.NotEquals:
-        errorMessage = t(Strings.function_validate_params_count_at_least,{
-          name: paramsName, 
-          count: paramsCount });
+        errorMessage = t(Strings.function_validate_params_count_at_least, {
+          name: paramsName,
+          count: paramsCount,
+        });
         break;
       case ParamsErrorType.AtLeastCount:
-        errorMessage = t(Strings.function_validate_params_count_at_least,{
-          name: paramsName, 
+        errorMessage = t(Strings.function_validate_params_count_at_least, {
+          name: paramsName,
           count: paramsCount,
         });
         break;
@@ -48,7 +45,7 @@ export class ParamsCountError extends Error {
     return errorMessage;
   }
 
-  public get type() : ParamsErrorType {
+  public get type(): ParamsErrorType {
     return this._type;
   }
 
@@ -59,5 +56,4 @@ export class ParamsCountError extends Error {
   public get paramsCount(): number {
     return this._paramsCount;
   }
-
 }

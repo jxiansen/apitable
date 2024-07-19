@@ -1,5 +1,3 @@
-
-
 import { Radio, Space } from 'antd';
 import classNames from 'classnames';
 import Image from 'next/image';

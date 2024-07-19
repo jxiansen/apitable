@@ -1,5 +1,3 @@
-
-
 import { SegmentType, FieldType, t, Strings } from '@apitable/core';
 import { Message } from 'pc/components/common';
 

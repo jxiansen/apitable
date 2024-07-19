@@ -1,5 +1,3 @@
-
-
 export enum Navigation {
   HOME,
   LOGIN,
@@ -27,7 +25,7 @@ export enum Navigation {
   WECOM,
   WECOM_SHOP_CALLBACK,
   EMBED_SPACE,
-  EMBED_AI_SPACE
+  EMBED_AI_SPACE,
 }
 
 export enum SpacePathType {
@@ -37,5 +35,5 @@ export enum SpacePathType {
   MAIN_ADMIN = 'mainadmin',
   SUB_ADMIN = 'subadmin',
   MEMBER = 'member',
-  MARKETING = 'marketing'
+  MARKETING = 'marketing',
 }

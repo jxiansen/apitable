@@ -1,5 +1,3 @@
-
-
 import { IReduxState } from '../../exports/store/interfaces';
 import { getCellIndex, getCellUIIndex, getCellByIndex } from 'modules/database/store/selectors/resource/datasheet/cell_range_calc';
 import { getVisibleRows } from 'modules/database/store/selectors/resource/datasheet/rows_calc';
@@ -7,11 +5,17 @@ import { getVisibleColumns } from 'modules/database/store/selectors/resource/dat
 import { ICell } from './range';
 
 export enum CellDirection {
-  Up, Down, Left, Right, UpEdge, DownEdge, LeftEdge, RightEdge,
+  Up,
+  Down,
+  Left,
+  Right,
+  UpEdge,
+  DownEdge,
+  LeftEdge,
+  RightEdge,
 }
 
 export class Cell {
-
   static instance = new Cell('', '');
 
   static bindModel(cell: ICell) {
@@ -20,9 +24,10 @@ export class Cell {
     return this.instance;
   }
 
-  constructor(public recordId: string, public fieldId: string) {
-
-  }
+  constructor(
+    public recordId: string,
+    public fieldId: string
+  ) {}
 
   getIndex(state: IReduxState, cell?: ICell) {
     return getCellIndex(state, cell || Cell.instance);
@@ -39,7 +44,7 @@ export class Cell {
     const maxColumnIndex = columns.length - 1;
     let minRowIndex = 0;
     let maxRowIndex = rowCount - 1;
-    let { recordIndex, fieldIndex }: { recordIndex: number, fieldIndex: number } = getCellIndex(state, Cell.instance)!;
+    let { recordIndex, fieldIndex }: { recordIndex: number; fieldIndex: number } = getCellIndex(state, Cell.instance)!;
 
     /**
      * No action is required for the following two cases:
@@ -55,7 +60,7 @@ export class Cell {
 
     // process the grouping
     if (breakpoints.length) {
-      const nextBreakpointIndex = breakpoints.findIndex(bp => bp > recordIndex);
+      const nextBreakpointIndex = breakpoints.findIndex((bp) => bp > recordIndex);
       if (nextBreakpointIndex > -1) {
         const nextBreakpoint = breakpoints[nextBreakpointIndex]!;
         const currentBreakpoint = breakpoints[nextBreakpointIndex - 1]!;

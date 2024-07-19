@@ -1,5 +1,3 @@
-
-
 import { Typography, useThemeColors } from '@apitable/components';
 import { FolderNormalFilled } from '@apitable/icons';
 import { Emoji } from 'pc/components/common';

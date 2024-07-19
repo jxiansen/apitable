@@ -1,5 +1,3 @@
-
-
 import { useDebounceFn, useMount } from 'ahooks';
 import { Breadcrumb, Checkbox, Radio, Tabs } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
@@ -245,92 +243,92 @@ export const SelectUnitLeft: React.FC<React.PropsWithChildren<ISelectUnitLeftPro
 
   const MemberItem =
     (inSearch = false) =>
-      (item: IMember) => {
-        let _item = item;
+    (item: IMember) => {
+      let _item = item;
 
-        if (source === SelectUnitSource.SyncMember) {
-          _item = {
-            ...item,
-            syncingTeamId: clickedTeamId || '',
-          } as any;
-        }
+      if (source === SelectUnitSource.SyncMember) {
+        _item = {
+          ...item,
+          syncingTeamId: clickedTeamId || '',
+        } as any;
+      }
 
-        const title =
+      const title =
         spaceInfo || embedId
           ? getSocialWecomUnitName?.({
-            name: _item.originName || _item.memberName,
-            isModified: _item.isMemberNameModified,
-            spaceInfo: spaceInfo!,
-          }) ||
+              name: _item.originName || _item.memberName,
+              isModified: _item.isMemberNameModified,
+              spaceInfo: spaceInfo!,
+            }) ||
             _item.originName ||
             _item.memberName
           : '';
-        const { uuid, unitId, memberName, teamData, originName, avatar, avatarColor, nickName, email, memberId } = _item;
-        return (
-          <div className={classnames(styles.item, inSearch && styles.searchItem)} key={_item.unitId}>
-            <div className={styles.checkWrapper}>
-              <ItemWrapper item={_item}>
-                <div className={styles.itemContent}>
-                  <InfoCard
-                    title={title || t(Strings.unnamed)}
-                    email={email}
-                    memberId={memberId}
-                    originTitle={memberName || t(Strings.unnamed)}
-                    description={teamData ? teamData[0]?.fullHierarchyTeamName : ''}
-                    style={{ backgroundColor: 'transparent' }}
-                    inSearch={inSearch}
-                    userId={uuid}
-                    triggerBase={triggerBase}
-                    avatarProps={{
-                      id: unitId,
-                      src: avatar,
-                      title: nickName || originName || memberName || t(Strings.unnamed),
-                      avatarColor,
-                    }}
-                  />
-                </div>
-              </ItemWrapper>
-            </div>
-          </div>
-        );
-      };
-
-  const TeamItem =
-    (inSearch = false) =>
-      (item: ITeam) => (
-        <div className={classnames(styles.item, inSearch && styles.searchItem)} key={item.unitId}>
+      const { uuid, unitId, memberName, teamData, originName, avatar, avatarColor, nickName, email, memberId } = _item;
+      return (
+        <div className={classnames(styles.item, inSearch && styles.searchItem)} key={_item.unitId}>
           <div className={styles.checkWrapper}>
-            <ItemWrapper item={item}>
-              <div className={styles.itemContent} onClick={() => !inSearch && onClickTeamItem(item)}>
+            <ItemWrapper item={_item}>
+              <div className={styles.itemContent}>
                 <InfoCard
-                  title={item.teamName}
-                  originTitle={item.teamName}
-                  description={t(Strings.display_member_by_count, {
-                    memberCount: item.memberCount,
-                  })}
+                  title={title || t(Strings.unnamed)}
+                  email={email}
+                  memberId={memberId}
+                  originTitle={memberName || t(Strings.unnamed)}
+                  description={teamData ? teamData[0]?.fullHierarchyTeamName : ''}
                   style={{ backgroundColor: 'transparent' }}
                   inSearch={inSearch}
+                  userId={uuid}
+                  triggerBase={triggerBase}
                   avatarProps={{
-                    id: item.unitId,
-                    src: '',
-                    title: item.teamName,
-                    type: AvatarType.Team,
+                    id: unitId,
+                    src: avatar,
+                    title: nickName || originName || memberName || t(Strings.unnamed),
+                    avatarColor,
                   }}
                 />
               </div>
             </ItemWrapper>
           </div>
-          {canEntrySubItem(item) && !inSearch && (
-            <ButtonPlus.Icon
-              onClick={(e) => {
-                stopPropagation(e);
-                onClickTeamItem(item);
-              }}
-              icon={<ChevronRightOutlined size={16} color={colors.fourthLevelText} />}
-            />
-          )}
         </div>
       );
+    };
+
+  const TeamItem =
+    (inSearch = false) =>
+    (item: ITeam) => (
+      <div className={classnames(styles.item, inSearch && styles.searchItem)} key={item.unitId}>
+        <div className={styles.checkWrapper}>
+          <ItemWrapper item={item}>
+            <div className={styles.itemContent} onClick={() => !inSearch && onClickTeamItem(item)}>
+              <InfoCard
+                title={item.teamName}
+                originTitle={item.teamName}
+                description={t(Strings.display_member_by_count, {
+                  memberCount: item.memberCount,
+                })}
+                style={{ backgroundColor: 'transparent' }}
+                inSearch={inSearch}
+                avatarProps={{
+                  id: item.unitId,
+                  src: '',
+                  title: item.teamName,
+                  type: AvatarType.Team,
+                }}
+              />
+            </div>
+          </ItemWrapper>
+        </div>
+        {canEntrySubItem(item) && !inSearch && (
+          <ButtonPlus.Icon
+            onClick={(e) => {
+              stopPropagation(e);
+              onClickTeamItem(item);
+            }}
+            icon={<ChevronRightOutlined size={16} color={colors.fourthLevelText} />}
+          />
+        )}
+      </div>
+    );
 
   const RoleItem = (item: IRoleItem) => (
     <div className={styles.item} key={item.unitId}>
@@ -368,8 +366,8 @@ export const SelectUnitLeft: React.FC<React.PropsWithChildren<ISelectUnitLeftPro
       const unitId = e.target.value;
       const selectUnit = units
         ? Object.values(units)
-          .flat(1)
-          .filter((item) => item.unitId === unitId)
+            .flat(1)
+            .filter((item) => item.unitId === unitId)
         : [];
       setCheckedList(selectUnit);
     }

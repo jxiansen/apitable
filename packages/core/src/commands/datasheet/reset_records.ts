@@ -1,12 +1,7 @@
-
-
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { CollaCommandName } from 'commands/enum';
 import { IRecordMap, IReduxState } from '../../exports/store/interfaces';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { ResourceType } from 'types';
 import { Store } from 'redux';
 import { IJOTAction, OTActionName } from 'engine';
@@ -31,19 +26,21 @@ export const resetRecords: ICollaCommandDef<IResetRecordsOptions> = {
       return null;
     }
 
-    const actions: IJOTAction[] = [{
-      n: OTActionName.ObjectReplace,
-      p: ['recordMap'],
-      od: snapshot.recordMap,
-      oi: _data,
-    }];
+    const actions: IJOTAction[] = [
+      {
+        n: OTActionName.ObjectReplace,
+        p: ['recordMap'],
+        od: snapshot.recordMap,
+        oi: _data,
+      },
+    ];
 
     return {
       result: ExecuteResult.Success,
       resourceId: datasheetId,
       resourceType: ResourceType.Datasheet,
       actions,
-      fieldMapSnapshot
+      fieldMapSnapshot,
     };
   },
 };

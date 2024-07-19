@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, IUserValue, MemberType } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { UnitInfo } from 'database/interfaces';
@@ -30,8 +28,7 @@ export class UnitService {
     private readonly teamService: UnitTeamService,
     private readonly envConfigService: EnvConfigService,
     private readonly userService: UserService,
-  ) {
-  }
+  ) {}
 
   /**
    * Batch obtain unit infos
@@ -51,8 +48,7 @@ export class UnitService {
     }, []);
     const attachmentTokens: string[] = Array.from(needSignatureOldUrlMap.values());
 
-
-    if (!oss.ossSignatureEnabled || !attachmentTokens.length){
+    if (!oss.ossSignatureEnabled || !attachmentTokens.length) {
       return afterUnitInfos;
     }
 
@@ -60,7 +56,7 @@ export class UnitService {
 
     // Loop Replace URL
     afterUnitInfos.forEach((dto: UnitInfo) => {
-      if (needSignatureOldUrlMap.has(dto.uuid)){
+      if (needSignatureOldUrlMap.has(dto.uuid)) {
         dto.avatar = signatureMap.get(needSignatureOldUrlMap.get(dto.uuid))!;
       }
     });
@@ -120,16 +116,15 @@ export class UnitService {
 
     const attachmentTokens: string[] = Array.from(needSignatureOldUrlMap.values());
 
-
-    if (!oss.ossSignatureEnabled || !attachmentTokens.length){
+    if (!oss.ossSignatureEnabled || !attachmentTokens.length) {
       return unitInfos;
     }
 
     const signatureMap = await this.userService.getSignatureMap(attachmentTokens);
 
     // Loop Replace URL
-    unitInfos.forEach(dto => {
-      if (needSignatureOldUrlMap.has(dto.uuid)){
+    unitInfos.forEach((dto) => {
+      if (needSignatureOldUrlMap.has(dto.uuid)) {
         dto.avatar = signatureMap.get(needSignatureOldUrlMap.get(dto.uuid))!;
       }
     });
@@ -145,8 +140,8 @@ export class UnitService {
     const roleMembers = await this.unitRoleMemberRepository.selectByRoleIds(unitMemberRefIdMap[MemberType.Role]!);
     const memberIds = unitMemberRefIdMap[MemberType.Member]!;
     // get teamIds from roles while role.unitType is UnitType.Team
-    const teamIds: string[] = [...unitMemberRefIdMap[MemberType.Team]!.map(t => String(t))];
-    roleMembers.forEach(roleMember => {
+    const teamIds: string[] = [...unitMemberRefIdMap[MemberType.Team]!.map((t) => String(t))];
+    roleMembers.forEach((roleMember) => {
       if (roleMember.unitType === MemberType.Team) {
         teamIds.push(String(roleMember.unitRefId));
       } else if (roleMember.unitType === MemberType.Member) {
@@ -157,7 +152,7 @@ export class UnitService {
     const { teamIdSubTeamIdsMap, subTeams } = await this.teamService.getTeamIdSubTeamIdsMapBySpaceIdAndParentIds(spaceId, teamIds);
     teamIds.push(...subTeams);
     const teamMembers = await this.unitTeamMemberRefRepository.selectByTeamIds(teamIds);
-    teamMembers.forEach(teamMember => {
+    teamMembers.forEach((teamMember) => {
       memberIds.push(teamMember.memberId);
     });
     const members = await this.memberService.getMemberBasicInfo(memberIds);
@@ -171,7 +166,7 @@ export class UnitService {
         // Process team members
         this.processTeamMembers(teamMembers, members, memberUnits, teamIdSubTeamIdsMap, cur.unitRefId, cur.id, pre);
       } else if (cur.unitType === MemberType.Role) {
-        const unitRoleMembers = roleMembers.filter(t => t.roleId === cur.unitRefId);
+        const unitRoleMembers = roleMembers.filter((t) => t.roleId === cur.unitRefId);
         for (const roleMember of unitRoleMembers) {
           if (roleMember.unitType === MemberType.Member) {
             // Process individual members in roles
@@ -196,21 +191,21 @@ export class UnitService {
     teamIdSubTeamIdsMap: { [teamId: string]: string[] },
     unitRefId: number,
     curId: string,
-    pre: { unitId: UnitInfoDto[] }[]
+    pre: { unitId: UnitInfoDto[] }[],
   ): void {
-    const unitTeamMembers = teamMembers.filter(t => t.teamId === unitRefId);
+    const unitTeamMembers = teamMembers.filter((t) => t.teamId === unitRefId);
 
     if (teamIdSubTeamIdsMap[unitRefId]) {
       // Process sub team members
-      teamIdSubTeamIdsMap[unitRefId]?.forEach(subTeamId => {
-        const subTeamMembers = teamMembers.filter(t => String(t.teamId) === subTeamId);
-        subTeamMembers.forEach(subTeamMember => {
+      teamIdSubTeamIdsMap[unitRefId]?.forEach((subTeamId) => {
+        const subTeamMembers = teamMembers.filter((t) => String(t.teamId) === subTeamId);
+        subTeamMembers.forEach((subTeamMember) => {
           this.processMember(subTeamMember.memberId, members, memberUnits, pre, curId);
         });
       });
     }
 
-    unitTeamMembers.forEach(teamMember => {
+    unitTeamMembers.forEach((teamMember) => {
       this.processMember(teamMember.memberId, members, memberUnits, pre, curId);
     });
   }
@@ -223,10 +218,10 @@ export class UnitService {
     members: { [memberId: number]: IUserValue },
     memberUnits: UnitEntity[],
     pre: { unitId: UnitInfoDto[] }[],
-    cursorUnitId: string
+    cursorUnitId: string,
   ): void {
     const user = members[memberId];
-    const unit = memberUnits.find(t => t.unitRefId === memberId);
+    const unit = memberUnits.find((t) => t.unitRefId === memberId);
     if (user && unit) {
       pre[cursorUnitId].push({
         name: user.name,
@@ -248,7 +243,7 @@ export class UnitService {
     const memberIds: number[] = [];
     const teamIds: number[] = [];
     const roleIds: number[] = [];
-    unitEntities.forEach(unit => {
+    unitEntities.forEach((unit) => {
       if (unit.unitType === MemberType.Member) {
         memberIds.push(unit.unitRefId);
       }
@@ -311,7 +306,7 @@ export class UnitService {
     const memberMap = await this.memberService.getMembersBaseInfoBySpaceIdAndUserIds(spaceId, userIds, excludeDeleted);
     const oss = this.envConfigService.getRoomConfig(EnvConfigKey.OSS) as IOssConfig;
     const needSignatureOldUrlMap = new Map();
-    users.map(user => {
+    users.map((user) => {
       const member = memberMap[user.id];
       if (user.avatar && !user.avatar.startsWith('http')) {
         needSignatureOldUrlMap.set(user.id, user.avatar);
@@ -336,8 +331,7 @@ export class UnitService {
     });
     const attachmentTokens: string[] = Array.from(needSignatureOldUrlMap.values());
 
-
-    if (!oss.ossSignatureEnabled || !attachmentTokens.length){
+    if (!oss.ossSignatureEnabled || !attachmentTokens.length) {
       return userMap;
     }
 
@@ -345,7 +339,7 @@ export class UnitService {
 
     // Loop Replace URL
     userMap.forEach((value, key) => {
-      if (needSignatureOldUrlMap.has(key)){
+      if (needSignatureOldUrlMap.has(key)) {
         value.avatar = signatureMap.get(needSignatureOldUrlMap.get(key))!;
       }
     });
@@ -357,7 +351,7 @@ export class UnitService {
     if (!memberId) {
       return undefined;
     }
-    return this.unitRepo.selectIdByRefIdAndSpaceId(memberId, spaceId).then(o => o?.id);
+    return this.unitRepo.selectIdByRefIdAndSpaceId(memberId, spaceId).then((o) => o?.id);
   }
 
   public async getIdByUnitIdAndSpaceIdAndUnitType(unitId: string, spaceId: string, unitType: UnitTypeEnum): Promise<string | undefined> {

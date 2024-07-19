@@ -1,5 +1,3 @@
-
-
 import { useContext, useMemo } from 'react';
 import { IWidgetContext } from 'interface';
 import { WidgetContext } from '../context';
@@ -12,9 +10,9 @@ import { isSandbox } from 'utils/private';
 /**
  * A hook for connecting a React component to your datasheet's schema.
  * Datasheet will provide the interface to make update to datasheet date, and check permission.
- * 
+ *
  * @param
- * 
+ *
  * @returns Datasheet instance
  * ### Example
  * ```js
@@ -44,9 +42,9 @@ import { isSandbox } from 'utils/private';
  *     <button onClick={() => addRecord(valuesMap)}>add a new record</button>
  *   </div>);
  * }
- * 
+ *
  * ```
- * 
+ *
  */
 
 export function useDatasheet(datasheetId?: string | undefined) {
@@ -61,6 +59,6 @@ export function useDatasheet(datasheetId?: string | undefined) {
   return useMemo(() => {
     if (!_datasheetId) return undefined;
     return new Datasheet(_datasheetId, context);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_datasheetId, context, datasheetObj]);
 }

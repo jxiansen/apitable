@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
 import { useEffect, useMemo, useRef, useState } from 'react';

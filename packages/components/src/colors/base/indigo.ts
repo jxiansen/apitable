@@ -1,4 +1,3 @@
-
 export const indigo = {
   50: '#E0E9FF',
   100: '#C2D3FF',
@@ -12,4 +11,3 @@ export const indigo = {
   900: '#132F77',
   1000: '#091F55',
 };
-

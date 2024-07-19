@@ -1,5 +1,3 @@
-
-
 import { cloneDeep } from 'lodash';
 import { Field, ICell, ICellValue, Selectors, StoreActions, WhyRecordMoveType } from '@apitable/core';
 import { store } from 'pc/store';

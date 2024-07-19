@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
@@ -10,7 +8,7 @@ export class ActionCreateRo {
     required: true,
     example: 'arbxxxxxx',
   })
-  @IsNotEmpty({ message: ApiTipConstant.api_params_empty_error, context: {}})
+  @IsNotEmpty({ message: ApiTipConstant.api_params_empty_error, context: {} })
   robotId!: string;
 
   @ApiProperty({
@@ -18,7 +16,7 @@ export class ActionCreateRo {
     required: true,
     example: 'aatxxxxxxx',
   })
-  @IsNotEmpty({ message: ApiTipConstant.api_params_empty_error, context: {}})
+  @IsNotEmpty({ message: ApiTipConstant.api_params_empty_error, context: {} })
   actionTypeId!: string;
 
   @ApiProperty({

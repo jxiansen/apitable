@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Button } from './index';
 import { StoryType } from '../../stories/constants';
@@ -27,8 +25,8 @@ export default {
     },
   },
   args: {
-    children: BUTTON_TEXT
-  }
+    children: BUTTON_TEXT,
+  },
 };
 
 const Template: Story<IButtonProps> = (args) => <Button {...args} />;
@@ -42,7 +40,7 @@ export const DefaultButton = Template.bind({});
 
 export const JellyButton = Template.bind({});
 JellyButton.args = {
-  variant: 'jelly'
+  variant: 'jelly',
 };
 
 export const RoundShape = Template.bind({});
@@ -67,39 +65,41 @@ export const PrefixIconButton = Template.bind({});
 PrefixIconButton.args = {
   color: 'primary',
   variant: 'fill',
-  prefixIcon: iconComponents.WebOutlined
+  prefixIcon: iconComponents.WebOutlined,
 };
 
 export const SuffixIconButton = Template.bind({});
 SuffixIconButton.args = {
   color: 'primary',
   variant: 'fill',
-  suffixIcon: iconComponents.WebOutlined
+  suffixIcon: iconComponents.WebOutlined,
 };
 
 export const BlockButton = Template.bind({});
 BlockButton.args = {
   color: 'primary',
   variant: 'fill',
-  block: true
+  block: true,
 };
 
 export const LoadingButton = Template.bind({});
 LoadingButton.args = {
   color: 'primary',
   variant: 'fill',
-  loading: true
+  loading: true,
 };
 
 export const PaletteCustomColor = Template.bind({});
 PaletteCustomColor.args = {
-  color: orange[500]
+  color: orange[500],
 };
 
 export const SupportFormSubmit = () => (
-  <form onSubmit={() => {
-    alert('Trigger form submit');
-  }}>
+  <form
+    onSubmit={() => {
+      alert('Trigger form submit');
+    }}
+  >
     <Button htmlType="submit">Submit</Button>
   </form>
 );

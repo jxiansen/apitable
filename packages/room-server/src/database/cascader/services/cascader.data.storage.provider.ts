@@ -1,13 +1,4 @@
-
-
-import {
-  databus, FieldType,
-  IBaseDatasheetPack,
-  IResourceOpsCollect,
-  IServerDatasheetPack,
-  IUnitValue,
-  IUserValue
-} from '@apitable/core';
+import { databus, FieldType, IBaseDatasheetPack, IResourceOpsCollect, IServerDatasheetPack, IUnitValue, IUserValue } from '@apitable/core';
 import { DatasheetService } from 'database/datasheet/services/datasheet.service';
 import { UnitService } from 'unit/services/unit.service';
 
@@ -63,6 +54,5 @@ export class CascaderDataStorageProvider implements databus.IDataStorageProvider
     throw new Error('Method not implemented.');
   }
 
-  async nestRoomChangeFromRust(_roomId: string, _data: any) {
-  }
+  async nestRoomChangeFromRust(_roomId: string, _data: any) {}
 }

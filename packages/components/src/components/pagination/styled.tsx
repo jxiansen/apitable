@@ -1,5 +1,3 @@
-
-
 import { editRgbaOpacity } from 'helper';
 import { TextInput } from 'components/text_input';
 import styled, { css } from 'styled-components';
@@ -19,7 +17,9 @@ export const PaginationItem = styled.button.attrs(applyDefaultTheme)<IPagination
   align-items: center;
   justify-content: center;
   border-radius: 2px;
-  transition: color, background-color .3s;
+  transition:
+    color,
+    background-color 0.3s;
   box-sizing: border-box;
   flex-shrink: 0;
   outline: none;
@@ -38,7 +38,7 @@ export const PaginationItem = styled.button.attrs(applyDefaultTheme)<IPagination
     if (disabled) {
       return css`
         cursor: not-allowed;
-        color: ${editRgbaOpacity(textCommonPrimary, 0.5)}
+        color: ${editRgbaOpacity(textCommonPrimary, 0.5)};
       `;
     }
     if (selected) {
@@ -103,7 +103,7 @@ export const PaginationEllipse = styled.div.attrs(applyDefaultTheme)<IPagination
     const { textCommonPrimary } = theme.color;
     return css`
       cursor: ${disabled ? 'not-allowed' : 'pointer'};
-      color: ${disabled ? editRgbaOpacity(textCommonPrimary, 0.5) : textCommonPrimary}
+      color: ${disabled ? editRgbaOpacity(textCommonPrimary, 0.5) : textCommonPrimary};
     `;
   }}
 `;

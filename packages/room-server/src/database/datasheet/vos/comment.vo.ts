@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { ApiResponse } from 'fusion/vos/api.response';
 import { CommentDto } from '../dtos/comment.dto';

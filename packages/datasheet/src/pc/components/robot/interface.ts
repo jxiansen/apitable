@@ -1,5 +1,3 @@
-
-
 import { IAutomationRobotDetailItem } from './robot_context';
 
 export interface IRobotHistoryTask {

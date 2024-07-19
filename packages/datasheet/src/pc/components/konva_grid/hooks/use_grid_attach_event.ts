@@ -1,5 +1,3 @@
-
-
 import _ from 'lodash';
 import { IFieldRanges, StoreActions, ICell, Selectors, DATASHEET_ID, IRange, IViewRow, IViewColumn } from '@apitable/core';
 import { expandRecordIdNavigate } from 'pc/components/expand_record';

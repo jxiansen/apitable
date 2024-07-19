@@ -1,5 +1,3 @@
-
-
 import { Global, Injectable, Module } from '@nestjs/common';
 import { ClientProvider, ClientsModule, Transport } from '@nestjs/microservices';
 import { ClientsModuleOptionsFactory } from '@nestjs/microservices/module/interfaces/clients-module.interface';
@@ -19,10 +17,7 @@ export class GrpcSocketClientModuleOption implements ClientsModuleOptionsFactory
       options: {
         url: BootstrapConstants.SOCKET_GRPC_URL,
         package: [protobufPackage],
-        protoPath: [
-          join(__dirname, '../generated/serving/SocketServingService.proto'),
-          join(__dirname, '../generated/common/Core.proto')
-        ],
+        protoPath: [join(__dirname, '../generated/serving/SocketServingService.proto'), join(__dirname, '../generated/common/Core.proto')],
         // 100M
         maxSendMessageLength: GRPC_MAX_PACKAGE_SIZE,
         maxReceiveMessageLength: GRPC_MAX_PACKAGE_SIZE,
@@ -42,10 +37,7 @@ export const backendGrpcClientProvider = (): ClientProvider => {
       maxSendMessageLength: GRPC_MAX_PACKAGE_SIZE,
       maxReceiveMessageLength: GRPC_MAX_PACKAGE_SIZE,
       package: [protobufPackage],
-      protoPath: [
-        join(__dirname, '../generated/serving/BackendServingService.proto'),
-        join(__dirname, '../generated/common/Core.proto')
-      ],
+      protoPath: [join(__dirname, '../generated/serving/BackendServingService.proto'), join(__dirname, '../generated/common/Core.proto')],
       loader: {
         json: true,
       },
@@ -70,4 +62,3 @@ export const backendGrpcClientProvider = (): ClientProvider => {
   exports: [BackendGrpcClient, SocketGrpcClient],
 })
 export class GrpcClientModule {}
-

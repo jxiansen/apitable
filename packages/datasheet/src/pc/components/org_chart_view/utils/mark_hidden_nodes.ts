@@ -1,5 +1,3 @@
-
-
 import { IGraphData, INodesMap, INodeStateMap, IPre } from '../interfaces';
 
 export function markHiddenNodes(params: { data: IGraphData; pre: IPre; nodeStateMap: INodeStateMap; nodesMap: INodesMap }) {

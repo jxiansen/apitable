@@ -1,5 +1,3 @@
-
-
 import { useDebounce, useUpdateEffect } from 'ahooks';
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
@@ -44,7 +42,7 @@ import { RecordList } from './record_list';
 import style from './style.module.less';
 
 interface ISearchContentProps {
-  field: ILinkField | IOneWayLinkField
+  field: ILinkField | IOneWayLinkField;
   searchValue: string;
   cellValue: ILinkIds;
   onlyShowSelected: boolean;
@@ -114,9 +112,12 @@ const SearchContentBase: React.ForwardRefRenderFunction<{ getFilteredRows(): { [
       }
 
       // filter one way link record
-      const filterCellValue = field.type === FieldType.Link ? cellValue : cellValue?.filter((id) => {
-        return foreignRows.some(row => row.recordId === id) || archivedRecordIds.includes(id);
-      });
+      const filterCellValue =
+        field.type === FieldType.Link
+          ? cellValue
+          : cellValue?.filter((id) => {
+              return foreignRows.some((row) => row.recordId === id) || archivedRecordIds.includes(id);
+            });
 
       if (filterCellValue && filterCellValue.includes(recordId)) {
         value = filterCellValue.filter((id) => id !== recordId);
@@ -295,12 +296,15 @@ const SearchContentBase: React.ForwardRefRenderFunction<{ getFilteredRows(): { [
     }
     // Theoretically fuse will not be null, but here is a compatibility
     if (!searchValue || fuse == null) {
-      return rows.filter(row => !archivedRecordIds.includes(row.recordId));
+      return rows.filter((row) => !archivedRecordIds.includes(row.recordId));
     }
 
-    return fuse.search(searchValue).map((result) => {
-      return { recordId: (result as any).item.recordId }; // FIXME:TYPE
-    }).filter(row => !archivedRecordIds.includes(row.recordId));
+    return fuse
+      .search(searchValue)
+      .map((result) => {
+        return { recordId: (result as any).item.recordId }; // FIXME:TYPE
+      })
+      .filter((row) => !archivedRecordIds.includes(row.recordId));
 
     // If the records of the associated table are not added or subtracted, the query results are only updated when the searchValue changes
     // eslint-disable-next-line

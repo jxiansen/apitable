@@ -1,5 +1,3 @@
-
-
 import { ITextButtonProps } from 'components';
 import { IButtonProps } from 'components/button';
 import React from 'react';

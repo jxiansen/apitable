@@ -9,17 +9,19 @@ import { IOption, ISelectOptions } from 'ui/cell_value/cell_options/interface';
 import { FilterInputWrap, OptionItemWrap, SelectPopupContainer } from './styled';
 
 const getSelectOptions = (value: string[] | null, options: IOption[]) => {
-  return (value || []).map(optionId => {
-    const option = options.find(option => option.id === optionId);
-    if (!option) {
-      return null;
-    }
-    return {
-      id: optionId,
-      name: option.name,
-      color: getFieldOptionColor(option.color)
-    } as ISelectFieldBaseOpenValue;
-  }).filter(v => Boolean(v));
+  return (value || [])
+    .map((optionId) => {
+      const option = options.find((option) => option.id === optionId);
+      if (!option) {
+        return null;
+      }
+      return {
+        id: optionId,
+        name: option.name,
+        color: getFieldOptionColor(option.color),
+      } as ISelectFieldBaseOpenValue;
+    })
+    .filter((v) => Boolean(v));
 };
 
 export const FilterSelect: React.FC<IFilterSelectProps> = (props) => {
@@ -32,34 +34,41 @@ export const FilterSelect: React.FC<IFilterSelectProps> = (props) => {
       options={{
         placement: 'bottom',
         autoWidth: true,
-        arrow: false
+        arrow: false,
       }}
       trigger={
         <FilterInputWrap pointer>
           <Box flex={1} padding={'8px 10px'}>
-            {Boolean(value) &&
-                <SelectValueBox
-                  options={field.property.options}
-                  selectOptions={getSelectOptions(value, field.property.options) as ISelectFieldBaseOpenValue[]}
-                />}
+            {Boolean(value) && (
+              <SelectValueBox
+                options={field.property.options}
+                selectOptions={getSelectOptions(value, field.property.options) as ISelectFieldBaseOpenValue[]}
+              />
+            )}
           </Box>
           <Box display={'flex'} alignItems={'center'} paddingRight={'10px'}>
             <ChevronDownOutlined size={16} color={color.black[300]} />
           </Box>
         </FilterInputWrap>
       }
-    >{
-        () => (
-          <OptionList isMulti={isMulti} field={field as ISelectField} value={value} onChange={(v) => {
+    >
+      {() => (
+        <OptionList
+          isMulti={isMulti}
+          field={field as ISelectField}
+          value={value}
+          onChange={(v) => {
             onChange.length === 0 ? onChange(null) : onChange(v);
-          }}/>)}
+          }}
+        />
+      )}
     </Dropdown>
   );
 };
 
 interface ISelectValueBoxProps {
   options?: IOption[];
-  selectOptions: ISelectOptions | null
+  selectOptions: ISelectOptions | null;
 }
 const SelectValueBox: React.FC<ISelectValueBoxProps> = (props) => {
   const { options, selectOptions } = props;
@@ -76,12 +85,12 @@ interface IOptionListProps {
 const OptionList: React.FC<IOptionListProps> = (props) => {
   const { field, value, onChange, isMulti } = props;
   const clickOption = (option: ISelectFieldOption) => {
-    const index = (value || []).findIndex(v => option.id === v);
+    const index = (value || []).findIndex((v) => option.id === v);
     let _value = value || [];
     if (index > -1) {
-      _value = _value.filter(v => option.id !== v);
+      _value = _value.filter((v) => option.id !== v);
     } else {
-      isMulti ? _value.push(option.id) : _value = [option.id];
+      isMulti ? _value.push(option.id) : (_value = [option.id]);
     }
     onChange && onChange(_value);
   };
@@ -89,7 +98,7 @@ const OptionList: React.FC<IOptionListProps> = (props) => {
   return (
     <SelectPopupContainer>
       <div>
-        {field.property.options.map(option => (
+        {field.property.options.map((option) => (
           <OptionItemWrap key={option.id} onClick={() => clickOption(option)}>
             <Box flex={'1'} width={'100%'}>
               <SelectValueBox
@@ -99,8 +108,7 @@ const OptionList: React.FC<IOptionListProps> = (props) => {
             </Box>
             <Check isChecked={(value || []).includes(option.id)} />
           </OptionItemWrap>
-        )
-        )}
+        ))}
       </div>
     </SelectPopupContainer>
   );
@@ -110,7 +118,7 @@ interface ICheckProps {
   isChecked: boolean;
 }
 
-const Check: React.FC<ICheckProps> = props => {
+const Check: React.FC<ICheckProps> = (props) => {
   const { isChecked } = props;
   const theme = useTheme();
   if (isChecked) {

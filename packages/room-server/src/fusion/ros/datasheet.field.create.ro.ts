@@ -1,5 +1,3 @@
-
-
 import { IAddOpenFieldProperty } from '@apitable/core';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';

@@ -1,11 +1,5 @@
-
-import {
-  IRecord, IReduxState, IViewDerivation, IViewProperty, IViewRow, Role,
-} from 'exports/store/interfaces';
-import {
-  getCurrentView,
-  getKanbanFieldId,
-} from 'modules/database/store/selectors/resource/datasheet/calc';
+import { IRecord, IReduxState, IViewDerivation, IViewProperty, IViewRow, Role } from 'exports/store/interfaces';
+import { getCurrentView, getKanbanFieldId } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { getFieldRoleByFieldId } from 'modules/database/store/selectors/resource/datasheet/base';
 import { UN_GROUP, ViewType } from 'modules/shared/store/constants';
 import { FieldType, IField, IMemberField, IUnitIds } from 'types/field_types';
@@ -13,21 +7,27 @@ import { ViewDerivateBase } from './view_derivate_base';
 import { polyfillOldData } from 'model/field/const';
 
 export class ViewDerivateKanban extends ViewDerivateBase {
-  constructor(protected override state: IReduxState, public override datasheetId: string) {
+  constructor(
+    protected override state: IReduxState,
+    public override datasheetId: string
+  ) {
     super(state, datasheetId);
   }
 
   private getGroupValueMap(field: IField) {
     let sourceData: string[] = [];
     if (field.type === FieldType.SingleSelect) {
-      sourceData = field.property.options.map(item => item.id);
+      sourceData = field.property.options.map((item) => item.id);
     } else {
       sourceData = (field as IMemberField).property.unitIds || [];
     }
-    return sourceData.reduce<{ [key: string]: IRecord[] }>((map, item) => {
-      map[item] = [];
-      return map;
-    }, { [UN_GROUP]: [] });
+    return sourceData.reduce<{ [key: string]: IRecord[] }>(
+      (map, item) => {
+        map[item] = [];
+        return map;
+      },
+      { [UN_GROUP]: [] }
+    );
   }
 
   private getKanbanGroupMap(rows: IViewRow[], kanbanFieldId?: string | null) {
@@ -44,7 +44,7 @@ export class ViewDerivateKanban extends ViewDerivateBase {
     const field = fieldMap[kanbanFieldId];
     if (fieldRole === Role.None || !field) {
       return {
-        UN_GROUP: rows.map(row => {
+        UN_GROUP: rows.map((row) => {
           return recordMap[row.recordId]!;
         }),
       };
@@ -65,7 +65,6 @@ export class ViewDerivateKanban extends ViewDerivateBase {
         continue;
       }
       try {
-
         if (field.type === FieldType.Member) {
           const id = polyfillOldData(fieldData as IUnitIds)?.[0];
           id && groupMap[id]!.push(record);
@@ -110,19 +109,19 @@ export class ViewDerivateKanban extends ViewDerivateBase {
     if (!kanbanGroupMap) {
       return rows;
     }
-    const groupIds = field.type === FieldType.SingleSelect
-      ? field.property.options.map(item => item.id)
-      : (field as IMemberField).property.unitIds;
+    const groupIds = field.type === FieldType.SingleSelect ? field.property.options.map((item) => item.id) : (field as IMemberField).property.unitIds;
     if (!Array.isArray(groupIds)) {
       return rows;
     }
-    const flatRows = [UN_GROUP, ...groupIds].map(groupId => {
-      const kanbanGroup = kanbanGroupMap[groupId];
-      if (!kanbanGroup) {
-        return [];
-      }
-      return kanbanGroup.map(record => ({ recordId: record.id }));
-    }).flat();
+    const flatRows = [UN_GROUP, ...groupIds]
+      .map((groupId) => {
+        const kanbanGroup = kanbanGroupMap[groupId];
+        if (!kanbanGroup) {
+          return [];
+        }
+        return kanbanGroup.map((record) => ({ recordId: record.id }));
+      })
+      .flat();
     return flatRows;
   }
 
@@ -132,7 +131,7 @@ export class ViewDerivateKanban extends ViewDerivateBase {
     const viewDerivationWithSearch = this.getViewDerivationWithSearch(view!, rowsWithoutSearch);
     return {
       rowsWithoutSearch,
-      ...viewDerivationWithSearch
+      ...viewDerivationWithSearch,
     };
   }
 
@@ -147,7 +146,7 @@ export class ViewDerivateKanban extends ViewDerivateBase {
 
     return {
       // Raw rows of data, grouped without any filtering sorting.
-      rowsIndexMap:  new Map(view!.rows!.map((item, index) => [item.recordId, index])),
+      rowsIndexMap: new Map(view!.rows!.map((item, index) => [item.recordId, index])),
 
       // Excluding pre-sorted row data, including filtered sorted grouped search
       pureVisibleRows: visibleRows,

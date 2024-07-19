@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from 'react';
 import { Strings, t } from '@apitable/core';
 import { Modal } from './common/modal';

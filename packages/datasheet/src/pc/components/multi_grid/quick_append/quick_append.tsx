@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { AddOutlined } from '@apitable/icons';
 import { appendRow, Direction } from 'modules/shared/shortcut_key/shortcut_actions/append_row';

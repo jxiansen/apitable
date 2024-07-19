@@ -1,5 +1,3 @@
-
-
 import { ISegment } from '@apitable/core';
 
 export interface ITableCellData {

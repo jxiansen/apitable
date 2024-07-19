@@ -1,19 +1,37 @@
-
-
 import produce from 'immer';
 import { AnyAction, combineReducers } from 'redux';
 import {
-  IActiveCollaboratorAction, ICacheTemporaryView, IChangeMirrorWidgetPanelWidth, IDeActiveCollaborator, IMirror, IMirrorClient,
-  ISwitchMirrorActivePanel, IToggleMirrorWidgetPanel, IUpdateMirrorInfo, IWidgetPanelStatus
+  IActiveCollaboratorAction,
+  ICacheTemporaryView,
+  IChangeMirrorWidgetPanelWidth,
+  IDeActiveCollaborator,
+  IMirror,
+  IMirrorClient,
+  ISwitchMirrorActivePanel,
+  IToggleMirrorWidgetPanel,
+  IUpdateMirrorInfo,
+  IWidgetPanelStatus,
 } from '../../../../../../exports/store/interfaces';
 import * as ActionConstants from 'modules/shared/store/action_constants';
 import * as actions from '../../../../../shared/store/action_constants';
 import { CHANGE_WIDGET_PANEL_WIDTH, SWITCH_ACTIVE_PANEL, TOGGLE_WIDGET_PANEL } from '../../../../../shared/store/action_constants';
 import {
-  IResetMirror, ISetMirrorClientAction, ISetMirrorDataAction, ISetMirrorLoadingAction, IUpdateMirrorInfoAction, IUpdateMirrorName,
+  IResetMirror,
+  ISetMirrorClientAction,
+  ISetMirrorDataAction,
+  ISetMirrorLoadingAction,
+  IUpdateMirrorInfoAction,
+  IUpdateMirrorName,
 } from 'modules/database/store/actions/resource/mirror';
 import {
-  IChangeResourceSyncingStatus, IJOTActionPayload, IMirrorMap, IMirrorPack, IResourceErrCode, IRoomInfoSync, ISetResourceConnected, IUpdateResource,
+  IChangeResourceSyncingStatus,
+  IJOTActionPayload,
+  IMirrorMap,
+  IMirrorPack,
+  IResourceErrCode,
+  IRoomInfoSync,
+  ISetResourceConnected,
+  IUpdateResource,
   IUpdateRevision,
 } from '../../../../../../exports/store/interfaces';
 import { JOTApply } from 'modules/database/store/reducers/resource/jot_apply';
@@ -34,11 +52,27 @@ export const mirrorMap = (state: IMirrorMap = {}, action: IResetMirror | AnyActi
   };
 };
 
-type IMirrorAction = ISetMirrorLoadingAction | ISetMirrorDataAction | ISetMirrorClientAction |
-  IJOTActionPayload | IUpdateRevision | ISetResourceConnected | IChangeResourceSyncingStatus |
-  IRoomInfoSync | IResourceErrCode | IUpdateResource | IResetMirror | IUpdateMirrorName | IUpdateMirrorInfo |
-  IDeActiveCollaborator | IActiveCollaboratorAction | IUpdateMirrorInfoAction | ICacheTemporaryView | IToggleMirrorWidgetPanel
-  | IChangeMirrorWidgetPanelWidth | ISwitchMirrorActivePanel;
+type IMirrorAction =
+  | ISetMirrorLoadingAction
+  | ISetMirrorDataAction
+  | ISetMirrorClientAction
+  | IJOTActionPayload
+  | IUpdateRevision
+  | ISetResourceConnected
+  | IChangeResourceSyncingStatus
+  | IRoomInfoSync
+  | IResourceErrCode
+  | IUpdateResource
+  | IResetMirror
+  | IUpdateMirrorName
+  | IUpdateMirrorInfo
+  | IDeActiveCollaborator
+  | IActiveCollaboratorAction
+  | IUpdateMirrorInfoAction
+  | ICacheTemporaryView
+  | IToggleMirrorWidgetPanel
+  | IChangeMirrorWidgetPanelWidth
+  | ISwitchMirrorActivePanel;
 
 export const mirror = (state: IMirror | null = null, action: IMirrorAction): IMirror | null => {
   if (action.type === ActionConstants.SET_MIRROR_DATA) {
@@ -69,8 +103,8 @@ export const mirror = (state: IMirror | null = null, action: IMirrorAction): IMi
         ...state,
         temporaryView: {
           ...(state.temporaryView || {}),
-          ...action.payload
-        }
+          ...action.payload,
+        },
       };
     }
     case ActionConstants.MIRROR_UPDATE_REVISION: {
@@ -80,7 +114,7 @@ export const mirror = (state: IMirror | null = null, action: IMirrorAction): IMi
       };
     }
     case ActionConstants.MIRROR_JOT_ACTION: {
-      return produce<IMirror, IMirror>(state, draft => {
+      return produce<IMirror, IMirror>(state, (draft) => {
         JOTApply(draft, action);
         return draft;
       });
@@ -100,7 +134,7 @@ const defaultWidgetPanelStatus: IWidgetPanelStatus = {
 
 const defaultClient = {
   collaborators: [],
-  widgetPanelStatus: defaultWidgetPanelStatus
+  widgetPanelStatus: defaultWidgetPanelStatus,
 };
 
 const client = (state: IMirrorClient = defaultClient, action: IMirrorAction): IMirrorClient => {
@@ -108,7 +142,7 @@ const client = (state: IMirrorClient = defaultClient, action: IMirrorAction): IM
     case ActionConstants.MIRROR_ACTIVE_COLLABORATOR: {
       if (!state.collaborators) {
         return { ...state, collaborators: [action.payload] };
-      } else if (state.collaborators.find(user => user.socketId === action.payload.socketId)) {
+      } else if (state.collaborators.find((user) => user.socketId === action.payload.socketId)) {
         console.error('warning user enter with same socketid');
         return state;
       }
@@ -119,7 +153,7 @@ const client = (state: IMirrorClient = defaultClient, action: IMirrorAction): IM
       if (!state.collaborators) {
         return state;
       }
-      state.collaborators = state.collaborators.filter(user => user.socketId !== action.payload.socketId);
+      state.collaborators = state.collaborators.filter((user) => user.socketId !== action.payload.socketId);
       return state;
     }
     case ActionConstants.MIRROR_ROOM_INFO_SYNC: {
@@ -140,7 +174,7 @@ const client = (state: IMirrorClient = defaultClient, action: IMirrorAction): IM
         widgetPanelStatus: {
           ...state.widgetPanelStatus,
           opening: action.payload == null ? !state.widgetPanelStatus.opening : action.payload,
-        }
+        },
       };
     }
     case CHANGE_WIDGET_PANEL_WIDTH: {
@@ -149,7 +183,7 @@ const client = (state: IMirrorClient = defaultClient, action: IMirrorAction): IM
         widgetPanelStatus: {
           ...state.widgetPanelStatus,
           width: Math.max(action.payload, MIN_WIDGET_PANEL_WIDTH),
-        }
+        },
       };
     }
     case SWITCH_ACTIVE_PANEL: {
@@ -158,7 +192,7 @@ const client = (state: IMirrorClient = defaultClient, action: IMirrorAction): IM
         widgetPanelStatus: {
           ...state.widgetPanelStatus,
           activePanelId: action.payload,
-        }
+        },
       };
     }
     default: {
@@ -172,10 +206,7 @@ const mirrorPack = combineReducers<IMirrorPack>({
     if (action.type === ActionConstants.SET_MIRROR_LOADING) {
       return action.payload;
     }
-    if (
-      action.type === ActionConstants.MIRROR_ERROR_CODE ||
-      action.type === ActionConstants.SET_MIRROR_DATA
-    ) {
+    if (action.type === ActionConstants.MIRROR_ERROR_CODE || action.type === ActionConstants.SET_MIRROR_DATA) {
       return false;
     }
 
@@ -191,10 +222,7 @@ const mirrorPack = combineReducers<IMirrorPack>({
     if (action.type === ActionConstants.MIRROR_ERROR_CODE) {
       return action.payload;
     }
-    if (
-      action.type === ActionConstants.SET_MIRROR_LOADING ||
-      action.type === ActionConstants.SET_MIRROR_DATA
-    ) {
+    if (action.type === ActionConstants.SET_MIRROR_LOADING || action.type === ActionConstants.SET_MIRROR_DATA) {
       return null;
     }
     return state;

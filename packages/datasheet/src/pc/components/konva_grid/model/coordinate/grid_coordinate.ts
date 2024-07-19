@@ -1,5 +1,3 @@
-
-
 import { ItemType, IGridCoordinate } from '../../interface';
 import { Coordinate } from './coordinate';
 

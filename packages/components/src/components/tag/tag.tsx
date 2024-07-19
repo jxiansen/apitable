@@ -1,5 +1,3 @@
-
-
 import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import Color from 'color';
@@ -26,14 +24,16 @@ const TagBase = styled.div<ITagProps>`
   padding: 0 4px;
   font-size: 12px;
   cursor: default;
-  ${props => css`
+  ${(props) => css`
     border-radius: ${props.shape === 'square' ? '2px' : '10px'};
     color: ${props.textColor || props.color};
-    ${props.type === 'fill' ? css`
-      background: ${Color(props.color).alpha(0.2).toString()};
-    ` : css`
-      border: 1px solid ${props.color};
-    `}
+    ${props.type === 'fill'
+      ? css`
+          background: ${Color(props.color).alpha(0.2).toString()};
+        `
+      : css`
+          border: 1px solid ${props.color};
+        `}
   `}
 `;
 
@@ -55,19 +55,23 @@ const CloseWrapper = styled.div`
 
 export const Tag: FC<React.PropsWithChildren<ITagProps>> = React.forwardRef((props, ref) => {
   const theme = useProviderTheme();
-  const { children, shape = 'square', type = 'fill', color = theme.color.fill0,
-    closable = false, closeIcon = <CloseOutlined />, icon, onClose } = props;
+  const {
+    children,
+    shape = 'square',
+    type = 'fill',
+    color = theme.color.fill0,
+    closable = false,
+    closeIcon = <CloseOutlined />,
+    icon,
+    onClose,
+  } = props;
 
   const closeHandler = (e: React.MouseEvent) => {
     onClose && onClose(e);
   };
 
   return (
-    <TagBase
-      shape={shape}
-      type={type}
-      color={color}
-    >
+    <TagBase shape={shape} type={type} color={color}>
       <Wrapper>
         {icon && React.cloneElement(icon, { size: 12 })}
         <Wrapper>{children}</Wrapper>

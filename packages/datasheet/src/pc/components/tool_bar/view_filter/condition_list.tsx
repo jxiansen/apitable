@@ -1,5 +1,3 @@
-
-
 import { Col, Row } from 'antd';
 import { isEqual } from 'lodash';
 import { FC, useContext, useEffect, useState } from 'react';

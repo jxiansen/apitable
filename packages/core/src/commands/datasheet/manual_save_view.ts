@@ -1,19 +1,14 @@
-
-
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { ITemporaryView } from '../../exports/store/interfaces';
 import { IJOTAction } from 'engine';
 import { CollaCommandName } from '..';
 import { ResourceType } from 'types';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 export interface IManualSaveView {
   cmd: CollaCommandName.ManualSaveView;
   viewId: string;
-  viewProperty: ITemporaryView
+  viewProperty: ITemporaryView;
 }
 
 export const manualSaveView: ICollaCommandDef<IManualSaveView> = {
@@ -42,7 +37,7 @@ export const manualSaveView: ICollaCommandDef<IManualSaveView> = {
       resourceId: datasheetId,
       resourceType: ResourceType.Datasheet,
       actions,
-      fieldMapSnapshot
+      fieldMapSnapshot,
     };
   },
 };

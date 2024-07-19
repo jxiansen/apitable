@@ -1,10 +1,14 @@
-
-
 import { Store } from 'redux';
 import {
-  DateFormat, ICollaborator, IPermissions, IReduxState,
-  IViewRow, TimeFormat, WidgetPackageStatus, WidgetReleaseType,
-  IOpenFilterInfo
+  DateFormat,
+  ICollaborator,
+  IPermissions,
+  IReduxState,
+  IViewRow,
+  TimeFormat,
+  WidgetPackageStatus,
+  WidgetReleaseType,
+  IOpenFilterInfo,
 } from 'core';
 import { ThemeName } from '@apitable/components';
 import { IResourceService } from '../resource/interface';
@@ -17,8 +21,16 @@ export interface ICell {
 }
 
 export {
-  BasicValueType, StatType, IFieldMap, DateFormat, TimeFormat, SymbolAlign,
-  IField, IDateTimeFieldProperty, Conversion, IEffectOption
+  BasicValueType,
+  StatType,
+  IFieldMap,
+  DateFormat,
+  TimeFormat,
+  SymbolAlign,
+  IField,
+  IDateTimeFieldProperty,
+  Conversion,
+  IEffectOption,
 } from 'core';
 
 export enum WidgetType {
@@ -49,9 +61,11 @@ export interface IWidgetDashboardState {
   permissions: IPermissions;
 }
 
-export type ICalcCache = {[datasheetId: string]: {
-  [viewId: string]: { cache: IViewRow[], expire?: boolean }
-}};
+export type ICalcCache = {
+  [datasheetId: string]: {
+    [viewId: string]: { cache: IViewRow[]; expire?: boolean };
+  };
+};
 
 /**
  * @hidden
@@ -109,7 +123,7 @@ export interface IWidgetContext {
   /** widgets data source datasheet Store */
   widgetStore: Store<IWidgetState>;
   /** widget runtime environment */
-  runtimeEnv?: RuntimeEnv
+  runtimeEnv?: RuntimeEnv;
 }
 
 export interface ICurrencyFormat {
@@ -139,18 +153,18 @@ export type IFormatType = {
 
 export type INumberBaseFormatType = INumberFormat | ICurrencyFormat | IPercentFormat;
 
-export type IPermissionResult = { acceptable: true } | { acceptable: false, message: string };
+export type IPermissionResult = { acceptable: true } | { acceptable: false; message: string };
 
 export interface IFieldQuery {
   /** Specify which fieldId data to query, explicitly pass undefined to return null data, do not pass this parameter to not filter. */
-  ids?: string[] | undefined,
+  ids?: string[] | undefined;
   /** Returns only the fields in the view, set to true will filter the hidden fields in the view by default. */
-  visible?: boolean
+  visible?: boolean;
 }
 
 export interface IRecordQuery {
   /** Specify which recordId data to query, explicitly pass undefined to return empty data, do not pass this parameter to not filter. */
-  ids?: string[] | undefined,
+  ids?: string[] | undefined;
   /** filter condition */
   filter?: IOpenFilterInfo;
 }
@@ -163,32 +177,32 @@ export interface IUpdatePropertyError {
  * `useExpandRecord()` definition of the parameter type of the returned function.
  * */
 export interface IExpandRecord {
-  /** 
-   * You need to expand the array of records. By default, 
-   * the record corresponding to the first recordId in the array will be expanded, 
-   * and the other records can be displayed by toggling the up and down buttons. 
+  /**
+   * You need to expand the array of records. By default,
+   * the record corresponding to the first recordId in the array will be expanded,
+   * and the other records can be displayed by toggling the up and down buttons.
    */
   recordIds: string[];
   /**
-   * Optional, records will be displayed by default using the column order/hiding in the first view in the datasheet, 
+   * Optional, records will be displayed by default using the column order/hiding in the first view in the datasheet,
    * pass in and specify the view .
    */
   viewId?: string;
-  /** 
-   * Optional, by default it will try to expand records from the datasheet associated with the widget, 
-   * if you need to expand records from other datasheet, you need to explicitly pass 
+  /**
+   * Optional, by default it will try to expand records from the datasheet associated with the widget,
+   * if you need to expand records from other datasheet, you need to explicitly pass
    */
   datasheetId?: string;
 }
 
 export enum InstallPosition {
   WidgetPanel = 'WidgetPanel',
-  Dashboard = 'Dashboard'
+  Dashboard = 'Dashboard',
 }
 
 export enum RuntimeEnv {
   Mobile = 'Mobile',
-  Desktop = 'Desktop'
+  Desktop = 'Desktop',
 }
 
 export interface IMetaType {
@@ -231,7 +245,7 @@ export interface IMetaType {
   /** Widget installation space */
   spaceId?: string;
   /** System Theme */
-  theme: ThemeName
+  theme: ThemeName;
   /** Current operating environment */
   runtimeEnv: RuntimeEnv;
 }
@@ -255,7 +269,7 @@ export interface IPropertyInView {
   /**
    * Whether the field is hidden in the view
    */
-  hidden?: boolean
+  hidden?: boolean;
 }
 
 export enum RollUpFuncType {
@@ -304,5 +318,5 @@ export enum DatasheetOperationPermission {
   AddField,
   EditFieldName,
   EditFieldProperty,
-  DeleteField
+  DeleteField,
 }

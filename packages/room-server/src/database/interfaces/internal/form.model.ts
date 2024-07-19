@@ -1,5 +1,3 @@
-
-
 import { IFormSnapshot, IPermissions, IServerFormPack, ISourceDatasheetInfo } from '@apitable/core';
 import { FieldPermissionMap } from './datasheet.model';
 import { NodeInfo } from './node.model';

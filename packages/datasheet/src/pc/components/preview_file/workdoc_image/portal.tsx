@@ -3,12 +3,7 @@ import FileSaver from 'file-saver';
 import * as React from 'react';
 import { useCallback, useRef } from 'react';
 import { ITransFormInfo } from 'pc/components/preview_file/preview_file.interface';
-import {
-  initTransformInfo,
-  initTranslatePosition,
-  MAX_SCALE,
-  MIN_SCALE
-} from 'pc/components/preview_file/preview_main/constant';
+import { initTransformInfo, initTranslatePosition, MAX_SCALE, MIN_SCALE } from 'pc/components/preview_file/preview_main/constant';
 import { getFile } from 'pc/components/preview_file/preview_main/util';
 import useFrameSetState from 'pc/components/preview_file/preview_type/preview_image/hooks/use_frame_state';
 import { PreviewImage } from 'pc/components/preview_file/preview_type/preview_image/preview_image';
@@ -25,13 +20,17 @@ export interface IWorkdocImage {
 export const WorkdocImagePortal = ({ onClose, file, onDelete, isEditable }: IWorkdocImage) => {
   const [transformInfo, setTransformInfo] = useFrameSetState<ITransFormInfo>(initTransformInfo);
   const imgContainerRef = useRef<HTMLDivElement>(null);
-  useClickAway((e) => {
-    // e.target is styles.workdocImage trigger close event
-    const workdocImageDom = document.querySelector(`.${styles.workdocImage}`);
-    if (e.target === workdocImageDom) {
-      onClose();
-    }
-  }, imgContainerRef, 'click');
+  useClickAway(
+    (e) => {
+      // e.target is styles.workdocImage trigger close event
+      const workdocImageDom = document.querySelector(`.${styles.workdocImage}`);
+      if (e.target === workdocImageDom) {
+        onClose();
+      }
+    },
+    imgContainerRef,
+    'click',
+  );
   const onZoom = useCallback(
     (newScale: number) => {
       const { initActualScale } = transformInfo;
@@ -98,12 +97,7 @@ export const WorkdocImagePortal = ({ onClose, file, onDelete, isEditable }: IWor
         />
       </div>
       <div className={styles.container} ref={imgContainerRef}>
-        <PreviewImage
-          transformInfo={transformInfo}
-          setTransformInfo={setTransformInfo}
-          file={file}
-          disabledDownload={false}
-        />
+        <PreviewImage transformInfo={transformInfo} setTransformInfo={setTransformInfo} file={file} disabledDownload={false} />
       </div>
     </div>
   );

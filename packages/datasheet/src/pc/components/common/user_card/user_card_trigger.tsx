@@ -1,5 +1,3 @@
-
-
 import Trigger, { TriggerProps } from 'rc-trigger';
 import { FC, isValidElement, useRef, useEffect, useState } from 'react';
 import { IReduxState } from '@apitable/core';

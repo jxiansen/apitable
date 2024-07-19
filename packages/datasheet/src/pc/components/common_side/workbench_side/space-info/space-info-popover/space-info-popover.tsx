@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { shallowEqual } from 'react-redux';
 import { Typography, useThemeColors } from '@apitable/components';

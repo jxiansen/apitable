@@ -1,5 +1,3 @@
-
-
 import get from 'lodash/get';
 import createCachedSelector from 're-reselect';
 import { GanttRowHeight, NotSupportFieldInstance, PREVIEW_DATASHEET_ID, RowHeightLevel } from '../../../../../shared/store/constants';

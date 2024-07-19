@@ -1,5 +1,3 @@
-
-
 import { IOperation } from 'engine/ot/interface';
 import { testPath } from 'event_manager';
 import { ResourceType } from 'types';
@@ -21,7 +19,7 @@ export class OPEventRecordUnarchived extends IAtomEventType<IRecordUnarchived> {
   scope = ResourceType.Datasheet;
 
   test({ action, resourceId, op }: IOPBaseContext) {
-    const { pass, recordId } = testPath(action.p, ['recordMap', ':recordId'], ('oi' in action));
+    const { pass, recordId } = testPath(action.p, ['recordMap', ':recordId'], 'oi' in action);
 
     let success = pass;
     if (op.cmd !== 'UnarchiveRecords') {
@@ -31,7 +29,7 @@ export class OPEventRecordUnarchived extends IAtomEventType<IRecordUnarchived> {
     if (!success) {
       return {
         pass: success,
-        context: null
+        context: null,
       };
     }
     // fill phase will overwrite diffFields
@@ -43,8 +41,8 @@ export class OPEventRecordUnarchived extends IAtomEventType<IRecordUnarchived> {
         recordId,
         op,
         fields: action['oi'].data,
-        diffFields
-      }
+        diffFields,
+      },
     };
   }
 }

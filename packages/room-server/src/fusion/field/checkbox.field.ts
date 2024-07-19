@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, ICellValue, IField } from '@apitable/core';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { FieldManager } from 'fusion/field.manager';

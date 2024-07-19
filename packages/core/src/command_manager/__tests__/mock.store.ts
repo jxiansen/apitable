@@ -1,8 +1,4 @@
-
-
-import {
-  setDatasheetConnected,receiveDataPack,loadFieldPermissionMap,
-} from 'modules/database/store/actions/resource';
+import { setDatasheetConnected, receiveDataPack, loadFieldPermissionMap } from 'modules/database/store/actions/resource';
 import { IBaseDatasheetPack, IReduxState } from 'exports/store/interfaces';
 import * as Reducers from 'exports/store/reducers';
 import { applyMiddleware, createStore } from 'redux';
@@ -15,11 +11,11 @@ export function fulfillStore(datasheetPack: IBaseDatasheetPack, foreignDatasheet
     setPageParams({
       datasheetId: datasheetPack.datasheet.id,
       spaceId: datasheetPack.datasheet.spaceId,
-    }),
+    })
   );
 
   if (foreignDatasheetMap) {
-    Object.keys(foreignDatasheetMap).forEach(dstId => {
+    Object.keys(foreignDatasheetMap).forEach((dstId) => {
       // Don't check linked datasheet, linked datasheet should be set to connected, or linked data can not be written
       store.dispatch(setDatasheetConnected(dstId));
       const dataPack = foreignDatasheetMap![dstId]!;

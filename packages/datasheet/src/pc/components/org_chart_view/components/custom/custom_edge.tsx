@@ -1,5 +1,3 @@
-
-
 import { FC, memo } from 'react';
 import { useThemeColors } from '@apitable/components';
 import { EdgeProps, getSmoothStepPath } from '@apitable/react-flow';

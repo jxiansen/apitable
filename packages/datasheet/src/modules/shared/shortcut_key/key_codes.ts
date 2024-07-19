@@ -1,5 +1,3 @@
-
-
 import { browser } from '../browser';
 /* eslint-disable */
 /**

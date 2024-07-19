@@ -1,5 +1,3 @@
-
-
 import { FieldType, IMemberField } from '@apitable/core';
 import '@apitable/i18n-lang';
 import { MemberField } from 'fusion/field/member.field';
@@ -15,7 +13,7 @@ describe('MemberField', () => {
   let field: IMemberField;
   let unitService: UnitService;
 
-  beforeAll(async() => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -35,7 +33,7 @@ describe('MemberField', () => {
     };
   });
 
-  afterAll(async() => {
+  afterAll(async () => {
     await app.close();
   });
 
@@ -52,9 +50,16 @@ describe('MemberField', () => {
     });
     it('memberId not string--should throw an error', () => {
       field.property.isMulti = false;
-      expect(() => fieldClass.validate([{
-        id: 1
-      }], field)).toThrow(/^api_param_member_id_type_error$/);
+      expect(() =>
+        fieldClass.validate(
+          [
+            {
+              id: 1,
+            },
+          ],
+          field,
+        ),
+      ).toThrow(/^api_param_member_id_type_error$/);
     });
     it('name not exist--should throw an error', () => {
       field.property.isMulti = false;
@@ -62,9 +67,16 @@ describe('MemberField', () => {
     });
     it('type not exist--should throw an error', () => {
       field.property.isMulti = false;
-      expect(() => fieldClass.validate([{
-        name: 'name'
-      }], field)).toThrow(/^api_params_instance_member_type_error$/);
+      expect(() =>
+        fieldClass.validate(
+          [
+            {
+              name: 'name',
+            },
+          ],
+          field,
+        ),
+      ).toThrow(/^api_params_instance_member_type_error$/);
     });
   });
 });

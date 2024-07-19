@@ -1,17 +1,11 @@
-
-
 import { EventAtomTypeEnums, EventRealTypeEnums, testPath, transformOpFields } from 'event_manager';
 import { groupBy } from 'lodash';
 import { IReduxState } from '../../../exports/store/interfaces';
-import {
-  getDatasheet,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getDatasheet } from 'modules/database/store/selectors/resource/datasheet/base';
 import { ResourceType } from 'types';
 import { IAtomEventType, ICombEventType } from '../interface';
 import { EventSourceTypeEnums, OPEventNameEnums } from './../../enum';
-import {
-  IAtomEvent, IEventInstance, IEventTestResult, IOPBaseContext, IOPEvent
-} from './../../interface/event.interface';
+import { IAtomEvent, IEventInstance, IEventTestResult, IOPBaseContext, IOPEvent } from './../../interface/event.interface';
 
 interface IRecordMetaUpdated {
   datasheetId: string;
@@ -24,8 +18,7 @@ export class OPEventRecordMetaUpdated extends IAtomEventType<IRecordMetaUpdated>
   scope = ResourceType.Datasheet;
 
   test({ action, resourceId }: IOPBaseContext) {
-    let pass,
-        recordId;
+    let pass, recordId;
     if (action.p.length === 3) {
       ({ pass, recordId } = testPath(action.p, ['recordMap', ':recordId', 'recordMeta']));
     } else {
@@ -37,7 +30,7 @@ export class OPEventRecordMetaUpdated extends IAtomEventType<IRecordMetaUpdated>
         datasheetId: resourceId,
         recordId,
         action,
-      }
+      },
     };
   }
 }
@@ -55,7 +48,7 @@ export class OPEventRecordCommentUpdated implements IAtomEventType<any> {
         datasheetId: resourceId,
         recordId: recordId,
         action,
-      }
+      },
     };
   }
 }
@@ -67,19 +60,19 @@ export class OPEventRecordUpdated extends ICombEventType {
   acceptEventNames = [OPEventNameEnums.CellUpdated];
   comb(events: IEventInstance<IAtomEvent>[]): IEventInstance<IOPEvent>[] {
     const res: IEventInstance<IOPEvent>[] = [];
-    const eventBuffer = events.filter(event => this.acceptEventNames.includes(event.eventName));
+    const eventBuffer = events.filter((event) => this.acceptEventNames.includes(event.eventName));
     const groupEvents = groupBy(eventBuffer, ({ context }) => {
       const { datasheetId, recordId } = context;
       return `${datasheetId}-${recordId}`;
     });
-    Object.keys(groupEvents).forEach(dstRecordId => {
+    Object.keys(groupEvents).forEach((dstRecordId) => {
       const [datasheetId, recordId] = dstRecordId.split('-');
       // log all cell update events
       const events = groupEvents[dstRecordId]!;
       const recordChange = {};
       const diffFields: string[] = [];
       // console.log('comb events', events);
-      events.forEach(event => {
+      events.forEach((event) => {
         if (event.context.change) {
           recordChange[event.context.fieldId] = event.context.change.to;
         }
@@ -91,7 +84,7 @@ export class OPEventRecordUpdated extends ICombEventType {
           datasheetId,
           recordId,
           fields: recordChange,
-          diffFields
+          diffFields,
         },
         scope: this.scope,
         realType: this.realType as any, // FIXME: type
@@ -105,7 +98,7 @@ export class OPEventRecordUpdated extends ICombEventType {
    * When generating events through op, some fields need to be completed with the help of state context. Complete the event context here
    */
   fill(events: IEventInstance<IOPEvent>[], state: IReduxState) {
-    return events.map(event => {
+    return events.map((event) => {
       if (event.eventName === OPEventNameEnums.RecordUpdated) {
         const { datasheetId, recordId } = event.context;
         event.context.datasheetName = getDatasheet(state, datasheetId)?.name;
@@ -114,7 +107,7 @@ export class OPEventRecordUpdated extends ICombEventType {
           recordData: event.context.fields,
           state: state,
           datasheetId,
-          recordId
+          recordId,
         });
         // This fields are used for trigger filter verification, where fieldValue is the cellValue from op
         event.context.fields = fields;
@@ -125,4 +118,3 @@ export class OPEventRecordUpdated extends ICombEventType {
     });
   }
 }
-

@@ -1,4 +1,3 @@
-
 import { compact } from 'lodash';
 import { FC, memo, useContext, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
@@ -48,9 +47,9 @@ export const NodeContextMenu: FC<React.PropsWithChildren<INodeContextMenuProps>>
       return state.catalogTree.treeNodesMap[clickNodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[clickNodeId]?.nodePrivate;
     });
     const nodesMap = useAppSelector((state: IReduxState) =>
-      activeNodePrivate ? state.catalogTree.privateTreeNodesMap : state.catalogTree.treeNodesMap
+      activeNodePrivate ? state.catalogTree.privateTreeNodesMap : state.catalogTree.treeNodesMap,
     );
-    const rootId = useAppSelector((state: IReduxState) => activeNodePrivate ? state.catalogTree.privateRootId : state.catalogTree.rootId);
+    const rootId = useAppSelector((state: IReduxState) => (activeNodePrivate ? state.catalogTree.privateRootId : state.catalogTree.rootId));
     const spaceInfo = useAppSelector((state) => state.space.curSpaceInfo);
     const { updateNodeFavoriteStatusReq, copyNodeReq } = useCatalogTreeRequest();
     const { run: updateNodeFavoriteStatus } = useRequest(updateNodeFavoriteStatusReq, { manual: true });
@@ -351,25 +350,25 @@ export const NodeContextMenu: FC<React.PropsWithChildren<INodeContextMenuProps>>
               }),
               judgeShowAIEntrance()
                 ? contextItemMap.get(ContextItemKey.addAi)(() => {
-                  if (!spaceInfo?.isEnableChatbot) {
-                    if (!getEnvVariables().IS_APITABLE) {
-                      if (getReleaseVersion() !== 'development') {
-                        window.open(getAIOpenFormUrl());
-                        return;
+                    if (!spaceInfo?.isEnableChatbot) {
+                      if (!getEnvVariables().IS_APITABLE) {
+                        if (getReleaseVersion() !== 'development') {
+                          window.open(getAIOpenFormUrl());
+                          return;
+                        }
                       }
                     }
-                  }
-                  const result = triggerUsageAlert?.(
-                    'maxFormViewsInSpace',
-                    { usage: spaceInfo!.formViewNums + 1, alwaysAlert: true },
-                    SubscribeUsageTipType.Alert,
-                  );
-                  if (result) {
-                    return;
-                  }
-                  openCatalog();
-                  addTreeNode(targetId, ConfigConstant.NodeType.AI);
-                })
+                    const result = triggerUsageAlert?.(
+                      'maxFormViewsInSpace',
+                      { usage: spaceInfo!.formViewNums + 1, alwaysAlert: true },
+                      SubscribeUsageTipType.Alert,
+                    );
+                    if (result) {
+                      return;
+                    }
+                    openCatalog();
+                    addTreeNode(targetId, ConfigConstant.NodeType.AI);
+                  })
                 : undefined,
 
               contextItemMap.get(ContextItemKey.AddAutomation)(() => {
@@ -382,10 +381,7 @@ export const NodeContextMenu: FC<React.PropsWithChildren<INodeContextMenuProps>>
             [
               contextItemMap.get(ContextItemKey.AddFolder)(() => {
                 openCatalog();
-                addTreeNode(
-                  targetId,
-                  ConfigConstant.NodeType.FOLDER,
-                ) ;
+                addTreeNode(targetId, ConfigConstant.NodeType.FOLDER);
               }),
             ],
             [

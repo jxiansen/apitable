@@ -1,5 +1,3 @@
-
-
 import { colors } from '@apitable/components';
 import { ILinearRow } from '@apitable/core';
 import { GRID_GROUP_OFFSET, GRID_ROW_HEAD_WIDTH } from '../../constant';

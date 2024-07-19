@@ -1,5 +1,3 @@
-
-
 import { ThemeName } from 'theme';
 import { darkColors, lightColors } from '../colors';
 
@@ -15,17 +13,17 @@ export const getThemeName = (): ThemeName => {
 };
 
 const colorHandler = {
-  get: function(_obj: any, prop: keyof any) {
+  get: function (_obj: any, prop: keyof any) {
     const theme = getThemeName();
     const color = theme.includes(ThemeName.Light) ? lightColors : darkColors;
     return color[prop];
-  }
+  },
 };
 
 /**
  * FIXME: If import {colors} from './colors'. theme does not cause the React component to re render.
  * For the time being, the original calling method should be compatible.
- * 
+ *
  * Finally, the color variables referenced in js should be obtained from the theme through useTheme hook.
  */
 export const colors = new Proxy(lightColors, colorHandler) as any;
@@ -51,4 +49,3 @@ export const getThemeColors = () => {
   const theme = getThemeName();
   return theme.includes(ThemeName.Light) ? lightColors : darkColors;
 };
-

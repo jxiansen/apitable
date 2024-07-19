@@ -1,5 +1,3 @@
-
-
 import cx from 'classnames';
 import produce from 'immer';
 import { useAtom } from 'jotai';
@@ -14,7 +12,14 @@ import { integrateCdnHost, IReduxState, Selectors, StoreActions, Strings, t } fr
 import { setSideBarVisible } from '@apitable/core/dist/modules/space/store/actions/space';
 import { ChevronDownOutlined } from '@apitable/icons';
 import { IFetchDatasheet } from '@apitable/widget-sdk/dist/message/interface';
-import { automationLocalMap, automationPanelAtom, automationStateAtom, PanelName, getResourceAutomationDetailIntegrated, useAutomationController } from 'pc/components/automation/controller';
+import {
+  automationLocalMap,
+  automationPanelAtom,
+  automationStateAtom,
+  PanelName,
+  getResourceAutomationDetailIntegrated,
+  useAutomationController,
+} from 'pc/components/automation/controller';
 import { getTriggerDatasheetId, IFetchedDatasheet } from 'pc/components/automation/controller/hooks/use_robot_fields';
 import { Message, Modal } from 'pc/components/common';
 import { useAppDispatch } from 'pc/hooks/use_app_dispatch';
@@ -46,7 +51,7 @@ export const customizer = (objValue, othValue) => {
   if (isNil(objValue) && isNil(othValue)) {
     return true;
   }
-  if(objValue === '******' || othValue === '******') {
+  if (objValue === '******' || othValue === '******') {
     return true;
   }
   const l = pickBy(objValue, identity);
@@ -98,12 +103,14 @@ export const RobotAction = memo((props: IRobotActionProps) => {
       ? Array.from({ length: triggers.length }, () => activeDstId)
       : ((dataList ?? []) as IFetchedDatasheet[]);
 
-  const triggerDataSheetMap : Record<string, string> = triggers.map((trigger, index) => ({ trigger, index })).reduce((p, c) => {
-    return {
-      ...p,
-      [c.trigger.triggerId]: triggerDataSheetIds[c.index]
-    };
-  }, {});
+  const triggerDataSheetMap: Record<string, string> = triggers
+    .map((trigger, index) => ({ trigger, index }))
+    .reduce((p, c) => {
+      return {
+        ...p,
+        [c.trigger.triggerId]: triggerDataSheetIds[c.index],
+      };
+    }, {});
 
   const nodeOutputSchemaList = getNodeOutputSchemaList({
     actionList,
@@ -319,7 +326,12 @@ export const RobotAction = memo((props: IRobotActionProps) => {
         TextWidget: (props: any) => {
           return (
             <Box maxWidth={'100%'} maxHeight={'300px'} overflowY={'auto'} overflowX={'auto'}>
-              <MagicTextField {...props} nodeOutputSchemaList={prevActionSchemaList} triggerType={triggerType} triggerDataSheetMap={triggerDataSheetMap} />
+              <MagicTextField
+                {...props}
+                nodeOutputSchemaList={prevActionSchemaList}
+                triggerType={triggerType}
+                triggerDataSheetMap={triggerDataSheetMap}
+              />
             </Box>
           );
         },

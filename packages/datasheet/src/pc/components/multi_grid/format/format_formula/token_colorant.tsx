@@ -1,5 +1,3 @@
-
-
 import { memo } from 'react';
 import * as React from 'react';
 import { TokenType, assertNever, FormulaExprLexer } from '@apitable/core';

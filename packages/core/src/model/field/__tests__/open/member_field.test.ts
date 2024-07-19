@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType, FieldType, IMemberField } from 'types';
 import { IOpenField } from 'types/open/open_field_read_types';
 import { IUpdateOpenMemberFieldProperty } from 'types/open/open_field_write_types';
@@ -13,8 +11,8 @@ const memberField: IMemberField = {
     isMulti: false, // Optional single or multiple members.
     shouldSendMsg: false, // Whether to send a message notification after selecting a member
     subscription: false,
-    unitIds: []
-  }
+    unitIds: [],
+  },
 };
 
 const openMemberField: IOpenField = {
@@ -25,22 +23,21 @@ const openMemberField: IOpenField = {
     options: [],
     isMulti: false,
     shouldSendMsg: false,
-    subscription: false
-  }
+    subscription: false,
+  },
 };
 
 const propertyOptionalFill: IUpdateOpenMemberFieldProperty = {
   isMulti: false,
   shouldSendMsg: false,
-  subscription: false
+  subscription: false,
 };
 
-const propertyOptionalNotFill: IUpdateOpenMemberFieldProperty = {
-};
+const propertyOptionalNotFill: IUpdateOpenMemberFieldProperty = {};
 
 describe('Member field read property format check', () => {
   const valid = getOpenFieldProperty(memberField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid(openMemberField.property);
     expect(receiveValue).toEqual(expectValue);
   });

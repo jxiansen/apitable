@@ -1,5 +1,3 @@
-
-
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import * as React from 'react';
 import { ILastModifiedByField, IField, CollectType } from '@apitable/core';

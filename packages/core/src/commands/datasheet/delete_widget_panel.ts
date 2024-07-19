@@ -1,5 +1,3 @@
-
-
 import { getResourceWidgetPanels } from 'modules/database/store/selectors/resource';
 import { ResourceType } from 'types';
 import { ExecuteResult, ICollaCommandDef, ICollaCommandExecuteContext } from '../../command_manager';
@@ -26,7 +24,7 @@ export const deleteWidgetPanel: ICollaCommandDef<IDeleteWidgetPanel> = {
       return null;
     }
 
-    const panel = widgetPanels.find(item => item.id === deletePanelId);
+    const panel = widgetPanels.find((item) => item.id === deletePanelId);
 
     if (!panel) {
       return null;

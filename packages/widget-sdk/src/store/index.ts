@@ -1,5 +1,3 @@
-
-
 import { IReduxState, Reducers } from 'core';
 import { AnyAction, applyMiddleware, CombinedState, compose, createStore, Store } from 'redux';
 import { enableBatching } from 'redux-batched-actions';
@@ -16,10 +14,8 @@ export * from './slice/root';
 
 export type IWidgetStore = Store<CombinedState<IWidgetState>, AnyAction>;
 
-export const createGlobalStore = () => createStore<IReduxState, any, unknown, unknown>(
-  enableBatching(Reducers.rootReducers),
-  compose(applyMiddleware(thunkMiddleware)),
-);
+export const createGlobalStore = () =>
+  createStore<IReduxState, any, unknown, unknown>(enableBatching(Reducers.rootReducers), compose(applyMiddleware(thunkMiddleware)));
 /**
  * @description Initialize all the dependencies and data needed for the widget and create an environment that can run independently.
  * 1. Enables widget developers to develop widget directly without launching the main development environment.
@@ -27,7 +23,7 @@ export const createGlobalStore = () => createStore<IReduxState, any, unknown, un
  */
 export const initGlobalContext = (): IGlobalContext => {
   const store = createGlobalStore();
-  const datasheetService = new ResourceService(store, e => alert(e.message));
+  const datasheetService = new ResourceService(store, (e) => alert(e.message));
   const unSubscribeDatasheetMap = subscribeDatasheetMap(store, { instance: datasheetService });
   const unSubscribeWidgetMap = subscribeWidgetMap(store, { instance: datasheetService });
   return {

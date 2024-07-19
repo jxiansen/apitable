@@ -1,5 +1,3 @@
-
-
 import { noop } from 'lodash';
 
 let _endEditCell = noop;

@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { ApiException } from 'shared/exception';

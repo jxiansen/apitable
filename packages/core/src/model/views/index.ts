@@ -1,5 +1,3 @@
-
-
 import { ViewType } from 'modules/shared/store/constants';
 import { DATASHEET_ID } from '../../config/dom_id';
 import { CalendarView } from './calendar_view';
@@ -32,7 +30,7 @@ export interface IBindViewModal {
   (viewType: ViewType.Calendar): CalendarView;
   (viewType: ViewType.Form): FormView;
   (viewType: ViewType.Gantt): GanttView;
-  (viewType: ViewType.OrgChart): OrgChartView
+  (viewType: ViewType.OrgChart): OrgChartView;
   (viewType: ViewType.NotSupport): NotSupportView;
   (viewType: any): View;
 }

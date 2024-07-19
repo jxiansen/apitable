@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@nestjs/common';
 import { ResourceType } from '@apitable/core';
 import { InjectLogger } from '../../../shared/common';
@@ -97,5 +95,4 @@ export class ChangesetService {
     }
     return await this.resourceChangesetRepository.getChangesetOrderList(resourceId, startRevision, endRevision);
   }
-
 }

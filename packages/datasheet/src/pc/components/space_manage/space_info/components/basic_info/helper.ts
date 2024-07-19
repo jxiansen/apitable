@@ -1,5 +1,3 @@
-
-
 import { getEnvVariables } from 'pc/utils/env';
 
 export const buildSpaceCertSheetUrl = (spaceId: string) => {

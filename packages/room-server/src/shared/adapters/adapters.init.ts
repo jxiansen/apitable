@@ -1,5 +1,3 @@
-
-
 import { generateRandomString } from '@apitable/core';
 import { INestApplication } from '@nestjs/common';
 import { LoggerService } from '@nestjs/common/services/logger.service';

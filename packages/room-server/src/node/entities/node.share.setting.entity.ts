@@ -1,5 +1,3 @@
-
-
 import { IdWorker } from 'shared/helpers/snowflake';
 import { INodeShareProps } from 'shared/interfaces/datasheet.interface';
 import { BeforeInsert, Column, Entity, PrimaryColumn } from 'typeorm';
@@ -9,7 +7,6 @@ import { BeforeInsert, Column, Entity, PrimaryColumn } from 'typeorm';
  */
 @Entity('node_share_setting')
 export class NodeShareSettingEntity {
-
   @PrimaryColumn('bigint')
   id!: string;
 

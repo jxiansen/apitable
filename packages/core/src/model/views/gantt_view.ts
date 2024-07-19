@@ -1,21 +1,10 @@
-
-
 import { Settings } from 'config';
 import { Field } from 'model/field';
 import { BasicValueType } from 'types';
 import { integrateCdnHost } from 'utils';
 import { Strings, t } from '../../exports/i18n';
-import {
-  IFieldMap,
-  IGanttViewColumn,
-  IGanttViewProperty,
-  IReduxState,
-  ISnapshot,
-  IViewProperty,
-} from '../../exports/store/interfaces';
-import { GanttColorType,
-  ViewType
-} from 'modules/shared/store/constants';
+import { IFieldMap, IGanttViewColumn, IGanttViewProperty, IReduxState, ISnapshot, IViewProperty } from '../../exports/store/interfaces';
+import { GanttColorType, ViewType } from 'modules/shared/store/constants';
 
 import { DatasheetActions } from '../../commands_actions/datasheet';
 import { View } from './views';
@@ -40,10 +29,12 @@ export class GanttView extends View {
   }
 
   static findDateTimeFieldIds(srcView: IViewProperty, fieldMap: IFieldMap, state?: IReduxState) {
-    const filterIds = srcView.columns.filter(({ fieldId }) => {
-      const field = fieldMap[fieldId]!;
-      return Field.bindModel(field, state).basicValueType === BasicValueType.DateTime;
-    }).map(column => column.fieldId);
+    const filterIds = srcView.columns
+      .filter(({ fieldId }) => {
+        const field = fieldMap[fieldId]!;
+        return Field.bindModel(field, state).basicValueType === BasicValueType.DateTime;
+      })
+      .map((column) => column.fieldId);
     return filterIds;
   }
 
@@ -62,7 +53,7 @@ export class GanttView extends View {
       workDays: DEFAULT_WORK_DAYS,
       onlyCalcWorkDay: false,
       linkFieldId: '',
-      autoTaskLayout: false
+      autoTaskLayout: false,
     };
   }
 
@@ -95,9 +86,7 @@ export class GanttView extends View {
       rows: this.defaultRows(srcView),
       frozenColumnCount: 1,
       style: this.defaultStyle(snapshot, activeViewId, state),
-      displayHiddenColumnWithinMirror: true
+      displayHiddenColumnWithinMirror: true,
     };
   }
-
 }
-

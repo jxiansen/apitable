@@ -1,5 +1,3 @@
-
-
 import { IResourceOpsCollect } from 'command_manager';
 import { OTActionName } from 'engine';
 import { IBaseDatasheetPack } from 'exports/store/interfaces';

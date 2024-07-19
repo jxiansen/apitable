@@ -1,5 +1,3 @@
-
-
 import { ITemplateCategory, ITemplateDirectory } from '../../../../exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';
 

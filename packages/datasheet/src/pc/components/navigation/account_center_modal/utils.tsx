@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { ConfigConstant, hiddenMobile, t, Strings } from '@apitable/core';
 import { TelephoneFilled, EmailFilled } from '@apitable/icons';

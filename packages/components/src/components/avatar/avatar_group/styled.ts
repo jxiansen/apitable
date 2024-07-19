@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { AvatarSizeConfig } from '../styled';
 import { IAvatarGroup } from './interface';

@@ -1,9 +1,6 @@
-
-
 import { Context, Link, Sampler, SamplingDecision, SpanAttributes, SpanKind } from '@opentelemetry/api';
 
 export class CustomParentBasedSampler implements Sampler {
-
   private FIXED_RULES: Map<string, ICustomizeSampler> = new Map();
 
   constructor() {
@@ -25,11 +22,10 @@ export class CustomParentBasedSampler implements Sampler {
   }
 
   private init_fixed_rules() {
-    this.FIXED_RULES
-      .set('Controller->ActuatorController.healthCheck', { sampleRate: 0.1 })
-      .set('Event->HttpRequestDurationSeconds.undefined', { sampleRate: 0.1 });
+    this.FIXED_RULES.set('Controller->ActuatorController.healthCheck', { sampleRate: 0.1 }).set('Event->HttpRequestDurationSeconds.undefined', {
+      sampleRate: 0.1,
+    });
   }
-
 }
 
 interface ICustomizeSampler {

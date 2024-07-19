@@ -1,5 +1,3 @@
-
-
 import { useThrottleFn } from 'ahooks';
 import cls from 'classnames';
 import RcTrigger, { TriggerProps } from 'rc-trigger';
@@ -216,8 +214,8 @@ const CollapseBase: React.ForwardRefRenderFunction<ICollapseFunc, ICollapseProps
   // Calculate hidden layouts
   const setPopup = () => {
     const container = wrapRef.current,
-          triggerBtn = triggerRef.current,
-          extraWrap = extraRef.current;
+      triggerBtn = triggerRef.current,
+      extraWrap = extraRef.current;
     if (!container || !triggerBtn) {
       return;
     }
@@ -253,7 +251,7 @@ const CollapseBase: React.ForwardRefRenderFunction<ICollapseFunc, ICollapseProps
     let realDisplayWidth = displayWidth;
 
     let widthSum = fixedTotalWidth,
-        sliceIndex = -1;
+      sliceIndex = -1;
     // Do mutually exclusive operations, activation and fixed n terms cannot occur at the same time
     const startIndex = activeKey ? 0 : fixedIndexResult;
     // Compare the width of the list to the width of the container and determine from which position it is hidden
@@ -438,8 +436,8 @@ const CollapseBase: React.ForwardRefRenderFunction<ICollapseFunc, ICollapseProps
                   typeof text === 'function'
                     ? text()
                     : typeof text === 'string'
-                      ? text
-                      : React.cloneElement(text, { isLastDisplay: index === show.length - 1, activeIndex, displayIndex: index });
+                    ? text
+                    : React.cloneElement(text, { isLastDisplay: index === show.length - 1, activeIndex, displayIndex: index });
                 return (
                   <Draggable isDragDisabled={unSortable} key={item.key} draggableId={item.key} index={index}>
                     {(providedChild) => {

@@ -1,5 +1,3 @@
-
-
 import { REQUIRED_FIELD_SYMBOL } from '../../../const';
 
 interface ILabelProps {

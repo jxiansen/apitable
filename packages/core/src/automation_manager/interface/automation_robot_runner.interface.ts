@@ -1,5 +1,3 @@
-
-
 import { InputParser } from 'automation_manager/input_parser';
 import { IActionType, IRobot, IRobotTask, IRobotTaskRuntimeContext } from './automation.interface';
 
@@ -13,8 +11,8 @@ type ISuccessActionOutput = {
 type IFailedActionOutput = {
   success: false;
   data: {
-    errors: { message: any }[]
-  }
+    errors: { message: any }[];
+  };
 };
 
 export type IActionOutput = ISuccessActionOutput | IFailedActionOutput;
@@ -45,6 +43,6 @@ export abstract class IAutomationRobotRunner {
   abstract executeAction(actionId: string, globalContext: IRobotTaskRuntimeContext): Promise<void>;
   // get action input from global context, transform dynamic params to static
   abstract getRuntimeActionInput(actionId: string, globalContext: IRobotTaskRuntimeContext): any;
-  // report result of robot task 
+  // report result of robot task
   abstract reportResult(taskId: string, globalContext: IRobotTaskRuntimeContext): void;
 }

@@ -1,5 +1,3 @@
-
-
 import fs from 'fs';
 import path from 'path';
 
@@ -27,12 +25,10 @@ const readFolder = (folderPath: string): Record<string, any> => {
         console.log(error);
       }
       const fileJson = JSON.parse(fileContent);
-      const locale = file.replace(sourceName, '')
-        .replace('.', '')
-        .replace('.json', '');
+      const locale = file.replace(sourceName, '').replace('.', '').replace('.json', '');
 
       if (generateType === 'json') {
-        keys.forEach(key => {
+        keys.forEach((key) => {
           if (!fileJson[key]) {
             if (locale === 'zh-CN') console.warn(`Missing key ${key} in ${filePath}`);
             fileJson[key] = fallbackLocale[key];
@@ -49,7 +45,7 @@ const mergeFolders = (folders: string[]): Record<string, any> => {
   const mergedContent: Record<string, any> = {};
 
   for (const folder of folders) {
-    if (!folder){
+    if (!folder) {
       continue;
     }
     const folderContent = readFolder(folder);
@@ -87,13 +83,15 @@ const writeMergedContent = (outputFolder: string, mergedContent: Record<string, 
     fs.writeFileSync(
       path.join(outputFolder, 'stringkeys.interface.ts'),
       '/* eslint-disable max-len */\nexport type StringKeysMapType = {\n  ' +
-        Object.keys(sortedMergedContent['en-US']).map(k => `'${k}': '${k}'`).join(',\n  ') +
+        Object.keys(sortedMergedContent['en-US'])
+          .map((k) => `'${k}': '${k}'`)
+          .join(',\n  ') +
         '\n};\n\n' +
         `export type StringKeysType = {
           [K in keyof StringKeysMapType]: K;
         } & { [key: string]: unknown };`
     );
-    Object.keys(sortedMergedContent).forEach(key => {
+    Object.keys(sortedMergedContent).forEach((key) => {
       fs.writeFileSync(path.join(outputFolder, `strings.${key}.json`), JSON.stringify(sortedMergedContent[key], null, 2), 'utf-8');
     });
     fs.writeFileSync(path.join(outputFolder, 'strings.json'), JSON.stringify(sortedMergedContent, null, 2), 'utf-8');
@@ -114,4 +112,3 @@ const writeMergedContent = (outputFolder: string, mergedContent: Record<string, 
 };
 const mergedContent = mergeFolders(sourceFolders);
 writeMergedContent(outputFolder, mergedContent);
-

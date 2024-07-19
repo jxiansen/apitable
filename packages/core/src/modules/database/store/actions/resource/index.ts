@@ -1,23 +1,63 @@
-
-
 import { IOperation } from 'engine/ot';
 import {
-  CHANGE_WIDGET_PANEL_WIDTH, DASHBOARD_CONNECTED, DASHBOARD_JOT_ACTION, DASHBOARD_ROOM_INFO_SYNC, DASHBOARD_UPDATE_REVISION, DATASHEET_CONNECTED,
-  DATASHEET_JOT_ACTION, DATASHEET_ROOM_INFO_SYNC, DATASHEET_UPDATE_REVISION, FORM_CONNECTED, FORM_JOT_ACTION, FORM_ROOM_INFO_SYNC,
-  FORM_UPDATE_REVISION, MIRROR_CONNECTED, MIRROR_JOT_ACTION, MIRROR_ROOM_INFO_SYNC, MIRROR_UPDATE_REVISION, SET_DASHBOARD_SYNCING,
-  SET_DATASHEET_SYNCING, SET_FORM_SYNCING,
-  SET_MIRROR_SYNCING, SET_THEME, SWITCH_ACTIVE_PANEL, TOGGLE_WIDGET_PANEL, UPDATE_DASHBOARD, UPDATE_MIRROR, WIDGET_JOT_ACTION, WIDGET_UPDATE_REVISION,
+  CHANGE_WIDGET_PANEL_WIDTH,
+  DASHBOARD_CONNECTED,
+  DASHBOARD_JOT_ACTION,
+  DASHBOARD_ROOM_INFO_SYNC,
+  DASHBOARD_UPDATE_REVISION,
+  DATASHEET_CONNECTED,
+  DATASHEET_JOT_ACTION,
+  DATASHEET_ROOM_INFO_SYNC,
+  DATASHEET_UPDATE_REVISION,
+  FORM_CONNECTED,
+  FORM_JOT_ACTION,
+  FORM_ROOM_INFO_SYNC,
+  FORM_UPDATE_REVISION,
+  MIRROR_CONNECTED,
+  MIRROR_JOT_ACTION,
+  MIRROR_ROOM_INFO_SYNC,
+  MIRROR_UPDATE_REVISION,
+  SET_DASHBOARD_SYNCING,
+  SET_DATASHEET_SYNCING,
+  SET_FORM_SYNCING,
+  SET_MIRROR_SYNCING,
+  SET_THEME,
+  SWITCH_ACTIVE_PANEL,
+  TOGGLE_WIDGET_PANEL,
+  UPDATE_DASHBOARD,
+  UPDATE_MIRROR,
+  WIDGET_JOT_ACTION,
+  WIDGET_UPDATE_REVISION,
 } from '../../../../shared/store/action_constants';
 import {
-  IChangeResourceSyncingStatus, IChangeWidgetPanelWidth, ICollaborator, IJOTActionPayload, INodeMeta, IResourceErrCode, IRoomInfoSync,
-  ISetResourceConnected, ISwitchActivePanel, IToggleWidgetPanelAction, IUpdateRevision, ThemeName,
+  IChangeResourceSyncingStatus,
+  IChangeWidgetPanelWidth,
+  ICollaborator,
+  IJOTActionPayload,
+  INodeMeta,
+  IResourceErrCode,
+  IRoomInfoSync,
+  ISetResourceConnected,
+  ISwitchActivePanel,
+  IToggleWidgetPanelAction,
+  IUpdateRevision,
+  ThemeName,
 } from '../../../../../exports/store/interfaces';
 import { ResourceType } from 'types';
 import {
-  activeDashboardCollaborator, deactivateDashboardCollaborator, resetDashboard, setDashboardErrorCode, updateDashboardName,
+  activeDashboardCollaborator,
+  deactivateDashboardCollaborator,
+  resetDashboard,
+  setDashboardErrorCode,
+  updateDashboardName,
 } from './dashboard';
 import {
-  activeDatasheetCollaborator, datasheetErrorCode, deactivateDatasheetCollaborator, resetDatasheet, updateDatasheet, updateDatasheetName,
+  activeDatasheetCollaborator,
+  datasheetErrorCode,
+  deactivateDatasheetCollaborator,
+  resetDatasheet,
+  updateDatasheet,
+  updateDatasheetName,
 } from './datasheet';
 import { activeFormCollaborator, deactivateFormCollaborator, formErrorCode, resetForm } from './form';
 import { resetWidget } from './widget';
@@ -73,7 +113,6 @@ export const applyJOTOperations = (operations: IOperation[], resourceType: Resou
       } as IJOTActionPayload;
     }
   }
-
 };
 
 export const updateRevision = (revision: number, resourceId: string, resourceType: ResourceType): IUpdateRevision => {
@@ -390,4 +429,3 @@ export const setTheme = (theme: ThemeName) => {
     payload: theme,
   };
 };
-

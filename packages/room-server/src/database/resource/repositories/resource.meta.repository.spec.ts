@@ -1,4 +1,3 @@
-
 import { DeepPartial, getConnection } from 'typeorm';
 import { ResourceMetaRepository } from './resource.meta.repository';
 import { ResourceMetaEntity } from '../entities/resource.meta.entity';
@@ -13,7 +12,7 @@ describe('DatasheetRepositoryTest', () => {
   let repository: ResourceMetaRepository;
   let entity: ResourceMetaEntity;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({ isGlobal: true }),
@@ -34,11 +33,11 @@ describe('DatasheetRepositoryTest', () => {
     entity = await repository.save(record);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
-  it('should get revisions by resource ids', async() => {
+  it('should get revisions by resource ids', async () => {
     const resourceRevisions = await repository.getRevisionByRscIds([entity.resourceId]);
     expect(resourceRevisions.length).toEqual(1);
     expect(resourceRevisions[0]?.resourceId).toEqual(entity.resourceId);

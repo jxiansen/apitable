@@ -1,5 +1,3 @@
-
-
 import { Injectable, NestInterceptor, Logger, ExecutionContext, CallHandler } from '@nestjs/common';
 import { ResourceType, ResourceIdPrefix, IWidget, IWidgetPanel, IServerDashboardPack } from '@apitable/core';
 import { InjectLogger } from '../../../shared/common';
@@ -30,7 +28,7 @@ export class ResourceDataInterceptor implements NestInterceptor {
     }
     return next.handle().pipe(
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      tap(async(data: any) => {
+      tap(async (data: any) => {
         const resourceIds = await this.getResourceIds(info.resourceType, data);
         // no need to create a new resource for mirror
         if (info.resourceType != ResourceType.Mirror) {

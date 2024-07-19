@@ -1,5 +1,3 @@
-
-
 import { IFieldPermissionMap, IRoleMember, IViewProperty } from '../../../exports/store/interfaces';
 import { MemberType } from 'types';
 import { ITeamData } from '../../../exports/store/interfaces';
@@ -7,10 +5,10 @@ import { ITeamData } from '../../../exports/store/interfaces';
 export interface IFieldPermissionRoleListData {
   enabled: boolean;
   members: IFieldPermissionMember[];
-  roles: IFieldPermissionRole[],
+  roles: IFieldPermissionRole[];
   setting: {
-    formSheetAccessible: boolean
-  }
+    formSheetAccessible: boolean;
+  };
 }
 
 export type IFieldPermissionMember = IRoleMember & { isAdmin: boolean };
@@ -39,16 +37,16 @@ export interface IFieldPermissionRole {
 
 export interface IFieldPermissionResponse {
   datasheetId: string;
-  fieldPermissionMap: IFieldPermissionMap
+  fieldPermissionMap: IFieldPermissionMap;
 }
 
 export interface IFixupDstViewDataPack {
   view: IViewProperty;
-  version: number
+  version: number;
 }
 
 export interface IGetCommentsByIdsResponse {
-  [commentId: string]: any
+  [commentId: string]: any;
 }
 
 export interface ISubOrUnsubByRecordIdsReq {
@@ -68,7 +66,7 @@ export interface ICascaderNode {
   linkedFieldId: string;
   linkedRecordId: string;
   text: string;
-  children?: ICascaderNode[]
+  children?: ICascaderNode[];
 }
 
 export interface ILinkedField {
@@ -81,7 +79,7 @@ export interface IGetTreeSelectDataRes {
   data?: {
     linkedFields: ILinkedField[];
     treeSelects: ICascaderNode[];
-  }
+  };
 }
 
 export interface IGetTreeSelectSnapshotReq {
@@ -115,7 +113,7 @@ export interface IDatasheetTablebundles {
   id: string;
   tbdId: string;
   name: string;
-  spaceId: string
+  spaceId: string;
   dstId: string;
   statusCode: number;
   createdAt: string;
@@ -135,4 +133,3 @@ export interface IRecoverDatasheetTablebundles {
   spaceId: string;
   parentId: string;
 }
-

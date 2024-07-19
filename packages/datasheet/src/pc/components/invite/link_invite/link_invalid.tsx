@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import { FC } from 'react';
 import { IReduxState } from '@apitable/core';

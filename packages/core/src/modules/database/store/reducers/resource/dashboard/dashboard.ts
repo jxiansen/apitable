@@ -1,18 +1,30 @@
-
-
 import produce from 'immer';
 import { AnyAction, combineReducers } from 'redux';
 import * as ActionConstants from 'modules/shared/store/action_constants';
 import {
-  IResetDashboard, ISetDashboardClientAction, ISetDashboardDataAction, ISetDashboardLoadingAction, IUpdateDashboardName
+  IResetDashboard,
+  ISetDashboardClientAction,
+  ISetDashboardDataAction,
+  ISetDashboardLoadingAction,
+  IUpdateDashboardName,
 } from 'modules/database/store/actions/resource';
 
 import { IUpdateDashboardInfo } from '../../../../../../exports/store/interfaces';
 import * as actions from '../../../../../shared/store/action_constants';
 import {
-  IChangeResourceSyncingStatus, IDashboard, IDashboardClient, IDashboardMap, IDashboardPack, IJOTActionPayload,
-  IResourceErrCode, IRoomInfoSync, ISetResourceConnected, IUpdateResource,
-  IUpdateRevision, IDeActiveDashboardCollaborator, IActiveDashboardCollaboratorAction,
+  IChangeResourceSyncingStatus,
+  IDashboard,
+  IDashboardClient,
+  IDashboardMap,
+  IDashboardPack,
+  IJOTActionPayload,
+  IResourceErrCode,
+  IRoomInfoSync,
+  ISetResourceConnected,
+  IUpdateResource,
+  IUpdateRevision,
+  IDeActiveDashboardCollaborator,
+  IActiveDashboardCollaboratorAction,
 } from '../../../../../../exports/store/interfaces';
 import { JOTApply } from '../jot_apply';
 
@@ -32,10 +44,22 @@ export const dashboardMap = (state: IDashboardMap = {}, action: IResetDashboard 
   };
 };
 
-type IDashboardAction = ISetDashboardLoadingAction | ISetDashboardDataAction | ISetDashboardClientAction |
-  IJOTActionPayload | IUpdateRevision | ISetResourceConnected | IChangeResourceSyncingStatus |
-  IRoomInfoSync | IResourceErrCode | IUpdateResource | IResetDashboard | IUpdateDashboardName | IUpdateDashboardInfo |
-  IDeActiveDashboardCollaborator | IActiveDashboardCollaboratorAction;
+type IDashboardAction =
+  | ISetDashboardLoadingAction
+  | ISetDashboardDataAction
+  | ISetDashboardClientAction
+  | IJOTActionPayload
+  | IUpdateRevision
+  | ISetResourceConnected
+  | IChangeResourceSyncingStatus
+  | IRoomInfoSync
+  | IResourceErrCode
+  | IUpdateResource
+  | IResetDashboard
+  | IUpdateDashboardName
+  | IUpdateDashboardInfo
+  | IDeActiveDashboardCollaborator
+  | IActiveDashboardCollaboratorAction;
 
 export const dashboard = (state: IDashboard | null = null, action: IDashboardAction): IDashboard | null => {
   if (action.type === ActionConstants.SET_DASHBOARD_DATA) {
@@ -53,7 +77,7 @@ export const dashboard = (state: IDashboard | null = null, action: IDashboardAct
       };
     }
     case ActionConstants.DASHBOARD_JOT_ACTION: {
-      return produce<IDashboard, IDashboard>(state, draft => {
+      return produce<IDashboard, IDashboard>(state, (draft) => {
         JOTApply(draft, action);
         return draft;
       });
@@ -84,7 +108,7 @@ const client = (state: IDashboardClient = defaultClient, action: IDashboardActio
     case ActionConstants.DASHBOARD_ACTIVE_COLLABORATOR: {
       if (!state.collaborators) {
         return { ...state, collaborators: [action.payload] };
-      } else if (state.collaborators.find(user => user.socketId === action.payload.socketId)) {
+      } else if (state.collaborators.find((user) => user.socketId === action.payload.socketId)) {
         console.error('warning user enter with same socketid');
         return state;
       }
@@ -95,7 +119,7 @@ const client = (state: IDashboardClient = defaultClient, action: IDashboardActio
       if (!state.collaborators) {
         return state;
       }
-      state.collaborators = state.collaborators.filter(user => user.socketId !== action.payload.socketId);
+      state.collaborators = state.collaborators.filter((user) => user.socketId !== action.payload.socketId);
       return state;
     }
     case ActionConstants.DASHBOARD_ROOM_INFO_SYNC: {
@@ -121,10 +145,7 @@ const dashboardPack = combineReducers<IDashboardPack>({
     if (action.type === ActionConstants.SET_DASHBOARD_LOADING) {
       return action.payload;
     }
-    if (
-      action.type === ActionConstants.DASHBOARD_ERROR_CODE ||
-      action.type === ActionConstants.SET_DASHBOARD_DATA
-    ) {
+    if (action.type === ActionConstants.DASHBOARD_ERROR_CODE || action.type === ActionConstants.SET_DASHBOARD_DATA) {
       return false;
     }
 
@@ -140,10 +161,7 @@ const dashboardPack = combineReducers<IDashboardPack>({
     if (action.type === ActionConstants.DASHBOARD_ERROR_CODE) {
       return action.payload;
     }
-    if (
-      action.type === ActionConstants.SET_DASHBOARD_LOADING ||
-      action.type === ActionConstants.SET_DASHBOARD_DATA
-    ) {
+    if (action.type === ActionConstants.SET_DASHBOARD_LOADING || action.type === ActionConstants.SET_DASHBOARD_DATA) {
       return null;
     }
     return state;

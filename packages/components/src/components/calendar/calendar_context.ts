@@ -1,5 +1,3 @@
-
-
 import { createContext } from 'react';
 import { Direction } from './constants';
 import { Id } from './interface';

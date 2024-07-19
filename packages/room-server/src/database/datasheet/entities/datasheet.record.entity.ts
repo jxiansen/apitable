@@ -1,5 +1,3 @@
-
-
 import { IRecordCellValue, IRecordMeta } from '@apitable/core';
 import { BaseEntity } from 'shared/entities/base.entity';
 import { Column, Entity } from 'typeorm';

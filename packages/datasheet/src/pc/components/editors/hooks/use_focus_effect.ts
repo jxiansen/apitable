@@ -1,5 +1,3 @@
-
-
 import { DependencyList, EffectCallback, useEffect } from 'react';
 import { usePlatform } from 'pc/hooks/use_platform';
 

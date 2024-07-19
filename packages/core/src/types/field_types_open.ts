@@ -1,5 +1,3 @@
-
-
 import type { IAttachmentValue } from './field_types';
 import { IWorkDocValue } from './field_types';
 
@@ -27,12 +25,12 @@ export interface ILinkFieldOpenValue {
   /**
    * record's ID
    */
-  recordId: string,
+  recordId: string;
 
   /**
    * record's title
    */
-  title: string
+  title: string;
 }
 
 export interface IAttachmentFieldOpenValue extends IAttachmentValue {
@@ -47,8 +45,15 @@ export interface IAttachmentFieldOpenValue extends IAttachmentValue {
 }
 
 export type BasicOpenValueTypeBase =
-  string | number | boolean | IMemberFieldOpenValue | ISelectFieldBaseOpenValue | ISelectFieldBaseOpenValue[] | ILinkFieldOpenValue[] |
-  IAttachmentFieldOpenValue[] | IWorkDocValue[];
+  | string
+  | number
+  | boolean
+  | IMemberFieldOpenValue
+  | ISelectFieldBaseOpenValue
+  | ISelectFieldBaseOpenValue[]
+  | ILinkFieldOpenValue[]
+  | IAttachmentFieldOpenValue[]
+  | IWorkDocValue[];
 
 export type ILookUpOpenValue = BasicOpenValueTypeBase[];
 

@@ -1,5 +1,3 @@
-
-
 export interface IAssetDTO {
   mimeType: string;
   token: string;

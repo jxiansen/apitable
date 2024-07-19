@@ -1,5 +1,3 @@
-
-
 import { useCreation } from 'ahooks';
 import { IFieldMap, ISnapshot, IViewRow, Selectors } from '@apitable/core';
 import { Edge } from '@apitable/react-flow';

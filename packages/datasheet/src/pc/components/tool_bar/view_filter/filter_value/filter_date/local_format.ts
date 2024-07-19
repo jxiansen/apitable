@@ -1,5 +1,3 @@
-
-
 // import { PickerLocale } from 'antd/es/date-picker/generatePicker';
 import deDE from 'antd/es/date-picker/locale/de_DE';
 import esES from 'antd/es/date-picker/locale/es_ES';

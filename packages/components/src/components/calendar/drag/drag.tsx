@@ -1,12 +1,10 @@
-
-
 import React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 import { TYPE } from '../constants';
 import { IDrag } from '../interface';
 
 export const Drag = ({ children, id, task }: IDrag) => {
-  const [{ opacity }, drag] = useDrag(() => ({ 
+  const [{ opacity }, drag] = useDrag(() => ({
     type: TYPE,
     item: { id, task },
     collect: (monitor: DragSourceMonitor) => ({

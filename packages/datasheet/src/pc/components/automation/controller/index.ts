@@ -9,16 +9,18 @@ import { automationStateAtom, loadableFormList } from './atoms';
 
 export * from './atoms';
 
-export const getResourceAutomationDetailIntegrated = async (resourceId: string, robotId: string,
+export const getResourceAutomationDetailIntegrated = async (
+  resourceId: string,
+  robotId: string,
   options: {
-                                                       shareId?: string
-                                                     }
+    shareId?: string;
+  },
 ): Promise<IAutomationRobotDetailItem> => {
   const resp = await getResourceAutomationDetail(resourceId, robotId, options);
   return {
     ...resp,
     triggers: resp.triggers,
-    actions: getActionList(resp.actions)
+    actions: getActionList(resp.actions),
   };
 };
 
@@ -26,55 +28,54 @@ export const useAutomationController = () => {
   const [state, setAutomationAtom] = useAtom(automationStateAtom);
 
   const { shareInfo } = useContext(ShareContext);
-  return useMemo(() => (
-    {
+  return useMemo(
+    () => ({
       state: {},
       api: {
         refreshItem: async () => {
           if (state?.resourceId && state?.currentRobotId) {
             const itemDetail = await getResourceAutomationDetailIntegrated(state?.resourceId, state?.currentRobotId, {
-              shareId: shareInfo?.shareId
+              shareId: shareInfo?.shareId,
             });
-            setAutomationAtom(draft => produce(draft, state => {
-              if (state) {
-                state.robot = itemDetail;
-              }
-            }));
+            setAutomationAtom((draft) =>
+              produce(draft, (state) => {
+                if (state) {
+                  state.robot = itemDetail;
+                }
+              }),
+            );
           }
         },
-        refresh: async (
-          data: {
-                        resourceId: string;
-                        robotId: string;
-                    }
-        ) => {
+        refresh: async (data: { resourceId: string; robotId: string }) => {
           if (!state?.resourceId || !state?.currentRobotId) {
             return;
           }
           if (data?.resourceId && data?.robotId) {
             const itemDetail = await getResourceAutomationDetailIntegrated(data?.resourceId, data?.robotId, {
-              shareId: shareInfo?.shareId
+              shareId: shareInfo?.shareId,
             });
-            setAutomationAtom(state => produce(state, draft => {
-              if (draft) {
-                draft.robot = itemDetail;
-              }
-            }));
+            setAutomationAtom((state) =>
+              produce(state, (draft) => {
+                if (draft) {
+                  draft.robot = itemDetail;
+                }
+              }),
+            );
           }
-        }
-      }
-    }
-  ), [setAutomationAtom, shareInfo?.shareId, state?.currentRobotId, state?.resourceId]);
-
+        },
+      },
+    }),
+    [setAutomationAtom, shareInfo?.shareId, state?.currentRobotId, state?.resourceId],
+  );
 };
 export const useResourceFormList = () => {
   const formList = useAtomValue(loadableFormList);
-  return useMemo(() => (
-    {
+  return useMemo(
+    () => ({
       state: {
         formList: formList?.data ?? [],
       },
-    }
-  ), [formList]);
-
+    }),
+    [formList],
+  );
 };

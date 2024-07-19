@@ -1,5 +1,3 @@
-
-
 import { FuncModalBase } from './func_modal_base';
 import { IModalFuncProps } from './modal.interface';
 

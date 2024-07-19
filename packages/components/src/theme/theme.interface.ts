@@ -1,5 +1,3 @@
-
-
 import { ILightOrDarkThemeColors } from 'colors';
 
 export interface IPalette {
@@ -31,7 +29,7 @@ export interface IPalette {
     fifth: string;
     disabled: string;
     hint: string;
-  }
+  };
   // Text background contrast
   contrastThreshold: number;
   background: {
@@ -46,7 +44,7 @@ export interface IPalette {
     activeItem: string;
     border: string;
     scrollTip?: string;
-  }
+  };
   action: {
     active: string;
     activatedOpacity: number;
@@ -58,7 +56,7 @@ export interface IPalette {
     disabledOpacity: number;
     focus: string;
     focusOpacity: number;
-  }
+  };
 }
 
 export interface ITheme {
@@ -68,15 +66,15 @@ export interface ITheme {
   effect?: {
     shadows: {
       [key: string]: string;
-    },
+    };
     blur: {
       [key: string]: string;
-    }
+    };
   };
   zIndex?: {};
 }
 
 export enum ThemeName {
   Light = 'light',
-  Dark = 'dark'
+  Dark = 'dark',
 }

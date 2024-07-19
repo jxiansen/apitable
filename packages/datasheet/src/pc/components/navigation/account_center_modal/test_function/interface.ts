@@ -1,5 +1,3 @@
-
-
 export enum ApplicantType {
   USER_TYPE, // User level in effect
   SPACE_TYPE, // Space level in effect

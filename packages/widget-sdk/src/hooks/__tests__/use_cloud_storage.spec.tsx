@@ -9,7 +9,7 @@ test('use cloud storage should return a correct result', () => {
   const cmdExecuteMock = jest.spyOn(utils, 'cmdExecute').mockImplementation(() => {
     return new Promise((resolve) => {
       resolve({
-        result: ExecuteResult.Success
+        result: ExecuteResult.Success,
       } as any);
     });
   });

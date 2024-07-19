@@ -3,4 +3,3 @@ export interface IArchivedRecordsProps {
   showLabel?: boolean;
   isHide?: boolean;
 }
-

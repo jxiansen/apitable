@@ -1,5 +1,3 @@
-
-
 import { Checkbox, Radio } from 'antd';
 import { CheckboxValueType } from 'antd/es/checkbox/Group';
 import classnames from 'classnames';

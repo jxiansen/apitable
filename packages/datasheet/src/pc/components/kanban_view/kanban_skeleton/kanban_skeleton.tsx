@@ -1,5 +1,3 @@
-
-
 import { useThemeColors, Skeleton } from '@apitable/components';
 import styles from './styles.module.less';
 

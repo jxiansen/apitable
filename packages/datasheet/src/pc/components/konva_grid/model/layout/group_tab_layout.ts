@@ -1,5 +1,3 @@
-
-
 import { colors, ThemeName } from '@apitable/components';
 import { ILinearRow, RowHeightLevel, Strings, t, IField } from '@apitable/core';
 import { LockOutlined } from '@apitable/icons';

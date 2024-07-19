@@ -1,4 +1,3 @@
-
 import { UnitTeamService } from './unit.team.service';
 import { UnitTeamRepository } from '../repositories/unit.team.repository';
 import { UnitTeamBaseInfoDto } from '../dtos/unit.team.base.info.dto';
@@ -10,12 +9,9 @@ describe('UnitTeamServiceTest', () => {
   let service: UnitTeamService;
   let unitTeamRepository: UnitTeamRepository;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
-      providers: [
-        UnitTeamService,
-        UnitTeamRepository,
-      ],
+      providers: [UnitTeamService, UnitTeamRepository],
     }).compile();
     unitTeamRepository = moduleFixture.get<UnitTeamRepository>(UnitTeamRepository);
     service = moduleFixture.get<UnitTeamService>(UnitTeamService);
@@ -25,29 +21,29 @@ describe('UnitTeamServiceTest', () => {
       isDeleted: false,
     };
 
-    jest.spyOn(unitTeamRepository, 'selectTeamsByIdsIncludeDeleted')
-      .mockImplementation((teamIds: number[]): Promise<UnitTeamBaseInfoDto[]> => {
-        if(teamIds?.length === 1 && `${teamIds[0]}` == unitTeam.id) {
-          return Promise.resolve([unitTeam]);
-        }
-        return Promise.resolve([]);
-      });
+    jest.spyOn(unitTeamRepository, 'selectTeamsByIdsIncludeDeleted').mockImplementation((teamIds: number[]): Promise<UnitTeamBaseInfoDto[]> => {
+      if (teamIds?.length === 1 && `${teamIds[0]}` == unitTeam.id) {
+        return Promise.resolve([unitTeam]);
+      }
+      return Promise.resolve([]);
+    });
 
-    jest.spyOn(unitTeamRepository, 'selectIdBySpaceIdAndName')
+    jest
+      .spyOn(unitTeamRepository, 'selectIdBySpaceIdAndName')
       .mockImplementation((spaceId: string, teamName: string): Promise<{ id: string } | undefined> => {
-        if(spaceId === 'spaceId' && teamName === 'teamName') {
+        if (spaceId === 'spaceId' && teamName === 'teamName') {
           return Promise.resolve({ id: '2023' });
         }
         return Promise.resolve(undefined);
       });
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
   describe('getTeamsByIdsIncludeDeleted', () => {
-    it('should be return team base infos by team ids', async() => {
+    it('should be return team base infos by team ids', async () => {
       const teamIdToTeamInfo = await service.getTeamsByIdsIncludeDeleted([2023]);
       expect(teamIdToTeamInfo['2023']?.name).toEqual('teamName');
       expect(teamIdToTeamInfo['2023']?.uuid).toEqual('');
@@ -58,27 +54,27 @@ describe('UnitTeamServiceTest', () => {
   });
 
   describe('getIdBySpaceIdAndName', () => {
-    it('return team id by space id and team name', async() => {
+    it('return team id by space id and team name', async () => {
       const teamId = await service.getIdBySpaceIdAndName('spaceId', 'teamName');
       expect(teamId).toEqual('2023');
     });
 
-    it('return null by space id and no exist team name', async() => {
+    it('return null by space id and no exist team name', async () => {
       const teamId = await service.getIdBySpaceIdAndName('spaceId', 'noExistTeamName');
       expect(teamId).toEqual(null);
-    } );
+    });
   });
 
   describe('getTeamIdSubTeamIdsMapBySpaceIdAndParentIds', () => {
-    it('should return an empty map and sub team list when there are no teams', async() => {
+    it('should return an empty map and sub team list when there are no teams', async () => {
       const spaceId = 'space1';
       const parentTeamIds: string[] = [];
       jest.spyOn(unitTeamRepository, 'selectTeamsBySpaceId').mockResolvedValue([]);
       const result = await service.getTeamIdSubTeamIdsMapBySpaceIdAndParentIds(spaceId, parentTeamIds);
       expect(result).toEqual({ teamIdSubTeamIdsMap: {}, subTeams: [] });
     });
-  
-    it('should return team ID - sub team IDs map and sub team list', async() => {
+
+    it('should return team ID - sub team IDs map and sub team list', async () => {
       const spaceId = 'space1';
       const parentTeamIds = ['team1', 'team2'];
       const unitTeams = [
@@ -106,7 +102,7 @@ describe('UnitTeamServiceTest', () => {
       const result = service.getSubTeamIdsByParentSubRefMap(parentSubRefMap, unitTeam);
       expect(result).toEqual([]);
     });
-  
+
     it('should return direct sub team IDs', () => {
       const parentSubRefMap: { [parentTeamId: string]: string[] } = {
         team1: ['team2', 'team3'],
@@ -115,7 +111,7 @@ describe('UnitTeamServiceTest', () => {
       const result = service.getSubTeamIdsByParentSubRefMap(parentSubRefMap, unitTeam);
       expect(result).toEqual(['team2', 'team3']);
     });
-  
+
     it('should return all sub team IDs recursively', () => {
       const parentSubRefMap: { [parentTeamId: string]: string[] } = {
         team1: ['team2'],

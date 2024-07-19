@@ -1,5 +1,3 @@
-
-
 import { ArgsProps } from 'antd/lib/notification';
 import React from 'react';
 import { Strings, t } from '@apitable/core';

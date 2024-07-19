@@ -1,5 +1,3 @@
-
-
 import { Object } from 'ts-toolbelt';
 import { ThemeName } from '@apitable/components';
 import {
@@ -17,8 +15,8 @@ declare module 'react-redux' {
   interface DefaultRootState extends IReduxState {}
 
   export function useSelector<TState = DefaultRootState, TSelected = unknown>(
-      selector: (state: TState, props?: any) => TSelected,
-      equalityFn?: (left: TSelected, right: TSelected) => boolean,
+    selector: (state: TState, props?: any) => TSelected,
+    equalityFn?: (left: TSelected, right: TSelected) => boolean,
   ): TSelected;
 }
 const envVars = getEnvVars();

@@ -1,5 +1,3 @@
-
-
 export function ArrayFieldTitle({ TitleField, idSchema, title, required }: any) {
   if (!title) {
     return null;

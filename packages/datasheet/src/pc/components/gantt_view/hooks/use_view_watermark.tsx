@@ -1,5 +1,3 @@
-
-
 import { ReactNode, useContext, useMemo, useRef } from 'react';
 import { autoSizerCanvas, Text } from 'pc/components/konva_components';
 import { KonvaGridContext } from 'pc/components/konva_grid';

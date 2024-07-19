@@ -37,7 +37,7 @@ export const rootReducers = combineReducers<IWidgetState>({
       case SET_USER_INFO: {
         state = {
           ...action.payload,
-          info: action.payload
+          info: action.payload,
         };
         return state;
       }

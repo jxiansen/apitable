@@ -1,5 +1,3 @@
-
-
 import { EmojisConfig, integrateCdnHost } from '@apitable/core';
 
 export const emojiUrl = (icon: string) => {

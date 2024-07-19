@@ -1,5 +1,3 @@
-
-
 import { AutomationRobotEntity } from '../entities/automation.robot.entity';
 
 export type ResourceRobotDto = Pick<AutomationRobotEntity, 'robotId' | 'resourceId'>;

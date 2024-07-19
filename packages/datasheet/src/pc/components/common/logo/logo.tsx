@@ -1,5 +1,3 @@
-
-
 import classnames from 'classnames';
 import { ThemeName, useThemeColors } from '@apitable/components';
 import { getLanguage, integrateCdnHost } from '@apitable/core';
@@ -31,7 +29,7 @@ interface ILogoProps {
   text?: boolean;
   size?: 'mini' | 'small' | 'large' | number;
   theme?: ThemeName;
-  type?:'LOGO'|'SHARE_LOGO'
+  type?: 'LOGO' | 'SHARE_LOGO';
 }
 
 export const LogoText: React.FunctionComponent<React.PropsWithChildren<React.SVGProps<SVGSVGElement>>> = {
@@ -42,12 +40,15 @@ export const LogoText: React.FunctionComponent<React.PropsWithChildren<React.SVG
 export const Logo: React.FC<React.PropsWithChildren<ILogoProps>> = (props) => {
   const colors = useThemeColors();
 
-  const { size = 'small', text = true, className, theme = ThemeName.Light, type='LOGO' } = props;
+  const { size = 'small', text = true, className, theme = ThemeName.Light, type = 'LOGO' } = props;
   const isLightTheme = theme === ThemeName.Light;
-  const logoSize = typeof size === 'number' ? {
-    logoSize: size,
-    logoTextHeight: size,
-  } : LogoSize[size];
+  const logoSize =
+    typeof size === 'number'
+      ? {
+          logoSize: size,
+          logoTextHeight: size,
+        }
+      : LogoSize[size];
 
   const envVars = getEnvVariables();
 
@@ -55,7 +56,7 @@ export const Logo: React.FC<React.PropsWithChildren<ILogoProps>> = (props) => {
     return (
       <img
         alt="logo"
-        src={integrateCdnHost(envVars[type]||envVars.LOGO)}
+        src={integrateCdnHost(envVars[type] || envVars.LOGO)}
         style={{ display: 'block', height: `${logoSize.logoSize}px` }}
         width={logoSize.logoSize}
       />

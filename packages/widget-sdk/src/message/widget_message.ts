@@ -9,7 +9,7 @@ let seed = 0;
 
 const getMessageId = () => {
   const id = seed;
-  seed ++;
+  seed++;
   return `widget-message_${Date.now()}_${id}`;
 };
 
@@ -28,20 +28,20 @@ class WidgetMessage {
   }
 
   /**
-   * Messages in the widget, will only communicate with the main thread and will only accept messages from the main thread, 
+   * Messages in the widget, will only communicate with the main thread and will only accept messages from the main thread,
    * so simplify the parameters here.
-   * @param type 
-   * @param callback 
+   * @param type
+   * @param callback
    */
   private on(type: MessageType, callback: (data: IResponse<any>) => void) {
     return this.messageBridge.on(type, callback, this.origin, this.target);
   }
 
   /**
-   * Messages in the widget, will only communicate with the main thread and 
+   * Messages in the widget, will only communicate with the main thread and
    * will only accept messages from the main thread, so simplify the parameters here.
-   * @param type 
-   * @param data 
+   * @param type
+   * @param data
    */
   private async emit(type: MessageType, data: IResponse<any>, messageId?: string, allowTimeout: boolean = false) {
     return await this.messageBridge.emit(type, { ...data, origin: this.origin }, this.target, messageId, allowTimeout);
@@ -49,12 +49,12 @@ class WidgetMessage {
 
   /**
    * Listening for connections.
-   * @param callback 
+   * @param callback
    */
   connectWidget(callback: () => void) {
     (this.messageBridge as PostMessage).addWindow(this.target, {
       window: window.parent,
-      origin: window.parent.origin
+      origin: window.parent.origin,
     });
     this.emit(MessageType.WIDGET_CONNECT, { success: true });
     this.connect = ConnectStatus.SYN_SENT;
@@ -77,7 +77,7 @@ class WidgetMessage {
 
   /**
    * Listening for config update messages from the main application.
-   * @param callback 
+   * @param callback
    */
   onSyncWidgetConfig(callback: (res: IWidgetConfigIframe) => void) {
     this.on(MessageType.MAIN_SYNC_WIDGET_CONFIG, interceptor(callback));
@@ -85,7 +85,7 @@ class WidgetMessage {
 
   /**
    * Refresh widget.
-   * @param callback 
+   * @param callback
    */
   onRefreshWidget(callback: (res: string) => void) {
     this.on(MessageType.MAIN_REFRESH_WIDGET, interceptor(callback));
@@ -93,7 +93,7 @@ class WidgetMessage {
 
   /**
    * Listening from autonomous application action.
-   * @param callback 
+   * @param callback
    */
   onSyncAction(callback: (res: AnyAction, messageId?: string) => void) {
     this.on(MessageType.MAIN_SYNC_ACTION, interceptor(callback));
@@ -101,7 +101,7 @@ class WidgetMessage {
 
   /**
    * Listening to the selection results from the autonomous application RecordPicker.
-   * @param callback 
+   * @param callback
    */
   onSyncRecordPickerResult(callback?: (res: string[], messageId?: string) => void) {
     this.on(MessageType.MAIN_SYNC_RECORD_PICKER_RESULT, interceptor(callback));
@@ -109,7 +109,7 @@ class WidgetMessage {
 
   /**
    * Synchronize config data to the main application.
-   * @param config 
+   * @param config
    */
   syncWidgetConfig(config: IWidgetConfigIframePartial) {
     this.emit(MessageType.WIDGET_SYNC_WIDGET_CONFIG, { success: true, data: config });
@@ -117,7 +117,7 @@ class WidgetMessage {
 
   /**
    * Send cmd to main application.
-   * @param cmdOptions 
+   * @param cmdOptions
    */
   syncCmd(cmdOptions: ICollaCommandOptions): Promise<ICollaCommandExecuteResult<any>> {
     this.emit(MessageType.WIDGET_SYNC_COMMAND, { success: true, data: cmdOptions });
@@ -134,7 +134,7 @@ class WidgetMessage {
 
   /**
    * Trigger expandRecord.
-   * @param expandRecordParams 
+   * @param expandRecordParams
    */
   expandRecord(expandRecordParams: IExpandRecordProps) {
     this.emit(MessageType.WIDGET_EXPAND_RECORD, { success: true, data: expandRecordParams });
@@ -150,7 +150,7 @@ class WidgetMessage {
 
   /**
    * Mouse in and mouse out widgets iframe.
-   * @param type 
+   * @param type
    */
   mouseListener(type: MouseListenerType) {
     this.emit(MessageType.WIDGET_MOUSE_EVENT, { success: true, data: type });
@@ -162,7 +162,7 @@ class WidgetMessage {
   expandDevConfig() {
     this.emit(MessageType.WIDGET_EXPAND_DEV_CONFIG, { success: true });
   }
-  
+
   /**
    * Loading other datasheet data.
    * @param datasheetId
@@ -174,7 +174,7 @@ class WidgetMessage {
 
   /**
    * Synchronizing View Reference Count Subscription Data.
-   * @param subscribeViews 
+   * @param subscribeViews
    */
   syncWidgetSubscribeView(subscribeViews: ISubscribeView[]) {
     this.emit(MessageType.WIDGET_SUBSCRIBE_CHANGE, { success: true, data: subscribeViews });
@@ -183,7 +183,6 @@ class WidgetMessage {
   removeListenEvent(type: MessageType) {
     this.messageBridge.removeListenEvent(type);
   }
-
 }
 
 /**
@@ -192,13 +191,12 @@ class WidgetMessage {
 export let widgetMessage: WidgetMessage;
 
 /**
- * Initialize the widget communication class, 
+ * Initialize the widget communication class,
  * you need to pass in the widgetId identifier and the current widget rendering mode.
- * @param widgetId 
- * @param sandbox 
+ * @param widgetId
+ * @param sandbox
  */
 export const initWidgetMessage = (widgetId: string) => {
   widgetMessage = new WidgetMessage(widgetId);
   return widgetMessage;
 };
-

@@ -1,19 +1,16 @@
-
-
 import { AnyAction, Store } from 'redux';
 // @ts-ignore
 import { ISubscription } from '../modules/enterprise';
 import { IReduxState } from '../exports/store/interfaces';
 
 export class SubscribeUsageCheck {
-
-  constructor(private store: Store<IReduxState, AnyAction>) { }
+  constructor(private store: Store<IReduxState, AnyAction>) {}
   /**
-    * @description According to functionName , check whether the current value exceeds the limit of the specification
-    * @param {keyof ISubscription} functionName
-    * @param usage The current usage, which can be omitted for subscription functions
-    * @returns {boolean} true - usage is within limit; false - usage exceeds limit
-    */
+   * @description According to functionName , check whether the current value exceeds the limit of the specification
+   * @param {keyof ISubscription} functionName
+   * @param usage The current usage, which can be omitted for subscription functions
+   * @returns {boolean} true - usage is within limit; false - usage exceeds limit
+   */
   underUsageLimit(functionName: keyof ISubscription, usage?: any) {
     const state = this.store.getState();
     const subscription = state.billing?.subscription;
@@ -37,4 +34,3 @@ export class SubscribeUsageCheck {
     return Boolean(subscription[functionName]);
   }
 }
-

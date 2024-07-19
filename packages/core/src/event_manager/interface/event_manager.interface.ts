@@ -1,5 +1,3 @@
-
-
 import { EventRealTypeEnums, EventSourceTypeEnums } from 'event_manager/enum';
 import { AnyObject, IEventInstance, IOPEvent } from './event.interface';
 
@@ -12,7 +10,7 @@ export interface IEventListenerMap {
 
 export interface IEventListenerOptions {
   // event source
-  sourceType?: EventSourceTypeEnums,
+  sourceType?: EventSourceTypeEnums;
   // the authenticity of the event
   realType?: EventRealTypeEnums;
   // The change of each event will be applied to the corresponding state tree,

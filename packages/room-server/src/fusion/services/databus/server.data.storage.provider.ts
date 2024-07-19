@@ -1,5 +1,3 @@
-
-
 import {
   ApiTipConstant,
   databus,
@@ -36,7 +34,10 @@ export class ServerDataStorageProvider implements databus.IDataStorageProvider {
   private readonly changesetSourceService: DatasheetChangesetSourceService;
   private readonly loadOptions: IServerDataLoadOptions;
 
-  constructor(options: IServerDataStorageProviderOptions, private readonly logger: Logger) {
+  constructor(
+    options: IServerDataStorageProviderOptions,
+    private readonly logger: Logger,
+  ) {
     const { datasheetService, dashboardService, redisService, otService, changesetSourceService, loadOptions } = options;
     this.datasheetService = datasheetService;
     this.dashboardService = dashboardService;
@@ -152,7 +153,7 @@ export class ServerDataStorageProvider implements databus.IDataStorageProvider {
       }
     }
     if (results) {
-      results.forEach(cs => {
+      results.forEach((cs) => {
         store.dispatch(StoreActions.applyJOTOperations(cs.operations, cs.resourceType, cs.resourceId));
       });
     }
@@ -164,7 +165,7 @@ export class ServerDataStorageProvider implements databus.IDataStorageProvider {
     if (!changeSets.length) {
       return;
     }
-    const thisResourceChangeSet = changeSets.find(cs => cs.resourceId === dstId);
+    const thisResourceChangeSet = changeSets.find((cs) => cs.resourceId === dstId);
     if (updateFieldOperations && updateFieldOperations.length) {
       if (!thisResourceChangeSet) {
         // Why can't I find resources?
@@ -288,5 +289,4 @@ export interface IServerSaveOptions extends databus.ISaveOptions {
   auth: IAuthHeader;
 }
 
-export interface IServerSaveOpsOptions extends IServerSaveOptions, databus.ISaveOpsOptions {
-}
+export interface IServerSaveOpsOptions extends IServerSaveOptions, databus.ISaveOpsOptions {}

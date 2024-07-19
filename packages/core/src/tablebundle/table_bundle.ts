@@ -53,13 +53,16 @@ export class TableBundle {
         sheetData[key + '.extras.json'] = fflate.strToU8(value.extras);
       }
     });
-    const zipped = fflate.zipSync({
-      data: sheetData,
-      'manifest.json': fflate.strToU8(JSON.stringify(this.manifest))
-    }, {
-      level: 1,
-      mtime: new Date()
-    });
+    const zipped = fflate.zipSync(
+      {
+        data: sheetData,
+        'manifest.json': fflate.strToU8(JSON.stringify(this.manifest)),
+      },
+      {
+        level: 1,
+        mtime: new Date(),
+      }
+    );
     this._saver.save(zipped, path);
   }
 
@@ -98,7 +101,6 @@ export class TableBundle {
       this._nodeMap.set(nodeId, dataSheet);
     }
   }
-
 }
 
 export interface ITableBundleInitOptions {
@@ -106,9 +108,9 @@ export interface ITableBundleInitOptions {
   saver: ITableBundleSaver;
 }
 
-export interface ITableBundleLoader{
-    load(path: string): Buffer;
+export interface ITableBundleLoader {
+  load(path: string): Buffer;
 }
-export interface ITableBundleSaver{
-    save(bundle: Uint8Array, path: string): void;
+export interface ITableBundleSaver {
+  save(bundle: Uint8Array, path: string): void;
 }

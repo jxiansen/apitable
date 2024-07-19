@@ -1,5 +1,3 @@
-
-
 import { getCustomConfig } from './env';
 import { Strings, t } from '../exports/i18n';
 

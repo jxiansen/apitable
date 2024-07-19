@@ -1,5 +1,3 @@
-
-
 import { Box, ThemeName, Typography, useTheme, useThemeColors } from '@apitable/components';
 import { integrateCdnHost } from '@apitable/core';
 import { EmailfeedbackOutlined, LinkedinOutlined, TwitterOutlined } from '@apitable/icons';
@@ -10,7 +8,7 @@ import { ActionType } from './pc_home';
 import styles from './style.module.less';
 
 interface IHomeWrapper {
-  action?: ActionType
+  action?: ActionType;
 }
 
 export const HomeWrapper: React.FC<React.PropsWithChildren<IHomeWrapper>> = ({ children, action }) => {
@@ -56,7 +54,7 @@ export const HomeWrapper: React.FC<React.PropsWithChildren<IHomeWrapper>> = ({ c
 
   let logo = getEnvVariables().IS_AITABLE ? getEnvVariables().LOGO : getEnvVariables().LOGIN_LOGO!;
   let text = getEnvVariables().LOGO_TEXT_DARK;
-  if (useTheme().palette.type === ThemeName.Light ) {
+  if (useTheme().palette.type === ThemeName.Light) {
     if (!getEnvVariables().IS_AITABLE) {
       logo = getEnvVariables().LOGIN_LOGO_LIGHT!;
     }

@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import classNames from 'classnames';
 import { ShortcutActionManager, ShortcutActionName } from 'modules/shared/shortcut_key';

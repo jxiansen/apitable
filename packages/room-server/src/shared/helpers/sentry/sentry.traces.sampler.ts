@@ -1,5 +1,3 @@
-
-
 import { SamplingContext } from '@sentry/types';
 import { find } from 'lodash';
 
@@ -12,10 +10,12 @@ export class SentryTraces {
 
   constructor(defaultSampleRate: number) {
     // initialize rules
-    this._nameSamplerConfig = [{
-      name: /^GET \/actuator\/health$/,
-      rate: 0
-    }];
+    this._nameSamplerConfig = [
+      {
+        name: /^GET \/actuator\/health$/,
+        rate: 0,
+      },
+    ];
     this._defaultSampleRate = defaultSampleRate;
   }
 
@@ -30,11 +30,11 @@ export class SentryTraces {
   public tracesSampler() {
     const nameSamplerConfig = this.nameSamplerConfig;
     const defaultSampleRate = this.defaultSampleRate;
-    return function(samplingContext: SamplingContext): number | boolean {
+    return function (samplingContext: SamplingContext): number | boolean {
       const { name: transactionName } = samplingContext.transactionContext;
 
       // select the first matching rule
-      const match = find(nameSamplerConfig, pre => {
+      const match = find(nameSamplerConfig, (pre) => {
         if (pre.name instanceof RegExp) {
           return pre.name.test(transactionName);
         }
@@ -47,9 +47,9 @@ export class SentryTraces {
 }
 
 interface ISampler {
-  rate: number | boolean
+  rate: number | boolean;
 }
 
 interface ITransactionNameSampler extends ISampler {
-  name: string | RegExp
+  name: string | RegExp;
 }

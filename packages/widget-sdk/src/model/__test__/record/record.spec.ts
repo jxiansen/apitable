@@ -18,7 +18,7 @@ describe('record modal should return the correct result', () => {
   afterAll(() => {
     cmdExecuteMock.mockRestore();
   });
-  test('test other accessor properties', async() => {
+  test('test other accessor properties', async () => {
     const primaryFieldId = getPrimaryFieldId(mockWidgetSdkData.widgetSdkData as any, DEFAULT_DATASHEET_ID)!;
     const recordId = await datasheet.addRecord({ [primaryFieldId]: '1' });
     const record = new Record(datasheet.id!, context, recordId);

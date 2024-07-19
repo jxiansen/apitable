@@ -1,5 +1,3 @@
-
-
 import { t, Strings } from '@apitable/core';
 
 // eslint-disable-next-line import/no-anonymous-default-export

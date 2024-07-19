@@ -1,5 +1,3 @@
-
-
 import { useSize } from 'ahooks';
 import { ScreenWidth } from '@apitable/core';
 

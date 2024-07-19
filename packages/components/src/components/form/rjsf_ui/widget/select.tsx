@@ -1,5 +1,3 @@
-
-
 import { WidgetProps } from '@rjsf/core';
 import React from 'react';
 import styled from 'styled-components';
@@ -12,12 +10,10 @@ const ErrorText = styled.div.attrs(applyDefaultTheme)`
   color: ${(props) => props.theme.color.errorColor};
 `;
 
-export const SelectWidget = ({
-  options: { enumOptions }, value, onChange, rawErrors, placeholder
-}: WidgetProps) => {
+export const SelectWidget = ({ options: { enumOptions }, value, onChange, rawErrors, placeholder }: WidgetProps) => {
   // const hasError = Boolean(rawErrors?.length);
   const style = { width: '100%' };
-      // hasError ? { border: '1px solid red', width: '100%' } :
+  // hasError ? { border: '1px solid red', width: '100%' } :
 
   return (
     <>
@@ -31,9 +27,7 @@ export const SelectWidget = ({
         dropdownMatchSelectWidth
         triggerStyle={style}
       />
-      {
-        rawErrors?.map(error => <ErrorText>{error}</ErrorText>)
-      }
+      {rawErrors?.map((error) => <ErrorText>{error}</ErrorText>)}
     </>
   );
 };

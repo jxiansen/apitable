@@ -1,5 +1,3 @@
-
-
 import { ICollaCommandDef, ILinkedActions } from 'command_manager/command';
 import { ExecuteResult } from 'command_manager/types';
 import { IJOTAction } from 'engine';
@@ -36,7 +34,7 @@ export interface IAddFieldOptions {
 export interface IAddFieldsOptions {
   cmd: CollaCommandName.AddFields;
   data: IAddFieldOptions[];
-  resourceType?: ResourceType,
+  resourceType?: ResourceType;
   datasheetId?: string;
   resourceId?: string;
   copyCell?: boolean;
@@ -66,7 +64,7 @@ export const addFields: ICollaCommandDef<IAddFieldsOptions, IAddFieldResult> = {
       throw new Error(
         t(Strings.columns_count_limit_tips, {
           column_limit: maxFieldCountPerSheet,
-        }),
+        })
       );
     }
     const newFieldIds = getNewIds(IDPrefix.Field, data.length, Object.keys(snapshot.meta.fieldMap));

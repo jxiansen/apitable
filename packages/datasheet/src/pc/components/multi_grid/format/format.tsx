@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { Dispatch, SetStateAction } from 'react';
 import { FieldType, IDateTimeBaseField, IField } from '@apitable/core';
@@ -26,8 +25,8 @@ interface IFieldFormatProps {
   hideOperateBox: () => void;
   datasheetId?: string;
   optionErrMsg?: object;
-  onUpdate: (field: IField) => void
-  onCreate?: (field: IField) => void
+  onUpdate: (field: IField) => void;
+  onCreate?: (field: IField) => void;
 }
 
 export const FieldFormat: React.FC<React.PropsWithChildren<IFieldFormatProps>> = (props) => {
@@ -89,11 +88,16 @@ export const FieldFormat: React.FC<React.PropsWithChildren<IFieldFormatProps>> =
       return <FormatCascader currentField={currentField} setCurrentField={setCurrentField} optionErrMsg={optionErrMsg as IFieldCascaderErrors} />;
     case FieldType.Button:
       // @ts-ignore
-      return <FormatButton
-        onCreate={onCreate}
-        // @ts-ignore
-        currentField={currentField} setCurrentField={setCurrentField} datasheetId={datasheetId} onUpdate={onUpdate
-        }/>;
+      return (
+        <FormatButton
+          onCreate={onCreate}
+          // @ts-ignore
+          currentField={currentField}
+          setCurrentField={setCurrentField}
+          datasheetId={datasheetId}
+          onUpdate={onUpdate}
+        />
+      );
     default:
       return <></>;
   }

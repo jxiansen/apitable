@@ -1,5 +1,3 @@
-
-
 import { IResourceRevision } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { ServerException } from '../../../shared/exception';
@@ -8,9 +6,7 @@ import { WidgetRepository } from '../repositories/widget.repository';
 
 @Injectable()
 export class WidgetService {
-  constructor(
-    private readonly widgetRepository: WidgetRepository,
-  ) { }
+  constructor(private readonly widgetRepository: WidgetRepository) {}
 
   async getNodeIdByWidgetId(widgetId: string): Promise<string> {
     const rawData = await this.widgetRepository.selectNodeIdByWidgetId(widgetId);
@@ -34,11 +30,10 @@ export class WidgetService {
 
   async getDelWidgetIdsByNodeId(nodeId: string): Promise<string[]> {
     const raws = await this.widgetRepository.selectWidgetIdsByNodeIdAndIsDeleted(nodeId, true);
-    return raws.map(item => item.widgetId);
+    return raws.map((item) => item.widgetId);
   }
 
   async getRevisionByWdtIds(widgetIds: string[]): Promise<IResourceRevision[]> {
     return await this.widgetRepository.getRevisionByWdtIds(widgetIds);
   }
 }
-

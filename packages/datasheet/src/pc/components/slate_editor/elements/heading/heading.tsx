@@ -1,5 +1,3 @@
-
-
 import cx from 'classnames';
 import { IElement, IElementRenderProps } from '../../interface/element';
 import Decorate from '../element_decorate';

@@ -1,5 +1,3 @@
-
-
 import { NodeTypeEnum } from '../enums/node.enum';
 
 export interface IAPINode {
@@ -12,7 +10,7 @@ export interface IAPINode {
 }
 
 export interface IAPIFolderNode extends IAPINode {
-  children: IAPINode[]
+  children: IAPINode[];
 }
 
 export interface IAPINodeInfo {

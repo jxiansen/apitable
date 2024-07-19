@@ -1,5 +1,3 @@
-
-
 import { SET_TOOLBAR_MENU_CARD_OPEN } from '../../../shared/store/action_constants';
 import { ToolBarMenuCardOpenState } from '../../../shared/store/constants';
 

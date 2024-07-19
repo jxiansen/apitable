@@ -1,5 +1,3 @@
-
-
 import { Collapse, Row, Col } from 'antd';
 import classNames from 'classnames';
 import { FC } from 'react';

@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import uniqBy from 'lodash/uniqBy';
 import { Api, IUnitValue } from '@apitable/core';

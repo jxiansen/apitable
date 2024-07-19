@@ -1,5 +1,3 @@
-
-
 import { NotificationTypes } from 'shared/enums/request-types.enum';
 import { IBaseUserDto } from 'socket/dtos/user/base-user.dto';
 

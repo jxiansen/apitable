@@ -1,5 +1,3 @@
-
-
 import type { IButtonField, IMeta } from '@apitable/core';
 import { Body, Controller, Delete, Get, Headers, HttpStatus, Param, Post, Query, UseInterceptors } from '@nestjs/common';
 import { TriggerAutomationRO } from 'database/datasheet/ros/trigger.automation';

@@ -1,5 +1,3 @@
-
-
 import { useMount, useUnmount } from 'ahooks';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
@@ -49,7 +47,7 @@ const fieldSequence: FieldType[] = [
   FieldType.Email,
   FieldType.Cascader,
   FieldType.WorkDoc,
-  FieldType.Button
+  FieldType.Button,
 ];
 
 interface ITypeSelectItemProps extends ITypeSelect {

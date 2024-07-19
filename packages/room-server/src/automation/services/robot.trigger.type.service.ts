@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@nestjs/common';
 import { AutomationTriggerTypeRepository } from '../repositories/automation.trigger.type.repository';
 import { IServiceSlugTriggerTypeVo } from '../vos/service.slug.trigger.type.vo';
@@ -8,19 +6,17 @@ import { getTypeByItem } from '../utils';
 
 @Injectable()
 export class RobotTriggerTypeService {
-
   constructor(
     private readonly automationTriggerTypeRepository: AutomationTriggerTypeRepository,
     private readonly automationServiceRepository: AutomationServiceRepository,
-  ) {
-  }
+  ) {}
 
   public async getServiceSlugToTriggerTypeId(endpoints: string[], serviceSlug: string): Promise<IServiceSlugTriggerTypeVo> {
     const triggerTypeServiceRelDtos = await this.automationTriggerTypeRepository.getTriggerTypeServiceRelByEndPoints(endpoints);
     const triggerTypes: {
-      triggerTypeId: string,
-      endpoint: string,
-      serviceSlug: string,
+      triggerTypeId: string;
+      endpoint: string;
+      serviceSlug: string;
     }[] = [];
     for (const triggerTypeServiceRelDto of triggerTypeServiceRelDtos) {
       const number = await this.automationServiceRepository.countServiceByServiceIdAndSlug(triggerTypeServiceRelDto.serviceId, serviceSlug);
@@ -32,7 +28,7 @@ export class RobotTriggerTypeService {
         });
       }
     }
-    return triggerTypes.reduce((serviceSlugToTriggerTypeId, item)=> {
+    return triggerTypes.reduce((serviceSlugToTriggerTypeId, item) => {
       const triggerSlug = `${item.endpoint}@${item.serviceSlug}`;
       serviceSlugToTriggerTypeId[triggerSlug] = item.triggerTypeId;
       return serviceSlugToTriggerTypeId;
@@ -49,14 +45,14 @@ export class RobotTriggerTypeService {
     const triggerTypes = await this.automationTriggerTypeRepository.selectAllTriggerType();
 
     const serviceIds = new Set<string>();
-    triggerTypes.forEach(triggerType => serviceIds.add(triggerType.serviceId));
+    triggerTypes.forEach((triggerType) => serviceIds.add(triggerType.serviceId));
     const services = await this.automationServiceRepository.selectServiceByServiceIds([...serviceIds]);
     const serviceIdToServiceMap = services.reduce((acc, item) => {
       acc[item.serviceId] = item;
       return acc;
     }, {});
 
-    const triggerTypeDetails = triggerTypes.map(triggerType => {
+    const triggerTypeDetails = triggerTypes.map((triggerType) => {
       const service = serviceIdToServiceMap[triggerType.serviceId];
       return {
         ...triggerType,
@@ -69,7 +65,7 @@ export class RobotTriggerTypeService {
       };
     });
 
-    return triggerTypeDetails.map(triggerType => {
+    return triggerTypeDetails.map((triggerType) => {
       return getTypeByItem(triggerType, lang, 'trigger');
     });
   }

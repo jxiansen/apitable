@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, ConfigConstant } from '@apitable/core';
 import { ArgumentsHost, BadRequestException, Catch, ExceptionFilter, HttpStatus, Logger, NotFoundException } from '@nestjs/common';
 import * as Sentry from '@sentry/node';

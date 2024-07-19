@@ -1,5 +1,3 @@
-
-
 import { SelectValue } from 'antd/lib/select';
 import classNames from 'classnames';
 import { useCallback, useState } from 'react';
@@ -62,7 +60,7 @@ const MobileSelectBase: React.FC<React.PropsWithChildren<IMobileSelectProps>> = 
             {renderList
               ? renderList({ setVisible })
               : optionData?.length
-                ? optionData.map((item) => {
+              ? optionData.map((item) => {
                   const selectedVal = selectedValue || defaultValue;
                   const isChecked = item.value === selectedVal;
 
@@ -95,7 +93,7 @@ const MobileSelectBase: React.FC<React.PropsWithChildren<IMobileSelectProps>> = 
                     </div>
                   );
                 })
-                : t(Strings.no_option)}
+              : t(Strings.no_option)}
           </div>
         </Popup>
       )}

@@ -1,5 +1,3 @@
-
-
 import { useDebounceFn } from 'ahooks';
 import classNames from 'classnames';
 import { XYCoord } from 'dnd-core';
@@ -193,11 +191,11 @@ const GalleryItemCardBase = ({ columnIndex, rowIndex, style, data }: IGalleryIte
 
   const mobileStyle = isMobile
     ? {
-      paddingTop: 16,
-      paddingLeft: 10,
-      paddingRight: 0,
-      paddingBottom: 0,
-    }
+        paddingTop: 16,
+        paddingLeft: 10,
+        paddingRight: 0,
+        paddingBottom: 0,
+      }
     : {};
 
   if (!recordId) {

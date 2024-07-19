@@ -1,5 +1,3 @@
-
-
 import { FC, memo } from 'react';
 import { FieldType } from '@apitable/core';
 import {

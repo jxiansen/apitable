@@ -1,8 +1,6 @@
-
-
 import { Store } from 'redux';
 import { IReduxState } from '../exports/store/interfaces';
-import { getSnapshot,getDatasheetIds } from 'modules/database/store/selectors//resource/datasheet';
+import { getSnapshot, getDatasheetIds } from 'modules/database/store/selectors//resource/datasheet';
 import { UndoManager } from './undo_manager';
 import LRU from 'lru-cache';
 import _ from 'lodash';
@@ -17,7 +15,10 @@ export class ResourceStashManager {
   private maxSize = 5;
   private closeClear = true;
 
-  constructor(private store: Store<IReduxState>, private getRoomService: () => RoomService) {
+  constructor(
+    private store: Store<IReduxState>,
+    private getRoomService: () => RoomService
+  ) {
     this.stash = new LRU(this.maxSize);
   }
 
@@ -41,7 +42,7 @@ export class ResourceStashManager {
 
     const _activeDstIds: string[] = [];
 
-    reRefMap.forEach(linkPath => {
+    reRefMap.forEach((linkPath) => {
       const _linkPath = Array.from(linkPath);
       const linkDstAndField = _linkPath[_linkPath.length - 1];
       if (linkDstAndField == null) {
@@ -84,20 +85,17 @@ export class ResourceStashManager {
     return {
       stashDatasheetIds,
       stashDashboardIds,
-      stashFormIds
+      stashFormIds,
     };
   }
 
   private analyseActiveResource() {
     const state = this.store.getState();
-    const stashResourceIds = this.stash.dump().map(item => item.k);
+    const stashResourceIds = this.stash.dump().map((item) => item.k);
 
     const roomService = this.getRoomService();
 
-    const {
-      stashDatasheetIds,
-      stashDashboardIds,
-    } = ResourceStashManager.getIdsByResourceType(stashResourceIds);
+    const { stashDatasheetIds, stashDashboardIds } = ResourceStashManager.getIdsByResourceType(stashResourceIds);
 
     if (stashDatasheetIds.length) {
       const activeDstIds: string[] = [...stashResourceIds];
@@ -120,7 +118,7 @@ export class ResourceStashManager {
 
       const _batchActions: any[] = [];
 
-      unActiveDstIds.map(id => {
+      unActiveDstIds.map((id) => {
         roomService.quit(id);
         _batchActions.push(resetDatasheet(id));
       });
@@ -134,14 +132,13 @@ export class ResourceStashManager {
 
       const _batchActions: any[] = [];
 
-      unActiveDashboardIds.map(id => {
+      unActiveDashboardIds.map((id) => {
         roomService.quit(id);
         _batchActions.push(resetDashboard(id));
       });
 
       this.store.dispatch(batchActions(_batchActions));
     }
-
   }
 
   setUndoManager(resourceId: string, undoManager: UndoManager) {

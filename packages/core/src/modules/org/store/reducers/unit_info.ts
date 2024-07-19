@@ -1,5 +1,3 @@
-
-
 import { IUnitInfo } from '../../../../exports/store/interfaces';
 import { IResetUnitInfoAction, IUpdateUnitMapAction, IUpdateUserMapAction } from 'modules/org/store/actions/unit_info';
 import produce from 'immer';
@@ -36,24 +34,22 @@ const updateUserMap = (oldUserMap: any, newUserMap: any) => {
   return { oldUserMap, _unitMap };
 };
 
-export const unitInfo = produce(
-  (state = defaultState, action: IUnitInfoAction) => {
-    switch (action.type) {
-      case UPDATE_UNIT_MAP: {
-        state.unitMap = updateUnitMap(state.unitMap, action.payload);
-        break;
-      }
-      case UPDATE_USER_MAP: {
-        const { oldUserMap: userMap, _unitMap } = updateUserMap(state.userMap, action.payload);
-        const unitMap = updateUnitMap(state.unitMap, _unitMap);
-        state.userMap = userMap;
-        state.unitMap = unitMap;
-        break;
-      }
-      case RESET_UNIT_INFO: {
-        return defaultState;
-      }
+export const unitInfo = produce((state = defaultState, action: IUnitInfoAction) => {
+  switch (action.type) {
+    case UPDATE_UNIT_MAP: {
+      state.unitMap = updateUnitMap(state.unitMap, action.payload);
+      break;
     }
-    return state;
+    case UPDATE_USER_MAP: {
+      const { oldUserMap: userMap, _unitMap } = updateUserMap(state.userMap, action.payload);
+      const unitMap = updateUnitMap(state.unitMap, _unitMap);
+      state.userMap = userMap;
+      state.unitMap = unitMap;
+      break;
+    }
+    case RESET_UNIT_INFO: {
+      return defaultState;
+    }
   }
-);
+  return state;
+});

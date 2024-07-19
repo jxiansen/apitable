@@ -1,5 +1,3 @@
-
-
 import { FormulaFunc, IFormulaParam } from './basic';
 import { BasicValueType, FormulaFuncType } from 'types';
 import { AstNode, ValueOperandNode } from 'formula_parser/parser/ast';
@@ -60,9 +58,7 @@ export class ArrayJoin extends ArrayFunc {
     return BasicValueType.String;
   }
 
-  static override func(
-    [valuesParam, separatorParam]: [IFormulaParam, IFormulaParam<string>],
-  ): string | null {
+  static override func([valuesParam, separatorParam]: [IFormulaParam, IFormulaParam<string>]): string | null {
     const { value, node } = valuesParam;
     const separator = (separatorParam && separatorParam.value) || ', ';
 
@@ -122,7 +118,7 @@ export class ArrayCompact extends ArrayFunc {
 
   static override func(params: IFormulaParam[]): any[] {
     const flattenValue = flattenParams(params);
-    return flattenValue.filter(v => v !== '');
+    return flattenValue.filter((v) => v !== '');
   }
 }
 
@@ -145,11 +141,13 @@ export class Count extends ArrayFunc {
       if (innerValueType && innerValueType === BasicValueType.DateTime) {
         return 0;
       }
-      if (!params[0].value) { return 0; }
+      if (!params[0].value) {
+        return 0;
+      }
       return params[0].value.filter(calc).length;
     }
 
-    return params.filter(param => calc(param.value)).length;
+    return params.filter((param) => calc(param.value)).length;
   }
 }
 
@@ -168,11 +166,13 @@ export class Counta extends ArrayFunc {
     const calc = (v: any) => v != null && v !== '' && v !== false;
 
     if (isArrayParam(params)) {
-      if (!params[0].value) { return 0; }
+      if (!params[0].value) {
+        return 0;
+      }
       return params[0].value.filter(calc).length;
     }
 
-    return params.filter(param => calc(param.value)).length;
+    return params.filter((param) => calc(param.value)).length;
   }
 }
 
@@ -188,7 +188,9 @@ export class Countall extends ArrayFunc {
 
   static override func(params: IFormulaParam<any>[]): number {
     if (isArrayParam(params)) {
-      if (params[0].value == null) { return 0; }
+      if (params[0].value == null) {
+        return 0;
+      }
       return params[0].value.length;
     }
 
@@ -199,10 +201,12 @@ export class Countall extends ArrayFunc {
 export class CountIf extends ArrayFunc {
   static override validateParams(params: AstNode[]) {
     if (params.length < 2) {
-      throw new Error(t(Strings.function_validate_params_count_at_least, {
-        name: 'COUNTIF',
-        count: 2,
-      }));
+      throw new Error(
+        t(Strings.function_validate_params_count_at_least, {
+          name: 'COUNTIF',
+          count: 2,
+        })
+      );
     }
   }
 
@@ -216,11 +220,7 @@ export class CountIf extends ArrayFunc {
     const symbol = params[2]?.value || '=';
     const reg = /^(=)|(!=|！=)|(>)|(<)$/g;
     const finalSymbol = symbol.replace(reg, (_m: string, $1?: string, $2?: string, $3?: string, $4?: string) => {
-      return ($1 && SymbolType.Equal) ||
-        ($2 && SymbolType.NotEqual) ||
-        ($3 && SymbolType.Greater) ||
-        ($4 && SymbolType.Less) ||
-        SymbolType.Equal;
+      return ($1 && SymbolType.Equal) || ($2 && SymbolType.NotEqual) || ($3 && SymbolType.Greater) || ($4 && SymbolType.Less) || SymbolType.Equal;
     });
 
     if (range == null) return 0;
@@ -231,51 +231,51 @@ export class CountIf extends ArrayFunc {
       switch (finalSymbol) {
         case SymbolType.Equal: {
           if (filterTypes.includes(rangeNode.innerValueType!) && filterTypes.includes(conditionNode.valueType!)) {
-            return range.filter(v => v == condition).length;
+            return range.filter((v) => v == condition).length;
           }
           if (rangeNode.innerValueType !== conditionNode.valueType) {
             return 0;
           }
           if (rangeNode.innerValueType === BasicValueType.DateTime && conditionNode.valueType === BasicValueType.DateTime) {
-            return range.filter(v => dayjs(v).valueOf() === dayjs(condition).valueOf()).length;
+            return range.filter((v) => dayjs(v).valueOf() === dayjs(condition).valueOf()).length;
           }
-          return range.filter(v => v === condition).length;
+          return range.filter((v) => v === condition).length;
         }
         case SymbolType.NotEqual: {
           if (filterTypes.includes(rangeNode.innerValueType!) && filterTypes.includes(conditionNode.valueType!)) {
-            return range.filter(v => v != condition).length;
+            return range.filter((v) => v != condition).length;
           }
           if (rangeNode.innerValueType !== conditionNode.valueType) {
             return range.length;
           }
           if (rangeNode.innerValueType === BasicValueType.DateTime && conditionNode.valueType === BasicValueType.DateTime) {
-            return range.filter(v => dayjs(v).valueOf() !== dayjs(condition).valueOf()).length;
+            return range.filter((v) => dayjs(v).valueOf() !== dayjs(condition).valueOf()).length;
           }
-          return range.filter(v => v !== condition).length;
+          return range.filter((v) => v !== condition).length;
         }
         case SymbolType.Greater: {
           if (filterTypes.includes(rangeNode.innerValueType!) && filterTypes.includes(conditionNode.valueType!)) {
-            return range.filter(v => v > condition).length;
+            return range.filter((v) => v > condition).length;
           }
           if (rangeNode.innerValueType !== conditionNode.valueType) {
             return 0;
           }
           if (rangeNode.innerValueType === BasicValueType.DateTime && conditionNode.valueType === BasicValueType.DateTime) {
-            return range.filter(v => dayjs(v).valueOf() > dayjs(condition).valueOf()).length;
+            return range.filter((v) => dayjs(v).valueOf() > dayjs(condition).valueOf()).length;
           }
-          return range.filter(v => v > condition).length;
+          return range.filter((v) => v > condition).length;
         }
         case SymbolType.Less: {
           if (filterTypes.includes(rangeNode.innerValueType!) && filterTypes.includes(conditionNode.valueType!)) {
-            return range.filter(v => v < condition).length;
+            return range.filter((v) => v < condition).length;
           }
           if (rangeNode.innerValueType !== conditionNode.valueType) {
             return 0;
           }
           if (rangeNode.innerValueType === BasicValueType.DateTime && conditionNode.valueType === BasicValueType.DateTime) {
-            return range.filter(v => dayjs(v).valueOf() < dayjs(condition).valueOf()).length;
+            return range.filter((v) => dayjs(v).valueOf() < dayjs(condition).valueOf()).length;
           }
-          return range.filter(v => v < condition).length;
+          return range.filter((v) => v < condition).length;
         }
       }
     } else if (rangeNode.valueType === BasicValueType.String) {

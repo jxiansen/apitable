@@ -1,5 +1,3 @@
-
-
 import { useContext } from 'react';
 import { Box, Button, Space, Typography, useThemeColors } from '@apitable/components';
 import { Strings, t } from '@apitable/core';

@@ -1,5 +1,3 @@
-
-
 import { useContext, useLayoutEffect } from 'react';
 import { useStoreState, useZoomPanHelper } from '@apitable/react-flow';
 import { CARD_WIDTH, BOUNDS_PADDING } from '../../constants';

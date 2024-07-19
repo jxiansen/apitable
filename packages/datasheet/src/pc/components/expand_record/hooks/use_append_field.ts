@@ -1,5 +1,3 @@
-
-
 import { useDispatch } from 'react-redux';
 import { FieldOperateType, SetFieldFrom, StoreActions } from '@apitable/core';
 import { ButtonOperateType } from 'pc/utils';

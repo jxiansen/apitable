@@ -1,5 +1,3 @@
-
-
 import { ICollaborator, IResourceRevision } from '@apitable/core';
 
 export interface INodeCopyRo {

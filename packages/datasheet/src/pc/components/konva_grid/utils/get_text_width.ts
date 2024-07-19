@@ -1,5 +1,3 @@
-
-
 import LRU from 'lru-cache';
 import { IWrapTextResultProps } from './interface';
 

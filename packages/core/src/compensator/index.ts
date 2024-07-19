@@ -1,5 +1,3 @@
-
-
 /**
  * Function: used to compensate for the difference between the main thread and the worker when each frame is rendered
  * Record the information that needs to be compensated when the action is generated
@@ -17,7 +15,7 @@ const wrapValueToArray = <T>(v: T | T[]): T[] => {
   return [v];
 };
 
-type TChangeOptionsData = { origin: number, target: number } | boolean;
+type TChangeOptionsData = { origin: number; target: number } | boolean;
 
 type TLastGroupInfo = IGroupInfo | null | undefined;
 
@@ -27,9 +25,8 @@ interface IChangeOptions {
 }
 
 class Compensator {
-
   willRemoveRecords: Map<string, boolean>;
-  willMoveRecords: Map<string, { origin: number, target: number }>;
+  willMoveRecords: Map<string, { origin: number; target: number }>;
   lastGroupInfo: TLastGroupInfo;
 
   constructor() {

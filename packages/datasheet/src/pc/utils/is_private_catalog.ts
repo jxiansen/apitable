@@ -5,6 +5,5 @@ export const isPrivateCatalog = (spaceId: string | null) => {
   if (!spaceId) {
     return false;
   }
-  return catalogKey ?
-    JSON.parse(catalogKey).some(item => item.spaceId === spaceId && item.activeKey === ConfigConstant.Modules.PRIVATE) : false;
+  return catalogKey ? JSON.parse(catalogKey).some((item) => item.spaceId === spaceId && item.activeKey === ConfigConstant.Modules.PRIVATE) : false;
 };

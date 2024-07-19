@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Story } from '@storybook/react';
 import { ArrowRightOutlined } from '@apitable/icons';
@@ -25,8 +23,8 @@ export default {
     },
   },
   args: {
-    icon: ArrowRightOutlined
-  }
+    icon: ArrowRightOutlined,
+  },
 };
 
 const Template: Story<IIconButtonProps> = (args) => <IconButton {...args} />;
@@ -35,39 +33,39 @@ export const Default = Template.bind({});
 
 export const LargeSize = Template.bind({});
 LargeSize.args = {
-  size: 'large'
+  size: 'large',
 };
 
 export const Square = Template.bind({});
 Square.args = {
   shape: 'square',
-  variant: 'background'
+  variant: 'background',
 };
 
 export const VariantBackground = Template.bind({});
 VariantBackground.args = {
-  variant: 'background'
+  variant: 'background',
 };
 
 export const VariantBlur = Template.bind({});
 VariantBlur.args = {
-  variant: 'blur'
+  variant: 'blur',
 };
 
 export const Active = Template.bind({});
 Active.args = {
-  active: true
+  active: true,
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
   component: 'button',
-  disabled: true
+  disabled: true,
 };
 
 export const VariantBackgroundDisabled = Template.bind({});
 VariantBackgroundDisabled.args = {
   component: 'button',
   disabled: true,
-  variant: 'background'
+  variant: 'background',
 };

@@ -1,5 +1,3 @@
-
-
 import { Spin } from 'antd';
 import classnames from 'classnames';
 import * as React from 'react';

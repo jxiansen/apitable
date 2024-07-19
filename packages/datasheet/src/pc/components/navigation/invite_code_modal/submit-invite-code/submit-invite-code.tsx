@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import { FC, useState } from 'react';
 import { Button, Message, TextInput, Typography, ThemeName } from '@apitable/components';

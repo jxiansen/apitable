@@ -1,5 +1,3 @@
-
-
 import { getDstViewDataPack, getShareDstViewDataPack } from '../modules/database/api/datasheet_api';
 import { CollaCommandName } from 'commands/enum';
 import { IJOTAction } from 'engine/ot/interface';
@@ -17,7 +15,7 @@ interface IViewPropertyFilterListener {
   onError?(error: IError): any;
 }
 
-type IViewPropertyKey = (keyof IViewProperty | 'style');
+type IViewPropertyKey = keyof IViewProperty | 'style';
 
 interface IResetViewPropertyProps {
   datasheetId: string;
@@ -32,15 +30,14 @@ export class ViewPropertyFilter {
   static ignoreViewProperty = ['id', 'type', 'rows', 'name', 'lockInfo'];
 
   constructor(
-      private _getState: () => IReduxState,
-      private _dispatch: (action: any) => void,
-      private _datasheetId: string,
-      private _listener: IViewPropertyFilterListener
-  ) {
-  }
+    private _getState: () => IReduxState,
+    private _dispatch: (action: any) => void,
+    private _datasheetId: string,
+    private _listener: IViewPropertyFilterListener
+  ) {}
 
   private _checkGroupInfo(groupInfo: IGroupInfo, fieldMap: IFieldMap) {
-    return groupInfo.every(info => {
+    return groupInfo.every((info) => {
       return fieldMap[info.fieldId];
     });
   }
@@ -49,7 +46,7 @@ export class ViewPropertyFilter {
     if (!filterInfo.conditions.length) {
       return true;
     }
-    return filterInfo.conditions.every(info => {
+    return filterInfo.conditions.every((info) => {
       return fieldMap[info.fieldId];
     });
   }
@@ -58,7 +55,7 @@ export class ViewPropertyFilter {
     if (!sortInfo.rules.length) {
       return true;
     }
-    return sortInfo.rules.every(info => {
+    return sortInfo.rules.every((info) => {
       return fieldMap[info.fieldId];
     });
   }
@@ -144,7 +141,7 @@ export class ViewPropertyFilter {
         datasheetId: this._datasheetId,
         viewId: view.id,
         dispatch: this._dispatch,
-        onError: this._listener.onError
+        onError: this._listener.onError,
       });
       return true;
     }
@@ -171,8 +168,13 @@ export class ViewPropertyFilter {
 
     if (
       commandName &&
-        [CollaCommandName.AddViews, CollaCommandName.DeleteViews, CollaCommandName.MoveViews, CollaCommandName.DeleteField,
-          CollaCommandName.SetFieldAttr].includes(commandName)
+      [
+        CollaCommandName.AddViews,
+        CollaCommandName.DeleteViews,
+        CollaCommandName.MoveViews,
+        CollaCommandName.DeleteField,
+        CollaCommandName.SetFieldAttr,
+      ].includes(commandName)
     ) {
       // If it is detected that the collaborative state of the view is being modified, there is no need to filter this action.
       return actions;
@@ -243,10 +245,18 @@ export class ViewPropertyFilter {
         return this.handleError(onError);
       }
 
-      dispatch(applyJOTOperations([{
-        cmd: CollaCommandName.SetViewAutoSave,
-        actions: resetActions
-      }], ResourceType.Datasheet, datasheetId));
+      dispatch(
+        applyJOTOperations(
+          [
+            {
+              cmd: CollaCommandName.SetViewAutoSave,
+              actions: resetActions,
+            },
+          ],
+          ResourceType.Datasheet,
+          datasheetId
+        )
+      );
       return;
     }
     return this.handleError(onError);
@@ -257,7 +267,7 @@ export class ViewPropertyFilter {
       type: ErrorType.CollaError,
       code: ErrorCode.EngineCreateFailed,
       message: t(Strings.manual_save_view_error),
-      modalType: ModalType.Warning
+      modalType: ModalType.Warning,
     });
   }
 

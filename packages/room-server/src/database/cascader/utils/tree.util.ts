@@ -1,11 +1,8 @@
-
-
 import { ILinkRecordData } from '../models/link.record.data';
 import { CascaderChildren } from '../models/cascader.children';
 import sha1 from 'sha1';
 
-export
-interface ITreeNodeMap {
+export interface ITreeNodeMap {
   [_: string]: { [_: string]: CascaderChildren };
 }
 

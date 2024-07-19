@@ -1,5 +1,3 @@
-
-
 import { Button, Typography, useThemeColors } from '@apitable/components';
 import { Strings, t } from '@apitable/core';
 import { ChevronLeftOutlined } from '@apitable/icons';

@@ -1,5 +1,3 @@
-
-
 import { In, ObjectLiteral, Repository } from 'typeorm';
 
 export async function batchQueryByRecordIdIn<T extends ObjectLiteral>(

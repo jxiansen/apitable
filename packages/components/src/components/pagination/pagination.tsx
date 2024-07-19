@@ -1,5 +1,3 @@
-
-
 import { ChevronLeftOutlined, ChevronRightOutlined } from '@apitable/icons';
 import React, { memo, FC, useState, useEffect, useRef, ChangeEvent, KeyboardEvent } from 'react';
 import { IOption, Select } from 'components/select';
@@ -23,10 +21,10 @@ const SHOW_START_ELLIPSE = 4;
 const SHOW_END_ELLIPSE = 4;
 
 enum PageEllipse {
-  START='START',
-  CENTER='CENTER',
-  END='END',
-  NONE='NONE',
+  START = 'START',
+  CENTER = 'CENTER',
+  END = 'END',
+  NONE = 'NONE',
 }
 
 enum PageArrow {
@@ -75,10 +73,7 @@ const PaginationBase: FC<React.PropsWithChildren<IPaginationProps>> = (props) =>
     }
     const { pages, current } = pagination;
     let resPage = page;
-    if (
-      (type === PageArrow.NEXT && page > pages) ||
-      (type === PageArrow.PREV && page < 1)
-    ) {
+    if ((type === PageArrow.NEXT && page > pages) || (type === PageArrow.PREV && page < 1)) {
       resPage = current;
     }
 
@@ -184,9 +179,7 @@ const PaginationBase: FC<React.PropsWithChildren<IPaginationProps>> = (props) =>
     const start = (current - 1) * pageSize + 1;
     let end = current * pageSize;
     end = end > total ? total : end;
-    return (
-      <PaginationTotal>{t(Strings.pagination_component_total, { start, end, total })}</PaginationTotal>
-    );
+    return <PaginationTotal>{t(Strings.pagination_component_total, { start, end, total })}</PaginationTotal>;
   };
 
   /**
@@ -260,14 +253,10 @@ const PaginationBase: FC<React.PropsWithChildren<IPaginationProps>> = (props) =>
           border: 'none',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
         }}
         onSelected={handleClickEllipse}
-        triggerLabel={(
-          <PaginationEllipse disabled={disabled}>
-            ...
-          </PaginationEllipse>
-        )}
+        triggerLabel={<PaginationEllipse disabled={disabled}>...</PaginationEllipse>}
       />
     );
   };
@@ -292,23 +281,20 @@ const PaginationBase: FC<React.PropsWithChildren<IPaginationProps>> = (props) =>
           lastRangeChild={i === pages}
           data-selected={selected}
           data-info={`page-${i}`}
-        >{i}</PaginationItem>
+        >
+          {i}
+        </PaginationItem>
       );
     }
     const endElement = (
-      <PaginationItem
-        disabled={disabled}
-        key="end"
-        onClick={() => handleClickPage(pages)}
-        lastRangeChild
-      >{pages}</PaginationItem>
+      <PaginationItem disabled={disabled} key="end" onClick={() => handleClickPage(pages)} lastRangeChild>
+        {pages}
+      </PaginationItem>
     );
     const startElement = (
-      <PaginationItem
-        disabled={disabled}
-        key="first"
-        onClick={() => handleClickPage(1)}
-      >1</PaginationItem>
+      <PaginationItem disabled={disabled} key="first" onClick={() => handleClickPage(1)}>
+        1
+      </PaginationItem>
     );
     if (type === PageEllipse.END) {
       pagesElements.push(renderEllipse(PageEllipse.END, end - 1, pages), endElement);
@@ -317,14 +303,8 @@ const PaginationBase: FC<React.PropsWithChildren<IPaginationProps>> = (props) =>
       pagesElements.unshift(startElement, renderEllipse(PageEllipse.START, 1, start + 1));
     }
     if (type === PageEllipse.CENTER) {
-      pagesElements.unshift(
-        startElement,
-        renderEllipse(PageEllipse.START, 1, current - 1)
-      );
-      pagesElements.push(
-        renderEllipse(PageEllipse.END, current + 1, pages),
-        endElement
-      );
+      pagesElements.unshift(startElement, renderEllipse(PageEllipse.START, 1, current - 1));
+      pagesElements.push(renderEllipse(PageEllipse.END, current + 1, pages), endElement);
     }
     return pagesElements;
   };
@@ -339,7 +319,9 @@ const PaginationBase: FC<React.PropsWithChildren<IPaginationProps>> = (props) =>
     if (showComplete) {
       pagesElements.push(...renderVisualPage(1, pages));
     } else {
-      let rangeStart = 0, rangeEnd = 0, type = PageEllipse.CENTER;
+      let rangeStart = 0,
+        rangeEnd = 0,
+        type = PageEllipse.CENTER;
       if (current <= SHOW_START_ELLIPSE) {
         // Back ellipsis
         rangeStart = 1;
@@ -368,7 +350,7 @@ const PaginationBase: FC<React.PropsWithChildren<IPaginationProps>> = (props) =>
     return (
       <>
         <PaginationArrow
-          aria-label='previous page'
+          aria-label="previous page"
           disabled={disabled || current === 1}
           onClick={() => handleClickArrowJumpPage(current - 1, PageArrow.PREV)}
         >
@@ -376,7 +358,7 @@ const PaginationBase: FC<React.PropsWithChildren<IPaginationProps>> = (props) =>
         </PaginationArrow>
         {pagesElements}
         <PaginationArrow
-          aria-label='next page'
+          aria-label="next page"
           lastRangeChild
           disabled={disabled || current === pages}
           onClick={() => handleClickArrowJumpPage(current + 1, PageArrow.NEXT)}

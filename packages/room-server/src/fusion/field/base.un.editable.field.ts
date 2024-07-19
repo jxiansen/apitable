@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, IField } from '@apitable/core';
 import { BaseField } from 'fusion/field/base.field';
 import { IFieldValue } from 'shared/interfaces';

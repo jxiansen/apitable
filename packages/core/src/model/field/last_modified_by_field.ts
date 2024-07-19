@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { isEqual } from 'lodash';
 import { DatasheetActions } from 'commands_actions/datasheet';
@@ -8,7 +6,14 @@ import { getApiMetaUserProperty } from 'model/utils';
 import { IFieldUpdatedMap, IRecord, IRecordMap, IReduxState } from '../../exports/store/interfaces';
 import { getUserMap } from 'modules/org/store/selectors/unit_info';
 import {
-  BasicValueType, CollectType, FieldType, IAPIMetaLastModifiedByFieldProperty, IField, ILastModifiedByField, ILastModifiedByProperty, IUuids
+  BasicValueType,
+  CollectType,
+  FieldType,
+  IAPIMetaLastModifiedByFieldProperty,
+  IField,
+  ILastModifiedByField,
+  ILastModifiedByProperty,
+  IUuids,
 } from '../../types';
 import { MemberBaseField } from './member_base_field';
 import { datasheetIdString, joiErrorResult } from './validate_schema';
@@ -18,7 +23,10 @@ import { IOpenLastModifiedByFieldProperty } from 'types/open/open_field_read_typ
 import { getFieldDefaultProperty } from './const';
 
 export class LastModifiedByField extends MemberBaseField {
-  constructor(public override field: ILastModifiedByField, public override state: IReduxState) {
+  constructor(
+    public override field: ILastModifiedByField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -53,7 +61,7 @@ export class LastModifiedByField extends MemberBaseField {
           type: 'string',
           title: t(Strings.robot_variables_editor_avatar),
         },
-      }
+      },
     };
   }
 
@@ -106,14 +114,17 @@ export class LastModifiedByField extends MemberBaseField {
   }
 
   getUuidByFieldUpdatedMap(fieldUpdatedMap: IFieldUpdatedMap, rangeIds: string[]): string | null {
-    const fieldUpdateInfo = rangeIds.reduce((prev, fieldId) => {
-      const info = fieldUpdatedMap[fieldId];
+    const fieldUpdateInfo = rangeIds.reduce(
+      (prev, fieldId) => {
+        const info = fieldUpdatedMap[fieldId];
 
-      if (!info?.at || !info?.by || (prev?.at > info?.at)) {
-        return prev;
-      }
-      return { at: info.at, by: info.by };
-    }, { at: 0, by: null } as { at: number, by: string | null });
+        if (!info?.at || !info?.by || prev?.at > info?.at) {
+          return prev;
+        }
+        return { at: info.at, by: info.by };
+      },
+      { at: 0, by: null } as { at: number; by: string | null }
+    );
 
     return fieldUpdateInfo?.by || null;
   }
@@ -136,25 +147,27 @@ export class LastModifiedByField extends MemberBaseField {
   // Get the uuid involved in all records
   getUuidsByRecordMap(recordMap: IRecordMap): string[] {
     const fieldUuids: string[] = [];
-    const uuids = Object.values(recordMap)
-      .reduce((acc, record) => {
-        const fieldUpdatedMap = record.recordMeta?.fieldUpdatedMap;
-        fieldUpdatedMap && Object.values(fieldUpdatedMap).forEach(updatedInfo => {
+    const uuids = Object.values(recordMap).reduce((acc, record) => {
+      const fieldUpdatedMap = record.recordMeta?.fieldUpdatedMap;
+      fieldUpdatedMap &&
+        Object.values(fieldUpdatedMap).forEach((updatedInfo) => {
           updatedInfo?.by && fieldUuids.push(updatedInfo.by);
         });
-        if (record.recordMeta?.updatedBy) {
-          acc.push(record.recordMeta.updatedBy);
-        }
-        return acc;
-      }, [] as string[]);
+      if (record.recordMeta?.updatedBy) {
+        acc.push(record.recordMeta.updatedBy);
+      }
+      return acc;
+    }, [] as string[]);
     return [...new Set([...uuids, ...fieldUuids])];
   }
 
   override getUnitNames(cellValue: IUuids) {
     const userMap = getUserMap(this.state);
     if (!userMap) return null;
-    return cellValue.map(uuid => {
-      if (!userMap[uuid]) { return ''; }
+    return cellValue.map((uuid) => {
+      if (!userMap[uuid]) {
+        return '';
+      }
       return userMap[uuid].name;
     });
   }
@@ -186,13 +199,13 @@ export class LastModifiedByField extends MemberBaseField {
     const { collectType, fieldIdCollection } = this.field.property;
     return {
       collectType,
-      fieldIdCollection
+      fieldIdCollection,
     };
   }
 
   static openUpdatePropertySchema = Joi.object({
     collectType: Joi.number().valid(CollectType.AllFields, CollectType.SpecifiedFields),
-    fieldIdCollection: Joi.array().items(Joi.string())
+    fieldIdCollection: Joi.array().items(Joi.string()),
   }).required();
 
   override validateUpdateOpenProperty(updateProperty: IUpdateOpenLastModifiedByFieldProperty) {
@@ -207,8 +220,7 @@ export class LastModifiedByField extends MemberBaseField {
       uuids: uuids || [],
       datasheetId,
       collectType: collectType ?? defaultProperty.collectType,
-      fieldIdCollection: fieldIdCollection || []
+      fieldIdCollection: fieldIdCollection || [],
     };
   }
-
 }

@@ -1,11 +1,7 @@
-
-
 import { CollaCommandName, IModifySelfView, IMoveSelfView } from 'commands';
 import { IFieldMap, IRecordCellValue, IReduxState, IViewColumn, IViewLockInfo, IViewProperty, IViewRow } from 'exports/store/interfaces';
 import { ViewType } from 'modules/shared/store/constants';
-import {
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getViewIndex } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { keyBy } from 'lodash';
 import { ICellValue } from 'model/record';
@@ -25,7 +21,11 @@ export class View {
    *
    * @internal This constructor is not intended for public use.
    */
-  constructor(private readonly datasheet: Datasheet, private readonly store: Store<IReduxState>, info: IViewInfo) {
+  constructor(
+    private readonly datasheet: Datasheet,
+    private readonly store: Store<IReduxState>,
+    info: IViewInfo
+  ) {
     const { property, fieldMap } = info;
 
     this.property = property;
@@ -122,7 +122,7 @@ export class View {
         records.push(
           new Record(recordMap[row.recordId]!, {
             voTransformOptions,
-          }),
+          })
         );
       }
     }
@@ -142,7 +142,7 @@ export class View {
         ...recordOptions,
         viewId: this.id,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -187,7 +187,7 @@ export class View {
         data: lockInfo,
         viewId: this.id,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -203,7 +203,7 @@ export class View {
         autoSave,
         viewId: this.id,
       },
-      saveOptions,
+      saveOptions
     );
   }
 
@@ -260,42 +260,42 @@ export interface IRecordsOptions {
 
 export type IAddRecordsOptions =
   | {
-  /**
-   * The position where new records will be inserted.
-   */
-  index: number;
+      /**
+       * The position where new records will be inserted.
+       */
+      index: number;
 
-  /**
-   * The number of new records. All cells of new records are set to default values, or left empty if no
-   * default values are set for corresponding fields.
-   */
-  count: number;
+      /**
+       * The number of new records. All cells of new records are set to default values, or left empty if no
+       * default values are set for corresponding fields.
+       */
+      count: number;
 
-  /**
-   * The cell values of the group which the new records belongs to.
-   */
-  groupCellValues?: ICellValue[];
+      /**
+       * The cell values of the group which the new records belongs to.
+       */
+      groupCellValues?: ICellValue[];
 
-  ignoreFieldPermission?: boolean;
-}
+      ignoreFieldPermission?: boolean;
+    }
   | {
-  /**
-   * The position where new records will be inserted.
-   */
-  index: number;
+      /**
+       * The position where new records will be inserted.
+       */
+      index: number;
 
-  /**
-   * New record values.
-   */
-  recordValues: IRecordCellValue[];
+      /**
+       * New record values.
+       */
+      recordValues: IRecordCellValue[];
 
-  /**
-   * The cell values of the group which the new records belongs to.
-   */
-  groupCellValues?: ICellValue[];
+      /**
+       * The cell values of the group which the new records belongs to.
+       */
+      groupCellValues?: ICellValue[];
 
-  ignoreFieldPermission?: boolean;
-};
+      ignoreFieldPermission?: boolean;
+    };
 
 /**
  * The options for getting fields in a view.

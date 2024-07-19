@@ -1,5 +1,3 @@
-
-
 /**
  * parse the input template with context, and return the parsed result
  * eg: render(`say ${{ trigger.event.output }}`,{ "trigger":{ "event": "output":{ "hello" } } }) => "say hello"

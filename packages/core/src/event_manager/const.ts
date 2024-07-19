@@ -1,11 +1,9 @@
-
-
 import { EventRealTypeEnums, EventSourceTypeEnums, OPEventNameEnums } from './enum';
 import { datasheetEvent } from './events/datasheet';
 import type { IEventListenerOptions } from './interface/event_manager.interface';
 
 /**
- * When listening for events, you can pass in option parameters. 
+ * When listening for events, you can pass in option parameters.
  * By default, all events are subscribed, and the event is triggered after the event op apply to the store.
  */
 export const defaultEventListenerOptions: IEventListenerOptions = {
@@ -19,7 +17,7 @@ export const EMPTY_ARRAY = [];
 export const DEFAULT_EVENT_MANAGER_OPTIONS = {
   enableVirtualEvent: false,
   enableCombEvent: false,
-  enableEventComplete: false
+  enableEventComplete: false,
 };
 
 // Mapping relationship between event name and event definition class
@@ -37,4 +35,3 @@ export const EventNameClsMap = {
   [OPEventNameEnums.RecordArchived]: datasheetEvent.OPEventRecordArchived,
   [OPEventNameEnums.RecordUnarchived]: datasheetEvent.OPEventRecordUnarchived,
 };
-

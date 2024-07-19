@@ -1,5 +1,3 @@
-
-
 import { Box } from 'konva/lib/shapes/Transformer';
 import dynamic from 'next/dynamic';
 import { FC, memo, useCallback, useEffect, useMemo, useRef } from 'react';

@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { NODE_INFO } from '../../../shared/common';
@@ -12,7 +10,6 @@ import { ApiException } from '../../../shared/exception';
  */
 @Injectable()
 export class ApiNodeGuard implements CanActivate {
-
   canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest();
     const nodeInfo = request[NODE_INFO];

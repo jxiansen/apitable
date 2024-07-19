@@ -1,5 +1,3 @@
-
-
 import { ITeamData } from '@apitable/core';
 
 export interface IUnitItemProps {

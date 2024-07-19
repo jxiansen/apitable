@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { Events, Player } from '@apitable/core';
 import AutoSaveJson from 'static/json/autosave.json';

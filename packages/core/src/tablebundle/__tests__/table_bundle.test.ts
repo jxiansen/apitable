@@ -21,12 +21,11 @@ class TestSaver implements ITableBundleSaver {
   save(array: Uint8Array, path: string): void {
     return fs.writeFileSync(path, array);
   }
-
 }
 const generateOption = (): ITableBundleInitOptions => {
   const options: ITableBundleInitOptions = {
     loader: new TestLoader(),
-    saver: new TestSaver()
+    saver: new TestSaver(),
   };
   return options;
 };
@@ -57,7 +56,6 @@ describe('TableBundle', () => {
     expect(tableBundle.getDataSheet('dst001')).toMatchSnapshot();
     fs.unlinkSync(assetFilePath);
   });
-
 });
 
 const snapshot = `

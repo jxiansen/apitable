@@ -1,4 +1,3 @@
-
 import { Injectable } from '@nestjs/common';
 import { CascaderSnapshotQueryDto } from '../dtos/cascader.snapshot.query.dto';
 import { CascaderDatabusService } from './cascader.databus.service';
@@ -28,8 +27,9 @@ export class DatasheetFieldCascaderSnapshotService {
   public async getCascaderSnapshot(dto: CascaderSnapshotQueryDto): Promise<CascaderSnapshotVo> {
     const { datasheetId, fieldId, linkedFieldIds } = dto;
     const spaceId = await this.nodeService.getSpaceIdByNodeId(datasheetId);
-    const cascaderData: DatasheetCascaderFieldEntity[] = await this.datasheetCascaderFieldRepository.selectRecordData(spaceId, datasheetId, fieldId,);
-    if (!linkedFieldIds || linkedFieldIds.length > 100) { // Prevents DoS.
+    const cascaderData: DatasheetCascaderFieldEntity[] = await this.datasheetCascaderFieldRepository.selectRecordData(spaceId, datasheetId, fieldId);
+    if (!linkedFieldIds || linkedFieldIds.length > 100) {
+      // Prevents DoS.
       return {
         treeSelectNodes: [],
       };
@@ -66,14 +66,17 @@ export class DatasheetFieldCascaderSnapshotService {
       datasheetId,
       fieldId,
     );
-    await this.datasheetCascaderFieldRepository.manager.transaction(async() => {
-      await this.datasheetCascaderFieldRepository.update({
-        spaceId,
-        datasheetId,
-        fieldId,
-      }, {
-        isDeleted: true,
-      });
+    await this.datasheetCascaderFieldRepository.manager.transaction(async () => {
+      await this.datasheetCascaderFieldRepository.update(
+        {
+          spaceId,
+          datasheetId,
+          fieldId,
+        },
+        {
+          isDeleted: true,
+        },
+      );
       await this.datasheetCascaderFieldRepository.save(cascaderSnapshot);
     });
     return true;
@@ -104,7 +107,7 @@ export class DatasheetFieldCascaderSnapshotService {
       const linkedRecordData: ILinkRecordData = reduce(
         fieldIdToCellValue,
         (result, cellValue, fldId) => {
-          if(fieldMethods[fldId]) {
+          if (fieldMethods[fldId]) {
             result[fldId] = { text: getTextByCellValue(cellValue, fldId, fieldMethods) };
           }
           return result;
@@ -170,16 +173,9 @@ export class DatasheetFieldCascaderSnapshotService {
           setNode(treeNodesMap, linkedFieldId, branchKey, node);
         }
         // ------------------------------- End --------------------------------------//
-        linkNodeToParentNode(
-          { fieldIdToParentFieldId, treeNodesMap, groupToTextToSet, treeNodes },
-          linkedFieldId,
-          linkRecordData,
-          node,
-          isNewNode,
-        );
+        linkNodeToParentNode({ fieldIdToParentFieldId, treeNodesMap, groupToTextToSet, treeNodes }, linkedFieldId, linkRecordData, node, isNewNode);
       }
     }
     return treeNodes;
   }
-
 }

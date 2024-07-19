@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import * as React from 'react';
@@ -168,7 +166,7 @@ export const CellLink: React.FC<React.PropsWithChildren<ICellLink>> = (props) =>
             <div
               className={classNames(styles.tabItem, styles.link, 'link')}
               style={{
-                pointerEvents: (isActive && !isDisabled) ? 'initial' : 'none',
+                pointerEvents: isActive && !isDisabled ? 'initial' : 'none',
               }}
               key={keyPrefix ? `${keyPrefix}-${index}` : id}
               onClick={(e) => !isDisabled && expand(e, id)}

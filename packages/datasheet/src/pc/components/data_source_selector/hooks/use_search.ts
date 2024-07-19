@@ -15,8 +15,8 @@ interface IParams {
 export const useSearch = ({ localDispatch, localState }: IParams) => {
   const spaceId = useAppSelector((state) => state.space.activeId!);
   const activeNodeId = useAppSelector((state) => Selectors.getNodeId(state));
-  const activeNodePrivate = useAppSelector((state) =>
-    state.catalogTree.treeNodesMap[activeNodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[activeNodeId]?.nodePrivate
+  const activeNodePrivate = useAppSelector(
+    (state) => state.catalogTree.treeNodesMap[activeNodeId]?.nodePrivate || state.catalogTree.privateTreeNodesMap[activeNodeId]?.nodePrivate,
   );
   const { nodeTypeFilterLoader } = useLoader();
   const requestNumberRef = useRef(0);
@@ -35,17 +35,17 @@ export const useSearch = ({ localDispatch, localState }: IParams) => {
           const { folders, files } = nodes.reduce<{
             folders: (INode | IViewNode)[];
             files: (INode | IViewNode)[];
-              }>(
-              (collect, node) => {
-                if (node.type === ConfigConstant.NodeType.FOLDER) {
-                  collect.folders.push(node);
-                } else {
-                  collect.files.push(node);
-                }
-                return collect;
-              },
-              { folders: [], files: [] },
-              );
+          }>(
+            (collect, node) => {
+              if (node.type === ConfigConstant.NodeType.FOLDER) {
+                collect.folders.push(node);
+              } else {
+                collect.files.push(node);
+              }
+              return collect;
+            },
+            { folders: [], files: [] },
+          );
 
           localDispatch({ showSearch: true });
           if (!folders.length && !files.length) {
@@ -56,7 +56,7 @@ export const useSearch = ({ localDispatch, localState }: IParams) => {
         }
       });
     }, 500);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [localDispatch, activeNodePrivate]);
 
   useEffect(() => {

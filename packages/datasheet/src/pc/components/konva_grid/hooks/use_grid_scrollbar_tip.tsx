@@ -1,5 +1,3 @@
-
-
 import { useCallback, useMemo, useState } from 'react';
 import { FancyTooltip } from 'pc/components/kanban_view';
 

@@ -1,5 +1,3 @@
-
-
 import { ResourceType } from '@apitable/core';
 
 export interface IResourceDataInfo {

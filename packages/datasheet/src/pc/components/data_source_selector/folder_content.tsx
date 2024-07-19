@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import * as React from 'react';
 import { ThemeName } from '@apitable/components';

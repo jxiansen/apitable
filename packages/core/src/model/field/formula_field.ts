@@ -1,5 +1,3 @@
-
-
 import { getComputeRefManager } from 'compute_manager';
 import { getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getUserTimeZone } from 'modules/user/store/selectors/user';
@@ -18,7 +16,7 @@ import {
   IFilterCheckbox,
   IFilterCondition,
   IFilterDateTime,
-  IFilterText
+  IFilterText,
 } from 'types';
 import {
   BasicValueType,
@@ -37,7 +35,7 @@ import {
   IOpenFilterValueBoolean,
   IOpenFilterValueDataTime,
   IOpenFilterValueNumber,
-  IOpenFilterValueString
+  IOpenFilterValueString,
 } from 'types/open/open_filter_types';
 import { isClient } from 'utils/env';
 import { IReduxState } from '../../exports/store/interfaces';
@@ -51,7 +49,10 @@ import { computedFormatting, computedFormattingStr, datasheetIdString, joiErrorR
 import { getFieldDefaultProperty } from './const';
 
 export class FormulaField extends ArrayValueField {
-  constructor(public override field: IFormulaField, public override state: IReduxState) {
+  constructor(
+    public override field: IFormulaField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -66,11 +67,11 @@ export class FormulaField extends ArrayValueField {
   }
 
   validateCellValue() {
-    return joiErrorResult('computed field shouldn\'t validate cellValue');
+    return joiErrorResult("computed field shouldn't validate cellValue");
   }
 
   validateOpenWriteValue() {
-    return joiErrorResult('computed field shouldn\'t validate cellValue');
+    return joiErrorResult("computed field shouldn't validate cellValue");
   }
 
   get apiMetaPropertyFormat(): IAPIMetaNoneStringValueFormat | null {
@@ -106,8 +107,8 @@ export class FormulaField extends ArrayValueField {
           title: this.field.name,
           items: {
             type: ValueTypeMap[innerBasicValueType],
-            title: 'sub project'
-          }
+            title: 'sub project',
+          },
         };
       default:
         // By default, it is processed as string
@@ -230,8 +231,7 @@ export class FormulaField extends ArrayValueField {
       case BasicValueType.Number:
         return NumberBaseField._compare(cv1 as number, cv2 as number);
       case BasicValueType.DateTime:
-        return DateTimeBaseField._compare(cv1 as ITimestamp, cv2 as ITimestamp,
-          this.field.property.formatting as IDateTimeFieldProperty);
+        return DateTimeBaseField._compare(cv1 as ITimestamp, cv2 as ITimestamp, this.field.property.formatting as IDateTimeFieldProperty);
       case BasicValueType.Boolean:
         return CheckboxField._compare(cv1, cv2, orderInCellValueSensitive);
       default:
@@ -252,7 +252,7 @@ export class FormulaField extends ArrayValueField {
     if (cellValue != null) {
       stdValue.data.push({
         text: this.cellValueToString(cellValue) || '',
-        value: cellValue
+        value: cellValue,
       });
     }
 
@@ -272,7 +272,7 @@ export class FormulaField extends ArrayValueField {
   }
 
   arrayValueToArrayStringValueArray(cellValue: any[], _options?: ICellToStringOption) {
-    return (cellValue as any[]).map(cv => {
+    return (cellValue as any[]).map((cv) => {
       switch (this.innerBasicValueType) {
         case BasicValueType.Number:
         case BasicValueType.Boolean: {
@@ -388,8 +388,8 @@ export class FormulaField extends ArrayValueField {
   }
 
   cellValueToOpenValue(
-    cellValue: null | string | number | boolean | string[] | number[] | boolean[]):
-    null | string | number | boolean | string[] | number[] | boolean[] {
+    cellValue: null | string | number | boolean | string[] | number[] | boolean[]
+  ): null | string | number | boolean | string[] | number[] | boolean[] {
     return cellValue;
   }
 
@@ -424,9 +424,8 @@ export class FormulaField extends ArrayValueField {
     return {
       datasheetId: this.field.property.datasheetId,
       expression: expression || '',
-      formatting
+      formatting,
     };
-
   }
 
   override filterValueToOpenFilterValue(value: IFilterText | IFilterCheckbox | IFilterDateTime): IOpenFilterValue {

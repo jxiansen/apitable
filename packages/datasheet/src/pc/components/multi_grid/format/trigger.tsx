@@ -1,5 +1,3 @@
-
-
 import { useClickAway } from 'ahooks';
 import Trigger, { TriggerProps as RcTriggerProps } from 'rc-trigger';
 import * as React from 'react';

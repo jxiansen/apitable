@@ -1,5 +1,3 @@
-
-
 import { DeepPartial, getConnection } from 'typeorm';
 import { AutomationActionRepository } from './automation.action.repository';
 import { AutomationActionEntity } from '../entities/automation.action.entity';
@@ -18,7 +16,7 @@ describe('AutomationActionRepository', () => {
   const theUserId = '123456';
   let entity: AutomationActionEntity;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({ isGlobal: true }),
@@ -44,7 +42,7 @@ describe('AutomationActionRepository', () => {
     entity = await repository.save(record);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
@@ -52,14 +50,14 @@ describe('AutomationActionRepository', () => {
     expect(repository).toBeDefined();
   });
 
-  it('should be return robotId and preActionId', async() => {
+  it('should be return robotId and preActionId', async () => {
     const robotRel = await repository.selectRobotRelByActionId(theActionId);
     expect(robotRel).toBeDefined();
     expect(robotRel.robotId).toEqual(theRobotId);
     expect(robotRel.prevActionId).toEqual(null);
   });
 
-  it("should be update the action's pre action id", async() => {
+  it("should be update the action's pre action id", async () => {
     const newAction: DeepPartial<AutomationActionEntity> = {
       actionId: 'newActionId',
       robotId: theRobotId,
@@ -75,7 +73,7 @@ describe('AutomationActionRepository', () => {
     await repository.delete(theNewAction.id);
   });
 
-  it('should be update delete flag', async() => {
+  it('should be update delete flag', async () => {
     const theUpdateResult = await repository.deleteActionByActionId(theUserId, theActionId);
     expect(theUpdateResult).toBeDefined();
     expect(theUpdateResult.affected).toEqual(1);
@@ -88,7 +86,7 @@ describe('AutomationActionRepository', () => {
     expect(theDeletedEntity.isDeleted).toBeTruthy();
   });
 
-  it('should get the action base infos by robot ids', async() => {
+  it('should get the action base infos by robot ids', async () => {
     const actionBaseInfoDtos = await repository.selectActionBaseInfosByRobotIds([theRobotId]);
     expect(actionBaseInfoDtos).toBeDefined();
     expect(actionBaseInfoDtos.length).toEqual(1);
@@ -98,7 +96,7 @@ describe('AutomationActionRepository', () => {
     expect(actionBaseInfoDtos[0]!.prevActionId).toEqual(null);
   });
 
-  it('should be get the action infos by robot id', async() => {
+  it('should be get the action infos by robot id', async () => {
     const robotActionInfoDtos = await repository.selectActionInfosByRobotId(theRobotId);
     expect(robotActionInfoDtos).toBeDefined();
     expect(robotActionInfoDtos.length).toEqual(1);

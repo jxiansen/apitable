@@ -1,5 +1,3 @@
-
-
 import { getResourceWidgetPanels } from 'modules/database/store/selectors/resource';
 import { ResourceType } from 'types';
 import { CollaCommandName } from '..';
@@ -31,13 +29,15 @@ export const modifyWidgetPanelName: ICollaCommandDef<IModifyWidgetPanelName> = {
       return null;
     }
 
-    const panel = widgetPanels.find(item => item.id === panelId);
+    const panel = widgetPanels.find((item) => item.id === panelId);
 
     if (!panel) {
       return null;
     }
 
-    const existPanelNames = widgetPanels.map(item => { return item.name; });
+    const existPanelNames = widgetPanels.map((item) => {
+      return item.name;
+    });
 
     if (existPanelNames.includes(panelName)) {
       return null;

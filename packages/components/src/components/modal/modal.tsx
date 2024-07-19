@@ -1,19 +1,6 @@
-
-
-import {
-  IModalFuncProps,
-  IModalFuncs,
-} from './interface';
+import { IModalFuncProps, IModalFuncs } from './interface';
 import { ModalBase } from './components/modal_base';
-import {
-  confirm,
-  withConfirm,
-  withDanger,
-  withError,
-  withInfo,
-  withSuccess,
-  withWarning
-} from './components/confirm';
+import { confirm, withConfirm, withDanger, withError, withInfo, withSuccess, withWarning } from './components/confirm';
 
 type ModalType = typeof ModalBase & IModalFuncs & { destroyAll(): void };
 export const destroyFns: Array<() => void> = [];
@@ -45,7 +32,7 @@ Modal.info = (props: IModalFuncProps) => {
 };
 
 Modal.destroyAll = () => {
-  while(destroyFns.length) {
+  while (destroyFns.length) {
     const close = destroyFns.pop();
     if (close) {
       close();
@@ -53,6 +40,4 @@ Modal.destroyAll = () => {
   }
 };
 
-export {
-  Modal
-};
+export { Modal };

@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { Pagination } from './index';
 import { StoryType } from '../../stories/constants';
@@ -57,7 +55,14 @@ export const ChangeSize = () => {
   const [size, setSize] = useState(10);
   return (
     <div>
-      <Pagination showChangeSize pageSize={size} total={71} onPageSizeChange={(_page, pageSize) => { setSize(pageSize); }} />
+      <Pagination
+        showChangeSize
+        pageSize={size}
+        total={71}
+        onPageSizeChange={(_page, pageSize) => {
+          setSize(pageSize);
+        }}
+      />
     </div>
   );
 };
@@ -73,7 +78,9 @@ export const Disabled = () => {
         pageSize={size}
         total={171}
         disabled
-        onPageSizeChange={(_page, pageSize) => { setSize(pageSize); }}
+        onPageSizeChange={(_page, pageSize) => {
+          setSize(pageSize);
+        }}
       />
     </div>
   );
@@ -89,7 +96,9 @@ export const Complete = () => {
         showTotal
         pageSize={size}
         total={171}
-        onPageSizeChange={(_page, pageSize) => { setSize(pageSize); }}
+        onPageSizeChange={(_page, pageSize) => {
+          setSize(pageSize);
+        }}
       />
     </div>
   );
@@ -106,7 +115,9 @@ export const I18n = () => {
         pageSize={size}
         total={171}
         lang="en"
-        onPageSizeChange={(_page, pageSize) => { setSize(pageSize); }}
+        onPageSizeChange={(_page, pageSize) => {
+          setSize(pageSize);
+        }}
       />
     </div>
   );

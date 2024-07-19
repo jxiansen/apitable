@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { ContextName, ShortcutContext } from 'modules/shared/shortcut_key';
 import RcTextArea from 'rc-textarea';

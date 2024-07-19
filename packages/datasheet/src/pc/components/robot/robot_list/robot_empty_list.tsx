@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import { Box, Button, Typography, useTheme, ThemeName } from '@apitable/components';
 import { Api, Selectors, Strings, SystemConfig, t } from '@apitable/core';
@@ -46,9 +44,7 @@ export const RobotEmptyList = () => {
         <Button
           disabled={!canAddNewRobot}
           color="primary"
-          onClick={() => (isShowRobot ? canAddNewRobot && createNewRobot(
-            datasheetId,
-          ) : openTestFunction())}
+          onClick={() => (isShowRobot ? canAddNewRobot && createNewRobot(datasheetId) : openTestFunction())}
           block
         >
           {isShowRobot ? t(Strings.new_automation) : t(Strings.test_function_btnmodal_btntext)}

@@ -13,16 +13,16 @@ export class Record {
   constructor(
     private datasheetId: string,
     private wCtx: IWidgetContext,
-    private recordId: string,
+    private recordId: string
   ) {
     this.modelRecord = new ModelRecord(this.datasheetId, this.wCtx, this.recordId);
   }
 
   /**
    * The unique ID of the record.
-   * 
+   *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myRecord.id);
@@ -33,11 +33,11 @@ export class Record {
   }
 
   /**
-   * The cell value of the primary field of cells. 
+   * The cell value of the primary field of cells.
    * The primary field is usually seen as the main field.
    *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myRecord.title);
@@ -50,9 +50,9 @@ export class Record {
 
   /**
    * The comment counts of the record.
-   * 
+   *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myRecord.commentCount); // => 10
@@ -66,7 +66,7 @@ export class Record {
    *
    * @param fieldId The ID of the field.
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * const cellValue = myRecord.getCellValue(mySingleLineTextFieldId);
@@ -81,7 +81,7 @@ export class Record {
    * Get the cell value of a specified cell in record, and convert it to a string type.
    *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * const stringValue = myRecord.getCellValueString(myNumberFieldId);
@@ -94,11 +94,11 @@ export class Record {
 
   /**
    * The url of the record.
-   * 
-   * @param viewId 
-   * 
+   *
+   * @param viewId
+   *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myRecord.getUrl('viwxxxxxx'));

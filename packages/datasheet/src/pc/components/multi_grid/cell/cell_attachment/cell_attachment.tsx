@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { uniqBy } from 'lodash';
 import * as React from 'react';

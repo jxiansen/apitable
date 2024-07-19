@@ -1,5 +1,3 @@
-
-
 import { FormulaFunc, IFormulaParam, FormulaBaseError } from './basic';
 import { BasicValueType, FormulaFuncType } from 'types';
 import { AstNode } from 'formula_parser/parser/ast';
@@ -37,7 +35,7 @@ export class If extends LogicalFunc {
     }
 
     const [, value1Node, value2Node] = params as [AstNode, AstNode, AstNode];
-    if ([value1Node.valueType, value2Node.valueType].some(v => v === BasicValueType.Array)) {
+    if ([value1Node.valueType, value2Node.valueType].some((v) => v === BasicValueType.Array)) {
       return BasicValueType.String;
     }
     // If one of the two values is 'BLANK', the result type is determined by the type of the other
@@ -122,11 +120,13 @@ export class Or extends LogicalFunc {
   static override func(params: IFormulaParam<boolean>[]): boolean {
     params = handleLookupNullValue(params);
     if (isArrayParam(params)) {
-      if (!params[0].value) { return false; }
+      if (!params[0].value) {
+        return false;
+      }
 
-      return params[0].value.some(v => Boolean(v));
+      return params[0].value.some((v) => Boolean(v));
     }
-    return params.some(v => Boolean(v.value));
+    return params.some((v) => Boolean(v.value));
   }
 }
 
@@ -147,11 +147,13 @@ export class And extends LogicalFunc {
   static override func(params: IFormulaParam<boolean>[]): boolean {
     params = handleLookupNullValue(params);
     if (isArrayParam(params)) {
-      if (!params[0].value) { return false; }
+      if (!params[0].value) {
+        return false;
+      }
 
-      return params[0].value.every(v => Boolean(v));
+      return params[0].value.every((v) => Boolean(v));
     }
-    return params.every(v => Boolean(v.value));
+    return params.every((v) => Boolean(v.value));
   }
 }
 
@@ -173,11 +175,13 @@ export class Xor extends LogicalFunc {
     let count: number;
     params = handleLookupNullValue(params);
     if (isArrayParam(params)) {
-      if (!params[0].value) { return false; }
+      if (!params[0].value) {
+        return false;
+      }
 
-      count = params[0].value.reduce((prev, cur) => cur ? prev + 1 : prev, 0);
+      count = params[0].value.reduce((prev, cur) => (cur ? prev + 1 : prev), 0);
     } else {
-      count = params.reduce((prev, cur) => cur.value ? prev + 1 : prev, 0);
+      count = params.reduce((prev, cur) => (cur.value ? prev + 1 : prev), 0);
     }
     return Boolean(count & 1);
   }

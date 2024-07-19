@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { NodeTypeEnum } from 'shared/enums/node.enum';
 import { IAPINode } from 'shared/interfaces/node.interface';

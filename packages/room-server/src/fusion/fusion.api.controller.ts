@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, Field, ICollaCommandOptions, IRemoteChangeset } from '@apitable/core';
 import {
   Body,
@@ -16,7 +14,7 @@ import {
   Res,
   SetMetadata,
   UseGuards,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -26,7 +24,7 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiProduces,
-  ApiTags
+  ApiTags,
 } from '@nestjs/swagger';
 import { AttachmentService } from 'database/attachment/services/attachment.service';
 import { DatasheetMetaService } from 'database/datasheet/services/datasheet.meta.service';
@@ -91,9 +89,8 @@ export class FusionApiController {
     private readonly fusionApiService: FusionApiService,
     private readonly attachService: AttachmentService,
     private readonly restService: RestService,
-    private readonly datasheetMetaService: DatasheetMetaService
-  ) {
-  }
+    private readonly datasheetMetaService: DatasheetMetaService,
+  ) {}
 
   @Get('/datasheets/:dstId/records')
   @ApiOperation({
@@ -478,9 +475,7 @@ export class FusionApiController {
   @UseInterceptors(ApiCacheInterceptor)
   @CacheTTL(apiCacheTTLFactory)
   @SetMetadata(DATASHEET_OPTIONS, { requireMetadata: true, loadSingleView: true } as IApiDatasheetOptions)
-  public async getDeletedRecords(
-      @Param() param: RecordParamRo,
-  ): Promise<RecordIdListVo> {
+  public async getDeletedRecords(@Param() param: RecordParamRo): Promise<RecordIdListVo> {
     const pageVo = await this.fusionApiService.getDeletedRecords(param.dstId);
     return ApiResponse.success(pageVo);
   }

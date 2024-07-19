@@ -1,6 +1,4 @@
-
-
-export const sleep: Function = (ms?: number) => new Promise(resolve => setTimeout(resolve, ms));
+export const sleep: Function = (ms?: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
  * randomly get a number in an interval

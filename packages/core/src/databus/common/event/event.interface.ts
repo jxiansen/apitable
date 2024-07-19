@@ -1,5 +1,3 @@
-
-
 import { IResourceOpsCollect } from 'command_manager';
 import { IError } from 'types';
 import { CommandExecutionResultType } from './command.execution.result.type.enum';

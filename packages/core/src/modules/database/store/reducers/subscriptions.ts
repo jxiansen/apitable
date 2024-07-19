@@ -1,5 +1,3 @@
-
-
 // reducers for data subscribe(follow)
 import produce from 'immer';
 import { ISetSubscriptionsAction, ISubscriptions } from '../../../../exports/store/interfaces';

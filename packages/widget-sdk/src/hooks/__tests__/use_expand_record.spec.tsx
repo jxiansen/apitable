@@ -4,11 +4,11 @@ import { useExpandRecord } from '../use_expand_record';
 
 test('use expand record should work', () => {
   const wrapper = createSimpleWrapper();
-  
+
   const { result } = renderHook(() => useExpandRecord(), { wrapper });
   const expandRecord = result.current;
   expandRecord({
-    recordIds: []
+    recordIds: [],
   });
   expect(expandRecord).toBeInstanceOf(Function);
 });

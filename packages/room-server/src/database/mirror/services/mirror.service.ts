@@ -1,5 +1,3 @@
-
-
 import { Span } from '@metinseylan/nestjs-opentelemetry';
 import { Injectable } from '@nestjs/common';
 import type { IPermissions } from '@apitable/core';
@@ -35,12 +33,7 @@ export class MirrorService {
   }
 
   @Span()
-  async fetchDataPack(
-    mirrorId: string,
-    auth: IAuthHeader,
-    origin: IFetchDataOriginOptions,
-    recordIds?: string[],
-  ): Promise<DatasheetPack> {
+  async fetchDataPack(mirrorId: string, auth: IAuthHeader, origin: IFetchDataOriginOptions, recordIds?: string[]): Promise<DatasheetPack> {
     // Query info of referenced database and view
     const datasheetId = await this.nodeService.getMainNodeId(mirrorId);
 

@@ -1,5 +1,3 @@
-
-
 import { FieldType } from '@apitable/core';
 import Enum from './enum';
 

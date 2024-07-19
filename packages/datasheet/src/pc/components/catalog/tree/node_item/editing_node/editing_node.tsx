@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -24,8 +22,9 @@ export const EditingNode: FC<React.PropsWithChildren<IEditingNodeProps>> = ({ no
   const dispatch = useDispatch();
   const { renameNodeReq } = useCatalogTreeRequest();
   const [value, setValue] = useState(node.nodeName);
-  const { run: renameNode } = useRequest((nodeId: string, nodeName: string) =>
-    renameNodeReq(nodeId, nodeName, isPrivate ? ConfigConstant.Modules.PRIVATE : undefined), { manual: true }
+  const { run: renameNode } = useRequest(
+    (nodeId: string, nodeName: string) => renameNodeReq(nodeId, nodeName, isPrivate ? ConfigConstant.Modules.PRIVATE : undefined),
+    { manual: true },
   );
 
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {

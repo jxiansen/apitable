@@ -1,5 +1,3 @@
-
-
 import { pick } from 'lodash';
 import Router from 'next/router';
 import browserPath from 'path-browserify';

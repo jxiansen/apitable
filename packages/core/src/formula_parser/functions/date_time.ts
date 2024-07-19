@@ -1,5 +1,3 @@
-
-
 // TODO(remove eslint disable)
 /* eslint-disable @typescript-eslint/naming-convention */
 import dayjs, { Dayjs, isDayjs, QUnitType } from 'dayjs';
@@ -369,9 +367,9 @@ export class FromNow extends DatetimeDiffUtil {
   }
 }
 /**
-  * Here FromNow and ToNow have the same function,
-  * Separately written just to remind the text and modify the relevant logic later to be better differentiated
-  */
+ * Here FromNow and ToNow have the same function,
+ * Separately written just to remind the text and modify the relevant logic later to be better differentiated
+ */
 export class ToNow extends DatetimeDiffUtil {
   static override validateParams(params: AstNode[]) {
     if (params.length < 2) {
@@ -398,7 +396,7 @@ export class IsBefore extends DateFunc {
   }
 
   static override func(params: [IFormulaParam<number | string>, IFormulaParam<number | string>]): boolean | null {
-    if (params?.some(v => v.value == null)) {
+    if (params?.some((v) => v.value == null)) {
       return null;
     }
     const date1 = getDayjs(params[0].value);
@@ -420,7 +418,7 @@ export class IsAfter extends DateFunc {
   }
 
   static override func(params: [IFormulaParam<number | string>, IFormulaParam<number | string>]): boolean | null {
-    if (params?.some(v => v.value == null)) {
+    if (params?.some((v) => v.value == null)) {
       return null;
     }
     const date1 = getDayjs(params[0].value);
@@ -458,23 +456,23 @@ export class WorkDay extends DateFunc {
     }
 
     /**
-      * Ideas:
-      * Take WORKDAY('2021-10-15',8) as an example, 2021-10-15 is Friday, add 8 days to get 2021-10-23,
-      * and check the difference between the two dates through the dayjs.diff method One week, that is to say on 2021-10-23
-      * Add 2 days to the base (with two days off a week) to get 2021-10-25
-      * At this time, take 2021-10-23 as the start date and the revised 2021-10-25 as the end date to do a diff check,
-      * you will find that there is another week, repeat the above process,
-      * until the start date and end date are in the same week , and the end date is not in
-      * The calculation ends on Saturday and Sunday
-      */
+     * Ideas:
+     * Take WORKDAY('2021-10-15',8) as an example, 2021-10-15 is Friday, add 8 days to get 2021-10-23,
+     * and check the difference between the two dates through the dayjs.diff method One week, that is to say on 2021-10-23
+     * Add 2 days to the base (with two days off a week) to get 2021-10-25
+     * At this time, take 2021-10-23 as the start date and the revised 2021-10-25 as the end date to do a diff check,
+     * you will find that there is another week, repeat the above process,
+     * until the start date and end date are in the same week , and the end date is not in
+     * The calculation ends on Saturday and Sunday
+     */
     if (weekends.includes(startDay)) {
-      const startDayDiff = totalWorkDays >= 0 ? (startDay === 6 ? -1 : -2) : (startDay === 6 ? 2 : 1);
+      const startDayDiff = totalWorkDays >= 0 ? (startDay === 6 ? -1 : -2) : startDay === 6 ? 2 : 1;
       startDate = startDate.add(startDayDiff, 'day');
     }
 
     let endDate = startDate.add(totalWorkDays, 'day');
 
-    const getDiffWeek = () => endDate.week() === startDate.week() ? 0 : endDate.startOf('week').diff(startDate.startOf('week'), 'week');
+    const getDiffWeek = () => (endDate.week() === startDate.week() ? 0 : endDate.startOf('week').diff(startDate.startOf('week'), 'week'));
 
     // handle the case where the end date encounters a weekend
     const skipWeekends = (date: dayjs.Dayjs) => {
@@ -492,7 +490,7 @@ export class WorkDay extends DateFunc {
 
     // holiday list
     const holidayStrList = params.length > 2 ? String(params[2]!.value).split(',') : [];
-    const holidays = holidayStrList.filter(v => v !== 'null').map(v => getDayjs(v.trim()));
+    const holidays = holidayStrList.filter((v) => v !== 'null').map((v) => getDayjs(v.trim()));
 
     // calculate holidays
     for (let i = 0; i < holidays.length; i++) {
@@ -528,7 +526,7 @@ export class WorkDayDiff extends DateFunc {
     const isMinus = startDate.valueOf() > endDate.valueOf(); // Whether with a negative sign
     isMinus && ([startDate, endDate] = [endDate, startDate]);
     const holidayStrList = params.length > 2 ? String(params[2]!.value).split(',') : [];
-    const holidays = holidayStrList.filter(v => v !== 'null').map(v => getDayjs(v.trim()));
+    const holidays = holidayStrList.filter((v) => v !== 'null').map((v) => getDayjs(v.trim()));
     const weekends = [0, 6]; // specify which days are the weekends
 
     const startDay = startDate.day();
@@ -557,10 +555,7 @@ export class WorkDayDiff extends DateFunc {
       const holidayDay = holiday.day();
       if (
         endDate.isAfter(holiday, 'date') &&
-        (
-          startDate.isBefore(holiday, 'date') ||
-          startDate.isSame(holiday, 'date')
-        ) &&
+        (startDate.isBefore(holiday, 'date') || startDate.isSame(holiday, 'date')) &&
         !weekends.includes(holidayDay)
       ) {
         finalCount--;
@@ -628,7 +623,7 @@ export class WeekNum extends DateFunc {
     }
 
     if (currentDate.weekYear() !== currentDate.year() && currentDate.week() === 1) {
-      const weekOffset = startOfWeek === 0 ? 1 : (currentDate.day() === 0 ? 0 : 1);
+      const weekOffset = startOfWeek === 0 ? 1 : currentDate.day() === 0 ? 0 : 1;
       return currentDate.add(-1, 'week').week() + weekOffset;
     }
 
@@ -641,7 +636,6 @@ export class WeekNum extends DateFunc {
     }
 
     return currentDate.week();
-
   }
 }
 
@@ -657,9 +651,7 @@ export class IsSame extends DateFunc {
     return BasicValueType.Boolean;
   }
 
-  static override func(
-    params: [IFormulaParam<number | string>, IFormulaParam<number | string>, IFormulaParam<string>],
-  ): boolean {
+  static override func(params: [IFormulaParam<number | string>, IFormulaParam<number | string>, IFormulaParam<string>]): boolean {
     const [{ value: dateFrom }, { value: dateTo }] = params;
     const unitStr = params[2]?.value || 'ms';
     const unit = getPureUnit(unitStr);
@@ -792,8 +784,8 @@ export class LastModifiedTime extends DateFunc {
       return null;
     }
 
-    const fieldIds = !params.length ? Object.keys(updatedMap) : params.map(param => (param.node as ValueOperandNode).field?.id);
-    const timestamps = fieldIds.map(fieldId => updatedMap[fieldId]?.at).filter(v => v);
-    return timestamps.length ? Math.max(...timestamps as number[]) : null;
+    const fieldIds = !params.length ? Object.keys(updatedMap) : params.map((param) => (param.node as ValueOperandNode).field?.id);
+    const timestamps = fieldIds.map((fieldId) => updatedMap[fieldId]?.at).filter((v) => v);
+    return timestamps.length ? Math.max(...(timestamps as number[])) : null;
   }
 }

@@ -1,5 +1,3 @@
-
-
 import { Strings, t } from '../../exports/i18n';
 import { LayoutType, ViewType } from 'modules/shared/store/constants';
 import { getViewById } from 'modules/database/store/selectors/resource/datasheet/base';
@@ -11,13 +9,9 @@ import { Settings } from 'config';
 import { integrateCdnHost } from 'utils';
 
 export class GalleryView extends CardView {
-
   static defaultStyle(snapshot: ISnapshot, srcView: IViewProperty) {
-
     // the first attachment field set as default cover field
-    const initCoverField = srcView.columns.find(col =>
-      snapshot.meta.fieldMap[col.fieldId]!.type === FieldType.Attachment,
-    );
+    const initCoverField = srcView.columns.find((col) => snapshot.meta.fieldMap[col.fieldId]!.type === FieldType.Attachment);
 
     return {
       layoutType: LayoutType.Flex,
@@ -54,7 +48,7 @@ export class GalleryView extends CardView {
       columns: this.defaultColumns(srcView, 4),
       rows: this.defaultRows(srcView),
       style: this.defaultStyle(snapshot, srcView),
-      displayHiddenColumnWithinMirror: true
+      displayHiddenColumnWithinMirror: true,
     };
   }
 

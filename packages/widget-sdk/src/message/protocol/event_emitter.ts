@@ -8,10 +8,10 @@ export class EventEmitter extends Protocol {
       return;
     }
     const callbacks = this.getCallbacks(type, key);
-    callbacks.forEach(cb => {
+    callbacks.forEach((cb) => {
       cb(data);
     });
   }
 }
 
-export const eventEmitter = process.env.SSR ? null as any : new EventEmitter();
+export const eventEmitter = process.env.SSR ? (null as any) : new EventEmitter();

@@ -1,5 +1,3 @@
-
-
 import { useCounter } from 'ahooks';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ResourceType, Selectors } from '@apitable/core';

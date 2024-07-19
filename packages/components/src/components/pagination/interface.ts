@@ -1,5 +1,3 @@
-
-
 /**
  * Pagination status interface
  */
@@ -27,23 +25,22 @@ export interface IPaginationState {
   /**
    * Current page number
    */
-   current: number;
+  current: number;
 
-   /**
-    * Per page size
-    */
-   pageSize: number;
- 
-   /**
-    * Total number
-    */
-   total: number;
+  /**
+   * Per page size
+   */
+  pageSize: number;
 
-   /**
-    * Total pages
-    */
-   pages: number;
+  /**
+   * Total number
+   */
+  total: number;
 
+  /**
+   * Total pages
+   */
+  pages: number;
 }
 
 /**
@@ -59,14 +56,14 @@ export interface IPaginationProps {
    */
   current?: number;
 
-   /**
-    * Page Size
-    */
+  /**
+   * Page Size
+   */
   pageSize?: number;
- 
-   /**
-    * Total number
-    */
+
+  /**
+   * Total number
+   */
   total: number;
 
   /**

@@ -1,5 +1,3 @@
-
-
 import { IPermissionResult } from 'interface';
 
 export * from './widgetCliSocket';

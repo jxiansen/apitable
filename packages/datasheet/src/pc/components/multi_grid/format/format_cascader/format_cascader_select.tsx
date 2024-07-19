@@ -54,8 +54,7 @@ export const FormatCascader = ({ currentField, setCurrentField, optionErrMsg }: 
     dispatch(StoreActions.fetchDatasheet(linkedDatasheetId) as any);
   });
 
-  const ruleBtnDisabled = !linkedDatasheetId || !linkedViewId || linkedDatasheetLoading === undefined
-    || linkedDatasheetLoading || !linkedDatasheet;
+  const ruleBtnDisabled = !linkedDatasheetId || !linkedViewId || linkedDatasheetLoading === undefined || linkedDatasheetLoading || !linkedDatasheet;
 
   return (
     <div className={commonStyles.section} style={{ marginBottom: 8 }}>

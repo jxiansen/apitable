@@ -1,4 +1,3 @@
-
 import { Controller, Get, Param, Query, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
 import { SwaggerConstants } from 'shared/common';
@@ -17,9 +16,7 @@ import { FusionNodeApiService } from './services/fusion.node.api.service';
 @UseGuards(ApiAuthGuard, ApiUsageGuard, NodePermissionGuard)
 @UseInterceptors(ApiUsageInterceptor)
 export class FusionApiV2Controller {
-  constructor(
-    private readonly fusionNodeApiServer: FusionNodeApiService,
-  ){}
+  constructor(private readonly fusionNodeApiServer: FusionNodeApiService) {}
 
   @Get('/spaces/:spaceId/nodes')
   @ApiOperation({
@@ -29,7 +26,7 @@ export class FusionApiV2Controller {
   })
   @ApiProduces('application/json')
   @UseGuards(ApiSpaceGuard)
-  public async getNodes( @Param('spaceId') spaceId: string, @Query() queryParam: NodeListQueryRo) {
+  public async getNodes(@Param('spaceId') spaceId: string, @Query() queryParam: NodeListQueryRo) {
     const { type, permissions, query } = queryParam;
     const uniquePermissions = Array.from(new Set(permissions));
     const nodes = await this.fusionNodeApiServer.getNodeList(spaceId, type, uniquePermissions || [0, 1, 2, 3], query);

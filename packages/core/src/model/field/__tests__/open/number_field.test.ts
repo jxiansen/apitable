@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType, FieldType, INumberField } from 'types';
 import { IOpenField } from 'types/open/open_field_read_types';
 import { IUpdateOpenNumberFieldProperty } from 'types/open/open_field_write_types';
@@ -11,8 +9,8 @@ const numberField: INumberField = {
   type: FieldType.Number,
   property: {
     defaultValue: '1',
-    precision: 1.0
-  }
+    precision: 1.0,
+  },
 };
 
 const openNumberField: IOpenField = {
@@ -21,23 +19,23 @@ const openNumberField: IOpenField = {
   type: APIMetaFieldType.Number,
   property: {
     defaultValue: '1',
-    precision: 1.0
-  }
+    precision: 1.0,
+  },
 };
 
 const propertyOptionalFill: IUpdateOpenNumberFieldProperty = {
   defaultValue: '1',
   precision: 1.0,
-  symbol: '$'
+  symbol: '$',
 };
 
 const propertyOptionalNotFill: IUpdateOpenNumberFieldProperty = {
-  precision: 1.0
+  precision: 1.0,
 };
 
 describe('Number field read property format check', () => {
   const valid = getOpenFieldProperty(numberField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid(openNumberField.property);
     expect(receiveValue).toEqual(expectValue);
   });

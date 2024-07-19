@@ -1,5 +1,3 @@
-
-
 import { uniqBy } from 'lodash';
 import mime from 'mime-types';
 import { Api, CollaCommandManager, CollaCommandName, getNewId, IAttachmentValue, IDPrefix, Selectors, StatusCode, Strings, t } from '@apitable/core';
@@ -276,12 +274,7 @@ export class UploadManager {
    * @returns
    * @memberof UploadManager
    */
-  public emitProgress(
-    cellId: string,
-    fileId: string,
-    loaded: number,
-    total: number | undefined,
-  ) {
+  public emitProgress(cellId: string, fileId: string, loaded: number, total: number | undefined) {
     if (!this.uploadMap[cellId]) {
       return;
     }

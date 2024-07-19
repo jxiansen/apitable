@@ -1,5 +1,3 @@
-
-
 import { useMount, useRequest, useUnmount } from 'ahooks';
 import { openTryoutSku } from 'dingtalk-design-libs';
 import dd from 'dingtalk-jsapi';

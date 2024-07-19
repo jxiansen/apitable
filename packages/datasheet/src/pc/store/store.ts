@@ -1,5 +1,3 @@
-
-
 import { composeWithDevTools } from '@redux-devtools/extension';
 import { applyMiddleware, createStore as _createStore } from 'redux';
 import { enableBatching } from 'redux-batched-actions';

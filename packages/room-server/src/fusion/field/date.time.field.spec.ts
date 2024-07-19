@@ -1,5 +1,3 @@
-
-
 import { CellFormatEnum, DateFormat, FieldType, IDateTimeField, IReduxState, Reducers, TimeFormat } from '@apitable/core';
 import { DateTimeField } from 'fusion/field/date.time.field';
 import { applyMiddleware, createStore, Store } from 'redux';

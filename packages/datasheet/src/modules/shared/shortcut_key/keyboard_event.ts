@@ -1,5 +1,3 @@
-
-
 import { browser } from '../browser';
 import { KeyCode, KeyCodeUtils, KeyMod, SimpleKeybinding } from './key_codes';
 

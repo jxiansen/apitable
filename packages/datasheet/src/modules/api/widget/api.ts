@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import { IApiWrapper, IWidget, WidgetPackageType, WidgetReleaseType } from '@apitable/core';
 import * as Url from './const';
@@ -14,7 +12,10 @@ import * as Url from './const';
  * @returns
  */
 export const createWidget = (
-  name: string, spaceId: string, packageType: WidgetPackageType = WidgetPackageType.Custom, releaseType: WidgetReleaseType = WidgetReleaseType.Space
+  name: string,
+  spaceId: string,
+  packageType: WidgetPackageType = WidgetPackageType.Custom,
+  releaseType: WidgetReleaseType = WidgetReleaseType.Space,
 ) => {
   return axios.post(Url.CREATE_WIDGET, { name, spaceId, packageType, releaseType });
 };
@@ -34,7 +35,6 @@ export const installWidget = (nodeId: string, packageId: string, name?: string) 
   return axios.post<IApiWrapper & { data: IWidget }>(Url.INSTALL_WIDGET, {
     nodeId: nodeId,
     widgetPackageId: packageId,
-    name
+    name,
   });
 };
-

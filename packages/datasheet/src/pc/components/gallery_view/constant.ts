@@ -1,5 +1,3 @@
-
-
 import { FieldType } from '@apitable/core';
 
 // The field rendering component declares here the height at which the field will be displayed in the card if it is not a text class.

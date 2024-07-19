@@ -1,5 +1,3 @@
-
-
 import classnames from 'classnames';
 import { FC } from 'react';
 import { Message } from 'pc/components/common';
@@ -43,10 +41,10 @@ export const MobileContextMenu: FC<React.PropsWithChildren<IMobileContextMenuPro
                   onClick={
                     groupItem.disabled
                       ? () => {
-                        Message.warning({
-                          content: groupItem.disabledTip,
-                        });
-                      }
+                          Message.warning({
+                            content: groupItem.disabledTip,
+                          });
+                        }
                       : groupItem.onClick
                   }
                 />

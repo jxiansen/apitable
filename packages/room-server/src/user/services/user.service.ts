@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@nestjs/common';
 import { EnvConfigKey } from 'shared/common';
 import { IAuthHeader, INamedUser, IOssConfig, IUserBaseInfo } from 'shared/interfaces';

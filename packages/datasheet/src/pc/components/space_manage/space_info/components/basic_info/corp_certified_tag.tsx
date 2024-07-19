@@ -1,5 +1,3 @@
-
-
 import classnames from 'classnames';
 import { Strings, t } from '@apitable/core';
 // eslint-disable-next-line no-restricted-imports

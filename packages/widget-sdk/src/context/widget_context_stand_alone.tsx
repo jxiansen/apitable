@@ -1,5 +1,3 @@
-
-
 import React, { useContext, useEffect } from 'react';
 import useToggleOrSet from './private/use_toggle_or_set';
 import { noop } from 'lodash';
@@ -17,11 +15,11 @@ export interface IWidgetStandAloneProps {
 }
 
 /**
- * WidgetProvider for standalone widget, 
+ * WidgetProvider for standalone widget,
  * with its own data loading capabilities and resourceService.
  * Multiple widgets can be loaded in a page, just wrap WidgetProvider on the outer layer of each widget.
  */
-export const WidgetStandAloneProvider: React.FC<React.PropsWithChildren<IWidgetStandAloneProps>> = props => {
+export const WidgetStandAloneProvider: React.FC<React.PropsWithChildren<IWidgetStandAloneProps>> = (props) => {
   const { resourceService, globalStore } = useContext(GlobalContext);
   const [isSettingOpened, { toggle: toggleSetting }] = useToggleOrSet(true);
   const [isExpanded, { toggle: toggleExpand }] = useToggleOrSet(false);

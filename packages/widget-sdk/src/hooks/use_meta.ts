@@ -1,5 +1,3 @@
-
-
 import { IMetaType, InstallPosition, IWidgetState, RuntimeEnv } from 'interface';
 import { useContext, useMemo } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -12,7 +10,7 @@ const getInstallPosition = (state: IWidgetState) => {
   }
   if (state.pageParams?.mirrorId || state.pageParams?.datasheetId) {
     return InstallPosition.WidgetPanel;
-  } 
+  }
   return undefined;
 };
 
@@ -38,7 +36,7 @@ const getInstallPosition = (state: IWidgetState) => {
  */
 export function useMeta(): IMetaType {
   const { id, theme, runtimeEnv = RuntimeEnv.Desktop } = useContext(WidgetContext);
-  const metaData = useSelector(state => {
+  const metaData = useSelector((state) => {
     const datasheet = getWidgetDatasheet(state);
     return {
       name: state.widget?.snapshot.widgetName,

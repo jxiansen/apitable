@@ -1,4 +1,3 @@
-
 import { IRobotAction, IRobotTrigger } from 'pc/components/robot/interface';
 
 export interface UpdatedBy {

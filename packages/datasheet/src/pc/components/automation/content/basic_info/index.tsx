@@ -5,13 +5,7 @@ import { FC, useMemo } from 'react';
 import styled from 'styled-components';
 import { Box, LinkButton, Switch, Typography } from '@apitable/components';
 import { Strings, t } from '@apitable/core';
-import {
-  ChevronRightOutlined,
-  GotoOutlined,
-  PlayOutlined,
-  TimeOutlined,
-  UserEditOutlined
-} from '@apitable/icons';
+import { ChevronRightOutlined, GotoOutlined, PlayOutlined, TimeOutlined, UserEditOutlined } from '@apitable/icons';
 import EllipsisText from 'pc/components/ellipsis_text';
 import { getNodeTypeByNodeId } from '../../../../utils';
 import { NodeIcon } from '../../../catalog/tree/node_icon';
@@ -51,10 +45,7 @@ export const BaseInfo: FC = () => {
   const permissions = useAutomationResourcePermission();
   const { items } = useGetTaskHistory();
 
-  const sortedList = useMemo(() =>
-    items.sort((a, b) => dayjs.tz(a.createdAt).isBefore(b.createdAt) ? 1 : -1), [
-    items,
-  ]);
+  const sortedList = useMemo(() => items.sort((a, b) => (dayjs.tz(a.createdAt).isBefore(b.createdAt) ? 1 : -1)), [items]);
   const [, setHistoryDialog] = useAtom(automationHistoryAtom);
 
   const handleChangeRobot = async (isActive: boolean) => {
@@ -79,7 +70,6 @@ export const BaseInfo: FC = () => {
   return (
     <>
       <Box display={'flex'} flexDirection={'column'} gridGap={'8px'}>
-
         <Box>
           <Box paddingX={'24px'} paddingTop={'4px'}>
             <Typography variant="h7" color={colors.textCommonPrimary} className={style.title}>
@@ -110,7 +100,7 @@ export const BaseInfo: FC = () => {
           <StyledGrip padding={'0 24px'} gridGap={'16px'} display={'flex'} flexDirection="column">
             <Box display={'flex'} justifyContent={'space-between'}>
               <Box display={'inline-flex'}>
-                <PlayOutlined size={16} color={colors.textCommonTertiary}/>
+                <PlayOutlined size={16} color={colors.textCommonTertiary} />
 
                 <Box alignItems={'center'} marginLeft={'8px'}>
                   <Typography variant="body4" color={colors.textCommonTertiary}>
@@ -126,7 +116,7 @@ export const BaseInfo: FC = () => {
 
             <Box display={'flex'} justifyContent={'space-between'}>
               <Box display={'inline-flex'}>
-                <UserEditOutlined size={16} color={colors.textCommonTertiary}/>
+                <UserEditOutlined size={16} color={colors.textCommonTertiary} />
 
                 <Box alignItems={'center'} marginLeft={'8px'}>
                   <Typography variant="body4" color={colors.textCommonTertiary}>
@@ -136,8 +126,7 @@ export const BaseInfo: FC = () => {
               </Box>
 
               <Box display={'flex'} alignItems={'center'}>
-                <Avatar id={AvatarType.Member.toString()} size={20} title={robot?.updatedBy?.nickName}
-                  src={robot?.updatedBy?.avatar}/>
+                <Avatar id={AvatarType.Member.toString()} size={20} title={robot?.updatedBy?.nickName} src={robot?.updatedBy?.avatar} />
 
                 <Box display="flex" alignItems={'center'} marginLeft={'8px'}>
                   <Typography variant="body4" color={colors.textCommonPrimary}>
@@ -149,7 +138,7 @@ export const BaseInfo: FC = () => {
 
             <Box display={'flex'} justifyContent={'space-between'}>
               <Box display={'inline-flex'}>
-                <TimeOutlined size={16} color={colors.textCommonTertiary}/>
+                <TimeOutlined size={16} color={colors.textCommonTertiary} />
 
                 <Box alignItems={'center'} marginLeft={'8px'}>
                   <Typography variant="body4" color={colors.textCommonTertiary}>
@@ -165,73 +154,77 @@ export const BaseInfo: FC = () => {
           </StyledGrip>
         </Box>
 
-        {
-          relativeFilesVisible && (
-            <Box>
-              <Box paddingX={'24px'}>
-                <Typography variant="h7"
-                  style={{ marginBottom: '0 !important', marginTop: '12px' }}
-                  color={colors.textCommonPrimary}>
-                  {t(Strings.related_files)}
+        {relativeFilesVisible && (
+          <Box>
+            <Box paddingX={'24px'}>
+              <Typography variant="h7" style={{ marginBottom: '0 !important', marginTop: '12px' }} color={colors.textCommonPrimary}>
+                {t(Strings.related_files)}
+              </Typography>
+            </Box>
+
+            {robot?.relatedResources?.map((item) => (
+              <Box padding={'0 16px'} key={item.nodeId}>
+                <StyeldRelatedResouece
+                  padding={'12px 8px'}
+                  display={'flex'}
+                  alignItems={'center'}
+                  justifyContent={'space-between'}
+                  onClick={() => {
+                    window.open(`/workbench/${item.nodeId}`);
+                  }}
+                >
+                  <Box display={'inline-flex'} alignItems={'center'}>
+                    <span
+                      style={{
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <NodeIcon
+                        nodeId={item.nodeId}
+                        type={getNodeTypeByNodeId(item.nodeId)}
+                        icon={item?.icon}
+                        editable={false}
+                        size={16}
+                        hasChildren
+                      />
+                    </span>
+
+                    <Box marginLeft={'8px'} display={'inline-flex'} alignItems={'center'} maxWidth={'80%'}>
+                      <EllipsisText>
+                        <Typography variant="body4" color={colors.textCommonPrimary}>
+                          {item.nodeName}
+                        </Typography>
+                      </EllipsisText>
+                    </Box>
+                  </Box>
+
+                  <GotoOutlined color={colors.textCommonTertiary} />
+                </StyeldRelatedResouece>
+              </Box>
+            ))}
+
+            {robot?.relatedResources?.length === 0 && (
+              <Box paddingX={'24px'} marginTop={'12px'}>
+                <Typography variant="body4" color={colors.textCommonTertiary}>
+                  {t(
+                    Strings.the_current_automation_workflow_has_no_related_files_you_can_establish_a_link_by_adding_trigger_conditions_and_actions_on_the_left_side,
+                  )}
                 </Typography>
               </Box>
-
-              {robot?.relatedResources?.map((item) => (
-                <Box padding={'0 16px'} key={item.nodeId}>
-                  <StyeldRelatedResouece
-                    padding={'12px 8px'}
-                    display={'flex'}
-                    alignItems={'center'}
-                    justifyContent={'space-between'}
-                    onClick={() => {
-                      window.open(`/workbench/${item.nodeId}`);
-                    }}
-                  >
-                    <Box display={'inline-flex'} alignItems={'center'}>
-                      <span style={{
-                        cursor: 'pointer',
-                      }}>
-                        <NodeIcon nodeId={item.nodeId} type={
-                          getNodeTypeByNodeId(item.nodeId)
-                        } icon={item?.icon} editable={false} size={16} hasChildren/>
-                      </span>
-
-                      <Box marginLeft={'8px'} display={'inline-flex'} alignItems={'center'} maxWidth={'80%'}>
-                        <EllipsisText>
-                          <Typography variant="body4" color={colors.textCommonPrimary}>
-                            {item.nodeName}
-                          </Typography>
-                        </EllipsisText>
-                      </Box>
-                    </Box>
-
-                    <GotoOutlined color={colors.textCommonTertiary}/>
-                  </StyeldRelatedResouece>
-                </Box>
-              ))}
-
-              {robot?.relatedResources?.length === 0 && (
-                <Box paddingX={'24px'} marginTop={'12px'}>
-                  <Typography variant="body4" color={colors.textCommonTertiary}>
-                    {t(Strings.the_current_automation_workflow_has_no_related_files_you_can_establish_a_link_by_adding_trigger_conditions_and_actions_on_the_left_side)}
-                  </Typography>
-                </Box>
-              )}
-            </Box>
-          )
-        }
+            )}
+          </Box>
+        )}
         <Box>
           <Box justifyContent={'space-between'} alignItems={'center'} display={'flex'} paddingX={'24px'}>
             <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
-              <Typography variant="h7" color={colors.textCommonPrimary}
-                style={{ marginBottom: '12px', marginTop: '12px' }}>
+              <Typography variant="h7" color={colors.textCommonPrimary} style={{ marginBottom: '12px', marginTop: '12px' }}>
                 {t(Strings.robot_run_history_title)}
               </Typography>
             </Box>
 
             {items.length > 0 && (
               <LinkButton
-                suffixIcon={<ChevronRightOutlined size={16} color={colors.textCommonTertiary}/>}
+                suffixIcon={<ChevronRightOutlined size={16} color={colors.textCommonTertiary} />}
                 underline={false}
                 onClick={() => {
                   setHistoryDialog((d) => ({
@@ -240,23 +233,21 @@ export const BaseInfo: FC = () => {
                   }));
                 }}
               >
-                <Typography variant={'body3'}
-                  color={colors.textCommonTertiary}>{t(Strings.automation_more)}</Typography>
+                <Typography variant={'body3'} color={colors.textCommonTertiary}>
+                  {t(Strings.automation_more)}
+                </Typography>
               </LinkButton>
             )}
           </Box>
 
-          <Box display={'flex'} alignItems={'center'} flexDirection={'row'} paddingBottom={'5px'}
-            paddingX={'24px'}>
+          <Box display={'flex'} alignItems={'center'} flexDirection={'row'} paddingBottom={'5px'} paddingX={'24px'}>
             <Typography variant={'body4'} color={colors.textCommonTertiary}>
               {t(Strings.notify_creator_when_there_is_an_error_occurred)}
             </Typography>
 
             <Box display={'flex'} alignItems={'center'} marginLeft={'8px'}>
               <Switch
-                disabled={
-                  !permissions.editable
-                }
+                disabled={!permissions.editable}
                 size="default"
                 checked={robot?.props?.failureNotifyEnable}
                 onChange={async (v) => {
@@ -276,7 +267,7 @@ export const BaseInfo: FC = () => {
       </Box>
 
       <Box paddingX={'16px'}>
-        <TaskList list={sortedList.slice(0, 10)} isSummary={false} activeId={undefined}/>
+        <TaskList list={sortedList.slice(0, 10)} isSummary={false} activeId={undefined} />
       </Box>
     </>
   );

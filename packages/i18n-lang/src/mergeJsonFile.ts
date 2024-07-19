@@ -1,5 +1,3 @@
-
-
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -35,9 +33,13 @@ const mergeJsonFiles = (folderNames: string[], outputFile: string, sourceFile: s
   const mergeObjects = (target: { [key: string]: any }, source: { [key: string]: any }) => {
     for (const key in source) {
       if (source.hasOwnProperty(key)) {
-        if (source[key] instanceof Object && !(source[key] instanceof Array)
-                    && target.hasOwnProperty(key) && target[key] instanceof Object
-                    && !(target[key] instanceof Array)) {
+        if (
+          source[key] instanceof Object &&
+          !(source[key] instanceof Array) &&
+          target.hasOwnProperty(key) &&
+          target[key] instanceof Object &&
+          !(target[key] instanceof Array)
+        ) {
           mergeObjects(target[key], source[key]);
         } else {
           target[key] = source[key];
@@ -53,7 +55,7 @@ const mergeJsonFiles = (folderNames: string[], outputFile: string, sourceFile: s
       const folderName = folderNames[index];
       const folderPath = path.resolve(folderName);
       const files = fs.readdirSync(folderPath);
-      const jsonFiles = files.filter(file => file.endsWith('.json') && file.startsWith(sourceFile));
+      const jsonFiles = files.filter((file) => file.endsWith('.json') && file.startsWith(sourceFile));
       const readJsonFile = (filename: string) => {
         const filePath = path.join(folderPath, filename);
         const data = fs.readFileSync(filePath, 'utf-8');

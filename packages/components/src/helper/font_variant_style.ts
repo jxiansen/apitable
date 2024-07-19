@@ -1,15 +1,13 @@
-
-
 import { css } from 'styled-components';
 
 const fontWeightBold = 'bold';
 const fontWeightRegular = 'normal';
 
-const buildVariant = (fontWeight: string, fontSize: number, lineHeight: number) => (css`
+const buildVariant = (fontWeight: string, fontSize: number, lineHeight: number) => css`
   font-size: ${`${fontSize}px`};
   font-weight: ${fontWeight};
   line-height: ${`${lineHeight}px`};
-`);
+`;
 
 export const fontVariants = {
   h1: buildVariant(fontWeightBold, 32, 48),

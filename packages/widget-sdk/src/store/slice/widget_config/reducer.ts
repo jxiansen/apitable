@@ -4,7 +4,8 @@ import { IWidgetConfigIframe } from 'interface';
 
 export function widgetConfigReducer(
   state: IWidgetConfigIframe = { isShowingSettings: false, isFullscreen: false },
-  action: IUpdateWidgetConfigAction): IWidgetConfigIframe {
+  action: IUpdateWidgetConfigAction
+): IWidgetConfigIframe {
   switch (action.type) {
     case UPDATE_WIDGET_CONFIG: {
       return {
@@ -12,6 +13,7 @@ export function widgetConfigReducer(
         ...action.payload,
       };
     }
-    default: return state;
+    default:
+      return state;
   }
 }

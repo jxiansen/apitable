@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import Highlighter from 'react-highlight-words';
 import { Typography } from '@apitable/components';

@@ -48,6 +48,6 @@ export function createMockPermissions(): IPermissions {
     viewKeyFieldEditable: true,
     viewColorOptionEditable: true,
     viewManualSaveManageable: true,
-    viewOptionSaveEditable: true
+    viewOptionSaveEditable: true,
   };
 }

@@ -1,5 +1,3 @@
-
-
 import { databus, IRecordMap, isBasicField, IViewRow } from '@apitable/core';
 import { IAuthHeader } from 'shared/interfaces';
 import { CascaderLinkedField } from '../models/cascader.link.field';
@@ -27,7 +25,7 @@ export class DatasheetFieldCascaderService {
       throw new Error('view no exist');
     }
     const linkedFields: CascaderLinkedField[] = await this.getCascaderLinkedFields(cascaderSourceDataView.view);
-    const fieldIds: string[] = linkedFieldIds || slice(linkedFields, 0, 2).map(i => i.id);
+    const fieldIds: string[] = linkedFieldIds || slice(linkedFields, 0, 2).map((i) => i.id);
     if (fieldIds.length === 0) {
       return {
         linkedFields: [],
@@ -74,7 +72,7 @@ export class DatasheetFieldCascaderService {
       const linkedRecordData: ILinkRecordData = reduce(
         fieldIdToCellValue,
         (result, cellValue, fldId) => {
-          if(fieldMethods[fldId]) {
+          if (fieldMethods[fldId]) {
             result[fldId] = { text: getTextByCellValue(cellValue, fldId, fieldMethods) };
           }
           return result;
@@ -102,13 +100,7 @@ export class DatasheetFieldCascaderService {
           setNode(treeNodesMap, linkedFieldId, branchKey, node);
         }
         // ------------------------------- End --------------------------------------//
-        linkNodeToParentNode(
-          { fieldIdToParentFieldId, treeNodesMap, groupToTextToSet, treeNodes },
-          linkedFieldId,
-          linkedRecordData,
-          node,
-          isNewNode,
-        );
+        linkNodeToParentNode({ fieldIdToParentFieldId, treeNodesMap, groupToTextToSet, treeNodes }, linkedFieldId, linkedRecordData, node, isNewNode);
       }
     }
     return treeNodes;

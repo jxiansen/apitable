@@ -10,7 +10,7 @@ export const useFetchExtraData = () => {
     reject: (reason?: any) => void;
     datasheetId?: string;
     mirrorId?: string;
-      } | null>(null);
+  } | null>(null);
   const dispatch = useDispatch();
   const mirror = useAppSelector((state) => {
     return process?.mirrorId ? Selectors.getMirror(state, process.mirrorId) : undefined;

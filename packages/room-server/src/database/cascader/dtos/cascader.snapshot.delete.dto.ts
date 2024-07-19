@@ -1,5 +1,3 @@
-
-
 export class CascaderSnapshotDeleteDto {
   spaceId!: string;
 

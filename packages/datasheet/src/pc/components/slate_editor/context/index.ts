@@ -1,5 +1,3 @@
-
-
 import { createContext } from 'react';
 import i18nText from '../strings';
 

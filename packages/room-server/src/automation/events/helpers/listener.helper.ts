@@ -1,5 +1,3 @@
-
-
 import { EventRealTypeEnums, EventSourceTypeEnums, IEventInstance, IEventListenerOptions, IOPEvent } from '@apitable/core';
 
 /**

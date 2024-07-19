@@ -1,5 +1,3 @@
-
-
 // Form common
 export * from './AddButton';
 export * from './DefaultErrorList';

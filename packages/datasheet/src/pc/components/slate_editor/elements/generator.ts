@@ -1,5 +1,3 @@
-
-
 import cloneDeep from 'lodash/cloneDeep';
 import { getNewId, IDPrefix } from '@apitable/core';
 import { NodeType, ElementType, ALIGN } from '../constant';

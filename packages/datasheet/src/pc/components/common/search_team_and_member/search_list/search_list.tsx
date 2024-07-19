@@ -1,5 +1,3 @@
-
-
 import { List } from 'antd';
 import { FC } from 'react';
 import { ITeamsInSearch, IMembersInSearch, t, Strings } from '@apitable/core';

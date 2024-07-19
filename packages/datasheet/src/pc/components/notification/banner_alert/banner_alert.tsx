@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import Image from 'next/image';
 import { createRoot } from 'react-dom/client';

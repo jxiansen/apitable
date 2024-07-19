@@ -1,5 +1,3 @@
-
-
 import { generateRandomString } from '@apitable/core';
 import { Body, Controller, Delete, Headers, Param, Patch, Post } from '@nestjs/common';
 import { isEmpty } from 'lodash';
@@ -14,20 +12,23 @@ export class RobotActionController {
     private readonly automationActionRepository: AutomationActionRepository,
     private readonly automationActionService: RobotActionService,
     private readonly userService: UserService,
-  ) {
-  }
+  ) {}
 
   @Post(['/'])
   async createAction(@Body() action: ActionCreateRo, @Headers('cookie') cookie: string) {
     const user = await this.userService.getMe({ cookie });
     await this.automationActionService.checkCreateActionCount(action.robotId);
-    const actionId =`aac${generateRandomString(15)}`;
+    const actionId = `aac${generateRandomString(15)}`;
     if (!isEmpty(action.prevActionId)) {
       const actions = await this.automationActionRepository.selectActionBaseInfosByRobotIds([action.robotId]);
-      const oldNextAction = actions.filter(i => i.prevActionId == action.prevActionId)[0];
+      const oldNextAction = actions.filter((i) => i.prevActionId == action.prevActionId)[0];
       if (oldNextAction) {
-        await this.automationActionRepository.updateRobotPrevActionIdByOldPrevActionId(user.userId, action.robotId,
-          actionId, oldNextAction.prevActionId!);
+        await this.automationActionRepository.updateRobotPrevActionIdByOldPrevActionId(
+          user.userId,
+          action.robotId,
+          actionId,
+          oldNextAction.prevActionId!,
+        );
       }
     }
     return await this.automationActionRepository.createAction(actionId, action, user.userId);
@@ -36,8 +37,8 @@ export class RobotActionController {
   @Patch(['/:actionId'])
   async changeActionTypeId(
     @Param('actionId') actionId: string,
-    @Body() data: { actionTypeId?: string, input?: object },
-    @Headers('cookie') cookie: string
+    @Body() data: { actionTypeId?: string; input?: object },
+    @Headers('cookie') cookie: string,
   ) {
     const user = await this.userService.getMe({ cookie });
     if (data.actionTypeId) {
@@ -50,10 +51,7 @@ export class RobotActionController {
   }
 
   @Delete(['/:actionId'])
-  async deleteRobotAction(
-    @Param('actionId') actionId: string,
-    @Headers('cookie') cookie: string
-  ) {
+  async deleteRobotAction(@Param('actionId') actionId: string, @Headers('cookie') cookie: string) {
     const { userId } = await this.userService.getMe({ cookie });
     return this.automationActionService.deleteRobotActionByActionId(userId, actionId);
   }

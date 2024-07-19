@@ -1,5 +1,3 @@
-
-
 import { Input, Tooltip } from 'antd';
 import RcTrigger from 'rc-trigger';
 import * as React from 'react';

@@ -1,5 +1,3 @@
-
-
 export * from './expand_record';
 export type { IExpandRecordComponentProp } from 'pc/components/expand_record/expand_record.interface';
 export type { IExpandRecordWrapperProp } from 'pc/components/expand_record/expand_record.interface';

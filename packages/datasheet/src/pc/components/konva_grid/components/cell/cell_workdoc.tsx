@@ -59,11 +59,7 @@ export const CellWorkdoc = (props: ICellProps) => {
     if (renderContent == null) return null;
     const { x, y, width, height, text } = renderContent[0] as IRenderContentBase;
     return (
-      <Group
-        x={10}
-        y={5}
-        listening={isActive}
-      >
+      <Group x={10} y={5} listening={isActive}>
         <Rect
           name={name}
           width={width + 6}
@@ -103,32 +99,36 @@ export const CellWorkdoc = (props: ICellProps) => {
       recordId={recordId}
       renderData={{} as IRenderData}
     >
-      {(operatingEnable && renderContent == null) ? editable ? (
-        <>
-          <Icon
-            name={name}
-            x={GRID_CELL_VALUE_PADDING}
-            y={5}
-            data={AddOutlinedPath}
-            shape={'circle'}
-            backgroundWidth={22}
-            backgroundHeight={22}
-            background={isHover ? colors.rowSelectedBgSolid : 'transparent'}
-            onMouseEnter={() => setHover(true)}
-            onMouseOut={() => setHover(false)}
-            onClick={toggleEdit}
-            onTap={toggleEdit}
-          />
-          <Text
-            x={GRID_OPTION_ITEM_PADDING + GRID_CELL_ADD_ITEM_BUTTON_SIZE}
-            y={16}
-            height={height}
-            text={t(Strings.workdoc_create)}
-            fontSize={13}
-            fill={colors.textCommonTertiary}
-          />
-        </>
-      ) : null : renderDoc()}
+      {operatingEnable && renderContent == null ? (
+        editable ? (
+          <>
+            <Icon
+              name={name}
+              x={GRID_CELL_VALUE_PADDING}
+              y={5}
+              data={AddOutlinedPath}
+              shape={'circle'}
+              backgroundWidth={22}
+              backgroundHeight={22}
+              background={isHover ? colors.rowSelectedBgSolid : 'transparent'}
+              onMouseEnter={() => setHover(true)}
+              onMouseOut={() => setHover(false)}
+              onClick={toggleEdit}
+              onTap={toggleEdit}
+            />
+            <Text
+              x={GRID_OPTION_ITEM_PADDING + GRID_CELL_ADD_ITEM_BUTTON_SIZE}
+              y={16}
+              height={height}
+              text={t(Strings.workdoc_create)}
+              fontSize={13}
+              fill={colors.textCommonTertiary}
+            />
+          </>
+        ) : null
+      ) : (
+        renderDoc()
+      )}
     </CellScrollContainer>
   );
 };

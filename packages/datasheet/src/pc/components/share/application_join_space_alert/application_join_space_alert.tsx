@@ -1,5 +1,3 @@
-
-
 import classnames from 'classnames';
 import { FC, useState } from 'react';
 import ReactDOM from 'react-dom';

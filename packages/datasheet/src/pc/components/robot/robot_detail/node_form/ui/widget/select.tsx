@@ -1,5 +1,3 @@
-
-
 import { DropdownSelect as Select } from '@apitable/components';
 import { t, Strings } from '@apitable/core';
 import { IWidgetProps } from '../../core/interface';

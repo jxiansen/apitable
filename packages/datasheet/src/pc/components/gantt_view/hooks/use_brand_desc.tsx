@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { useContext, useMemo } from 'react';
 import { getThemeName, ThemeName } from '@apitable/components';

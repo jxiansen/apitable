@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { shallowEqual } from 'react-redux';
 import { useThemeColors } from '@apitable/components';

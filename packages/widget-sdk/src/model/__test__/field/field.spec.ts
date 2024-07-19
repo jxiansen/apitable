@@ -29,7 +29,7 @@ describe('field modal should return the correct result', () => {
     cmdExecuteMock.mockRestore();
   });
 
-  test('property is correct', async() => {
+  test('property is correct', async () => {
     const fieldId = await datasheet.addField('test', FieldType.Rating, { max: 3, icon: 'star' });
     const fieldMap = getFieldMap(mockWidgetSdkData.widgetSdkData, DEFAULT_DATASHEET_ID)!;
     const field = new Field(DEFAULT_DATASHEET_ID, context, fieldMap[fieldId]!);
@@ -38,7 +38,7 @@ describe('field modal should return the correct result', () => {
     expect(property.icon).toEqual('⭐');
   });
 
-  test('updateProperty is correct', async() => {
+  test('updateProperty is correct', async () => {
     const fieldId = await datasheet.addField('test', FieldType.Rating, { max: 3, icon: 'star' });
     const fieldMap = getFieldMap(mockWidgetSdkData.widgetSdkData, DEFAULT_DATASHEET_ID)!;
     const field = new Field(DEFAULT_DATASHEET_ID, context, fieldMap[fieldId]!);
@@ -60,7 +60,7 @@ describe('field modal should return the correct result', () => {
 
   test('checkPermissionForUpdateProperty acceptable as true', () => {
     const primaryField = getPrimaryFieldDefault();
-    
+
     const field = new Field(DEFAULT_DATASHEET_ID, context, primaryField);
     const res = field.checkPermissionForUpdateProperty({ defaultValue: '1' });
     expect(res.acceptable).toBe(true);
@@ -69,13 +69,15 @@ describe('field modal should return the correct result', () => {
   test('checkPermissionForUpdateProperty acceptable as false', () => {
     const mockWidgetSdkData = MockWidgetSdkData.simpleDatasheetExample();
     // No node access.
-    mockWidgetSdkData.dispatch(StoreActions.updateDatasheet(DEFAULT_DATASHEET_ID, {
-      permissions: {
-        ...createMockPermissions(),
-        manageable: false,
-        fieldPropertyEditable: false
-      }
-    }));
+    mockWidgetSdkData.dispatch(
+      StoreActions.updateDatasheet(DEFAULT_DATASHEET_ID, {
+        permissions: {
+          ...createMockPermissions(),
+          manageable: false,
+          fieldPropertyEditable: false,
+        },
+      })
+    );
     const context = createSimpleContextWrapper({ mockWidgetSdkData });
 
     const primaryField = getPrimaryFieldDefault(mockWidgetSdkData.widgetSdkData);
@@ -85,7 +87,7 @@ describe('field modal should return the correct result', () => {
     expect(res.acceptable).toBe(false);
   });
 
-  test('test other accessor properties', async() => {
+  test('test other accessor properties', async () => {
     const fieldId = await datasheet.addField('test', FieldType.Rating, { max: 3, icon: 'star' });
     const fieldMap = getFieldMap(mockWidgetSdkData.widgetSdkData, DEFAULT_DATASHEET_ID)!;
     const field = new Field(DEFAULT_DATASHEET_ID, context, fieldMap[fieldId]!);

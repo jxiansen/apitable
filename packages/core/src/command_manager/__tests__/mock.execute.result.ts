@@ -1,5 +1,3 @@
-
-
 import { ExecuteResult, ExecuteType, ICollaCommandExecuteSuccessResult } from 'command_manager/types';
 import { IJOTAction, ILocalChangeset, IOperation, OTActionName } from 'engine';
 import { IResourceOpsCollect } from 'command_manager/command_manager';
@@ -63,7 +61,7 @@ export const mockResultOfAddOneDefaultRecordInDst1 = (recordId: string): ICollaC
 });
 
 export const mockChangesetsOfAddOneDefaultRecordInDst1 = (recordId: string): ILocalChangeset[] =>
-  mockOpsCollectsOfAddOneDefaultRecordInDst1(recordId).map(ops => ({
+  mockOpsCollectsOfAddOneDefaultRecordInDst1(recordId).map((ops) => ({
     baseRevision: 1,
     messageId: 'x',
     resourceId: 'dst1',
@@ -75,7 +73,7 @@ export const mockAddOneRecordResult = (
   dstId: string,
   recordId: string,
   cellValues: { [fieldId: string]: ICellValue },
-  actions: IJOTAction[] = [],
+  actions: IJOTAction[] = []
 ) => {
   const operation: IOperation = {
     cmd: 'AddRecords',
@@ -214,7 +212,7 @@ export const mockResultOfDeleteLinkFieldInDst2: ICollaCommandExecuteSuccessResul
   result: ExecuteResult.Success,
   data: undefined,
   operation: mockOperationOfDeleteLinkFieldInDst2,
-  linkedActions: mockLinkedOperationsOfDeleteLinkFieldInDst2.map(op => ({
+  linkedActions: mockLinkedOperationsOfDeleteLinkFieldInDst2.map((op) => ({
     actions: op.actions,
     datasheetId: 'dst3',
   })),

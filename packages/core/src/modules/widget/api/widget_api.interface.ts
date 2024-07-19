@@ -1,5 +1,3 @@
-
-
 export interface IWidgetTemplateItem {
   cover: string;
   description: string;

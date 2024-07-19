@@ -1,5 +1,3 @@
-
-
 /**
  * Purpose: advance calculation of information that needs to be processed based on the underlying metadata to be obtained
  * during UI rendering in the main thread, and caching it in the main thread

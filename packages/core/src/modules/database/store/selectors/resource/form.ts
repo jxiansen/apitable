@@ -1,5 +1,3 @@
-
-
 import { IFormState, IFormPack } from 'modules/database/store/interfaces/resource/form';
 import { IReduxState } from '../../../../../exports/store/interfaces';
 import { getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
@@ -32,7 +30,7 @@ export const getFormLoading = (state: IReduxState, id?: string) => {
 export const getFormErrorCode = (state: IReduxState, id?: string) => {
   const formPack = getFormPack(state, id);
   if (!formPack) {
-    return ;
+    return;
   }
   return formPack.errorCode;
 };
@@ -81,7 +79,7 @@ export const getFormRelMeta = (state: IReduxState, id?: string) => {
     return null;
   }
 
-  const currentView = datasheetSnapshot.meta.views.filter(view => {
+  const currentView = datasheetSnapshot.meta.views.filter((view) => {
     return view.id === viewId;
   });
   if (!currentView.length) {

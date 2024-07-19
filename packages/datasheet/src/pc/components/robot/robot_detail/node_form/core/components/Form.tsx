@@ -1,5 +1,3 @@
-
-
 import _pick from 'lodash/pick';
 import { useEffect, useImperativeHandle, useState, useRef, memo } from 'react';
 import * as React from 'react';
@@ -29,9 +27,9 @@ const Form1 = React.forwardRef((_props: IFormProps<any>, ref) => {
 
   useEffect(() => {
     const newProps = { ...defaultProps, ..._props };
-    setState(getStateFromProps(newProps, newProps.formData,));
-    if(props.validateOnMount) {
-      setNewErrorSchema(getStateFromProps(newProps, newProps.formData,).errorSchema);
+    setState(getStateFromProps(newProps, newProps.formData));
+    if (props.validateOnMount) {
+      setNewErrorSchema(getStateFromProps(newProps, newProps.formData).errorSchema);
     }
   }, [_props, props.validateOnMount]);
 
@@ -71,7 +69,6 @@ const Form1 = React.forwardRef((_props: IFormProps<any>, ref) => {
   };
 
   const onChange = (formData: any, newErrorSchema: any) => {
-
     if (isObject(formData) || Array.isArray(formData)) {
       const newState = getStateFromProps(props, formData, state);
       formData = newState.formData;

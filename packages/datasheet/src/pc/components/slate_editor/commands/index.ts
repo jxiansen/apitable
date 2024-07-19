@@ -1,5 +1,3 @@
-
-
 import clamp from 'lodash/clamp';
 import { Editor, Transforms, Element as SlateElement, Range, Location as SlateLocation, Path, Node, BaseEditor } from 'slate';
 import { ReactEditor } from 'slate-react';

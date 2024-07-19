@@ -1,5 +1,3 @@
-
-
 import { Progress } from 'antd';
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';

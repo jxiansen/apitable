@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { Tooltip, useThemeColors, ThemeProvider } from '@apitable/components';
 import { Selectors, Strings, t } from '@apitable/core';

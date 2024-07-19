@@ -1,4 +1,3 @@
-
 import { IMeta } from '@apitable/core';
 
 export interface INodeInstalledWidget {

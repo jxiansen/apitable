@@ -1,5 +1,3 @@
-
-
 import { Tree } from 'antd';
 import classNames from 'classnames';
 import * as React from 'react';
@@ -146,7 +144,7 @@ export const ShareMenu: React.FC<React.PropsWithChildren<IShareMenu>> = ({ share
   return (
     <div className={styles.shareMenu}>
       <div className={styles.logo} onClick={enterSpace}>
-        <Logo theme={ThemeName.Dark} size="large" type='SHARE_LOGO' />
+        <Logo theme={ThemeName.Dark} size="large" type="SHARE_LOGO" />
       </div>
       <div className={styles.shareInfo}>
         <div className={styles.avatar}>

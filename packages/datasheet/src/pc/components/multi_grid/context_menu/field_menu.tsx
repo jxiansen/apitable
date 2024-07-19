@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import * as React from 'react';
 import { memo, useMemo, useRef } from 'react';
@@ -27,7 +25,8 @@ import {
   t,
   ToolBarMenuCardOpenState,
   ViewType,
-  IGridViewProperty, ConfigConstant
+  IGridViewProperty,
+  ConfigConstant,
 } from '@apitable/core';
 import {
   ArrowDownOutlined,

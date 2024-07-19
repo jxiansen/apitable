@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import cls from 'classnames';
 import { usePostHog } from 'posthog-js/react';

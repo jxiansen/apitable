@@ -1,5 +1,3 @@
-
-
 import cls from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import * as React from 'react';

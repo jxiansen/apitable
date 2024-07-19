@@ -1,9 +1,4 @@
-
-
-import {
-  getSnapshot,
-  getStringifyCellValue
-} from 'modules/database/store/selectors/resource/datasheet';
+import { getSnapshot, getStringifyCellValue } from 'modules/database/store/selectors/resource/datasheet';
 import { IReduxState } from '../../../../exports/store/interfaces';
 import * as mirrorState from './mirror_state.json';
 

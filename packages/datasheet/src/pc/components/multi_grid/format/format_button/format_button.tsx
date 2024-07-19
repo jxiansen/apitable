@@ -228,10 +228,10 @@ export const FormatButton: React.FC<React.PropsWithChildren<IFormateButtonProps>
       preNodeId: datasheetId,
       parentId: datasheetParentId,
       type: 10,
-      unitId: isDatasheetPrivate ? userUnitId : undefined
+      unitId: isDatasheetPrivate ? userUnitId : undefined,
     });
     const { data, message, success } = res.data;
-    if(!success) {
+    if (!success) {
       message.error(message);
     }
     const automationId = data?.nodeId;
@@ -265,39 +265,42 @@ export const FormatButton: React.FC<React.PropsWithChildren<IFormateButtonProps>
   }, [currentField, datasheetId, datasheetParentId, handleAddTrigger, handleModify, router, setAutomationSource, userUnitId]);
 
   const handleClickDebounce = debounce(handleClick, 300);
-  const handleAutomationChange = useCallback(async ({ automationId }: IOnChangeParams) => {
-    if (!automationId) {
-      return;
-    }
-    const robot = await automationApiClient.getResourceRobots({
-      resourceId: automationId,
-      shareId: '',
-    });
-
-    const data = robot.data?.[0]?.triggers?.length;
-
-    if (data && data >= CONST_MAX_TRIGGER_COUNT) {
-      message.warn(t(Strings.number_of_trigger_is_full));
-      return;
-    }
-
-    await handleAddTrigger(automationId, datasheetId, currentField.id, (triggerId) => {
-      const item = produce(currentField, (draft) => {
-        draft.property.action.type = ButtonActionType.TriggerAutomation;
-        if (automationId) {
-          if (draft.property.action?.automation) {
-            draft.property.action.automation.automationId = automationId;
-            draft.property.action.automation.triggerId = triggerId;
-          } else {
-            draft.property.action.automation = { automationId, triggerId };
-          }
-        }
+  const handleAutomationChange = useCallback(
+    async ({ automationId }: IOnChangeParams) => {
+      if (!automationId) {
+        return;
+      }
+      const robot = await automationApiClient.getResourceRobots({
+        resourceId: automationId,
+        shareId: '',
       });
 
-      setBingAutomationVisible(false);
-      setCurrentField(item);
-    });
-  }, [currentField, datasheetId, handleAddTrigger, setCurrentField]);
+      const data = robot.data?.[0]?.triggers?.length;
+
+      if (data && data >= CONST_MAX_TRIGGER_COUNT) {
+        message.warn(t(Strings.number_of_trigger_is_full));
+        return;
+      }
+
+      await handleAddTrigger(automationId, datasheetId, currentField.id, (triggerId) => {
+        const item = produce(currentField, (draft) => {
+          draft.property.action.type = ButtonActionType.TriggerAutomation;
+          if (automationId) {
+            if (draft.property.action?.automation) {
+              draft.property.action.automation.automationId = automationId;
+              draft.property.action.automation.triggerId = triggerId;
+            } else {
+              draft.property.action.automation = { automationId, triggerId };
+            }
+          }
+        });
+
+        setBingAutomationVisible(false);
+        setCurrentField(item);
+      });
+    },
+    [currentField, datasheetId, handleAddTrigger, setCurrentField],
+  );
 
   const loadingNewRef: MutableRefObject<boolean> = useRef(false);
   const loadingCreateRef: MutableRefObject<boolean> = useRef(false);
@@ -312,16 +315,15 @@ export const FormatButton: React.FC<React.PropsWithChildren<IFormateButtonProps>
                 paddingLeft={'16px'}
                 onClick={async () => {
                   try {
-                    if(loadingNewRef.current) {
+                    if (loadingNewRef.current) {
                       return;
                     }
-                    loadingNewRef.current =true;
+                    loadingNewRef.current = true;
                     await handleClickDebounce();
                   } finally {
-                    loadingNewRef.current =false;
+                    loadingNewRef.current = false;
                   }
-                }
-                }
+                }}
               >
                 <LinkButton prefixIcon={<AddOutlined color={colors.textBrandDefault} />} underline={false}>
                   <Typography variant={'body4'} color={colors.textBrandDefault}>
@@ -343,13 +345,13 @@ export const FormatButton: React.FC<React.PropsWithChildren<IFormateButtonProps>
           permissionRequired={'editable'}
           onChange={async (e) => {
             try {
-              if(loadingCreateRef.current) {
+              if (loadingCreateRef.current) {
                 return;
               }
-              loadingCreateRef.current=true;
+              loadingCreateRef.current = true;
               await handleAutomationChangeDebounced(e);
             } finally {
-              loadingCreateRef.current=false;
+              loadingCreateRef.current = false;
             }
           }}
           nodeTypes={[ConfigConstant.NodeType.AUTOMATION, ConfigConstant.NodeType.FOLDER]}

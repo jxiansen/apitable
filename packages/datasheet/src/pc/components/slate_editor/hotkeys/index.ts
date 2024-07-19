@@ -1,5 +1,3 @@
-
-
 import isHotkey from 'is-hotkey';
 import { Editor } from 'slate';
 import { IVikaEditor, IEventBusEditor } from '../interface/editor';

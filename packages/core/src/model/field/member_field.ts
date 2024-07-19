@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { isEqual, isNil, isString } from 'lodash';
 import { ICellValue } from 'model/record';
@@ -17,7 +15,10 @@ import { getFieldDefaultProperty } from './const';
 import { FieldType } from '../../types/field_types';
 
 export class MemberField extends MemberBaseField {
-  constructor(public override field: IMemberField, public override state: IReduxState) {
+  constructor(
+    public override field: IMemberField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -28,10 +29,17 @@ export class MemberField extends MemberBaseField {
     subscription: Joi.boolean(),
   }).required();
 
-  static cellValueSchema = Joi.array().items(Joi.string().pattern(/^\d{10}/).required()).allow(null).required();
+  static cellValueSchema = Joi.array()
+    .items(
+      Joi.string()
+        .pattern(/^\d{10}/)
+        .required()
+    )
+    .allow(null)
+    .required();
 
   static openWriteValueSchema = Joi.custom((owv: string[] | IMemberFieldOpenValue[], helpers) => {
-    const memberIds = (owv as any).map((v: string | IMemberFieldOpenValue) => isString(v) ? v : v.id);
+    const memberIds = (owv as any).map((v: string | IMemberFieldOpenValue) => (isString(v) ? v : v.id));
     if (!memberIds?.length) {
       return helpers.error('value format error');
     }
@@ -41,7 +49,9 @@ export class MemberField extends MemberBaseField {
       }
     }
     return owv;
-  }).allow(null).required();
+  })
+    .allow(null)
+    .required();
 
   validateProperty() {
     return MemberField.propertySchema.validate(this.field.property);
@@ -59,7 +69,7 @@ export class MemberField extends MemberBaseField {
     const unitMap = getUnitMap(this.state);
     const options: IAPIMetaMember[] = [];
     if (unitMap) {
-      this.field.property.unitIds.forEach(unitId => {
+      this.field.property.unitIds.forEach((unitId) => {
         if (unitMap.hasOwnProperty(unitId)) {
           const { name, type, avatar } = unitMap[unitId]!;
           options.push({
@@ -103,7 +113,7 @@ export class MemberField extends MemberBaseField {
             title: t(Strings.robot_variables_join_member_avatars),
           },
         },
-      }
+      },
     };
   }
 
@@ -133,7 +143,7 @@ export class MemberField extends MemberBaseField {
     const unitValue = Object.values(unitMap);
     // The members of the space station may have the same name, so every time the data is converted,
     // it is necessary to first find the members that are activated and not deleted, so all data must be checked
-    const unitNames = Array.from(new Set(stdValue.data.map(d => d.text.split(/, ?/)).flat()));
+    const unitNames = Array.from(new Set(stdValue.data.map((d) => d.text.split(/, ?/)).flat()));
     const cvMap = new Map();
     for (const name of unitNames) {
       for (const unit of unitValue) {
@@ -163,7 +173,7 @@ export class MemberField extends MemberBaseField {
     if (!unitMap) {
       return null;
     }
-    return cellValue.map(id => {
+    return cellValue.map((id) => {
       // There is unitId in the cell, but there is no corresponding user information in the space. Two situations need to be compatible here:
       // 1. Old data
       // 2. Data pasted from other spaces, or data stored in the dumped table
@@ -183,9 +193,11 @@ export class MemberField extends MemberBaseField {
     if (!unitMap) {
       return null;
     }
-    return cellValue.map(unitId => {
-      return unitMap[unitId];
-    }).filter(item => item);
+    return cellValue
+      .map((unitId) => {
+        return unitMap[unitId];
+      })
+      .filter((item) => item);
   }
 
   /**
@@ -201,7 +213,7 @@ export class MemberField extends MemberBaseField {
       return null;
     }
     const units: any[] = [];
-    cellValues.forEach(unitId => {
+    cellValues.forEach((unitId) => {
       if (unitMap.hasOwnProperty(unitId)) {
         units.push({
           id: unitId,
@@ -216,13 +228,15 @@ export class MemberField extends MemberBaseField {
   }
 
   override enrichProperty(stdVals: IStandardValue[]): IMemberProperty {
-    const cellValues = stdVals.map(stdVal => {
-      const cv = this.stdValueToCellValue(stdVal);
-      if (!cv) {
-        return [];
-      }
-      return cv;
-    }).flat() as string[];
+    const cellValues = stdVals
+      .map((stdVal) => {
+        const cv = this.stdValueToCellValue(stdVal);
+        if (!cv) {
+          return [];
+        }
+        return cv;
+      })
+      .flat() as string[];
 
     return {
       ...this.field.property,
@@ -236,7 +250,7 @@ export class MemberField extends MemberBaseField {
     }
 
     if (Array.isArray(value)) {
-      return value.every(unitId => {
+      return value.every((unitId) => {
         return typeof unitId === 'string';
       });
     }
@@ -248,7 +262,7 @@ export class MemberField extends MemberBaseField {
     const unitMap = getUnitMap(this.state);
     const options: IOpenMemberOption[] = [];
     if (unitMap) {
-      this.field.property.unitIds.forEach(unitId => {
+      this.field.property.unitIds.forEach((unitId) => {
         if (unitMap.hasOwnProperty(unitId)) {
           const { name, type, avatar } = unitMap[unitId]!;
           options.push({
@@ -265,7 +279,7 @@ export class MemberField extends MemberBaseField {
       options,
       isMulti,
       shouldSendMsg,
-      subscription
+      subscription,
     };
   }
 
@@ -286,7 +300,7 @@ export class MemberField extends MemberBaseField {
       isMulti: Boolean(isMulti),
       shouldSendMsg: Boolean(shouldSendMsg),
       subscription: Boolean(subscription),
-      unitIds
+      unitIds,
     };
   }
 
@@ -297,7 +311,7 @@ export class MemberField extends MemberBaseField {
       isMulti: isMulti ?? defaultProperty.isMulti,
       shouldSendMsg: shouldSendMsg ?? defaultProperty.shouldSendMsg,
       subscription: subscription ?? defaultProperty.subscription,
-      unitIds: []
+      unitIds: [],
     };
   }
 }

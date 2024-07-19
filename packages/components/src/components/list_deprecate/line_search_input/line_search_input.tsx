@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { SearchOutlined } from '@apitable/icons';
 import { ILineSearchInputProps } from './interface';
@@ -20,9 +18,13 @@ export const LineSearchInputBase: React.ForwardRefRenderFunction<{}, ILineSearch
     };
   });
 
-  useKeyPress('Enter', (e) => {
-    onPressEnter && onPressEnter(e);
-  }, { target: inputRef });
+  useKeyPress(
+    'Enter',
+    (e) => {
+      onPressEnter && onPressEnter(e);
+    },
+    { target: inputRef }
+  );
 
   const onCancelClick = () => {
     if (!showClearIcon) {
@@ -34,27 +36,15 @@ export const LineSearchInputBase: React.ForwardRefRenderFunction<{}, ILineSearch
     inputRef.current!.value = '';
   };
 
-  return <StyledSearchInputContainer
-    className={className}
-    style={style}
-    size={size}
-  >
-    <PrefixIcon>
-      <SearchOutlined color={theme.color.black[300]} />
-    </PrefixIcon>
-    <input
-      type="text"
-      ref={inputRef}
-      onFocus={onFocus}
-      onChange={onChange}
-      value={value}
-      placeholder={placeholder || 'please input'}
-      size={1}
-    />
-    <SuffixIcon onClick={onCancelClick}>
-      {/* {Boolean(value && showClearIcon) && <CloseIcon />} */}
-    </SuffixIcon>
-  </StyledSearchInputContainer>;
+  return (
+    <StyledSearchInputContainer className={className} style={style} size={size}>
+      <PrefixIcon>
+        <SearchOutlined color={theme.color.black[300]} />
+      </PrefixIcon>
+      <input type="text" ref={inputRef} onFocus={onFocus} onChange={onChange} value={value} placeholder={placeholder || 'please input'} size={1} />
+      <SuffixIcon onClick={onCancelClick}>{/* {Boolean(value && showClearIcon) && <CloseIcon />} */}</SuffixIcon>
+    </StyledSearchInputContainer>
+  );
 };
 
 export const LineSearchInput = React.forwardRef(LineSearchInputBase);

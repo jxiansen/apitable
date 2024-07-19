@@ -1,5 +1,3 @@
-
-
 import {
   AutomationRobotRunner,
   ConfigConstant,

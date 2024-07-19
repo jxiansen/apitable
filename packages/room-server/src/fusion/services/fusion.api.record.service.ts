@@ -1,5 +1,3 @@
-
-
 import { IRecordMap } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { DatasheetRecordService } from 'database/datasheet/services/datasheet.record.service';

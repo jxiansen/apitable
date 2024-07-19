@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, ICellValue, IField, SegmentType } from '@apitable/core';
 import { isString } from 'class-validator';
 import { BaseField } from 'fusion/field/base.field';

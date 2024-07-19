@@ -1,5 +1,3 @@
-
-
 import parser from 'html-react-parser';
 import Image from 'next/image';
 import { FC } from 'react';

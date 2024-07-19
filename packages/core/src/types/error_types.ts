@@ -1,5 +1,3 @@
-
-
 export enum ServerErrorCode {
   // The node server exception is 5 digits, and the java server exception is 3~4 digits
   ServerError = 50000,
@@ -48,7 +46,6 @@ export enum ErrorCode {
   PermissionDenied = 'F6001',
 }
 export enum ErrorType {
-
   /**
    * unknown mistake
    */
@@ -101,7 +98,7 @@ export enum ModalType {
 
 export enum OnOkType {
   Refresh = 'Refresh',
-  BackWorkBench = 'BackWorkBranch'
+  BackWorkBench = 'BackWorkBranch',
 }
 
 export interface IError {

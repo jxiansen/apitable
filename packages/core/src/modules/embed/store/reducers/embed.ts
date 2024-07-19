@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import * as actions from '../action_constants';
 import { IEmbedInfo, IEmbedInfoAction } from '../interfaces/embed';
@@ -11,7 +9,7 @@ export const embedInfo = produce((embedInfoDraft: IEmbedInfo = defaultEmbedInfo,
     case actions.SET_EMBED_INFO: {
       return {
         ...embedInfoDraft,
-        ...action.payload
+        ...action.payload,
       };
     }
     default:

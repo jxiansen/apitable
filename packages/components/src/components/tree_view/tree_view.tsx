@@ -1,5 +1,3 @@
-
-
 import React, { FC, useCallback, useState, useEffect, Fragment } from 'react';
 import TreeViewContext, { Modules } from './tree_view_context';
 import { TriangleRightFilled } from '@apitable/icons';
@@ -69,11 +67,11 @@ export const TreeView: FC<React.PropsWithChildren<ITreeViewProps>> = React.memo(
   }) => {
     /**
      * Expanded nodes collection
-    */
+     */
     const [expandedIds, setExpandedIds] = useState<string[]>(expandedKeys || defaultExpandedKeys || []);
     /**
      * Selected node collection
-    */
+     */
     const [selectedIds, setSelectedIds] = useState<string[]>(selectedKeys || defaultSelectedKeys || []);
     /**
      * Node currently focused
@@ -89,7 +87,7 @@ export const TreeView: FC<React.PropsWithChildren<ITreeViewProps>> = React.memo(
     const [dragNodeId, setDragNodesId] = useState<string>('');
     /**
      * Nodes to highlight
-    */
+     */
     const [highlightNodeId, setHighlightNodeId] = useState<string>('');
     /**
      * Currently loading data nodes
@@ -98,9 +96,13 @@ export const TreeView: FC<React.PropsWithChildren<ITreeViewProps>> = React.memo(
     const [cacheExpandedIds, setCacheExpandedId] = useState<string[]>([]);
 
     useEffect(() => {
-      if (isNull(expandedKeys)) { return; }
-      if (isEqual(expandedKeys, expandedIds)) { return; }
-      const filterNodeIds = expandedKeys.filter(expandedKey => !cacheExpandedIds.includes(expandedKey));
+      if (isNull(expandedKeys)) {
+        return;
+      }
+      if (isEqual(expandedKeys, expandedIds)) {
+        return;
+      }
+      const filterNodeIds = expandedKeys.filter((expandedKey) => !cacheExpandedIds.includes(expandedKey));
       for (const id of filterNodeIds) {
         toggleExpansion(id);
       }
@@ -110,20 +112,18 @@ export const TreeView: FC<React.PropsWithChildren<ITreeViewProps>> = React.memo(
     }, [expandedKeys]);
 
     useEffect(() => {
-      if (isNull(selectedKeys)) { return; }
-      if (isEqual(selectedIds, selectedKeys)) { return; }
+      if (isNull(selectedKeys)) {
+        return;
+      }
+      if (isEqual(selectedIds, selectedKeys)) {
+        return;
+      }
       setSelectedIds(selectedKeys);
     }, [selectedKeys, selectedIds]);
 
-    const isExpanded = useCallback(
-      (id: string) => (expandedIds?.length ? expandedIds.indexOf(id) !== -1 : false),
-      [expandedIds],
-    );
+    const isExpanded = useCallback((id: string) => (expandedIds?.length ? expandedIds.indexOf(id) !== -1 : false), [expandedIds]);
 
-    const isSelected = useCallback(
-      (id: string) => (selectedIds?.length ? selectedIds.indexOf(id) !== -1 : false),
-      [selectedIds],
-    );
+    const isSelected = useCallback((id: string) => (selectedIds?.length ? selectedIds.indexOf(id) !== -1 : false), [selectedIds]);
 
     const isFocused = (id: string) => focusedNodeId === id;
 
@@ -138,9 +138,9 @@ export const TreeView: FC<React.PropsWithChildren<ITreeViewProps>> = React.memo(
       let newExpandedIds: string[];
       /**
        * Determine whether the current operation is an expand operation or a close operation to generate a new set of expanded nodes
-      */
+       */
       if (expandedIds.includes(nodeId)) {
-        newExpandedIds = expandedIds.filter(id => id !== nodeId);
+        newExpandedIds = expandedIds.filter((id) => id !== nodeId);
       } else {
         newExpandedIds = expandedIds.concat(nodeId);
       }
@@ -185,23 +185,13 @@ export const TreeView: FC<React.PropsWithChildren<ITreeViewProps>> = React.memo(
     const renderTree = (children: any, parentNode = null, level = '0') => {
       return children.map((node: any, index: number) => {
         if (node.children && node.children.length) {
-          return <TreeItem
-            key={node.nodeId}
-            nodeId={node.nodeId}
-            label={node.label}
-            pos={`${level}-${index}`}
-            parentNode={parentNode}
-          >
-            {renderTree(node.children, node, level)}
-          </TreeItem>;
+          return (
+            <TreeItem key={node.nodeId} nodeId={node.nodeId} label={node.label} pos={`${level}-${index}`} parentNode={parentNode}>
+              {renderTree(node.children, node, level)}
+            </TreeItem>
+          );
         }
-        return <TreeItem
-          key={node.nodeId}
-          nodeId={node.nodeId}
-          label={node.label}
-          pos={`${level}-${index}`}
-          parentNode={parentNode}
-        />;
+        return <TreeItem key={node.nodeId} nodeId={node.nodeId} label={node.label} pos={`${level}-${index}`} parentNode={parentNode} />;
       });
     };
 
@@ -274,17 +264,11 @@ export const TreeView: FC<React.PropsWithChildren<ITreeViewProps>> = React.memo(
             drop,
           }}
         >
-          <TreeViewRoot
-            role="tree"
-            className='treeViewRoot'
-            aria-labelledby="tree_label"
-            onKeyDown={keyDownHandler}
-            tabIndex={0}
-          >
+          <TreeViewRoot role="tree" className="treeViewRoot" aria-labelledby="tree_label" onKeyDown={keyDownHandler} tabIndex={0}>
             {treeData ? renderTree(treeData) : React.Children.map(children, renderTreeItem)}
           </TreeViewRoot>
         </TreeViewContext.Provider>
       </Fragment>
     );
-  },
+  }
 );

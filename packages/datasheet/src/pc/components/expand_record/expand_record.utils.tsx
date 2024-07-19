@@ -1,5 +1,3 @@
-
-
 import { expandRecordInner } from 'pc/components/expand_record/expand_record';
 import { RecordType } from 'pc/components/expand_record/expand_record.enum';
 import { IExpandRecordDatasheetProp, IExpandRecordIndependentProp } from 'pc/components/expand_record/expand_record.interface';

@@ -1,5 +1,3 @@
-
-
 import { pickBy } from 'lodash';
 import Image from 'next/image';
 import * as React from 'react';

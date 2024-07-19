@@ -28,20 +28,22 @@ export const getTriggerDstId = (relatedResourceId: string): Promise<IFetchedData
 
   const formId = relatedResourceId;
   if (formId && formId.startsWith('fom')) {
-    return fetchFormPack(String(formId)).then(res => res?.data?.data ?? {} as IServerFormPack).then(res => res?.sourceInfo?.datasheetId);
+    return fetchFormPack(String(formId))
+      .then((res) => res?.data?.data ?? ({} as IServerFormPack))
+      .then((res) => res?.sourceInfo?.datasheetId);
   }
 
-  return new Promise<IFetchedDatasheet>(r => r(undefined));
+  return new Promise<IFetchedDatasheet>((r) => r(undefined));
 };
 
 export const getTriggerDatasheetId: (triggers: IRobotTrigger[]) => Promise<IFetchedDatasheet[]> = async (triggers: IRobotTrigger[]) => {
-  const arr = triggers.map(automationTrigger => automationTrigger.relatedResourceId).map(item=> getTriggerDstId(item ?? ''));
+  const arr = triggers.map((automationTrigger) => automationTrigger.relatedResourceId).map((item) => getTriggerDstId(item ?? ''));
   const list = await Promise.all(arr);
   return list;
 };
 
 export const getTriggerDatasheetId2: (triggers: string[]) => Promise<IFetchedDatasheet[]> = async (triggers: string[]) => {
-  const arr = triggers.map(item=> getTriggerDstId(item ?? ''));
+  const arr = triggers.map((item) => getTriggerDstId(item ?? ''));
   const list = await Promise.all(arr);
   return list;
 };
@@ -50,7 +52,7 @@ export const useAutomationFieldInfo = (triggers: string[]) => {
   const fieldPermissionMap = useSelector((state: IReduxState) => {
     return triggers.map((trigger) => ({
       fields: getAllFieldsByDstIdFp(state, trigger),
-      fieldPermissionMap: Selectors.getFieldPermissionMap(state, trigger)
+      fieldPermissionMap: Selectors.getFieldPermissionMap(state, trigger),
     }));
   });
 

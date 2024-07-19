@@ -1,14 +1,14 @@
-
-import {
-  IReduxState, IViewDerivation, IViewProperty, IViewRow,
-} from 'exports/store/interfaces';
+import { IReduxState, IViewDerivation, IViewProperty, IViewRow } from 'exports/store/interfaces';
 import { getFieldMap } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { getCellValue } from 'modules/database/store/selectors/resource/datasheet/cell_calc';
 import { Field } from 'model/field';
 import { ViewDerivateBase } from './view_derivate_base';
 
 export class ViewDerivateGallery extends ViewDerivateBase {
-  constructor(protected override state: IReduxState, public override datasheetId: string) {
+  constructor(
+    protected override state: IReduxState,
+    public override datasheetId: string
+  ) {
     super(state, datasheetId);
   }
 
@@ -39,7 +39,7 @@ export class ViewDerivateGallery extends ViewDerivateBase {
           field &&
           Field.bindContext(field, state).compare(
             getCellValue(state, snapshot, preRecordId, fieldId),
-            getCellValue(state, snapshot, recordId, fieldId),
+            getCellValue(state, snapshot, recordId, fieldId)
           )
         ) {
           groupedRows.push(tempGroupedRows);

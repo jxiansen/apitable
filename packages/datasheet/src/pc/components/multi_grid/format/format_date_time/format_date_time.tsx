@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { omit } from 'lodash';
 import * as React from 'react';
@@ -17,7 +15,9 @@ import {
   ILastModifiedTimeFieldProperty,
   ILastModifiedTimeField,
   getUtcOptionList,
-  IDateTimeBaseFieldProperty, Selectors, formatTimeZone,
+  IDateTimeBaseFieldProperty,
+  Selectors,
+  formatTimeZone,
 } from '@apitable/core';
 import { QuestionCircleOutlined } from '@apitable/icons';
 // eslint-disable-next-line no-restricted-imports

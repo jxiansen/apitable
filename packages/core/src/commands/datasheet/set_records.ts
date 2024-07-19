@@ -1,5 +1,3 @@
-
-
 import { ICollaCommandDef } from 'command_manager/command';
 import { ExecuteResult, ICollaCommandExecuteContext } from 'command_manager/types';
 import { CollaCommandName } from 'commands/enum';
@@ -12,7 +10,13 @@ import { Field } from 'model/field';
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { IRecordAlarm } from '../../exports/store/interfaces';
 import {
-  getFieldRoleByFieldId,getFieldPermissionMap,getFieldMap, getDateTimeCellAlarm, getCellValue, getActiveDatasheetId, getSnapshot
+  getFieldRoleByFieldId,
+  getFieldPermissionMap,
+  getFieldMap,
+  getDateTimeCellAlarm,
+  getCellValue,
+  getActiveDatasheetId,
+  getSnapshot,
 } from 'modules/database/store/selectors/resource/datasheet';
 import { ResourceType, SegmentType, WithOptional } from 'types';
 import { FieldType, IField, IUnitIds } from 'types/field_types';
@@ -38,7 +42,7 @@ export interface ISetRecordsOptions {
 function collectMemberProperty(datasheetId: string, actions: IJOTAction[], context: ICollaCommandExecuteContext) {
   const { state: state, memberFieldMaintainer } = context;
   const fieldMap = getFieldMap(state, datasheetId)!;
-  const isAddFieldAction = actions.map(item => item.p[3]!).some(fieldId => !fieldMap[fieldId]);
+  const isAddFieldAction = actions.map((item) => item.p[3]!).some((fieldId) => !fieldMap[fieldId]);
   if (isAddFieldAction) {
     return actions;
   }
@@ -47,7 +51,7 @@ function collectMemberProperty(datasheetId: string, actions: IJOTAction[], conte
 
   // Check if there is a modification to the member field in the current OP, if so,
   // Collect OI (written) data into operateRecordIds, and also collect related fieldIds into memberFieldIds
-  actions.forEach(item => {
+  actions.forEach((item) => {
     const fieldId = item.p[3] as string;
     const field = fieldMap[fieldId]!;
 
@@ -65,7 +69,7 @@ function collectMemberProperty(datasheetId: string, actions: IJOTAction[], conte
   });
 
   // Put the data collected according to fieldId into the property of the corresponding field
-  memberFieldIds.forEach(fieldId => {
+  memberFieldIds.forEach((fieldId) => {
     const collectUnitIds = unitIdsMap.get(fieldId) || [];
     const field = fieldMap[fieldId]!;
     // The unitIds of members are dynamically calculated, which will cause the position of the kanban to change in the kanban.
@@ -75,7 +79,7 @@ function collectMemberProperty(datasheetId: string, actions: IJOTAction[], conte
     // and then perform "intersection" processing with the result and the collected data, and take out the same part
     // (i.e. that is, the data from the cell phone, but it is guaranteed the data order of the original unitIds)
     const unDuplicateArray = [...new Set([...field.property.unitIds, ...collectUnitIds])];
-    const newProperty = unDuplicateArray.filter(item => item);
+    const newProperty = unDuplicateArray.filter((item) => item);
     memberFieldMaintainer.insert(fieldId, newProperty as string[], datasheetId);
   });
   return actions;
@@ -96,7 +100,7 @@ export const setRecords: ICollaCommandDef<ISetRecordsOptions> = {
       return null;
     }
 
-    const data = _data.filter(item => {
+    const data = _data.filter((item) => {
       const fieldRole = getFieldRoleByFieldId(fieldPermissionMap, item.fieldId);
       if (fieldRole && fieldRole !== ConfigConstant.Role.Editor) {
         return false;
@@ -115,7 +119,7 @@ export const setRecords: ICollaCommandDef<ISetRecordsOptions> = {
       let value = recordOption.value;
 
       // field does not exist, the data does not take effect
-      if (!field || !Field.bindContext(field, state).recordEditable(datasheetId, mirrorId) && !internalFix?.anonymouFix) {
+      if (!field || (!Field.bindContext(field, state).recordEditable(datasheetId, mirrorId) && !internalFix?.anonymouFix)) {
         return collected;
       }
 
@@ -151,14 +155,7 @@ export const setRecords: ICollaCommandDef<ISetRecordsOptions> = {
          */
         const oldValue = getCellValue(state, snapshot, recordId, fieldId) as string[] | null;
         const linkedSnapshot = getSnapshot(state, field.property.foreignDatasheetId)!;
-        ldcMaintainer.insert(
-          state,
-          linkedSnapshot,
-          recordId,
-          field,
-          value as string[] | null,
-          oldValue,
-        );
+        ldcMaintainer.insert(state, linkedSnapshot, recordId, field, value as string[] | null, oldValue);
       }
 
       // if val.value is an empty array then it will be null
@@ -183,7 +180,8 @@ export const setRecords: ICollaCommandDef<ISetRecordsOptions> = {
           if (alarmActions) {
             collected.push(...alarmActions);
           }
-        } else if (Boolean(value) && !cacheAlarm && Boolean(alarm)) { // new alarm
+        } else if (Boolean(value) && !cacheAlarm && Boolean(alarm)) {
+          // new alarm
           const newAlarmId = getNewId(IDPrefix.DateTimeAlarm);
           const alarmActions = DatasheetActions.setDateTimeCellAlarm(snapshot, {
             recordId,
@@ -196,7 +194,8 @@ export const setRecords: ICollaCommandDef<ISetRecordsOptions> = {
           if (alarmActions) {
             collected.push(...alarmActions);
           }
-        } else if (Boolean(value) && !isEqual(cacheAlarm, alarm)) { // edit alarm
+        } else if (Boolean(value) && !isEqual(cacheAlarm, alarm)) {
+          // edit alarm
           const alarmActions = DatasheetActions.setDateTimeCellAlarm(snapshot, {
             recordId,
             fieldId,
@@ -219,7 +218,7 @@ export const setRecords: ICollaCommandDef<ISetRecordsOptions> = {
       resourceId: datasheetId,
       resourceType: ResourceType.Datasheet,
       actions: collectMemberProperty(datasheetId, actions, context),
-      fieldMapSnapshot
+      fieldMapSnapshot,
     };
   },
 };

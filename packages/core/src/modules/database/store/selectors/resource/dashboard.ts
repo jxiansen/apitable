@@ -1,5 +1,3 @@
-
-
 import { DEFAULT_PERMISSION } from 'modules/shared/store/constants';
 import { IDashboard, IDashboardPack, IReduxState } from '../../../../../exports/store/interfaces';
 
@@ -33,7 +31,7 @@ export const getDashboardLayout = (state: IReduxState) => {
 export const getInstalledWidgetInDashboard = (state: IReduxState) => {
   const snapshot = getDashboardSnapshot(state);
   const layout = snapshot?.widgetInstallations.layout || [];
-  return layout.map(v => v.id);
+  return layout.map((v) => v.id);
 };
 
 export const getDashboardClient = (state: IReduxState) => {

@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@nestjs/common';
 import { IOperation, IRemoteChangeset, jot } from '@apitable/core';
 import { InjectLogger } from '../../../shared/common';
@@ -22,8 +20,8 @@ export class WidgetOtService {
   constructor(
     @InjectLogger() private readonly logger: Logger,
     private readonly resourceService: ResourceService,
-    private readonly widgetService: WidgetService
-  ) { }
+    private readonly widgetService: WidgetService,
+  ) {}
 
   createResultSet() {
     return {
@@ -35,8 +33,8 @@ export class WidgetOtService {
   }
 
   analyseOperates(operations: IOperation[], permission: NodePermission, resultSet: { [key: string]: any }) {
-    operations.forEach(op => {
-      op.actions.forEach(action => {
+    operations.forEach((op) => {
+      op.actions.forEach((action) => {
         //  Modify widget name
         if (action.p[0] === 'widgetName') {
           if (!permission.editable) {
@@ -68,16 +66,9 @@ export class WidgetOtService {
     });
 
     return this.transaction;
-
   }
 
-  transaction = async(
-    manager: EntityManager,
-    effectMap: Map<string, any>,
-    commonData: ICommonData,
-    resultSet: { [key: string]: any }
-  ) => {
-
+  transaction = async (manager: EntityManager, effectMap: Map<string, any>, commonData: ICommonData, resultSet: { [key: string]: any }) => {
     // ----- Start updating widget name
     await this.handleForWidgetName(manager, commonData, resultSet);
     // ----- Finished updating widget name
@@ -112,7 +103,6 @@ export class WidgetOtService {
     await manager.update(WidgetEntity, { widgetId: commonData.resourceId }, { name: resultSet.updateWidgetName });
     const endTime = Date.now();
     this.logger.info(`[${commonData.resourceId}] ====> Finished storing changeset...... duration:${endTime - beginTime}`);
-
   }
 
   async handleForStorage(manager: EntityManager, commonData: ICommonData, resultSet: { [key: string]: any }) {
@@ -149,16 +139,19 @@ export class WidgetOtService {
     const beginTime = Date.now();
     const spaceId = await this.resourceService.getSpaceIdByResourceId(commonData.resourceId);
     this.logger.info(`[${commonData.resourceId}] ====> Start storing changeset......`);
-    await manager.createQueryBuilder()
+    await manager
+      .createQueryBuilder()
       .insert()
       .into(DatasheetWidgetEntity)
-      .values([{
-        id: IdWorker.nextId().toString(),
-        spaceId,
-        dstId: resultSet.updateWidgetDepDatasheetId,
-        sourceId: resultSet.updateWidgetSourceId || null,
-        widgetId: commonData.resourceId,
-      }])
+      .values([
+        {
+          id: IdWorker.nextId().toString(),
+          spaceId,
+          dstId: resultSet.updateWidgetDepDatasheetId,
+          sourceId: resultSet.updateWidgetSourceId || null,
+          widgetId: commonData.resourceId,
+        },
+      ])
       .updateEntity(false)
       .execute();
     const endTime = Date.now();
@@ -167,7 +160,7 @@ export class WidgetOtService {
 
   /**
    * Create new changeset and store it in database
-   * 
+   *
    * @param manager database manager
    * @param remoteChangeset changeset that is about to be stored
    */
@@ -178,18 +171,21 @@ export class WidgetOtService {
     const beginTime = +new Date();
     this.logger.info(`[${remoteChangeset.resourceId}] ====> Start storing changeset......`);
     const { userId } = commonData;
-    await manager.createQueryBuilder()
+    await manager
+      .createQueryBuilder()
       .insert()
       .into(ResourceChangesetEntity)
-      .values([{
-        id: IdWorker.nextId().toString(),
-        messageId: remoteChangeset.messageId,
-        resourceId: remoteChangeset.resourceId,
-        resourceType: remoteChangeset.resourceType,
-        operations: remoteChangeset.operations,
-        revision: remoteChangeset.revision,
-        createdBy: userId,
-      }])
+      .values([
+        {
+          id: IdWorker.nextId().toString(),
+          messageId: remoteChangeset.messageId,
+          resourceId: remoteChangeset.resourceId,
+          resourceType: remoteChangeset.resourceType,
+          operations: remoteChangeset.operations,
+          revision: remoteChangeset.revision,
+          createdBy: userId,
+        },
+      ])
       .updateEntity(false)
       .execute();
     const endTime = +new Date();

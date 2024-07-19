@@ -1,8 +1,15 @@
-
-
 import {
-  composeOperation, composeOperations, ExecuteResult, FieldType, IFieldMap, ILocalChangeset, IOperation, IReduxState, ResourceType, Selectors,
-  StoreActions
+  composeOperation,
+  composeOperations,
+  ExecuteResult,
+  FieldType,
+  IFieldMap,
+  ILocalChangeset,
+  IOperation,
+  IReduxState,
+  ResourceType,
+  Selectors,
+  StoreActions,
 } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { Store } from 'redux';
@@ -28,10 +35,10 @@ export class DatasheetChangesetService {
 
   async getAllCommentChangeSetByDstId(dstId: string) {
     return await this.datasheetChangesetRepository.find({
-      where:  (qb: any) => {
+      where: (qb: any) => {
         qb.where(`dst_id = '${dstId}' `);
-        qb.andWhere('operations->\'$[0].cmd\' = \'InsertComment\'');
-      }
+        qb.andWhere("operations->'$[0].cmd' = 'InsertComment'");
+      },
     });
   }
 
@@ -39,16 +46,12 @@ export class DatasheetChangesetService {
     if (!changeSets || !changeSets.length) {
       return;
     }
-    changeSets.forEach(item => {
+    changeSets.forEach((item) => {
       item.dstId = dstId;
       item.id = IdWorker.nextId() + '';
       item.revision = 0;
     });
-    await this.datasheetChangesetRepository
-      .createQueryBuilder()
-      .insert()
-      .values(changeSets)
-      .execute();
+    await this.datasheetChangesetRepository.createQueryBuilder().insert().values(changeSets).execute();
   }
 
   /**
@@ -78,15 +81,15 @@ export class DatasheetChangesetService {
    */
   getDeleteNodeChangesets(ro: INodeDeleteRo, store: Store<IReduxState>): ILocalChangeset[] | null {
     const changesetMap = new Map<string, ILocalChangeset>();
-    ro.deleteNodeId.map(nodeId => {
+    ro.deleteNodeId.map((nodeId) => {
       const fieldMap = Selectors.getFieldMap(store.getState(), nodeId);
-      Object.values(fieldMap!).map(field => {
+      Object.values(fieldMap!).map((field) => {
         // Is linked field and linked datasheet is deleted, convert this field to multi-line text field
         if ((field.type === FieldType.Link || field.type === FieldType.OneWayLink) && ro.linkNodeId.includes(field.property.foreignDatasheetId)) {
           const options = this.commandOption.getSetFieldAttrOptions(nodeId, { ...field, property: null, type: FieldType.Text }, false);
           const { result, changeSets } = this.commandService.execute(options, store);
           if (result && result.result == ExecuteResult.Success) {
-            changeSets.map(item => {
+            changeSets.map((item) => {
               // add operations
               this.changesetAddOperations(changesetMap, item);
             });
@@ -127,8 +130,10 @@ export class DatasheetChangesetService {
     revisions: string[],
     filedIds: string[],
   ): Promise<{ commentChangesets: ChangesetBaseDto[]; users: UnitInfoDto[]; recordChangesets: ChangesetBaseDto[] }> {
-    const entities: (DatasheetChangesetEntity & { isComment: string })[]
-      = await this.datasheetChangesetRepository.selectDetailByDstIdAndRevisions(dstId, revisions);
+    const entities: (DatasheetChangesetEntity & { isComment: string })[] = await this.datasheetChangesetRepository.selectDetailByDstIdAndRevisions(
+      dstId,
+      revisions,
+    );
     if (!entities.length) {
       return { commentChangesets: [], users: [], recordChangesets: [] };
     }
@@ -155,7 +160,7 @@ export class DatasheetChangesetService {
 
   async getRecordModifyRevisions(dstId: string, revisions: string[], limitDays: number): Promise<string[]> {
     const raws = await this.datasheetChangesetRepository.selectRevisionsByDstIdAndLimitDays(dstId, revisions, limitDays);
-    if (raws) return raws.map(raw => raw.revision);
+    if (raws) return raws.map((raw) => raw.revision);
     return [];
   }
 
@@ -212,14 +217,14 @@ export class DatasheetChangesetService {
     const fieldMap = Selectors.getFieldMap(store.getState(), ro.copyNodeId)!;
     // Change converted text field to link field, restore datasheet structure of copied datasheet
     const copyNodeOperations = new Map<string, IOperation[]>();
-    ro.fieldIds.map(fieldId => {
+    ro.fieldIds.map((fieldId) => {
       if (originalFieldMap[fieldId]!.type === fieldMap[fieldId]!.type) return;
       // Find fields that need change
       const field = originalFieldMap[fieldId]!;
       const setFieldAttrOptions = this.commandOption.getSetFieldAttrOptions(ro.copyNodeId, field, false);
       const { result, changeSets } = this.commandService.execute(setFieldAttrOptions, store);
       if (result && result.result == ExecuteResult.Success) {
-        changeSets.map(item => {
+        changeSets.map((item) => {
           this.changesetAddOperations(changesetMap, item);
           // apply succeeded operations, writing data, to avoid field name duplicate
           store.dispatch(StoreActions.applyJOTOperations(item.operations, ResourceType.Datasheet, item.resourceId));
@@ -257,7 +262,7 @@ export class DatasheetChangesetService {
     const { result, changeSets } = this.commandService.execute(setRecordsOptions, store);
     // Don't throw exception when written data is none
     if (result && (result.result == ExecuteResult.Success || result.result == ExecuteResult.None)) {
-      changeSets.map(item => {
+      changeSets.map((item) => {
         this.changesetAddOperations(changesetMap, item);
       });
     } else {
@@ -279,7 +284,7 @@ export class DatasheetChangesetService {
       if (!cur.cmd.includes('System') && !cur.cmd.includes('Comment')) {
         // Filter out field changes that do not relate to record change and field deletion,
         // and filter out actions that do not relate to the current recordId
-        const actions = cur.actions.filter(action => {
+        const actions = cur.actions.filter((action) => {
           return (
             (action.p.includes('fieldMap') && cur.actions.length > 1 && fieldIds.includes(action.p[2]!.toString())) ||
             (action.p[1] == recordId && action.p[2] == 'data' && fieldIds.includes(action.p[3]!.toString())) ||
@@ -348,7 +353,7 @@ export class DatasheetChangesetService {
     const recordModifyEntities: (DatasheetChangesetEntity & { isComment: string })[] = [];
     const commentEntities: (DatasheetChangesetEntity & { isComment: string })[] = [];
     const userIds = new Set<string>();
-    entities.map(item => {
+    entities.map((item) => {
       userIds.add(item.createdBy);
       if (Number(item.isComment)) {
         commentEntities.push(item);

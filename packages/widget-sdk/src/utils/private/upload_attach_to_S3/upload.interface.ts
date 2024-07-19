@@ -1,5 +1,3 @@
-
-
 import { AxiosRequestConfig } from 'axios';
 
 export enum UploadType {
@@ -13,14 +11,14 @@ export enum UploadType {
   CoverImage,
   // node description
   NodeDesc,
-  Document
+  Document,
 }
 
 export interface IUploadCertificate {
-  count: number,
-  data: string,
-  nodeId?: string,
-  type: UploadType
+  count: number;
+  data: string;
+  nodeId?: string;
+  type: UploadType;
 }
 
 export interface IUploadFileForSaaS {

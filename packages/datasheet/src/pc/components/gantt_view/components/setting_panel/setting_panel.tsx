@@ -1,5 +1,3 @@
-
-
 import { Select as MultiSelect } from 'antd';
 import classNames from 'classnames';
 import { FC, memo, useContext, useMemo } from 'react';
@@ -38,7 +36,8 @@ import {
   ClassOutlined,
   CloseOutlined,
   OneWayLinkOutlined,
-  QuestionCircleOutlined, TwoWayLinkOutlined,
+  QuestionCircleOutlined,
+  TwoWayLinkOutlined,
   WarnCircleOutlined,
 } from '@apitable/icons';
 import { TriggerCommands } from 'modules/shared/apphook/trigger_commands';
@@ -204,8 +203,12 @@ export const SettingPanel: FC<React.PropsWithChildren<ISettingPanelProps>> = mem
           value: columnFieldId,
           label: fieldMap[columnFieldId].name,
           disabled: (fieldMap[columnFieldId] as ILinkField).property.foreignDatasheetId !== datasheetId,
-          prefixIcon: fieldMap[column.fieldId].type === FieldType.Link ?
-            <TwoWayLinkOutlined color={colors.thirdLevelText} /> : <OneWayLinkOutlined color={colors.thirdLevelText} />,
+          prefixIcon:
+            fieldMap[column.fieldId].type === FieldType.Link ? (
+              <TwoWayLinkOutlined color={colors.thirdLevelText} />
+            ) : (
+              <OneWayLinkOutlined color={colors.thirdLevelText} />
+            ),
           disabledTip: t(Strings.org_chart_choose_a_self_link_field),
         });
       });
@@ -269,8 +272,8 @@ export const SettingPanel: FC<React.PropsWithChildren<ISettingPanelProps>> = mem
       const newFieldName = isLinkFieldType
         ? t(Strings.field_title_link)
         : styleKey === GanttStyleKeyType.StartFieldId
-          ? t(Strings.gantt_start_field_name)
-          : t(Strings.gantt_end_field_name);
+        ? t(Strings.gantt_start_field_name)
+        : t(Strings.gantt_end_field_name);
       const result = resourceService.instance!.commandManager.execute({
         cmd: CollaCommandName.AddFields,
         data: [
@@ -281,8 +284,8 @@ export const SettingPanel: FC<React.PropsWithChildren<ISettingPanelProps>> = mem
               type: isLinkFieldType ? FieldType.Link : FieldType.DateTime,
               property: isLinkFieldType
                 ? {
-                  foreignDatasheetId: datasheetId,
-                }
+                    foreignDatasheetId: datasheetId,
+                  }
                 : DateTimeField.defaultProperty(),
             },
             viewId,

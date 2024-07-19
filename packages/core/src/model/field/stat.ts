@@ -1,4 +1,3 @@
-
 import { Field } from './field';
 import { Strings, t } from '../../exports/i18n';
 import { sum, uniq } from 'lodash';
@@ -63,19 +62,19 @@ const statCountAll = (records: string[]) => {
 };
 
 const statEmpty = (cellValues: ICellValue[]) => {
-  return cellValues.filter(cellValue => {
+  return cellValues.filter((cellValue) => {
     return cellValue == null || (Array.isArray(cellValue) && !cellValue.length);
   }).length;
 };
 
 const statFilled = (cellValues: ICellValue[]) => {
-  return cellValues.filter(cellValue => {
-    return Array.isArray(cellValue) ? cellValue.length : (cellValue != null);
+  return cellValues.filter((cellValue) => {
+    return Array.isArray(cellValue) ? cellValue.length : cellValue != null;
   }).length;
 };
 
 const statUnique = (cellValues: ICellValue[], _field: IField) => {
-  const _cellValue = cellValues.map(item => {
+  const _cellValue = cellValues.map((item) => {
     return JSON.stringify(item);
   });
   const result = uniq(_cellValue).length;
@@ -95,7 +94,7 @@ const statSum = (cellValues: ICellValue[], field: IField, state: IReduxState) =>
 // numeric field calculation
 const statAverage = (cellValues: ICellValue[], field: IField, state: IReduxState) => {
   // cell is empty, not counted in total
-  const total = cellValues.filter(cv => typeof cv === 'number').length;
+  const total = cellValues.filter((cv) => typeof cv === 'number').length;
   let res: number | number[] = sum(cellValues) / total;
   if (field.type === FieldType.Rating) {
     return res.toFixed(2).toString();
@@ -109,8 +108,10 @@ const statAverage = (cellValues: ICellValue[], field: IField, state: IReduxState
 
 // Number & date field calculation
 const statMax = (cellValues: ICellValue[], field: IField, state: IReduxState) => {
-  let res: number | number[] = (cellValues as (number | null)[]).reduce<number>((accumulator, cellValue: number | null) =>
-    Math.max(accumulator, typeof cellValue ==='number' ? cellValue : -Infinity), -Infinity);
+  let res: number | number[] = (cellValues as (number | null)[]).reduce<number>(
+    (accumulator, cellValue: number | null) => Math.max(accumulator, typeof cellValue === 'number' ? cellValue : -Infinity),
+    -Infinity
+  );
   if (!isFinite(res)) return Infinity;
   const instance = Field.bindContext(field, state);
   if (instance.basicValueType === BasicValueType.Array) res = [res];
@@ -119,8 +120,10 @@ const statMax = (cellValues: ICellValue[], field: IField, state: IReduxState) =>
 
 // Number & date field calculation
 const statMin = (cellValues: ICellValue[], field: IField, state: IReduxState) => {
-  let res: number | number[] = (cellValues as (number | null)[]).reduce<number>((accumulator, cellValue: number | null) =>
-    Math.min(accumulator, typeof cellValue ==='number' ? cellValue : Infinity), Infinity);
+  let res: number | number[] = (cellValues as (number | null)[]).reduce<number>(
+    (accumulator, cellValue: number | null) => Math.min(accumulator, typeof cellValue === 'number' ? cellValue : Infinity),
+    Infinity
+  );
   if (!isFinite(res)) return -Infinity;
   const instance = Field.bindContext(field, state);
   if (instance.basicValueType === BasicValueType.Array) res = [res];
@@ -128,11 +131,15 @@ const statMin = (cellValues: ICellValue[], field: IField, state: IReduxState) =>
 };
 
 const statDateRangeOfDays = (cellValues: ICellValue[]) => {
-  const max = (cellValues as (number | null)[]).reduce<number>((accumulator, cellValue: number | null) =>
-    Math.max(accumulator, cellValue || -Infinity), -Infinity) as number;
+  const max = (cellValues as (number | null)[]).reduce<number>(
+    (accumulator, cellValue: number | null) => Math.max(accumulator, cellValue || -Infinity),
+    -Infinity
+  ) as number;
 
-  const min = (cellValues as (number | null)[]).reduce<number>((accumulator, cellValue: number | null) =>
-    Math.min(accumulator, cellValue || Infinity), Infinity) as number;
+  const min = (cellValues as (number | null)[]).reduce<number>(
+    (accumulator, cellValue: number | null) => Math.min(accumulator, cellValue || Infinity),
+    Infinity
+  ) as number;
 
   if (!isFinite(min)) return 0;
   const rangeDayTime = max - min;
@@ -140,11 +147,15 @@ const statDateRangeOfDays = (cellValues: ICellValue[]) => {
 };
 
 const statDateRangeOfMonths = (cellValues: ICellValue[]) => {
-  const max = (cellValues as (number | null)[]).reduce((accumulator: number, cellValue: number | null) =>
-    Math.max(accumulator, cellValue || -Infinity), -Infinity) as number;
+  const max = (cellValues as (number | null)[]).reduce(
+    (accumulator: number, cellValue: number | null) => Math.max(accumulator, cellValue || -Infinity),
+    -Infinity
+  ) as number;
 
-  const min = (cellValues as (number | null)[]).reduce((accumulator: number, cellValue: number | null) =>
-    Math.min(accumulator, cellValue || Infinity), Infinity) as number;
+  const min = (cellValues as (number | null)[]).reduce(
+    (accumulator: number, cellValue: number | null) => Math.min(accumulator, cellValue || Infinity),
+    Infinity
+  ) as number;
 
   if (!isFinite(min)) return 0;
   const maxDate = new Date(max);
@@ -171,14 +182,8 @@ const statDateRangeOfMonths = (cellValues: ICellValue[]) => {
 /**
  * Get column result based on calculation type
  */
-export const getFieldResultByStatType = (
-  statType: StatType,
-  records: string[],
-  field: IField,
-  snapshot: ISnapshot,
-  state: IReduxState,
-) => {
-  let cellValues: ICellValue[] = records.map(recId => {
+export const getFieldResultByStatType = (statType: StatType, records: string[], field: IField, snapshot: ISnapshot, state: IReduxState) => {
+  let cellValues: ICellValue[] = records.map((recId) => {
     return getCellValue(state, snapshot, recId, field.id);
   });
 
@@ -198,13 +203,13 @@ export const getFieldResultByStatType = (
       return statUnique(cellValues, field);
     case StatType.PercentEmpty:
     case StatType.PercentUnChecked:
-      return toFixed(statEmpty(cellValues) * 100 / records.length) + '%';
+      return toFixed((statEmpty(cellValues) * 100) / records.length) + '%';
     case StatType.PercentFilled:
     case StatType.PercentChecked:
-      return toFixed(statFilled(cellValues) * 100 / records.length) + '%';
+      return toFixed((statFilled(cellValues) * 100) / records.length) + '%';
     case StatType.PercentUnique:
       if (shouldFlat) cellValues = cellValues.flat(1) as ICellValue[];
-      return toFixed(statUnique(cellValues, field) * 100 / (shouldFlat ? cellValues.length : records.length)) + '%';
+      return toFixed((statUnique(cellValues, field) * 100) / (shouldFlat ? cellValues.length : records.length)) + '%';
     case StatType.Sum:
       if (shouldFlat) cellValues = cellValues.flat(1) as ICellValue[];
       return statSum(cellValues, field, state);

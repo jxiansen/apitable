@@ -1,5 +1,3 @@
-
-
 import { useUnmount } from 'ahooks';
 import { Tooltip } from 'antd';
 import cls from 'classnames';
@@ -27,8 +25,7 @@ interface IDrag {
 
 const DragBase = ({ id, listStyle, task, disabled, isMore }: IDrag) => {
   const { startDate, endDate, title } = task;
-  const { columns, currentSearchRecordId, draggable, isCryptoStartField, isCryptoEndField, isMobile, activeCell } =
-    useContext(CalendarContext);
+  const { columns, currentSearchRecordId, draggable, isCryptoStartField, isCryptoEndField, isMobile, activeCell } = useContext(CalendarContext);
 
   const { show } = useContextMenu({
     id: CALENDAR_RECORD_MENU,

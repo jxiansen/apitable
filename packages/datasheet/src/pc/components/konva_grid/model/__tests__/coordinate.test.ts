@@ -1,5 +1,3 @@
-
-
 import { Coordinate } from '../coordinate';
 
 const initState = {

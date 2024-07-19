@@ -1,5 +1,3 @@
-
-
 import { ISelectField } from '../../../types/field_types';
 import { commonTestSuit, getValidCellValue, validProperty } from './common';
 
@@ -8,12 +6,14 @@ const singleSelectField: ISelectField = {
   id: 'fld1111',
   type: 3,
   property: {
-    options: [{
-      id: 'opt000',
-      name: 'test tag',
-      color: 1
-    }]
-  }
+    options: [
+      {
+        id: 'opt000',
+        name: 'test tag',
+        color: 1,
+      },
+    ],
+  },
 };
 
 const multiSelectField: ISelectField = {
@@ -21,28 +21,28 @@ const multiSelectField: ISelectField = {
   id: 'fld22222',
   type: 4,
   property: {
-    options: [{
-      id: 'opt000',
-      name: 'test tag',
-      color: 1
-    }]
-  }
+    options: [
+      {
+        id: 'opt000',
+        name: 'test tag',
+        color: 1,
+      },
+    ],
+  },
 };
 
 export const selectCommonTestSuit = (valid: any) => {
-
   commonTestSuit(valid);
 
-  it('input number', function() {
+  it('input number', function () {
     const [expectValue, receiveValue] = valid(12312312);
     expect(receiveValue).not.toEqual(expectValue);
   });
 
-  it('input text', function() {
+  it('input text', function () {
     const [expectValue, receiveValue] = valid([{ text: '123', type: 1 }]);
     expect(receiveValue).not.toEqual(expectValue);
   });
-
 };
 
 describe('Format check for single select fields', () => {
@@ -50,17 +50,17 @@ describe('Format check for single select fields', () => {
 
   selectCommonTestSuit(valid);
 
-  it('Enter multiple selections', function() {
+  it('Enter multiple selections', function () {
     const [expectValue, receiveValue] = valid(['optxxxxx']);
     expect(receiveValue).not.toEqual(expectValue);
   });
 
-  it('Enter single select value, the value exists in the property', function() {
+  it('Enter single select value, the value exists in the property', function () {
     const [expectValue, receiveValue] = valid('opt000');
     expect(receiveValue).toEqual(expectValue);
   });
 
-  it('Enter single select value, the value does not exist in the property', function() {
+  it('Enter single select value, the value does not exist in the property', function () {
     const [expectValue, receiveValue] = valid('opt111');
     expect(receiveValue).not.toEqual(expectValue);
   });
@@ -71,17 +71,17 @@ describe('Format check for multi-select fields', () => {
 
   selectCommonTestSuit(valid);
 
-  it('The value of the multiple selection exists in the field property', function() {
+  it('The value of the multiple selection exists in the field property', function () {
     const [expectValue, receiveValue] = valid(['opt000']);
     expect(receiveValue).toEqual(expectValue);
   });
 
-  it('The value of the multi-select does not exist in the field property', function() {
+  it('The value of the multi-select does not exist in the field property', function () {
     const [expectValue, receiveValue] = valid(['opt1111']);
     expect(receiveValue).not.toEqual(expectValue);
   });
 
-  it('input single select content', function() {
+  it('input single select content', function () {
     const [expectValue, receiveValue] = valid('optxxxxx');
     expect(receiveValue).not.toEqual(expectValue);
   });
@@ -89,58 +89,72 @@ describe('Format check for multi-select fields', () => {
 
 // The structure of single-selection and multiple-selection are the same, just check one
 describe('Check single select field property format', () => {
-  it('property = undefined', function() {
-    expect(validProperty({
-      ...singleSelectField,
-      property: undefined
-    } as any)).toEqual(false);
+  it('property = undefined', function () {
+    expect(
+      validProperty({
+        ...singleSelectField,
+        property: undefined,
+      } as any)
+    ).toEqual(false);
   });
 
-  it('property = null', function() {
-    expect(validProperty({
-      ...singleSelectField,
-      property: null
-    } as any)).toEqual(false);
+  it('property = null', function () {
+    expect(
+      validProperty({
+        ...singleSelectField,
+        property: null,
+      } as any)
+    ).toEqual(false);
   });
 
-  it('property = {}', function() {
-    expect(validProperty({
-      ...singleSelectField,
-      property: {}
-    } as any)).toEqual(false);
+  it('property = {}', function () {
+    expect(
+      validProperty({
+        ...singleSelectField,
+        property: {},
+      } as any)
+    ).toEqual(false);
   });
 
-  it('property.options = []', function() {
-    expect(validProperty({
-      ...singleSelectField,
-      property: {
-        options: []
-      }
-    } as any)).toEqual(true);
+  it('property.options = []', function () {
+    expect(
+      validProperty({
+        ...singleSelectField,
+        property: {
+          options: [],
+        },
+      } as any)
+    ).toEqual(true);
   });
 
-  it('default property', function() {
-    expect(validProperty({
-      ...singleSelectField
-    } as any)).toEqual(true);
+  it('default property', function () {
+    expect(
+      validProperty({
+        ...singleSelectField,
+      } as any)
+    ).toEqual(true);
   });
 
-  it('property.options cannot be an array of strings', function() {
-    expect(validProperty({
-      ...singleSelectField,
-      property: {
-        options: ['1']
-      }
-    } as any)).toEqual(false);
+  it('property.options cannot be an array of strings', function () {
+    expect(
+      validProperty({
+        ...singleSelectField,
+        property: {
+          options: ['1'],
+        },
+      } as any)
+    ).toEqual(false);
   });
 
-  it('property has redundant properties', function() {
-    expect(validProperty({
-      ...singleSelectField,
-      property: {
-        ...singleSelectField.property,
-        name: '123',
-      }
-    } as any)).toEqual(false);
+  it('property has redundant properties', function () {
+    expect(
+      validProperty({
+        ...singleSelectField,
+        property: {
+          ...singleSelectField.property,
+          name: '123',
+        },
+      } as any)
+    ).toEqual(false);
   });
 });

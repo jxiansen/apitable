@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { IAPISpace } from 'shared/interfaces/space.interface';
 

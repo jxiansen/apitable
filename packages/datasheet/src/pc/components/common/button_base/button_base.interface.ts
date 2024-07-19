@@ -1,5 +1,3 @@
-
-
 export type ButtonSize = 'x-small' | 'small' | 'middle' | 'large';
 
 type ButtonShape = 'circle' | 'round' | 'square';

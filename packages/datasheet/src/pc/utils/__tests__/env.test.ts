@@ -1,5 +1,3 @@
-
-
 import { getReleaseVersion, getSpaceIdFormTemplate } from '../env';
 declare const window: any;
 

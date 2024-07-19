@@ -15,7 +15,7 @@ export class ClientStoreProvider implements databus.IStoreProvider {
     const dispatchActions: AnyAction[] = [];
 
     if (dataPack.foreignDatasheetMap) {
-      Object.keys(dataPack.foreignDatasheetMap).forEach(foreignDstId => {
+      Object.keys(dataPack.foreignDatasheetMap).forEach((foreignDstId) => {
         const foreignDatasheetPack = dataPack.foreignDatasheetMap![foreignDstId]!;
         dispatchActions.push(StoreActions.receiveDataPack(foreignDatasheetPack, { isPartOfData: true }));
         if (foreignDatasheetPack.fieldPermissionMap) {
@@ -29,12 +29,12 @@ export class ClientStoreProvider implements databus.IStoreProvider {
       if (dataPack.units) {
         // init unityMap, for `member` field use
         const unitMap = {};
-        dataPack.units.filter(unit => unit.unitId).forEach(unit => (unitMap[unit.unitId!] = unit));
+        dataPack.units.filter((unit) => unit.unitId).forEach((unit) => (unitMap[unit.unitId!] = unit));
         this.store.dispatch(StoreActions.updateUnitMap(unitMap));
 
         // init UserMap, for `CreatedBy`/`LastModifiedBy` field use
         const userMap = {};
-        dataPack.units.filter(unit => unit.userId).forEach(user => (userMap[user.userId!] = user));
+        dataPack.units.filter((unit) => unit.userId).forEach((user) => (userMap[user.userId!] = user));
         this.store.dispatch(StoreActions.updateUserMap(userMap));
       }
     }

@@ -15,7 +15,6 @@ import { ComputeFieldReferenceManager } from './compute.field.reference.manager'
 import { RoomResourceRelService } from 'database/resource/services/room.resource.rel.service';
 
 describe('forEachRecordMap', () => {
-
   const mockRecordMap: IRecordMap = {
     rec1w1: {
       id: 'rec1w1',
@@ -110,8 +109,8 @@ describe('extend main datasheet records', () => {
   let nodeService: NodeService;
   let metaService: DatasheetMetaService;
   let recordService: DatasheetRecordService;
-  
-  beforeEach(async() => {
+
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [
         WinstonModule.forRootAsync({
@@ -174,21 +173,21 @@ describe('extend main datasheet records', () => {
         },
       ],
     }).compile();
-    
+
     fieldHandler = moduleFixture.get(DatasheetFieldHandler);
     nodeService = moduleFixture.get(NodeService);
     metaService = moduleFixture.get(DatasheetMetaService);
     recordService = moduleFixture.get(DatasheetRecordService);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
   const filterRecordMap = (recordMap: IRecordMap, recordIds: string[]): IRecordMap =>
     Object.fromEntries(Object.entries(recordMap).filter(([recordId]) => recordIds.includes(recordId)));
 
-  it('should contain extended records referenced by foreign datasheets if needExtendMainDstRecords is true', async() => {
+  it('should contain extended records referenced by foreign datasheets if needExtendMainDstRecords is true', async () => {
     const mockDatasheets: IForeignDatasheetMap['foreignDatasheetMap'] = {
       dst1: {
         datasheet: {
@@ -426,7 +425,7 @@ describe('extend main datasheet records', () => {
       },
     };
 
-    it('should contain extended records referenced by self linking if needExtendMainDstRecords is true', async() => {
+    it('should contain extended records referenced by self linking if needExtendMainDstRecords is true', async () => {
       jest
         .spyOn(recordService, 'getRecordsByDstIdAndRecordIds')
         .mockImplementation((dstId, recordIds) => Promise.resolve(filterRecordMap(mockDatasheets[dstId]!.snapshot.recordMap, recordIds)));
@@ -447,7 +446,7 @@ describe('extend main datasheet records', () => {
       } as IFieldAnalysisResult);
     });
 
-    it('should not contain extended records referenced by self linking if needExtendMainDstRecords is false', async() => {
+    it('should not contain extended records referenced by self linking if needExtendMainDstRecords is false', async () => {
       jest
         .spyOn(recordService, 'getRecordsByDstIdAndRecordIds')
         .mockImplementation((dstId, recordIds) => Promise.resolve(filterRecordMap(mockDatasheets[dstId]!.snapshot.recordMap, recordIds)));

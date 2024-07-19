@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { ListDeprecate } from '../list_deprecate';
 import { Typography } from 'components/typography';
@@ -15,7 +13,7 @@ export const StyledOptionWrapper = styled(ListDeprecate.Item).attrs(applyDefault
   justify-content: center;
   cursor: pointer;
 
-  ${props => {
+  ${(props) => {
     if (props.disabled) {
       return css`
         cursor: not-allowed;
@@ -26,21 +24,19 @@ export const StyledOptionWrapper = styled(ListDeprecate.Item).attrs(applyDefault
   }}
   .label {
     ${(props) => {
-    const { deepPurple } = props.theme.color;
-    if (props.active) {
-      return css`
+      const { deepPurple } = props.theme.color;
+      if (props.active) {
+        return css`
           color: ${deepPurple[500]};
         `;
-    }
-    return;
-  }}
+      }
+      return;
+    }}
   }
-
-
 `;
 
 export const StyledDropdownContainer = styled.div`
-  color: ${props => {
+  color: ${(props) => {
     return `
       background: ${props.theme.color.defaultBg};
     `;
@@ -53,7 +49,7 @@ export const StyledLabel = styled(Typography)`
 
 export const StyledSubLabel = styled(Typography).attrs(applyDefaultTheme)`
   width: 100%;
-  color: ${props => {
+  color: ${(props) => {
     return props.theme.color.black[500];
   }};
 `;

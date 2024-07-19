@@ -1,4 +1,3 @@
-
 export class UnitMemberBaseInfoDto {
   id!: string;
   memberName!: string;

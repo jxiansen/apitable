@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
@@ -11,18 +9,17 @@ export class CascaderSnapshotParam extends CascaderParam {
     example: 'fld***',
     description: 'Field',
   })
-  @IsNotEmpty({ context: { tipId: ApiTipConstant.api_params_empty_error }})
+  @IsNotEmpty({ context: { tipId: ApiTipConstant.api_params_empty_error } })
   fieldId!: string;
 }
 
-export class GetCascaderSnapshotParam{
-
+export class GetCascaderSnapshotParam {
   @ApiProperty({
     type: String,
     example: 'dst***',
     description: 'Datasheet ID',
   })
-  @IsNotEmpty({ context: { tipId: ApiTipConstant.api_params_empty_error }})
+  @IsNotEmpty({ context: { tipId: ApiTipConstant.api_params_empty_error } })
   dstId!: string;
 
   @ApiProperty({
@@ -30,6 +27,6 @@ export class GetCascaderSnapshotParam{
     example: 'fld***',
     description: 'Field',
   })
-  @IsNotEmpty({ context: { tipId: ApiTipConstant.api_params_empty_error }})
+  @IsNotEmpty({ context: { tipId: ApiTipConstant.api_params_empty_error } })
   fieldId!: string;
 }

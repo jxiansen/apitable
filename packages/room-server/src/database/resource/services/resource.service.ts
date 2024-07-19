@@ -1,5 +1,3 @@
-
-
 import { FieldType, IMeta, ResourceIdPrefix, ResourceType } from '@apitable/core';
 import { Span } from '@metinseylan/nestjs-opentelemetry';
 import { Injectable } from '@nestjs/common';

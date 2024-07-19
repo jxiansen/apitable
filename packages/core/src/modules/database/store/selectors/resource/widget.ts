@@ -1,5 +1,3 @@
-
-
 import { IReduxState } from '../../../../../exports/store/interfaces';
 
 export const getWidget = (state: IReduxState, id: string) => {
@@ -9,12 +7,14 @@ export const getWidget = (state: IReduxState, id: string) => {
 
 export const getWidgetStorageById = (state: IReduxState, id: string): undefined | { [key: string]: any } => {
   const widget = getWidget(state, id);
-  if (!widget) { return; }
+  if (!widget) {
+    return;
+  }
   return widget.snapshot.storage;
 };
 
-export const getWidgetSnapshot = (state: IReduxState, id: string) => { 
+export const getWidgetSnapshot = (state: IReduxState, id: string) => {
   const widget = getWidget(state, id);
-  if(!widget) return; 
+  if (!widget) return;
   return widget.snapshot;
 };

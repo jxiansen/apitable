@@ -1,5 +1,3 @@
-
-
 import { ISelectProps, ISelectValue } from 'components/select';
 
 type IDoubleSelectPropsBase = Pick<ISelectProps, 'disabled' | 'triggerStyle' | 'triggerCls'>;
@@ -34,7 +32,7 @@ export interface IDoubleOptions {
   /**
    * Select list subtitle
    */
-  subLabel: string
+  subLabel: string;
 
   /**
    * Whether selected option can be selected

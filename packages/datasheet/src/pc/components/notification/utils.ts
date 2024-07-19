@@ -1,5 +1,3 @@
-
-
 import semver from 'semver';
 import { integrateCdnHost, Strings, SystemConfig, t } from '@apitable/core';
 import { Notifications, Templates, Types } from '@apitable/core/src/config/system_config.interface';

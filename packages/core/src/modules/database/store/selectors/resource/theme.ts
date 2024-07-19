@@ -1,5 +1,3 @@
-
-
 import { IReduxState } from '../../../../../exports/store/interfaces';
 import { ThemeName } from 'modules/database/store/interfaces/resource/theme';
 

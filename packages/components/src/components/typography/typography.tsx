@@ -1,5 +1,3 @@
-
-
 import React, { FC, useRef, useEffect, useState } from 'react';
 import { FloatUiTooltip } from '../tooltip';
 import { IEllipsis, ITypographyProps } from './interface';
@@ -22,16 +20,7 @@ const defaultVariantMapping: { [key: string]: string } = {
   body4: 'p',
 };
 export const Typography: FC<React.PropsWithChildren<ITypographyProps>> = (props) => {
-  const {
-    className,
-    component,
-    align = 'inherit',
-    variant = 'body1',
-    color = '',
-    children,
-    ellipsis = false,
-    ...rest
-  } = props;
+  const { className, component, align = 'inherit', variant = 'body1', color = '', children, ellipsis = false, ...rest } = props;
   const typographyRef = useRef<HTMLDivElement>();
   const [isWithTooltip, setIsWithTooltip] = useState(false);
   const more = { align, variant, color, ...rest };
@@ -50,7 +39,7 @@ export const Typography: FC<React.PropsWithChildren<ITypographyProps>> = (props)
 
     return {
       rows: 1,
-      ...(typeof ellipsis === 'object' ? ellipsis : null)
+      ...(typeof ellipsis === 'object' ? ellipsis : null),
     };
   };
 
@@ -62,30 +51,37 @@ export const Typography: FC<React.PropsWithChildren<ITypographyProps>> = (props)
     return ['string', 'number'].includes(typeof children);
   }
 
-  const textNode = <TypographyBase className={classNames('typography', className)} ref={typographyRef} as={tag as any} rows={rows} children={children}
-    cssTextOverflow={cssTextOverflow} cssLineClamp={cssLineClamp} {...more} />;
+  const textNode = (
+    <TypographyBase
+      className={classNames('typography', className)}
+      ref={typographyRef}
+      as={tag as any}
+      rows={rows}
+      children={children}
+      cssTextOverflow={cssTextOverflow}
+      cssLineClamp={cssLineClamp}
+      {...more}
+    />
+  );
 
   if ((typeof ellipsis !== 'boolean' && ellipsis.tooltip) || isWithTooltip) {
-    const content = tooltip || (isReactText(children) ? children as string : '');
+    const content = tooltip || (isReactText(children) ? (children as string) : '');
     return (
       <>
-        {
-          Boolean(content) ?
-            <FloatUiTooltip
-              content={content}
-              options={
-                {
-                  initialVisible: false
-                }
-              }
-            >
-              {textNode}
-            </FloatUiTooltip>:
-            textNode
-        }
+        {Boolean(content) ? (
+          <FloatUiTooltip
+            content={content}
+            options={{
+              initialVisible: false,
+            }}
+          >
+            {textNode}
+          </FloatUiTooltip>
+        ) : (
+          textNode
+        )}
       </>
     );
   }
   return textNode;
 };
-

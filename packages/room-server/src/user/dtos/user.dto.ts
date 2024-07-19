@@ -1,4 +1,3 @@
-
 export class UserBaseInfoDto {
   id!: string;
   uuid!: string;

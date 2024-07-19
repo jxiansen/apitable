@@ -1,5 +1,3 @@
-
-
 import env from 'app.environment';
 
 export const getRecordUrl = (dstId: string, recordId: string) => {

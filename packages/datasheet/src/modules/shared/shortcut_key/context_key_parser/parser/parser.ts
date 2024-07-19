@@ -1,5 +1,3 @@
-
-
 import { ILexer } from '../lexer/lexer';
 import { Token, TokenType } from '../lexer/token';
 import { AstNode, BinaryOperatorNode, UnaryOperatorNode, ValueOperandNode } from './ast';

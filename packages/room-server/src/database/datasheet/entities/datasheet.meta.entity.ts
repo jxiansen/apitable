@@ -1,5 +1,3 @@
-
-
 import { IMeta } from '@apitable/core';
 import { BaseEntity } from 'shared/entities/base.entity';
 import { Column, Entity } from 'typeorm';
@@ -9,7 +7,6 @@ import { Column, Entity } from 'typeorm';
  */
 @Entity('datasheet_meta')
 export class DatasheetMetaEntity extends BaseEntity {
-
   @Column({
     name: 'dst_id',
     nullable: true,

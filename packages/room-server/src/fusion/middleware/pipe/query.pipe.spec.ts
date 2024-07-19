@@ -1,12 +1,9 @@
-
-
 import { ApiTipConstant, FieldType, IMeta, ViewType } from '@apitable/core';
 import { ApiException } from 'shared/exception';
 import { QueryPipe } from 'fusion/middleware/pipe/query.pipe';
 import { OrderEnum } from 'shared/enums';
 
 describe('QueryPipe', () => {
-
   describe('validateSort', () => {
     test('sort.field error--zh-CN', () => {
       const error = ApiException.tipError(ApiTipConstant.api_param_sort_field_not_exists, { fieldId: 'aa' });
@@ -106,5 +103,4 @@ describe('QueryPipe', () => {
       }).toThrow(error);
     });
   });
-
 });

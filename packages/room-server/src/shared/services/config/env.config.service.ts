@@ -1,5 +1,3 @@
-
-
 import { Injectable, OnApplicationShutdown } from '@nestjs/common';
 import { EnvConfigKey } from '../../common';
 import { IActuatorConfig, IBaseRateLimiter, IOssConfig, IRateLimiter, IServerConfig } from '../../interfaces';
@@ -10,7 +8,6 @@ import { ConfigStoreInMemory } from './config.store';
  */
 @Injectable()
 export class EnvConfigService implements OnApplicationShutdown {
-
   private configStore: ConfigStoreInMemory = new ConfigStoreInMemory();
 
   constructor() {
@@ -37,13 +34,13 @@ export class EnvConfigService implements OnApplicationShutdown {
     const limit: IRateLimiter = {
       points: parseInt(process.env.LIMIT_POINTS!) || 5,
       duration: parseInt(process.env.LIMIT_DURATION!) || 1,
-      whiteList: null as any
+      whiteList: null as any,
     };
     const limitWhiteList = process.env.LIMIT_WHITE_LIST && JSON.parse(process.env.LIMIT_WHITE_LIST);
     // const limitWhiteList = envWhiteList || this.configService.get<Map<string, IBaseRateLimiter>>('limit.whiteList', null as any);
     if (limitWhiteList) {
       const limitWhitMap = new Map<string, IBaseRateLimiter>();
-      Object.keys(limitWhiteList).forEach(token => {
+      Object.keys(limitWhiteList).forEach((token) => {
         limitWhitMap.set(token, limitWhiteList[token]);
       });
       limit.whiteList = limitWhitMap;

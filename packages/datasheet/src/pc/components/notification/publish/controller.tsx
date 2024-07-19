@@ -1,5 +1,3 @@
-
-
 import { colors } from '@apitable/components';
 import { Api, INoticeDetail, Navigation, StoreActions } from '@apitable/core';
 import { IDingTalkModalType, showTipInDingTalk } from 'pc/components/economy/upgrade_modal';

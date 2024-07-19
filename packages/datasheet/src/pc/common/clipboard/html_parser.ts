@@ -1,5 +1,3 @@
-
-
 import { ISegment, SegmentType, string2Segment } from '@apitable/core';
 import { ITableCellData, ITableData } from './table_data';
 

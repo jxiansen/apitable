@@ -1,5 +1,3 @@
-
-
 /* eslint_disable */
 
 // The id of the Wig table part (excluding the working directory)

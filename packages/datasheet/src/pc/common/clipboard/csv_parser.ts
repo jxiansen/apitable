@@ -1,5 +1,3 @@
-
-
 import endsWith from 'lodash/endsWith';
 import { string2Segment } from '@apitable/core';
 import { browser } from '../../../modules/shared/browser';

@@ -1,5 +1,3 @@
-
-
 import {
   api,
   IDashboardWidgetMap,
@@ -15,7 +13,8 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { skipUsageVerification } from 'app.environment';
 import {
-  InternalCreateDatasheetVo, InternalSpaceCreditUsageView,
+  InternalCreateDatasheetVo,
+  InternalSpaceCreditUsageView,
   InternalSpaceAutomationRunsMessageView,
   InternalSpaceInfoVo,
   InternalSpaceStatisticsRo,
@@ -124,10 +123,10 @@ export class RestService {
           this.logger.log(`RPC Request uri:${res.config.url}, took duration: ${duration}ms`);
         }
         const restResponse = res.data as IHttpSuccessResponse<any>;
-        if(containSkipHeader(res.config.headers)) {
+        if (containSkipHeader(res.config.headers)) {
           return res;
         }
-        function containSkipHeader( headers: any) {
+        function containSkipHeader(headers: any) {
           if (!headers) {
             return false;
           }
@@ -275,25 +274,28 @@ export class RestService {
   }
 
   async downloadFile(host: string, url: string, fileName: string) {
-    const response = await this.httpService.axiosRef.request(
-      {
-        url: host + '/' + url,
-        method: 'GET',
-        responseType: 'stream',
-        baseURL: host,
-        validateStatus: null,
-        headers: {
-          'Skip-Interceptor': 'true'
-        },
-      });
+    const response = await this.httpService.axiosRef.request({
+      url: host + '/' + url,
+      method: 'GET',
+      responseType: 'stream',
+      baseURL: host,
+      validateStatus: null,
+      headers: {
+        'Skip-Interceptor': 'true',
+      },
+    });
     const filePath = `${os.tmpdir()}/${fileName}`; // Replace with the desired file path and name
     const writer = fs.createWriteStream(filePath);
     await pipeline(response.data, writer);
     return filePath;
   }
 
-  async getUploadPresignedUrl(headers: IAuthHeader, nodeId: string, count: number | undefined,
-    type: number = AttachmentTypeEnum.DATASHEET_ATTACH): Promise<AssetVo[]> {
+  async getUploadPresignedUrl(
+    headers: IAuthHeader,
+    nodeId: string,
+    count: number | undefined,
+    type: number = AttachmentTypeEnum.DATASHEET_ATTACH,
+  ): Promise<AssetVo[]> {
     const response = await lastValueFrom(
       this.httpService.get(this.GET_UPLOAD_PRESIGNED_URL, {
         headers: HttpHelper.createAuthHeaders(headers),
@@ -305,11 +307,13 @@ export class RestService {
 
   async getUploadCallBack(headers: IAuthHeader, resourceKeys: string[], type: number): Promise<AssetVo[]> {
     const response = await lastValueFrom(
-      this.httpService.post(this.GET_UPLOAD_CALLBACK, { resourceKeys, type },
+      this.httpService.post(
+        this.GET_UPLOAD_CALLBACK,
+        { resourceKeys, type },
         {
           headers: HttpHelper.createAuthHeaders(headers),
-        }
-      )
+        },
+      ),
     );
     return response.data;
   }
@@ -386,7 +390,7 @@ export class RestService {
     if (skipUsageVerification) {
       this.logger.log(`skipApiUsage:${spaceId}`);
       return Promise.resolve({
-        isAllowOverLimit: true
+        isAllowOverLimit: true,
       });
     }
     const res = await lastValueFrom(
@@ -427,7 +431,7 @@ export class RestService {
     const res = await lastValueFrom(
       this.httpService.post<INode>(this.NODE_CREATE, payload, {
         headers: HttpHelper.withSpaceIdHeader(HttpHelper.createAuthHeaders(headers), spaceId),
-      })
+      }),
     );
     return res.data;
   }
@@ -498,8 +502,8 @@ export class RestService {
   async getSpaceSubscriptionInfo(cookie: string, spaceId: string): Promise<any> {
     const response = await lastValueFrom(
       this.httpService.get<any>(SUBSCRIBE_INFO + spaceId, {
-        headers: HttpHelper.withSpaceIdHeader(HttpHelper.createAuthHeaders({ cookie }), spaceId)
-      })
+        headers: HttpHelper.withSpaceIdHeader(HttpHelper.createAuthHeaders({ cookie }), spaceId),
+      }),
     );
     return response!.data;
   }
@@ -564,7 +568,9 @@ export class RestService {
   }
 
   public async getSpaceAutomationRunsMessage(spaceId: string): Promise<InternalSpaceAutomationRunsMessageView> {
-    const response = await lastValueFrom(this.httpService.get<InternalSpaceAutomationRunsMessageView>(sprintf(this.SPACE_AUTOMATION_RUNS_MESSAGE, { spaceId })));
+    const response = await lastValueFrom(
+      this.httpService.get<InternalSpaceAutomationRunsMessageView>(sprintf(this.SPACE_AUTOMATION_RUNS_MESSAGE, { spaceId })),
+    );
     return response!.data;
   }
 
@@ -674,14 +680,11 @@ export class RestService {
 
   public async getSignatures(keys: string[]): Promise<Array<{ resourceKey: string; url: string }>> {
     const queryParams = new URLSearchParams();
-    keys.forEach(key => queryParams.append('resourceKeys', key));
+    keys.forEach((key) => queryParams.append('resourceKeys', key));
 
     const url = `${this.GET_ASSET_SIGNATURES}?${queryParams.toString()}`;
 
-    const response = await lastValueFrom(
-      this.httpService.get<Array<{ resourceKey: string; url: string }>>(url),
-    );
+    const response = await lastValueFrom(this.httpService.get<Array<{ resourceKey: string; url: string }>>(url));
     return response.data;
   }
-
 }

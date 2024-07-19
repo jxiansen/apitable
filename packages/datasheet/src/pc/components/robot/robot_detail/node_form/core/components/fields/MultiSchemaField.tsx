@@ -1,5 +1,3 @@
-
-
 import { JSONSchema7 } from 'json-schema';
 import { useState } from 'react';
 import { getDefaultFormState, getMatchingOption, getUiOptions, getWidget, guessType, retrieveSchema } from '../../utils';

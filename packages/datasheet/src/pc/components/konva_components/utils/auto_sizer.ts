@@ -1,5 +1,3 @@
-
-
 export interface IAutoSizer {
   fontFamily?: string;
   fontSize?: number;

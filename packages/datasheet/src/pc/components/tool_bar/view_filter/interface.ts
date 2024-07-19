@@ -1,5 +1,3 @@
-
-
 import { FieldType, IField, IFilterCondition, IFilterInfo } from '@apitable/core';
 
 export interface IFilterValueProps {

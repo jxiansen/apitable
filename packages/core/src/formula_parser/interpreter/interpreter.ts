@@ -1,5 +1,3 @@
-
-
 import {
   AstNode,
   AstNodeType,
@@ -44,17 +42,8 @@ export class Interpreter {
        */
       if (
         [BasicValueType.Number, BasicValueType.Boolean, BasicValueType.String].includes(fieldBasicValueType) ||
-        (
-          fieldBasicValueType === BasicValueType.DateTime &&
-          [
-            TokenType.Equal,
-            TokenType.NotEqual,
-            TokenType.Less,
-            TokenType.LessEqual,
-            TokenType.Greater,
-            TokenType.GreaterEqual,
-          ].includes(tokenType)
-        )
+        (fieldBasicValueType === BasicValueType.DateTime &&
+          [TokenType.Equal, TokenType.NotEqual, TokenType.Less, TokenType.LessEqual, TokenType.Greater, TokenType.GreaterEqual].includes(tokenType))
       ) {
         return value;
       }
@@ -113,7 +102,8 @@ export class Interpreter {
         case AstNodeType.PureValueOperandNode: {
           return this.visitPureValueOperandNode(node as PureValueOperandNode);
         }
-        default: return;
+        default:
+          return;
       }
     } catch (e) {
       if (isErrorScope) {
@@ -196,7 +186,8 @@ export class Interpreter {
       case TokenType.Concat: {
         return String(left == null ? '' : left) + String(right == null ? '' : right);
       }
-      default: return;
+      default:
+        return;
     }
     throw new TypeError(`Visitor can't process AST Node Type: ${node.token.type}`);
   }
@@ -230,9 +221,11 @@ export class Interpreter {
     const fnName = node.value.toUpperCase();
     const fnClass = Functions.get(fnName);
     if (!fnClass) {
-      throw new TypeError(t(Strings.function_err_not_found_function_name_as, {
-        fnName,
-      }));
+      throw new TypeError(
+        t(Strings.function_err_not_found_function_name_as, {
+          fnName,
+        })
+      );
     }
     // The IS_ERROR function needs to monitor whether the internal equation will report an error,
     // and IF/SWITCH needs to execute until Error before reporting an error.
@@ -242,7 +235,7 @@ export class Interpreter {
       isErrorScope = true;
     }
 
-    const params = node.params.map(param => {
+    const params = node.params.map((param) => {
       let value = this.visit(param, isErrorScope);
       let valueType = param.valueType;
       // Nodes of field value types need to perform dedicated string conversion logic

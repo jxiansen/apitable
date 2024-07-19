@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import * as React from 'react';
 import { Button, Message } from '@apitable/components';

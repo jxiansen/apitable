@@ -1,5 +1,3 @@
-
-
 /**
  * robot task running history
  */

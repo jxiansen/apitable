@@ -1,5 +1,3 @@
-
-
 import { Module } from '@nestjs/common';
 import { AlarmDynamicModule } from './alarm/alarm.dynamic.module';
 import { SubscriptionDynamicModule } from './subscription/subscription.dynamic.module';
@@ -39,8 +37,8 @@ import { TimeMachineDynamicModule } from './time_machine/time.machine.dynamic.mo
   exports: [
     AssetModule,
     AttachmentModule,
-    AlarmDynamicModule.forRoot(), 
-    SubscriptionDynamicModule.forRoot(), 
+    AlarmDynamicModule.forRoot(),
+    SubscriptionDynamicModule.forRoot(),
     DashboardModule,
     DatasheetModule,
     FormModule,
@@ -51,6 +49,6 @@ import { TimeMachineDynamicModule } from './time_machine/time.machine.dynamic.mo
     OtModule,
     CommandModule,
     CascaderModule,
-  ]
+  ],
 })
 export class DatabaseModule {}

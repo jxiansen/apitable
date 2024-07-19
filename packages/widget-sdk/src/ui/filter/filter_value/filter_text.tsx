@@ -3,7 +3,7 @@ import React from 'react';
 import { IFilterTextProps } from './interface';
 import { FilterInputWrap } from './styled';
 
-export const FilterText: React.FC<IFilterTextProps> = props => {
+export const FilterText: React.FC<IFilterTextProps> = (props) => {
   const { value, onChange } = props;
 
   const _value = value?.[0];
@@ -18,7 +18,7 @@ export const FilterText: React.FC<IFilterTextProps> = props => {
           const value = e.target.value;
           onChange(value ? [value] : null);
         }}
-        placeholder=''
+        placeholder=""
       />
     </FilterInputWrap>
   );

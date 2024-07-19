@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { first } from 'lodash';
 import { IReduxState } from 'exports/store/interfaces';
@@ -11,7 +9,10 @@ import { TextBaseField } from './text_base_field';
 import { getFieldDefaultProperty } from './const';
 import { IURLProperty } from 'types/field_types';
 export class URLField extends TextBaseField {
-  constructor(public override field: IURLField, public override state: IReduxState) {
+  constructor(
+    public override field: IURLField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -19,13 +20,18 @@ export class URLField extends TextBaseField {
     return getFieldDefaultProperty(FieldType.URL) as IURLProperty;
   }
 
-  static override cellValueSchema = Joi.array().items(Joi.object({
-    text: Joi.string().allow('').required(),
-    type: Joi.number().required(),
-    link: Joi.string(),
-    title: Joi.string(),
-    favicon: Joi.string(),
-  }).required()).allow(null).required();
+  static override cellValueSchema = Joi.array()
+    .items(
+      Joi.object({
+        text: Joi.string().allow('').required(),
+        type: Joi.number().required(),
+        link: Joi.string(),
+        title: Joi.string(),
+        favicon: Joi.string(),
+      }).required()
+    )
+    .allow(null)
+    .required();
 
   static override propertySchema = Joi.object({
     isRecogURLFlag: Joi.boolean(),
@@ -46,7 +52,7 @@ export class URLField extends TextBaseField {
 
     const cv = [cellValue].flat();
 
-    return (cv as IHyperlinkSegment[]).map(seg => seg?.text || seg?.title).join('') || null;
+    return (cv as IHyperlinkSegment[]).map((seg) => seg?.text || seg?.title).join('') || null;
   }
 
   cellValueToTitle(cellValue: ICellValue): string | null {
@@ -56,7 +62,7 @@ export class URLField extends TextBaseField {
 
     const cv = [cellValue].flat();
 
-    return (cv as IHyperlinkSegment[]).map(seg => seg?.title || seg?.text).join('') || null;
+    return (cv as IHyperlinkSegment[]).map((seg) => seg?.title || seg?.text).join('') || null;
   }
 
   override cellValueToString(cellValue: ICellValue): string | null {
@@ -66,7 +72,7 @@ export class URLField extends TextBaseField {
 
     const cv = [cellValue].flat();
 
-    return (cv as IHyperlinkSegment[]).map(seg => seg?.text || seg?.title).join('') || null;
+    return (cv as IHyperlinkSegment[]).map((seg) => seg?.text || seg?.title).join('') || null;
   }
 
   override validateProperty() {
@@ -88,7 +94,7 @@ export class URLField extends TextBaseField {
     return {
       title: cv.title || cv.text,
       text: cv.text,
-      favicon: cv.favicon || ''
+      favicon: cv.favicon || '',
     } as ISegment;
   }
 

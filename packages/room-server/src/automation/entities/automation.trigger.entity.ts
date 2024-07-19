@@ -1,5 +1,3 @@
-
-
 import { BaseEntity } from 'shared/entities/base.entity';
 import { Column, Entity } from 'typeorm';
 
@@ -11,39 +9,39 @@ export class AutomationTriggerEntity extends BaseEntity {
     unique: true,
     length: 50,
   })
-    triggerId!: string;
+  triggerId!: string;
 
   @Column({
     name: 'robot_id',
     nullable: false,
     length: 50,
   })
-    robotId!: string;
+  robotId!: string;
 
   @Column({
     name: 'trigger_type_id',
     nullable: true,
     length: 255,
   })
-    triggerTypeId?: string;
+  triggerTypeId?: string;
 
   @Column({
     name: 'resource_id',
     nullable: false,
     length: 50,
   })
-    resourceId?: string;
+  resourceId?: string;
 
   @Column({
     name: 'prev_trigger_id',
     nullable: false,
     length: 50,
   })
-    prevTriggerId?: string;
+  prevTriggerId?: string;
 
   @Column('json', {
     name: 'input',
     nullable: true,
   })
-    input?: object;
+  input?: object;
 }

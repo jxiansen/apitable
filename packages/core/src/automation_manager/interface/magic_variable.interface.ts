@@ -1,9 +1,6 @@
-
-
 import { IExpression } from './expression.interface';
 
 export abstract class MagicVariableParserABC<T> {
-
   /**
    * init parser with system functions
    */

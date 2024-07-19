@@ -1,20 +1,18 @@
-
-
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
 
-export const ModalWrapper = styled.div <{ centered?: boolean; zIndex?: number }>`
+export const ModalWrapper = styled.div<{ centered?: boolean; zIndex?: number }>`
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  ${props => {
+  ${(props) => {
     return css`
       z-index: ${props.zIndex || 1000};
     `;
   }}
-  ${props => {
+  ${(props) => {
     if (props.centered) {
       return css`
         display: flex;
@@ -43,12 +41,13 @@ export const ModalWrapper = styled.div <{ centered?: boolean; zIndex?: number }>
   box-shadow: 0px 4px 12px rgba(27, 31, 35, 0.15);
 `;
 
-export const ModalContentWrapper = styled.div <{ centered?: boolean; width?: number | string; }>`
-  ${props => {
-
+export const ModalContentWrapper = styled.div<{ centered?: boolean; width?: number | string }>`
+  ${(props) => {
     let width: number | string = props.width || 520;
 
-    if (typeof width === 'number') { width = `${width}px`; }
+    if (typeof width === 'number') {
+      width = `${width}px`;
+    }
 
     return css`
       width: ${width};
@@ -57,15 +56,16 @@ export const ModalContentWrapper = styled.div <{ centered?: boolean; width?: num
   position: relative;
   box-sizing: border-box;
   margin: auto;
-  ${props => !props.centered && css`
-    top: 100px;
-  `};
-
+  ${(props) =>
+    !props.centered &&
+    css`
+      top: 100px;
+    `};
 `;
 
 export const ModalContent = styled.div.attrs(applyDefaultTheme)`
   position: relative;
-  ${props => {
+  ${(props) => {
     return css`
       background-color: ${props.theme.color.highBg};
     `;
@@ -94,7 +94,7 @@ export const ModalFooter = styled.div`
   padding: 24px;
 `;
 
-export const ModalMask = styled.div <{ zIndex?: number }>`
+export const ModalMask = styled.div<{ zIndex?: number }>`
   position: fixed;
   width: 100%;
   height: 100%;
@@ -103,7 +103,7 @@ export const ModalMask = styled.div <{ zIndex?: number }>`
   top: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.45);
-  ${props => {
+  ${(props) => {
     return css`
       z-index: ${props.zIndex || 1000};
     `;

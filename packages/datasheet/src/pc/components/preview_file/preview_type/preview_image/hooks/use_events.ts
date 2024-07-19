@@ -1,5 +1,3 @@
-
-
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ITransFormInfo, ITranslatePosition } from 'pc/components/preview_file/preview_file.interface';
 import { isWindowsOS } from 'pc/utils/os';

@@ -1,5 +1,3 @@
-
-
 import { IFieldProps } from '../../interface';
 
 import { getWidget, getUiOptions, optionsList, getDefaultRegistry } from '../../utils';

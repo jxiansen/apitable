@@ -1,5 +1,3 @@
-
-
 import { FieldType, IField, IStandardValue, IStandardValueTable, escapeHtml } from '@apitable/core';
 import { CsvDelimiter, parseCsv } from './csv_parser';
 import { parseHtml } from './html_parser';

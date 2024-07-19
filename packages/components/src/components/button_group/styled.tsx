@@ -1,5 +1,3 @@
-
-
 import styled from 'styled-components';
 
 export const ButtonGroupBase = styled.div`
@@ -14,7 +12,7 @@ export const ButtonGroupBase = styled.div`
       border-radius: 4px;
       position: relative;
       &:not(:first-of-type):before {
-        content: " ";
+        content: ' ';
         display: block;
         width: 1px;
         height: 12px;
@@ -24,7 +22,7 @@ export const ButtonGroupBase = styled.div`
         background: #e6e6e6;
         z-index: 3;
         transform: translateY(-50%);
-        opacity: 1!important;
+        opacity: 1 !important;
       }
     }
   }

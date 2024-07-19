@@ -1,11 +1,9 @@
-
-
 import { useRef } from 'react';
 import { isTouchEvent, isMouseEvent, resizeFormat } from '../utils';
 import { Direction } from '../constants';
 import { IResizeHook, IResizeRef } from '../interface';
 
-export const useResize = ({ height = [], width, update, setResizeDay, tasks } : IResizeHook) => {
+export const useResize = ({ height = [], width, update, setResizeDay, tasks }: IResizeHook) => {
   const resizeRef = useRef<IResizeRef>();
   const onMouseMove = (event: MouseEvent) => {
     const isRight = resizeRef.current?.direction === Direction.Right;
@@ -25,13 +23,13 @@ export const useResize = ({ height = [], width, update, setResizeDay, tasks } : 
       }
       day = Math.ceil(diffX / width!) + 7 * week;
     } else {
-      const topY = - diffY - topF;
+      const topY = -diffY - topF;
       if (diffY < 0 && topY > 0) {
         week = Math.ceil(topY / height[0]!);
       } else {
         week = 0;
       }
-      day = Math.ceil(- diffX / width!) + 7 * week;
+      day = Math.ceil(-diffX / width!) + 7 * week;
     }
     setResizeDay(day);
     resizeRef.current = {
@@ -58,7 +56,7 @@ export const useResize = ({ height = [], width, update, setResizeDay, tasks } : 
     const direction = resizeRef.current?.direction!;
     const day = resizeRef.current?.day;
     if (day && update) {
-      const task = tasks.filter(t => resizeRef.current?.id === t.id)[0]!;
+      const task = tasks.filter((t) => resizeRef.current?.id === t.id)[0]!;
       const { startDate, endDate } = task;
       const formatData = resizeFormat({ startDate, endDate, day, direction });
       update(task.id, formatData.startDate, formatData.endDate);
@@ -71,6 +69,6 @@ export const useResize = ({ height = [], width, update, setResizeDay, tasks } : 
 
   return {
     onResizeStart,
-    resizeData: resizeRef.current
+    resizeData: resizeRef.current,
   };
 };

@@ -1,5 +1,3 @@
-
-
 import { difference } from 'lodash';
 
 /**

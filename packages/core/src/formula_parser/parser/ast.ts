@@ -1,5 +1,3 @@
-
-
 import { Token, TokenType } from '../lexer/token';
 import type { IFieldMap, IReduxState } from 'exports/store/interfaces';
 import { Field } from 'model/field';
@@ -51,7 +49,7 @@ export class BinaryOperatorNode extends AstNode {
     // TokenType.Times, TokenType.Div, TokenType.Minus,
     // TokenType.Mod, TokenType.Concat,
     switch (token.type) {
-    // Addition, subtraction, multiplication and division operator symbols are calculated correctly only when both sides are numbers.
+      // Addition, subtraction, multiplication and division operator symbols are calculated correctly only when both sides are numbers.
       case TokenType.Add: {
         const isNumberType = ({ valueType, innerValueType, token }: AstNode) => {
           return valueType === BasicValueType.Number || innerValueType === BasicValueType.Number || token.value.toUpperCase() === 'BLANK';
@@ -91,9 +89,11 @@ export class BinaryOperatorNode extends AstNode {
       }
 
       default: {
-        throw new TypeError(t(Strings.function_err_unknown_operator, {
-          type: token.type,
-        }));
+        throw new TypeError(
+          t(Strings.function_err_unknown_operator, {
+            type: token.type,
+          })
+        );
       }
     }
   }
@@ -136,14 +136,14 @@ export abstract class ValueOperandNodeBase extends AstNode {
   override valueType!: BasicValueType;
   override readonly name!: AstNodeType;
   field!: IField;
-  context!: { state: IReduxState, fieldMap: IFieldMap };
+  context!: { state: IReduxState; fieldMap: IFieldMap };
 
   constructor(token: Token) {
     super(token);
     this.value = token.value.replace(/\\(.)/g, '$1');
   }
 
-  protected init(fieldId: string, context: { state: IReduxState, fieldMap: IFieldMap }, hostField?: IField) {
+  protected init(fieldId: string, context: { state: IReduxState; fieldMap: IFieldMap }, hostField?: IField) {
     this.context = context;
     fieldId = fieldId.replace(/\\(.)/g, '$1');
     if (fieldId === ROLLUP_KEY_WORDS && hostField) {
@@ -152,9 +152,11 @@ export abstract class ValueOperandNodeBase extends AstNode {
     } else {
       const field = context.fieldMap[fieldId];
       if (!field) {
-        throw new Error(t(Strings.function_err_invalid_field_name, {
-          fieldId,
-        }));
+        throw new Error(
+          t(Strings.function_err_invalid_field_name, {
+            fieldId,
+          })
+        );
       }
       this.field = field;
       this.valueType = Field.bindContext(field, context.state).basicValueType;
@@ -169,7 +171,7 @@ export class ValueOperandNode extends ValueOperandNodeBase {
   override readonly name = AstNodeType.ValueOperandNode;
   override readonly field!: IField;
 
-  constructor(token: Token, context: { state: IReduxState, fieldMap: IFieldMap }, hostField?: IField) {
+  constructor(token: Token, context: { state: IReduxState; fieldMap: IFieldMap }, hostField?: IField) {
     super(token);
     const fieldId = token.value.slice(1, -1);
     this.init(fieldId, context, hostField);
@@ -180,7 +182,7 @@ export class PureValueOperandNode extends ValueOperandNodeBase {
   override readonly name = AstNodeType.PureValueOperandNode;
   override readonly field!: IField;
 
-  constructor(token: Token, context: { state: IReduxState, fieldMap: IFieldMap }, hostField?: IField) {
+  constructor(token: Token, context: { state: IReduxState; fieldMap: IFieldMap }, hostField?: IField) {
     super(token);
     const fieldId = token.value;
     this.init(fieldId, context, hostField);

@@ -1,5 +1,3 @@
-
-
 import { ApiProperty } from '@nestjs/swagger';
 import { ApiResponse } from 'fusion/vos/api.response';
 import { RecordHistoryDto } from '../../datasheet/dtos/record.history.dto';

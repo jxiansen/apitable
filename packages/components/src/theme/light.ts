@@ -1,5 +1,3 @@
-
-
 import { black, blackBlue, deepPurple, orange, red, teal, lightColors } from '../colors';
 import { ITheme, ThemeName } from './theme.interface';
 
@@ -52,6 +50,6 @@ export const light: ITheme = {
       disabledOpacity: 0.5,
       focus: '#000',
       focusOpacity: 0.12,
-    }
-  }
+    },
+  },
 };

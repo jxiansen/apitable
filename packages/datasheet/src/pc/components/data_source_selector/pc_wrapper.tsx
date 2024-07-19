@@ -19,7 +19,7 @@ export const PcWrapper: React.FC<React.PropsWithChildren<{ hidePanel(e: any): vo
 
   return ReactDOM.createPortal(
     <div
-      onMouseDown={e => e.nativeEvent.stopImmediatePropagation()}
+      onMouseDown={(e) => e.nativeEvent.stopImmediatePropagation()}
       onWheel={stopPropagation}
       onClick={onClickPortalContainer}
       className={styles.portalContainer}

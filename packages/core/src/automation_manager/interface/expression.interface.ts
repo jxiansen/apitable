@@ -1,5 +1,3 @@
-
-
 // basic support operators
 export enum OperatorEnums {
   // logic
@@ -35,13 +33,13 @@ export enum OperandTypeEnums {
 }
 
 export interface IExpressionOperand {
-  type: OperandTypeEnums.Expression,
-  value: IExpression,
+  type: OperandTypeEnums.Expression;
+  value: IExpression;
 }
 
 export interface ILiteralOperand {
-  type: OperandTypeEnums.Literal,
-  value: any,
+  type: OperandTypeEnums.Literal;
+  value: any;
 }
 
 export type IOperand = IExpressionOperand | ILiteralOperand;
@@ -49,6 +47,6 @@ export type IOperand = IExpressionOperand | ILiteralOperand;
 // just like an AST/S-Expression
 // eg:  and(=(fieldId1,1),isNull(filedId2))
 export interface IExpression {
-  operator: OperatorEnums, // like function name
-  operands: IOperand[] // like function parameters
+  operator: OperatorEnums; // like function name
+  operands: IOperand[]; // like function parameters
 }

@@ -1,5 +1,3 @@
-
-
 import produce from 'immer';
 import { isSafari } from 'react-device-detect';
 import { BaseEditor, Selection, Transforms } from 'slate';

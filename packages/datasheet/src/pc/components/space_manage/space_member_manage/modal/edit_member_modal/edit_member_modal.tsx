@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState, FC, ChangeEvent } from 'react';
 import { shallowEqual, useDispatch } from 'react-redux';
 import { TextInput, Button, TextButton, colorVars } from '@apitable/components';

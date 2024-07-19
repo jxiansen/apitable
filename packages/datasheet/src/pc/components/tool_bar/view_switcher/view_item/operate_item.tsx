@@ -1,5 +1,3 @@
-
-
 import { Tooltip } from 'antd';
 import * as React from 'react';
 import { stopPropagation, useThemeColors } from '@apitable/components';

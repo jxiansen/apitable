@@ -1,5 +1,3 @@
-
-
 import { Strings, t } from '@apitable/core';
 
 export const OPERATE_HEAD_CLASS = 'operateHeadClass';

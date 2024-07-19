@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from 'react';
 import * as React from 'react';
 import { BasicValueType, Field, FormulaBaseError, IFormulaField, RowHeightLevel, Strings, t } from '@apitable/core';

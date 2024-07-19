@@ -2,10 +2,10 @@ import { IResponse, MessageType } from './interface';
 
 type ICallBack = (res: IResponse, messageId?: string) => void;
 
-type IEventMap = Map<MessageType, {[key: string]: ICallBack[]}>;
+type IEventMap = Map<MessageType, { [key: string]: ICallBack[] }>;
 
 /**
- * Make a layer of callback proxy, if the message body declares origin source form, 
+ * Make a layer of callback proxy, if the message body declares origin source form,
  * when joining the listener will declare that only the source will be processed.
  */
 const getProxyCallback = (callback: (data: IResponse, messageId?: string) => void, origin?: string) => {
@@ -20,7 +20,7 @@ const getProxyCallback = (callback: (data: IResponse, messageId?: string) => voi
 
 /**
  * Communication protocol base class definition.
- * Define the communication method, will be eventBus, 
+ * Define the communication method, will be eventBus,
  * postMessage two communication method inheritance.
  * emit send message
  * on receiving message
@@ -31,7 +31,7 @@ export abstract class Protocol {
    */
   protected eventMap: IEventMap = new Map();
   /**
-   * Send the message, if it has a key, only to the window with the specified key, 
+   * Send the message, if it has a key, only to the window with the specified key,
    * otherwise it is broadcast to all.
    * @param type message type
    * @param data response data body
@@ -56,7 +56,7 @@ export abstract class Protocol {
     this.eventMap.delete(type);
   }
   /**
-   * When adding a listener, you need to pass in your own form identifier to 
+   * When adding a listener, you need to pass in your own form identifier to
    * facilitate receiving data from the specified form.
    * @param type message type
    * @param callback
@@ -71,7 +71,7 @@ export abstract class Protocol {
     if (event) {
       event = {
         ...event,
-        [key]: callbacks
+        [key]: callbacks,
       };
     } else {
       event = { [key]: callbacks };

@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { produce } from 'immer';
 import * as React from 'react';

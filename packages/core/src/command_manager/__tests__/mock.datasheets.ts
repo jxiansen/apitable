@@ -1,5 +1,3 @@
-
-
 import { IBaseDatasheetPack } from 'exports/store/interfaces';
 import { ViewType } from 'modules/shared/store/constants';
 import { FieldType, SegmentType } from 'types';

@@ -1,5 +1,3 @@
-
-
 import { useRef } from 'react';
 
 // Scroll sensitivity
@@ -7,14 +5,14 @@ const MIN_DISTANCE = 30;
 
 export enum Direction {
   Left = 'left',
-  Right = 'right'
+  Right = 'right',
 }
 
 export const useTouch = () => {
   const touchRef = useRef({
     startX: 0,
     startY: 0,
-    direction: undefined as (Direction | undefined)
+    direction: undefined as Direction | undefined,
   });
 
   // Reset touch cache
@@ -22,7 +20,7 @@ export const useTouch = () => {
     touchRef.current = {
       startX: 0,
       startY: 0,
-      direction: undefined
+      direction: undefined,
     };
   };
 
@@ -32,7 +30,7 @@ export const useTouch = () => {
     touchRef.current = {
       startX: clientX,
       startY: clientY,
-      direction: undefined
+      direction: undefined,
     };
   };
 
@@ -70,6 +68,6 @@ export const useTouch = () => {
     start,
     end,
     move,
-    direction: touchRef.current.direction
+    direction: touchRef.current.direction,
   };
 };

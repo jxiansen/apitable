@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@nestjs/common';
 import { IRemoteChangeset } from '@apitable/core';
 import { DatasheetChangesetSourceEntity } from '../entities/datasheet.changeset.source.entity';
@@ -9,21 +7,19 @@ import { DatasheetChangesetSourceRepository } from '../../datasheet/repositories
 
 @Injectable()
 export class DatasheetChangesetSourceService {
-  constructor(
-    private readonly changesetSourceRepository: DatasheetChangesetSourceRepository,
-  ) {}
+  constructor(private readonly changesetSourceRepository: DatasheetChangesetSourceRepository) {}
 
   /**
    * Batch create source info for changesets
-   * 
-   * @param changesets changesets from server 
+   *
+   * @param changesets changesets from server
    * @param sourceType changeset source
    * @return
    * @author Zoe Zheng
    * @date 2021/4/16 5:27 PM
    */
   async batchCreateChangesetSource(changesets: IRemoteChangeset[], sourceType: SourceTypeEnum, sourceId?: string) {
-    const changesetSourceEntities: DatasheetChangesetSourceEntity[] = changesets.map(changeset => {
+    const changesetSourceEntities: DatasheetChangesetSourceEntity[] = changesets.map((changeset) => {
       const entity = new DatasheetChangesetSourceEntity();
       entity.id = IdWorker.nextId().toString();
       entity.createdBy = changeset.userId;

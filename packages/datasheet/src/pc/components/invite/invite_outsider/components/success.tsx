@@ -1,5 +1,3 @@
-
-
 import { FC, useState } from 'react';
 import { Button, TextButton } from '@apitable/components';
 import { Strings, t } from '@apitable/core';

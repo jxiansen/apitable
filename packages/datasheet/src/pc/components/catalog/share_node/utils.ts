@@ -1,5 +1,3 @@
-
-
 import { IUserInfo } from '@apitable/core';
 
 /**

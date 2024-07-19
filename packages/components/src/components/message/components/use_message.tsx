@@ -1,12 +1,10 @@
-
-
 import { CSSMotionList } from 'rc-motion';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { IMessageUIProps } from '../interface';
 import { MessageUI } from './message_ui';
 
-export function useRefCallback<T extends(...args: any[]) => any>(callback: T) {
+export function useRefCallback<T extends (...args: any[]) => any>(callback: T) {
   const callbackRef = React.useRef(callback);
   callbackRef.current = callback;
   return React.useCallback((...args: any[]) => callbackRef.current(...args), []) as T;
@@ -25,7 +23,7 @@ const MessageUiContainer = (props: IMessageUIProps) => {
   const [uuids, setUuids] = useState<React.Key[]>([]);
   const [uiPropsMap, setUiPropsMap] = useState<Record<React.Key, IMessageUIProps>>({});
   const remove = (removeKey: React.Key) => {
-    setUuids(uuids => uuids.filter(key => key !== removeKey));
+    setUuids((uuids) => uuids.filter((key) => key !== removeKey));
   };
 
   useEffect(() => {
@@ -60,13 +58,8 @@ const MessageUiContainer = (props: IMessageUIProps) => {
 
   return (
     <div style={{ position: 'fixed', top: '80px', textAlign: 'center', width: '100%', pointerEvents: 'none', zIndex: 1000 }}>
-      <CSSMotionList keys={uuids} motionName='apitable'>
-        {({ key, className: motionClassName }) =>
-          <MessageUI
-            motionClassName={motionClassName}
-            {...uiPropsMap[key]!}
-          />
-        }
+      <CSSMotionList keys={uuids} motionName="apitable">
+        {({ key, className: motionClassName }) => <MessageUI motionClassName={motionClassName} {...uiPropsMap[key]!} />}
       </CSSMotionList>
     </div>
   );
@@ -81,8 +74,6 @@ export const createUseMessage = () => {
       domWrapper = rootDom;
     }
     const root = createRoot(domWrapper);
-    root.render(
-      <MessageUiContainer {...props} messageKey={props.messageKey} />);
+    root.render(<MessageUiContainer {...props} messageKey={props.messageKey} />);
   };
 };
-

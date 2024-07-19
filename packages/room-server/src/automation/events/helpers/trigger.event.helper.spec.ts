@@ -1,5 +1,3 @@
-
-
 import { AutomationService } from '../../services/automation.service';
 import { FieldType } from '@apitable/core';
 import { AutomationTriggerEntity } from '../../entities/automation.trigger.entity';
@@ -108,29 +106,29 @@ describe('TriggerEventHelper', () => {
     };
   };
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     moduleFixture = await Test.createTestingModule({
       imports: [
         WinstonModule.forRootAsync({
           useClass: LoggerConfigService,
         }),
-        QueueDynamicModule.forRoot()
+        QueueDynamicModule.forRoot(),
       ],
       providers: [
         {
           provide: AutomationService,
           useValue: {
             handleTask: jest.fn().mockReturnValue(Promise.resolve()),
-          }
-        }
-        , TriggerEventHelper,
+          },
+        },
+        TriggerEventHelper,
       ],
     }).compile();
     automationService = moduleFixture.get<AutomationService>(AutomationService);
     triggerEventHelper = moduleFixture.get<TriggerEventHelper>(TriggerEventHelper);
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     await moduleFixture.close();
   });
 
@@ -153,13 +151,13 @@ describe('TriggerEventHelper', () => {
     return getCommonMetaContext({ [key]: 'triggerTypeId' }, getDatasheetInfoInput());
   };
 
-  it('given record created context when handle record created trigger then should no be throw', async() => {
+  it('given record created context when handle record created trigger then should no be throw', async () => {
     await expect(
       triggerEventHelper.recordCreatedTriggerHandler(getCommonEventContext(), getDatasheetInfoInputMetaContext(EventTypeEnums.RecordCreated)),
     ).resolves.not.toThrow();
   });
 
-  it('given un match condition context when handle record match conditions trigger then should no be throw', async() => {
+  it('given un match condition context when handle record match conditions trigger then should no be throw', async () => {
     await expect(
       triggerEventHelper.recordMatchConditionsTriggerHandler(
         getCommonEventContext(),
@@ -168,7 +166,7 @@ describe('TriggerEventHelper', () => {
     ).resolves.not.toThrow();
   });
 
-  it('given match condition context when handle record match conditions trigger then should no be throw', async() => {
+  it('given match condition context when handle record match conditions trigger then should no be throw', async () => {
     await expect(
       triggerEventHelper.recordMatchConditionsTriggerHandler(
         getCommonEventContext(

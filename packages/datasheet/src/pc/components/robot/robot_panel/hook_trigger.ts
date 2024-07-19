@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import { useAtomValue } from 'jotai';
 import { atomsWithQuery } from 'jotai-tanstack-query';

@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { FC, useEffect, useRef } from 'react';
 import { IAttachmentValue } from '@apitable/core';

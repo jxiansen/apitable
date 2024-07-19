@@ -1,5 +1,3 @@
-
-
 import { useUpdateEffect } from 'ahooks';
 import { Context } from 'konva/lib/Context';
 import { KonvaEventObject } from 'konva/lib/Node';

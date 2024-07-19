@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { ILightOrDarkThemeColors } from '@apitable/components';
 import { ILinearRow, ILinearRowRecord, RowHeight } from '@apitable/core';

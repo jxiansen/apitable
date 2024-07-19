@@ -1,5 +1,3 @@
-
-
 import Ajv from 'ajv';
 import { JSONSchema7 } from 'json-schema';
 import toPath from 'lodash/toPath';
@@ -254,8 +252,8 @@ export default function validateFormData(
 
   const userErrorSchema1 = unwrapErrorHandler({
     datasheetId: {
-      __errors: ['testxxxxxxxx']
-    }
+      __errors: ['testxxxxxxxx'],
+    },
   });
   const userErrorSchema = unwrapErrorHandler(errorHandler);
   const newErrorSchema = mergeObjects(errorSchema, userErrorSchema, true);

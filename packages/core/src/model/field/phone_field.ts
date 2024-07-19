@@ -1,13 +1,14 @@
-
-
 import { IReduxState } from '../../exports/store/interfaces';
-import { FieldType, IField, IPhoneField,IPhoneProperty } from 'types/field_types';
+import { FieldType, IField, IPhoneField, IPhoneProperty } from 'types/field_types';
 import { DatasheetActions } from '../../commands_actions/datasheet';
 import { TextBaseField } from './text_base_field';
 import { getFieldDefaultProperty } from './const';
 
 export class PhoneField extends TextBaseField {
-  constructor(public override field: IPhoneField, state: IReduxState) {
+  constructor(
+    public override field: IPhoneField,
+    state: IReduxState
+  ) {
     super(field, state);
   }
 

@@ -1,5 +1,3 @@
-
-
 type IOptions<T extends string> = {
   supportedLngs: T[];
   fallbackLng?: { [key: string]: T };

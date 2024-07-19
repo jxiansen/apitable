@@ -1,5 +1,3 @@
-
-
 export * from './record';
 export * from '../commands_actions/datasheet';
 export * from './view';

@@ -39,40 +39,40 @@ export const getView = createCachedSelector(
     (state: IWidgetState) => {
       const mirrorId = state.widget?.snapshot.sourceId;
       return mirrorId?.startsWith('mir') && state.mirrorMap?.[mirrorId]?.mirror;
-    }
+    },
   ],
   (views, fieldPermissionMap, viewId, mirror) => {
     if (!views) {
       return;
     }
-    const view = views.find(view => view.id == viewId) || views[0];
+    const view = views.find((view) => view.id == viewId) || views[0];
 
     if (!view) {
       return;
     }
 
-    let columns = view.columns.filter(column => {
+    let columns = view.columns.filter((column) => {
       const fieldRole = Selectors.getFieldRoleByFieldId(fieldPermissionMap, column.fieldId);
       return fieldRole !== ConfigConstant.Role.None;
     });
 
     if (typeof view.displayHiddenColumnWithinMirror === 'boolean' && !view.displayHiddenColumnWithinMirror && mirror) {
-      const originViewHiddenColumnIds = columns.filter(item => item.hidden).map(item => item.fieldId) || [];
+      const originViewHiddenColumnIds = columns.filter((item) => item.hidden).map((item) => item.fieldId) || [];
       const mirrorColumns = mirror.temporaryView?.columns;
-      const mirrorFilterColumns = mirrorColumns?.filter(item => {
+      const mirrorFilterColumns = mirrorColumns?.filter((item) => {
         return !originViewHiddenColumnIds.includes(item.fieldId);
       });
 
       if (!mirrorFilterColumns) {
         // If mirrorFilterColumns does not exist, it means that the user has not configured a trial view in the mirror.
         // In this case, only the hidden columns in the original view need to be filtered.
-        columns = view.columns.filter(col => !col.hidden);
+        columns = view.columns.filter((col) => !col.hidden);
       }
     }
 
     return {
       ...view,
-      columns
+      columns,
     };
   }
 )((state, viewId?: string, datasheetId?: string) => viewId || getViews(state, datasheetId)?.[0]?.id);
@@ -121,7 +121,7 @@ export const getActiveViewId = (state: IWidgetState, id?: string) => {
   if (!views) {
     return pageViewId;
   }
-  if (!views.find(item => item.id === pageViewId)) {
+  if (!views.find((item) => item.id === pageViewId)) {
     return views[0]?.id;
   }
   return pageViewId;

@@ -1,5 +1,3 @@
-
-
 import { HttpException } from '@nestjs/common';
 import { ApiTipConfig, ApiTipConstant, Strings, t } from '@apitable/core';
 import { ServerException } from 'shared/exception/server.exception';
@@ -77,7 +75,7 @@ export class ApiException extends HttpException {
     const tip = ApiTipConfig[error.tipId];
     let message: string = ApiException.message(error.tipId, error?.value, error?.property);
     if (Array.isArray(tips)) {
-      const messages = tips.map(v => {
+      const messages = tips.map((v) => {
         return ApiException.message(v.tipId, v?.value, v?.property);
       });
       message = messages.join(',');

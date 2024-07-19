@@ -1,5 +1,3 @@
-
-
 export enum NotifyKey {
   ArchiveRecord = 'archiveRecord',
   Export = 'export',

@@ -1,5 +1,3 @@
-
-
 import { useMemo } from 'react';
 import { byteMGArr, decimalCeil, t, Strings } from '@apitable/core';
 import { IHooksParams, IHooksResult } from '../interface';

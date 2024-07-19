@@ -1,5 +1,3 @@
-
-
 import { Arrow as KonvaArrow } from 'react-konva';
 
 const Arrow = (props: any) => {

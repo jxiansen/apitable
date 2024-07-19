@@ -1,5 +1,3 @@
-
-
 import { Strings, t } from 'exports/i18n';
 import { generateRandomString } from './string';
 
@@ -48,10 +46,13 @@ export function getNewIds(prefix: IDPrefix, num: number, ids: string[] = []): st
   if (num <= 0) return [];
 
   const newIds: string[] = [];
-  const idMap = ids.reduce((prev, id) => {
-    prev[id] = true;
-    return prev;
-  }, {} as { [id: string]: true });
+  const idMap = ids.reduce(
+    (prev, id) => {
+      prev[id] = true;
+      return prev;
+    },
+    {} as { [id: string]: true }
+  );
 
   for (let i = 0; i < num; i++) {
     let newId: string;
@@ -84,10 +85,13 @@ export const NamePrefix = {
  */
 export function getUniqName(newName: string, names: string[]) {
   let index = 1;
-  const nameMap = names.reduce((prev, name) => {
-    prev[name] = true;
-    return prev;
-  }, {} as { [name: string]: true });
+  const nameMap = names.reduce(
+    (prev, name) => {
+      prev[name] = true;
+      return prev;
+    },
+    {} as { [name: string]: true }
+  );
 
   let uniqName: string = newName;
   while (nameMap[uniqName]) {

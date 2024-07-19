@@ -1,5 +1,3 @@
-
-
 import { InputProps } from 'antd/lib/input';
 import classnames from 'classnames';
 import * as React from 'react';

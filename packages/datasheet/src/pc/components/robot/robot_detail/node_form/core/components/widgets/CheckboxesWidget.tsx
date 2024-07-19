@@ -1,5 +1,3 @@
-
-
 import { WidgetProps } from '@rjsf/core';
 import { Checkbox } from '@apitable/components';
 

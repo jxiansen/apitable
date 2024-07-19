@@ -1,5 +1,3 @@
-
-
 import { IPermissions } from '../../../../space/store/interfaces/catalog_tree';
 import { IMeta, INodeMeta, IFieldPermissionMap, ICollaborator } from './datasheet/datasheet';
 
@@ -19,7 +17,7 @@ export interface IFormPack {
 export interface IFormState extends INodeMeta {
   sourceInfo: ISourceDatasheetInfo;
   snapshot: IFormSnapshot;
-  fieldPermissionMap: IFieldPermissionMap
+  fieldPermissionMap: IFieldPermissionMap;
 }
 
 export interface ISourceDatasheetInfo {
@@ -65,7 +63,7 @@ export interface IResourceMeta {
 }
 
 /**
- * the data structure of server-side form 
+ * the data structure of server-side form
  */
 export interface IServerFormPack {
   sourceInfo: ISourceDatasheetInfo;

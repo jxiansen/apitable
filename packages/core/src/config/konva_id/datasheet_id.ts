@@ -1,11 +1,9 @@
-
-
 // Grid
 export const GRID_CELL = 'GRID_CELL'; // cellValue
 export const GRID_CELL_LINK_ICON = 'GRID_CELL_LINK_ICON'; // cellValue icon for email/url/phone
 export const GRID_FIELD_HEAD = 'GRID_FIELD_HEAD'; // column header
 export const GRID_FIELD_HEAD_MORE = 'GRID_FIELD_HEAD_MORE'; // More button in the column header
-export const GRID_FIELD_ADD_BUTTON= 'GRID_FIELD_ADD_BUTTON'; // Add column button
+export const GRID_FIELD_ADD_BUTTON = 'GRID_FIELD_ADD_BUTTON'; // Add column button
 export const GRID_ROW_HEAD = 'GRID_ROW_HEAD'; // row header
 export const GRID_ROW_DRAG_HANDLER = 'GRID_ROW_DRAG_HANDLER'; // row drag handle
 export const GRID_ROW_SELECT_CHECKBOX = 'GRID_ROW_SELECT_CHECKBOX'; // row check box

@@ -29,19 +29,19 @@ class MessageMap {
    * Message callback to queue operations.
    */
   public push(id: string, resolve?: ResolveType, reject?: RejectType, allowTimeout: boolean = false) {
-    const messageData: IMessageReturnProps = { 
-      id, 
-      success: true, 
-      resolve, 
-      reject 
+    const messageData: IMessageReturnProps = {
+      id,
+      success: true,
+      resolve,
+      reject,
     };
     if (!allowTimeout) {
       messageData.timer = setTimeout(() => {
         this.put(id);
-        reject?.({ 
-          id, 
-          success: false, 
-          msg: 'Message Event Timeout'
+        reject?.({
+          id,
+          success: false,
+          msg: 'Message Event Timeout',
         });
       }, this.timer * 1000);
     }
@@ -61,7 +61,7 @@ class MessageMap {
    * Clear message memory.
    */
   public clear() {
-    this.map.forEach(p => p.timer && clearTimeout(p.timer));
+    this.map.forEach((p) => p.timer && clearTimeout(p.timer));
     this.map = new Map();
   }
 

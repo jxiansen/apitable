@@ -1,5 +1,3 @@
-
-
 import { DateRange, ITimestamp } from 'types/field_types';
 
 export const notInTimestampRange = (timestamp: ITimestamp) => {

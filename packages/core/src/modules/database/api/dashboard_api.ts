@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import urlcat from 'urlcat';
 import * as Url from './url.data';
@@ -12,7 +10,7 @@ export const fetchDashboardPack = (dashboardId: string) => {
   });
 };
 
-export const fetchShareDashboardPack = (dashboardId: string, shareId: string,) => {
+export const fetchShareDashboardPack = (dashboardId: string, shareId: string) => {
   return axios.get(urlcat(Url.FETCH_SHARE_DASHBOARD, { shareId, dashboardId }), {
     baseURL,
   });

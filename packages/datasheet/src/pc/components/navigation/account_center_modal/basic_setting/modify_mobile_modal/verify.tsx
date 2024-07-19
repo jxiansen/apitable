@@ -1,5 +1,3 @@
-
-
 import { Form } from 'antd';
 import { FC } from 'react';
 import { hiddenMobile, ConfigConstant, Strings, t } from '@apitable/core';

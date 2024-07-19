@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { IReduxState } from '../../exports/store/interfaces';
 import { FieldType, IField, INumberField, SymbolAlign } from 'types/field_types';
@@ -13,7 +11,10 @@ import { IUpdateOpenNumberFieldProperty } from 'types/open/open_field_write_type
 import { getFieldDefaultProperty } from './const';
 import { INumberFieldProperty } from 'types/field_types';
 export class NumberField extends NumberBaseField {
-  constructor(public override field: INumberField, public override state: IReduxState) {
+  constructor(
+    public override field: INumberField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -40,7 +41,6 @@ export class NumberField extends NumberBaseField {
       return str2Currency(cellString, symbol, 3, commaStyle, symbolAlign);
     }
     return null;
-
   }
 
   static createDefault(fieldMap: { [fieldId: string]: IField }): INumberField {
@@ -48,7 +48,7 @@ export class NumberField extends NumberBaseField {
       id: DatasheetActions.getNewFieldId(fieldMap),
       type: FieldType.Number,
       name: DatasheetActions.getDefaultFieldName(fieldMap),
-      property: this.defaultProperty()
+      property: this.defaultProperty(),
     };
   }
 
@@ -62,10 +62,7 @@ export class NumberField extends NumberBaseField {
   }
 
   override compare(cellValue1: number, cellValue2: number): number {
-    return NumberBaseField._compare(
-      this.compareCellValue(cellValue1),
-      this.compareCellValue(cellValue2),
-    );
+    return NumberBaseField._compare(this.compareCellValue(cellValue1), this.compareCellValue(cellValue2));
   }
 
   override defaultValue(): ICellValue {
@@ -81,7 +78,7 @@ export class NumberField extends NumberBaseField {
   static updateOpenPropertySchema = Joi.object({
     precision: Joi.number().min(0).max(1000).required(),
     defaultValue: Joi.string().allow(''),
-    symbol: Joi.string().allow('')
+    symbol: Joi.string().allow(''),
   }).required();
 
   override get openFieldProperty(): IOpenNumberFieldProperty {

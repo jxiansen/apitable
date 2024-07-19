@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import useSWR from 'swr';
 import { Box, Typography } from '@apitable/components';

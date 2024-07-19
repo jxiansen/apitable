@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
@@ -10,7 +8,10 @@ import { NodePermission } from 'shared/interfaces';
 
 @Injectable()
 export class NodePermissionGuard implements CanActivate {
-  constructor(private reflector: Reflector, private readonly permissionService: NodePermissionService) {}
+  constructor(
+    private reflector: Reflector,
+    private readonly permissionService: NodePermissionService,
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest();

@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { Typography } from '@apitable/components';
 import { Selectors, Strings, t } from '@apitable/core';

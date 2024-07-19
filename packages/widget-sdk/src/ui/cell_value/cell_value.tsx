@@ -1,5 +1,3 @@
-
-
 import React, { CSSProperties, useContext } from 'react';
 import { FieldType, IWidgetContext } from '../../interface';
 import { WidgetContext } from 'context/widget_context';
@@ -19,30 +17,30 @@ import { Field, getFieldTypeString, IReduxState, LookUpField } from '../../core'
 import { CellMultiText } from './cell_multi_text';
 
 /**
- * Display the UI style for recording the cells of the specified field, 
+ * Display the UI style for recording the cells of the specified field,
  * all types of fields are now supported.
- * 
+ *
  * @param props.recordId The recordId from which to render a cell.
  * @param props.fieldId The fieldId from which to render a cell.
- * @param props.cellValue The cell value to render. 
+ * @param props.cellValue The cell value to render.
  * Either record or cellValue must be provided to the CellValue. If both are provided, record will be used.
  * @param props.className Additional class names to apply to the cell renderer container, separated by spaces.
  * @param props.style Additional styles to apply to the cell renderer container.
  * @param props.cellClassName Additional class names to apply to the cell itself, separated by spaces.
  * @param props.cellStyle Additional styles to apply to the cell itself.
  * @returns
- * 
+ *
  * #### Example
- * 
+ *
  * **Method 1**
- * 
- * Use recordId,fieldId render CellValue UI, 
+ *
+ * Use recordId,fieldId render CellValue UI,
  * Rendering CellValue UI by recordId, fieldId, e.g. focus cell's rendering cell display UI.
- * 
+ *
  * ```tsx
  * import React from 'react';
  * import { useActiveCell, CellValue } from '@apitable/widget-sdk';
- * 
+ *
  * export const CellValueUI = () => {
  *   const activeCell = useActiveCell();
  *   if (!activeCell) {
@@ -59,16 +57,16 @@ import { CellMultiText } from './cell_multi_text';
  *   )
  * }
  * ```
- * 
+ *
  *  **Method 2**
- * 
- * Render CellValue UI by cellValue, fieldId, 
+ *
+ * Render CellValue UI by cellValue, fieldId,
  * e.g. merge or difference set calculation for multiple cells data in the same column, return data in cellValue format.
- * 
+ *
  * ```tsx
  * import React from 'react';
  * import { useActiveCell, CellValue } from '@apitable/widget-sdk';
- * 
+ *
  * export const CellValueUI = ({ cellValue }) => {
  *   const activeCell = useActiveCell();
  *   if (!activeCell) {
@@ -104,7 +102,7 @@ export const CellValue = (props: {
   let type = activeField?.type;
   let property = activeField?.fieldData?.property;
   const state = context.widgetStore.getState();
-  if (!activeField ||!type || !state) {
+  if (!activeField || !type || !state) {
     return null;
   }
   let cellValue = cellValueData || activeRecord.getCellValue(fieldId);
@@ -115,27 +113,13 @@ export const CellValue = (props: {
       return null;
     }
     type = getFieldTypeString(realType) as any as FieldType;
-    if (
-      type === FieldType.Attachment ||
-      type === FieldType.MultiSelect ||
-      type === FieldType.Member ||
-      type === FieldType.MagicLink
-    ) {
+    if (type === FieldType.Attachment || type === FieldType.MultiSelect || type === FieldType.Member || type === FieldType.MagicLink) {
       cellValue = cellValue ? cellValue[0] : null;
     }
-    if (
-      type === FieldType.MultiSelect ||
-      type === FieldType.SingleSelect ||
-      type === FieldType.Checkbox
-    ) {
+    if (type === FieldType.MultiSelect || type === FieldType.SingleSelect || type === FieldType.Checkbox) {
       property = realField?.property;
     }
-    if (
-      type === FieldType.Email ||
-      type === FieldType.URL || 
-      type === FieldType.Phone || 
-      type === FieldType.Rating
-    ) {
+    if (type === FieldType.Email || type === FieldType.URL || type === FieldType.Phone || type === FieldType.Rating) {
       type = FieldType.Text;
     }
   }
@@ -144,11 +128,11 @@ export const CellValue = (props: {
     return cellValueData ? activeField.convertCellValueToString(cellValueData) : activeRecord.getCellValueString(fieldId);
   };
 
-  switch(type) {
+  switch (type) {
     case FieldType.SingleText:
       return <CellEnhanceText text={handleCellValue()} {...cellProps} />;
     case FieldType.Text:
-      return <CellMultiText text={handleCellValue()} {...cellProps}/>;
+      return <CellMultiText text={handleCellValue()} {...cellProps} />;
     case FieldType.Currency:
     case FieldType.DateTime:
     case FieldType.CreatedTime:

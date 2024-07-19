@@ -1,5 +1,3 @@
-
-
 import { StoreActions, Selectors, compensator } from '@apitable/core';
 import { changeView } from 'pc/hooks/use_change_view';
 import { store } from 'pc/store';

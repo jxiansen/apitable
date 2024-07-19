@@ -1,12 +1,8 @@
-
-
 import { IOption } from './interface';
 import { isFragment } from 'react-is';
 import React from 'react';
 
-export default function toArray(
-  children: React.ReactNode,
-): React.ReactElement[] {
+export default function toArray(children: React.ReactNode): React.ReactElement[] {
   let ret: React.ReactElement[] = [];
 
   React.Children.forEach(children, (child: any) => {
@@ -33,10 +29,7 @@ function convertNodeToOption(node: React.ReactElement): IOption {
   return { value: value, label: children, ...restProps };
 }
 
-export function convertChildrenToData(
-  nodes: React.ReactNode,
-  optionOnly = false,
-): (IOption | null)[] {
+export function convertChildrenToData(nodes: React.ReactNode, optionOnly = false): (IOption | null)[] {
   return toArray(nodes)
     .map((node: React.ReactElement, index: number): IOption | null => {
       if (!React.isValidElement(node)) {
@@ -58,5 +51,5 @@ export function convertChildrenToData(
         // options: convertChildrenToData(children),
       } as IOption;
     })
-    .filter(data => data);
+    .filter((data) => data);
 }

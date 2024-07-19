@@ -1,5 +1,3 @@
-
-
 import { CARD_WIDTH, NodeType, GHOST_NODE_SIZE } from '../constants';
 import { IAdj, IEdge, INode, INodesMap } from '../interfaces';
 

@@ -1,5 +1,3 @@
-
-
 import { FieldType, ILinkField } from '@apitable/core';
 import { DatasheetRecordService } from 'database/datasheet/services/datasheet.record.service';
 import { LinkField } from 'fusion/field/link.field';
@@ -13,7 +11,7 @@ describe('LinkField', () => {
   let field: ILinkField;
   let recordService: any;
 
-  beforeAll(async() => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -29,7 +27,7 @@ describe('LinkField', () => {
     };
   });
 
-  afterAll(async() => {
+  afterAll(async () => {
     await app.close();
   });
 

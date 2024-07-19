@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { useContext } from 'react';
 import { CellType, compensator, ConfigConstant, Field, IField, KONVA_DATASHEET_ID, Range, RecordMoveType, Selectors, ViewType } from '@apitable/core';

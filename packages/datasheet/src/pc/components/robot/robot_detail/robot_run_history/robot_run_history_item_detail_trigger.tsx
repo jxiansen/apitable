@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { shallowEqual } from 'react-redux';
 import ReactJson from 'react18-json-view';
@@ -103,7 +101,7 @@ export const RobotRunHistoryTriggerDetail = (props: IRobotRunHistoryTriggerDetai
   const hasTimeZone = retrievedSchema?.properties?.timeZone != null;
 
   const datasheetEmpty = !datasheet || !fieldPermissionMap || !fields;
-  if (!hasTimeZone && datasheetEmpty ) {
+  if (!hasTimeZone && datasheetEmpty) {
     return (
       <Box color={colors.bgCommonDefault} width={'100%'}>
         <StyledTitle>{t(Strings.robot_run_history_input)}</StyledTitle>
@@ -115,7 +113,7 @@ export const RobotRunHistoryTriggerDetail = (props: IRobotRunHistoryTriggerDetai
     );
   }
 
-  if (hasTimeZone && datasheetEmpty ) {
+  if (hasTimeZone && datasheetEmpty) {
     return (
       <Box color={colors.bgCommonDefault} width={'100%'}>
         <StyledTitle>{t(Strings.robot_run_history_input)}</StyledTitle>

@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { Button, IconButton, LinkButton, Message, Typography, useThemeColors } from '@apitable/components';
 import { CollaCommandName, ExecuteResult, Selectors, StoreActions, Strings, t } from '@apitable/core';

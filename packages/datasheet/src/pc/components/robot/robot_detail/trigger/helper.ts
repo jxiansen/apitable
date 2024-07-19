@@ -1,10 +1,8 @@
-
-
 import produce from 'immer';
 import { Field, FOperator, IExpressionOperand, IField, IFieldMap, IViewColumn, OperandTypeEnums, OperatorEnums, t, Strings } from '@apitable/core';
 
 export const getFields = (columns: IViewColumn[], fieldMap: IFieldMap) => {
-  if(!columns) return [];
+  if (!columns) return [];
   return columns?.map((column) => {
     return fieldMap[column.fieldId];
   });

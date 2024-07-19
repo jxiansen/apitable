@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
 import { convertHexToRGB, editRgbaOpacity } from '../../helper/color_helper';
@@ -18,10 +16,10 @@ export const RadioLabelStyled = styled.label.attrs(applyDefaultTheme)`
     transition: background 0.2s ease 0s;
     border-radius: 4px;
     ${(props) => {
-    const { color } = props.theme;
-    const hoverBg = color.bgControlsHoverSolid;
-    const activeBg = color.bgControlsActiveSolid;
-    return css`
+      const { color } = props.theme;
+      const hoverBg = color.bgControlsHoverSolid;
+      const activeBg = color.bgControlsActiveSolid;
+      return css`
         color: ${color.fc1};
         &:not(.radio-label-btn-checked) {
           background-color: ${color.bgControlsDefaultSolid};
@@ -33,7 +31,7 @@ export const RadioLabelStyled = styled.label.attrs(applyDefaultTheme)`
           background-color: ${activeBg};
         }
       `;
-  }}
+    }}
     .radio-btn {
       padding: 0;
     }
@@ -43,12 +41,12 @@ export const RadioLabelStyled = styled.label.attrs(applyDefaultTheme)`
   }
   &.radio-label-btn-checked {
     ${(props) => {
-    const { color } = props.theme;
-    return css`
+      const { color } = props.theme;
+      return css`
         color: ${color.primaryColor};
         background-color: ${color.defaultBg};
       `;
-  }}
+    }}
     font-weight: 600;
   }
   @keyframes radioEffect {
@@ -73,27 +71,27 @@ export const RadioLabelStyled = styled.label.attrs(applyDefaultTheme)`
     animation-fill-mode: both;
     content: '';
     ${(props) => {
-    const { color } = props.theme;
-    return css`
+      const { color } = props.theme;
+      return css`
         border: 1px solid ${color.primaryColor};
       `;
-  }}
+    }}
   }
   .radio-disabled,
   .radio-disabled + span {
     cursor: not-allowed;
     ${(props) => {
-    const { color, palette } = props.theme;
-    const resColor = palette.type === 'light' ? convertHexToRGB(color.fc1, 0.5) : editRgbaOpacity(color.fc1, 0.5);
-    return css`
-      color: ${resColor};
-    `;
-  }}
+      const { color, palette } = props.theme;
+      const resColor = palette.type === 'light' ? convertHexToRGB(color.fc1, 0.5) : editRgbaOpacity(color.fc1, 0.5);
+      return css`
+        color: ${resColor};
+      `;
+    }}
   }
 `;
 
 export const RadioSpanStyled = styled.span.attrs(applyDefaultTheme)`
-  box-sizing: border-box; 
+  box-sizing: border-box;
   display: inline-flex;
   position: relative;
   cursor: pointer;
@@ -129,11 +127,11 @@ export const RadioInputStyled = styled.input.attrs(applyDefaultTheme)`
   left: 0;
   &:checked + span {
     ${(props) => {
-    const { color } = props.theme;
-    return css`
+      const { color } = props.theme;
+      return css`
         border-color: ${color.primaryColor};
       `;
-  }}
+    }}
     &:after {
       transform: scale(1);
       opacity: 1;
@@ -172,11 +170,11 @@ export const RadioInnerStyled = styled.span.attrs(applyDefaultTheme)`
     transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
     content: ' ';
     ${(props) => {
-    const { color } = props.theme;
-    return css`
+      const { color } = props.theme;
+      return css`
         background-color: ${color.primaryColor};
       `;
-  }}
+    }}
   }
 `;
 
@@ -186,6 +184,6 @@ export const RadioTextStyled = styled.span.attrs(applyDefaultTheme)`
     const { color } = props.theme;
     return css`
       color: ${color.fc1};
-      `;
+    `;
   }}
 `;

@@ -1,5 +1,3 @@
-
-
 import { LoggerService, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
@@ -9,7 +7,16 @@ import { useContainer } from 'class-validator';
 import * as immer from 'immer';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { I18nService } from 'nestjs-i18n';
-import { initFastify, initHocuspocus, initHttpHook, initRedisIoAdapter, initRoomGrpc, initSentry, initSocketGrpc, initSwagger } from 'shared/adapters/adapters.init';
+import {
+  initFastify,
+  initHocuspocus,
+  initHttpHook,
+  initRedisIoAdapter,
+  initRoomGrpc,
+  initSentry,
+  initSocketGrpc,
+  initSwagger,
+} from 'shared/adapters/adapters.init';
 import { APPLICATION_NAME, BootstrapConstants } from 'shared/common/constants/bootstrap.constants';
 import { GlobalExceptionFilter } from 'shared/filters';
 import { HttpResponseInterceptor } from 'shared/interceptor';

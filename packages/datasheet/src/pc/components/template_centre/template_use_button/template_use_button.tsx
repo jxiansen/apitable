@@ -1,5 +1,3 @@
-
-
 import { usePostHog } from 'posthog-js/react';
 import * as React from 'react';
 import { useEffect, useMemo, useState } from 'react';

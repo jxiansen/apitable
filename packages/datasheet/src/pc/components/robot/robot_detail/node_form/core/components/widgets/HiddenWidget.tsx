@@ -1,5 +1,3 @@
-
-
 function HiddenWidget({ id, value }: any) {
   return <input type="hidden" id={id} value={typeof value === 'undefined' ? '' : value} />;
 }

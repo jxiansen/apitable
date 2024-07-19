@@ -23,32 +23,32 @@ export const defaultWidget: IWidget = {
     datasheetId: DEFAULT_DATASHEET_ID,
     sourceId: DEFAULT_DATASHEET_ID,
     widgetName: 'vika',
-    storage: {}
-  }
+    storage: {},
+  },
 };
 
 const defaultPermission = {
   storage: {
-    editable: true
+    editable: true,
   },
-  datasheet: createMockPermissions()
+  datasheet: createMockPermissions(),
 };
 
 /**
  * Default a store.
- * @param props 
- * @returns 
+ * @param props
+ * @returns
  */
 export function mockWidgetSdkStore(props: Partial<IWidgetState>): IWidgetState {
   const {
     widget = defaultWidget,
     errorCode = null,
     datasheetMap = {
-      [DEFAULT_DATASHEET_ID]: mockWidgetSdkDatasheetPack()
+      [DEFAULT_DATASHEET_ID]: mockWidgetSdkDatasheetPack(),
     },
     unitInfo = null,
     pageParams = {
-      datasheetId: DEFAULT_DATASHEET_ID
+      datasheetId: DEFAULT_DATASHEET_ID,
     },
     user = null,
     collaborators = [],
@@ -64,6 +64,6 @@ export function mockWidgetSdkStore(props: Partial<IWidgetState>): IWidgetState {
     mirrorMap,
     user,
     collaborators,
-    permission
+    permission,
   };
 }

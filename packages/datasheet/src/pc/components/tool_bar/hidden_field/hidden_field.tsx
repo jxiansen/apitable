@@ -1,5 +1,3 @@
-
-
 import { Tooltip } from 'antd';
 import classNames from 'classnames';
 import * as React from 'react';
@@ -543,8 +541,8 @@ export const HiddenField: React.FC<React.PropsWithChildren<IHiddenFieldProps>> =
               {[ViewType.Gallery, ViewType.Kanban].includes(activeView.type)
                 ? t(Strings.set_gallery_card_style)
                 : isExclusive && isGanttView
-                  ? t(Strings.set_graphic_field)
-                  : t(Strings.set_field)}
+                ? t(Strings.set_graphic_field)
+                : t(Strings.set_field)}
             </Typography>
             {[ViewType.Gallery, ViewType.Kanban].includes(activeView.type) && (
               <a

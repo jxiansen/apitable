@@ -1,5 +1,3 @@
-
-
 import { connect } from 'react-redux';
 import { Skeleton } from '@apitable/components';
 import { IReduxState, Selectors } from '@apitable/core';

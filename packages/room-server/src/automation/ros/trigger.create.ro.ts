@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { object } from '@hapi/joi';
 import { ApiProperty } from '@nestjs/swagger';
@@ -11,7 +9,7 @@ export class TriggerCreateRo {
     required: true,
     example: 'arbxxxxxx',
   })
-  @IsNotEmpty({ message: ApiTipConstant.api_params_empty_error, context: {}})
+  @IsNotEmpty({ message: ApiTipConstant.api_params_empty_error, context: {} })
   robotId!: string;
 
   @ApiProperty({
@@ -19,7 +17,7 @@ export class TriggerCreateRo {
     required: true,
     example: 'attxxxxxxx',
   })
-  @IsNotEmpty({ message: ApiTipConstant.api_params_empty_error, context: {}})
+  @IsNotEmpty({ message: ApiTipConstant.api_params_empty_error, context: {} })
   triggerTypeId!: string;
 
   @ApiProperty({

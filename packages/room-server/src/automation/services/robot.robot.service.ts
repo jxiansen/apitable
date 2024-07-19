@@ -1,5 +1,3 @@
-
-
 import { IActionType, IRobot } from '@apitable/core';
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { AutomationRobotRepository } from 'automation/repositories/automation.robot.repository';

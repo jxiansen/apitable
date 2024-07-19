@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import * as React from 'react';
 import { useMemo } from 'react';
@@ -93,10 +91,10 @@ export const RobotListItemCard: React.FC<React.PropsWithChildren<IRobotListItemC
   const theme = useTheme();
   const readonlyStyle: React.CSSProperties = readonly
     ? {
-      cursor: 'not-allowed',
-      pointerEvents: 'none',
-      opacity: 0.5,
-    }
+        cursor: 'not-allowed',
+        pointerEvents: 'none',
+        opacity: 0.5,
+      }
     : { cursor: 'pointer' };
 
   const { resourceId, currentRobotId, robot } = useAutomationRobot();

@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { IFormulaField, Field, BasicValueType, FormulaBaseError } from '@apitable/core';
 import { IBaseEditorProps } from 'pc/components/editors/interface';

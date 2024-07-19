@@ -1,5 +1,3 @@
-
-
 import { ICellValue, IField, RowHeightLevel, ViewType, ThemeName, IPermissions } from '@apitable/core';
 
 // index - size
@@ -47,7 +45,7 @@ export interface IRenderProps {
   isActive?: boolean;
   editable?: boolean;
   rowHeightLevel: RowHeightLevel;
-  permissions?: IPermissions| {},
+  permissions?: IPermissions | {};
   style: IRenderStyleProps;
   callback?: ({ width }: { width: number }) => void;
   viewType?: ViewType;

@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Avatar } from './index';
 import { StoryType } from '../../stories/constants';
@@ -30,21 +28,21 @@ const Template: Story<IAvatarProps> = (args) => <Avatar {...args} />;
 export const Image = Template.bind({});
 Image.args = {
   src: LOGO,
-  alt: 'apitable logo'
+  alt: 'apitable logo',
 };
 
 export const SquareShape = Template.bind({});
 SquareShape.args = {
   src: LOGO,
   alt: 'apitable logo',
-  shape: 'square'
+  shape: 'square',
 };
 
 export const ImageSSize = Template.bind({});
 ImageSSize.args = {
   src: LOGO,
   alt: 'apitable logo',
-  size: 's'
+  size: 's',
 };
 
 export const SingleText = Template.bind({});
@@ -55,7 +53,7 @@ SingleText.args = {
 export const CustomTextBackground = Template.bind({});
 CustomTextBackground.args = {
   children: 'APITable',
-  style: { background: '#ccc' }
+  style: { background: '#ccc' },
 };
 
 export const Icon = Template.bind({});
@@ -66,7 +64,7 @@ Icon.args = {
 export const CustomIconBackground = Template.bind({});
 CustomIconBackground.args = {
   icon: <ExpandOutlined />,
-  style: { background: '#ccc' }
+  style: { background: '#ccc' },
 };
 
 const AvatarGroupTemplate: Story = (args) => <AvatarGroup {...args} />;
@@ -82,6 +80,6 @@ AvatarGroupSetting.args = {
     <Avatar src="https://avatars.githubusercontent.com/u/89725681" alt="apitable avatar" />,
     <Avatar src="https://avatars.githubusercontent.com/u/89725681" alt="apitable avatar" />,
     <Avatar src="https://avatars.githubusercontent.com/u/89725681" alt="apitable avatar" />,
-    <Avatar src="https://avatars.githubusercontent.com/u/89725681" alt="apitable avatar" />
-  ]
+    <Avatar src="https://avatars.githubusercontent.com/u/89725681" alt="apitable avatar" />,
+  ],
 };

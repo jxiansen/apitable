@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType } from 'types/field_api_enums';
 import { IOpenField, IOpenFieldProperty } from 'types/open/open_field_read_types';
 import { FieldType, IURLField } from 'types/field_types';
@@ -16,14 +14,14 @@ const openTextField: IOpenField = {
   name: 'URL field',
   id: 'fld1111',
   type: APIMetaFieldType.URL,
-  property: null
+  property: null,
 };
 
 const writeOpenProperty: IOpenFieldProperty = null;
 
 describe('URL field read property format check', () => {
   const valid = getOpenFieldProperty(urlField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid(openTextField.property);
     expect(receiveValue).toEqual(expectValue);
   });
@@ -35,7 +33,6 @@ describe('URL field update property check', () => {
     const result = valid(writeOpenProperty);
     expect(result).toEqual(false);
   });
-
 });
 
 describe('Add property check for URL field', () => {

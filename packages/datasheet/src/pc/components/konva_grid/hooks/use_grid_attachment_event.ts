@@ -1,5 +1,3 @@
-
-
 import { isEqual } from 'lodash';
 import { useRef, useState } from 'react';
 import { shallowEqual } from 'react-redux';

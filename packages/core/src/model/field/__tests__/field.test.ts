@@ -1,5 +1,3 @@
-
-
 import { mock, Random } from 'mockjs';
 import { mockState } from '../../../formula_parser/__tests__/mock_state';
 import { FieldType } from '../../../types';
@@ -52,7 +50,7 @@ const compare = (fType: any, type: number, itemType: string, expectTime = 1000) 
 };
 
 describe('', () => {
-  it('should ', function() {
+  it('should ', function () {
     console.log(create500ThousandArray, compare);
   });
 });

@@ -1,14 +1,12 @@
-
-
 /**
-  * move the array
-  * @export
-  * @template T
-  * @param {T[]} array
-  * @param {number} from original subscript of mobile data
-  * @param {number} to target index of mobile data
-  * @returns {(T[] | boolean)}
-  */
+ * move the array
+ * @export
+ * @template T
+ * @param {T[]} array
+ * @param {number} from original subscript of mobile data
+ * @param {number} to target index of mobile data
+ * @returns {(T[] | boolean)}
+ */
 export function moveArrayElement<T>(array: T[], from: number, to: number): boolean {
   const length = array.length;
 
@@ -106,11 +104,11 @@ export function array2Map<T>(arr: T[], key: string) {
 }
 
 /**
-  * Get the previous index or the next index of the array, when the index reaches the boundary, start from the beginning.
-  * @param length array length
-  * @param index current index
-  * @param plusOrNot +1 or -1
-  */
+ * Get the previous index or the next index of the array, when the index reaches the boundary, start from the beginning.
+ * @param length array length
+ * @param index current index
+ * @param plusOrNot +1 or -1
+ */
 export const getArrayLoopIndex = (length: number, index: number, plusOrNot: number) => {
   if (index == null || length <= 0) return 0;
   const newIndex = index + plusOrNot;
@@ -122,7 +120,7 @@ export const getArrayLoopIndex = (length: number, index: number, plusOrNot: numb
 
 /**
  * @description adds an anchorIndex to each item in the object array to be sorted, where anchorIndex is the order of the unsorted array
- * @param sortList 
+ * @param sortList
  */
 export const addExtraAnchorIndex = <T>(sortList: T[]): (T & { anchorIndex: number })[] => {
   return sortList.map((item, index) => {
@@ -134,17 +132,19 @@ export const addExtraAnchorIndex = <T>(sortList: T[]): (T & { anchorIndex: numbe
 };
 
 /**
- * @description Combined with the anchorIndex added above, 
+ * @description Combined with the anchorIndex added above,
  * when the results of the custom sorting function are consistent, compare whether the anchorIndex of the two items are consistent to sort
- * @param sortFunc 
- * @param sortList 
+ * @param sortFunc
+ * @param sortList
  */
-export const sortByExtraAnchorIndex =
-  <T, S extends (T & { anchorIndex: number }) = (T & { anchorIndex: number })>(sortFunc: (a: S, b: S) => number, sortList: S[]): S[] => {
-    return sortList.sort((a, b) => {
-      return sortFunc(a, b) || a.anchorIndex - b.anchorIndex;
-    });
-  };
+export const sortByExtraAnchorIndex = <T, S extends T & { anchorIndex: number } = T & { anchorIndex: number }>(
+  sortFunc: (a: S, b: S) => number,
+  sortList: S[]
+): S[] => {
+  return sortList.sort((a, b) => {
+    return sortFunc(a, b) || a.anchorIndex - b.anchorIndex;
+  });
+};
 
 /**
  * the complement of a with respect to b
@@ -156,5 +156,5 @@ export const sortByExtraAnchorIndex =
  */
 export const setComplement = (a: any[], b: any[]) => {
   const setA = new Set(a);
-  return b.filter(itemB => !setA.has(itemB));
+  return b.filter((itemB) => !setA.has(itemB));
 };

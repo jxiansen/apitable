@@ -1,13 +1,9 @@
-
-
 import { DynamicModule, Module } from '@nestjs/common';
 import path from 'path';
 import * as fs from 'fs';
 
-@Module({
-})
+@Module({})
 export class EmbedDynamicModule {
-
   static forRoot(): DynamicModule {
     const embedEnterpriseModulePath = path.join(__dirname, '../enterprise/embed');
     const isEnterpriseLevel: boolean = fs.existsSync(embedEnterpriseModulePath);
@@ -17,9 +13,8 @@ export class EmbedDynamicModule {
         module: EmbedEnterpriseModule,
       };
     }
-    return { 
+    return {
       module: EmbedDynamicModule,
-    }; 
+    };
   }
-
 }

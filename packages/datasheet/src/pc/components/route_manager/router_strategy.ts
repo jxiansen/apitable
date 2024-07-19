@@ -1,5 +1,3 @@
-
-
 import { Navigation } from '@apitable/core';
 import { Method } from 'pc/components/route_manager/const';
 import { getNodeId, joinPath } from 'pc/components/route_manager/helper';

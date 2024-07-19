@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { FC, useContext } from 'react';
 import { FieldType, IPermissions, IReduxState, RowHeight, Selectors, Strings, t, ViewType } from '@apitable/core';

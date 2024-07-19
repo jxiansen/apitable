@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { clamp } from 'lodash';
 import { useThrottleFn, configResponsive, useResponsive } from 'ahooks';
@@ -57,7 +55,7 @@ export function useListenVisualHeight(props: IUseListenVisualHeightProps) {
     if (!scrollEle) return;
     const { scrollTop, scrollHeight, clientHeight } = scrollEle;
 
-    const styleNode = showOnParent ? (scrollEle.parentElement || scrollEle) : scrollEle;
+    const styleNode = showOnParent ? scrollEle.parentElement || scrollEle : scrollEle;
     const positionValue = position.includes('relative') ? 'relative' : position;
     const scrollCls = `scroll-color-${position}`;
     // height === 'auto'
@@ -99,8 +97,12 @@ export function useListenVisualHeight(props: IUseListenVisualHeightProps) {
     }
     const { top } = ele.getBoundingClientRect();
     const containerScrollHeight = ele.scrollHeight;
-    let actualTop = top, actualBottom = 0, offset = [0, 0], adjust = containerAdjust, triggerHeight = 0,
-        actualMaxHeight = maxHeight;
+    let actualTop = top,
+      actualBottom = 0,
+      offset = [0, 0],
+      adjust = containerAdjust,
+      triggerHeight = 0,
+      actualMaxHeight = maxHeight;
     if (props?.configMaxHeight) {
       actualMaxHeight = props.configMaxHeight;
     }
@@ -141,10 +143,7 @@ export function useListenVisualHeight(props: IUseListenVisualHeightProps) {
 
       let restPutHeight = restSpaceHeight - restChildTotalHeight;
       restPutHeight = clamp(restPutHeight, minHeight, actualMaxHeight);
-      const resultChildHeight =
-        childEle.scrollHeight < restPutHeight ?
-          'auto' :
-          restPutHeight - subOffsetY;
+      const resultChildHeight = childEle.scrollHeight < restPutHeight ? 'auto' : restPutHeight - subOffsetY;
 
       toggleScorllColor(childEle, resultChildHeight);
       setHeight(resultChildHeight);
@@ -183,13 +182,13 @@ export function useListenVisualHeight(props: IUseListenVisualHeightProps) {
         scrollELe.removeEventListener('scroll', () => toggleScorllColor(scrollELe));
       }
     };
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [listenNode, childNode, run, cancel]);
 
   useLayoutEffect(() => {
     if (isMobile) return;
     onListenResize();
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   const style: React.CSSProperties = {};

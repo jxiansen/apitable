@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import * as actions from 'modules/shared/store/action_constants';
 

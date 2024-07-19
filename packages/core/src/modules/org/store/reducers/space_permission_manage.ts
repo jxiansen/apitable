@@ -1,8 +1,9 @@
-
-
 import { produce } from 'immer';
 import {
-  ISpacePermissionManage, IUpdateMainAdminInfoAction, IUpdateSpaceResourceAction, IUpdateSubAdminListDataAction,
+  ISpacePermissionManage,
+  IUpdateMainAdminInfoAction,
+  IUpdateSpaceResourceAction,
+  IUpdateSubAdminListDataAction,
 } from '../../../../exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';
 
@@ -11,13 +12,9 @@ const defaultState: ISpacePermissionManage = {
   mainAdminInfo: null,
   spaceResource: null,
 };
-type ISpacePermissionManageActions = IUpdateSubAdminListDataAction
-  | IUpdateMainAdminInfoAction | IUpdateSpaceResourceAction;
+type ISpacePermissionManageActions = IUpdateSubAdminListDataAction | IUpdateMainAdminInfoAction | IUpdateSpaceResourceAction;
 
-export const spacePermissionManage = produce((
-  data: ISpacePermissionManage = defaultState,
-  action: ISpacePermissionManageActions,
-) => {
+export const spacePermissionManage = produce((data: ISpacePermissionManage = defaultState, action: ISpacePermissionManageActions) => {
   switch (action.type) {
     case actions.UPDATE_SUB_ADMIN_LIST_DATA: {
       data.subAdminListData = action.payload;

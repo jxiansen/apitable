@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import { useEffect, useRef, useState } from 'react';
 import { Loading, Message } from '@apitable/components';

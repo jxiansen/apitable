@@ -1,5 +1,3 @@
-
-
 import Color from 'color';
 import { black, blackBlue } from 'colors';
 import styled, { createGlobalStyle, css } from 'styled-components';
@@ -12,7 +10,7 @@ export const OutsideListCls = styled(CommonList)`
   }
 `;
 
-export const TriggerDivCls = styled.div.attrs(applyDefaultTheme) <{ focus: boolean }>`
+export const TriggerDivCls = styled.div.attrs(applyDefaultTheme)<{ focus: boolean }>`
   cursor: pointer;
   border-radius: 4px;
   border: 1px solid transparent;
@@ -23,13 +21,16 @@ export const TriggerDivCls = styled.div.attrs(applyDefaultTheme) <{ focus: boole
   height: 40px;
   background-color: ${black[100]};
   user-select: none;
-    /* color: ${black[500]}; */
+  /* color: ${black[500]}; */
   outline: none;
 
-  ${props => {
-    return props.focus && css`
-      background-color: ${blackBlue[50]};
-    `;
+  ${(props) => {
+    return (
+      props.focus &&
+      css`
+        background-color: ${blackBlue[50]};
+      `
+    );
   }}
 `;
 
@@ -59,14 +60,18 @@ export const PrefixIcon = styled.span`
   padding-right: 4px;
 `;
 
-export const SuffixIcon = styled(PrefixIcon) <{ rotate: boolean }>`
+export const SuffixIcon = styled(PrefixIcon)<{ rotate: boolean }>`
   position: absolute;
   right: 8px;
   height: 100%;
   display: flex;
   align-items: center;
   transition: transform 0.3s;
-  ${props => props.rotate && css` transform: rotate(180deg); `}
+  ${(props) =>
+    props.rotate &&
+    css`
+      transform: rotate(180deg);
+    `}
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -93,9 +98,8 @@ export const SelectDropDownWrapper = styled.div<{ width: string; minWidth: strin
 
 export const OptionOutside = styled(CommonList.Option)`
   padding: 0 8px;
-  
 
-  ${prop => {
+  ${(prop) => {
     if (prop.disabled) {
       return css`
         color: ${black[300]};
@@ -111,12 +115,12 @@ export const OptionOutside = styled(CommonList.Option)`
   @media (any-hover: hover) {
     &:hover {
       ${(props) => {
-    const { fc6 } = props.theme.color;
-    return css`
+        const { fc6 } = props.theme.color;
+        return css`
           background-color: ${fc6};
           border-radius: 8px;
         `;
-  }};
+      }};
     }
   }
 
@@ -127,7 +131,6 @@ export const OptionOutside = styled(CommonList.Option)`
           fill: currentColor;
         }
       }
-
     }
   }
 `;

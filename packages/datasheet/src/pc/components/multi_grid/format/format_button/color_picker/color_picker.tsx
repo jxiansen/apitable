@@ -6,11 +6,11 @@ interface IColorPickProps {
   onchange: (color: number) => void;
   options?: {
     content?: string;
-    style?: ButtonStyleType,
+    style?: ButtonStyleType;
   };
 }
 
-const arr = Array.from({ length: 9 }, (_item, index) => index + 1+ 40);
+const arr = Array.from({ length: 9 }, (_item, index) => index + 1 + 40);
 export const ColorPicker: React.FC<IColorPickProps> = (props) => {
   const { color, onchange } = props;
 
@@ -27,7 +27,7 @@ export const ColorPicker: React.FC<IColorPickProps> = (props) => {
         color: color,
       }}
       onChange={colorChange}
-      colorGroup={ [40].concat(arr).concat([50])}
+      colorGroup={[40].concat(arr).concat([50])}
       itemStyle={{
         flex: '0 0 9%',
       }}

@@ -1,5 +1,3 @@
-
-
 // import * as React from 'react';
 import { Slider } from 'antd';
 import { useEffect, useRef } from 'react';

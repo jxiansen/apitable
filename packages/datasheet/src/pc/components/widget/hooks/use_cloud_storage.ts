@@ -1,5 +1,3 @@
-
-
 import { Dispatch, SetStateAction, useMemo, useState } from 'react';
 import { CollaCommandName, ResourceType } from '@apitable/core';
 import { resourceService } from 'pc/resource_service';

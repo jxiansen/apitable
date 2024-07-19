@@ -1,5 +1,3 @@
-
-
 import { ExecuteResult, ICollaCommandDef, ICommandOptionBase } from 'command_manager';
 import { Strings, t } from '../../exports/i18n';
 import { WidgetActions } from 'commands_actions/widget';

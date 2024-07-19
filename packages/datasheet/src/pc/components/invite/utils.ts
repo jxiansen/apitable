@@ -1,5 +1,3 @@
-
-
 import { StatusCode, t, Strings } from '@apitable/core';
 
 const InviteInvalidReasonObj = {

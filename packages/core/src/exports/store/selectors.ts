@@ -1,5 +1,3 @@
-
-
 export * from '../../modules/database/store/selectors/collaborators';
 export * from '../../modules/user/store/selectors/user';
 export * from '../../modules/space/store/selectors/tree';

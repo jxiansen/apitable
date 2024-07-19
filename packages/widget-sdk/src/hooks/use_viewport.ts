@@ -1,14 +1,12 @@
-
-
 import { useContext } from 'react';
 import { WidgetConfigContext } from '../context';
 
 /**
  * Return information related to the widget windows, and change function.
  * When windows changes, re-rendering is triggered.
- * 
+ *
  * @returns
- * 
+ *
  * ### Example
  * ```js
  * import { useViewport } from '@apitable/widget-sdk';
@@ -22,9 +20,9 @@ import { WidgetConfigContext } from '../context';
  *   </div>);
  * }
  * ```
- * 
+ *
  */
-export function useViewport(): { isFullscreen: boolean, toggleFullscreen: (state?: boolean) => void } {
+export function useViewport(): { isFullscreen: boolean; toggleFullscreen: (state?: boolean) => void } {
   const { isFullscreen, toggleFullscreen } = useContext(WidgetConfigContext);
   return { isFullscreen, toggleFullscreen };
 }

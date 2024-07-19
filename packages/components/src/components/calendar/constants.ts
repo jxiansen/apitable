@@ -1,5 +1,3 @@
-
-
 export const COUNT = 35;
 
 export const DEFAULT_LIST_HEIGHT = 28;
@@ -18,22 +16,9 @@ export const FORMAT = 'yyyy/MM/dd';
 
 export const MAX_LEVEL = 5;
 
-export const MONTHS = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct', 
-  'Nov',
-  'Dec',
-];
+export const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export enum Direction {
   Left = 'left',
-  Right = 'right'
+  Right = 'right',
 }

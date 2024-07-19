@@ -1,5 +1,3 @@
-
-
 import { str2number } from '../other2number';
 import assert from 'assert';
 import * as cases from './other2number.test.json';
@@ -17,7 +15,7 @@ describe('test convert text to number', () => {
     expect(str2number('-1.23456789e-5')).toEqual(-0.0000123456789);
     expect(str2number('-1234567890')).toEqual(-1234567890);
     expect(str2number('-0.0000000001123457789')).toEqual(-0.0000000001123457789);
-    expect(str2number('-1234567890e23')).toEqual(-1.234567890e32);
+    expect(str2number('-1234567890e23')).toEqual(-1.23456789e32);
   });
 
   it('数字有效位超过15位截断', () => {
@@ -32,4 +30,3 @@ describe('test convert text to number', () => {
     expect(str2number('-0.1234567890123456789012345678')).toEqual(-0.123456789012345);
   });
 });
-

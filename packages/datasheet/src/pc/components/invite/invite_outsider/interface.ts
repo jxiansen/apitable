@@ -1,5 +1,3 @@
-
-
 // The result of the response after uploading the file
 export interface IUploadFileResponse {
   errorCount: number;

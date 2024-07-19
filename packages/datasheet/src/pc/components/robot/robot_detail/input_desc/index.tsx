@@ -21,7 +21,7 @@ export const EditableInputDescription: FC = () => {
     return null;
   }
   const handleNameChange = async (value: string) => {
-    if(!automationState?.resourceId) {
+    if (!automationState?.resourceId) {
       console.error('automationState?.resourceId is null');
       return;
     }

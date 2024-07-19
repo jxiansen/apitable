@@ -1,5 +1,3 @@
-
-
 import { Input } from 'antd';
 import classNames from 'classnames';
 import { usePostHog } from 'posthog-js/react';

@@ -1,8 +1,11 @@
-
-
 import { IJOTAction } from 'engine/ot';
 import { DatasheetActions } from 'commands_actions/datasheet';
-import { getActiveDatasheetId, getDatasheet, getFieldPermissionMap, getFieldRoleByFieldId } from 'modules/database/store/selectors/resource/datasheet/base';
+import {
+  getActiveDatasheetId,
+  getDatasheet,
+  getFieldPermissionMap,
+  getFieldRoleByFieldId,
+} from 'modules/database/store/selectors/resource/datasheet/base';
 import { getCurrentView } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { IGridViewProperty, Role } from '../../exports/store/interfaces';
 import { IGroupInfo, ResourceType } from 'types';
@@ -24,7 +27,7 @@ export const setGroup: ICollaCommandDef<ISetGroupOptions> = {
     const { data, viewId } = options;
     const datasheetId = getActiveDatasheetId(state)!;
     const datasheet = getDatasheet(state, datasheetId);
-    const fieldIds = (getCurrentView(state, datasheetId)! as IGridViewProperty).columns.map(item => item.fieldId);
+    const fieldIds = (getCurrentView(state, datasheetId)! as IGridViewProperty).columns.map((item) => item.fieldId);
     const fieldPermissionMap = getFieldPermissionMap(state, datasheetId);
 
     if (!state || !datasheet) {
@@ -37,13 +40,16 @@ export const setGroup: ICollaCommandDef<ISetGroupOptions> = {
     }
 
     const checkMissGroupField = () => {
-      return data && data.filter(item => {
-        // Data missing due to permissions is expected and will not be processed
-        if (getFieldRoleByFieldId(fieldPermissionMap, item.fieldId) === Role.None) {
-          return false;
-        }
-        return !fieldIds.includes(item.fieldId);
-      }).length;
+      return (
+        data &&
+        data.filter((item) => {
+          // Data missing due to permissions is expected and will not be processed
+          if (getFieldRoleByFieldId(fieldPermissionMap, item.fieldId) === Role.None) {
+            return false;
+          }
+          return !fieldIds.includes(item.fieldId);
+        }).length
+      );
     };
 
     // Check if the field used by grouping exists in the current view

@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Story } from '@storybook/react';
 import { Space } from './index';
@@ -15,13 +13,7 @@ const COMPONENT_NAME = 'Space';
 const TITLE = `${StoryType.Design}/${COMPONENT_NAME}`;
 
 const Card = () => (
-  <Box
-    width="120px"
-    height="80px"
-    border="1px solid #ccc"
-    textAlign="center"
-    lineHeight="80px"
-  >
+  <Box width="120px" height="80px" border="1px solid #ccc" textAlign="center" lineHeight="80px">
     120px x 80px
   </Box>
 );
@@ -36,14 +28,8 @@ export default {
     },
   },
   args: {
-    children: [
-      'Text',
-      <Button color="primary">Button</Button>,
-      <Switch />,
-      <Checkbox>Checkbox</Checkbox>,
-      <Radio>Radio</Radio>
-    ]
-  }
+    children: ['Text', <Button color="primary">Button</Button>, <Switch />, <Checkbox>Checkbox</Checkbox>, <Radio>Radio</Radio>],
+  },
 };
 
 const Template: Story<ISpaceProps> = (args) => <Space {...args} />;
@@ -64,26 +50,24 @@ VerticalSize16.args = {
 export const Wrap = Template.bind({});
 Wrap.args = {
   wrap: true,
-  children: new Array(20).fill(null).map((_, index) => (
-    <Card key={index}/>
-  ))
+  children: new Array(20).fill(null).map((_, index) => <Card key={index} />),
 };
 
 export const SetRowColumnSpace = Template.bind({});
 SetRowColumnSpace.args = {
   size: [16, 32],
   wrap: true,
-  children: new Array(20).fill(null).map((_, index) => (
-    <Card key={index}/>
-  ))
+  children: new Array(20).fill(null).map((_, index) => <Card key={index} />),
 };
 
 export const Split = Template.bind({});
 Split.args = {
   split: true,
   children: new Array(5).fill(null).map((_, index) => (
-    <LinkButton underline={false} prefixIcon={<LinktableOutlined currentColor />} key={index}>Link href</LinkButton>
-  ))
+    <LinkButton underline={false} prefixIcon={<LinktableOutlined currentColor />} key={index}>
+      Link href
+    </LinkButton>
+  )),
 };
 
 export const AlignStart = Template.bind({});
@@ -93,9 +77,11 @@ AlignStart.args = {
     <>
       <span>Text</span>
       <Button color="primary">Button</Button>
-      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">Box</Box>
+      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">
+        Box
+      </Box>
     </>
-  )
+  ),
 };
 
 export const AlignCenter = Template.bind({});
@@ -105,9 +91,11 @@ AlignCenter.args = {
     <>
       <span>Text</span>
       <Button color="primary">Button</Button>
-      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">Box</Box>
+      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">
+        Box
+      </Box>
     </>
-  )
+  ),
 };
 
 export const AlignEnd = Template.bind({});
@@ -117,9 +105,11 @@ AlignEnd.args = {
     <>
       <span>Text</span>
       <Button color="primary">Button</Button>
-      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">Box</Box>
+      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">
+        Box
+      </Box>
     </>
-  )
+  ),
 };
 
 export const AlignBaseline = Template.bind({});
@@ -129,9 +119,11 @@ AlignBaseline.args = {
     <>
       <span>Text</span>
       <Button color="primary">Button</Button>
-      <Box backgroundColor="#ccc" padding="40px 8px 16px">Box</Box>
+      <Box backgroundColor="#ccc" padding="40px 8px 16px">
+        Box
+      </Box>
     </>
-  )
+  ),
 };
 
 export const VerticalAlignStart = Template.bind({});
@@ -142,9 +134,11 @@ VerticalAlignStart.args = {
     <>
       <span>Text</span>
       <Button color="primary">Button</Button>
-      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">Box</Box>
+      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">
+        Box
+      </Box>
     </>
-  )
+  ),
 };
 
 export const VerticalAlignCenter = Template.bind({});
@@ -155,9 +149,11 @@ VerticalAlignCenter.args = {
     <>
       <span>Text</span>
       <Button color="primary">Button</Button>
-      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">Box</Box>
+      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">
+        Box
+      </Box>
     </>
-  )
+  ),
 };
 
 export const VerticalAlignEnd = Template.bind({});
@@ -168,9 +164,11 @@ VerticalAlignEnd.args = {
     <>
       <span>Text</span>
       <Button color="primary">Button</Button>
-      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">Box</Box>
+      <Box backgroundColor="#ccc" padding="40px 8px 16px 32px">
+        Box
+      </Box>
     </>
-  )
+  ),
 };
 
 export const SetComponentUlLi = Template.bind({});
@@ -181,5 +179,5 @@ SetComponentUlLi.args = {
     <Space key={index} component="li" style={{ borderBottom: '1px solid #ccc' }}>
       list {index + 1}
     </Space>
-  ))
+  )),
 };

@@ -1,5 +1,3 @@
-
-
 import { Spin } from 'antd';
 import { FC } from 'react';
 import { LoadingOutlined } from '@apitable/icons';

@@ -1,4 +1,3 @@
-
 const map = new Map<Symbol, boolean>();
 
 export const setIsValid = (key: string, value: boolean) => {

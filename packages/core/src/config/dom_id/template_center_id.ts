@@ -1,5 +1,3 @@
-
-
 /* eslint-disable */
 // id of the template center
 

@@ -1,5 +1,3 @@
-
-
 import { ShapeConfig } from 'konva/lib/Shape';
 import dynamic from 'next/dynamic';
 import { FC, memo, useContext } from 'react';

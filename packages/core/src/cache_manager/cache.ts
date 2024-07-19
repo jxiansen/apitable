@@ -1,5 +1,3 @@
-
-
 import LRU from 'lru-cache';
 
 /**
@@ -22,20 +20,19 @@ import LRU from 'lru-cache';
  */
 
 export interface ICellValueData {
-  cellValue: any,
-  cellStr?: string | null
+  cellValue: any;
+  cellStr?: string | null;
 }
 
 type TFieldCache = Map<string, ICellValueData>;
 
 interface IDsCache {
-  cellValues: Map<string, TFieldCache>,
+  cellValues: Map<string, TFieldCache>;
 }
 
 export const NO_CACHE = Symbol('NO_CACHE');
 
 class Cache {
-
   dsMap: LRU<string, IDsCache | null>;
 
   constructor() {

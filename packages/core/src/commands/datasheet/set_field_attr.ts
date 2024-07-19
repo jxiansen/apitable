@@ -1,11 +1,6 @@
-
-
 import { ExecuteResult, ICollaCommandDef, ICollaCommandExecuteContext, ILinkedActions } from 'command_manager';
 import { isEqual } from 'lodash';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { ISnapshot } from '../../exports/store/interfaces';
 import { getDatasheet } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getFieldMap } from 'modules/database/store/selectors/resource/datasheet/calc';
@@ -28,10 +23,14 @@ export interface ISetFieldAttrOptions {
 }
 
 function generateLinkedFieldActions(
-  context: ICollaCommandExecuteContext, snapshot: ISnapshot,
-  oldField: IField, newField: IField, datasheetId: string, deleteBrotherField?: boolean,
-  internalFix?: IInternalFix,
-): { actions: IJOTAction[], linkedActions?: ILinkedActions[] } {
+  context: ICollaCommandExecuteContext,
+  snapshot: ISnapshot,
+  oldField: IField,
+  newField: IField,
+  datasheetId: string,
+  deleteBrotherField?: boolean,
+  internalFix?: IInternalFix
+): { actions: IJOTAction[]; linkedActions?: ILinkedActions[] } {
   const actions: IJOTAction[] = [];
   const linkedActions: ILinkedActions[] = [];
   const { state: state } = context;
@@ -87,17 +86,14 @@ export const setFieldAttr: ICollaCommandDef<ISetFieldAttrOptions> = {
       return null;
     }
     /* Check for duplicate names */
-    const duplicate = Object.values(fieldMap).some(f => {
+    const duplicate = Object.values(fieldMap).some((f) => {
       return f.id !== options.fieldId && f.name === options.data.name;
     });
     if (duplicate) {
       throw new Error(t(Strings.error_set_column_failed_duplicate_column_name));
     }
 
-    if (
-      oldField.type === FieldType.NotSupport ||
-      newField.type === FieldType.NotSupport
-    ) {
+    if (oldField.type === FieldType.NotSupport || newField.type === FieldType.NotSupport) {
       throw new Error(t(Strings.error_set_column_failed_no_support_unknown_column));
     }
 
@@ -112,17 +108,14 @@ export const setFieldAttr: ICollaCommandDef<ISetFieldAttrOptions> = {
     }
 
     // Compatible with errors caused by defaultValue of some online fields being null
-    if (
-      [FieldType.Currency, FieldType.Percent, FieldType.Number].includes(newField.type) &&
-      newField.property.defaultValue === null
-    ) {
+    if ([FieldType.Currency, FieldType.Percent, FieldType.Number].includes(newField.type) && newField.property.defaultValue === null) {
       newField.property = { ...newField.property, defaultValue: '' };
     }
 
     // AutoNumber needs to record the current view index
     if (newField.type === FieldType.AutoNumber) {
       const datasheet = getDatasheet(state);
-      const viewIdx = snapshot.meta.views.findIndex(item => item.id === datasheet?.activeView) || 0;
+      const viewIdx = snapshot.meta.views.findIndex((item) => item.id === datasheet?.activeView) || 0;
       newField.property = { ...newField.property, viewIdx };
     }
 
@@ -138,7 +131,9 @@ export const setFieldAttr: ICollaCommandDef<ISetFieldAttrOptions> = {
     if (oldField.type === FieldType.Link || newField.type === FieldType.Link) {
       const validateFieldPropertyError = Field.bindContext(newField, state).validateProperty().error;
       if (validateFieldPropertyError) {
-        throw new Error(`${t(Strings.error_set_column_failed_bad_property)}: ${validateFieldPropertyError.details.map(d => d.message).join(',\n')}`);
+        throw new Error(
+          `${t(Strings.error_set_column_failed_bad_property)}: ${validateFieldPropertyError.details.map((d) => d.message).join(',\n')}`
+        );
       }
       const result = generateLinkedFieldActions(context, snapshot, oldField, newField, datasheetId, deleteBrotherField, internalFix);
       const linkedActions = result.linkedActions || [];

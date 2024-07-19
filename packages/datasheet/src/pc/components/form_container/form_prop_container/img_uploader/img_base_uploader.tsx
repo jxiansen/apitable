@@ -1,5 +1,3 @@
-
-
 import { Spin } from 'antd';
 import classnames from 'classnames';
 import Image from 'next/image';
@@ -81,13 +79,13 @@ export const ImgBaseUploader: React.FC<React.PropsWithChildren<IImgBaseUploader>
   const previewImgConfig =
     previewShape === IPreviewShape.Square
       ? {
-        width: 200,
-        height: 200,
-      }
+          width: 200,
+          height: 200,
+        }
       : {
-        width: 210,
-        height: 70,
-      };
+          width: 210,
+          height: 70,
+        };
 
   return (
     <div className={styles.uploadContainer}>

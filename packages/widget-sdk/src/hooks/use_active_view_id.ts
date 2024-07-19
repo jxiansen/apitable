@@ -1,13 +1,11 @@
-
-
 import { useSelector } from 'react-redux';
 
 /**
  * Get the view ID of currently active view, return a value of string.
  * When views switched, re-rendering is triggered.
- * 
+ *
  * @param
- * 
+ *
  * @returns
  *
  * ### Example
@@ -26,5 +24,5 @@ import { useSelector } from 'react-redux';
  * ```
  */
 export function useActiveViewId() {
-  return useSelector(state => state.pageParams?.viewId);
+  return useSelector((state) => state.pageParams?.viewId);
 }

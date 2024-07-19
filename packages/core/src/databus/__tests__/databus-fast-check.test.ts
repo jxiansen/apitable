@@ -14,20 +14,20 @@ describe('fast check try', () => {
     return text.length > 3 ? text.substr(1).indexOf(pattern) === -1 : text.indexOf(pattern) >= 0;
   };
 
-  test('should always contain itself', async() => {
+  test('should always contain itself', async () => {
     await fc.assert(
       fc.asyncProperty(fc.string(), (text: string) => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           resolve(contains(text, text));
         });
       }),
-      { verbose: true },
+      { verbose: true }
     );
   });
 });
 
 describe('fast check doCommand Operation', () => {
-  test('check revision and datasheet pros after a AddRecords doCommand operation', async() => {
+  test('check revision and datasheet pros after a AddRecords doCommand operation', async () => {
     const dst1 = await db.getDatasheet('dst1', {
       loadOptions: {},
       storeOptions: {},
@@ -39,7 +39,7 @@ describe('fast check doCommand Operation', () => {
     let expectRevisionChangedCount = 0;
 
     await fc.assert(
-      fc.asyncProperty(fc.integer(), async(aInt: number) => {
+      fc.asyncProperty(fc.integer(), async (aInt: number) => {
         const result = await dst1!.doCommand(
           {
             cmd: CollaCommandName.AddRecords,
@@ -47,7 +47,7 @@ describe('fast check doCommand Operation', () => {
             index: 3,
             count: aInt % 10,
           },
-          {},
+          {}
         );
         // check Revision change count. only the result is success will call saveOps
         if (result.result === ExecuteResult.Success) {
@@ -57,16 +57,16 @@ describe('fast check doCommand Operation', () => {
         // the id, name, and type field of the Datasheet are not changed.
         const prosEq = dst1!.id === 'dst1' && dst1!.type === ResourceType.Datasheet && dst1!.name === 'datasheet 1';
         expect(prosEq).toBeTruthy();
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           resolve(prosEq);
         });
       }),
-      { verbose: true, timeout: 30000 },
+      { verbose: true, timeout: 30000 }
     );
     expect(dst1?.revision).toBe(expectRevisionChangedCount + oldRevision);
   });
 
-  test("check datasheet's field count after a AddFields doCommand operation", async() => {
+  test("check datasheet's field count after a AddFields doCommand operation", async () => {
     const dst1 = await db.getDatasheet('dst1', {
       loadOptions: {},
       storeOptions: {},
@@ -81,7 +81,7 @@ describe('fast check doCommand Operation', () => {
     expect(oldViewColumnCount).toStrictEqual(2);
     let expectFieldAddedCount = 0;
     await fc.assert(
-      fc.asyncProperty(fc.string(), fc.integer({ min: 2, max: 200 }), async(aStr: string, aInt: number) => {
+      fc.asyncProperty(fc.string(), fc.integer({ min: 2, max: 200 }), async (aStr: string, aInt: number) => {
         const oldFieldCount = Object.keys(dst1.fields).length;
         const result = await dst1!.doCommand(
           {
@@ -101,7 +101,7 @@ describe('fast check doCommand Operation', () => {
             copyCell: false,
             datasheetId: dstId,
           },
-          {},
+          {}
         );
         // check Revision change count. only the result is success will call saveOps
         let fieldAddedCount = 0;
@@ -114,11 +114,11 @@ describe('fast check doCommand Operation', () => {
 
         const fieldCount = Object.keys(dst1.fields).length;
         expect(fieldCount).toEqual(oldFieldCount + fieldAddedCount);
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           resolve(fieldCount >= oldFieldCount + fieldAddedCount);
         });
       }),
-      { verbose: true, timeout: 30000 },
+      { verbose: true, timeout: 30000 }
     );
     const view2 = await dst1!.getView('viw1');
     expect(view2?.columns.length).toStrictEqual(oldViewColumnCount + expectFieldAddedCount);

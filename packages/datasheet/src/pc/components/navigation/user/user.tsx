@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { shallowEqual } from 'react-redux';

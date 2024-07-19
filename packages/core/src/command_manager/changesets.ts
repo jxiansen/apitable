@@ -1,5 +1,3 @@
-
-
 import { IResourceOpsCollect } from 'command_manager';
 import { ILocalChangeset } from 'engine';
 import { IReduxState } from 'exports/store/interfaces';
@@ -11,7 +9,7 @@ import { generateRandomString } from 'utils';
 
 export function resourceOpsToChangesets(resourceOpsCollects: IResourceOpsCollect[], state: IReduxState): ILocalChangeset[] {
   const changesetMap: Map<string, ILocalChangeset> = new Map();
-  resourceOpsCollects.forEach(collect => {
+  resourceOpsCollects.forEach((collect) => {
     const { resourceId, resourceType, operations } = collect;
     // One datasheet, one changeset
     let changeset = changesetMap.get(resourceId);
@@ -30,7 +28,7 @@ export function resourceOpsToChangesets(resourceOpsCollects: IResourceOpsCollect
           resourceId,
           resourceType,
           operations,
-        }),
+        })
       );
     } else {
       changeset.operations.push(...operations);

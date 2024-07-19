@@ -1,5 +1,3 @@
-
-
 import { useSize } from 'ahooks';
 import classNames from 'classnames';
 import { usePostHog } from 'posthog-js/react';
@@ -67,7 +65,7 @@ const FormTabBase = ({ setPreFill, preFill }: { setPreFill: Dispatch<SetStateAct
     const { renamable, iconEditable, editable } = permissions;
     const { datasheetId, viewId, datasheetName, datasheetIcon } = sourceInfo;
     let viewName = '',
-        viewType = ViewType.Form;
+      viewType = ViewType.Form;
     if (formRelMeta) {
       viewName = formRelMeta.views[0].name;
       viewType = formRelMeta.views[0].type;

@@ -1,5 +1,3 @@
-
-
 import React, { FC } from 'react';
 import { useCssColors } from '../../hooks/use_css_colors';
 import { Box } from '../box';

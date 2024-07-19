@@ -1,5 +1,3 @@
-
-
 import { ErrorCode, ErrorType, IError } from 'types/error_types';
 import { COLLA_COMMAND_MAP, ICollaCommandOptions } from '../commands';
 import { CollaCommandName } from '../commands/enum';
@@ -45,9 +43,12 @@ export class CollaCommandManager {
 
   addUndoStack?(cmd: CollaCommandName, commandResult: ICollaCommandDefExecuteSuccessResult, executeType: ExecuteType): void;
 
-  constructor(private _listener: ICollaCommandManagerListener = {}, private store: Store<IReduxState, AnyAction>) {
+  constructor(
+    private _listener: ICollaCommandManagerListener = {},
+    private store: Store<IReduxState, AnyAction>
+  ) {
     const commandNames = Object.keys(COLLA_COMMAND_MAP);
-    commandNames.forEach(commandName => {
+    commandNames.forEach((commandName) => {
       this.register(commandName, COLLA_COMMAND_MAP[commandName]!);
     });
     this.cellFormatChecker = new CellFormatChecker(store);
@@ -110,7 +111,7 @@ export class CollaCommandManager {
 
     if ('resourceId' in options) {
       resourceId = options.resourceId;
-      if(options.resourceType) {
+      if (options.resourceType) {
         resourceType = options.resourceType;
       }
     }
@@ -197,7 +198,7 @@ export class CollaCommandManager {
   _executeActions<R = any>(
     cmd: CollaCommandName,
     ret: ICollaCommandDefExecuteSuccessResult<R>,
-    executeType: ExecuteType,
+    executeType: ExecuteType
   ): ICollaCommandExecuteResult<R> | null {
     const { actions, resourceId, resourceType, linkedActions, fieldMapSnapshot } = ret;
     const command = this._commands[cmd];
@@ -262,7 +263,7 @@ export class CollaCommandManager {
     });
 
     if (linkedActions) {
-      linkedActions.forEach(lCmd => {
+      linkedActions.forEach((lCmd) => {
         if (!lCmd.actions.length) {
           return;
         }

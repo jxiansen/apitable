@@ -1,5 +1,3 @@
-
-
 import { getCustomConfig } from 'config';
 import { EmojisConfig } from 'config/emojis_config';
 import { IOpenComputedFormat } from 'types/open/open_field_read_types';
@@ -35,7 +33,7 @@ export const handleNullArray = (cv: any | null): any | null => {
     return null;
   }
   if (Array.isArray(cv)) {
-    cv = cv.filter(v => v != null);
+    cv = cv.filter((v) => v != null);
   }
   if (cv.length === 0) {
     return null;
@@ -324,7 +322,8 @@ export const computedFormattingToFormat = (format: IOpenComputedFormat): IComput
 };
 
 export const isBasicField = (fieldType: FieldType) => {
-  return fieldType === FieldType.Text ||
+  return (
+    fieldType === FieldType.Text ||
     fieldType === FieldType.Number ||
     fieldType === FieldType.SingleSelect ||
     fieldType === FieldType.MultiSelect ||
@@ -338,5 +337,6 @@ export const isBasicField = (fieldType: FieldType) => {
     fieldType === FieldType.Currency ||
     fieldType === FieldType.Percent ||
     fieldType === FieldType.SingleText ||
-    fieldType === FieldType.Attachment;
+    fieldType === FieldType.Attachment
+  );
 };

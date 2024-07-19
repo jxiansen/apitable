@@ -1,5 +1,3 @@
-
-
 import 'prismjs/components/prism-sql';
 import 'prismjs/components/prism-php';
 import 'prismjs/components/prism-markup-templating';

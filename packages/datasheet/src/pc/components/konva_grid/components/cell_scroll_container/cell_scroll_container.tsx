@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { FC, useContext, useMemo } from 'react';
 import { KONVA_DATASHEET_ID } from '@apitable/core';

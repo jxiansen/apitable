@@ -1,5 +1,3 @@
-
-
 import { UnitTypeEnum } from 'shared/enums';
 import { EntityRepository, getConnection, In, Repository } from 'typeorm';
 import { UnitBaseInfoDto } from '../dtos/unit.base.info.dto';
@@ -14,15 +12,15 @@ import { UnitEntity } from '../entities/unit.entity';
 @EntityRepository(UnitEntity)
 export class UnitRepository extends Repository<UnitEntity> {
   public async selectUnitMembersByIdsIncludeDeleted(unitIds: string[]): Promise<UnitBaseInfoDto[]> {
-    return await this.find({ select: ['id', 'unitType', 'unitRefId'], where: { id: In(unitIds) }});
+    return await this.find({ select: ['id', 'unitType', 'unitRefId'], where: { id: In(unitIds) } });
   }
 
   selectCountByIdAndSpaceId(id: string, spaceId: string): Promise<number> {
-    return this.count({ where: { id, spaceId, isDeleted: false }});
+    return this.count({ where: { id, spaceId, isDeleted: false } });
   }
 
   selectIdByRefIdAndSpaceId(refId: string, spaceId: string): Promise<{ id: string } | undefined> {
-    return this.findOne({ select: ['id'], where: { unitRefId: refId, spaceId, isDeleted: false }});
+    return this.findOne({ select: ['id'], where: { unitRefId: refId, spaceId, isDeleted: false } });
   }
 
   public async selectUnitInfosBySpaceIdAndUnitIds(spaceId: string, unitIds: string[]) {
@@ -61,14 +59,14 @@ export class UnitRepository extends Repository<UnitEntity> {
    * get units by unit ref Ids
    */
   public async selectUnitsByUnitRefIds(unitRefIds: number[]): Promise<UnitEntity[]> {
-    return await this.find({ select: ['id', 'unitType', 'unitRefId'], where: { unitRefId: In(unitRefIds) }});
+    return await this.find({ select: ['id', 'unitType', 'unitRefId'], where: { unitRefId: In(unitRefIds) } });
   }
 
   selectIdByUnitIdAndSpaceIdAndUnitType(unitId: string, spaceId: string, unitType: UnitTypeEnum): Promise<{ id: string } | undefined> {
-    return this.findOne({ select: ['id'], where: { unitId: unitId, spaceId, unitType: unitType, isDeleted: false }});
+    return this.findOne({ select: ['id'], where: { unitId: unitId, spaceId, unitType: unitType, isDeleted: false } });
   }
 
   selectUnitIdsByUnitIdsAndSpaceIdAndUnitType(unitIds: string[], spaceId: string, unitType: UnitTypeEnum): Promise<{ unitId: string }[] | undefined> {
-    return this.find({ select: ['unitId'], where: { unitId: In(unitIds), spaceId, unitType: unitType, isDeleted: false }});
+    return this.find({ select: ['unitId'], where: { unitId: In(unitIds), spaceId, unitType: unitType, isDeleted: false } });
   }
 }

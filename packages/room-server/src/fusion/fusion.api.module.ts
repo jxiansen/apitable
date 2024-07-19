@@ -1,12 +1,31 @@
-
-
 import { CacheModule, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
-  AttachmentField, AutoNumberField,
-  CascaderField, CheckboxField, CreatedByField, CreatedTimeField, CurrencyField, DateTimeField, EmailField, FormulaField,
-  LastModifiedByField, LastModifiedTimeField, LinkField, LookUpField, MemberField, MultiSelectField, NumberField, PercentField, PhoneField,
-  RatingField, SingleSelectField, SingleTextField, TextField, UrlField, WorkDocField
+  AttachmentField,
+  AutoNumberField,
+  CascaderField,
+  CheckboxField,
+  CreatedByField,
+  CreatedTimeField,
+  CurrencyField,
+  DateTimeField,
+  EmailField,
+  FormulaField,
+  LastModifiedByField,
+  LastModifiedTimeField,
+  LinkField,
+  LookUpField,
+  MemberField,
+  MultiSelectField,
+  NumberField,
+  PercentField,
+  PhoneField,
+  RatingField,
+  SingleSelectField,
+  SingleTextField,
+  TextField,
+  UrlField,
+  WorkDocField,
 } from 'fusion/field';
 import { CacheConfigService } from 'shared/cache/cache.config.service';
 import { ApiRequestMiddleware } from './middleware/api.request.middleware';
@@ -41,9 +60,7 @@ import { OneWayLinkField } from './field/one_way_link.field';
     CacheModule.registerAsync({
       useClass: CacheConfigService,
     }),
-    TypeOrmModule.forFeature([
-      ApiUsageRepository,
-    ]),
+    TypeOrmModule.forFeature([ApiUsageRepository]),
   ],
   controllers: [FusionApiController, FusionApiV2Controller],
   providers: [

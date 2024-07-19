@@ -1,5 +1,3 @@
-
-
 import { useCallback, useMemo } from 'react';
 import { FilterConjunction, FOperator, IField, IFilterInfo } from '@apitable/core';
 import { FilterValue } from 'pc/components/tool_bar/view_filter/filter_value';

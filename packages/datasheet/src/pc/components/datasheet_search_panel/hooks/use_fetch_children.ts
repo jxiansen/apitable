@@ -14,6 +14,6 @@ interface IParams {
 export const useFetchChildren = ({ folderId }: IParams) => {
   const catalogTreeActiveType = useAppSelector((state) => state.catalogTree.activeType);
   const isPrivate = catalogTreeActiveType === ConfigConstant.Modules.PRIVATE;
-  const result = useSWR(getApiKey(folderId), () => getChildrenNode(folderId, isPrivate ? 3: undefined), { revalidateOnFocus: false });
+  const result = useSWR(getApiKey(folderId), () => getChildrenNode(folderId, isPrivate ? 3 : undefined), { revalidateOnFocus: false });
   return result;
 };

@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
 
@@ -10,7 +8,7 @@ interface ITextButtonBaseProps {
   block?: boolean;
 }
 
-export const TextButtonBase = styled.button.attrs(applyDefaultTheme) <ITextButtonBaseProps>`
+export const TextButtonBase = styled.button.attrs(applyDefaultTheme)<ITextButtonBaseProps>`
   cursor: pointer;
   transition: background-color 100ms linear;
   border: none;
@@ -43,7 +41,7 @@ export const TextButtonBase = styled.button.attrs(applyDefaultTheme) <ITextButto
         padding: '13px 16px',
         borderRadius: 8,
         fontSize: 14,
-      }
+      },
     };
     const attr = sizeAttrMap[props.size || 'middle'];
     return css`
@@ -56,13 +54,16 @@ export const TextButtonBase = styled.button.attrs(applyDefaultTheme) <ITextButto
   &:focus {
     box-shadow: none;
     outline: none;
-  };
+  }
   &:active {
     box-shadow: none;
     outline: none;
-  };
+  }
   ${(props) => {
-    if (props.block) return css`width:100%;`;
+    if (props.block)
+      return css`
+        width: 100%;
+      `;
     return;
   }}
   ${(props) => {
@@ -75,11 +76,11 @@ export const TextButtonBase = styled.button.attrs(applyDefaultTheme) <ITextButto
     return;
   }};
   ${(props) => {
-    const { 
-      bgBglessHover, 
-      bgBglessActive, 
-      textCommonPrimary, 
-      bgBrandLightDefault, 
+    const {
+      bgBglessHover,
+      bgBglessActive,
+      textCommonPrimary,
+      bgBrandLightDefault,
       bgBrandLightHover,
       textBrandDefault,
       bgDangerLightDefault,
@@ -142,18 +143,18 @@ export const TextButtonBase = styled.button.attrs(applyDefaultTheme) <ITextButto
 export const IconSpanStyled = styled.span<{ existIcon: boolean; position: string }>`
   display: flex;
   justify-content: center;
-  
-  ${props => {
+
+  ${(props) => {
     if (!props.existIcon) {
       return;
     }
     if (props.position === 'suffix') {
       return css`
-        margin-left:4px;
-        `;
+        margin-left: 4px;
+      `;
     }
     return css`
-    margin-right:4px;
+      margin-right: 4px;
     `;
   }};
 `;

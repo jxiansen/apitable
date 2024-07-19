@@ -1,5 +1,3 @@
-
-
 import { IJOTAction } from 'engine/ot';
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { getActiveDatasheetId, getDatasheet } from 'modules/database/store/selectors/resource/datasheet/base';
@@ -42,4 +40,3 @@ export const setViewFrozenColumnCount: ICollaCommandDef<ISetViewFrozenColumnCoun
     };
   },
 };
-

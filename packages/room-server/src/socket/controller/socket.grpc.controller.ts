@@ -1,5 +1,3 @@
-
-
 import { Controller, UseFilters } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { BasicResult, ServerRoomChangeRo } from 'grpc/generated/common/Core';
@@ -14,7 +12,7 @@ import { RoomService } from 'socket/services/room/room.service';
 export class SocketGrpcController {
   constructor(
     private readonly roomGateway: RoomGateway,
-    private readonly roomService: RoomService
+    private readonly roomService: RoomService,
   ) {}
 
   @GrpcMethod('SocketService', 'serverRoomChange')

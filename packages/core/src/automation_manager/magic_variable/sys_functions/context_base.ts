@@ -1,5 +1,3 @@
-
-
 import { IRobotTaskRuntimeContext, OperatorEnums } from 'automation_manager/interface';
 import type { IReduxState } from 'exports/store/interfaces';
 import { Field } from 'model/field';
@@ -51,11 +49,7 @@ const makeFunction = (operator: OperatorEnums, funcName: string) => {
     const field = fieldMap[fieldId];
     // if the field is deleted, the filter should be invalid. return false
     if (!field) return false;
-    return Field.bindContext(field, ctx.state).isMeetFilter(
-      IMagicOperatorMap[operator],
-      getFieldValue(ctx, fieldId),
-      b
-    );
+    return Field.bindContext(field, ctx.state).isMeetFilter(IMagicOperatorMap[operator], getFieldValue(ctx, fieldId), b);
   };
   Object.defineProperty(func, 'name', { writable: false, value: funcName });
   return func;
@@ -71,4 +65,3 @@ export const isNull = makeFunction(OperatorEnums.IsNull, 'isNull');
 export const isNotNull = makeFunction(OperatorEnums.IsNotNull, 'isNotNull');
 export const includes = makeFunction(OperatorEnums.Includes, 'includes');
 export const notIncludes = makeFunction(OperatorEnums.NotIncludes, 'notIncludes');
-

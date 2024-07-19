@@ -1,5 +1,3 @@
-
-
 import React, { cloneElement, FC, ReactElement } from 'react';
 import { IAvatarGroup } from './interface';
 import { AvatarGroupStyled } from './styled';

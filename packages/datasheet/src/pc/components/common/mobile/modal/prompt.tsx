@@ -1,5 +1,3 @@
-
-
 import { Modal } from 'antd-mobile';
 import type { Action } from 'antd-mobile/es/components/modal';
 import * as React from 'react';

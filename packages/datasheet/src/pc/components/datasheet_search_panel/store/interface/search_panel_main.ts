@@ -6,7 +6,7 @@ export interface ISearchPanelMainState {
   parents: IParent[];
   searchValue: string;
   onlyShowEditableNode: boolean;
-  needPermission?: 'editable' | 'manageable'
+  needPermission?: 'editable' | 'manageable';
   nodes: ICommonNode[];
   searchResult: { folders: INode[]; files: INode[] } | string;
   currentFolderId: string;

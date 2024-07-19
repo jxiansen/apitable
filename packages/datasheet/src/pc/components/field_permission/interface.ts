@@ -1,5 +1,3 @@
-
-
 import { IOption, IDoubleOptions } from '@apitable/components';
 import { IField, IUnitValue } from '@apitable/core';
 

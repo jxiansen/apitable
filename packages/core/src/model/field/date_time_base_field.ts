@@ -1,5 +1,3 @@
-
-
 import { format as dfzFormat, utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 import dayjs, { PluginFunc } from 'dayjs';
 import 'dayjs/locale/zh-cn';
@@ -47,7 +45,7 @@ const dfzFormatWithValid = (date: any, format: string, timeZone?: string) => {
   }
   try {
     return dfzFormat(date, covertDayjsFormat2DateFnsFormat(format), timeZone ? { timeZone } : undefined);
-  } catch(_e) {
+  } catch (_e) {
     return dayjs(Number(date)).tz(timeZone).format(format);
   }
 };
@@ -58,9 +56,12 @@ const patchDayjsTimezone = (timezone: PluginFunc): PluginFunc => {
   // which is published under the MIT license. See https://github.com/iamkun/dayjs/blob/dev/LICENSE for more information.
 
   const dtfCache: { [timezone: string]: Intl.DateTimeFormat } = {};
-  const getDateTimeFormat = (timezone: string, options: {
-    timeZoneName?: Intl.DateTimeFormatOptions['timeZoneName']
-  } = {}) => {
+  const getDateTimeFormat = (
+    timezone: string,
+    options: {
+      timeZoneName?: Intl.DateTimeFormatOptions['timeZoneName'];
+    } = {}
+  ) => {
     const timeZoneName = options.timeZoneName || 'short';
     const key = `${timezone}|${timeZoneName}`;
     let dtf = dtfCache[key];
@@ -94,8 +95,7 @@ const patchDayjsTimezone = (timezone: PluginFunc): PluginFunc => {
       const date = this.toDate();
       const target = getDateTimeFormat(timezone!).format(date);
       const diff = Math.round((+date - +new Date(target)) / 1000 / 60);
-      let ins = (d(target) as any).$set(MS, (this as any).$ms)
-        .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true);
+      let ins = (d(target) as any).$set(MS, (this as any).$ms).utcOffset(-Math.round(date.getTimezoneOffset() / 15) * 15 - diff, true);
       if (keepLocalTime) {
         const newOffset = ins.utcOffset();
         ins = ins.add(oldOffset - newOffset, MIN);
@@ -132,11 +132,7 @@ export const getDateTimeFormat = (props: IOptionalDateTimeFieldProperty) => {
   return dateFormat + (props.includeTime ? ' ' + timeFormat : '');
 };
 
-export const dateTimeFormat = (
-  timestamp: any,
-  props?: IOptionalDateTimeFieldProperty,
-  userTimeZone?: string,
-) => {
+export const dateTimeFormat = (timestamp: any, props?: IOptionalDateTimeFieldProperty, userTimeZone?: string) => {
   if (!timestamp) {
     return null;
   }
@@ -160,12 +156,12 @@ export const dateTimeFormat = (
     if (props.includeTimeZone) {
       timeZone = timeZone || DEFAULT_DATETIME_PROPS.timeZone;
       const abbr = getTimeZoneAbbrByUtc(timeZone)!;
-      return dfzFormatWithValid(utcToZonedTime(Number(timestamp), timeZone), covertDayjsFormat2DateFnsFormat(format), timeZone ) + ` (${abbr})`;
+      return dfzFormatWithValid(utcToZonedTime(Number(timestamp), timeZone), covertDayjsFormat2DateFnsFormat(format), timeZone) + ` (${abbr})`;
     }
     if (!props.includeTimeZone && timeZone) {
       // dayjs(Number(timestamp)).tz(timeZone).format(format);
       // Frequent invocations of the "tz" function here will result in severe page lag.
-      return dfzFormatWithValid(utcToZonedTime(Number(timestamp), timeZone), covertDayjsFormat2DateFnsFormat(format), timeZone );
+      return dfzFormatWithValid(utcToZonedTime(Number(timestamp), timeZone), covertDayjsFormat2DateFnsFormat(format), timeZone);
     }
   } catch (e) {
     if (e instanceof RangeError) {
@@ -194,7 +190,10 @@ const withTimeZone = (timestamp: number | undefined | string, timeZone?: string,
 export type ICommonDateTimeField = IDateTimeField | ICreatedTimeField | ILastModifiedTimeField;
 
 export abstract class DateTimeBaseField extends Field {
-  constructor(public override field: ICommonDateTimeField, public override state: IReduxState) {
+  constructor(
+    public override field: ICommonDateTimeField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -245,7 +244,7 @@ export abstract class DateTimeBaseField extends Field {
       format: getDateTimeFormat(this.field.property),
       includeTime: this.field.property.includeTime,
       timeZone: this.field.property.timeZone,
-      includeTimeZone: this.field.property.includeTimeZone
+      includeTimeZone: this.field.property.includeTimeZone,
     };
     if ((this.field.property as any).autoFill) {
       res.autoFill = true;
@@ -362,15 +361,13 @@ export abstract class DateTimeBaseField extends Field {
     // if you use str to compare the order at this time, there will be an error,
     // So the format containing the year, month and day uses timestamp comparison uniformly
     if (hasYear) {
-      return dateTimeStr1 === dateTimeStr2 ?
-        0 : (cv1 > cv2 ? 1 : -1);
+      return dateTimeStr1 === dateTimeStr2 ? 0 : cv1 > cv2 ? 1 : -1;
     }
 
     // Fill in a uniform year, then compare the timestamps
     const timestamp1 = dayjs(cv1).year(2000).valueOf();
     const timestamp2 = dayjs(cv2).year(2000).valueOf();
-    return dateTimeStr1 === dateTimeStr2 ?
-      0 : (timestamp1! > timestamp2! ? 1 : -1);
+    return dateTimeStr1 === dateTimeStr2 ? 0 : timestamp1! > timestamp2! ? 1 : -1;
   }
 
   override compare(cellValue1: ITimestamp, cellValue2: ITimestamp, onlyCompareOriginValue?: boolean): number {
@@ -393,12 +390,12 @@ export abstract class DateTimeBaseField extends Field {
 
     if (cellValue != null) {
       /*
-        * Data pasted or dragged from a date field should be saved twice
-        * text is text, such as 11/02 2020-11-1, used to write data when pasting to non-date fields
-        * originValue is a timestamp, which is used to paste or fill data into the date field.
-        * The biggest difference from text is that all the time information is saved, which can be used according to
-        * The format of the target date field is displayed freely
-        */
+       * Data pasted or dragged from a date field should be saved twice
+       * text is text, such as 11/02 2020-11-1, used to write data when pasting to non-date fields
+       * originValue is a timestamp, which is used to paste or fill data into the date field.
+       * The biggest difference from text is that all the time information is saved, which can be used according to
+       * The format of the target date field is displayed freely
+       */
       stdVal.data.push({
         text: this.cellValueToString(cellValue) || '',
         originValue: cellValue,
@@ -468,15 +465,16 @@ export abstract class DateTimeBaseField extends Field {
    * Last month: [January 1st 00:00, January 31st 23:59] UTC+8
    * This year: [January 1st 00:00, December 31st 23:59] UTC+8
    */
-  private static getTimeRange(filterDuration: FilterDuration, time: ITimestamp | string | null | undefined, timeZone?: string,
-    locale?: string): [ITimestamp, ITimestamp] {
+  private static getTimeRange(
+    filterDuration: FilterDuration,
+    time: ITimestamp | string | null | undefined,
+    timeZone?: string,
+    locale?: string
+  ): [ITimestamp, ITimestamp] {
     switch (filterDuration) {
       case FilterDuration.ExactDate: {
         if (time != undefined) {
-          return [
-            withTimeZone(time, timeZone, locale).startOf('day').valueOf(),
-            withTimeZone(time, timeZone, locale).endOf('day').valueOf()
-          ];
+          return [withTimeZone(time, timeZone, locale).startOf('day').valueOf(), withTimeZone(time, timeZone, locale).endOf('day').valueOf()];
         }
         throw new Error('ExactDate has to calculate with timestamp');
       }
@@ -490,25 +488,25 @@ export abstract class DateTimeBaseField extends Field {
       case FilterDuration.Today: {
         return [
           withTimeZone(Date.now(), timeZone, locale).startOf('day').valueOf(),
-          withTimeZone(Date.now(), timeZone, locale).endOf('day').valueOf()
+          withTimeZone(Date.now(), timeZone, locale).endOf('day').valueOf(),
         ];
       }
       case FilterDuration.Tomorrow: {
         return [
           withTimeZone(Date.now(), timeZone, locale).add(1, 'day').startOf('day').valueOf(),
-          withTimeZone(Date.now(), timeZone, locale).add(1, 'day').endOf('day').valueOf()
+          withTimeZone(Date.now(), timeZone, locale).add(1, 'day').endOf('day').valueOf(),
         ];
       }
       case FilterDuration.Yesterday: {
         return [
           withTimeZone(Date.now(), timeZone, locale).add(-1, 'day').startOf('day').valueOf(),
-          withTimeZone(Date.now(), timeZone, locale).add(-1, 'day').endOf('day').valueOf()
+          withTimeZone(Date.now(), timeZone, locale).add(-1, 'day').endOf('day').valueOf(),
         ];
       }
       case FilterDuration.TheNextWeek: {
         return [
           withTimeZone(Date.now(), timeZone, locale).add(1, 'day').startOf('day').valueOf(),
-          withTimeZone(Date.now(), timeZone, locale).add(7, 'day').endOf('day').valueOf()
+          withTimeZone(Date.now(), timeZone, locale).add(7, 'day').endOf('day').valueOf(),
         ];
       }
       case FilterDuration.TheLastWeek: {
@@ -521,7 +519,7 @@ export abstract class DateTimeBaseField extends Field {
       case FilterDuration.TheNextMonth: {
         return [
           withTimeZone(Date.now(), timeZone, locale).add(1, 'day').startOf('day').valueOf(),
-          withTimeZone(Date.now(), timeZone, locale).add(30, 'day').endOf('day').valueOf()
+          withTimeZone(Date.now(), timeZone, locale).add(30, 'day').endOf('day').valueOf(),
         ];
       }
       case FilterDuration.TheLastMonth: {
@@ -533,38 +531,38 @@ export abstract class DateTimeBaseField extends Field {
       case FilterDuration.ThisWeek: {
         return [
           withTimeZone(Date.now(), timeZone, locale).startOf('week').valueOf(),
-          withTimeZone(Date.now(), timeZone, locale).endOf('week').valueOf()
+          withTimeZone(Date.now(), timeZone, locale).endOf('week').valueOf(),
         ];
       }
       case FilterDuration.PreviousWeek: {
         return [
           withTimeZone(Date.now(), timeZone, locale).add(-1, 'week').startOf('week').valueOf(),
-          withTimeZone(Date.now(), timeZone, locale).add(-1, 'week').endOf('week').valueOf()
+          withTimeZone(Date.now(), timeZone, locale).add(-1, 'week').endOf('week').valueOf(),
         ];
       }
       case FilterDuration.ThisMonth: {
         return [
           withTimeZone(Date.now(), timeZone, locale).startOf('month').valueOf(),
-          withTimeZone(Date.now(), timeZone, locale).endOf('month').valueOf()
+          withTimeZone(Date.now(), timeZone, locale).endOf('month').valueOf(),
         ];
       }
       case FilterDuration.PreviousMonth: {
         return [
           withTimeZone(Date.now(), timeZone, locale).add(-1, 'month').startOf('month').valueOf(),
-          withTimeZone(Date.now(), timeZone, locale).add(-1, 'month').endOf('month').valueOf()
+          withTimeZone(Date.now(), timeZone, locale).add(-1, 'month').endOf('month').valueOf(),
         ];
       }
       case FilterDuration.ThisYear: {
         return [
           withTimeZone(Date.now(), timeZone, locale).startOf('year').valueOf(),
-          withTimeZone(Date.now(), timeZone, locale).endOf('year').valueOf()
+          withTimeZone(Date.now(), timeZone, locale).endOf('year').valueOf(),
         ];
       }
       case FilterDuration.SomeDayBefore: {
         if (typeof time === 'number') {
           return [
             withTimeZone(Date.now(), timeZone, locale).add(-time, 'day').startOf('day').valueOf(),
-            withTimeZone(Date.now(), timeZone, locale).add(-time, 'day').endOf('day').valueOf()
+            withTimeZone(Date.now(), timeZone, locale).add(-time, 'day').endOf('day').valueOf(),
           ];
         }
         throw new Error('SomeDayBefore has to calculate with number');
@@ -573,7 +571,7 @@ export abstract class DateTimeBaseField extends Field {
         if (typeof time === 'number') {
           return [
             withTimeZone(Date.now(), timeZone, locale).add(time, 'day').startOf('day').valueOf(),
-            withTimeZone(Date.now(), timeZone, locale).add(time, 'day').endOf('day').valueOf()
+            withTimeZone(Date.now(), timeZone, locale).add(time, 'day').endOf('day').valueOf(),
           ];
         }
         throw new Error('SomeDayAfter has to calculate with number');
@@ -585,7 +583,11 @@ export abstract class DateTimeBaseField extends Field {
   }
 
   static _isMeetFilter(
-    operator: FOperator, cellValue: ITimestamp | null, conditionValue: Exclude<IFilterDateTime, null>, timeZone?: string, locale?: string
+    operator: FOperator,
+    cellValue: ITimestamp | null,
+    conditionValue: Exclude<IFilterDateTime, null>,
+    timeZone?: string,
+    locale?: string
   ) {
     // The logic to judge in advance that it is empty or not.
     if (operator === FOperator.IsEmpty) {
@@ -702,7 +704,7 @@ export abstract class DateTimeBaseField extends Field {
     const operator = value[0];
     const _value = value[1];
     if (operator === FilterDuration.DateRange) {
-      const range = typeof _value === 'string' ? _value.split('-').map(v => Number(v)) : [];
+      const range = typeof _value === 'string' ? _value.split('-').map((v) => Number(v)) : [];
       return range.length === 2 ? [operator, range[0]!, range[1]!] : [operator, null];
     }
     if (operator === FilterDuration.ExactDate) {
@@ -754,7 +756,6 @@ export abstract class DateTimeBaseField extends Field {
       return Joi.array().items(Joi.number().allow(null)).max(1).allow(null).validate(_value);
     }
     return Joi.array().max(0).validate(_value);
-
   }
 
   override validateOpenFilterValue(value: IOpenFilterValueDataTime) {

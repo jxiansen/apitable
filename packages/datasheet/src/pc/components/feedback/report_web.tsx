@@ -1,5 +1,3 @@
-
-
 import RcTrigger from 'rc-trigger';
 import { FC, useState } from 'react';
 import { Strings, t } from '@apitable/core';

@@ -1,5 +1,3 @@
-
-
 import { ArrayFieldTemplate, ObjectFieldTemplate, FieldTemplate, ErrorList } from './template';
 import { ThemeProps } from '@rjsf/core';
 import { CheckboxWidget, SelectWidget, CheckboxesWidget, TextWidget, ColorWidget, ToggleButtonWidget } from './widget';

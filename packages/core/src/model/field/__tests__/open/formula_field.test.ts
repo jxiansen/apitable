@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldPropertyFormatEnums, APIMetaFieldType, BasicValueType, DateFormat, FieldType, IFormulaField, TimeFormat } from 'types';
 import { IOpenField } from 'types/open/open_field_read_types';
 import { IUpdateOpenFormulaFieldProperty } from 'types/open/open_field_write_types';
@@ -11,13 +9,13 @@ const formulaField: IFormulaField = {
   type: FieldType.Formula,
   property: {
     datasheetId: 'dst1111',
-    expression: 'WORKDAY(\'2020/10/01\' , 1)',
+    expression: "WORKDAY('2020/10/01' , 1)",
     formatting: {
       dateFormat: DateFormat['YYYY/MM/DD'],
       includeTime: true,
-      timeFormat: TimeFormat['HH:mm']
-    }
-  }
+      timeFormat: TimeFormat['HH:mm'],
+    },
+  },
 };
 
 const openFormulaField: IOpenField = {
@@ -25,7 +23,7 @@ const openFormulaField: IOpenField = {
   id: 'fld1111',
   type: APIMetaFieldType.Formula,
   property: {
-    expression: 'WORKDAY(\'2020/10/01\' , 1)',
+    expression: "WORKDAY('2020/10/01' , 1)",
     valueType: BasicValueType.DateTime,
     hasError: false,
     format: {
@@ -33,29 +31,29 @@ const openFormulaField: IOpenField = {
       format: {
         dateFormat: 'YYYY/MM/DD',
         timeFormat: 'HH:mm',
-        includeTime: true
-      }
-    }
-  }
+        includeTime: true,
+      },
+    },
+  },
 };
 
 const propertyOptionalFill: IUpdateOpenFormulaFieldProperty = {
-  expression: 'WORKDAY(\'2020/10/01\' , 1)',
+  expression: "WORKDAY('2020/10/01' , 1)",
   format: {
     type: APIMetaFieldPropertyFormatEnums.DateTime,
     format: {
       dateFormat: 'YYYY/MM/DD',
       timeFormat: 'HH:mm',
-      includeTime: true
-    }
-  }
+      includeTime: true,
+    },
+  },
 };
 
 const propertyOptionalNotFill: IUpdateOpenFormulaFieldProperty = {};
 
 describe('The formula field reads the property format check', () => {
   const valid = getOpenFieldProperty(formulaField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid(openFormulaField.property);
     expect(receiveValue).toEqual(expectValue);
   });
@@ -84,7 +82,7 @@ describe('Formula field update property conversion property check', () => {
   it('Do not fill in optional fields', () => {
     const [expectValue, receiveValue] = valid(propertyOptionalNotFill, {
       datasheetId: formulaField.property.datasheetId,
-      expression: ''
+      expression: '',
     });
     expect(expectValue).toEqual(receiveValue);
   });

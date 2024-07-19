@@ -1,5 +1,3 @@
-
-
 import { useUpdateEffect } from 'ahooks';
 import classNames from 'classnames';
 import * as React from 'react';
@@ -111,8 +109,7 @@ const FieldEditorBase = (props: IFieldEditorProps) => {
   }, []);
 
   function onMouseDown() {
-    if (Field.bindModel(field).isComputed ||
-      field.type === FieldType.AutoNumber || (fieldRole && fieldRole !== ConfigConstant.Role.Editor)) {
+    if (Field.bindModel(field).isComputed || field.type === FieldType.AutoNumber || (fieldRole && fieldRole !== ConfigConstant.Role.Editor)) {
       window.clearTimeout(timeoutRef.current);
       setShowTip(true);
       timeoutRef.current = window.setTimeout(() => {

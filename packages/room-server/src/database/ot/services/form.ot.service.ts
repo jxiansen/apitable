@@ -1,5 +1,3 @@
-
-
 import { IFormProps, IOperation, IRemoteChangeset, jot } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { EffectConstantName, ICommonData } from 'database/ot/interfaces/ot.interface';
@@ -17,17 +15,17 @@ export class FormOtService {
   constructor(
     @InjectLogger() private readonly logger: Logger,
     private readonly repository: ResourceMetaRepository,
-  ) { }
+  ) {}
 
   createResultSet() {
     return {
-      metaActions: []
+      metaActions: [],
     };
   }
 
   analyseOperates(operations: IOperation[], permission: NodePermission, resultSet: { [key: string]: any }) {
-    operations.forEach(op => {
-      op.actions.forEach(action => {
+    operations.forEach((op) => {
+      op.actions.forEach((action) => {
         // Modify form props
         if (action.p[0] === 'formProps' && 'oi' in action && 'od' in action) {
           if (!permission.editable) {
@@ -39,16 +37,9 @@ export class FormOtService {
     });
 
     return this.transaction;
-
   }
 
-  transaction = async(
-    manager: EntityManager,
-    effectMap: Map<string, any>,
-    commonData: ICommonData,
-    resultSet: { [key: string]: any }
-  ) => {
-
+  transaction = async (manager: EntityManager, effectMap: Map<string, any>, commonData: ICommonData, resultSet: { [key: string]: any }) => {
     // Update database parallelly
     await Promise.all([
       // Update meta
@@ -58,11 +49,7 @@ export class FormOtService {
     ]);
   };
 
-  async handleMeta(
-    _manager: EntityManager,
-    commonData: ICommonData,
-    resultSet: { [key: string]: any }
-  ) {
+  async handleMeta(_manager: EntityManager, commonData: ICommonData, resultSet: { [key: string]: any }) {
     if (this.logger.isDebugEnabled()) {
       this.logger.debug(`[${commonData.resourceId}] Update metadata`);
     }
@@ -92,22 +79,24 @@ export class FormOtService {
     const beginTime = +new Date();
     this.logger.info(`[${remoteChangeset.resourceId}] ====> Start storing changeset......`);
     const { userId } = commonData;
-    await manager.createQueryBuilder()
+    await manager
+      .createQueryBuilder()
       .insert()
       .into(ResourceChangesetEntity)
-      .values([{
-        id: IdWorker.nextId().toString(),
-        messageId: remoteChangeset.messageId,
-        resourceId: remoteChangeset.resourceId,
-        resourceType: remoteChangeset.resourceType,
-        operations: remoteChangeset.operations,
-        revision: remoteChangeset.revision,
-        createdBy: userId,
-      }])
+      .values([
+        {
+          id: IdWorker.nextId().toString(),
+          messageId: remoteChangeset.messageId,
+          resourceId: remoteChangeset.resourceId,
+          resourceType: remoteChangeset.resourceType,
+          operations: remoteChangeset.operations,
+          revision: remoteChangeset.revision,
+          createdBy: userId,
+        },
+      ])
       .updateEntity(false)
       .execute();
     const endTime = +new Date();
     this.logger.info(`[${remoteChangeset.resourceId}] ====> Finished storing changeset......duration: ${endTime - beginTime}ms`);
   }
-
 }

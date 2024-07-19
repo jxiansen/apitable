@@ -1,13 +1,8 @@
-
-
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { CollaCommandName } from 'commands/enum';
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { IRecordAlarm } from '../../exports/store/interfaces';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 import { ResourceType, WithOptional } from 'types';
 import { getNewId, IDPrefix } from 'utils';
 
@@ -39,10 +34,12 @@ export const setDateTimeCellAlarm: ICollaCommandDef<ISetDateTimeCellAlarmOptions
     const actions = DatasheetActions.setDateTimeCellAlarm(snapshot, {
       recordId,
       fieldId,
-      alarm: alarm ? {
-        id: newAlarmId,
-        ...alarm,
-      } : null
+      alarm: alarm
+        ? {
+            id: newAlarmId,
+            ...alarm,
+          }
+        : null,
     });
     if (!actions) {
       return null;
@@ -53,5 +50,5 @@ export const setDateTimeCellAlarm: ICollaCommandDef<ISetDateTimeCellAlarmOptions
       resourceType: ResourceType.Datasheet,
       actions,
     };
-  }
+  },
 };

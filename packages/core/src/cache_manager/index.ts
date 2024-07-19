@@ -1,19 +1,28 @@
-
-
 import { computeCache } from 'compute_manager/compute_cache_manager';
 import { ExpCache } from 'formula_parser/evaluate';
 import type { IReduxState, ISnapshot } from 'exports/store/interfaces';
 import { calcCellValueAndString } from 'modules/database/store/selectors/resource/datasheet/cell_calc';
 import { getFilterInfo } from 'modules/database/store/selectors/resource/datasheet/rows_calc';
-import { getCurrentView, getFieldMap, getFieldMapIgnorePermission, getVisibleColumns
-  , getCalendarVisibleColumns, getOrgChartVisibleColumns, getGanttVisibleColumns } from 'modules/database/store/selectors/resource/datasheet/calc';
+import {
+  getCurrentView,
+  getFieldMap,
+  getFieldMapIgnorePermission,
+  getVisibleColumns,
+  getCalendarVisibleColumns,
+  getOrgChartVisibleColumns,
+  getGanttVisibleColumns,
+} from 'modules/database/store/selectors/resource/datasheet/calc';
 import { cache, ICellValueData } from './cache';
 
 export { NO_CACHE } from './cache';
 
 export const CacheManager = {
   calcDsCache: (state: IReduxState, snapshot: ISnapshot) => {
-    const { datasheetId, recordMap, meta: { fieldMap } } = snapshot;
+    const {
+      datasheetId,
+      recordMap,
+      meta: { fieldMap },
+    } = snapshot;
     if (!datasheetId) {
       return;
     }
@@ -26,7 +35,7 @@ export const CacheManager = {
           recordId,
           datasheetId,
           withError: false,
-          ignoreFieldPermission: true
+          ignoreFieldPermission: true,
         });
         CacheManager.setCellCache(datasheetId, fieldId, recordId, cellCache);
       }
@@ -49,7 +58,7 @@ export const CacheManager = {
   },
   clear: () => {
     cache.clearCache();
-  }
+  },
 };
 
 if (!(global as any).process) {
@@ -71,7 +80,7 @@ export const clearComputeCache = (dstId?: string) => {
 /**
  * clear cached selectors
  */
-export const clearCachedSelectors = ():void => {
+export const clearCachedSelectors = (): void => {
   getCurrentView.clearCache();
   getFilterInfo.clearCache();
   getFieldMap.clearCache();

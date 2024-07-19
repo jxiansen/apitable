@@ -1,7 +1,7 @@
 import { Connection } from 'typeorm';
 import { RedisService } from '@apitable/nestjs-redis';
 
-export const clearDatabase = async(connection: Connection) => {
+export const clearDatabase = async (connection: Connection) => {
   const entities = connection.entityMetadatas;
 
   for (const entity of entities) {
@@ -11,7 +11,7 @@ export const clearDatabase = async(connection: Connection) => {
   }
 };
 
-export const clearRedis = async(redisService: RedisService) => {
+export const clearRedis = async (redisService: RedisService) => {
   const redis = redisService.getClient();
   await redis.flushdb();
 };

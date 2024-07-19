@@ -1,11 +1,12 @@
-
-
 import { IReduxState } from 'exports/store/interfaces';
 import { Store } from 'redux';
 import { FieldType, IField } from 'types';
 
 export class Field {
-  constructor(private readonly field: IField, private readonly store: Store<IReduxState>) {}
+  constructor(
+    private readonly field: IField,
+    private readonly store: Store<IReduxState>
+  ) {}
 
   get id(): string {
     return this.field.id;
@@ -31,5 +32,5 @@ export class Field {
  * The options for the field view object transformer function.
  */
 export interface IFieldVoTransformOptions {
-  state: IReduxState
+  state: IReduxState;
 }

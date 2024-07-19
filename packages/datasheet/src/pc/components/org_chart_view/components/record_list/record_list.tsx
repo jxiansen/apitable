@@ -1,5 +1,3 @@
-
-
 import { isEmpty } from 'lodash';
 import { useState, Fragment, FC, useCallback, useContext } from 'react';
 import { Typography, Button, ListDeprecate, IconButton, useThemeColors } from '@apitable/components';

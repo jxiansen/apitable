@@ -1,5 +1,3 @@
-
-
 import { Module } from '@nestjs/common';
 import { NodeRateLimiterMiddleware } from './node.rate.limiter.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,17 +10,8 @@ import { DeveloperModule } from '../../developer/developer.module';
  * @date 2020/7/24 4:39 PM
  */
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([
-      DatasheetRepository
-    ]),
-    DeveloperModule,
-  ],
-  providers: [
-    NodeRateLimiterMiddleware,
-  ],
-  exports: [
-    NodeRateLimiterMiddleware,
-  ]
+  imports: [TypeOrmModule.forFeature([DatasheetRepository]), DeveloperModule],
+  providers: [NodeRateLimiterMiddleware],
+  exports: [NodeRateLimiterMiddleware],
 })
 export class MiddlewareModule {}

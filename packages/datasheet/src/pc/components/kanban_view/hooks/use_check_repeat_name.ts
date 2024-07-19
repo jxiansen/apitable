@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react';
 import { Selectors, Strings, t } from '@apitable/core';
 

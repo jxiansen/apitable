@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import domtoimage from 'dom-to-image';
 import QRCode from 'qrcode';

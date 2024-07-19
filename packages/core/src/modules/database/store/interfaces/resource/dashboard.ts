@@ -1,5 +1,3 @@
-
-
 import { IWidget } from 'modules/database/store/interfaces/resource/widget';
 import * as ActionConstants from '../../../../shared/store/action_constants';
 import { ICollaborator, INodeMeta } from './datasheet';

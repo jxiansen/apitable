@@ -1,5 +1,3 @@
-
-
 import { KonvaEventObject } from 'konva/lib/Node';
 import { useCallback, useContext, useEffect } from 'react';
 import {
@@ -282,9 +280,9 @@ export const useGanttMouseEvent = ({ gridInstance, ganttInstance, pointPosition,
           columns: (view as IGanttViewProperty).columns.map((column) => {
             return column.fieldId === lastFieldId
               ? {
-                ...column,
-                width: finalColumnWidth,
-              }
+                  ...column,
+                  width: finalColumnWidth,
+                }
               : column;
           }),
         },

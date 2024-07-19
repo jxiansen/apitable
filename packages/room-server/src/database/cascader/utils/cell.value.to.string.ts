@@ -1,5 +1,3 @@
-
-
 import { Field, ICellValue, IRecord } from '@apitable/core';
 
 export interface IFieldMethods {

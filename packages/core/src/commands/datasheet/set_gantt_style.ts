@@ -1,5 +1,3 @@
-
-
 import { CollaCommandName } from 'commands/enum';
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { IJOTAction } from 'engine';
@@ -46,4 +44,3 @@ export const setGanttStyle: ICollaCommandDef<ISetGanttStyleOptions> = {
     };
   },
 };
-

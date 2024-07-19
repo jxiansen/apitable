@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { FieldType, ISegment, string2Segment, SegmentType } from '@apitable/core';
 import { useEnhanceTextClick } from 'pc/components/multi_grid/cell/hooks/use_enhance_text_click';

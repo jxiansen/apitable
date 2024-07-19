@@ -1,5 +1,3 @@
-
-
 import { DatasheetWidgetEntity } from '../entities/datasheet.widget.entity';
 import { EntityRepository, In, Repository } from 'typeorm';
 
@@ -9,8 +7,8 @@ export class DatasheetWidgetRepository extends Repository<DatasheetWidgetEntity>
     return await this.find({
       select: ['dstId'],
       where: [{ widgetId: In(widgetIds) }],
-    }).then(entities => {
-      return entities.map(entity => entity.dstId);
+    }).then((entities) => {
+      return entities.map((entity) => entity.dstId);
     });
   }
 

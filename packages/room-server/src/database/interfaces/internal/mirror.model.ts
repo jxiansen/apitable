@@ -1,5 +1,3 @@
-
-
 import { IMirrorSnapshot, INodeMeta, IServerMirror, ISourceDatasheetInfo } from '@apitable/core';
 
 export class MirrorInfo implements IServerMirror {

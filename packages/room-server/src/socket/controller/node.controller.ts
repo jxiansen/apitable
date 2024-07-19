@@ -1,5 +1,3 @@
-
-
 import { Body, Controller, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 import { RoomGateway } from 'socket/gateway/room.gateway';
 import { AuthGuard } from 'socket/guard/auth.guard';
@@ -13,7 +11,7 @@ import { RoomService } from 'socket/services/room/room.service';
 export class NodeController {
   constructor(
     private readonly roomGateway: RoomGateway,
-    private readonly roomService: RoomService
+    private readonly roomService: RoomService,
   ) {}
 
   @Post('/disableShare')

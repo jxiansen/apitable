@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { INodeRoleMap, t, Strings } from '@apitable/core';
 import { BaseModal } from 'pc/components/common';

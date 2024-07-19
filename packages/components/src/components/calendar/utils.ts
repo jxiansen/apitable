@@ -1,5 +1,3 @@
-
-
 import add from 'date-fns/add';
 import differenceInDays from 'date-fns/differenceInDays';
 import format from 'date-fns/format';
@@ -41,7 +39,8 @@ export const resizeFormat = (resizeData: IResizeFormat) => {
     if (isAfter(startDate, endDate)) {
       endDate = startDate;
     }
-  } else { // update start date
+  } else {
+    // update start date
     const calcStartDate = subDays(startDate, day);
     // Normal record left stretching is not allowed to be greater than the end date
     if (!isWarning && isAfter(calcStartDate, endDate)) {
@@ -97,14 +96,14 @@ export const getPanelData = (step: number) => {
   const days = daysInMonth(year, month + 1);
   const preDays = daysInMonth(year, month);
   const firstDay = firstDayOfMonth(year, month);
-  const data: { day: number, month: number }[] = [];
+  const data: { day: number; month: number }[] = [];
   let i = 1;
   const count = COUNT + (days + firstDay - 1 > COUNT ? 7 : 0);
   while (count >= i) {
     if (firstDay >= i + 1) {
       data.push({
         day: preDays - firstDay + i + 1,
-        month: month - 1
+        month: month - 1,
       });
     } else if (days < i + 1 - firstDay) {
       data.push({
@@ -128,8 +127,7 @@ export const getPanelData = (step: number) => {
 
 export const isMouseEvent = (event: MouseEvent | TouchEvent): event is MouseEvent => {
   return Boolean(
-    ((event as MouseEvent).clientX || (event as MouseEvent).clientX === 0) &&
-    ((event as MouseEvent).clientY || (event as MouseEvent).clientY === 0),
+    ((event as MouseEvent).clientX || (event as MouseEvent).clientX === 0) && ((event as MouseEvent).clientY || (event as MouseEvent).clientY === 0)
   );
 };
 
@@ -145,7 +143,7 @@ export const getLevels = ({ week, year, tasks, resizeMsg }: ILevel) => {
   let updateTasks = tasks;
   if (resizeMsg) {
     const { id, day, direction } = resizeMsg;
-    updateTasks = tasks.map(task => {
+    updateTasks = tasks.map((task) => {
       if (id === task.id) {
         const { startDate, endDate } = task;
         const formatData = resizeFormat({ startDate, endDate, day, direction });
@@ -158,40 +156,41 @@ export const getLevels = ({ week, year, tasks, resizeMsg }: ILevel) => {
     });
   }
 
-  const rowTasks = updateTasks.filter(task =>
-    (!isAfter(date2Day(task.startDate || task.endDate), endDate) && !isAfter(startDate, task.endDate || task.startDate)) ||
-    // The start date is greater than the end date. Exception task processing
-    (isAfter(task.startDate, task.endDate) && !isBefore(task.startDate, startDate) && !isBefore(endDate, task.startDate))
-  ).map(task => {
-    const isWarning = isAfter(task.startDate, task.endDate);
-    const taskStartDate = date2Day(task.startDate || task.endDate);
-    const taskEndDate = date2Day(task.endDate || task.startDate);
-    const currMaxStartDay = date2Day(max([startDate, taskStartDate]));
-    const currMinLastDay = date2Day(min([endDate, taskEndDate]));
-    const len = isWarning ? 1 : (differenceInDays(currMinLastDay, currMaxStartDay) + 1);
-    const diffStart = differenceInDays(taskStartDate, startDate);
-    const diffEnd = differenceInDays(endDate, taskEndDate);
-    const left = diffStart < 0 ? 0 : diffStart;
-    return {
-      task,
-      len,
-      left: left + 1,
-      right: left + len,
-      isStart: diffStart >= 0 || isWarning,
-      isEmptyStart: !task.startDate,
-      isEnd: diffEnd >= 0 || isWarning,
-      isEmptyEnd: !task.endDate,
-      warn: isWarning,
-    };
-  });
+  const rowTasks = updateTasks
+    .filter(
+      (task) =>
+        (!isAfter(date2Day(task.startDate || task.endDate), endDate) && !isAfter(startDate, task.endDate || task.startDate)) ||
+        // The start date is greater than the end date. Exception task processing
+        (isAfter(task.startDate, task.endDate) && !isBefore(task.startDate, startDate) && !isBefore(endDate, task.startDate))
+    )
+    .map((task) => {
+      const isWarning = isAfter(task.startDate, task.endDate);
+      const taskStartDate = date2Day(task.startDate || task.endDate);
+      const taskEndDate = date2Day(task.endDate || task.startDate);
+      const currMaxStartDay = date2Day(max([startDate, taskStartDate]));
+      const currMinLastDay = date2Day(min([endDate, taskEndDate]));
+      const len = isWarning ? 1 : differenceInDays(currMinLastDay, currMaxStartDay) + 1;
+      const diffStart = differenceInDays(taskStartDate, startDate);
+      const diffEnd = differenceInDays(endDate, taskEndDate);
+      const left = diffStart < 0 ? 0 : diffStart;
+      return {
+        task,
+        len,
+        left: left + 1,
+        right: left + len,
+        isStart: diffStart >= 0 || isWarning,
+        isEmptyStart: !task.startDate,
+        isEnd: diffEnd >= 0 || isWarning,
+        isEmptyEnd: !task.endDate,
+        warn: isWarning,
+      };
+    });
   const levels: ILevelResult[][] = [];
   let j: number;
   for (let i = 0; i < rowTasks.length; i++) {
     const task = rowTasks[i]!;
     for (j = 0; j < levels.length; j++) {
-      const isOver = levels[j]!.some(seg =>
-        seg.left <= task.right && seg.right >= task.left
-      );
+      const isOver = levels[j]!.some((seg) => seg.left <= task.right && seg.right >= task.left);
       if (!isOver) {
         break;
       }
@@ -201,7 +200,7 @@ export const getLevels = ({ week, year, tasks, resizeMsg }: ILevel) => {
   return levels;
 };
 
-export const formatDayValue = (month: number, day: number, lang?: 'en' | 'zh',) => {
+export const formatDayValue = (month: number, day: number, lang?: 'en' | 'zh') => {
   if (!lang) {
     lang = getLanguage().split('-')[0];
   }

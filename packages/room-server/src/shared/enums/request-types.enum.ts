@@ -1,5 +1,3 @@
-
-
 export enum RequestTypes {
   /**
    * Build long connection channels

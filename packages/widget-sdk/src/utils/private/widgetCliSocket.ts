@@ -1,11 +1,9 @@
-
-
 import io from 'socket.io-client';
 
 const SOCKET_PATH_DEFAULT = 'widget-cli:sockjs-node';
 
 export enum WidgetCliSocketType {
-  LiveReload = 'liveReload'
+  LiveReload = 'liveReload',
 }
 
 type IWidgetCLiSocketResponseData = null;
@@ -33,10 +31,12 @@ class WidgetCliSocket implements IWidgetCliSocket {
     this.socket = io(origin, { path: `/${SOCKET_PATH_DEFAULT}` }); // Establishing links
     this.socket.loading = true;
     this.socket.on(SOCKET_PATH_DEFAULT, (res: IWidgetCLiSocketResponse) => {
-      this.eventMap.get(res.type)?.forEach((cb: ICallBack) => cb({
-        success: true,
-        data: res?.data
-      }));
+      this.eventMap.get(res.type)?.forEach((cb: ICallBack) =>
+        cb({
+          success: true,
+          data: res?.data,
+        })
+      );
     });
     // connection successful
     this.socket.on('connect', () => {
@@ -44,10 +44,12 @@ class WidgetCliSocket implements IWidgetCliSocket {
     });
     // connection failure
     this.socket.on('disconnect', () => {
-      [...this.eventMap.values()].flat(1).forEach((cb: ICallBack) => cb({
-        success: false,
-        error: 'disconnect'
-      }));
+      [...this.eventMap.values()].flat(1).forEach((cb: ICallBack) =>
+        cb({
+          success: false,
+          error: 'disconnect',
+        })
+      );
     });
   }
 

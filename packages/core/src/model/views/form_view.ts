@@ -1,5 +1,3 @@
-
-
 import { View } from './views';
 import { Strings, t } from '../../exports/i18n';
 import { Settings } from 'config';

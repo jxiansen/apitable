@@ -1,5 +1,3 @@
-
-
 import { forwardRef, Module } from '@nestjs/common';
 import { NodeModule } from 'node/node.module';
 import { ResourceModule } from 'database/resource/resource.module';
@@ -14,7 +12,7 @@ import { HttpConfigService } from 'shared/services/config/http.config.service';
       useClass: HttpConfigService,
     }),
     ResourceModule,
-    forwardRef(()=>NodeModule),
+    forwardRef(() => NodeModule),
   ],
   controllers: [AttachmentController],
   providers: [AttachmentService],

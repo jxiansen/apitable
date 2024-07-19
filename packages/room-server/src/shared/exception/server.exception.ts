@@ -1,5 +1,3 @@
-
-
 import { IBaseException } from './base.exception';
 import { HttpStatus } from '@nestjs/common';
 

@@ -16,7 +16,7 @@ import {
   ResourceType,
   Selectors,
   Strings,
-  t
+  t,
 } from '@apitable/core';
 import { AddOutlined } from '@apitable/icons';
 import { AutomationConstant } from 'pc/components/automation/config';
@@ -27,11 +27,9 @@ import { useAppSelector } from 'pc/store/react-redux';
 export const useColumnInfo: (resourceId: string) => {
   viewId: any;
   exitFieldNames: string[];
-  columnCount: any
+  columnCount: any;
 } = (resourceId: string) => {
-
   const data = useAppSelector((state) => {
-
     const fieldMap = Selectors.getFieldMap(state, resourceId);
     const datasheet = Selectors.getDatasheet(state, resourceId);
     const views = datasheet?.snapshot.meta.views;
@@ -48,11 +46,17 @@ export const useColumnInfo: (resourceId: string) => {
   return data;
 };
 
-export const handleCreateNewTrigger = (resourceId: string, datasheetId: string, triggerId: string, columnInfo: {
-  viewId: any;
-  exitFieldNames: string[];
-  columnCount: any
-}, onSubmit : (value: string)=> void) => {
+export const handleCreateNewTrigger = (
+  resourceId: string,
+  datasheetId: string,
+  triggerId: string,
+  columnInfo: {
+    viewId: any;
+    exitFieldNames: string[];
+    columnCount: any;
+  },
+  onSubmit: (value: string) => void,
+) => {
   const { viewId, exitFieldNames, columnCount } = columnInfo;
 
   const generateField = (fieldId: string, name: string): IButtonField => {
@@ -68,9 +72,9 @@ export const handleCreateNewTrigger = (resourceId: string, datasheetId: string, 
         },
         action: {
           type: ButtonActionType.TriggerAutomation,
-          automation:  {
+          automation: {
             triggerId,
-            automationId: resourceId
+            automationId: resourceId,
           },
         },
       },
@@ -89,16 +93,16 @@ export const handleCreateNewTrigger = (resourceId: string, datasheetId: string, 
         data: generateField(startFieldId, t(Strings.button)),
         viewId,
         hiddenColumn: false,
-        forceColumnVisible:  true,
+        forceColumnVisible: true,
         index: columnCount,
       },
     ],
   };
   try {
-    const result = resourceService.instance!.commandManager.execute(d );
-    if(result.result === ExecuteResult.Success) {
+    const result = resourceService.instance!.commandManager.execute(d);
+    if (result.result === ExecuteResult.Success) {
       onSubmit(startFieldId);
-    }else {
+    } else {
       message.error('Error');
     }
   } catch (e) {
@@ -110,22 +114,26 @@ const StyledBox = styled(Box)`
   cursor: pointer;
 `;
 
-export const CreateNewTrigger: FC<{resourceId: string, datasheetId: string, triggerId: string, onSubmit: (id: string) => void}> = ({ resourceId, datasheetId, triggerId, onSubmit }) => {
-  const columnInfo= useColumnInfo(datasheetId);
+export const CreateNewTrigger: FC<{ resourceId: string; datasheetId: string; triggerId: string; onSubmit: (id: string) => void }> = ({
+  resourceId,
+  datasheetId,
+  triggerId,
+  onSubmit,
+}) => {
+  const columnInfo = useColumnInfo(datasheetId);
   const colors = useCssColors();
   return (
     <StyledBox
       display={'flex'}
       alignItems={'center'}
       justifyContent={'flex-start'}
-      onClick={()=> handleCreateNewTrigger(resourceId, datasheetId, triggerId, columnInfo, onSubmit)}>
+      onClick={() => handleCreateNewTrigger(resourceId, datasheetId, triggerId, columnInfo, onSubmit)}
+    >
       <Box marginRight={'4px'} display={'flex'} alignItems={'center'}>
         <AddOutlined color={colors.textBrandDefault} size={'small'} />
       </Box>
-      <Typography color={colors.textBrandDefault} variant={'body4'} >
-        {
-          t(Strings.create_new_button_field)
-        }
+      <Typography color={colors.textBrandDefault} variant={'body4'}>
+        {t(Strings.create_new_button_field)}
       </Typography>
     </StyledBox>
   );

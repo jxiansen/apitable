@@ -1,5 +1,3 @@
-
-
 import Image from 'next/image';
 import * as React from 'react';
 import { ConfigConstant, INode, Strings, t, ThemeName } from '@apitable/core';

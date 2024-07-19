@@ -1,5 +1,3 @@
-
-
 import { IBaseException } from './base.exception';
 
 /**
@@ -17,7 +15,10 @@ export class PermissionException implements IBaseException {
   static readonly OPERATION_DENIED = new PermissionException(602, 'Operation denied');
   // Exception Type =================================================================
 
-  private constructor(public readonly code: number, public readonly message: string) {
+  private constructor(
+    public readonly code: number,
+    public readonly message: string,
+  ) {
     PermissionException.AllValues[message] = this;
   }
 

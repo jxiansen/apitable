@@ -1,5 +1,3 @@
-
-
 import { Modal as AntdModal } from 'antd';
 import React from 'react';
 import { ThemeProvider } from '@apitable/components';

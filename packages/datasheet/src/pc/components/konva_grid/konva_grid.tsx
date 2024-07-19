@@ -1,5 +1,3 @@
-
-
 import { isEmpty } from 'lodash';
 import dynamic from 'next/dynamic';
 import { FC, memo, useContext, useEffect } from 'react';

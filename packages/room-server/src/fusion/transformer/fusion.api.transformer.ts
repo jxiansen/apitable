@@ -1,5 +1,3 @@
-
-
 import {
   ISetRecordOptions,
   ApiTipConstant,

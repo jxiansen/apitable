@@ -1,5 +1,3 @@
-
-
 import { useEffect, useRef, useCallback, useMemo } from 'react';
 // @ts-ignore
 import { Scroller } from 'scroller';

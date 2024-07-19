@@ -1,5 +1,3 @@
-
-
 import { hexToRGB } from '../color_utils';
 describe('hex to rgba', () => {
   test('should right to convert', function () {

@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { ApiException } from '../../../shared/exception';
 import { ApiAuthGuard } from './api.auth.guard';

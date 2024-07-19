@@ -1,5 +1,3 @@
-
-
 import dayjs from 'dayjs';
 import { getDayjs } from '../functions/date_time';
 import { evaluate, mergeContext } from './mock_state';
@@ -14,8 +12,8 @@ describe('DateTime function test', () => {
       evaluate(
         'DAY({b})',
         // tslint:disable-next-line: max-line-length
-        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] })
+      )
     ).toEqual(3);
     expect(evaluate('DAY({b})', mergeContext({ a: 0, b: '2012年2月3日', c: 1591414562369, d: ['opt1', 'opt2'] }))).toEqual(3);
     // ignore redundant parameters
@@ -31,8 +29,8 @@ describe('DateTime function test', () => {
       evaluate(
         'YEAR({b})',
         // tslint:disable-next-line: max-line-length
-        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] })
+      )
     ).toEqual(2012);
     // requires at least one parameter
     expect(() => evaluate('YEAR()', mergeContext({ a: 0, b: '456', c: 1591414562369, d: ['opt1', 'opt2'] }))).toThrow(ParamsCountError);
@@ -45,8 +43,8 @@ describe('DateTime function test', () => {
       evaluate(
         'MONTH({b})',
         // tslint:disable-next-line: max-line-length
-        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] })
+      )
     ).toEqual(2);
     // requires at least one parameter
     expect(() => evaluate('MONTH()', mergeContext({ a: 0, b: '456', c: 1591414562369, d: ['opt1', 'opt2'] }))).toThrow(ParamsCountError);
@@ -59,8 +57,8 @@ describe('DateTime function test', () => {
       evaluate(
         'HOUR({b})',
         // tslint:disable-next-line: max-line-length
-        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] })
+      )
     ).toEqual(23);
     // requires at least one parameter
     expect(() => evaluate('HOUR()', mergeContext({ a: 0, b: '456', c: 1591414562369, d: ['opt1', 'opt2'] }))).toThrow(ParamsCountError);
@@ -73,8 +71,8 @@ describe('DateTime function test', () => {
       evaluate(
         'MINUTE({b})',
         // tslint:disable-next-line: max-line-length
-        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] })
+      )
     ).toEqual(22);
     // requires at least one parameter
     expect(() => evaluate('MINUTE()', mergeContext({ a: 0, b: '456', c: 1591414562369, d: ['opt1', 'opt2'] }))).toThrow(ParamsCountError);
@@ -87,8 +85,8 @@ describe('DateTime function test', () => {
       evaluate(
         'SECOND({b})',
         // tslint:disable-next-line: max-line-length
-        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '2012/2/3 23:22:44', c: 1591414562369, d: ['opt1', 'opt2'] })
+      )
     ).toEqual(44);
     // requires at least one parameter
     expect(() => evaluate('SECOND()', mergeContext({ a: 0, b: '456', c: 1591414562369, d: ['opt1', 'opt2'] }))).toThrow(ParamsCountError);
@@ -107,43 +105,43 @@ describe('DateTime function test', () => {
 
   it('DATEADD', () => {
     expect(evaluate('DATEADD({c}, 1, "years")', mergeContext({ c: new Date('2020/6/6 00:00:00').getTime() }))).toEqual(
-      new Date('2021/6/6 00:00:00').getTime(),
+      new Date('2021/6/6 00:00:00').getTime()
     );
 
     expect(evaluate('DATEADD({c}, 1.5, "years")', mergeContext({ c: new Date('2020/6/6 00:00:00').getTime() }))).toEqual(
-      new Date('2021/6/6 00:00:00').getTime(),
+      new Date('2021/6/6 00:00:00').getTime()
     );
 
     expect(evaluate('DATEADD({c}, 3, "quarters")', mergeContext({ c: new Date('2020/6/6 00:00:00').getTime() }))).toEqual(
-      new Date('2021/3/6 00:00:00').getTime(),
+      new Date('2021/3/6 00:00:00').getTime()
     );
 
     expect(evaluate('DATEADD({c}, 3, "months")', mergeContext({ c: new Date('2020/6/6 00:00:00').getTime() }))).toEqual(
-      new Date('2020/9/6 00:00:00').getTime(),
+      new Date('2020/9/6 00:00:00').getTime()
     );
 
     expect(evaluate('DATEADD({c}, 3, "weeks")', mergeContext({ c: new Date('2020/6/6 00:00:00').getTime() }))).toEqual(
-      new Date('2020/6/27 00:00:00').getTime(),
+      new Date('2020/6/27 00:00:00').getTime()
     );
 
     expect(evaluate('DATEADD({c}, 100, "days")', mergeContext({ c: new Date('2020/6/6 00:00:00').getTime() }))).toEqual(
-      new Date('2020/9/14 00:00:00').getTime(),
+      new Date('2020/9/14 00:00:00').getTime()
     );
 
     expect(evaluate('DATEADD({c}, 100, "hours")', mergeContext({ c: new Date('2020/6/6 00:00:00').getTime() }))).toEqual(
-      new Date('2020/6/10 04:00:00').getTime(),
+      new Date('2020/6/10 04:00:00').getTime()
     );
 
     expect(evaluate('DATEADD({c}, 100, "minutes")', mergeContext({ c: new Date('2020/6/6 00:00:00').getTime() }))).toEqual(
-      new Date('2020/6/6 01:40:00').getTime(),
+      new Date('2020/6/6 01:40:00').getTime()
     );
 
     expect(evaluate('DATEADD({c}, 100, "seconds")', mergeContext({ c: new Date('2020/6/6 00:00:00').getTime() }))).toEqual(
-      new Date('2020/6/6 00:01:40').getTime(),
+      new Date('2020/6/6 00:01:40').getTime()
     );
 
     expect(evaluate('DATEADD({c}, 100000, {b})', mergeContext({ b: 'milliseconds', c: new Date('2020/6/6 00:00:00').getTime() }))).toEqual(
-      new Date('2020/6/6 00:01:40').getTime(),
+      new Date('2020/6/6 00:01:40').getTime()
     );
 
     // requires at least 3 parameters
@@ -156,64 +154,64 @@ describe('DateTime function test', () => {
     expect(
       evaluate(
         'DATETIME_DIFF({c}, {e}, "y")',
-        mergeContext({ c: new Date('2020/6/6 00:00:00').getTime(), e: new Date('2022/6/6 00:00:00').getTime() }),
-      ),
+        mergeContext({ c: new Date('2020/6/6 00:00:00').getTime(), e: new Date('2022/6/6 00:00:00').getTime() })
+      )
     ).toEqual(-2);
 
     expect(
       evaluate(
         'DATETIME_DIFF({c}, {e}, "Q")',
-        mergeContext({ c: new Date('2020/12/5 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() }),
-      ),
+        mergeContext({ c: new Date('2020/12/5 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() })
+      )
     ).toEqual(1.988888888888889);
 
     expect(
       evaluate(
         'DATETIME_DIFF({c}, {e}, "M")',
-        mergeContext({ c: new Date('2020/6/6 00:00:00').getTime(), e: new Date('2020/9/6 00:00:00').getTime() }),
-      ),
+        mergeContext({ c: new Date('2020/6/6 00:00:00').getTime(), e: new Date('2020/9/6 00:00:00').getTime() })
+      )
     ).toEqual(-3);
 
     expect(
       evaluate(
         'DATETIME_DIFF({c}, {e}, "w")',
-        mergeContext({ c: new Date('2020/12/5 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() }),
-      ),
+        mergeContext({ c: new Date('2020/12/5 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() })
+      )
     ).toEqual(26);
 
     expect(
       evaluate(
         'DATETIME_DIFF({c}, {e}, "d")',
-        mergeContext({ c: new Date('2020/12/6 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() }),
-      ),
+        mergeContext({ c: new Date('2020/12/6 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() })
+      )
     ).toEqual(183);
 
     expect(
       evaluate(
         'DATETIME_DIFF({c}, {e}, "h")',
-        mergeContext({ c: new Date('2020/12/6 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() }),
-      ),
+        mergeContext({ c: new Date('2020/12/6 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() })
+      )
     ).toEqual(4392);
 
     expect(
       evaluate(
         'DATETIME_DIFF({c}, {e}, "m")',
-        mergeContext({ c: new Date('2020/12/6 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() }),
-      ),
+        mergeContext({ c: new Date('2020/12/6 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() })
+      )
     ).toEqual(263520);
 
     expect(
       evaluate(
         'DATETIME_DIFF({c}, {e}, "s")',
-        mergeContext({ c: new Date('2020/12/6 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() }),
-      ),
+        mergeContext({ c: new Date('2020/12/6 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() })
+      )
     ).toEqual(15811200);
 
     expect(
       evaluate(
         'DATETIME_DIFF({c}, {e}, "ms")',
-        mergeContext({ c: new Date('2020/12/6 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() }),
-      ),
+        mergeContext({ c: new Date('2020/12/6 00:00:00').getTime(), e: new Date('2020/6/6 00:00:00').getTime() })
+      )
     ).toEqual(15811200000);
 
     // requires at least 3 parameters
@@ -270,15 +268,15 @@ describe('DateTime function test', () => {
     expect(
       evaluate(
         'FROMNOW({c}, "M")',
-        mergeContext({ a: 0, b: '456', c: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000 + 1).getTime(), d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '456', c: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000 + 1).getTime(), d: ['opt1', 'opt2'] })
+      )
     ).toEqual(1);
 
     expect(() =>
       evaluate(
         'FROMNOW({c})',
-        mergeContext({ a: 0, b: '456', c: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000 + 1).getTime(), d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '456', c: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000 + 1).getTime(), d: ['opt1', 'opt2'] })
+      )
     ).toThrow(ParamsCountError);
   });
 
@@ -291,108 +289,108 @@ describe('DateTime function test', () => {
     expect(
       evaluate(
         'TONOW({c}, "M")',
-        mergeContext({ a: 0, b: '456', c: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000 + 1).getTime(), d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '456', c: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000 + 1).getTime(), d: ['opt1', 'opt2'] })
+      )
     ).toEqual(1);
 
     expect(() =>
-      evaluate('TONOW({c})', mergeContext({ a: 0, b: '456', c: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000 + 1).getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('TONOW({c})', mergeContext({ a: 0, b: '456', c: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000 + 1).getTime(), d: ['opt1', 'opt2'] }))
     ).toThrow(ParamsCountError);
   });
 
   it('IS_BEFORE', () => {
     expect(
-      evaluate('IS_BEFORE({c}, NOW())', mergeContext({ a: 0, b: '456', c: new Date('2100/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('IS_BEFORE({c}, NOW())', mergeContext({ a: 0, b: '456', c: new Date('2100/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(false);
 
     expect(
-      evaluate('IS_BEFORE({c}, NOW())', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('IS_BEFORE({c}, NOW())', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(true);
 
     expect(() =>
-      evaluate('IS_BEFORE({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('IS_BEFORE({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toThrow(ParamsCountError);
   });
 
   it('IS_AFTER', () => {
     expect(
-      evaluate('IS_AFTER({c}, NOW())', mergeContext({ a: 0, b: '456', c: new Date('2100/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('IS_AFTER({c}, NOW())', mergeContext({ a: 0, b: '456', c: new Date('2100/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(true);
 
     expect(
-      evaluate('IS_AFTER({c}, NOW())', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('IS_AFTER({c}, NOW())', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(false);
 
     expect(() =>
-      evaluate('IS_AFTER({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('IS_AFTER({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toThrow(ParamsCountError);
   });
 
   it('WORKDAY', () => {
     expect(evaluate('WORKDAY({c}, 100)', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))).toEqual(
-      1603382400000,
+      1603382400000
     );
 
     expect(
-      evaluate('WORKDAY({c}, 100, "2020-07-13")', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('WORKDAY({c}, 100, "2020-07-13")', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(1603641600000);
 
     expect(
       evaluate(
         'WORKDAY({c}, 100, "2020-07-13, 2020-07-14")',
-        mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })
+      )
     ).toEqual(1603728000000);
 
     expect(
-      evaluate('WORKDAY({c}, 1,"2021-10-15")', mergeContext({ a: 0, b: '456', c: new Date('2021/10/15 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('WORKDAY({c}, 1,"2021-10-15")', mergeContext({ a: 0, b: '456', c: new Date('2021/10/15 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(1634486400000);
 
     expect(
-      evaluate('WORKDAY({c}, -30)', mergeContext({ a: 0, b: '456', c: new Date('2021/10/15 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('WORKDAY({c}, -30)', mergeContext({ a: 0, b: '456', c: new Date('2021/10/15 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(1630598400000);
 
     expect(
-      evaluate('WORKDAY({c}, -30, "2021-10-1")', mergeContext({ a: 0, b: '456', c: new Date('2021/10/15 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('WORKDAY({c}, -30, "2021-10-1")', mergeContext({ a: 0, b: '456', c: new Date('2021/10/15 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(1630512000000);
 
     expect(
       evaluate(
         'WORKDAY({c}, -30, "2021-10-1, 2021-9-2")',
-        mergeContext({ a: 0, b: '456', c: new Date('2021/10/15 00:00:00').getTime(), d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '456', c: new Date('2021/10/15 00:00:00').getTime(), d: ['opt1', 'opt2'] })
+      )
     ).toEqual(1630425600000);
 
     expect(() =>
-      evaluate('WORKDAY({c}, 1000000000)', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('WORKDAY({c}, 1000000000)', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toThrow('NaN');
 
     expect(() =>
-      evaluate('WORKDAY({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('WORKDAY({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toThrow(ParamsCountError);
   });
 
   it('WORKDAY_DIFF', () => {
     expect(
-      evaluate('WORKDAY_DIFF({c}, "2020-10-18")', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('WORKDAY_DIFF({c}, "2020-10-18")', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(95);
 
     expect(
-      evaluate('WORKDAY_DIFF({c}, "2023-02-28")', mergeContext({ a: 0, b: '456', c: new Date('2023/2/21 10:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('WORKDAY_DIFF({c}, "2023-02-28")', mergeContext({ a: 0, b: '456', c: new Date('2023/2/21 10:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(6);
 
     expect(
       evaluate(
         'WORKDAY_DIFF({c}, "2020-10-18", "2020-7-13")',
-        mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })
+      )
     ).toEqual(94);
 
     expect(
       evaluate(
         'WORKDAY_DIFF({c}, "2020-10-18", "2020-7-13, 2020-7-14")',
-        mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })
+      )
     ).toEqual(93);
 
     // Because you need to throw an error here, you need to catch the error and verify it through catch
@@ -405,32 +403,32 @@ describe('DateTime function test', () => {
     expect(
       evaluate(
         'WORKDAY_DIFF({c}, "1636963995466")',
-        mergeContext({ a: 0, b: '456', c: new Date('2021/11/15 00:00:00').getTime(), d: ['opt1', 'opt2'] }),
-      ),
+        mergeContext({ a: 0, b: '456', c: new Date('2021/11/15 00:00:00').getTime(), d: ['opt1', 'opt2'] })
+      )
     ).toEqual(1);
 
     expect(() =>
-      evaluate('WORKDAY_DIFF({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('WORKDAY_DIFF({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/12/6 00:00:00').getTime(), d: ['opt1', 'opt2'] }))
     ).toThrow(ParamsCountError);
   });
 
   it('TIMESTR', () => {
     expect(evaluate('TIMESTR({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 18:30:15').getTime(), d: ['opt1', 'opt2'] }))).toEqual(
-      '18:30:15',
+      '18:30:15'
     );
 
     expect(() => evaluate('TIMESTR()', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 18:30:15').getTime(), d: ['opt1', 'opt2'] }))).toThrow(
-      ParamsCountError,
+      ParamsCountError
     );
   });
 
   it('DATESTR', () => {
     expect(evaluate('DATESTR({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 18:30:15').getTime(), d: ['opt1', 'opt2'] }))).toEqual(
-      '2020-06-06',
+      '2020-06-06'
     );
 
     expect(() => evaluate('DATESTR()', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 18:30:15').getTime(), d: ['opt1', 'opt2'] }))).toThrow(
-      ParamsCountError,
+      ParamsCountError
     );
   });
 
@@ -442,25 +440,25 @@ describe('DateTime function test', () => {
     expect(evaluate('WEEKNUM({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/6/7 18:30:15').getTime(), d: ['opt1', 'opt2'] }))).toEqual(24);
 
     expect(
-      evaluate('WEEKNUM({c}, "Monday")', mergeContext({ a: 0, b: '456', c: new Date('2020/6/7 18:30:15').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('WEEKNUM({c}, "Monday")', mergeContext({ a: 0, b: '456', c: new Date('2020/6/7 18:30:15').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(23);
 
     expect(() => evaluate('WEEKNUM()', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 18:30:15').getTime(), d: ['opt1', 'opt2'] }))).toThrow(
-      ParamsCountError,
+      ParamsCountError
     );
   });
 
   it('IS_SAME', () => {
     expect(
-      evaluate('IS_SAME({c}, "2020/6/6")', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 18:30:15').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('IS_SAME({c}, "2020/6/6")', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 18:30:15').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(false);
 
     expect(
-      evaluate('IS_SAME({c}, "2020/6/6", "d")', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 18:30:15').getTime(), d: ['opt1', 'opt2'] })),
+      evaluate('IS_SAME({c}, "2020/6/6", "d")', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 18:30:15').getTime(), d: ['opt1', 'opt2'] }))
     ).toEqual(true);
 
     expect(() => evaluate('IS_SAME({c})', mergeContext({ a: 0, b: '456', c: new Date('2020/6/6 18:30:15').getTime(), d: ['opt1', 'opt2'] }))).toThrow(
-      ParamsCountError,
+      ParamsCountError
     );
   });
 

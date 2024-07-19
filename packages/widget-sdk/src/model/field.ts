@@ -1,9 +1,17 @@
-
-
 import {
-  BasicValueType, Field as FieldCore, getFieldResultByStatType, FieldType as CoreFieldType, 
-  ICurrencyFieldProperty, IDateTimeFieldProperty, IField, INumberFieldProperty,
-  INumberFormatFieldProperty, LookUpField, Selectors, StatType, getFieldTypeString,
+  BasicValueType,
+  Field as FieldCore,
+  getFieldResultByStatType,
+  FieldType as CoreFieldType,
+  ICurrencyFieldProperty,
+  IDateTimeFieldProperty,
+  IField,
+  INumberFieldProperty,
+  INumberFormatFieldProperty,
+  LookUpField,
+  Selectors,
+  StatType,
+  getFieldTypeString,
   IEffectOption,
   ICollaCommandExecuteResult,
   CollaCommandName,
@@ -11,7 +19,7 @@ import {
   IUpdateOpenMagicLinkFieldProperty,
   Conversion,
   Strings,
-  t
+  t,
 } from 'core';
 import { cmdExecute } from 'message/utils';
 import { IWidgetContext, IFormatType, FieldType, IPermissionResult, IPropertyInView } from 'interface';
@@ -22,10 +30,10 @@ import { getSnapshot } from 'store';
 
 /**
  * @hidden
- * Enterprise Wecom compatibility judgment, 
+ * Enterprise Wecom compatibility judgment,
  * three-party applications do not support the display of member fields.
- * @param type 
- * @returns 
+ * @param type
+ * @returns
  */
 export const showField = (type: FieldType) => {
   if (!window['_isSocialWecom']) {
@@ -51,9 +59,9 @@ const MAX_DESC = 200;
 
 /**
  * Number datasheet column operations and information.
- * 
- * To manipulate the number datasheet columns, 
- * you can use {@link useField} (single column information), 
+ *
+ * To manipulate the number datasheet columns,
+ * you can use {@link useField} (single column information),
  * {@link useFields} (multiple column information).
  */
 export class Field {
@@ -95,7 +103,7 @@ export class Field {
   }
   /**
    * The name of the field. Can be watched.
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -109,7 +117,7 @@ export class Field {
   }
   /**
    * The type of the field. Can be watched. {@link FieldType}
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -126,7 +134,7 @@ export class Field {
    * The description of the field, if it has one. Can be watched.
    *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myField.description);
@@ -138,12 +146,12 @@ export class Field {
   }
 
   /**
-   * 
-   * The configuration property of the field. 
-   * The structure of the field's property depend on the field's type. 
+   *
+   * The configuration property of the field.
+   * The structure of the field's property depend on the field's type.
    * null if the field has no property. Can be watched.
    * Refer to {@link FieldType}.
-   * 
+   *
    * @return {@link FieldType}
    *
    * #### Example
@@ -161,11 +169,11 @@ export class Field {
   }
 
   /**
-   * true if this field is computed, false otherwise. 
+   * true if this field is computed, false otherwise.
    * A field is "computed" if it's value is not set by user input (e.g. autoNumber, magic lookup,  magic formula, etc.). Can be watched
    *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(mySingleLineTextField.isComputed);
@@ -179,9 +187,9 @@ export class Field {
   }
 
   /**
-   * TODO: Leave for compatibility, subsequent deletion 
+   * TODO: Leave for compatibility, subsequent deletion
    * @hidden
-   * true if this field is its parent table's primary field, false otherwise. 
+   * true if this field is its parent table's primary field, false otherwise.
    * Should never change because the primary field of a datasheet cannot change.
    * @returns
    */
@@ -190,7 +198,7 @@ export class Field {
   }
 
   /**
-   * true if this field is its parent table's primary field, false otherwise. 
+   * true if this field is its parent table's primary field, false otherwise.
    * Should never change because the primary field of a datasheet cannot change.
    * @returns
    */
@@ -209,10 +217,10 @@ export class Field {
 
   /**
    * Get the current view feature properties, such as whether the field is hidden in a view
-   * 
+   *
    * @param viewId the view ID
    * @return
-   * 
+   *
    * #### Example
    * ``` js
    * const propertyInView = field.getPropertyInView('viwxxxxx');
@@ -223,7 +231,7 @@ export class Field {
     const state = this.wCtx.widgetStore.getState();
     const snapshot = getSnapshot(state, this.datasheetId);
     const view = snapshot && Selectors.getViewById(snapshot, viewId);
-    const viewField = view?.columns.find(column => column.fieldId === this.id);
+    const viewField = view?.columns.find((column) => column.fieldId === this.id);
     if (!viewField) {
       return null;
     }
@@ -236,10 +244,10 @@ export class Field {
    * Updates the description for this field.
    *
    * Throws an error if the user does not have permission to update the field, or if an invalid description is provided.
-   * 
+   *
    * @param description new description for the field
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    *  field.updateDescription('this is a new description')
@@ -250,16 +258,19 @@ export class Field {
     if (description && description.length > MAX_DESC) {
       throw new Error('Description exceeds the maximum length limit of 200');
     }
-    return new Promise(async(resolve) => {
-      const result: ICollaCommandExecuteResult<any> = await cmdExecute({
-        cmd: CollaCommandName.SetFieldAttr,
-        datasheetId: this.datasheetId,
-        fieldId: this.fieldData.id,
-        data: {
-          ...this.fieldData,
-          desc
-        }
-      }, this.wCtx.id);
+    return new Promise(async (resolve) => {
+      const result: ICollaCommandExecuteResult<any> = await cmdExecute(
+        {
+          cmd: CollaCommandName.SetFieldAttr,
+          datasheetId: this.datasheetId,
+          fieldId: this.fieldData.id,
+          data: {
+            ...this.fieldData,
+            desc,
+          },
+        },
+        this.wCtx.id
+      );
       if (result.result === ExecuteResult.Fail) {
         throw new Error(result.reason);
       }
@@ -271,13 +282,13 @@ export class Field {
   }
 
   /**
-   * 
+   *
    * Beta API, future changes are possible.
    *
-   * Updates the property for this field, 
+   * Updates the property for this field,
    * tips: that the update property configuration must be overwritten in full.
    *
-   * Throws an error if the user does not have permission to update the field, 
+   * Throws an error if the user does not have permission to update the field,
    * if invalid property are provided, if this field has no writable property, or if updates to this field type is not supported.
    *
    * Refer to {@link FieldType} for supported field types, the write format for property, and other specifics for certain field types.
@@ -314,17 +325,20 @@ export class Field {
       const { conversion } = property as IUpdateOpenMagicLinkFieldProperty;
       deleteBrotherField = conversion === Conversion.Delete;
     }
-    return new Promise(async(resolve) => {
-      const result: ICollaCommandExecuteResult<any> = await cmdExecute({
-        cmd: CollaCommandName.SetFieldAttr,
-        datasheetId: this.datasheetId,
-        fieldId: this.fieldData.id,
-        deleteBrotherField,
-        data: {
-          ...this.fieldData,
-          property: updateProperty
-        }
-      }, this.wCtx.id);
+    return new Promise(async (resolve) => {
+      const result: ICollaCommandExecuteResult<any> = await cmdExecute(
+        {
+          cmd: CollaCommandName.SetFieldAttr,
+          datasheetId: this.datasheetId,
+          fieldId: this.fieldData.id,
+          deleteBrotherField,
+          data: {
+            ...this.fieldData,
+            property: updateProperty,
+          },
+        },
+        this.wCtx.id
+      );
       if (result.result === ExecuteResult.Fail) {
         throw new Error(result.reason);
       }
@@ -336,12 +350,12 @@ export class Field {
   }
 
   /**
-   * 
+   *
    * Checks whether the current user has permission to perform the given description update.
-   * 
+   *
    * @param description new description for the field, Length limit 200.
    * @returns
-   * 
+   *
    * #### Example
    * ``` js
    * const canUpdateFieldDescription = field.hasPermissionForUpdateDescription();
@@ -358,14 +372,14 @@ export class Field {
   }
 
   /**
-   * 
+   *
    * Check whether the current user has permission to perform the given option update.
-   * 
+   *
    * Property about the update write format, refer to {@link FieldType}.
-   * 
+   *
    * @param property  new property for the field.
    * @returns
-   * 
+   *
    * #### Example
    * ``` js
    * const canUpdateFieldProperty = field.hasPermissionForUpdateProperty();
@@ -380,23 +394,23 @@ export class Field {
 
   /**
    * Check whether the current user has permission to perform the given option update.
-   * 
+   *
    * @param property new property for the field.
    * @returns
-   * 
-   * 
+   *
+   *
    * #### Description
    * Accepts partial input, in the same format as {@link updateProperty}.
    *
    * property about the update write format, refer to {@link FieldType}.
-   * 
+   *
    * Returns `{acceptable: true}` if the current user can update the specified property.
    *
    * Returns `{acceptable: false, message: string}` if no permission to operate, message may be used to display an error message to the user.
    *
    * #### Example
    * ```js
-   * // Check whether the current user has permission to perform the given property update, 
+   * // Check whether the current user has permission to perform the given property update,
    * // when the update is accompanied by a write, it can also be verified at the same time.
    * const updatePropertyCheckResult = field.checkPermissionForUpdateProperty({
    *   defaultValue: '1',
@@ -420,7 +434,7 @@ export class Field {
     if (!this.fieldEntity.propertyEditable()) {
       return errMsg(`No write access to ${this.fieldData.name}(${this.id}) column`);
     }
-    if(property) {
+    if (property) {
       const { error } = this.fieldEntity.validateUpdateOpenProperty(property);
       if (error) {
         return errMsg(`
@@ -473,7 +487,7 @@ export class Field {
           formatting: { precision, commaStyle },
         };
       }
-      case FieldType.Currency: 
+      case FieldType.Currency:
         const { symbol, precision } = this.fieldData.property as ICurrencyFieldProperty;
         return {
           type: 'currency',
@@ -486,7 +500,7 @@ export class Field {
         };
       case FieldType.Formula:
       case FieldType.MagicLookUp:
-        if (!(this.fieldData.property?.formatting)) return null;
+        if (!this.fieldData.property?.formatting) return null;
         switch (this.fieldEntity.valueType) {
           case BasicValueType.Number:
             const { symbol, precision, formatType } = this.fieldData.property.formatting as INumberFormatFieldProperty;
@@ -524,7 +538,7 @@ export class Field {
   /**
    * @hidden
    * Attempts to convert data of string type to when compatible with the data type of the current field.
-   * 
+   *
    * If it is not compatible, it returns null.
    *
    * @param string The string to parse.
@@ -559,7 +573,7 @@ export class Field {
    * @hidden
    */
   getFieldResultByStatType(statType: StatType, records: Record[]) {
-    const recordIds = records.map(record => record.id);
+    const recordIds = records.map((record) => record.id);
     const state = this.wCtx.widgetStore.getState() as any as IReduxState;
     const snapshot = Selectors.getSnapshot(state, this.datasheetId)!;
     return getFieldResultByStatType(statType, recordIds, this.fieldData, snapshot, state);

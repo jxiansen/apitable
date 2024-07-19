@@ -1,5 +1,3 @@
-
-
 import { useEffect } from 'react';
 import { Strings, t } from '@apitable/core';
 import { showBannerAlert } from 'pc/components/notification/banner_alert';

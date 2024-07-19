@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import Notification from 'rc-notification';
 import { NotificationInstance as RCNotificationInstance } from 'rc-notification/lib/Notification';

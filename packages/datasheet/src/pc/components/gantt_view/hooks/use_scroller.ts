@@ -1,5 +1,3 @@
-
-
 import { useEffect, useCallback, useMemo } from 'react';
 import { isWindowsOS } from 'pc/utils/os';
 import { AreaType } from '../interface';

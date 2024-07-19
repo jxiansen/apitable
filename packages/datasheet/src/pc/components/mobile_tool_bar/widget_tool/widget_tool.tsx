@@ -1,5 +1,3 @@
-
-
 import { IconButton } from '@apitable/components';
 import { ResourceType, Selectors } from '@apitable/core';
 import { WidgetOutlined } from '@apitable/icons';

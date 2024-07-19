@@ -1,5 +1,3 @@
-
-
 import { Element, Text } from 'slate';
 import { RenderElementProps, RenderLeafProps } from 'slate-react';
 import { IUnitValue } from '@apitable/core';

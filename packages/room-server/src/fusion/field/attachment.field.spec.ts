@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, CellFormatEnum, FieldType, getNewId, IAttacheField, ICellValue, IDPrefix, IReduxState, Reducers } from '@apitable/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -24,7 +22,7 @@ describe('AttachmentField', () => {
   let restService: RestService;
   let store: Store<IReduxState>;
 
-  beforeAll(async() => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -43,7 +41,7 @@ describe('AttachmentField', () => {
     store = createStore<IReduxState, any, unknown, unknown>(Reducers.rootReducers, applyMiddleware(thunkMiddleware, batchDispatchMiddleware));
   });
 
-  afterAll(async() => {
+  afterAll(async () => {
     await app.close();
   });
 
@@ -159,11 +157,9 @@ describe('AttachmentField', () => {
 
   describe('roTransform', () => {
     it('token value does not exist--should throw ServerException', async () => {
-      jest.spyOn(restService, 'getAssetInfo').mockImplementationOnce(
-        async (): Promise<IAssetDTO | undefined> => {
-          return undefined;
-        },
-      );
+      jest.spyOn(restService, 'getAssetInfo').mockImplementationOnce(async (): Promise<IAssetDTO | undefined> => {
+        return undefined;
+      });
       const error = ApiException.tipError(ApiTipConstant.api_param_attachment_not_exists);
       // The assertion for a promise must be returned.
       expect.assertions(1);
@@ -177,7 +173,7 @@ describe('AttachmentField', () => {
           width: 0,
           name: 'Internet Media Industry: 2020 Weibo Animation White Paper.pdf',
           mimeType: 'application/pdf',
-        }
+        },
       ];
       try {
         await fieldClass.roTransform(fieldValues, field);
@@ -187,20 +183,18 @@ describe('AttachmentField', () => {
     });
 
     it('pdf--should return without height/with but preview', async () => {
-      jest.spyOn(restService, 'getAssetInfo').mockImplementationOnce(
-        async (): Promise<IAssetDTO | undefined> => {
-          return {
-            // tslint:disable-next-line:no-empty
-            size: 5008519,
-            height: undefined,
-            token: '',
-            width: 0,
-            mimeType: 'application/pdf',
-            bucket: 'QNY1',
-            preview: 'space/2020/06/20/166113199f5848e7884207c4b54d521f',
-          };
-        },
-      );
+      jest.spyOn(restService, 'getAssetInfo').mockImplementationOnce(async (): Promise<IAssetDTO | undefined> => {
+        return {
+          // tslint:disable-next-line:no-empty
+          size: 5008519,
+          height: undefined,
+          token: '',
+          width: 0,
+          mimeType: 'application/pdf',
+          bucket: 'QNY1',
+          preview: 'space/2020/06/20/166113199f5848e7884207c4b54d521f',
+        };
+      });
 
       const fieldValues: IFieldValue[] = [
         {
@@ -227,20 +221,18 @@ describe('AttachmentField', () => {
     });
 
     it('pdf--should return without height/with but preview without host', async () => {
-      jest.spyOn(restService, 'getAssetInfo').mockImplementationOnce(
-        async (): Promise<IAssetDTO | undefined> => {
-          return {
-            // tslint:disable-next-line:no-empty
-            size: 5008519,
-            height: undefined,
-            token: '',
-            width: 0,
-            mimeType: 'application/pdf',
-            bucket: 'QNY1',
-            preview: 'space/2020/09/22/11cacb59a7c647528011fe35164d3ef8',
-          };
-        },
-      );
+      jest.spyOn(restService, 'getAssetInfo').mockImplementationOnce(async (): Promise<IAssetDTO | undefined> => {
+        return {
+          // tslint:disable-next-line:no-empty
+          size: 5008519,
+          height: undefined,
+          token: '',
+          width: 0,
+          mimeType: 'application/pdf',
+          bucket: 'QNY1',
+          preview: 'space/2020/09/22/11cacb59a7c647528011fe35164d3ef8',
+        };
+      });
 
       const fieldValues: IFieldValue[] = [
         {
@@ -285,11 +277,7 @@ describe('AttachmentField', () => {
         },
       ];
       // The assertion for a promise must be returned.source.host
-      const data = fieldClass.voTransform(
-        cellValue,
-        field,
-        { cellFormat: CellFormatEnum.JSON, store }
-      );
+      const data = fieldClass.voTransform(cellValue, field, { cellFormat: CellFormatEnum.JSON, store });
       expect(data![0].token).toBe('space/2020/06/20/38f89e81bb83496da5d8af6a0ba637ec');
       expect(data![0].preview).toBe(oss.host + '/space/2020/06/20/38f89e81bb83496da5d8af6a0ba637ec?imageView2/0');
       expect(data![0].size).toBe(5008519);
@@ -315,13 +303,9 @@ describe('AttachmentField', () => {
         },
       ];
       // The assertion for a promise must be returned.
-      expect(
-        fieldClass.voTransform(
-          cellValue,
-          field,
-          { cellFormat: CellFormatEnum.STRING, store },
-        ),
-      ).toBe('Internet Media Industry: 2020 Weibo Animation White Paper.pdf (https://s1.vika.cn/space/2020/06/20/38f89e81bb83496da5d8af6a0ba637ec)');
+      expect(fieldClass.voTransform(cellValue, field, { cellFormat: CellFormatEnum.STRING, store })).toBe(
+        'Internet Media Industry: 2020 Weibo Animation White Paper.pdf (https://s1.vika.cn/space/2020/06/20/38f89e81bb83496da5d8af6a0ba637ec)',
+      );
     });
 
     it('image--json--should return json array', () => {
@@ -335,14 +319,10 @@ describe('AttachmentField', () => {
           height: 478,
           width: 479,
           bucket: oss.bucket,
-        }
+        },
       ];
 
-      const data = fieldClass.voTransform(
-        cellValue,
-        field,
-        { cellFormat: CellFormatEnum.JSON, store },
-      );
+      const data = fieldClass.voTransform(cellValue, field, { cellFormat: CellFormatEnum.JSON, store });
       expect(data![0].token).toBe('space/2020/07/28/6fdc652231a8480398e302606ae28213');
       expect(data![0].url).toBe(oss.host + '/space/2020/07/28/6fdc652231a8480398e302606ae28213');
       expect(data![0].size).toBe(7194);

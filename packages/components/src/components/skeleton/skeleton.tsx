@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import style, { css } from 'styled-components';
 import { ISkeletonProps } from './interface';
@@ -15,27 +13,22 @@ const SkeletonStyles = style.div.attrs(applyDefaultTheme)<ISkeletonProps>`
     width: 100%;
     margin-top: 16px;
     ${(props) => {
-    if (!props.disabledAnimation) {
-      return css`
+      if (!props.disabledAnimation) {
+        return css`
           &::after {
             position: absolute;
             top: 0;
             right: -150%;
             bottom: 0;
             left: -150%;
-            background: linear-gradient(
-              90deg,
-              rgba(190,190,190,.2) 25%,
-              rgba(129,129,129,.24) 37%,
-              rgba(190,190,190,.2) 63%
-              );
+            background: linear-gradient(90deg, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
             animation: skeletonKeyframes 1.4s ease infinite;
-            content: "";
+            content: '';
           }
         `;
-    }
-    return '';
-  }}
+      }
+      return '';
+    }}
     
     &.react-image-skeleton {
       display: flex;
@@ -44,20 +37,20 @@ const SkeletonStyles = style.div.attrs(applyDefaultTheme)<ISkeletonProps>`
       svg {
         width: 48px;
         height: 48px;
-        ${props => {
-    const { fc3 } = props.theme.color;
-    return css`
-              fill: ${fc3}
-            `;
-  }}
+        ${(props) => {
+          const { fc3 } = props.theme.color;
+          return css`
+            fill: ${fc3};
+          `;
+        }}
       }
     }
-    ${props => {
-    const { fc11 } = props.theme.color;
-    return css`
+    ${(props) => {
+      const { fc11 } = props.theme.color;
+      return css`
         background-color: ${fc11};
       `;
-  }}
+    }}
 
     @keyframes skeletonKeyframes {
       0% {
@@ -86,10 +79,10 @@ export const Skeleton: React.FC<React.PropsWithChildren<ISkeletonProps>> = (prop
     className: customClassName,
     disabledAnimation = false,
   } = props;
-  const elements:JSX.Element[] = [];
+  const elements: JSX.Element[] = [];
 
   for (let i = 0; i < count; i++) {
-    const style:React.CSSProperties = {};
+    const style: React.CSSProperties = {};
 
     if (width != null) {
       style.width = width;
@@ -118,26 +111,14 @@ export const Skeleton: React.FC<React.PropsWithChildren<ISkeletonProps>> = (prop
         }}
         disabledAnimation={disabledAnimation}
       >
-        {image && <svg
-          viewBox="0 0 1098 1024"
-          xmlns="http://www.w3.org/2000/svg"
-          className="image-svg-skeleton"
-        >
-          <path d={path} />
-        </svg>}
+        {image && (
+          <svg viewBox="0 0 1098 1024" xmlns="http://www.w3.org/2000/svg" className="image-svg-skeleton">
+            <path d={path} />
+          </svg>
+        )}
       </SkeletonStyles>
     );
   }
 
-  return (
-    <>
-      {Wrapper
-        ? elements.map((element, i) => (
-          <Wrapper key={i}>
-            {element}
-          </Wrapper>
-        ))
-        : elements}
-    </>
-  );
+  return <>{Wrapper ? elements.map((element, i) => <Wrapper key={i}>{element}</Wrapper>) : elements}</>;
 };

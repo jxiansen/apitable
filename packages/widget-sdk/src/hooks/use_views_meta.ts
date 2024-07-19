@@ -1,5 +1,3 @@
-
-
 import { pickViewProperty } from './use_view_meta';
 import { Datasheet } from 'model';
 import { useViews } from './private/use_views';
@@ -24,7 +22,7 @@ import { useViews } from './private/use_views';
  *   </div>);
  * }
  *
- * // Show the names of all views corresponding to the datasheetId(dstXXXXXXXX) datasheet 
+ * // Show the names of all views corresponding to the datasheetId(dstXXXXXXXX) datasheet
  * function DatasheetViewNames() {
  *   const datasheet = useDatasheet('dstXXXXXXXX');
  *   const viewsMeta = useViewsMeta(datasheet);
@@ -37,7 +35,7 @@ import { useViews } from './private/use_views';
  */
 export function useViewsMeta(datasheet?: Datasheet) {
   const viewsData = useViews(datasheet?.datasheetId);
-  return viewsData.map(viewData => {
+  return viewsData.map((viewData) => {
     return pickViewProperty(viewData);
   });
 }

@@ -1,16 +1,14 @@
-
-
 import { ConfigConstant, IDPrefix } from '@apitable/core';
 import { isJSON } from 'class-validator';
 import { NodeTypeEnum } from 'shared/enums/node.enum';
 
 /**
  * get datasheetId from url
- * @param url 
+ * @param url
  */
 export const parseDstIdFromUrl = (url: string) => {
   let datasheetId;
-  url.split('/').forEach(item => {
+  url.split('/').forEach((item) => {
     if (item.startsWith(IDPrefix.Table)) {
       datasheetId = item;
     }
@@ -24,7 +22,7 @@ export const parseDstIdFromUrl = (url: string) => {
  */
 export const parseSpaceIdFromUrl = (url: string) => {
   let spaceId;
-  url.split('/').forEach(item => {
+  url.split('/').forEach((item) => {
     if (item.startsWith(IDPrefix.SPACE)) {
       spaceId = item;
     }
@@ -53,13 +51,13 @@ export const isNull = (value: string) => {
 export const stringToArray = (value: string) => {
   if (isNull(value)) return null;
   const valueArray = Array.isArray(value) ? value : value.split(',');
-  return valueArray.filter(v => !isNull(v));
+  return valueArray.filter((v) => !isNull(v));
 };
 
 export const integerStringToArray = (value: string) => {
   if (isNull(value)) return null;
   const valueArray = Array.isArray(value) ? value : value.split(',');
-  return valueArray.filter(v => !isNull(v)).map(v => parseInt(v));
+  return valueArray.filter((v) => !isNull(v)).map((v) => parseInt(v));
 };
 
 export const formulaToString = (value: string | string[]) => {
@@ -123,4 +121,3 @@ const EFFECTIVE_OPTION_ID_LENGTH = 13;
 export const isOptionId = (optionId: string) => {
   return optionId && optionId.startsWith('opt') && optionId.length === EFFECTIVE_OPTION_ID_LENGTH;
 };
-

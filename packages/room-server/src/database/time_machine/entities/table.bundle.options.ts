@@ -10,5 +10,4 @@ export class TableBundleSaver implements ITableBundleSaver {
   save(array: Uint8Array, path: string): void {
     return fs.writeFileSync(path, array);
   }
-
 }

@@ -1,5 +1,3 @@
-
-
 // The avatar address is obtained from the cdn address and is consistent with the user's uploaded avatar logic.
 // Use path without host to facilitate migration of data for privatized versions
 // Maintain Address: https://vika.cn/space/spcBcZN1UZZJz/workbench/dstbbxEQsgj4n5YoY3/viwyjWJEgnapf/rec82hjVdPPd3

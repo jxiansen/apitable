@@ -1,5 +1,3 @@
-
-
 import { JSONSchema7, ValidationResult } from 'json-schema';
 import { getLiteralOperandValue, getObjectOperandProperty, getOperandValueType, isLiteralOperand, isOperandNullValue } from './utils';
 import { Strings, t } from '../exports/i18n';
@@ -8,21 +6,19 @@ import { Strings, t } from '../exports/i18n';
  * override the validate method of rjsf to support expression.
  */
 
-export const validateMagicFormWithCustom = (rootSchema: JSONSchema7, formData: any,
-  validate?: (formData: any, errors: any) => ValidationResult
-) => {
+export const validateMagicFormWithCustom = (rootSchema: JSONSchema7, formData: any, validate?: (formData: any, errors: any) => ValidationResult) => {
   const data = validateMagicForm(rootSchema, formData);
-  if(validate == null) {
+  if (validate == null) {
     return data;
   }
 
   const resCustomValidator = validate?.(formData, data.errors);
 
-  if(!resCustomValidator) {
+  if (!resCustomValidator) {
     return data;
   }
 
-  if(Array.isArray(resCustomValidator) && resCustomValidator.length === 0) {
+  if (Array.isArray(resCustomValidator) && resCustomValidator.length === 0) {
     return data;
   }
   return {
@@ -43,10 +39,10 @@ export const validateMagicForm = (rootSchema: JSONSchema7, formData: any) => {
           schemaPath: '#/type',
           keyword: 'type',
           params: { type: 'object' },
-          message: 'must be object'
+          message: 'must be object',
         });
       } else {
-        Object.keys(rootSchema.properties!).forEach(propertyKey => {
+        Object.keys(rootSchema.properties!).forEach((propertyKey) => {
           const propertySchema = rootSchema.properties![propertyKey] as JSONSchema7;
           const isRequired = rootSchema.required && rootSchema.required.indexOf(propertyKey) !== -1;
           const propertyValue = getObjectOperandProperty(formData, propertyKey, propertySchema);

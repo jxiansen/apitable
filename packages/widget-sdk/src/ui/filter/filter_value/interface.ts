@@ -8,8 +8,8 @@ export interface IFilterValueProps {
 }
 
 export interface IFilterValueBaseProps {
-  field: IField
-  onChange: (condition: any) => void
+  field: IField;
+  onChange: (condition: any) => void;
 }
 
 export interface IFilterCheckboxProps extends IFilterValueBaseProps {

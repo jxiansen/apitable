@@ -1,5 +1,3 @@
-
-
 import { MarkType, ElementType } from '../constant';
 import { IS_APPLE } from '../helpers/browser';
 

@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import KeyCode from 'rc-util/lib/KeyCode';
@@ -9,19 +7,23 @@ import { Loading } from 'components';
 import styled, { css } from 'styled-components';
 import { isBoolean } from 'lodash';
 
-const StyledSpan = styled.span<{size: string, active: boolean, color?: string}>`
-  color: ${props => props.color};
+const StyledSpan = styled.span<{ size: string; active: boolean; color?: string }>`
+  color: ${(props) => props.color};
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  ${props => props.active && css`
-    margin-left: ${SIZE_MAP[props.size].innerSize + 2}px;
-  `}
-  
-  ${props => !props.active && css`
-    margin-right: ${SIZE_MAP[props.size].innerSize + 2}px;
-  `}
+  ${(props) =>
+    props.active &&
+    css`
+      margin-left: ${SIZE_MAP[props.size].innerSize + 2}px;
+    `}
+
+  ${(props) =>
+    !props.active &&
+    css`
+      margin-right: ${SIZE_MAP[props.size].innerSize + 2}px;
+    `}
 `;
 
 export const Switch = React.forwardRef<HTMLButtonElement, ISwitchProps>(
@@ -43,17 +45,14 @@ export const Switch = React.forwardRef<HTMLButtonElement, ISwitchProps>(
       size = 'default',
       ...restProps
     },
-    ref,
+    ref
   ) => {
     const [innerChecked, setInnerChecked] = useMergedState<boolean>(false, {
       value: checked,
       defaultValue: defaultChecked,
     });
 
-    function triggerChange(
-      newChecked: boolean,
-      event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
-    ) {
+    function triggerChange(newChecked: boolean, event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) {
       let mergedChecked = innerChecked;
       if (!disabled) {
         mergedChecked = newChecked;
@@ -81,7 +80,7 @@ export const Switch = React.forwardRef<HTMLButtonElement, ISwitchProps>(
     return (
       <SwitchBase
         {...restProps}
-        className={ className ?? (innerChecked ? clazz?.checkedBackground : clazz?.unCheckedBackground) }
+        className={className ?? (innerChecked ? clazz?.checkedBackground : clazz?.unCheckedBackground)}
         type="button"
         role="switch"
         ref={ref}
@@ -91,31 +90,24 @@ export const Switch = React.forwardRef<HTMLButtonElement, ISwitchProps>(
         disabled={disabled || loading}
         size={size}
       >
-        <SwitchBeforeBase size={size} checked={innerChecked} className={innerChecked ? clazz?.checkedCircle: clazz?.unCheckedCircle}>
-          { loading ? (loadingIcon || <Loading/>) : null}
+        <SwitchBeforeBase size={size} checked={innerChecked} className={innerChecked ? clazz?.checkedCircle : clazz?.unCheckedCircle}>
+          {loading ? loadingIcon || <Loading /> : null}
         </SwitchBeforeBase>
 
-        {
-          text && innerChecked && (
-            <StyledSpan size={size} active={false} className={clazz?.checkedText}>
-              {isBoolean(text) ? innerChecked ? 'Disable': 'Enable': text}
-            </StyledSpan>
-          )
-        }
+        {text && innerChecked && (
+          <StyledSpan size={size} active={false} className={clazz?.checkedText}>
+            {isBoolean(text) ? (innerChecked ? 'Disable' : 'Enable') : text}
+          </StyledSpan>
+        )}
 
-        <SwitchInnerBase checked={innerChecked} >
-          {innerChecked ? checkedChildren : unCheckedChildren}
-        </SwitchInnerBase>
+        <SwitchInnerBase checked={innerChecked}>{innerChecked ? checkedChildren : unCheckedChildren}</SwitchInnerBase>
 
-        {
-          text && !innerChecked && (
-            <StyledSpan size={size} active className={clazz?.unCheckedText}>
-              {isBoolean(text) ? innerChecked ? 'Disable': 'Enable': text}
-            </StyledSpan>
-          )
-        }
-
+        {text && !innerChecked && (
+          <StyledSpan size={size} active className={clazz?.unCheckedText}>
+            {isBoolean(text) ? (innerChecked ? 'Disable' : 'Enable') : text}
+          </StyledSpan>
+        )}
       </SwitchBase>
     );
-  },
+  }
 );

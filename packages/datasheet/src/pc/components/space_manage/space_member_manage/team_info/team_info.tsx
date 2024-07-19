@@ -1,5 +1,3 @@
-
-
 import { FC, useEffect, useState } from 'react';
 import * as React from 'react';
 import { useDispatch, shallowEqual } from 'react-redux';
@@ -130,21 +128,21 @@ export const TeamInfo: FC<React.PropsWithChildren<ITeamInfo>> = (props) => {
             spaceResource.permissions.includes(ConfigConstant.PermissionCode.MEMBER) &&
             selectedTeamInfoInSpace &&
             !isIdassPrivateDeployment() && (
-            <div className={styles.btnWTopTable}>
-              {!isRootTeamSelected && !isBindSocial && <Button onClick={addMemberClick}>{t(Strings.add_member)}</Button>}
+              <div className={styles.btnWTopTable}>
+                {!isRootTeamSelected && !isBindSocial && <Button onClick={addMemberClick}>{t(Strings.add_member)}</Button>}
 
-              {isRootTeamSelected && !isBindSocial && (
-                <Button onClick={changeMemberTeamClick} disabled={!selectMemberListInSpace.length}>
-                  {t(Strings.distribute_a_team)}
-                </Button>
-              )}
-              {!isRootTeamSelected && !isBindSocial && (
-                <Button onClick={batchDelMemberBtn} variant="jelly" color="danger" disabled={!selectMemberListInSpace.length}>
-                  {t(Strings.batch_remove)}
-                </Button>
-              )}
-            </div>
-          )}
+                {isRootTeamSelected && !isBindSocial && (
+                  <Button onClick={changeMemberTeamClick} disabled={!selectMemberListInSpace.length}>
+                    {t(Strings.distribute_a_team)}
+                  </Button>
+                )}
+                {!isRootTeamSelected && !isBindSocial && (
+                  <Button onClick={batchDelMemberBtn} variant="jelly" color="danger" disabled={!selectMemberListInSpace.length}>
+                    {t(Strings.batch_remove)}
+                  </Button>
+                )}
+              </div>
+            )}
           <MemberTable searchMemberRes={props.searchMemberRes} setSearchMemberRes={props.setSearchMemberRes} />
         </div>
       </div>

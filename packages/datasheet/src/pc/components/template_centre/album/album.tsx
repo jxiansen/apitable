@@ -1,5 +1,3 @@
-
-
 import MarkdownIt from 'markdown-it';
 import Image from 'next/image';
 import { useRouter } from 'next/router';

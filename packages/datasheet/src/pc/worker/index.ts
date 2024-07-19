@@ -1,5 +1,3 @@
-
-
 import { Remote, wrap } from 'comlink';
 import { Store } from 'redux';
 import { DispatchToStore, IReduxState, Selectors, StoreActions } from '@apitable/core';

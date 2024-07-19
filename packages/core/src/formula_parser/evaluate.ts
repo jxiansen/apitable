@@ -1,5 +1,3 @@
-
-
 import { AstNode, FormulaExprParser } from './parser';
 import { Interpreter, ResolverFunction } from './interpreter/interpreter';
 import { IFieldMap, IFieldPermissionMap, IReduxState } from 'exports/store/interfaces';
@@ -8,7 +6,7 @@ import {
   getFieldMap,
   getFieldPermissionMap,
   getFieldRoleByFieldId,
-  getCellValue
+  getCellValue,
 } from 'modules/database/store/selectors/resource/datasheet';
 import { TokenType, FormulaExprLexer } from './lexer';
 import { Field } from 'model/field';
@@ -62,7 +60,7 @@ function resolverWrapper(context: IFormulaContext): ResolverFunction {
       throw new Error(
         t(Strings.view_field_search_not_found_tip, {
           value: fieldId,
-        }),
+        })
       );
     }
 
@@ -118,7 +116,7 @@ export class ExpCache {
 export function parse(
   expression: string,
   context: { field: IField; fieldMap: IFieldMap; state: IReduxState },
-  updateCache?: boolean,
+  updateCache?: boolean
 ): IFormulaExpr | IFormulaError {
   if (!expression || !expression.trim()) {
     return {
@@ -196,7 +194,7 @@ export function evaluate(expression: string, context: IFormulaEvaluateContext, s
 export function expressionTransform(
   expression: string,
   { fieldMap, fieldPermissionMap }: { fieldMap: IFieldMap; fieldPermissionMap?: IFieldPermissionMap },
-  to: 'id' | 'name',
+  to: 'id' | 'name'
 ): string {
   if (!expression) {
     return expression;
@@ -239,7 +237,7 @@ export function expressionTransform(
       console.log(
         t(Strings.not_found_field_the_name_as, {
           value: pureTokenValue,
-        }),
+        })
       );
       return name;
     }
@@ -261,7 +259,7 @@ export function expressionTransform(
       console.log(
         t(Strings.not_found_field_the_name_as, {
           value: pureTokenValue,
-        }),
+        })
       );
       return tokenValue;
     }

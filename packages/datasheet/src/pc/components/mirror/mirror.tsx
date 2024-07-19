@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { IMirror, ResourceType } from '@apitable/core';
 import { ComponentDisplay, ScreenSize } from 'pc/components/common/component_display';

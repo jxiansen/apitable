@@ -1,5 +1,3 @@
-
-
 import { useFields } from '../../hooks';
 import React from 'react';
 import { DropdownSelect as Select } from '@apitable/components';

@@ -1,6 +1,4 @@
-
-
-import {IReduxState, Selectors, ICollaborator, ResourceType, IUserInfo} from 'core';
+import { IReduxState, Selectors, ICollaborator, ResourceType, IUserInfo } from 'core';
 import { IWidgetDatasheetState, IWidgetPermission, IWidgetState, IDatasheetMap } from 'interface';
 import { DEFAULT_WIDGET_PERMISSION } from './slice/permission/reducer';
 
@@ -15,11 +13,11 @@ export const getWidgetErrorCode = (state: IReduxState, widgetId: string) => {
 };
 
 /**
-  * init widgetState;
-  * @param state
-  * @param widgetId
-  */
-export const initRootWidgetState = (state: IReduxState, widgetId: string, opt?: { foreignDatasheetIds?: string[]}): IWidgetState => {
+ * init widgetState;
+ * @param state
+ * @param widgetId
+ */
+export const initRootWidgetState = (state: IReduxState, widgetId: string, opt?: { foreignDatasheetIds?: string[] }): IWidgetState => {
   const widget = Selectors.getWidget(state, widgetId)!;
   const datasheetId = widget.snapshot.datasheetId!;
   const mirrorId = widget.snapshot?.sourceId;
@@ -29,7 +27,7 @@ export const initRootWidgetState = (state: IReduxState, widgetId: string, opt?: 
   const datasheetMap: IDatasheetMap = bindDatasheet ? { [datasheetId]: bindDatasheet } : {};
 
   const foreignDatasheetIds = opt?.foreignDatasheetIds || [];
-  foreignDatasheetIds.forEach(dstId => {
+  foreignDatasheetIds.forEach((dstId) => {
     if (dstId === datasheetId) {
       return;
     }
@@ -47,19 +45,19 @@ export const initRootWidgetState = (state: IReduxState, widgetId: string, opt?: 
     mirrorMap: mirrorPack ? { [mirrorId!]: mirrorPack } : undefined,
     user: {
       ...state.user.info,
-      info: state.user.info ?? undefined
+      info: state.user.info ?? undefined,
     } as IUserInfo,
     errorCode: getWidgetErrorCode(state, widgetId) || null,
     permission: aggregationWidgetPermission(state, widgetId),
-    collaborators: aggregationWidgetCollaborators(state)
+    collaborators: aggregationWidgetCollaborators(state),
   };
 };
 
 /**
-  * Aggregate widget permissions.
-  * @param state
-  * @param widgetId
-  */
+ * Aggregate widget permissions.
+ * @param state
+ * @param widgetId
+ */
 export const aggregationWidgetPermission = (state: IReduxState, widgetId: string): IWidgetPermission => {
   const widget = Selectors.getWidget(state, widgetId);
   if (!widget) {
@@ -73,17 +71,17 @@ export const aggregationWidgetPermission = (state: IReduxState, widgetId: string
   const onDashboard = Boolean(state.pageParams.dashboardId);
   return {
     storage: {
-      editable: onDashboard ? Selectors.getDashboardPermission(state).editable : datasheetPermission.editable
+      editable: onDashboard ? Selectors.getDashboardPermission(state).editable : datasheetPermission.editable,
     },
-    datasheet: datasheetPermission
+    datasheet: datasheetPermission,
   };
 };
 
 /**
-  * Aggregate widget collaborators.
-  * Change according to the node you are currently at.
-  * @param state
-  */
+ * Aggregate widget collaborators.
+ * Change according to the node you are currently at.
+ * @param state
+ */
 export const aggregationWidgetCollaborators = (state: IReduxState): ICollaborator[] => {
   const { dashboardId, datasheetId, mirrorId } = state.pageParams;
   const resourceId = dashboardId || mirrorId || datasheetId;
@@ -101,8 +99,8 @@ export const aggregationWidgetCollaborators = (state: IReduxState): ICollaborato
 };
 
 /**
-  * Get the datasheet state required by the widget in one go.
-  */
+ * Get the datasheet state required by the widget in one go.
+ */
 export const widgetDatasheetSelector = (state: IReduxState, datasheetId: string, foreign?: boolean): IWidgetDatasheetState | null => {
   const datasheetPack = state.datasheetMap[datasheetId];
   if (!datasheetPack) {
@@ -131,7 +129,7 @@ export const widgetDatasheetSelector = (state: IReduxState, datasheetId: string,
     },
     client: {
       selection,
-      viewDerivation
-    }
+      viewDerivation,
+    },
   };
 };

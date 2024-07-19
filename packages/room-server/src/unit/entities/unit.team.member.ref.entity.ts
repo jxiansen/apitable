@@ -1,10 +1,7 @@
-
-
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity('unit_team_member_rel')
 export class UnitTeamMemberRefEntity {
-
   @PrimaryColumn('bigint')
   id!: string;
 
@@ -25,6 +22,4 @@ export class UnitTeamMemberRefEntity {
     type: 'bigint',
   })
   memberId!: number;
-
 }
-

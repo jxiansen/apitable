@@ -1,5 +1,3 @@
-
-
 /*
  * Define the configuration required for the bootloader
  *
@@ -34,7 +32,6 @@ export class BootstrapConstants {
    * SOCKET_BACKEND_GRPC_URL is reserved only for compatibility with private version environments.
    */
   public static readonly BACKEND_GRPC_URL: string = process.env.BACKEND_GRPC_URL || process.env.SOCKET_BACKEND_GRPC_URL || '0.0.0.0:8083';
-
 }
 
 /*

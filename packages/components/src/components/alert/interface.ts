@@ -1,12 +1,10 @@
-
-
 import { IHtmlElementBase } from 'interface';
 
 export interface IAlertProps extends IHtmlElementBase {
   /**
    * Prompt type, associated with color and icon
    */
-  type: 'default' | 'error' | 'warning' | 'success'
+  type: 'default' | 'error' | 'warning' | 'success';
   /**
    * title of the alert
    */

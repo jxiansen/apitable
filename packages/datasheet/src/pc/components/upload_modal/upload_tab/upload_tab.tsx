@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import { Tooltip } from 'antd';
 import classNames from 'classnames';
@@ -80,8 +78,7 @@ export const UploadTab: React.FC<React.PropsWithChildren<IUploadTabProps>> = (pr
       return;
     }
 
-    initNoTraceVerification(() => {
-    }, ConfigConstant.CaptchaIds.LOGIN);
+    initNoTraceVerification(() => {}, ConfigConstant.CaptchaIds.LOGIN);
   });
 
   useEffect(() => {
@@ -134,7 +131,7 @@ export const UploadTab: React.FC<React.PropsWithChildren<IUploadTabProps>> = (pr
                     tabInfoRef.current?.focus();
                   }}
                 >
-                  <Icon size={16} color={showActiveIcon(isActive) ? colors.primaryColor : colors.fourthLevelText}/>
+                  <Icon size={16} color={showActiveIcon(isActive) ? colors.primaryColor : colors.fourthLevelText} />
                 </span>
               </Tooltip>
             );
@@ -152,16 +149,14 @@ export const UploadTab: React.FC<React.PropsWithChildren<IUploadTabProps>> = (pr
       <div className={styles.uploadTabInfo}>
         <ComponentDisplay minWidthCompatible={ScreenSize.md}>
           {currentTab === UploadTabType.Drag && (
-            <UploadZone onUpload={onUpload} recordId={recordId} fieldId={fieldId} cellValue={cellValue}
-              ref={tabInfoRef}/>
+            <UploadZone onUpload={onUpload} recordId={recordId} fieldId={fieldId} cellValue={cellValue} ref={tabInfoRef} />
           )}
           {currentTab === UploadTabType.Paste && (
-            <UploadPaste onUpload={onUpload} ref={tabInfoRef} fieldId={fieldId} recordId={recordId}
-              cellValue={cellValue}/>
+            <UploadPaste onUpload={onUpload} ref={tabInfoRef} fieldId={fieldId} recordId={recordId} cellValue={cellValue} />
           )}
         </ComponentDisplay>
         <ComponentDisplay maxWidthCompatible={ScreenSize.md}>
-          <UploadZone onUpload={onUpload} recordId={recordId} fieldId={fieldId} cellValue={cellValue} ref={tabInfoRef}/>
+          <UploadZone onUpload={onUpload} recordId={recordId} fieldId={fieldId} cellValue={cellValue} ref={tabInfoRef} />
         </ComponentDisplay>
       </div>
     </div>

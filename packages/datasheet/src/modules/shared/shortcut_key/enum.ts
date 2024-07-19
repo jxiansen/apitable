@@ -1,5 +1,3 @@
-
-
 /* eslint-disable */
 export enum ContextName {
   true = 'true', // when is always true

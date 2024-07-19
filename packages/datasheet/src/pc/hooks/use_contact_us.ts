@@ -1,5 +1,3 @@
-
-
 import { useCallback } from 'react';
 import { ConfigConstant } from '@apitable/core';
 import { TriggerCommands } from 'modules/shared/apphook/trigger_commands';

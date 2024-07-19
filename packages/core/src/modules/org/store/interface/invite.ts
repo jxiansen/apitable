@@ -1,5 +1,3 @@
-
-
 import * as actions from '../../../shared/store/action_constants';
 export interface IInvite {
   inviteEmailInfo: IInviteEmailInfo | null;
@@ -25,7 +23,7 @@ export interface IUpdateTeamTreeInviteAction {
 }
 export interface IUpdateSubTeamTreeInviteAction {
   type: typeof actions.UPDATE_SUB_TEAM_TREE_INVITE;
-  payload: {parentId: string, childrenTree: ITeamTreeNode[]};
+  payload: { parentId: string; childrenTree: ITeamTreeNode[] };
 }
 export interface IUpdateLinkListAction {
   type: typeof actions.UPDATE_LINK_LIST;

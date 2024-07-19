@@ -1,5 +1,3 @@
-
-
 import { Token, TokenType } from './token';
 import { t, Strings } from 'exports/i18n';
 import { isNumber } from 'lodash';
@@ -125,14 +123,14 @@ export class FormulaExprLexer implements ILexer {
   }
 
   private filterUselessToken(tokens: Token[]) {
-    return tokens.filter(token => {
+    return tokens.filter((token) => {
       if (token.type === TokenType.Unknown) {
         this.errors.push(
           new Error(
             t(Strings.function_err_unrecognized_operator, {
               token: token.value,
-            }),
-          ),
+            })
+          )
         );
       }
       return token.type !== TokenType.Blank && token.type !== TokenType.Unknown;
@@ -161,7 +159,7 @@ export class FormulaExprLexer implements ILexer {
   }
 
   private pattern(): RegExp {
-    const pattern: string = EXPR_GRAMMAR.map(g => `(${g.exp.source})`).join('|');
+    const pattern: string = EXPR_GRAMMAR.map((g) => `(${g.exp.source})`).join('|');
 
     return new RegExp(pattern, 'g');
   }

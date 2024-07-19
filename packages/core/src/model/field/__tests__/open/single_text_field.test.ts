@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType } from 'types/field_api_enums';
 import { IOpenField, IOpenSingleTextFieldProperty } from 'types/open/open_field_read_types';
 import { FieldType, ISingleTextField } from 'types/field_types';
@@ -10,8 +8,8 @@ const textField: ISingleTextField = {
   id: 'fld1111',
   type: FieldType.SingleText,
   property: {
-    defaultValue: '1'
-  }
+    defaultValue: '1',
+  },
 };
 
 const openSingleTextField: IOpenField = {
@@ -19,17 +17,17 @@ const openSingleTextField: IOpenField = {
   id: 'fld1111',
   type: APIMetaFieldType.SingleText,
   property: {
-    defaultValue: '1'
-  }
+    defaultValue: '1',
+  },
 };
 
 const writeOpenProperty: IOpenSingleTextFieldProperty = {
-  defaultValue: '1'
+  defaultValue: '1',
 };
 
 describe('Text field read property format check', () => {
   const valid = getOpenFieldProperty(textField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid(openSingleTextField.property);
     expect(receiveValue).toEqual(expectValue);
   });

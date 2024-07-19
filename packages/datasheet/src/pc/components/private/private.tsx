@@ -3,16 +3,7 @@ import { isEmpty } from 'lodash';
 import { useContext, useEffect, useRef } from 'react';
 import * as React from 'react';
 import { Skeleton } from '@apitable/components';
-import {
-  ConfigConstant,
-  NodeErrorType,
-  t,
-  Strings,
-  Selectors,
-  IReduxState,
-  StoreActions,
-  Navigation
-} from '@apitable/core';
+import { ConfigConstant, NodeErrorType, t, Strings, Selectors, IReduxState, StoreActions, Navigation } from '@apitable/core';
 import { NodeItem } from 'pc/components/catalog/tree/node_item';
 import { Modal } from 'pc/components/common';
 import { ScreenSize } from 'pc/components/common/component_display';
@@ -40,14 +31,9 @@ export const Private = () => {
   const timerRef = useRef<any>(null);
   const lastOverNodeIdRef = useRef<any>(null);
 
-  const {
-    privateTreeNodesMap, privateRootId,
-    editNodeId, delNodeId, expandedKeys
-  } = useAppSelector((state: IReduxState) => {
-    const {
-      privateTreeNodesMap, privateRootId, privateLoading, rootId,
-      privateEditNodeId, privateDelNodeId, privateExpandedKeys
-    } = state.catalogTree;
+  const { privateTreeNodesMap, privateRootId, editNodeId, delNodeId, expandedKeys } = useAppSelector((state: IReduxState) => {
+    const { privateTreeNodesMap, privateRootId, privateLoading, rootId, privateEditNodeId, privateDelNodeId, privateExpandedKeys } =
+      state.catalogTree;
     return {
       privateTreeNodesMap,
       privateRootId: privateRootId || rootId,
@@ -107,8 +93,10 @@ export const Private = () => {
      * Confirmation of change of authority
      * Only move order or nodes with permission settings enabled
      */
-    if ((dropPosition !== 0 && privateTreeNodesMap[dragNodeId].parentId === privateTreeNodesMap[dropNodeId].parentId)
-      || privateTreeNodesMap[dragNodeId].nodePermitSet) {
+    if (
+      (dropPosition !== 0 && privateTreeNodesMap[dragNodeId].parentId === privateTreeNodesMap[dropNodeId].parentId) ||
+      privateTreeNodesMap[dragNodeId].nodePermitSet
+    ) {
       nodeMove(dragNodeId, dropNodeId, dropPosition, ConfigConstant.Modules.PRIVATE);
       return;
     }
@@ -158,7 +146,7 @@ export const Private = () => {
     });
     onSetContextMenu(e as React.MouseEvent<HTMLElement>);
   };
-  
+
   const selectNodeHandler = (e: React.MouseEvent, selectedKeys: string | string[]) => {
     if (editNodeId) {
       return;

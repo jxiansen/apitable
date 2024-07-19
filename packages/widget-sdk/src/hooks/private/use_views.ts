@@ -5,10 +5,10 @@ import { getWidgetDatasheet } from 'store';
 
 /**
  * Get the bound datasheet view and handle returning only one view in the mirror.
- * @param datasheetId 
+ * @param datasheetId
  */
 export const useViews = (datasheetId?: string) => {
-  const views = useSelector(state => {
+  const views = useSelector((state) => {
     const sourceId = state.widget?.snapshot.sourceId;
     const datasheet = getWidgetDatasheet(state, datasheetId);
     if (!datasheet) {
@@ -18,7 +18,7 @@ export const useViews = (datasheetId?: string) => {
     if (sourceId?.startsWith('mir')) {
       const sourceInfo = Selectors.getMirrorSourceInfo(state as any as IReduxState, sourceId);
       if (sourceInfo) {
-        const viewData = views.find(viewData => viewData.id === sourceInfo.viewId);
+        const viewData = views.find((viewData) => viewData.id === sourceInfo.viewId);
         return viewData ? [viewData] : [];
       }
     }

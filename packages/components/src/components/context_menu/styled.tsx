@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
 import { Typography } from '../typography';
@@ -22,12 +20,12 @@ export const StyledSubMenu = styled.div.attrs(applyDefaultTheme)`
   left: 0;
   top: 0;
   box-sizing: border-box;
-  ${props => {
+  ${(props) => {
     const { color } = props.theme;
     return css`
-        background: ${color.highestBg};
-        box-shadow: ${color.shadowCommonHighest};
-      `;
+      background: ${color.highestBg};
+      box-shadow: ${color.shadowCommonHighest};
+    `;
   }};
   padding: 4px 0;
   border-radius: 4px;
@@ -40,7 +38,7 @@ export const StyledMenuItem = styled.div.attrs(applyDefaultTheme)<IContextMenuSt
   align-items: center;
   height: 40px;
   padding: 0 8px;
-  cursor: ${(props) => props.disabled ? 'not-allowed' : 'pointer'};
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   margin: 0 8px;
   box-sizing: border-box;
   font-size: 14px;
@@ -51,7 +49,9 @@ export const StyledMenuItem = styled.div.attrs(applyDefaultTheme)<IContextMenuSt
       const { palette, color } = props.theme;
       const disableColor = palette.type === 'light' ? color.fc12 : convertHexToRGB('#fff', 0.5);
       return css`
-        div, svg, p {
+        div,
+        svg,
+        p {
           color: ${disableColor} !important;
           fill: ${disableColor} !important;
         }
@@ -79,7 +79,7 @@ export const StyledMenuItem = styled.div.attrs(applyDefaultTheme)<IContextMenuSt
   }}
 
   svg {
-    fill: ${props => props.theme.color.textCommonTertiary};
+    fill: ${(props) => props.theme.color.textCommonTertiary};
     width: 16px;
     height: 16px;
     font-size: 12px;
@@ -89,25 +89,25 @@ export const StyledMenuItem = styled.div.attrs(applyDefaultTheme)<IContextMenuSt
 
   &:hover {
     border-radius: 4px;
-    ${props => {
-    if (props.disabled) {
-      return '';
-    }
-    return css`
-          background: ${props.theme.color.fill0};
-        `;
-  }};
-    }
+    ${(props) => {
+      if (props.disabled) {
+        return '';
+      }
+      return css`
+        background: ${props.theme.color.fill0};
+      `;
+    }};
+  }
   &:active {
     border-radius: 4px;
-    ${props => {
-    if (props.disabled) {
-      return '';
-    }
-    return css`
-          background: ${props.theme.color.fill1};
-        `;
-  }};
+    ${(props) => {
+      if (props.disabled) {
+        return '';
+      }
+      return css`
+        background: ${props.theme.color.fill1};
+      `;
+    }};
   }
 `;
 
@@ -135,16 +135,12 @@ export const StyledMenuShadow = styled.div.attrs(applyDefaultTheme)`
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   pointer-events: none;
-  background: linear-gradient(
-    rgba(253, 253, 253, 0.5),
-    rgba(253, 253, 253, 0.92) 81.48%,
-    rgba(253, 253, 253, 1) 100%
-  );
+  background: linear-gradient(rgba(253, 253, 253, 0.5), rgba(253, 253, 253, 0.92) 81.48%, rgba(253, 253, 253, 1) 100%);
 `;
 
 export const StyledMenuItemExtra = styled.div.attrs(applyDefaultTheme)`
   margin-left: 4px;
-  color: ${props => props.theme.color.fc3};
+  color: ${(props) => props.theme.color.fc3};
   font-size: 13px;
   text-align: right;
   text-transform: capitalize;

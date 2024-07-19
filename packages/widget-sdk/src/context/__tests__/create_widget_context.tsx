@@ -1,5 +1,3 @@
-
-
 import { ThemeName } from '@apitable/components';
 import { IWidgetConfig, IWidgetState } from 'interface';
 import React from 'react';
@@ -20,9 +18,7 @@ export function createWidgetContextWrapper(config: IWidgetConfig, widgetState: I
   return ({ children }: { children: any }) => (
     <_Provider store={widgetStore}>
       <WidgetContext.Provider value={{ id: widgetState.widget!.id, theme: ThemeName.Light, locale, widgetStore }}>
-        <WidgetConfigContext.Provider value={config}>
-          {children}
-        </WidgetConfigContext.Provider>
+        <WidgetConfigContext.Provider value={config}>{children}</WidgetConfigContext.Provider>
       </WidgetContext.Provider>
     </_Provider>
   );

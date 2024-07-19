@@ -1,5 +1,3 @@
-
-
 import { KonvaEventObject } from 'konva/lib/Node';
 import { isEqual } from 'lodash';
 import { ShortcutActionManager, ShortcutActionName } from 'modules/shared/shortcut_key';

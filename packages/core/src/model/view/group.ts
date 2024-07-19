@@ -1,9 +1,7 @@
-
-
 import { computeCache } from 'compute_manager/compute_cache_manager';
 import { IReduxState, ILinearRow } from '../../exports/store/interfaces';
 import { CellType } from 'modules/shared/store/constants';
-import { getVisibleRows, getVisibleRowsIndexMap }from 'modules/database/store/selectors/resource/datasheet/rows_calc';
+import { getVisibleRows, getVisibleRowsIndexMap } from 'modules/database/store/selectors/resource/datasheet/rows_calc';
 import { IGroupInfo } from 'types';
 
 type GroupTabIds = Map<string, boolean>; // recordId_depth[]
@@ -12,10 +10,10 @@ export class Group {
   groupArray: string[] = [];
   groupTabIdMap: Map<string, boolean> = new Map();
   constructor(groupInfo: IGroupInfo, groupBreakpoint?: { [key: string]: number[] }) {
-    this.groupArray = groupInfo.map(f => f.fieldId);
+    this.groupArray = groupInfo.map((f) => f.fieldId);
     this.groupBreakpoint = this.groupArray.length && groupBreakpoint ? groupBreakpoint : {};
     if (!groupBreakpoint) {
-      groupInfo.forEach(groupItem => {
+      groupInfo.forEach((groupItem) => {
         this.groupBreakpoint[groupItem.fieldId] = [];
       });
     }
@@ -66,15 +64,15 @@ export class Group {
     const startVisibleRowIndex = rowIndexMap.get(recordId);
     const breakPoints = this.groupBreakpoint[this.groupArray[depth]!];
     if (!breakPoints) return [];
-    const breakPointIndex = breakPoints.findIndex(i => i === startVisibleRowIndex);
+    const breakPointIndex = breakPoints.findIndex((i) => i === startVisibleRowIndex);
     const endVisibleRowIndex = breakPoints[breakPointIndex + 1];
     const childGroupFieldId = this.groupArray[depth + 1];
     if (childGroupFieldId) {
       const childBreakpoints = this.groupBreakpoint[childGroupFieldId];
       if (childBreakpoints) {
-        const startIndex = childBreakpoints.findIndex(i => i === startVisibleRowIndex);
-        const endIndex = childBreakpoints.findIndex(i => i === endVisibleRowIndex);
-        return childBreakpoints.slice(startIndex, endIndex).map(recordIndex => rows[recordIndex]?.recordId);
+        const startIndex = childBreakpoints.findIndex((i) => i === startVisibleRowIndex);
+        const endIndex = childBreakpoints.findIndex((i) => i === endVisibleRowIndex);
+        return childBreakpoints.slice(startIndex, endIndex).map((recordIndex) => rows[recordIndex]?.recordId);
       }
     }
     return [];
@@ -87,7 +85,7 @@ export class Group {
     const startVisibleRowIndex = rowIndexMap.get(recordId);
     const breakPointArray = this.groupBreakpoint[this.groupArray[depth]!];
     if (!breakPointArray) return [];
-    const breakPointIndex = breakPointArray.findIndex(i => i === startVisibleRowIndex);
+    const breakPointIndex = breakPointArray.findIndex((i) => i === startVisibleRowIndex);
     const endVisibleRowIndex = breakPointArray[breakPointIndex + 1];
     return visibleRows.slice(startVisibleRowIndex, endVisibleRowIndex);
   }
@@ -96,11 +94,7 @@ export class Group {
    * According to the breakpoint, generate the Row of the grouping structure between the breakpoint Records
    * @param breakIndex
    */
-  genGroupLinearRows(
-    breakIndex: number,
-    recordId: string,
-    preRecordId: string,
-  ) {
+  genGroupLinearRows(breakIndex: number, recordId: string, preRecordId: string) {
     const res: ILinearRow[] = [];
     let breakPointGroupLevel = 0;
     for (const [index, fid] of this.groupArray.entries()) {
@@ -114,7 +108,8 @@ export class Group {
     if (preRecordId) {
       const depth = this.groupArray.length;
       res.push({
-        type: CellType.Add, depth,
+        type: CellType.Add,
+        depth,
         recordId: preRecordId,
       });
     }
@@ -126,14 +121,16 @@ export class Group {
         if (recordId) {
           const depth = this.groupArray.length - 1 - i;
           res.push({
-            type: CellType.Blank, depth,
+            type: CellType.Blank,
+            depth,
             recordId: recordId,
           });
         }
       } else if (preRecordId) {
         const depth = this.groupArray.length - 1 - i;
         res.push({
-          type: CellType.Blank, depth,
+          type: CellType.Blank,
+          depth,
           recordId: preRecordId,
         });
       }

@@ -1,5 +1,3 @@
-
-
 import { ReactEditor } from 'slate-react';
 import { IMetaEditor, IEditorMeta } from '../interface/editor';
 

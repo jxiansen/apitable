@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import Image from 'next/image';
 import Trigger from 'rc-trigger';
@@ -91,7 +89,7 @@ export const ViewIntroduceList = (props: IViewIntroduceList) => {
   const isViewCountOverLimit = useAppSelector((state) => {
     return Selectors.getViewsList(state).length >= getMaxViewCountPerSheet();
   });
-  const permissions = useAppSelector(state => Selectors.getPermissions(state));
+  const permissions = useAppSelector((state) => Selectors.getPermissions(state));
   const { style, onListenResize } = useListenVisualHeight({
     listenNode: containerRef,
     minHeight: MIN_HEIGHT,
@@ -160,23 +158,25 @@ export const ViewIntroduceList = (props: IViewIntroduceList) => {
         );
       })}
 
-      {nodeTypeList.length > 0 && <div className={styles.nodeTypeContainer}>
-        {nodeTypeList.map((nodeType, index) => {
-          return (
-            <TriggerComponent key={index} popupComponent={<NodeIntroduce nodeType={nodeType}/>}>
-              <section
-                className={styles.viewItem}
-                id={DATASHEET_ID.VIEW_CREATOR_FORM}
-                onClick={(e) => addNewNode(e as any as React.MouseEvent, nodeType)}
-              >
-                <NodeIcon nodeType={nodeType} color={colors.primaryColor} size={16}/>
-                <span>{FormView.getViewIntroduce()!.title}</span>
-                <AddOutlined color={colors.thirdLevelText}/>
-              </section>
-            </TriggerComponent>
-          );
-        })}
-      </div>}
+      {nodeTypeList.length > 0 && (
+        <div className={styles.nodeTypeContainer}>
+          {nodeTypeList.map((nodeType, index) => {
+            return (
+              <TriggerComponent key={index} popupComponent={<NodeIntroduce nodeType={nodeType} />}>
+                <section
+                  className={styles.viewItem}
+                  id={DATASHEET_ID.VIEW_CREATOR_FORM}
+                  onClick={(e) => addNewNode(e as any as React.MouseEvent, nodeType)}
+                >
+                  <NodeIcon nodeType={nodeType} color={colors.primaryColor} size={16} />
+                  <span>{FormView.getViewIntroduce()!.title}</span>
+                  <AddOutlined color={colors.thirdLevelText} />
+                </section>
+              </TriggerComponent>
+            );
+          })}
+        </div>
+      )}
 
       {!embedId && permissions.manageable && (
         <section

@@ -1,5 +1,3 @@
-
-
 /**
  * utils for operand
  */
@@ -11,7 +9,7 @@ import { EmptyNullOperand, EmptyObjectOperand, EmptyArrayOperand } from './const
 // is input value an operand
 export const isOperand = (value: any) => {
   if (value == null) return false;
-  return typeof value === 'object' && value.type === 'Literal' || value.type === 'Expression';
+  return (typeof value === 'object' && value.type === 'Literal') || value.type === 'Expression';
 };
 
 // is input value an expression
@@ -95,7 +93,7 @@ export const isOperandNullValue = (operand: any, schema: any): boolean => {
   }
   switch (schema.type) {
     case 'object': {
-      return Object.keys(schema.properties!).some(propertyKey => {
+      return Object.keys(schema.properties!).some((propertyKey) => {
         const propertySchema = schema.properties![propertyKey] as JSONSchema7;
         const propertyValue = getObjectOperandProperty(operand, propertyKey, propertySchema);
         return isOperandNullValue(propertyValue, propertySchema);
@@ -136,7 +134,7 @@ export const objectCombOperand = (operands: any[]) => {
     const newItemKeys = newItems.filter((_item, index) => {
       return index % 2 === 0;
     });
-    const itemKeyIndex = newItemKeys.findIndex(key => isEqual(key, itemKey));
+    const itemKeyIndex = newItemKeys.findIndex((key) => isEqual(key, itemKey));
     if (itemKeyIndex > -1) {
       const itemValueIndex = itemKeyIndex * 2 + 1;
       const oldItemValue = newItems[itemValueIndex];
@@ -176,23 +174,25 @@ export const data2Operand = (data: any): any => {
           type: 'Expression',
           value: {
             operator: 'newArray',
-            operands: data.map(item => data2Operand(item))
-          }
+            operands: data.map((item) => data2Operand(item)),
+          },
         };
       }
       return {
         type: 'Expression',
         value: {
           operator: 'newObject',
-          operands: Object.keys(data).map(key => [key, data2Operand(data[key])]).flat()
-        }
+          operands: Object.keys(data)
+            .map((key) => [key, data2Operand(data[key])])
+            .flat(),
+        },
       };
     case 'string':
     case 'number':
     case 'boolean':
       return {
         type: 'Literal',
-        value: data
+        value: data,
       };
   }
 };
@@ -208,8 +208,8 @@ export const mergeOperand = (operand1: any, operand2: any) => {
       type: 'Expression',
       value: {
         operator: 'newObject',
-        operands: objectCombOperand([...operand1.value.operands, ...operand2.value.operands])
-      }
+        operands: objectCombOperand([...operand1.value.operands, ...operand2.value.operands]),
+      },
     };
   }
   return operand1;

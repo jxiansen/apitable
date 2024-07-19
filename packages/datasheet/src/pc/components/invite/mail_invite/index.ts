@@ -1,5 +1,3 @@
-
-
 export * from './mail_invite';
 export * from './mail_invalid';
 export * from './mail_login';

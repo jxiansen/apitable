@@ -1,5 +1,3 @@
-
-
 import { EntityRepository, In, Repository } from 'typeorm';
 import { DatasheetChangesetEntity } from '../entities/datasheet.changeset.entity';
 import { DatasheetChangesetSourceEntity } from '../entities/datasheet.changeset.source.entity';
@@ -88,7 +86,7 @@ export class DatasheetChangesetRepository extends Repository<DatasheetChangesetE
       .select('vdc.revision', 'revision')
       .where('vdc.dst_id = :dstId', { dstId })
       .andWhere('vdc.revision IN (:...revisions)', { revisions })
-      .andWhere(qb => {
+      .andWhere((qb) => {
         const subQuery = qb
           .subQuery()
           .select('vdcs.message_id')

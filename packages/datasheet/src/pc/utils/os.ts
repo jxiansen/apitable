@@ -1,5 +1,3 @@
-
-
 import { ConfigConstant } from '@apitable/core';
 import { isMobileApp } from './env';
 

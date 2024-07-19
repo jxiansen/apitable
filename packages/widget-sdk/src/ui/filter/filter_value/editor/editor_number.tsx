@@ -13,21 +13,12 @@ interface IEditorNumber {
 }
 
 export const EditorNumber: React.FC<IEditorNumber> = (props) => {
-  const {
-    tooltip = t(Strings.number_cell_input_tips),
-    validate,
-    value,
-    onChange,
-    placeholder
-  } = props;
+  const { tooltip = t(Strings.number_cell_input_tips), validate, value, onChange, placeholder } = props;
   const [input, setInput] = useState<string | undefined>(value);
   const [isFormat, setIsFormat] = useState<boolean | undefined>(true);
-  const { run: hideTipDebounce } = useDebounceFn(
-    () => setIsFormat(true),
-    {
-      wait: 2000,
-    },
-  );
+  const { run: hideTipDebounce } = useDebounceFn(() => setIsFormat(true), {
+    wait: 2000,
+  });
 
   const validateValue = (value: any) => {
     // allow null & undefined
@@ -40,7 +31,7 @@ export const EditorNumber: React.FC<IEditorNumber> = (props) => {
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    
+
     const validateRes = !validate || validateValue(value);
     if (!validateRes) {
       setIsFormat(validateRes);
@@ -51,18 +42,16 @@ export const EditorNumber: React.FC<IEditorNumber> = (props) => {
     onChange && onChange(value || null);
   };
 
-  return <Tooltip
-    visible={!isFormat}
-    content={tooltip}
-    placement="top"
-  >
-    <TextInput
-      className={'widgetFilterTextInput'}
-      style={{ textAlign: 'right' }}
-      block
-      value={input}
-      onChange={onInputChange}
-      placeholder={placeholder}
-    />
-  </Tooltip>;
+  return (
+    <Tooltip visible={!isFormat} content={tooltip} placement="top">
+      <TextInput
+        className={'widgetFilterTextInput'}
+        style={{ textAlign: 'right' }}
+        block
+        value={input}
+        onChange={onInputChange}
+        placeholder={placeholder}
+      />
+    </Tooltip>
+  );
 };

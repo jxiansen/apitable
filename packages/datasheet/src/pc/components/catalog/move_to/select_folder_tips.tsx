@@ -1,5 +1,3 @@
-
-
 import { Breadcrumb } from 'antd';
 import { LinkButton, Typography, useThemeColors } from '@apitable/components';
 import { IParent, Strings, t } from '@apitable/core';

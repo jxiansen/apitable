@@ -1,5 +1,3 @@
-
-
 import { Path as KonvaPath } from 'react-konva';
 
 const Path = (props: any) => {

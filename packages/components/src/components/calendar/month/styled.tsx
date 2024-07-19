@@ -1,23 +1,21 @@
-
-
 import styled, { css } from 'styled-components';
 import { Drawer } from 'antd';
 import { applyDefaultTheme } from 'theme';
 
-export const MonthListDiv = styled.div.attrs(applyDefaultTheme) <{ isMobile: boolean }>`
+export const MonthListDiv = styled.div.attrs(applyDefaultTheme)<{ isMobile: boolean }>`
   min-height: 450px;
   width: 100%;
   position: relative;
   .moreTask {
-      ${props => {
-    if (!props.isMobile) {
-      return '';
-    }
-    return `
+    ${(props) => {
+      if (!props.isMobile) {
+        return '';
+      }
+      return `
     margin-left: 0 !important;
     transform: scale(0.9);
       `;
-  }}
+    }}
   }
   ${css`
     .task {
@@ -26,7 +24,7 @@ export const MonthListDiv = styled.div.attrs(applyDefaultTheme) <{ isMobile: boo
       &.draggable > .list {
         cursor: auto;
         &:hover {
-          border-color: #E9E9F5;
+          border-color: #e9e9f5;
         }
       }
       &.endClose > .list {
@@ -60,10 +58,10 @@ export const MonthListDiv = styled.div.attrs(applyDefaultTheme) <{ isMobile: boo
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      ${props => css`
-      background-color: ${props.theme.color.defaultBg};
-      color: ${props.theme.color.fc1};
-    `}
+      ${(props) => css`
+        background-color: ${props.theme.color.defaultBg};
+        color: ${props.theme.color.fc1};
+      `}
     }
     .left-resize,
     .right-resize {
@@ -87,7 +85,7 @@ export const MonthListDiv = styled.div.attrs(applyDefaultTheme) <{ isMobile: boo
 export const DayDiv = styled.div.attrs(applyDefaultTheme)`
   flex: 1;
   height: 100%;
-  ${props => css`
+  ${(props) => css`
     border-left: 1px solid ${props.theme.color.fc5};
   `}
   position: relative;
@@ -101,7 +99,7 @@ export const DaySpan = styled.span`
   font-weight: 500;
 
   ${() => css`
-    color: #C9C9C9;
+    color: #c9c9c9;
   `}
 `;
 
@@ -109,7 +107,7 @@ export const MoreDiv = styled.div.attrs(applyDefaultTheme)`
   max-height: 560px;
   width: 240px;
   margin: -12px -16px;
-  ${props => css`
+  ${(props) => css`
     color: ${props.theme.color.shadowCommonHigh};
   `}
   header {
@@ -123,7 +121,7 @@ export const MoreDiv = styled.div.attrs(applyDefaultTheme)`
 `;
 
 export const MoreListDiv = styled.div.attrs(applyDefaultTheme)<{ isMobile: boolean }>`
-  ${props => {
+  ${(props) => {
     if (!props.isMobile) {
       return `
         width: 240px;
@@ -132,39 +130,39 @@ export const MoreListDiv = styled.div.attrs(applyDefaultTheme)<{ isMobile: boole
     return '';
   }}
   .moreList {
-    ${props => {
-    if (!props.isMobile) {
-      return `
+    ${(props) => {
+      if (!props.isMobile) {
+        return `
         overflow-y: overlay !important;
       `;
-    }
-    return '';
-  }}
+      }
+      return '';
+    }}
   }
   .list {
-      cursor: pointer;
-      position: relative;
-      padding: 0 8px;
-      box-sizing: border-box;
-      border-radius: 4px;
-      font-size: 13px;
-      line-height: 22px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      ${props => css`
-        background-color: ${props.theme.color.defaultBg};
-        color: ${props.theme.color.fc1};
-      `}
-      ${props => {
-    if (!props.isMobile) {
-      return `
+    cursor: pointer;
+    position: relative;
+    padding: 0 8px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    ${(props) => css`
+      background-color: ${props.theme.color.defaultBg};
+      color: ${props.theme.color.fc1};
+    `}
+    ${(props) => {
+      if (!props.isMobile) {
+        return `
           margin: 0 6px;
           `;
-    }
-    return '';
-  }}
-    }
+      }
+      return '';
+    }}
+  }
 `;
 
 export const MoreHeader = styled.span`
@@ -190,4 +188,3 @@ export const DrawerStyled = styled(Drawer)`
 export const ListItemStyled = styled.div`
   padding: 0 8px;
 `;
-

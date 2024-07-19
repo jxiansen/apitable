@@ -1,5 +1,3 @@
-
-
 import { JSONSchema7 } from 'json-schema';
 import * as React from 'react';
 import { COMPONENT_TYPES } from '../../../const';
@@ -34,8 +32,8 @@ export function getFieldComponent(
   return componentName in fields
     ? fields[componentName]
     : () => {
-      const { UnsupportedField } = fields;
+        const { UnsupportedField } = fields;
 
-      return <UnsupportedField schema={schema} idSchema={idSchema} reason={`Unknown field type ${schema.type}`} />;
-    };
+        return <UnsupportedField schema={schema} idSchema={idSchema} reason={`Unknown field type ${schema.type}`} />;
+      };
 }

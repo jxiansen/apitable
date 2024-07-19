@@ -1,12 +1,12 @@
-
-
 import { ConfigConstant } from '../config';
 import type { ITreeNode, ITreeNodesMap, INode, INodesMapItem } from 'exports/store/interfaces';
 
 // Collect the ids of all nodes under the specified node (including itself)
 export const collectProperty = (treeNodesMap: ITreeNodesMap, rootId: string) => {
   const node = treeNodesMap[rootId];
-  if (!node) { return [rootId]; }
+  if (!node) {
+    return [rootId];
+  }
   const findId = (node: INodesMapItem) => {
     return node.children.reduce((prev, nodeId) => {
       prev.push(nodeId);
@@ -75,7 +75,9 @@ export const flatNodeTree = (nodeTree: INode[]) => {
 export const getExpandNodeIds = (data: ITreeNodesMap, nodeId: string, end: any = null, favoriteTreeNodeIds: string[] = []) => {
   const expandNodeIds: string[] = [];
   // If the chain is found to be broken when searching up the chain recursively, give up this operation directly
-  if (!data[nodeId]) { return []; }
+  if (!data[nodeId]) {
+    return [];
+  }
   if (data[nodeId]!.type === ConfigConstant.NodeType.ROOT) {
     return expandNodeIds;
   }

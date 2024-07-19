@@ -1,5 +1,3 @@
-
-
 import { IDashboardSnapshot, IOperation, IRemoteChangeset, jot } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { EffectConstantName, ICommonData } from 'database/ot/interfaces/ot.interface';
@@ -20,7 +18,7 @@ export class DashboardOtService {
     @InjectLogger() private readonly logger: Logger,
     private readonly widgetService: WidgetService,
     private readonly repository: ResourceMetaRepository,
-  ) { }
+  ) {}
 
   createResultSet() {
     return {
@@ -31,9 +29,8 @@ export class DashboardOtService {
   }
 
   analyseOperates(operations: IOperation[], permission: NodePermission, resultSet: { [key: string]: any }) {
-
-    operations.map(item => {
-      item.actions.forEach(action => {
+    operations.map((item) => {
+      item.actions.forEach((action) => {
         if ('oi' in action || 'li' in action) {
           if (action.p[0] === 'widgetInstallations') {
             if (!permission.manageable) {
@@ -70,13 +67,7 @@ export class DashboardOtService {
     return this.transaction;
   }
 
-  transaction = async(
-    manager: EntityManager,
-    effectMap: Map<string, any>,
-    commonData: ICommonData,
-    resultSet: { [key: string]: any }
-  ) => {
-
+  transaction = async (manager: EntityManager, effectMap: Map<string, any>, commonData: ICommonData, resultSet: { [key: string]: any }) => {
     await this.handleAddWidget(manager, commonData, resultSet);
 
     await this.handleDeleteWidget(manager, resultSet);
@@ -92,7 +83,7 @@ export class DashboardOtService {
 
   async handleAddWidget(manager: EntityManager, commonData: ICommonData, resultSet: { [key: string]: any }) {
     if (this.logger.isDebugEnabled()) {
-      this.logger.debug('[Start updating widget\'s add state]');
+      this.logger.debug("[Start updating widget's add state]");
     }
     if (!resultSet.addWidgetIds.length) {
       return;
@@ -104,7 +95,8 @@ export class DashboardOtService {
     this.logger.info('[ ======> Start batch adding widgets]');
     for (const widgetId of resultSet.addWidgetIds) {
       if (widgetId && deleteWidgetIds.includes(widgetId)) {
-        await manager.createQueryBuilder()
+        await manager
+          .createQueryBuilder()
           .update(WidgetEntity)
           .set({ isDeleted: false })
           .where('widget_id=:widgetId', { widgetId: widgetId })
@@ -116,14 +108,15 @@ export class DashboardOtService {
 
   async handleDeleteWidget(manager: EntityManager, resultSet: { [key: string]: any }) {
     if (this.logger.isDebugEnabled()) {
-      this.logger.debug('[Starting update widget\'s delete state]');
+      this.logger.debug("[Starting update widget's delete state]");
     }
 
     if (!resultSet.deleteWidgetIds.length) {
       return;
     }
     this.logger.info('[ ======> Start batch deleting widgets]');
-    await manager.createQueryBuilder()
+    await manager
+      .createQueryBuilder()
       .update(WidgetEntity)
       .set({ isDeleted: true })
       .where('widget_id IN(:...widgetIds)', { widgetIds: resultSet.deleteWidgetIds })
@@ -162,18 +155,21 @@ export class DashboardOtService {
     const beginTime = +new Date();
     this.logger.info(`[${remoteChangeset.resourceId}] ====> Start storing changeset......`);
     const { userId } = commonData;
-    await manager.createQueryBuilder()
+    await manager
+      .createQueryBuilder()
       .insert()
       .into(ResourceChangesetEntity)
-      .values([{
-        id: IdWorker.nextId().toString(),
-        messageId: remoteChangeset.messageId,
-        resourceId: remoteChangeset.resourceId,
-        resourceType: remoteChangeset.resourceType,
-        operations: remoteChangeset.operations,
-        revision: remoteChangeset.revision,
-        createdBy: userId,
-      }])
+      .values([
+        {
+          id: IdWorker.nextId().toString(),
+          messageId: remoteChangeset.messageId,
+          resourceId: remoteChangeset.resourceId,
+          resourceType: remoteChangeset.resourceType,
+          operations: remoteChangeset.operations,
+          revision: remoteChangeset.revision,
+          createdBy: userId,
+        },
+      ])
       .updateEntity(false)
       .execute();
     const endTime = +new Date();

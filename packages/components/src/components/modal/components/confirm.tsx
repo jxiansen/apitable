@@ -1,5 +1,3 @@
-
-
 import { InfoCircleFilled, WarnCircleFilled, QuestionCircleOutlined, CheckCircleFilled, WarnFilled } from '@apitable/icons';
 import { Box } from 'components/box';
 import { Button } from 'components/button';
@@ -36,19 +34,7 @@ export const confirm = (props: IModalFuncProps): IModalRef => {
   destroyFns.push(close);
 
   const render = (props: IModalFuncProps) => {
-    const {
-      content,
-      title,
-      onOk = noop,
-      onCancel = noop,
-      closable = false,
-      okText,
-      cancelText,
-      icon,
-      type,
-      footer,
-      ...rest
-    } = props;
+    const { content, title, onOk = noop, onCancel = noop, closable = false, okText, cancelText, icon, type, footer, ...rest } = props;
     const handleOk = () => {
       onOk();
       close();
@@ -59,51 +45,40 @@ export const confirm = (props: IModalFuncProps): IModalRef => {
       close();
     };
 
-    const CustomFooter = (!footer && typeof footer === 'object') ? null : (
-      <Box
-        display='flex'
-        justifyContent='flex-end'
-        alignItems='center'
-        padding={24}
-      >
-        {type === 'confirm' && (
-          <>
-            <TextButton
-              {...props.cancelButtonProps}
-              onClick={handleCancel}
-              style={{
-                height: 40,
-                padding: '9px 16px',
-              }}
-            >
-              {props.cancelText || 'Cancel'}
-            </TextButton>
-            <div style={{ marginRight: 8 }} />
-          </>
-        )}
-        <Button
-          color={type}
-          {...props.okButtonProps}
-          onClick={handleOk}
-        >
-          {props.okText || 'Confirm'}
-        </Button>
-      </Box>
-    );
+    const CustomFooter =
+      !footer && typeof footer === 'object' ? null : (
+        <Box display="flex" justifyContent="flex-end" alignItems="center" padding={24}>
+          {type === 'confirm' && (
+            <>
+              <TextButton
+                {...props.cancelButtonProps}
+                onClick={handleCancel}
+                style={{
+                  height: 40,
+                  padding: '9px 16px',
+                }}
+              >
+                {props.cancelText || 'Cancel'}
+              </TextButton>
+              <div style={{ marginRight: 8 }} />
+            </>
+          )}
+          <Button color={type} {...props.okButtonProps} onClick={handleOk}>
+            {props.okText || 'Confirm'}
+          </Button>
+        </Box>
+      );
 
     root.render(
       <ThemeProvider>
         <ModalBase
           visible
-          title={(
-            <Box
-              display='flex'
-              alignItems='center'
-            >
+          title={
+            <Box display="flex" alignItems="center">
               {icon}
               <div style={{ marginLeft: icon ? 8 : 0 }}>{title}</div>
             </Box>
-          )}
+          }
           onOk={handleOk}
           onCancel={handleCancel}
           getContainer={div}
@@ -118,7 +93,7 @@ export const confirm = (props: IModalFuncProps): IModalRef => {
         >
           {content}
         </ModalBase>
-      </ThemeProvider>,
+      </ThemeProvider>
     );
   };
 
@@ -160,9 +135,7 @@ export const withWarning = (props: IModalFuncProps): IModalFuncProps => {
 
 const IconDanger = styled(QuestionCircleOutlined).attrs(applyDefaultTheme)`
   ${(props) => {
-    const {
-      red,
-    } = props.theme.color;
+    const { red } = props.theme.color;
     return css`
       fill: ${red[500]};
     `;

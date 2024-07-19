@@ -1,5 +1,3 @@
-
-
 import { Checkbox } from '@apitable/components';
 import { IWidgetProps } from '../../interface';
 

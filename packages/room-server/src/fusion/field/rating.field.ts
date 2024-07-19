@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant, IField } from '@apitable/core';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { BaseNumberField } from 'fusion/field/base.number.field';

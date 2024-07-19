@@ -1,5 +1,3 @@
-
-
 export const formatString2Date = (value: string) => {
   const str = value.replace(/年| /, '-').replace(/月/, '');
   const parts = str.split('-');

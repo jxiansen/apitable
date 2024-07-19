@@ -1,9 +1,15 @@
-
-
 import { produce } from 'immer';
 import {
-  IInvite, ITeamTreeNode, IUpdateErrCodeAction, IUpdateInviteEmailInfoAction, IUpdateInviteLinkInfoAction, IUpdateLinkListAction,
-  IUpdateLinkTokenAction, IUpdateMailTokenAction, IUpdateSubTeamTreeInviteAction, IUpdateTeamTreeInviteAction,
+  IInvite,
+  ITeamTreeNode,
+  IUpdateErrCodeAction,
+  IUpdateInviteEmailInfoAction,
+  IUpdateInviteLinkInfoAction,
+  IUpdateLinkListAction,
+  IUpdateLinkTokenAction,
+  IUpdateMailTokenAction,
+  IUpdateSubTeamTreeInviteAction,
+  IUpdateTeamTreeInviteAction,
 } from '../../../../exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';
 
@@ -17,9 +23,15 @@ const defaultState: IInvite = {
   errCode: null,
 };
 
-type IInviteActions = IUpdateInviteEmailInfoAction | IUpdateTeamTreeInviteAction |
-  IUpdateSubTeamTreeInviteAction | IUpdateLinkListAction | IUpdateInviteLinkInfoAction | IUpdateLinkTokenAction |
-  IUpdateMailTokenAction | IUpdateErrCodeAction;
+type IInviteActions =
+  | IUpdateInviteEmailInfoAction
+  | IUpdateTeamTreeInviteAction
+  | IUpdateSubTeamTreeInviteAction
+  | IUpdateLinkListAction
+  | IUpdateInviteLinkInfoAction
+  | IUpdateLinkTokenAction
+  | IUpdateMailTokenAction
+  | IUpdateErrCodeAction;
 
 const findParent = (data: ITeamTreeNode[], id: string): null | ITeamTreeNode => {
   return data.reduce<ITeamTreeNode | null>((preValue, item) => {

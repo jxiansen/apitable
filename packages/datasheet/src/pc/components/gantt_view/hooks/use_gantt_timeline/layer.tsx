@@ -1,5 +1,3 @@
-
-
 import { Layer as KonvaLayer } from 'react-konva';
 
 const Layer = (props: any) => {

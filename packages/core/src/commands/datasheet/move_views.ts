@@ -1,5 +1,3 @@
-
-
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { CollaCommandName } from 'commands/enum';
 import { IJOTAction } from 'engine/ot';
@@ -7,10 +5,7 @@ import { find, isEmpty } from 'lodash';
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { ResourceType } from 'types';
 import { Strings, t } from '../../exports/i18n';
-import {
-  getActiveDatasheetId,
-  getSnapshot,
-} from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
 // import { IGridViewProperty } from 'store/interface';
 
 export interface IMoveView {
@@ -26,11 +21,9 @@ export interface IMoveViewsOptions {
 export type IMoveSelfView = Omit<IMoveView, 'viewId'>;
 
 export const moveViews: ICollaCommandDef<IMoveViewsOptions> = {
-
   undoable: true,
 
   execute: (context, options) => {
-
     const { state: state } = context;
     const { data } = options;
     const datasheetId = getActiveDatasheetId(state)!;

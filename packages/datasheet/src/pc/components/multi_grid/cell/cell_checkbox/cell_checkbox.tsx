@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import * as React from 'react';
 import { ConfigConstant, Field, FieldType, ICheckboxField, IFormulaField, ILookUpField } from '@apitable/core';

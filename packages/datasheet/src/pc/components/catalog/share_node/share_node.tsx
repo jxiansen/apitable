@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { ConfigConstant, Strings, t } from '@apitable/core';
 import { ComponentDisplay, ScreenSize } from 'pc/components/common/component_display';
@@ -32,8 +30,8 @@ export enum ShareTab {
 
 export const ShareNode: FC<React.PropsWithChildren<IShareNodeProps>> = ({ data, visible, onClose, isTriggerRender }) => {
   const nodeId = data.nodeId;
-  const nodeName = useAppSelector((state) =>
-    state.catalogTree.treeNodesMap[nodeId]?.nodeName || state.catalogTree.privateTreeNodesMap[nodeId]?.nodeName
+  const nodeName = useAppSelector(
+    (state) => state.catalogTree.treeNodesMap[nodeId]?.nodeName || state.catalogTree.privateTreeNodesMap[nodeId]?.nodeName,
   );
 
   if (isTriggerRender) {

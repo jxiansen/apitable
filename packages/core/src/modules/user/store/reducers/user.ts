@@ -1,18 +1,45 @@
-
-
 import axios from 'axios';
 import { produce } from 'immer';
 import * as ActionConstants from 'modules/shared/store/action_constants';
 import {
-  IAddWizardNumberAction, ISetActiveRecordId, ISetHttpErrInfoAction, ISetIsLoginActions, ISetLoadingAction, ISetLoginErrAction, ISetNicknameAction,
-  ISetRegisterAction, ISetReqStatusAction, ISetUsedInviteReward, ISetUserAvatarAction, ISetUserAvatarColorAction, ISetUserMeActions, ISignOutAction,
-  IUpdateUserInfoAction, IUpdateUserInfoErrAction, IUser, ISetUserTimezoneAction
+  IAddWizardNumberAction,
+  ISetActiveRecordId,
+  ISetHttpErrInfoAction,
+  ISetIsLoginActions,
+  ISetLoadingAction,
+  ISetLoginErrAction,
+  ISetNicknameAction,
+  ISetRegisterAction,
+  ISetReqStatusAction,
+  ISetUsedInviteReward,
+  ISetUserAvatarAction,
+  ISetUserAvatarColorAction,
+  ISetUserMeActions,
+  ISignOutAction,
+  IUpdateUserInfoAction,
+  IUpdateUserInfoErrAction,
+  IUser,
+  ISetUserTimezoneAction,
 } from '../../../../exports/store/interfaces';
 
-type UserActions = ISetUserMeActions | ISetIsLoginActions | ISetLoginErrAction |
-  ISetRegisterAction | ISetLoadingAction | ISetUserAvatarColorAction |
-  ISignOutAction | ISetUserAvatarAction | ISetReqStatusAction | ISetHttpErrInfoAction | ISetNicknameAction |
-  IUpdateUserInfoAction | IUpdateUserInfoErrAction | IAddWizardNumberAction | ISetActiveRecordId | ISetUsedInviteReward | ISetUserTimezoneAction;
+type UserActions =
+  | ISetUserMeActions
+  | ISetIsLoginActions
+  | ISetLoginErrAction
+  | ISetRegisterAction
+  | ISetLoadingAction
+  | ISetUserAvatarColorAction
+  | ISignOutAction
+  | ISetUserAvatarAction
+  | ISetReqStatusAction
+  | ISetHttpErrInfoAction
+  | ISetNicknameAction
+  | IUpdateUserInfoAction
+  | IUpdateUserInfoErrAction
+  | IAddWizardNumberAction
+  | ISetActiveRecordId
+  | ISetUsedInviteReward
+  | ISetUserTimezoneAction;
 
 const initValue: IUser = {
   info: null,
@@ -29,11 +56,7 @@ const initValue: IUser = {
 };
 
 declare const window: any;
-const userInfo = (
-  typeof window === 'object' &&
-  (window as any).__initialization_data__ &&
-  (window as any).__initialization_data__.userInfo
-) || null;
+const userInfo = (typeof window === 'object' && (window as any).__initialization_data__ && (window as any).__initialization_data__.userInfo) || null;
 
 if (userInfo) {
   axios.defaults.headers.common['X-Space-Id'] = userInfo.spaceId;

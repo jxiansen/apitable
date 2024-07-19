@@ -1,4 +1,3 @@
-
 import { ChangeEvent, useState } from 'react';
 import { TextInput } from '@apitable/components';
 import { map2Text } from 'pc/components/robot/robot_detail/magic_variable_container';

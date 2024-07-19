@@ -1,5 +1,3 @@
-
-
 import { Strings, t } from 'exports/i18n';
 import type { IFilterInfo } from './view_types';
 
@@ -27,9 +25,9 @@ export enum FormulaFuncType {
   Text = 'Text',
 }
 /**
-  * The underlying type of the cell value.
-  */
- export enum BasicValueType {
+ * The underlying type of the cell value.
+ */
+export enum BasicValueType {
   String = 'String',
   Number = 'Number',
   DateTime = 'DateTime',
@@ -86,7 +84,7 @@ export interface ILookUpSortField {
 }
 
 export interface ILookUpSortInfo {
-  rules: ILookUpSortField[]
+  rules: ILookUpSortField[];
 }
 
 export interface ILookUpProperty {
@@ -461,7 +459,6 @@ export interface ISelectFieldOption {
   color: number;
 }
 
-
 export interface ISelectFieldProperty {
   options: ISelectFieldOption[];
   defaultValue?: string | IMultiSelectedIds;
@@ -581,16 +578,16 @@ interface ILinkedFields {
 }
 
 export interface ICascaderProperty {
-  showAll: boolean,
-  linkedDatasheetId: string,
-  linkedViewId: string,
-  linkedFields: ILinkedFields[],
-  fullLinkedFields: ILinkedFields[],
+  showAll: boolean;
+  linkedDatasheetId: string;
+  linkedViewId: string;
+  linkedFields: ILinkedFields[];
+  fullLinkedFields: ILinkedFields[];
 }
 
 export enum ButtonStyleType {
-  Background= 0,
-  OnlyText=1
+  Background = 0,
+  OnlyText = 1,
 }
 
 export enum ButtonActionType {
@@ -599,8 +596,8 @@ export enum ButtonActionType {
 }
 
 export interface IButtonStyle {
-  type: ButtonStyleType,
-  color: number
+  type: ButtonStyleType;
+  color: number;
 }
 
 export enum OpenLinkType {
@@ -622,16 +619,16 @@ export interface IButtonAction {
 
 export interface IButtonActionMeta {
   type?: ButtonActionType;
-    expression?: string;
-    automationId?: string;
-    triggerId?: string;
+  expression?: string;
+  automationId?: string;
+  triggerId?: string;
 }
 
 export interface IButtonProperty {
   datasheetId?: string;
-  text: string,
-  style: IButtonStyle
-  action: IButtonAction,
+  text: string;
+  style: IButtonStyle;
+  action: IButtonAction;
 }
 
 export interface IButtonField extends IBaseField {
@@ -713,7 +710,7 @@ export const readonlyFields = new Set([
   FieldType.LastModifiedTime,
   FieldType.CreatedBy,
   FieldType.LastModifiedBy,
-  FieldType.Button
+  FieldType.Button,
 ]);
 
 export interface IFieldTypeCollection {
@@ -991,6 +988,6 @@ export const FieldTypeDescriptionMap: {
     fieldGroup: FieldGroup.Common,
     help: t(Strings.field_help_workdoc),
     hasOptSetting: false,
-    isBeta: true
+    isBeta: true,
   },
 };

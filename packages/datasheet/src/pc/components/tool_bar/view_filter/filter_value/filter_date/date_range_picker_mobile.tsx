@@ -1,5 +1,3 @@
-
-
 import { DatePicker } from 'antd-mobile';
 import dayjs, { Dayjs } from 'dayjs';
 import * as React from 'react';

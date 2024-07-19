@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Radio, RadioGroup } from '../index';
 import { IRadioGroup } from './interface';
@@ -24,8 +22,8 @@ export default {
         <Radio value="2">Radio 2</Radio>
         <Radio value="3">Radio 3</Radio>
       </>
-    )
-  }
+    ),
+  },
 };
 
 const Template: Story<IRadioGroup> = (args) => <RadioGroup {...args} />;
@@ -56,14 +54,14 @@ ButtonGroup.args = {
 export const SetDefaultValue = Template.bind({});
 SetDefaultValue.args = {
   name: 'set-default',
-  value: '2'
+  value: '2',
 };
 
 export const ButtonSetDefaultValue = Template.bind({});
 ButtonSetDefaultValue.args = {
   name: 'set-btn-default',
   isBtn: true,
-  value: '2'
+  value: '2',
 };
 
 export const ButtonSetDefaultValueBlock = Template.bind({});
@@ -71,7 +69,7 @@ ButtonSetDefaultValueBlock.args = {
   name: 'set-btn-default-block',
   isBtn: true,
   block: true,
-  value: '2'
+  value: '2',
 };
 
 export const WithOptions = Template.bind({});
@@ -81,8 +79,8 @@ WithOptions.args = {
   options: [
     { label: 'option 1', value: '1' },
     { label: 'option 2', value: '2' },
-    { label: 'option 2', value: '3' }
-  ]
+    { label: 'option 2', value: '3' },
+  ],
 };
 
 export const OptionsWithDisabled = Template.bind({});
@@ -93,8 +91,8 @@ OptionsWithDisabled.args = {
   options: [
     { label: 'option 1', value: '1' },
     { label: 'option 2', value: '2', disabled: true },
-    { label: 'option 2', value: '3' }
-  ]
+    { label: 'option 2', value: '3' },
+  ],
 };
 
 export const ButtonOptionsWithDisabled = Template.bind({});
@@ -106,8 +104,8 @@ ButtonOptionsWithDisabled.args = {
   options: [
     { label: 'option 1', value: '1' },
     { label: 'option 2', value: '2', disabled: true },
-    { label: 'option 2', value: '3' }
-  ]
+    { label: 'option 2', value: '3' },
+  ],
 };
 
 export const Disabled = Template.bind({});

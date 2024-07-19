@@ -1,5 +1,3 @@
-
-
 import { KanbanStyleKey } from '../../../shared/store/constants';
 import { HiddenGroupMap } from './resource';
 

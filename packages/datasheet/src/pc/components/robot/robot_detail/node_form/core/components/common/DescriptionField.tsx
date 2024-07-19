@@ -1,5 +1,3 @@
-
-
 import MarkdownIt from 'markdown-it';
 import * as React from 'react';
 import { Typography, useTheme } from '@apitable/components';

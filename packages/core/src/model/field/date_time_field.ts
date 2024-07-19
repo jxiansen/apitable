@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { DatasheetActions } from '../../commands_actions/datasheet';
 import { DateTimeBaseField } from './date_time_base_field';
@@ -14,7 +12,10 @@ import { getUserTimeZone } from 'modules/user/store/selectors/user';
 import { getFieldDefaultProperty } from './const';
 
 export class DateTimeField extends DateTimeBaseField {
-  constructor(public override field: IDateTimeField, public override state: IReduxState) {
+  constructor(
+    public override field: IDateTimeField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -27,19 +28,24 @@ export class DateTimeField extends DateTimeBaseField {
     includeTimeZone: Joi.boolean(),
   }).required();
 
-  static cellValueSchema = Joi.number().custom((value, helpers) => {
-    if (dayjs(value).isValid()) {
-      return value;
-    }
-    return helpers.error('valid date');
-  }, 'custom validation').allow(null).required();
+  static cellValueSchema = Joi.number()
+    .custom((value, helpers) => {
+      if (dayjs(value).isValid()) {
+        return value;
+      }
+      return helpers.error('valid date');
+    }, 'custom validation')
+    .allow(null)
+    .required();
 
   static openWriteValueSchema = Joi.custom((value: Date | string, helpers) => {
     if (dayjs(value).isValid()) {
       return value;
     }
     return helpers.error('valid date');
-  }).allow(null).required();
+  })
+    .allow(null)
+    .required();
 
   static defaultDateFormat: string = DateFormat[0]!;
   static defaultTimeFormat: string = TimeFormat[0]!;
@@ -93,7 +99,7 @@ export class DateTimeField extends DateTimeBaseField {
       dateFormat: DateFormat[dateFormat]!,
       timeFormat: TimeFormat[timeFormat]!,
       autoFill,
-      includeTime
+      includeTime,
     };
   }
 
@@ -117,7 +123,7 @@ export class DateTimeField extends DateTimeBaseField {
       dateFormat: DateFormat[dateFormat],
       timeFormat: timeFormat ? TimeFormat[timeFormat] : defaultProperty.timeFormat,
       autoFill: autoFill ?? defaultProperty.autoFill,
-      includeTime: includeTime ?? defaultProperty.includeTime
+      includeTime: includeTime ?? defaultProperty.includeTime,
     };
   }
 }

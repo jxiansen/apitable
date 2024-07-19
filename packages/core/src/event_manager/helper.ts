@@ -1,13 +1,7 @@
-
-
 import { Field } from 'model/field';
 // import 'reflect-metadata';
 import { IRecordCellValue, IReduxState } from '../exports/store/interfaces';
-import {
-  getSnapshot,
-  getDatasheet,
-  getCellValue
-} from 'modules/database/store/selectors/resource/datasheet';
+import { getSnapshot, getDatasheet, getCellValue } from 'modules/database/store/selectors/resource/datasheet';
 import { BasicOpenValueType } from 'types/field_types_open';
 import { getDashboard } from '../modules/database/store/selectors/resource/dashboard';
 import { getForm } from '../modules/database/store/selectors/resource/form';
@@ -63,7 +57,7 @@ export const testPath = (pathList: (string | number)[], testPathList: string[], 
     return NOT_PASS_RES;
   }
   const res: {
-    [key: string]: any
+    [key: string]: any;
   } = { pass: true };
 
   for (let i = 0; i < testPathList.length; i++) {
@@ -84,8 +78,7 @@ export const shallowEqual = (objA: any, objB: any) => {
     return true;
   }
 
-  if (typeof objA !== 'object' || objA === null ||
-    typeof objB !== 'object' || objB === null) {
+  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
     return false;
   }
 
@@ -98,8 +91,7 @@ export const shallowEqual = (objA: any, objB: any) => {
 
   // Test for A's keys different from B.
   for (const key of keysA) {
-    if (!Object.hasOwnProperty.call(objB, key) ||
-      !Object.is(objA[key], objB[key])) {
+    if (!Object.hasOwnProperty.call(objB, key) || !Object.is(objA[key], objB[key])) {
       return false;
     }
   }
@@ -120,7 +112,7 @@ export const transformOpFields = (props: ITransformOpFieldsProps) => {
   const eventFields: { [key: string]: BasicOpenValueType | null } = {};
   const fieldTypeMap = new Map<string, number>();
   const newFields = { ...recordData };
-  Object.keys(snapshot?.meta.fieldMap).forEach(fieldId => {
+  Object.keys(snapshot?.meta.fieldMap).forEach((fieldId) => {
     const field = snapshot.meta.fieldMap[fieldId]!;
     let cellValue = recordData[fieldId]!;
     // FIXME: Only fill in what is not, there is a problem here.
@@ -132,13 +124,14 @@ export const transformOpFields = (props: ITransformOpFieldsProps) => {
       newFields[fieldId] = cellValue;
     }
     fieldTypeMap.set(fieldId, field.type);
-    eventFields[fieldId] = field.type === FieldType.Formula
-      ? Field.bindContext(field, state).cellValueToString(cellValue)
-      : Field.bindContext(field, state).cellValueToOpenValue(cellValue);
+    eventFields[fieldId] =
+      field.type === FieldType.Formula
+        ? Field.bindContext(field, state).cellValueToString(cellValue)
+        : Field.bindContext(field, state).cellValueToOpenValue(cellValue);
   });
   return {
     fields: newFields,
     fieldTypeMap,
-    eventFields
+    eventFields,
   };
 };

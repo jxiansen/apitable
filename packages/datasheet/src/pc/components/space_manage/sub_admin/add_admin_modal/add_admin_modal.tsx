@@ -1,5 +1,3 @@
-
-
 import { FC, useEffect, useState } from 'react';
 import { shallowEqual } from 'react-redux';
 import { Button, TextButton } from '@apitable/components';
@@ -126,10 +124,10 @@ export const AddAdminModal: FC<React.PropsWithChildren<IModalProps>> = ({ cancel
   const title =
     source !== ModalType.Add && editOrReadSubMainInfo
       ? getSocialWecomUnitName?.({
-        name: editOrReadSubMainInfo?.memberName,
-        isModified: editOrReadSubMainInfo?.isMemberNameModified,
-        spaceInfo,
-      }) || editOrReadSubMainInfo?.memberName
+          name: editOrReadSubMainInfo?.memberName,
+          isModified: editOrReadSubMainInfo?.isMemberNameModified,
+          spaceInfo,
+        }) || editOrReadSubMainInfo?.memberName
       : '';
   return (
     <>

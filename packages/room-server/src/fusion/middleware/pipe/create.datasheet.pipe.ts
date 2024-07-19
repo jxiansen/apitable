@@ -1,5 +1,3 @@
-
-
 import {
   APIMetaFieldType,
   ApiTipConstant,
@@ -84,7 +82,7 @@ export class CreateDatasheetPipe implements PipeTransform {
       this.validate(field);
     });
     const seen = new Set();
-    const hasDuplicatedFieldName = fields.some(function(field) {
+    const hasDuplicatedFieldName = fields.some(function (field) {
       return seen.size === seen.add(field.name).size;
     });
     if (hasDuplicatedFieldName) {

@@ -1,4 +1,3 @@
-
 import {
   BasicValueType,
   DateFormat,
@@ -27,8 +26,8 @@ export const getApiMetaPropertyFormat = (fieldInstance: LookUpField | FormulaFie
       return {
         type: APIMetaFieldPropertyFormatEnums.DateTime,
         format: {
-          dateFormat: DateFormat[0]!,//DateTimeField.defaultDateFormat,
-          timeFormat: DateFormat[0]!,//DateTimeField.defaultTimeFormat,
+          dateFormat: DateFormat[0]!, //DateTimeField.defaultDateFormat,
+          timeFormat: DateFormat[0]!, //DateTimeField.defaultTimeFormat,
           includeTime: false,
         },
       };

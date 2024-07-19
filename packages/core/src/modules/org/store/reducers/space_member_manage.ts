@@ -1,10 +1,17 @@
-
-
 import { produce } from 'immer';
 import {
-  ISelectedTeamKeysAction, ISelectedTeamRowsAction, ISpaceMemberManage, IUpdateInviteStatusAction, IUpdateMemberInfoInSpaceAction,
-  IUpdateMemberListInSpaceAction, IUpdateRightClickTeamInfoInSpaceAction, IUpdateSelectedRowsInSpaceAction, IUpdateSelectedTeamInfoInSpaceAction,
-  IUpdateSelectMemberListInSpaceAction, IUpdateSubTeamListInSpaceAction, IUpdateTeamListInSpaceAction,
+  ISelectedTeamKeysAction,
+  ISelectedTeamRowsAction,
+  ISpaceMemberManage,
+  IUpdateInviteStatusAction,
+  IUpdateMemberInfoInSpaceAction,
+  IUpdateMemberListInSpaceAction,
+  IUpdateRightClickTeamInfoInSpaceAction,
+  IUpdateSelectedRowsInSpaceAction,
+  IUpdateSelectedTeamInfoInSpaceAction,
+  IUpdateSelectMemberListInSpaceAction,
+  IUpdateSubTeamListInSpaceAction,
+  IUpdateTeamListInSpaceAction,
 } from '../../../../exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';
 
@@ -32,16 +39,21 @@ const defaultState: ISpaceMemberManage = {
   selectedTeamKeys: [],
   selectedTeamRows: [],
 };
-type SpaceMemberManageActions = IUpdateTeamListInSpaceAction |
-  IUpdateMemberListInSpaceAction | IUpdateSelectedTeamInfoInSpaceAction | IUpdateMemberInfoInSpaceAction |
-  IUpdateSelectMemberListInSpaceAction | IUpdateSubTeamListInSpaceAction | IUpdateRightClickTeamInfoInSpaceAction |
-  IUpdateTeamListInSpaceAction | IUpdateInviteStatusAction |
-  ISelectedTeamKeysAction | ISelectedTeamRowsAction | IUpdateSelectedRowsInSpaceAction;
+type SpaceMemberManageActions =
+  | IUpdateTeamListInSpaceAction
+  | IUpdateMemberListInSpaceAction
+  | IUpdateSelectedTeamInfoInSpaceAction
+  | IUpdateMemberInfoInSpaceAction
+  | IUpdateSelectMemberListInSpaceAction
+  | IUpdateSubTeamListInSpaceAction
+  | IUpdateRightClickTeamInfoInSpaceAction
+  | IUpdateTeamListInSpaceAction
+  | IUpdateInviteStatusAction
+  | ISelectedTeamKeysAction
+  | ISelectedTeamRowsAction
+  | IUpdateSelectedRowsInSpaceAction;
 
-export const spaceMemberManage = produce((
-  storeData: ISpaceMemberManage = defaultState,
-  action: SpaceMemberManageActions,
-) => {
+export const spaceMemberManage = produce((storeData: ISpaceMemberManage = defaultState, action: SpaceMemberManageActions) => {
   switch (action.type) {
     case actions.UPDATE_MEMBER_LIST_IN_SPACE: {
       storeData.memberListInSpace = action.payload;

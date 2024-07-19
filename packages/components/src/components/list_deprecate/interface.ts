@@ -1,10 +1,7 @@
-
-
 import { IUseListenTriggerInfo } from 'helper';
 import { HTMLAttributes, ReactElement, ReactNode } from 'react';
 
 export interface IListDeprecateProps {
-
   /**
    * Child element
    */
@@ -13,12 +10,12 @@ export interface IListDeprecateProps {
   /**
    * click handler
    */
-  onClick(e: React.MouseEvent | null, index: number): void
+  onClick(e: React.MouseEvent | null, index: number): void;
 
   /**
    * Tips when data is empty
    */
-  noDataTip?: string | (() => ReactNode)
+  noDataTip?: string | (() => ReactNode);
 
   /**
    * Footer components
@@ -26,14 +23,14 @@ export interface IListDeprecateProps {
   footerComponent?: () => ReactNode;
 
   className?: string;
-  style?: React.CSSProperties
+  style?: React.CSSProperties;
 
   /**
    * The position of the item currently being focused
    */
-  activeIndex?: number
+  activeIndex?: number;
 
-  searchProps?: ISearchProps
+  searchProps?: ISearchProps;
 
   triggerInfo?: IUseListenTriggerInfo;
 
@@ -41,18 +38,17 @@ export interface IListDeprecateProps {
 }
 
 export interface IListItemProps extends HTMLAttributes<HTMLDivElement> {
-
   /**
    * Current option index
    */
   currentIndex: number;
-  setRef?: (node: (HTMLElement | null)) => void;
+  setRef?: (node: HTMLElement | null) => void;
   /**
    * Wrapper component
    */
-  wrapperComponent?(children: ReactNode): ReactNode
-  active?:boolean;
-  selected?:boolean;
+  wrapperComponent?(children: ReactNode): ReactNode;
+  active?: boolean;
+  selected?: boolean;
   disabled?: boolean;
 }
 
@@ -65,24 +61,24 @@ export interface ISearchProps {
   /**
    * Custom inline styles
    */
-  style?: React.CSSProperties
+  style?: React.CSSProperties;
 
   /**
    * Input placeholder
    */
-  placeholder?: string
+  placeholder?: string;
 
   /**
    * @description input enter event callback
-   * @param {() => void} clearKeyword is the processing function passed in from the component, 
+   * @param {() => void} clearKeyword is the processing function passed in from the component,
    * where you can process some operations inside the component
    */
-  onInputEnter?(clearKeyword: () => void): void
+  onInputEnter?(clearKeyword: () => void): void;
 
   /**
    * @description Search input callback
    * @param {React.ChangeEvent} e
    * @param {string} keyword
    */
-  onSearchChange?(e: React.ChangeEvent, keyword: string): void
+  onSearchChange?(e: React.ChangeEvent, keyword: string): void;
 }

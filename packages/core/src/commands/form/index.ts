@@ -1,5 +1,3 @@
-
-
 import { ResourceType } from 'types';
 import { ExecuteResult, ICollaCommandDef, ICollaCommandExecuteContext } from '../../command_manager';
 import { FormAction } from '../../commands_actions/form';
@@ -10,7 +8,7 @@ import { getFormSnapshot } from 'modules/database/store/selectors/resource/form'
 export interface IUpdateFormProps {
   cmd: CollaCommandName.UpdateFormProps;
   formId: string;
-  partialProps: Partial<IFormProps>
+  partialProps: Partial<IFormProps>;
 }
 
 export const updateFormProps: ICollaCommandDef<IUpdateFormProps> = {

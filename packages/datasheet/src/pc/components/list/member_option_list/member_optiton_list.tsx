@@ -1,5 +1,3 @@
-
-
 import { useUpdateEffect } from 'ahooks';
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
@@ -268,27 +266,27 @@ export const MemberOptionList: React.FC<
         footerComponent={
           showMoreTipButton && !shareId && !embedId
             ? () => {
-              return (
-                <div
-                  className={styles.seeMore}
-                  onMouseUp={() => {
-                    expandUnitModal({
-                      source: SelectUnitSource.Member,
-                      onSubmit: (values) => handleSubmit(values),
-                      isSingleSelect: !multiMode,
-                      checkedList: standardStructure(existValues),
-                      onClose: () => refreshMemberList(),
-                      showTab: true,
-                    });
-                  }}
-                  onMouseDown={(e) => {
-                    e.preventDefault();
-                  }}
-                >
-                  {t(Strings.see_more)}
-                </div>
-              );
-            }
+                return (
+                  <div
+                    className={styles.seeMore}
+                    onMouseUp={() => {
+                      expandUnitModal({
+                        source: SelectUnitSource.Member,
+                        onSubmit: (values) => handleSubmit(values),
+                        isSingleSelect: !multiMode,
+                        checkedList: standardStructure(existValues),
+                        onClose: () => refreshMemberList(),
+                        showTab: true,
+                      });
+                    }}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                    }}
+                  >
+                    {t(Strings.see_more)}
+                  </div>
+                );
+              }
             : undefined
         }
       >

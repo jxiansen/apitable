@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { useDrop } from 'react-dnd';
 import { Strings, t } from '@apitable/core';

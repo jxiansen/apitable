@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { IOption, ISelectProps } from 'components/select/interface';
 import { Typography } from 'components/typography';

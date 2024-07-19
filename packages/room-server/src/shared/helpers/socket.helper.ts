@@ -1,5 +1,3 @@
-
-
 import { isNil } from '@nestjs/common/utils/shared.utils';
 import { BootstrapConstants } from 'shared/common/constants/bootstrap.constants';
 import { GatewayConstants, SocketConstants } from 'shared/common/constants/socket.module.constants';

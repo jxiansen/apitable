@@ -1,5 +1,3 @@
-
-
 import { configResponsive, useResponsive } from 'ahooks';
 import { FC } from 'react';
 import { shallowEqual } from 'react-redux';

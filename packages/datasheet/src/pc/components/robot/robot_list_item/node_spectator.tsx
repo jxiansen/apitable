@@ -1,5 +1,3 @@
-
-
 import { useTheme } from '@apitable/components';
 
 export const NodeSpectator = () => {

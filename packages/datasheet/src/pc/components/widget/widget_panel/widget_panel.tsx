@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import Image from 'next/image';
 import { shallowEqual } from 'react-redux';

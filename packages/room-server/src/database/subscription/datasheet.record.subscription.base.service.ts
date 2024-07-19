@@ -1,5 +1,3 @@
-
-
 import { IRemoteChangeset } from '@apitable/core';
 import { Injectable } from '@nestjs/common';
 import { ICommonData } from 'database/ot/interfaces/ot.interface';
@@ -8,7 +6,6 @@ import { DatasheetRecordSubscriptionEntity } from './entities/datasheet.record.s
 
 @Injectable()
 export class DatasheetRecordSubscriptionBaseService {
-
   public async subscribeDatasheetRecords(_userId: string, _dstId: string, recordIds: string[], _mirrorId?: string | null) {
     if (isEmpty(recordIds)) return;
     await Promise.resolve();
@@ -35,11 +32,7 @@ export class DatasheetRecordSubscriptionBaseService {
     await Promise.resolve();
   }
 
-  public async handleRecordAutoSubscriptions(
-    _commonData: ICommonData,
-    _resultSet: { [key: string]: any },
-  ) {
+  public async handleRecordAutoSubscriptions(_commonData: ICommonData, _resultSet: { [key: string]: any }) {
     await Promise.resolve();
   }
-
 }

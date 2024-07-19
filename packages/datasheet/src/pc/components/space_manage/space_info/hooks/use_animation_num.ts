@@ -1,5 +1,3 @@
-
-
 import { useEffect, useRef, useState } from 'react';
 import { normalDecimal } from '@apitable/core';
 import { Easing } from './easing';

@@ -1,5 +1,3 @@
-
-
 import React, { useEffect } from 'react';
 import { colors, LinkButton, Loading } from '@apitable/components';
 import { Strings, t, WidgetPackageStatus } from '@apitable/core';

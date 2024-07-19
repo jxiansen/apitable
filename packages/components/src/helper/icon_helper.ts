@@ -1,5 +1,3 @@
-
-
 import { InfoCircleFilled, WarnCircleFilled, CheckCircleFilled, WarnFilled } from '@apitable/icons';
 import React from 'react';
 

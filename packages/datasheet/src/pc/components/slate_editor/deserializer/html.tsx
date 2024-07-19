@@ -1,5 +1,3 @@
-
-
 import { jsx } from 'slate-hyperscript';
 import { MarkType } from '../constant';
 import { GENERATOR } from '../elements';

@@ -1,5 +1,3 @@
-
-
 export interface IActionType {
   id: string;
   inputJSONSchema: object;
@@ -14,7 +12,7 @@ export interface IActionInstance<Input> {
   typeId: string;
   // action input
   input: Input;
-  // 
+  //
   nextActionId?: string;
 }
 
@@ -70,8 +68,8 @@ export interface IRobotTaskRuntimeContext {
       // timestamp of node execution end
       endAt?: number;
       errorStacks?: any[];
-    }
-  }
+    };
+  };
   // is this task done, no matter if there is an error
   isDone: boolean;
   // is this task success, if there is an error, it is not success

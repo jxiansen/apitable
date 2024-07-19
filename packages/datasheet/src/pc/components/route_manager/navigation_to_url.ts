@@ -1,5 +1,3 @@
-
-
 // Method.replace function is not implemented yet
 import { StoreActions } from '@apitable/core';
 import { Method } from 'pc/components/route_manager/const';

@@ -140,7 +140,11 @@ export { WechatpayColorFilled } from './wechatpay_color_filled';
 export { WechatpayFilled } from './wechatpay_filled';
 export { WechatFilled } from './wechat_filled';
 export { WecomFilled } from './wecom_filled';
-export { EmailfeedbackOutlined, EmailfeedbackOutlined as ColumnEmailFilled, EmailfeedbackOutlined as ColumnEmailNonzeroFilled } from './emailfeedback_outlined';
+export {
+  EmailfeedbackOutlined,
+  EmailfeedbackOutlined as ColumnEmailFilled,
+  EmailfeedbackOutlined as ColumnEmailNonzeroFilled,
+} from './emailfeedback_outlined';
 export { CommentBgFilled } from './comment_bg_filled';
 export { SelectMarkFilled } from './select_mark_filled';
 export { LogoTextFilled } from './logo_text_filled';

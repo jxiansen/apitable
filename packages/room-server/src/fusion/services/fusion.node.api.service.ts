@@ -1,4 +1,3 @@
-
 import { getEmojiIconNativeString } from '@apitable/core';
 import { Inject, Injectable } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
@@ -13,12 +12,12 @@ export class FusionNodeApiService {
   constructor(
     private readonly restService: RestService,
     @Inject(REQUEST) private readonly request: FastifyRequest,
-  ) { }
+  ) {}
 
   public async getNodeList(spaceId: string, type: NodeTypeEnum, permissions: number[], query?: string): Promise<IAPINodeInfo[]> {
     const authHeader = { token: this.request.headers.authorization };
     const nodes = await this.restService.getNodesList(authHeader, spaceId, getAPINodeTypeId(type), permissions, query);
-    return nodes.map(node => {
+    return nodes.map((node) => {
       return {
         id: node.nodeId,
         name: node.nodeName,
@@ -30,5 +29,4 @@ export class FusionNodeApiService {
       };
     });
   }
-
 }

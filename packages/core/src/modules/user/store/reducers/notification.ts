@@ -1,9 +1,13 @@
-
-
 import { produce } from 'immer';
 import {
-  IDelUnReadNoticeListAction, IGetNewMsgFromWsAndLookAction, INotification, IUpdateNewNoticeListFromWsAction, IUpdateReadMsgCountAction,
-  IUpdateReadNoticeListAction, IUpdateUnreadMsgCountAction, IUpdateUnReadNoticeListAction,
+  IDelUnReadNoticeListAction,
+  IGetNewMsgFromWsAndLookAction,
+  INotification,
+  IUpdateNewNoticeListFromWsAction,
+  IUpdateReadMsgCountAction,
+  IUpdateReadNoticeListAction,
+  IUpdateUnreadMsgCountAction,
+  IUpdateUnReadNoticeListAction,
 } from '../../../../exports/store/interfaces';
 import * as actions from '../../../shared/store/action_constants';
 
@@ -15,9 +19,14 @@ const defaultState: INotification = {
   newNoticeListFromWs: [],
 };
 
-type INotificationActions = IUpdateUnreadMsgCountAction | IUpdateReadMsgCountAction
-  | IUpdateReadNoticeListAction | IUpdateUnReadNoticeListAction | IDelUnReadNoticeListAction
-  | IUpdateNewNoticeListFromWsAction | IGetNewMsgFromWsAndLookAction;
+type INotificationActions =
+  | IUpdateUnreadMsgCountAction
+  | IUpdateReadMsgCountAction
+  | IUpdateReadNoticeListAction
+  | IUpdateUnReadNoticeListAction
+  | IDelUnReadNoticeListAction
+  | IUpdateNewNoticeListFromWsAction
+  | IGetNewMsgFromWsAndLookAction;
 
 export const notification = produce((data: INotification = defaultState, action: INotificationActions) => {
   switch (action.type) {
@@ -79,7 +88,7 @@ export const notification = produce((data: INotification = defaultState, action:
         data.unReadCount = 0;
         return data;
       }
-      const newUnReadNoticeList = data.unReadNoticeList.filter(item => !action.payload.idList.includes(item.id));
+      const newUnReadNoticeList = data.unReadNoticeList.filter((item) => !action.payload.idList.includes(item.id));
       data.unReadNoticeList = newUnReadNoticeList;
       data.unReadCount = data.unReadCount - action.payload.idList.length;
       return data;

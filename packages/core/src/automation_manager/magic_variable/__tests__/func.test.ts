@@ -1,13 +1,8 @@
-
-
 import { IExpression } from 'automation_manager/interface';
 import { runtimeContext } from 'automation_manager/__tests__/mock_data';
 import { MagicVariableParser } from '../magic_variable_parser';
 import { getNodeOutput, getObjectProperty, concatString, newArray, newObject, flatten } from '../sys_functions';
-import {
-  dynamicArrayExpr, dynamicKeyObjectExpr, dynamicNestedObjectExpr, dynamicObjectExpr,
-  getNodeOutputExpr, dynamicStrExpr
-} from './mock_data';
+import { dynamicArrayExpr, dynamicKeyObjectExpr, dynamicNestedObjectExpr, dynamicObjectExpr, getNodeOutputExpr, dynamicStrExpr } from './mock_data';
 
 describe('dynamic variable render', () => {
   const sysFunctions = [getNodeOutput, getObjectProperty, concatString, newArray, newObject, flatten];
@@ -26,8 +21,8 @@ describe('dynamic variable render', () => {
         text: 'apitableA',
         title: 'doge: automation test',
         picUrl: '',
-        messageUrl: 'https://example.com'
-      }
+        messageUrl: 'https://example.com',
+      },
     });
   });
 
@@ -52,15 +47,21 @@ describe('dynamic variable render', () => {
   });
 
   it('dynamic nested array', () => {
-    const res = parser.exec({
-      operator: 'flatten',
-      operands: [
-        {
-          type: 'Literal',
-          value: [['a', 'b', 'c'], ['d', 'e', 'f']],
-        },
-      ]
-    } as IExpression, runtimeContext);
+    const res = parser.exec(
+      {
+        operator: 'flatten',
+        operands: [
+          {
+            type: 'Literal',
+            value: [
+              ['a', 'b', 'c'],
+              ['d', 'e', 'f'],
+            ],
+          },
+        ],
+      } as IExpression,
+      runtimeContext
+    );
     expect(res).toEqual(['a', 'b', 'c', 'd', 'e', 'f']);
   });
 });

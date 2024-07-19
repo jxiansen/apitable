@@ -1,5 +1,3 @@
-
-
 import { JSONSchema7 } from 'json-schema';
 import * as React from 'react';
 
@@ -115,7 +113,7 @@ export type IFieldTemplateProps<T = any> = {
   disabled: boolean;
   displayLabel: boolean;
   fields: IField[];
-  schema: any;//JSONSchema7;
+  schema: any; //JSONSchema7;
   uiSchema: IUiSchema;
   formContext: any;
   formData: T;
@@ -218,9 +216,12 @@ type FieldValidation = {
   addError: (message: string) => void;
 };
 
-export type FieldDetailValidation = Record<string, {
-  __errors: FieldError[]
-}>;
+export type FieldDetailValidation = Record<
+  string,
+  {
+    __errors: FieldError[];
+  }
+>;
 export type ValidationResult = FieldValidation | Partial<FieldDetailValidation>;
 
 type FormValidation = FieldValidation & {
@@ -283,7 +284,7 @@ export interface IFormProps<T> {
   target?: string;
   transformErrors?: (errors: AjvError[]) => AjvError[];
   uiSchema?: IUiSchema;
-  validate?: (formData: T, errors: FormValidation) => ValidationResult ;
+  validate?: (formData: T, errors: FormValidation) => ValidationResult;
   widgets?: { [name: string]: IWidget };
   nodeOutputSchemaList?: INodeSchema[];
 }

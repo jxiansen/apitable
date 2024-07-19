@@ -1,5 +1,3 @@
-
-
 import { ScreenSize } from 'pc/components/common/component_display';
 import { useResponsive } from './use_responsive';
 

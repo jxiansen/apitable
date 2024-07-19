@@ -1,5 +1,3 @@
-
-
 import { Dispatch } from 'redux';
 import { IOptNode, INode, IReduxState, INodeChangeSocketData, INodeMeta, INodesMapItem, NodeErrorType } from '../../../../exports/store/interfaces';
 import { updateDatasheet, updateDashboard, updateMirror } from 'modules/database/store/actions/resource';
@@ -178,10 +176,7 @@ export const addNodeToMap = (
  */
 export const addNode = (node: INodesMapItem, module?: ConfigConstant.Modules) => {
   return (dispatch: any) => {
-    dispatch(batchActions([
-      addNodeToMap([node], true, module),
-      setEditNodeId(node.nodeId, module)
-    ], 'ADD_NODE'));
+    dispatch(batchActions([addNodeToMap([node], true, module), setEditNodeId(node.nodeId, module)], 'ADD_NODE'));
   };
 };
 
@@ -210,7 +205,7 @@ export function setNodeName(nodeId: string, nodeName: string, module?: ConfigCon
     payload: {
       nodeId,
       nodeName,
-      module
+      module,
     },
   };
 }
@@ -221,7 +216,7 @@ export function setNodeErrorType(nodeId: string, errType: NodeErrorType | null, 
     payload: {
       nodeId,
       errType,
-      module
+      module,
     },
   };
 }
@@ -279,13 +274,15 @@ export function updateHasChildren(nodeId: string, module?: ConfigConstant.Module
  * @returns
  */
 const getChildNodeList = (nodeId: string, unitType?: number) => {
-  return Api.getChildNodeList(nodeId, undefined, unitType).then(res => {
-    const { success, data } = res.data;
-    if (success) {
-      return data;
-    }
-    return NodeErrorType.ChildNodes;
-  }).catch(() => NodeErrorType.ChildNodes);
+  return Api.getChildNodeList(nodeId, undefined, unitType)
+    .then((res) => {
+      const { success, data } = res.data;
+      if (success) {
+        return data;
+      }
+      return NodeErrorType.ChildNodes;
+    })
+    .catch(() => NodeErrorType.ChildNodes);
 };
 
 /**
@@ -460,8 +457,8 @@ export const collectionNodeAndExpand = (nodeId: string, module?: ConfigConstant.
     const state = getState();
     const { rootId, expandedKeys, treeNodesMap, favoriteExpandedKeys, favoriteTreeNodeIds, privateTreeNodesMap } = state.catalogTree;
     const nodesMap = module === ConfigConstant.Modules.PRIVATE ? privateTreeNodesMap : treeNodesMap;
-    const newExpandKeys = [...(new Set([...expandedKeys, ...getExpandNodeIds(nodesMap, nodeId, rootId)]))];
-    const newFavoriteExpandKeys = [...(new Set([...favoriteExpandedKeys, ...getExpandNodeIds(nodesMap, nodeId, rootId, favoriteTreeNodeIds)]))];
+    const newExpandKeys = [...new Set([...expandedKeys, ...getExpandNodeIds(nodesMap, nodeId, rootId)])];
+    const newFavoriteExpandKeys = [...new Set([...favoriteExpandedKeys, ...getExpandNodeIds(nodesMap, nodeId, rootId, favoriteTreeNodeIds)])];
     dispatch(setExpandedKeys(newExpandKeys, module));
     dispatch(setExpandedKeys(newFavoriteExpandKeys, ConfigConstant.Modules.FAVORITE));
   };
@@ -475,7 +472,7 @@ export const collectionNodeAndExpand = (nodeId: string, module?: ConfigConstant.
 export const generateFavoriteTree = (node: INodesMapItem[]) => {
   return (dispatch: Dispatch) => {
     // dispatch(addNodeToMap(node, true, module));
-    const nodeIds = node.map(item => item.nodeId);
+    const nodeIds = node.map((item) => item.nodeId);
     dispatch(addNodeToFavoriteTree(nodeIds));
   };
 };
@@ -560,15 +557,18 @@ export function setLoadedKeys(keys: string[]) {
  */
 export const getNodeInfo = (nodeId: string) => {
   return (dispatch: Dispatch) => {
-    Api.getNodeInfo(nodeId).then(res => {
-      const { success, data } = res.data;
-      const isPrivate = data?.[0]?.nodePrivate;
-      if (success) {
-        dispatch(addNodeToMap(data, undefined, isPrivate ? ConfigConstant.Modules.PRIVATE : undefined));
+    Api.getNodeInfo(nodeId).then(
+      (res) => {
+        const { success, data } = res.data;
+        const isPrivate = data?.[0]?.nodePrivate;
+        if (success) {
+          dispatch(addNodeToMap(data, undefined, isPrivate ? ConfigConstant.Modules.PRIVATE : undefined));
+        }
+      },
+      (err) => {
+        console.error('API.getNodeInfo error', err);
       }
-    }, err => {
-      console.error('API.getNodeInfo error', err);
-    });
+    );
   };
 };
 
@@ -616,7 +616,7 @@ export const updateNodeInfo = (nodeId: string, nodeType: ConfigConstant.NodeType
 export function setPermissionCommitRemindStatus(status: boolean) {
   return {
     type: actions.SET_PERMISSION_COMMIT_REMIND_STATUS,
-    payload: status
+    payload: status,
   };
 }
 
@@ -628,7 +628,7 @@ export function setPermissionCommitRemindStatus(status: boolean) {
 export function setPermissionCommitRemindParameter(Param: IApi.ICommitRemind) {
   return {
     type: actions.SET_PERMISSION_COMMIT_REMIND_PARAMETER,
-    payload: Param
+    payload: Param,
   };
 }
 
@@ -640,7 +640,7 @@ export function setPermissionCommitRemindParameter(Param: IApi.ICommitRemind) {
 export function setNoPermissionMembers(Param: string[]) {
   return {
     type: actions.SET_NO_PERMISSION_MEMBERS,
-    payload: Param
+    payload: Param,
   };
 }
 

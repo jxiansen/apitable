@@ -1,5 +1,3 @@
-
-
 import { EventRealTypeEnums } from 'event_manager';
 import { ResourceType } from '../../../types/resource_types';
 import { IAtomEventType } from '../interface';
@@ -16,7 +14,7 @@ interface IFormSubmitted {
     id: string;
     url: string;
     fields: AnyObject;
-  }
+  };
 }
 
 export class OPEventFormSubmitted extends IAtomEventType<IFormSubmitted> {
@@ -28,7 +26,7 @@ export class OPEventFormSubmitted extends IAtomEventType<IFormSubmitted> {
   test(_opContext: IOPBaseContext) {
     return {
       pass: false,
-      context: null
+      context: null,
     };
   }
 }

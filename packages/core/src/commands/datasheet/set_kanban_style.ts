@@ -1,8 +1,6 @@
-
-
 import { Strings, t } from '../../exports/i18n';
 import { ISetKanbanStyleValue } from '../../exports/store/interfaces';
-import { getActiveDatasheetId,getDatasheet } from 'modules/database/store/selectors/resource/datasheet/base';
+import { getActiveDatasheetId, getDatasheet } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getActualRowCount } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { ResourceType } from 'types';
 import { ExecuteResult, ICollaCommandDef } from '../../command_manager';
@@ -14,7 +12,7 @@ import { ViewAction } from 'commands_actions/view';
 export type ISetKanbanStyleOptions = {
   cmd: CollaCommandName.SetKanbanStyle;
   viewId: string;
-  addRecord?: boolean
+  addRecord?: boolean;
 } & ISetKanbanStyleValue;
 
 export const setKanbanStyle: ICollaCommandDef<ISetKanbanStyleOptions> = {

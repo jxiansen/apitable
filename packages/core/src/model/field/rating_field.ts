@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { isNumber } from 'lodash';
 import { ICellValue } from 'model/record';
@@ -17,7 +15,10 @@ import { joiErrorResult } from './validate_schema';
 import { getFieldDefaultProperty } from './const';
 
 export class RatingField extends NumberBaseField {
-  constructor(public override field: IRatingField, state: IReduxState) {
+  constructor(
+    public override field: IRatingField,
+    state: IReduxState
+  ) {
     super(field, state);
   }
 

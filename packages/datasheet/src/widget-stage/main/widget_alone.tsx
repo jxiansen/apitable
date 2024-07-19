@@ -1,5 +1,3 @@
-
-
 import { useLocalStorageState } from 'ahooks';
 import { Button, TextInput } from '@apitable/components';
 import { WidgetStandAloneProvider } from '@apitable/widget-sdk';

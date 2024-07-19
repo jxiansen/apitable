@@ -1,5 +1,3 @@
-
-
 import { useClickAway, useUpdateEffect } from 'ahooks';
 import cls from 'classnames';
 import dayjs from 'dayjs';
@@ -63,7 +61,7 @@ export const CommentEditor: React.FC<React.PropsWithChildren<IActivityPaneProps>
       return;
     }
     const recordTitle = getFirstColumnValue();
-    
+
     verificationPermission({
       isNotify: true,
       nodeId: mirrorId || datasheetId,

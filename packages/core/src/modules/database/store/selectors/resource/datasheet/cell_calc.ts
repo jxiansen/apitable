@@ -31,7 +31,7 @@ export const getCellValue = (
   fieldId: string,
   withError?: boolean,
   datasheetId?: string,
-  ignoreFieldPermission?: boolean,
+  ignoreFieldPermission?: boolean
 ) => {
   // TODO: temp code for the first version of column permission, delete this logic in next version
   const fieldPermissionMap = getFieldPermissionMap(state, snapshot.datasheetId);
@@ -101,7 +101,7 @@ export const calcCellValueAndString = ({
   }
   if (field.type === FieldType.Attachment) {
     return {
-      cellStr: (cellValue as IAttachmentValue[]).map(item => item.name).join(','),
+      cellStr: (cellValue as IAttachmentValue[]).map((item) => item.name).join(','),
       cellValue,
       ignoreCache: workerCompute() ? false : true,
     };
@@ -111,7 +111,7 @@ export const calcCellValueAndString = ({
     cellValue,
     cellStr: field.type === FieldType.URL ? Field.bindContext(field, state).cellValueToTitle(cellValue) : instance.cellValueToString(cellValue),
     // issue: https://github.com/vikadata/vikadata/issues/7757
-    ignoreCache: workerCompute() ? false : (field.type === FieldType.CreatedBy ? true : !instance.isComputed),
+    ignoreCache: workerCompute() ? false : field.type === FieldType.CreatedBy ? true : !instance.isComputed,
   };
 };
 
@@ -121,7 +121,7 @@ export const getStringifyCellValue = (
   recordId: string,
   fieldId: string,
   _withFilter?: boolean,
-  withError?: boolean,
+  withError?: boolean
 ) => {
   const dsId = snapshot.datasheetId || state.pageParams.datasheetId;
   if (!dsId) {
@@ -148,7 +148,7 @@ export const calcCellValue = (
   withError?: boolean,
   datasheetId?: string,
   // TODO: for first version of column permission, delete this field in next version
-  ignoreFieldPermission?: boolean,
+  ignoreFieldPermission?: boolean
 ) => {
   const fieldMap = snapshot.meta.fieldMap;
   const field = fieldMap[fieldId];
@@ -164,7 +164,7 @@ export const calcCellValue = (
     return null;
   }
 
-  if(field.type === FieldType.Button ) {
+  if (field.type === FieldType.Button) {
     return field.property.text;
   }
 

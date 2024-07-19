@@ -1,12 +1,15 @@
-
-
 import { ExecuteResult, ICollaCommandDef } from 'command_manager';
 import { ICellValue } from 'model/record';
 import { DatasheetActions } from 'commands_actions/datasheet';
 import { getDatasheetLoading } from 'modules/database/store/selectors/resource/datasheet/base';
 import { getNewIds, IDPrefix } from 'utils';
 import { IJOTAction } from 'engine';
-import { getActiveDatasheetId,getSnapshot, getFieldPermissionMap,getFieldRoleByFieldId } from 'modules/database/store/selectors/resource/datasheet/base';
+import {
+  getActiveDatasheetId,
+  getSnapshot,
+  getFieldPermissionMap,
+  getFieldRoleByFieldId,
+} from 'modules/database/store/selectors/resource/datasheet/base';
 import { FieldType, IField, ILinkField, ResourceType } from 'types';
 import { Strings, t } from '../../exports/i18n';
 import { CollaCommandName } from 'commands/enum';
@@ -40,7 +43,7 @@ export const addRecords: ICollaCommandDef<IAddRecordsOptions, IAddRecordsResult>
     const fieldPermissionMap = getFieldPermissionMap(state, datasheetId);
     const loading = getDatasheetLoading(state, datasheetId);
 
-    if(loading){
+    if (loading) {
       throw new Error(t(Strings.datasheet_is_loading));
     }
 
@@ -57,9 +60,9 @@ export const addRecords: ICollaCommandDef<IAddRecordsOptions, IAddRecordsResult>
     }
 
     const recordIds = Object.keys(snapshot.recordMap);
-    const newRecordIds = getNewIds(IDPrefix.Record, count, recordIds.length ? recordIds : snapshot.meta.views[0]!.rows.map(item => item.recordId));
+    const newRecordIds = getNewIds(IDPrefix.Record, count, recordIds.length ? recordIds : snapshot.meta.views[0]!.rows.map((item) => item.recordId));
 
-    if ((recordIds.length + newRecordIds.length) > MAX_RECORD_NUM) {
+    if (recordIds.length + newRecordIds.length > MAX_RECORD_NUM) {
       throw new Error(t(Strings.max_record_num_per_dst));
     }
 
@@ -150,7 +153,7 @@ export const addRecords: ICollaCommandDef<IAddRecordsOptions, IAddRecordsResult>
             continue;
           }
 
-          const unitIds = Array.isArray(cellValue) ? cellValue as string[] : [];
+          const unitIds = Array.isArray(cellValue) ? (cellValue as string[]) : [];
 
           if (!memberFieldMap[fieldId]) {
             memberFieldMap[fieldId] = [...unitIds];

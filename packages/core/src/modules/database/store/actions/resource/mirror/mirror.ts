@@ -1,5 +1,3 @@
-
-
 import { IApiWrapper, ICollaborator, IMirror, IMirrorClient, IReduxState, IServerMirror, ITemporaryView } from 'exports/store/interfaces';
 import { getMirror, getMirrorLoading, getMirrorSourceInfo } from 'modules/database/store/selectors/resource/mirror';
 import { getDatasheet } from 'modules/database/store/selectors/resource/datasheet/base';
@@ -41,7 +39,7 @@ export function fetchMirrorPack(
   successCb?: (props?: IFetchMirrorSuccess) => void,
   _overwrite?: boolean,
   extra?: { recordIds: string[] },
-  failCb?: () => void,
+  failCb?: () => void
 ) {
   return (dispatch: any, getState: () => IReduxState) => {
     const state = getState();
@@ -54,18 +52,18 @@ export function fetchMirrorPack(
     }
     if (!mirror || datasheet?.isPartOfData) {
       return fetchMirrorInfoApi(mirrorId, shareId, templateId)
-        .then(response => {
+        .then((response) => {
           // if (!response.data.success && state.catalogTree.treeNodesMap[mirrorId]) {
           //   // dispatch(deleteNode({ nodeId: mirrorId, parentId: state.catalogTree.treeNodesMap[mirrorId].parentId }));
           //   // return Promise.reject();
           // }
           return Promise.resolve({ mirrorId, response, dispatch, getState });
         })
-        .catch(e => {
+        .catch((e) => {
           dispatch(setMirrorErrorCode(mirrorId, StatusCode.COMMON_ERR));
           throw e;
         })
-        .then(async props => {
+        .then(async (props) => {
           const { recordIds } = extra || {};
           await fetchSuccess(props, recordIds, successCb, failCb);
         });
@@ -87,7 +85,7 @@ const fetchSuccess = (
   { dispatch, getState, response, mirrorId }: { dispatch: any; getState: () => IReduxState; response: any; mirrorId: string },
   recordIds?: string[],
   successCb?: (props?: IFetchMirrorSuccess) => void,
-  failCb?: () => void,
+  failCb?: () => void
 ) => {
   const { data, success, code } = response.data;
   if (success) {
@@ -98,7 +96,7 @@ const fetchSuccess = (
           sourceInfo: data.sourceInfo,
           snapshot: data.snapshot,
         },
-        data.mirror.id,
+        data.mirror.id
       ),
     ];
 
@@ -108,7 +106,7 @@ const fetchSuccess = (
     const datasheet = getDatasheet(state, sourceDatasheetId);
     if (!datasheet || datasheet.isPartOfData) {
       fetchMirrorDataPackApi(mirrorId, shareId, recordIds)
-        .then(response => {
+        .then((response) => {
           return Promise.resolve({
             datasheetId: sourceDatasheetId,
             responseBody: response.data,
@@ -117,19 +115,22 @@ const fetchSuccess = (
             isPartOfData: Boolean(recordIds),
           });
         })
-        .catch(e => {
+        .catch((e) => {
           if (state.catalogTree.treeNodesMap[sourceDatasheetId]) {
             dispatch(deleteNode({ nodeId: sourceDatasheetId, parentId: state.catalogTree.treeNodesMap[sourceDatasheetId]!.parentId }));
           }
           dispatch(datasheetErrorCode(sourceDatasheetId, StatusCode.COMMON_ERR));
           throw e;
         })
-        .then(props => {
-          fetchDatasheetPackSuccess(props as any);
-          props.responseBody.success ? successCb && successCb() : failCb && failCb();
-        }, e => {
-          console.error('fetchMirrorDataPackApi error', e);
-        });
+        .then(
+          (props) => {
+            fetchDatasheetPackSuccess(props as any);
+            props.responseBody.success ? successCb && successCb() : failCb && failCb();
+          },
+          (e) => {
+            console.error('fetchMirrorDataPackApi error', e);
+          }
+        );
     } else {
       successCb && successCb();
     }

@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { stopPropagation, useListenVisualHeight } from 'helper';
 import React, { PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
@@ -9,11 +7,19 @@ import { FootWrapper, ResultSpan, StyledListItem, StyledListWrapper, WrapperDiv 
 import { useListInteractive } from './use_list_interactive';
 import styled from 'styled-components';
 
-export const ListDeprecate: React.FC<React.PropsWithChildren<IListDeprecateProps>> & { Item: React.FC<React.PropsWithChildren<IListItemProps>> } = (props) => {
+export const ListDeprecate: React.FC<React.PropsWithChildren<IListDeprecateProps>> & { Item: React.FC<React.PropsWithChildren<IListItemProps>> } = (
+  props
+) => {
   const {
-    children, noDataTip = 'empty data', activeIndex: DraftActiveIndex,
-    footerComponent, onClick, className,
-    searchProps, triggerInfo, autoHeight = false
+    children,
+    noDataTip = 'empty data',
+    activeIndex: DraftActiveIndex,
+    footerComponent,
+    onClick,
+    className,
+    searchProps,
+    triggerInfo,
+    autoHeight = false,
   } = props;
 
   const [keyword, setKeyword] = useState('');
@@ -85,9 +91,12 @@ export const ListDeprecate: React.FC<React.PropsWithChildren<IListDeprecateProps
             }
             searchProps.inputRef && searchProps.inputRef.current && searchProps.inputRef.current.focus();
           },
-          className: classNames({
-            hoverBg: activeIndex === child.props.currentIndex,
-          }, child.props.className),
+          className: classNames(
+            {
+              hoverBg: activeIndex === child.props.currentIndex,
+            },
+            child.props.className
+          ),
         });
       };
       // console.log('000', child);
@@ -112,7 +121,9 @@ export const ListDeprecate: React.FC<React.PropsWithChildren<IListDeprecateProps
     if (activeIndex < 0) {
       return;
     }
-    const { props: { disabled }} = childs?.[activeIndex] as React.ReactElement;
+    const {
+      props: { disabled },
+    } = childs?.[activeIndex] as React.ReactElement;
     if (disabled) {
       return;
     }
@@ -124,74 +135,49 @@ export const ListDeprecate: React.FC<React.PropsWithChildren<IListDeprecateProps
 
   const showNoSearchResult = Boolean(keyword.length && !childrenCount);
 
-  return <WrapperDiv
-    ref={containerRef}
-    tabIndex={0}
-    onKeyDown={keydownForContainer}
-    className={className}
-  >
-    {/* search part */}
-    {
-      searchProps && <ListSearch setKeyword={setKeyword} keyword={keyword} {...searchProps} />
-    }
-    {/* list part */}
-    {
-      (showNoDataTip || showNoSearchResult) && <ResultSpan>
-        {
-          blackTip
-        }
-      </ResultSpan>
-    }
-    {
-      Boolean(childrenCount) && <StyledListWrapper
-        ref={listRef}
-        style={autoHeight ? style : undefined}
-      >
-        {childs}
-      </StyledListWrapper>
-    }
+  return (
+    <WrapperDiv ref={containerRef} tabIndex={0} onKeyDown={keydownForContainer} className={className}>
+      {/* search part */}
+      {searchProps && <ListSearch setKeyword={setKeyword} keyword={keyword} {...searchProps} />}
+      {/* list part */}
+      {(showNoDataTip || showNoSearchResult) && <ResultSpan>{blackTip}</ResultSpan>}
+      {Boolean(childrenCount) && (
+        <StyledListWrapper ref={listRef} style={autoHeight ? style : undefined}>
+          {childs}
+        </StyledListWrapper>
+      )}
 
-    {
-      footerComponent && Boolean(footerComponent()) &&
-      <FootWrapper onClick={clearStatus}>
-        {footerComponent()}
-      </FootWrapper>
-    }
-  </WrapperDiv>;
+      {footerComponent && Boolean(footerComponent()) && <FootWrapper onClick={clearStatus}>{footerComponent()}</FootWrapper>}
+    </WrapperDiv>
+  );
 };
 
 const StyledDiv = styled.div`
   width: 100%;
-  
+
   &:focus-visible {
-    outline: none;    
+    outline: none;
   }
 `;
 
 // FIXME: line color
-export const ListDeprecateItem= React.forwardRef<HTMLDivElement, PropsWithChildren<any>> ((props) => {
+export const ListDeprecateItem = React.forwardRef<HTMLDivElement, PropsWithChildren<any>>((props) => {
   const { currentIndex, selected, children, setRef, className, active, ...rest } = props;
 
-  return <StyledListItem
-    data-tab-index={currentIndex}
-    active={active}
-    selected={selected}
-    className={className}
-    variant={'body2'}
-  >
-    <StyledDiv
-      style={{
-        width: '100%'
-      }}
-      role={'option'}
-      ref={setRef}
-      {...rest}
-    >
-      {
-        children
-      }
-    </StyledDiv>
-  </StyledListItem>;
+  return (
+    <StyledListItem data-tab-index={currentIndex} active={active} selected={selected} className={className} variant={'body2'}>
+      <StyledDiv
+        style={{
+          width: '100%',
+        }}
+        role={'option'}
+        ref={setRef}
+        {...rest}
+      >
+        {children}
+      </StyledDiv>
+    </StyledListItem>
+  );
 });
 
 // @ts-ignore

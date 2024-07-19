@@ -1,5 +1,3 @@
-
-
 import { Events, Player } from '../modules/shared/player';
 import { IWatchResponse, SyncRequestTypes } from 'sync/types';
 import { wait } from 'utils/async';

@@ -1,5 +1,3 @@
-
-
 export class FieldManager {
   private static validator = {};
 

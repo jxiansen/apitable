@@ -1,5 +1,3 @@
-
-
 import { ITheme } from './../theme/theme.interface';
 import { useTheme } from './use_provider_theme';
 

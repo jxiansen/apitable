@@ -1,5 +1,3 @@
-
-
 import { Modal, Radio, RadioChangeEvent } from 'antd';
 import classnames from 'classnames';
 import Image from 'next/image';

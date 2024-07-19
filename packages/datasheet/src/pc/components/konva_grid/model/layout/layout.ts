@@ -1,5 +1,3 @@
-
-
 import { range } from 'lodash';
 import { colors } from '@apitable/components';
 import { ILinearRow, ViewType } from '@apitable/core';

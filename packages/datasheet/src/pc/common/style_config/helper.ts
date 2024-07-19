@@ -1,5 +1,3 @@
-
-
 import { getLanguage } from '@apitable/core';
 import { StyleConfig } from './config';
 

@@ -1,5 +1,3 @@
-
-
 import { ApiTipConstant } from '@apitable/core';
 import { RedisService } from '@apitable/nestjs-redis';
 import { Injectable, NestMiddleware } from '@nestjs/common';
@@ -29,8 +27,8 @@ export class NodeRateLimiterMiddleware implements NestMiddleware {
     private readonly restService: RestService,
     private readonly datasheetRepository: DatasheetRepository,
     private readonly developerService: DeveloperService,
-    private readonly i18n: I18nService) {
-  }
+    private readonly i18n: I18nService,
+  ) {}
 
   async use(req: any, res: any, next: () => void) {
     if (req.complete) {

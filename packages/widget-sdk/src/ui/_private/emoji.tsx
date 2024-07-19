@@ -16,10 +16,7 @@ interface IEmoji {
 export const Emoji = (props: IEmoji) => {
   return (
     <React.Suspense fallback={<Loading />}>
-      <EmojiEmoji
-        backgroundImageFn={() => getEmojiSource(props.set, 64)}
-        {...props}
-      />
+      <EmojiEmoji backgroundImageFn={() => getEmojiSource(props.set, 64)} {...props} />
     </React.Suspense>
   );
 };

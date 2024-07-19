@@ -1,5 +1,3 @@
-
-
 import { useToggle } from 'ahooks';
 
 // To be compatible with ahooks-v2.
@@ -7,9 +5,7 @@ import { useToggle } from 'ahooks';
 // - toggle no longer accepts parameters
 // - Added set
 
-export default function useToggleOrSet(
-  defaultValue: boolean = false
-): [boolean, { toggle: (defaultValue?: boolean) => void }] {
+export default function useToggleOrSet(defaultValue: boolean = false): [boolean, { toggle: (defaultValue?: boolean) => void }] {
   const [state, { toggle, set }] = useToggle(defaultValue);
 
   function toggleOrSet(value?: boolean): void {

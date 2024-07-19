@@ -1,5 +1,3 @@
-
-
 import { Inject, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { Any } from 'grpc/generated/google/protobuf/any';

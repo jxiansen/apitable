@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import * as Url from './url.data';
 import { IApiWrapper } from '../../../exports/store/interfaces';
@@ -21,15 +19,24 @@ export function fetchTemplateFormPack(templateId: string, formId: string) {
 }
 
 export function addFormRecord(formId: string, recordData: any) {
-  return axios.post<IApiWrapper & { data: any }>(urlcat(Url.FORM_ADD_RECORD, {
-    formId,
-  }), recordData, { baseURL });
+  return axios.post<IApiWrapper & { data: any }>(
+    urlcat(Url.FORM_ADD_RECORD, {
+      formId,
+    }),
+    recordData,
+    { baseURL }
+  );
 }
 
 export function addShareFormRecord(formId: string, shareId: string | undefined, recordData: any) {
-  return axios.post<IApiWrapper & { data: any }>(urlcat(Url.SHARE_FORM_ADD_RECORD, {
-    formId, shareId,
-  }), recordData, { baseURL });
+  return axios.post<IApiWrapper & { data: any }>(
+    urlcat(Url.SHARE_FORM_ADD_RECORD, {
+      formId,
+      shareId,
+    }),
+    recordData,
+    { baseURL }
+  );
 }
 
 export function fetchFormProps(formId: string) {
@@ -37,9 +44,13 @@ export function fetchFormProps(formId: string) {
 }
 
 export function updateFormProps(formId: string, formProps: any) {
-  return axios.post<IApiWrapper & { data: any }>(urlcat(Url.UPDATE_FORM_PROPS, {
-    formId,
-  }), formProps, { baseURL });
+  return axios.post<IApiWrapper & { data: any }>(
+    urlcat(Url.UPDATE_FORM_PROPS, {
+      formId,
+    }),
+    formProps,
+    { baseURL }
+  );
 }
 
 export function fetchFormSubmitStatus(formId: string) {

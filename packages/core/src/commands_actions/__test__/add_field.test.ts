@@ -1,11 +1,9 @@
-
 // import { action_add_field } from '@apitable/databus-wasm-nodejs';
 // import { action_add_field } from '../../../../databus-wasm-nodejs';
 import { DatasheetActions } from '../datasheet';
 import { ISnapshot } from '../../modules/database/store/interfaces/resource';
 import MockDataForAction from './mock_data/action_add_record_mock';
 describe('test add field', () => {
-
   it('test add field in the end', () => {
     const snapshot = MockDataForAction as any as ISnapshot;
     const options = {
@@ -13,7 +11,7 @@ describe('test add field', () => {
         id: 'fldFlJeRUPUb2',
         name: 'test',
         type: 1,
-        property: null
+        property: null,
       },
       viewId: 'viwuTxAXZp9fR',
       index: 3,
@@ -25,7 +23,7 @@ describe('test add field', () => {
       id: 'fldFlJeRUPUb2',
       name: 'test',
       type: 1,
-      property: null
+      property: null,
     };
     const payload = {
       viewId: options && options.viewId,
@@ -43,17 +41,17 @@ describe('test add field', () => {
 
     // expect(result).toEqual(resul2);
 
-  // [
-  //   {
-  //     n: 'LI',
-  //     p: [ 'meta', 'views', 0, 'columns', 3 ],
-  //     li: { fieldId: 'fldFlJeRUPUb2', hidden: false }
-  //   },
-  //   {
-  //     n: 'OI',
-  //     p: [ 'meta', 'fieldMap', 'fldFlJeRUPUb2' ],
-  //     oi: { id: 'fldFlJeRUPUb2', name: 'test', type: 1, property: null }
-  //   }
-  // ]
+    // [
+    //   {
+    //     n: 'LI',
+    //     p: [ 'meta', 'views', 0, 'columns', 3 ],
+    //     li: { fieldId: 'fldFlJeRUPUb2', hidden: false }
+    //   },
+    //   {
+    //     n: 'OI',
+    //     p: [ 'meta', 'fieldMap', 'fldFlJeRUPUb2' ],
+    //     oi: { id: 'fldFlJeRUPUb2', name: 'test', type: 1, property: null }
+    //   }
+    // ]
   });
 });

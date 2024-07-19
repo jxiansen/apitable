@@ -1,5 +1,3 @@
-
-
 import { Metadata, status } from '@grpc/grpc-js';
 import { Http2ServerCallStream } from '@grpc/grpc-js/build/src/server-call';
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
@@ -27,7 +25,7 @@ export class TracingHandlerInterceptor implements NestInterceptor {
       const mapping = {
         method: req?.context?.config?.method,
         url: req?.raw?.url,
-        path: req?.context?.config?.url
+        path: req?.context?.config?.url,
       };
       httpTracingHandler(req.raw, res.raw, req.user, mapping);
     } else if (host.getType() === 'rpc') {
@@ -73,11 +71,8 @@ function httpTracingHandler(req: http.IncomingMessage, res: http.ServerResponse,
   const currentUser = user ? { username: user.nikeName, uuid: user.uuid } : { username: 'anonymousUser' };
 
   // We put the transaction on the scope so users can attach children to it
-  getCurrentHub().configureScope(scope => {
-    scope.clear().setSpan(transaction)
-      .setUser(currentUser)
-      .setTag('url', extractRequestData.url)
-      .setContext('Request', extractRequestData);
+  getCurrentHub().configureScope((scope) => {
+    scope.clear().setSpan(transaction).setUser(currentUser).setTag('url', extractRequestData.url).setContext('Request', extractRequestData);
   });
 
   // We also set __sentry_transaction on the response so people can grab the transaction there to add
@@ -88,8 +83,7 @@ function httpTracingHandler(req: http.IncomingMessage, res: http.ServerResponse,
   res.once('finish', () => {
     setImmediate(() => {
       addExpressReqToTransaction(transaction, req, mapping);
-      transaction.setHttpStatus(res.statusCode)
-        .finish();
+      transaction.setHttpStatus(res.statusCode).finish();
     });
   });
 }
@@ -102,13 +96,12 @@ function grpcTracingHandler(data: any, context: Metadata, serverUnaryCall: Http2
       op: 'rpc.server',
     },
     {
-      request: rpcData
+      request: rpcData,
     },
   );
 
-  getCurrentHub().configureScope(scope => {
-    scope.clear().setSpan(transaction)
-      .setContext('Request', rpcData);
+  getCurrentHub().configureScope((scope) => {
+    scope.clear().setSpan(transaction).setContext('Request', rpcData);
   });
 
   serverUnaryCall.once('close', (code: status) => {
@@ -117,14 +110,14 @@ function grpcTracingHandler(data: any, context: Metadata, serverUnaryCall: Http2
       const changesetsMessageId = context.get(CHANGESETS_MESSAGE_ID)?.toString();
       const changesetsCmd = context.get(TRACE_ID)?.toString();
 
-      transaction.setTag('grpc.status_code', code)
-        .setTag('grpc.trace_id', traceId);
+      transaction.setTag('grpc.status_code', code).setTag('grpc.trace_id', traceId);
 
       // add changesets meta info
       !isEmpty(changesetsMessageId) && transaction.setTag(CHANGESETS_MESSAGE_ID, changesetsMessageId);
       !isEmpty(changesetsCmd) && transaction.setTag(CHANGESETS_CMD, changesetsCmd);
 
-      transaction.setTag('grpc.status_code', code)
+      transaction
+        .setTag('grpc.status_code', code)
         .setStatus(code === status.OK ? SpanStatus.Ok : SpanStatus.UnknownError)
         .finish();
     });
@@ -160,12 +153,9 @@ function extractExpressTransactionName(
 
 const DEFAULT_REQUEST_KEYS = ['userAgent', 'cookies', 'requestType', 'changesetsCmd', 'roomId'];
 
-function extractRpcData(
-  req: { [key: string]: any },
-  keys: string[] = DEFAULT_REQUEST_KEYS
-): { [key: string]: any } {
+function extractRpcData(req: { [key: string]: any }, keys: string[] = DEFAULT_REQUEST_KEYS): { [key: string]: any } {
   const requestData: { [key: string]: any } = {};
-  keys.forEach(key => {
+  keys.forEach((key) => {
     switch (key) {
       case 'userAgent':
         requestData.userAgent = req?.internalRepr?.get('user-agent') || '';

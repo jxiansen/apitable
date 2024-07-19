@@ -1,5 +1,3 @@
-
-
 export interface IGrammar {
   Value: RegExp;
   And: RegExp;

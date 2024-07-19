@@ -1,5 +1,3 @@
-
-
 export class ActionTypeBaseInfoDto {
   actionTypeId!: string;
 

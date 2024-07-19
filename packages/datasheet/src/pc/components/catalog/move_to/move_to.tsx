@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -104,10 +102,7 @@ export const MoveTo: React.FC<
             content = t(Strings.move_folder_link_warn);
           } else {
             const nodeType = ConfigConstant.nodePrefixNameMap.get(nodeId.slice(0, 3) as ConfigConstant.NodeTypeReg);
-            content = <TComponent
-              tkey={t(Strings.move_other_link_warn)}
-              params={{ nodeType }}
-            />;
+            content = <TComponent tkey={t(Strings.move_other_link_warn)} params={{ nodeType }} />;
           }
           Modal.warning({
             title: t(Strings.please_note),

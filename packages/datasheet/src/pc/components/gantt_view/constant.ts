@@ -1,5 +1,3 @@
-
-
 // Spacing above and below the task
 export const GANTT_TASK_GAP_SIZE = 8;
 

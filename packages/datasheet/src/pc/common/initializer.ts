@@ -1,5 +1,3 @@
-
-
 /*
  * Initialization functions, used for some non-constructor type things that need to be initialized and executed at startup again
  */
@@ -88,4 +86,3 @@ export function initializer(comlink: any) {
 
   initBugTracker();
 }
-

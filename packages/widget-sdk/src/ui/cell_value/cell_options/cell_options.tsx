@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { ISelectFieldBaseOpenValue } from '@apitable/core';
 import { black } from '@apitable/components';
@@ -11,11 +9,7 @@ const COLOR_INDEX_THRESHOLD = 30;
 
 const OptionItem = (props: IOptionItem) => {
   const { text, ...rest } = props;
-  return (
-    <OptionItemStyled {...rest}>
-      {text}
-    </OptionItemStyled>
-  );
+  return <OptionItemStyled {...rest}>{text}</OptionItemStyled>;
 };
 
 export const CellOptions = (props: ICellOptions) => {
@@ -24,14 +18,7 @@ export const CellOptions = (props: ICellOptions) => {
     const color = find(options, { id: option.id })?.color;
     const textColor = color && color >= COLOR_INDEX_THRESHOLD ? black[50] : black[1000];
     return (
-      <OptionItem
-        key={option.id}
-        bg={option.color.value}
-        text={option.name}
-        textColor={textColor}
-        className={cellClassName}
-        style={cellStyle}
-      />
+      <OptionItem key={option.id} bg={option.color.value} text={option.name} textColor={textColor} className={cellClassName} style={cellStyle} />
     );
   };
   if (!selectOptions) {
@@ -46,4 +33,3 @@ export const CellOptions = (props: ICellOptions) => {
   }
   return renderOption(selectOptions);
 };
-

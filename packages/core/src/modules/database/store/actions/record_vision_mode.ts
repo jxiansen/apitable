@@ -1,5 +1,3 @@
-
-
 import { SET_RECORD_VISION_MODE } from 'modules/shared/store/action_constants';
 import { RecordVision } from 'exports/store/interfaces';
 

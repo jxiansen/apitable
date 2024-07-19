@@ -1,5 +1,3 @@
-
-
 import { Editor } from 'slate';
 
 export type TApi = (...params: Array<any>) => Promise<unknown>;

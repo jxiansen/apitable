@@ -1,5 +1,3 @@
-
-
 import { resourceOpsToChangesets } from '../changesets';
 import { mockDatasheetMap } from './mock.datasheets';
 import {
@@ -16,7 +14,7 @@ describe('resourceOpsToChangesets', () => {
   test('convert op in single datasheet', () => {
     const changesets = resourceOpsToChangesets(mockOpsCollectsOfAddOneDefaultRecordInDst1('rec10'), store.getState());
 
-    changesets.forEach(changeset => (changeset.messageId = 'x'));
+    changesets.forEach((changeset) => (changeset.messageId = 'x'));
 
     expect(changesets).toStrictEqual(mockChangesetsOfAddOneDefaultRecordInDst1('rec10'));
   });
@@ -24,10 +22,10 @@ describe('resourceOpsToChangesets', () => {
   test('convert multiple ops in single datasheet', () => {
     const changesets = resourceOpsToChangesets(
       [...mockOpsCollectsOfAddOneDefaultRecordInDst1('rec10'), ...mockOpsCollectsOfAddOneDefaultRecordInDst1('rec11')],
-      store.getState(),
+      store.getState()
     );
 
-    changesets.forEach(changeset => (changeset.messageId = 'x'));
+    changesets.forEach((changeset) => (changeset.messageId = 'x'));
 
     const expected = mockChangesetsOfAddOneDefaultRecordInDst1('rec10');
     expected[0]!.operations.push(...mockChangesetsOfAddOneDefaultRecordInDst1('rec11')[0]!.operations);
@@ -38,7 +36,7 @@ describe('resourceOpsToChangesets', () => {
   test('convert ops in multiple datasheets', () => {
     const changesets = resourceOpsToChangesets(mockOpsCollectsOfDeleteLinkFieldInDst2, store.getState());
 
-    changesets.forEach(changeset => (changeset.messageId = 'x'));
+    changesets.forEach((changeset) => (changeset.messageId = 'x'));
 
     expect(changesets).toStrictEqual(mockChangesetsOfDeleteLinkFieldInDst2);
   });

@@ -1,5 +1,3 @@
-
-
 import { IOperation } from '@apitable/core';
 import { BaseEntity } from 'shared/entities/base.entity';
 import { Column, Entity } from 'typeorm';
@@ -9,7 +7,6 @@ import { Column, Entity } from 'typeorm';
  */
 @Entity('datasheet_changeset')
 export class DatasheetChangesetEntity extends BaseEntity {
-
   @Column({
     name: 'message_id',
     nullable: true,

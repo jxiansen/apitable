@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldType } from 'types/field_api_enums';
 import { IOpenField, IOpenFieldProperty } from 'types/open/open_field_read_types';
 import { FieldType, IAutoNumberField } from 'types/field_types';
@@ -12,22 +10,22 @@ const autoNumberField: IAutoNumberField = {
   property: {
     nextId: 0,
     viewIdx: 0,
-    datasheetId: 'dst123'
-  }
+    datasheetId: 'dst123',
+  },
 };
 
 const openAutoNumberField: IOpenField = {
   name: 'Auto incremental number field',
   id: 'fld1111',
   type: APIMetaFieldType.AutoNumber,
-  property: null
+  property: null,
 };
 
 const writeOpenProperty: IOpenFieldProperty = null;
 
 describe('Auto-Self-incrementing numeric fields read property format check', () => {
   const valid = getOpenFieldProperty(autoNumberField);
-  it('the correct property', function() {
+  it('the correct property', function () {
     const [expectValue, receiveValue] = valid(openAutoNumberField.property);
     expect(receiveValue).toEqual(expectValue);
   });

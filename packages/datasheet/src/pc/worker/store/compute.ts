@@ -1,5 +1,3 @@
-
-
 import { Selectors, IReduxState } from '@apitable/core';
 
 import { ComputeServices } from './constants';

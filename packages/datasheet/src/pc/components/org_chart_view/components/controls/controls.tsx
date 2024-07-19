@@ -1,5 +1,3 @@
-
-
 import { Divider, Tooltip } from 'antd';
 import { FC, useContext } from 'react';
 import { IconButton, Button, useThemeColors } from '@apitable/components';

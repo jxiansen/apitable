@@ -1,5 +1,3 @@
-
-
 import Router from 'next/router';
 import { useDispatch } from 'react-redux';
 import { Api, StatusCode, StoreActions, Strings, t } from '@apitable/core';

@@ -1,5 +1,3 @@
-
-
 import { ConfigConstant } from '@apitable/core';
 import { isRabbitContext } from '@golevelup/nestjs-rabbitmq';
 import { CallHandler, ExecutionContext, HttpStatus, Injectable, NestInterceptor } from '@nestjs/common';
@@ -30,7 +28,7 @@ export class HttpResponseInterceptor implements NestInterceptor {
     response.__proto__.once = response.raw.once;
     response.__proto__.removeListener = response.raw.removeListener;
     // @ts-ignore
-    response.__proto__.on = function(method, callback) {
+    response.__proto__.on = function (method, callback) {
       callback();
     };
 

@@ -1,5 +1,3 @@
-
-
 import { FC, useState, useEffect } from 'react';
 import { shallowEqual } from 'react-redux';
 import { IReduxState, Api, IAddIsActivedMemberInfo, UnitItem, ITeam, IMember } from '@apitable/core';

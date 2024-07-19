@@ -1,5 +1,3 @@
-
-
 import styled, { css } from 'styled-components';
 
 export const CheckboxWrapperStyled = styled.div`
@@ -11,7 +9,7 @@ export const CheckboxStyled = styled.div<{ checked: boolean }>`
   padding: 2px;
   align-items: center;
   justify-content: center;
-  ${props => {
+  ${(props) => {
     if (props.checked) {
       return css`
         opacity: 1;

@@ -1,5 +1,3 @@
-
-
 import { useAtom, useSetAtom } from 'jotai';
 import { KonvaEventObject } from 'konva/lib/Node';
 import { debounce } from 'lodash';

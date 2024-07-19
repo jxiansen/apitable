@@ -1,5 +1,3 @@
-
-
 import { ModalConfirmKey } from '@apitable/core';
 
 export interface IModalConfirmArgs {

@@ -1,5 +1,3 @@
-
-
 import { Space } from 'antd';
 import { FC } from 'react';
 import { useThemeColors } from '@apitable/components';

@@ -1,5 +1,3 @@
-
-
 import * as crypto from 'crypto';
 import { join } from 'path';
 import { LiteralObject } from '@nestjs/common';
@@ -11,15 +9,18 @@ export abstract class BaseOssStore {
   protected options: any;
 
   protected constructor(args: LiteralObject) {
-    this.options = extend({
-      region: '',
-      path: process.env.NODE_ENV,
-      bucket: '',
-      // whether or not to parse json
-      parse: true,
-      // file suffix
-      fileSuffix: '.json'
-    }, args);
+    this.options = extend(
+      {
+        region: '',
+        path: process.env.NODE_ENV,
+        bucket: '',
+        // whether or not to parse json
+        parse: true,
+        // file suffix
+        fileSuffix: '.json',
+      },
+      args,
+    );
   }
 
   protected getFileNameByKey(key: string): string {
@@ -28,8 +29,10 @@ export abstract class BaseOssStore {
     for (let i = 0; i < keys.length - 1; i++) {
       filePath = join(filePath, keys[i]!);
     }
-    const hash = crypto.createHash('md5').update(key + '').digest('hex');
+    const hash = crypto
+      .createHash('md5')
+      .update(key + '')
+      .digest('hex');
     return join(filePath, hash + this.options.fileSuffix);
   }
-
 }

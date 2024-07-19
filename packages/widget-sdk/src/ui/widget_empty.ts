@@ -1,5 +1,3 @@
-
-
 /* eslint-disable max-len */
 export const WidgetEmptyPath = `<svg width="160" height="120" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="160" height="120" fill="white"/>

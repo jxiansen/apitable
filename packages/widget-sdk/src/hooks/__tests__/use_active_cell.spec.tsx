@@ -13,17 +13,21 @@ test('use active cell should return a ICell', () => {
     rec1111: {
       id: 'rec1111',
       data: {},
-      commentCount: 0
-    }
+      commentCount: 0,
+    },
   };
   mockWidgetSdkData.addRecords(recordMap);
-  mockWidgetSdkData.dispatch(StoreActions.setActiveCell(DEFAULT_DATASHEET_ID, {
-    recordId: 'rec1111',
-    fieldId: primaryFieldId
-  }));
-  mockWidgetSdkData.dispatch(StoreActions.setPageParams({
-    datasheetId: DEFAULT_DATASHEET_ID
-  }));
+  mockWidgetSdkData.dispatch(
+    StoreActions.setActiveCell(DEFAULT_DATASHEET_ID, {
+      recordId: 'rec1111',
+      fieldId: primaryFieldId,
+    })
+  );
+  mockWidgetSdkData.dispatch(
+    StoreActions.setPageParams({
+      datasheetId: DEFAULT_DATASHEET_ID,
+    })
+  );
 
   const wrapper = createSimpleWrapper({ widgetState: mockWidgetSdkData.widgetSdkData });
   const { result } = renderHook(() => useActiveCell(), { wrapper });

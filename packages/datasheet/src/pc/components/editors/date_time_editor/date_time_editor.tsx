@@ -1,5 +1,3 @@
-
-
 import { usePrevious } from 'ahooks';
 import deDE from 'antd/es/date-picker/locale/de_DE';
 import enUS from 'antd/es/date-picker/locale/en_US';
@@ -246,8 +244,7 @@ export class DateTimeEditorBase extends React.PureComponent<IDateTimeEditorProps
     const { autoFill } = property;
     let dateTimestamp = new Date(getToday()).getTime();
     if (dateValue) {
-      const timestamp = formatDateNoYear(dateFormat) ? this.format2StandardDate(dateValue):
-        this.format2StandardDate(displayDateStr, dateFormat);
+      const timestamp = formatDateNoYear(dateFormat) ? this.format2StandardDate(dateValue) : this.format2StandardDate(displayDateStr, dateFormat);
       if (timestamp == null || notInTimestampRange(timestamp)) {
         return null;
       }

@@ -1,5 +1,3 @@
-
-
 import { Progress } from 'antd';
 import { ProgressProps } from 'antd/lib/progress';
 import classNames from 'classnames';

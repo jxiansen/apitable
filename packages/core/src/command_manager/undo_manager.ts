@@ -1,5 +1,3 @@
-
-
 import { ExecuteType, ICollaCommandExecuteResult } from './types';
 import { CollaCommandManager } from './command_manager';
 import { IJOTAction, jot } from 'engine/ot';
@@ -50,7 +48,7 @@ export class UndoManager {
 
   private static revertLinkedActions(cmd: IUndoCommand) {
     if (cmd.result.linkedActions) {
-      cmd.result.linkedActions = cmd.result.linkedActions.map(lCmd => {
+      cmd.result.linkedActions = cmd.result.linkedActions.map((lCmd) => {
         return {
           ...lCmd,
           actions: jot.invert(lCmd.actions),

@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 import { ReactNode, useContext } from 'react';
 import { CellType, ILinearRowRecord, KONVA_DATASHEET_ID, Selectors } from '@apitable/core';

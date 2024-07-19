@@ -1,5 +1,3 @@
-
-
 import { Popover } from 'antd';
 import { FC } from 'react';
 import { shallowEqual } from 'react-redux';

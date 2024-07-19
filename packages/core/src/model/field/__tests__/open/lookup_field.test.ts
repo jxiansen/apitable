@@ -1,5 +1,3 @@
-
-
 import { APIMetaFieldPropertyFormatEnums, DateFormat, FieldType, ILookUpField, RollUpFuncType, TimeFormat } from 'types';
 import { IUpdateOpenMagicLookUpFieldProperty } from 'types/open/open_field_write_types';
 import { getOpenFieldProperty, updateOpenFieldPropertyTransformProperty, validAddOpenProperty, validUpdateOpenProperty } from './common';
@@ -16,9 +14,9 @@ const lookupField: ILookUpField = {
     formatting: {
       dateFormat: DateFormat['YYYY/MM/DD'],
       includeTime: true,
-      timeFormat: TimeFormat['HH:mm']
-    }
-  }
+      timeFormat: TimeFormat['HH:mm'],
+    },
+  },
 };
 
 // const openLookUpField: IOpenField = {
@@ -51,19 +49,19 @@ const propertyOptionalFill: IUpdateOpenMagicLookUpFieldProperty = {
     format: {
       dateFormat: 'YYYY/MM/DD',
       timeFormat: 'HH:mm',
-      includeTime: true
-    }
-  }
+      includeTime: true,
+    },
+  },
 };
 
 const propertyOptionalNotFill: IUpdateOpenMagicLookUpFieldProperty = {
   relatedLinkFieldId: 'fldxxxx',
-  targetFieldId: 'fldccc'
+  targetFieldId: 'fldccc',
 };
 
 describe('Magic reference field read property format check', () => {
   const valid = getOpenFieldProperty(lookupField);
-  it('correct property', function() {
+  it('correct property', function () {
     const [expectValue, receiveValue] = valid({
       hasError: true,
       relatedLinkFieldId: 'fldxxxx',
@@ -98,7 +96,7 @@ describe('Magic reference field update property conversion property check', () =
     const [expectValue, receiveValue] = valid(propertyOptionalNotFill, {
       relatedLinkFieldId: 'fldxxxx',
       lookUpTargetFieldId: 'fldccc',
-      datasheetId: lookupField.property.datasheetId
+      datasheetId: lookupField.property.datasheetId,
     });
     expect(expectValue).toEqual(receiveValue);
   });

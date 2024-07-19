@@ -1,5 +1,3 @@
-
-
 import { black, blackBlue, deepPurple, darkColors, orange, red, teal } from '../colors';
 import { ITheme, ThemeName } from './theme.interface';
 
@@ -55,5 +53,5 @@ export const dark: ITheme = {
       border: blackBlue[200],
       // scrollTip: '51, 51, 51',
     },
-  }
+  },
 };

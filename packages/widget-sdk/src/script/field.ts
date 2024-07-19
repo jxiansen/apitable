@@ -33,7 +33,7 @@ export class Field {
   }
   /**
    * Field name, different field names are called non-repeating values
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -47,7 +47,7 @@ export class Field {
 
   /**
    * Field types, which are enumerated values, can be found in {@link FieldType}
-   * 
+   *
    * @returns
    *
    * #### Example
@@ -63,7 +63,7 @@ export class Field {
    * Returns the description of the field
    *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myField.description);
@@ -75,11 +75,11 @@ export class Field {
   }
 
   /**
-   * 
+   *
    * Returns the property of the field, which is different for different types of fields
    * Returns null means that the field has no properties configured
    * Refer to {@link FieldType}
-   * 
+   *
    * @return {@link FieldType}
    *
    * #### Example
@@ -93,11 +93,11 @@ export class Field {
 
   /**
    * Determine if the current field is a "computed field"
-   * "Computed fields" means the types of fields that do not allow the user to actively write values. 
+   * "Computed fields" means the types of fields that do not allow the user to actively write values.
    * (e.g., auto number, formula, link, modification time, creation time, modifier, creator)
    *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(mySingleLineTextField.isComputed);
@@ -112,9 +112,9 @@ export class Field {
 
   /**
    * Returns whether the current field belongs to the primary field, which in datasheet is always the field where the first field is located.
-   * 
+   *
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    * console.log(myField.isPrimary); // => true
@@ -128,10 +128,10 @@ export class Field {
    * Update the description of the field.
    *
    * Throws an error if the user does not have permission to update the field, or if an invalid description is provided.
-   * 
+   *
    * @param description new description for the field
    * @returns
-   * 
+   *
    * #### Example
    * ```js
    *  await field.updateDescriptionAsync('this is a new description')
@@ -146,7 +146,7 @@ export class Field {
    * Updates the property for this field,
    * tips: that the update property configuration must be overwritten in full.
    *
-   * Throws an error if the user does not have permission to update the field, 
+   * Throws an error if the user does not have permission to update the field,
    * if invalid property are provided, if this field has no writable property, or if updates to this field type is not supported.
    *
    * Refer to {@link FieldType} for supported field types, the write format for property, and other specifics for certain field types.

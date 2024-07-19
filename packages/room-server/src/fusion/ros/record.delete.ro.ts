@@ -1,4 +1,3 @@
-
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsOptional, IsString } from 'class-validator';
@@ -11,7 +10,7 @@ export class RecordDeleteRo {
     description: 'The set of recordId to be deleted',
     example: 'recwZ6yV3Srv3',
   })
-  @Transform(value => stringToArray(value), { toClassOnly: true })
+  @Transform((value) => stringToArray(value), { toClassOnly: true })
   @IsOptional()
   recordIds!: string[];
 }

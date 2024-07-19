@@ -1,5 +1,3 @@
-
-
 export enum ResponseStatusCodeEnums {
   Success = 200,
   ClientError = 400,

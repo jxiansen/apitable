@@ -5,7 +5,7 @@ import { isSandbox } from 'utils/private';
  * Maintaining the reference count of the view cache.
  */
 class ReferenceCount {
-  private referenceCountMap = new Map<string, {[key: string]: number}>();
+  private referenceCountMap = new Map<string, { [key: string]: number }>();
 
   constructor() {}
 
@@ -13,9 +13,9 @@ class ReferenceCount {
    * Get all subscription views.
    */
   private getSubscribeMap() {
-    const res: { datasheetId: string, viewId: string }[] = [];
+    const res: { datasheetId: string; viewId: string }[] = [];
     this.referenceCountMap.forEach((v, k) => {
-      res.push(...Object.keys(v).map(viewId => ({ datasheetId: k, viewId })));
+      res.push(...Object.keys(v).map((viewId) => ({ datasheetId: k, viewId })));
     });
     return res;
   }
@@ -53,7 +53,7 @@ class ReferenceCount {
     if (!referenceCount) {
       return;
     }
-    Object.keys(referenceCount).forEach(viewId => {
+    Object.keys(referenceCount).forEach((viewId) => {
       if (referenceCount.hasOwnProperty(viewId) && referenceCount[viewId]! < 1) {
         delete referenceCount[viewId];
       }
@@ -74,9 +74,9 @@ class ReferenceCount {
    * Notify the main thread of a change in subscription count.
    */
   notify(widgetId: string) {
-    isSandbox() ?
-      widgetMessage.syncWidgetSubscribeView(this.getSubscribeMap()) :
-      eventMessage.syncWidgetSubscribeView(this.getSubscribeMap(), widgetId);
+    isSandbox()
+      ? widgetMessage.syncWidgetSubscribeView(this.getSubscribeMap())
+      : eventMessage.syncWidgetSubscribeView(this.getSubscribeMap(), widgetId);
   }
 }
 

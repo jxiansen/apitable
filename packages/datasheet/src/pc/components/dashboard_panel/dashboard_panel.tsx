@@ -1,5 +1,3 @@
-
-
 import { Skeleton } from '@apitable/components';
 import { Selectors, StatusCode } from '@apitable/core';
 import 'react-grid-layout/css/styles.css';

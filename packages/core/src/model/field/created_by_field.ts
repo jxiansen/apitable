@@ -1,5 +1,3 @@
-
-
 import Joi from 'joi';
 import { isEqual } from 'lodash';
 import { DatasheetActions } from 'commands_actions/datasheet';
@@ -8,9 +6,7 @@ import { getApiMetaUserProperty } from 'model/utils';
 import { IRecord, IRecordMap, IReduxState } from '../../exports/store/interfaces';
 import { getUserMap } from 'modules/org/store/selectors/unit_info';
 import { IAPIMetaCreateByFieldProperty } from 'types/field_api_property_types';
-import {
-  BasicValueType, FieldType, IAddOpenCreatedByFieldProperty, ICreatedByField, IField, IJsonSchema, IUuids
-} from '../../types';
+import { BasicValueType, FieldType, IAddOpenCreatedByFieldProperty, ICreatedByField, IField, IJsonSchema, IUuids } from '../../types';
 import { MemberBaseField } from './member_base_field';
 import { OtherTypeUnitId } from './const';
 import { datasheetIdString, joiErrorResult } from './validate_schema';
@@ -18,8 +14,10 @@ import { t, Strings } from '../../exports/i18n';
 import { getFieldDefaultProperty } from './const';
 import { ICreatedByProperty } from '../../types/field_types';
 export class CreatedByField extends MemberBaseField {
-
-  constructor(public override field: ICreatedByField, public override state: IReduxState) {
+  constructor(
+    public override field: ICreatedByField,
+    public override state: IReduxState
+  ) {
     super(field, state);
   }
 
@@ -81,7 +79,7 @@ export class CreatedByField extends MemberBaseField {
           type: 'string',
           title: t(Strings.robot_variables_creator_avatar),
         },
-      }
+      },
     };
   }
 
@@ -109,13 +107,12 @@ export class CreatedByField extends MemberBaseField {
 
   // get all records uuid
   getUuidsByRecordMap(recordMap: IRecordMap): string[] {
-    const uuids = Object.values(recordMap)
-      .reduce((ids, record) => {
-        if (record.recordMeta?.createdBy) {
-          ids.push(record.recordMeta?.createdBy);
-        }
-        return ids;
-      }, [] as string[]);
+    const uuids = Object.values(recordMap).reduce((ids, record) => {
+      if (record.recordMeta?.createdBy) {
+        ids.push(record.recordMeta?.createdBy);
+      }
+      return ids;
+    }, [] as string[]);
     return [...new Set(uuids)];
   }
 
@@ -124,7 +121,7 @@ export class CreatedByField extends MemberBaseField {
     if (!userMap) {
       return null;
     }
-    return cellValue.map(uuid => {
+    return cellValue.map((uuid) => {
       if (!userMap[uuid]) {
         return '';
       }

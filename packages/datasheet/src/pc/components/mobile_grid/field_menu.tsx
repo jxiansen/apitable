@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { useEffect } from 'react';
 import { shallowEqual } from 'react-redux';
@@ -7,7 +5,8 @@ import { useThemeColors } from '@apitable/components';
 
 import {
   BasicValueType,
-  CollaCommandName, ConfigConstant,
+  CollaCommandName,
+  ConfigConstant,
   ExecuteResult,
   Field,
   FieldType,

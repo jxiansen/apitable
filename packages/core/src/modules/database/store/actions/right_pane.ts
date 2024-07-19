@@ -1,5 +1,3 @@
-
-
 import * as actions from 'modules/shared/store/action_constants';
 
 export const setRightPaneWidth = (width: number | string) => {

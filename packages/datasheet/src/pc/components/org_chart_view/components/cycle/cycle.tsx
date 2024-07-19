@@ -1,5 +1,3 @@
-
-
 import { FC, useEffect, PropsWithChildren } from 'react';
 import { Typography, useThemeColors } from '@apitable/components';
 import { Strings, t } from '@apitable/core';

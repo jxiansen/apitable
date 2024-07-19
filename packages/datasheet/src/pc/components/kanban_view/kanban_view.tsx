@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import CSSMotion from 'rc-motion';
 import { useEffect, useRef, useState } from 'react';

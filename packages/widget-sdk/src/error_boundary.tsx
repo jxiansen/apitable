@@ -1,9 +1,7 @@
-
-
 import React from 'react';
 import { Player, Events } from 'core';
 
-type Props = { id: string, datasheetId?: string, logError: boolean };
+type Props = { id: string; datasheetId?: string; logError: boolean };
 
 // TODO: Access to sentry
 export class ErrorBoundary extends React.Component<Props, { hasError: boolean }> {

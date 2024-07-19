@@ -1,5 +1,3 @@
-
-
 import omit from 'lodash/omit';
 import * as React from 'react';
 import { colorVars } from '@apitable/components';

@@ -1,5 +1,3 @@
-
-
 import { useMemo } from 'react';
 
 export function useCellEditorVisibleStyle(value: { editing: boolean; width?: number; height?: number }) {

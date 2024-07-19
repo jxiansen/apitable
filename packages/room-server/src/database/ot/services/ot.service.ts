@@ -1,5 +1,3 @@
-
-
 import {
   clearCachedSelectors,
   clearComputeCache,
@@ -140,8 +138,7 @@ export class OtService {
     private readonly nodeService: NodeService,
     private readonly recordSubscriptionService: DatasheetRecordSubscriptionBaseService,
     private readonly otEventService: OTEventService,
-  ) {
-  }
+  ) {}
 
   /**
    * Obtain the node rule of the operator.
@@ -221,11 +218,14 @@ export class OtService {
     }
     const spaceId = await this.resourceService.getSpaceIdByResourceId(message.roomId);
 
-    const msgIds = message.changesets.map(cs => cs.messageId);
+    const msgIds = message.changesets.map((cs) => cs.messageId);
     const client = this.redisService.getClient();
     const lock = RedisLock(client as any);
     // Lock resource, messages of the same resource are consumed sequentially. Timeout is 120s
-    const unlock = await lock(message.changesets.map(cs => cs.resourceId), 120 * 1000);
+    const unlock = await lock(
+      message.changesets.map((cs) => cs.resourceId),
+      120 * 1000,
+    );
     const attachCites: any[] = [];
     const results: IRemoteChangeset[] = [];
     const context: IOtEventContext = {
@@ -287,7 +287,7 @@ export class OtService {
     // Add to queue, submit to java to calculate attachment capacity in op,
     // add to queue individually to avoid concurrency
     this.logger.info('applyRoomChangeset-handle-attach', { roomId: message.roomId, msgIds });
-    await Promise.all(attachCites.map(item => this.restService.calDstAttachCite(auth, item)));
+    await Promise.all(attachCites.map((item) => this.restService.calDstAttachCite(auth, item)));
 
     const thisBatchResourceIds = results.reduce((ids, result) => {
       if (result.resourceType === ResourceType.Datasheet) {
@@ -301,7 +301,7 @@ export class OtService {
       // Handle event here
       this.logger.info('applyRoomChangeset-robot-event-start', { roomId: message.roomId, msgIds, allEffectDstIds, thisBatchResourceIds });
       // Clear cache
-      allEffectDstIds.forEach(resourceId => {
+      allEffectDstIds.forEach((resourceId) => {
         clearComputeCache(resourceId);
       });
       // automation async function
@@ -492,17 +492,19 @@ export class OtService {
       const changesets = await this.changesetService.getByRevisions(changeset.resourceId, changeset.resourceType, revisions);
       const isEqual = changesets && changesets.length === revisions.length;
       if (!isEqual) {
-        this.logger.info(`REVISION_ERROR :${revisions.join(',')} --- ${changesets.map(item => item.revision).join(',')} --- ${changeset.resourceId}`);
+        this.logger.info(
+          `REVISION_ERROR :${revisions.join(',')} --- ${changesets.map((item) => item.revision).join(',')} --- ${changeset.resourceId}`,
+        );
         throw new ServerException(OtException.REVISION_ERROR);
       }
       const serverActions = changesets.reduce<IJOTAction[]>((pre, cs) => {
-        cs.operations?.forEach(op => {
+        cs.operations?.forEach((op) => {
           pre.push(...op.actions);
         });
         return pre;
       }, []);
       let localActionLength = 0;
-      changeset.operations.forEach(op => {
+      changeset.operations.forEach((op) => {
         localActionLength += op.actions.length;
       });
       // Revision in database is too large, do not transform in server, hand to client

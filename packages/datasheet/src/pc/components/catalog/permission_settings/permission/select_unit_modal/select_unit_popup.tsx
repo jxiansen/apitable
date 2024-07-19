@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { Button } from '@apitable/components';
 import { Strings, t } from '@apitable/core';

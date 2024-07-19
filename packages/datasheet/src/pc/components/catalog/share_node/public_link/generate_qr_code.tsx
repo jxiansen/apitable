@@ -1,5 +1,3 @@
-
-
 import { useMount } from 'ahooks';
 import QRCode from 'qrcode';
 import { FC } from 'react';

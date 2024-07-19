@@ -1,5 +1,3 @@
-
-
 export interface IViewLockProps {
   viewId: string;
   unlockHandle?: () => void;

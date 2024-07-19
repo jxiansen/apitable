@@ -1,5 +1,3 @@
-
-
 import { FC } from 'react';
 import { IReduxState } from '@apitable/core';
 import { useAppSelector } from 'pc/store/react-redux';

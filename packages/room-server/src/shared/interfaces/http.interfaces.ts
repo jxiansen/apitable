@@ -1,5 +1,3 @@
-
-
 // HTTP error response
 export interface IHttpErrorResponse {
   success: boolean;

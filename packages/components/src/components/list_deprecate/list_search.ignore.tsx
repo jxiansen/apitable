@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { StyledSearchInputWrapper } from './styled';
 import { LineSearchInput } from './line_search_input';
@@ -12,20 +10,15 @@ export const ListSearch = (props: any) => {
   };
 
   const onPressEnter = () => {
-    onInputEnter && onInputEnter(() => {
-      setKeyword('');
-    });
+    onInputEnter &&
+      onInputEnter(() => {
+        setKeyword('');
+      });
   };
 
-  return <StyledSearchInputWrapper
-    style={style}
-  >
-    <LineSearchInput
-      onPressEnter={onPressEnter}
-      onChange={changInput}
-      value={keyword}
-      placeholder={placeholder || 'please input'}
-      ref={inputRef}
-    />
-  </StyledSearchInputWrapper>;
+  return (
+    <StyledSearchInputWrapper style={style}>
+      <LineSearchInput onPressEnter={onPressEnter} onChange={changInput} value={keyword} placeholder={placeholder || 'please input'} ref={inputRef} />
+    </StyledSearchInputWrapper>
+  );
 };

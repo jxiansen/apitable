@@ -1,5 +1,3 @@
-
-
 import accept from 'attr-accept';
 import { getCustomConfig } from 'config';
 import type { IAttachmentValue } from 'types/field_types';
@@ -84,25 +82,11 @@ function getImageThumbSrcForQiniu(src: string, options: IImageThumbOption) {
     src[0] !== '/' && (src = '/' + src);
   }
 
-  if(src.includes('?')){
-    return [
-      src,
-      '&imageView2',
-      getFileMethod(options),
-      getFileSize(options),
-      getFileFormat(options),
-      getFileQuality(options),
-    ].join('');
+  if (src.includes('?')) {
+    return [src, '&imageView2', getFileMethod(options), getFileSize(options), getFileFormat(options), getFileQuality(options)].join('');
   }
 
-  return [
-    src,
-    '?imageView2',
-    getFileMethod(options),
-    getFileSize(options),
-    getFileFormat(options),
-    getFileQuality(options),
-  ].join('');
+  return [src, '?imageView2', getFileMethod(options), getFileSize(options), getFileFormat(options), getFileQuality(options)].join('');
 }
 
 export function getImageThumbSrc(src: string, options?: IImageThumbOption) {
@@ -141,10 +125,7 @@ export const getHostOfAttachment = (bucket: string, fileUrl?: string) => {
   return QNY3.includes('http') ? QNY3 : urlcat(origin, QNY3 + '');
 };
 
-export function cellValueToImageSrc(
-  cellValue: IAttachmentValue | undefined,
-  options?: IImageSrcOption,
-): string {
+export function cellValueToImageSrc(cellValue: IAttachmentValue | undefined, options?: IImageSrcOption): string {
   if (!cellValue) return '';
 
   const { bucket, token, preview: previewToken, mimeType, name } = cellValue;
@@ -186,9 +167,7 @@ export function cellValueToImageSrc(
   return defaultSrc;
 }
 
-export const integrateCdnHost = (
-  pathName: string,
-): string => {
+export const integrateCdnHost = (pathName: string): string => {
   if (!pathName) {
     return pathName;
   }

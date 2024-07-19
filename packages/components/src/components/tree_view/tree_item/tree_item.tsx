@@ -1,5 +1,3 @@
-
-
 import React, { FC, useContext, useState, useRef } from 'react';
 import TreeViewContext from '../tree_view_context';
 import { useDrag, useDrop } from 'react-dnd';
@@ -23,10 +21,15 @@ const TreeItemWrapper = styled.li`
   list-style: none;
 `;
 
-const Item = styled.div.attrs(applyDefaultTheme) < {
-  hoverColor?: string, level: number, selected: boolean, expanded: boolean, dragOverGapTop: boolean,
-  dragOver: boolean, dragOverGapBottom: boolean
-} >`
+const Item = styled.div.attrs(applyDefaultTheme)<{
+  hoverColor?: string;
+  level: number;
+  selected: boolean;
+  expanded: boolean;
+  dragOverGapTop: boolean;
+  dragOver: boolean;
+  dragOverGapBottom: boolean;
+}>`
   width: 100%;
   height: 40px;
   display: flex;
@@ -34,61 +37,74 @@ const Item = styled.div.attrs(applyDefaultTheme) < {
   cursor: pointer;
   border-radius: 4px;
   border: 2px solid transparent;
-  padding-left: ${props => {
+  padding-left: ${(props) => {
     const level = props.level;
-    return ((level - 1) === 0 ? 8 : level * 16) + 'px';
+    return (level - 1 === 0 ? 8 : level * 16) + 'px';
   }};
-  
-  ${props => props.selected && css`
-    background-color: ${props.theme.color.deepPurple[50]};
-    ${props.expanded && css`border-radius: 4px 4px 0 0;`}
-    & + ${ChildWrapper} {
-      background-color: ${props.theme.color.blackBlue[100]};
-      border-radius: 0 0 4px 4px;
-    }
-  `}
 
-  ${props => props.dragOverGapTop && css`
-    & > ${LabelWrapper}{
-      ::before {
-        display: block;
-        top: ${(-2 - 1) + 'px'};
-      }
-
-      ::after {
-        display: block;
-        top: ${-6 - 1 + 2 + 'px'} 
-      }
-    }
-  `}
-
-  ${props => props.dragOverGapBottom && css`
-    & > ${LabelWrapper}{
-      ::before {
-        display: block;
-        bottom: ${(-2 - 1) + 'px'};
-      }
-      ::after {
-        display: block;
-        bottom: ${(-6 - 1 + 2 + 'px')};
-      }
-    }
-  `}
-
-  ${props => props.dragOver && css`
-    border-color: ${props.theme.color.deepPurple[500]};
-  `}
-
-  @media (any-hover: hover) {
-    ${props => !props.selected && css`
-      &:hover {
-        background: ${props.hoverColor || props.theme.color.blackBlue[100]};
+  ${(props) =>
+    props.selected &&
+    css`
+      background-color: ${props.theme.color.deepPurple[50]};
+      ${props.expanded &&
+      css`
+        border-radius: 4px 4px 0 0;
+      `}
+      & + ${ChildWrapper} {
+        background-color: ${props.theme.color.blackBlue[100]};
+        border-radius: 0 0 4px 4px;
       }
     `}
+
+  ${(props) =>
+    props.dragOverGapTop &&
+    css`
+      & > ${LabelWrapper} {
+        ::before {
+          display: block;
+          top: ${-2 - 1 + 'px'};
+        }
+
+        ::after {
+          display: block;
+          top: ${-6 - 1 + 2 + 'px'};
+        }
+      }
+    `}
+
+  ${(props) =>
+    props.dragOverGapBottom &&
+    css`
+      & > ${LabelWrapper} {
+        ::before {
+          display: block;
+          bottom: ${-2 - 1 + 'px'};
+        }
+        ::after {
+          display: block;
+          bottom: ${-6 - 1 + 2 + 'px'};
+        }
+      }
+    `}
+
+  ${(props) =>
+    props.dragOver &&
+    css`
+      border-color: ${props.theme.color.deepPurple[500]};
+    `}
+
+  @media (any-hover: hover) {
+    ${(props) =>
+      !props.selected &&
+      css`
+        &:hover {
+          background: ${props.hoverColor || props.theme.color.blackBlue[100]};
+        }
+      `}
   }
 `;
 
-const Switcher = styled.div<{ hoverColor?: string, expanded: boolean, loading: boolean }>`
+const Switcher = styled.div<{ hoverColor?: string; expanded: boolean; loading: boolean }>`
   flex-shrink: 0;
   width: 20px;
   height: 20px;
@@ -98,13 +114,20 @@ const Switcher = styled.div<{ hoverColor?: string, expanded: boolean, loading: b
   border-radius: 2px;
 
   & > svg {
-    ${props => props.expanded ? css`transform: rotate(90deg);` : css`transform: rotate(0deg);`}
+    ${(props) =>
+      props.expanded
+        ? css`
+            transform: rotate(90deg);
+          `
+        : css`
+            transform: rotate(0deg);
+          `}
     transition: transform 500ms ease;
   }
 
   @media (any-hover: hover) {
     &:hover {
-      background-color: ${props => props.hoverColor || props.theme.color.black[200]};
+      background-color: ${(props) => props.hoverColor || props.theme.color.black[200]};
     }
   }
 `;
@@ -117,11 +140,13 @@ const LabelWrapper = styled.div.attrs(applyDefaultTheme)`
 
   &::before {
     display: none;
-    content: "";
+    content: '';
     position: absolute;
-    left: ${(6 - 1) + 'px'};
+    left: ${6 - 1 + 'px'};
     right: 0;
-    ${props => css`border-top: 2px  solid ${props.theme.color.deepPurple[500]};`}
+    ${(props) => css`
+      border-top: 2px solid ${props.theme.color.deepPurple[500]};
+    `}
     z-index: 1;
     pointer-events: none;
   }
@@ -129,12 +154,14 @@ const LabelWrapper = styled.div.attrs(applyDefaultTheme)`
   &::after {
     display: none;
     box-sizing: border-box;
-    content: "";
+    content: '';
     position: absolute;
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    ${props => css`border: 2px solid ${props.theme.color.deepPurple[500]};`}
+    ${(props) => css`
+      border: 2px solid ${props.theme.color.deepPurple[500]};
+    `}
     left: 0;
     right: 0;
     z-index: 1;
@@ -158,9 +185,22 @@ const TreeItemBase: FC<React.PropsWithChildren<ITreeItemProps>> = ({
   draggable = true,
 }) => {
   const {
-    module, icons, expandAction, multiple, draggable: treeDraggable, dragNodeId,
-    loadingNodeId, renderTreeItem, isExpanded, isSelected, isFocused, focus, toggleExpansion, selectNode,
-    dragOver, drop,
+    module,
+    icons,
+    expandAction,
+    multiple,
+    draggable: treeDraggable,
+    dragNodeId,
+    loadingNodeId,
+    renderTreeItem,
+    isExpanded,
+    isSelected,
+    isFocused,
+    focus,
+    toggleExpansion,
+    selectNode,
+    dragOver,
+    drop,
   } = useContext(TreeViewContext);
   const nodeRef = useRef<any>(null);
 
@@ -184,22 +224,24 @@ const TreeItemBase: FC<React.PropsWithChildren<ITreeItemProps>> = ({
     drop() {
       drop({ dragNodeId, dropNodeId: hoverNodeId, dropPosition });
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
   });
 
-  const isOverGap = (clientOffset: { x: number, y: number } | null, treeNode: HTMLDivElement) => {
+  const isOverGap = (clientOffset: { x: number; y: number } | null, treeNode: HTMLDivElement) => {
     let newDropPosition = 0;
-    if (!clientOffset) { return newDropPosition; }
+    if (!clientOffset) {
+      return newDropPosition;
+    }
     const offsetTop = getOffset(treeNode).top;
     const offsetHeight = treeNode.offsetHeight;
     const gapHeight = 12;
     const pageY = clientOffset.y;
     // Determine whether the mouse position is in the lower part of the element
-    if (pageY >= (offsetTop + (offsetHeight + 2) - gapHeight) && pageY <= (offsetTop + (offsetHeight + 2))) {
+    if (pageY >= offsetTop + (offsetHeight + 2) - gapHeight && pageY <= offsetTop + (offsetHeight + 2)) {
       newDropPosition = 1;
-    } else if (pageY <= (offsetTop + gapHeight) && pageY >= offsetTop - 4) {
+    } else if (pageY <= offsetTop + gapHeight && pageY >= offsetTop - 4) {
       newDropPosition = -1;
     }
     return newDropPosition;
@@ -207,7 +249,6 @@ const TreeItemBase: FC<React.PropsWithChildren<ITreeItemProps>> = ({
 
   // Get node offset data
   const getOffset = (ele: HTMLDivElement) => {
-
     if (!ele.getClientRects().length) {
       return { top: 0, left: 0 };
     }
@@ -217,7 +258,7 @@ const TreeItemBase: FC<React.PropsWithChildren<ITreeItemProps>> = ({
     if (rect.width || rect.height) {
       return {
         top: rect.top,
-        left: rect.left
+        left: rect.left,
       };
     }
 
@@ -279,7 +320,7 @@ const TreeItemBase: FC<React.PropsWithChildren<ITreeItemProps>> = ({
   };
 
   /* Depth of the current node */
-  const depth = pos ? (pos.split('-').length - 1) : 0;
+  const depth = pos ? pos.split('-').length - 1 : 0;
 
   drag(dndDrop(dragRef));
 
@@ -297,24 +338,16 @@ const TreeItemBase: FC<React.PropsWithChildren<ITreeItemProps>> = ({
         onClick={clickHandler}
       >
         <Switcher onClick={clickSwitcherHandler} expanded={expanded} loading={loading}>
-          {!isLeaf &&
-            loading ? icons.switcherLoadingIcon : icons.switcherIcon
-          }
+          {!isLeaf && loading ? icons.switcherLoadingIcon : icons.switcherIcon}
         </Switcher>
         <LabelWrapper ref={nodeRef}> {label}</LabelWrapper>
       </Item>
-      {
-        children && expanded && (
-          <ChildWrapper
-            className={'group'}
-            role="group"
-            aria-labelledby="tree_label"
-          >
-            {renderChildren(children)}
-          </ChildWrapper>
-        )
-      }
-    </TreeItemWrapper >
+      {children && expanded && (
+        <ChildWrapper className={'group'} role="group" aria-labelledby="tree_label">
+          {renderChildren(children)}
+        </ChildWrapper>
+      )}
+    </TreeItemWrapper>
   );
 };
 

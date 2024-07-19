@@ -1,5 +1,3 @@
-
-
 import { fontVariants } from 'index';
 import styled, { css } from 'styled-components';
 import { applyDefaultTheme } from 'theme';
@@ -12,26 +10,27 @@ export const DividerStyled = styled.div.attrs(applyDefaultTheme)<IDividerStyledT
   font-size: 16px;
   box-sizing: border-box;
   display: flex;
-  ${props => fontVariants[props.typography || 'body2']}
+  ${(props) => fontVariants[props.typography || 'body2']}
 
-  ${props => {
+  ${(props) => {
     const borderBg = props.theme.color.lineColor;
     const strokeStyle = props.dashed ? 'dashed' : 'solid';
 
     if (props.hasChildren) {
       return css`
-        &::before, &::after {
+        &::before,
+        &::after {
           position: relative;
           border-top: 1px ${strokeStyle} ${borderBg};
           top: 50%;
-          content: "";
+          content: '';
           transform: translateY(50%);
         }
         &::before {
-          width: ${props.textAlign === 'left' ? 0 : '100%'}
+          width: ${props.textAlign === 'left' ? 0 : '100%'};
         }
         &::after {
-          width: ${props.textAlign === 'right' ? 0 : '100%'}
+          width: ${props.textAlign === 'right' ? 0 : '100%'};
         }
         & > div {
           padding-left: ${props.textAlign === 'left' ? 0 : undefined};
@@ -43,7 +42,7 @@ export const DividerStyled = styled.div.attrs(applyDefaultTheme)<IDividerStyledT
     if (props.orientation === 'vertical') {
       return css`
         width: 0px;
-        height: .9em;
+        height: 0.9em;
         border-right: 1px ${strokeStyle} ${borderBg};
         display: inline-block;
         margin: 0 16px;

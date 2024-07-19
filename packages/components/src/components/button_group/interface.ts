@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 export interface IButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   /** child elements */

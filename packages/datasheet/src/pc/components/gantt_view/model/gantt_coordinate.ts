@@ -1,5 +1,3 @@
-
-
 import { ManipulateType, OpUnitType } from 'dayjs';
 import { DateUnitType, DEFAULT_WORK_DAYS } from '@apitable/core';
 import { Coordinate } from 'pc/components/konva_grid';

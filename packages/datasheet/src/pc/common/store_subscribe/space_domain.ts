@@ -1,5 +1,3 @@
-
-
 import { store } from 'pc/store';
 
 store.subscribe(function spaceIdChange() {

@@ -1,5 +1,3 @@
-
-
 import { OpenTelemetryModuleConfig } from '@metinseylan/nestjs-opentelemetry';
 import { AlwaysOffSampler, ParentBasedSampler, TraceIdRatioBasedSampler } from '@opentelemetry/core';
 import { JaegerExporter } from '@opentelemetry/exporter-jaeger';
@@ -18,9 +16,9 @@ const openTelemetryConfiguration: OpenTelemetryModuleConfig = {
   applicationName: APPLICATION_NAME,
   sampler: enableOtelJaeger
     ? new ParentBasedSampler({
-      root: new TraceIdRatioBasedSampler(parseInt(process.env.OTEL_JAEGER_TRACE_ID_RATIO_BASED || '0.1', 10)),
-      localParentSampled: new CustomParentBasedSampler(),
-    })
+        root: new TraceIdRatioBasedSampler(parseInt(process.env.OTEL_JAEGER_TRACE_ID_RATIO_BASED || '0.1', 10)),
+        localParentSampled: new CustomParentBasedSampler(),
+      })
     : new AlwaysOffSampler(),
   metricInterval: 1000,
   instrumentations: [
@@ -39,10 +37,10 @@ const openTelemetryConfiguration: OpenTelemetryModuleConfig = {
   }) as any,
   spanProcessor: (enableOtelJaeger
     ? new BatchSpanProcessor(
-      new JaegerExporter({
-        endpoint: process.env.OTEL_JAEGER_ENDPOINT,
-      }),
-    )
+        new JaegerExporter({
+          endpoint: process.env.OTEL_JAEGER_ENDPOINT,
+        }),
+      )
     : new NoopSpanProcessor()) as any,
 };
 

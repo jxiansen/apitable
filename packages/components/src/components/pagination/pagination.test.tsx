@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
@@ -16,7 +14,7 @@ describe('pagination test', () => {
 
   it('Show total number', () => {
     const { container } = render(<Total />);
-    
+
     expect(container).toHaveTextContent('第 1-10 条/总共 50 条');
   });
 
@@ -27,7 +25,7 @@ describe('pagination test', () => {
     const pages = screen.getAllByRole('button');
 
     if (input) {
-      fireEvent.change(input, { target: { value: 3 }});
+      fireEvent.change(input, { target: { value: 3 } });
       fireEvent.blur(input);
       expect(pages[2]).toHaveAttribute('data-selected', 'true');
     }
@@ -42,7 +40,7 @@ describe('pagination test', () => {
 
   it('Per page number', () => {
     const { container } = render(<ChangeSize />);
-    
+
     // const select = container.querySelector('div[data-name]');
     // if (select) {
     //   fireEvent.click(select);

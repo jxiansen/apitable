@@ -1,5 +1,3 @@
-
-
 import { Api, IApiWrapper } from '@apitable/core';
 import { ApiInterface } from '@apitable/core';
 import axios, { AxiosRequestConfig, Method } from 'axios';
@@ -47,14 +45,14 @@ function convertOrigin(url: string) {
 async function notify(uploadCertificate: IGetUploadCertificateResponse, type: UploadType) {
   const res = await Api.getS3Callback({
     resourceKeys: [uploadCertificate.token],
-    type
+    type,
   });
   const { data } = res.data;
   return {
     data: {
       ...res.data,
-      data: Array.isArray(data) ? data[0] : data
-    }
+      data: Array.isArray(data) ? data[0] : data,
+    },
   };
 }
 
@@ -73,13 +71,9 @@ export async function uploadAttachToS3(optional: IUploadFileForSaaS): Promise<an
     return uploadCertificates;
   }
 
-  await uploadDirectOSS(
-    uploadCertificates[0]!,
-    file,
-    {
-      ...axiosConfig,
-      headers: { 'Content-Type': _fileType },
-    }
-  );
+  await uploadDirectOSS(uploadCertificates[0]!, file, {
+    ...axiosConfig,
+    headers: { 'Content-Type': _fileType },
+  });
   return notify(uploadCertificates[0]!, fileType);
 }

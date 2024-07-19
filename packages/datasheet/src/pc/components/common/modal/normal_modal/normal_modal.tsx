@@ -1,5 +1,3 @@
-
-
 import classNames from 'classnames';
 import React, { FC, PropsWithChildren } from 'react';
 import { Strings, t } from '@apitable/core';

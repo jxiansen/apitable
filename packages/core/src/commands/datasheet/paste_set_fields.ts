@@ -1,12 +1,10 @@
-
-
 import { ExecuteResult, ICollaCommandDef, ILinkedActions } from 'command_manager';
 import { IJOTAction } from 'engine';
 import { Field } from 'model/field';
 import { TextField } from 'model/field/text_field';
 import { ViewType } from 'modules/shared/store/constants';
-import { getViewById,getActiveDatasheetId,getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
-import { getVisibleColumns,getPermissions,getRangeFields } from 'modules/database/store/selectors/resource/datasheet/calc';
+import { getViewById, getActiveDatasheetId, getSnapshot } from 'modules/database/store/selectors/resource/datasheet/base';
+import { getVisibleColumns, getPermissions, getRangeFields } from 'modules/database/store/selectors/resource/datasheet/calc';
 import { getSelectRanges } from 'modules/database/store/selectors/resource/datasheet/cell_range_calc';
 import { IViewColumn } from '../../exports/store/interfaces';
 import { FieldType, ResourceType } from 'types';
@@ -93,7 +91,7 @@ export const pasteSetFields: ICollaCommandDef<IPasteSetFieldsOptions> = {
       const range = ranges[0]!;
       const fields = getRangeFields(state, range, datasheetId)!;
       let stdValue = stdValues[0]![0]!;
-      const data = stdValue.data.filter(d => d.text);
+      const data = stdValue.data.filter((d) => d.text);
       stdValue = { ...stdValue, data };
       for (const field of fields) {
         enrichColumnProperty({ fieldId: field.id }, [stdValue]);
@@ -104,7 +102,7 @@ export const pasteSetFields: ICollaCommandDef<IPasteSetFieldsOptions> = {
         const stdValueField = stdValues.reduce((result, stdValueRow) => {
           const stdValue = stdValueRow[i];
           if (stdValue) {
-            const data = stdValue.data.filter(d => d.text);
+            const data = stdValue.data.filter((d) => d.text);
             result.push({ ...stdValue, data });
           }
           return result;
@@ -121,7 +119,7 @@ export const pasteSetFields: ICollaCommandDef<IPasteSetFieldsOptions> = {
       for (const fieldId in fieldMap) {
         fieldNames.add(fieldMap[fieldId]!.name);
       }
-      newFields = newFields.map(field => {
+      newFields = newFields.map((field) => {
         const originName = field.name;
         // The incoming fields may have fieldId. In order to ensure that it does not conflict with the id of the newly created field,
         // we force it to be deleted in this category.

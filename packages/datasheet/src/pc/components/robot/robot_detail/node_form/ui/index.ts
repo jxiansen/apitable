@@ -1,5 +1,3 @@
-
-
 import { memo } from 'react';
 import { withTheme } from '../core';
 import { theme } from './theme';
