@@ -1,4 +1,5 @@
 import { useAtomValue, useAtom } from 'jotai';
+import { debounce } from 'lodash';
 import { ReactElement, useCallback, useMemo } from 'react';
 import { SearchSelect } from '@apitable/components';
 import { integrateCdnHost, Strings, t } from '@apitable/core';
@@ -10,7 +11,6 @@ import { IActionType, INodeOutputSchema, IRobotAction } from '../../interface';
 import { NewItem } from '../../robot_list/new_item';
 import { EditType } from '../trigger/robot_trigger';
 import itemStyle from '../trigger/select_styles.module.less';
-import { debounce } from 'lodash';
 
 export const getNextAction = (actionList: IRobotAction[], preActionId?: string) => {
   const actionIndex = actionList.findIndex((action) => action.actionId === preActionId);

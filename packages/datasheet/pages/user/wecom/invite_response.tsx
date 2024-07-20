@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 // @ts-ignore
 import { isWecomFunc } from 'enterprise/home/social_platform/utils';

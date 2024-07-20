@@ -1,6 +1,5 @@
 import { KonvaEventObject } from 'konva/lib/Node';
 import { isEqual } from 'lodash';
-import { ShortcutActionManager, ShortcutActionName } from 'modules/shared/shortcut_key';
 import dynamic from 'next/dynamic';
 import * as React from 'react';
 import { useCallback, useContext, useMemo } from 'react';
@@ -18,6 +17,7 @@ import {
   Strings,
   t,
 } from '@apitable/core';
+import { ShortcutActionManager, ShortcutActionName } from 'modules/shared/shortcut_key';
 import { generateTargetName, IScrollState } from 'pc/components/gantt_view';
 import { Rect } from 'pc/components/konva_components';
 import {

@@ -192,11 +192,11 @@ export const MemberTable: FC<React.PropsWithChildren<IMemberTable>> = (props) =>
         const text = value ? value.map((team: any) => team.fullHierarchyTeamName).join(' & ') : [];
         const tipsTitle = value
           ? value.map((team: any, index: number) => (
-              <div key={index} className={styles.teamItem}>
-                <p>-</p>
-                <p>{team.fullHierarchyTeamName}</p>
-              </div>
-            ))
+            <div key={index} className={styles.teamItem}>
+              <p>-</p>
+              <p>{team.fullHierarchyTeamName}</p>
+            </div>
+          ))
           : '';
         return (
           <Tooltip title={tipsTitle} rowsNumber={2} textEllipsis overflowWidth={200} showTipAnyway>
@@ -258,11 +258,11 @@ export const MemberTable: FC<React.PropsWithChildren<IMemberTable>> = (props) =>
     rowSelection: isBindSocial
       ? undefined
       : {
-          selectedRowKeys: selectMemberListInSpace,
-          selectedRows,
-          onChange: onSelectMemberChange,
-          columnWidth: 40,
-        },
+        selectedRowKeys: selectMemberListInSpace,
+        selectedRows,
+        onChange: onSelectMemberChange,
+        columnWidth: 40,
+      },
     rowKey: (record: any) => String(record.orderNo),
   };
 

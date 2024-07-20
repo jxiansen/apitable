@@ -40,7 +40,7 @@ export const SearchPanelMain: React.FC<ISearchPanelProps> = (props) => {
   const isMobile = screenIsAtMost(ScreenSize.md);
   const editorRef = useRef<{
     focus: () => void;
-  } | null>(null);
+      } | null>(null);
 
   const onCancelClick = () => {
     localDispatch({ searchValue: '' });

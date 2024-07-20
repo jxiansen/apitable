@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import { NextPageContext } from 'next';
 import { getBaseUrl } from '../utils/get_base_url';

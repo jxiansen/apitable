@@ -1,5 +1,3 @@
-
-
 import { isPrivateDeployment } from '@apitable/core';
 
 (() => {

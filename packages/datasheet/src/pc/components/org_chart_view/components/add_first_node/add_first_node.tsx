@@ -63,8 +63,8 @@ export const AddFirstNode: FC<React.PropsWithChildren<IAddFirstNodeProps>> = (pr
           {addMode
             ? t(Strings.org_chart_please_click_button_to_create_a_node)
             : !rightPanelVisible
-            ? t(Strings.org_chart_please_drag_a_node_into_canvas_if_list_closed)
-            : t(Strings.org_chart_please_drag_a_node_into_canvas)}
+              ? t(Strings.org_chart_please_drag_a_node_into_canvas_if_list_closed)
+              : t(Strings.org_chart_please_drag_a_node_into_canvas)}
         </Typography>
         {addMode && (
           <div

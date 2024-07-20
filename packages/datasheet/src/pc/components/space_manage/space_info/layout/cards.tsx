@@ -122,11 +122,11 @@ export const useCards = (props: ILayoutProps) => {
           basicCert || isSocial || isMobileApp() || isMobile || getEnvVariables().IS_SELFHOST || getEnvVariables().IS_APITABLE
             ? undefined
             : {
-                text: t(Strings.attachment_capacity_details_entry),
-                onClick: () => {
-                  expandCapacityRewardModal();
-                },
-              };
+              text: t(Strings.attachment_capacity_details_entry),
+              onClick: () => {
+                expandCapacityRewardModal();
+              },
+            };
 
         return isSocial || getEnvVariables().IS_SELFHOST || getEnvVariables().IS_APITABLE ? (
           <Card
@@ -165,11 +165,11 @@ export const useCards = (props: ILayoutProps) => {
           basicCert || isMobileApp() || isMobile || getEnvVariables().IS_SELFHOST
             ? undefined
             : {
-                text: t(Strings.attachment_capacity_details_entry),
-                onClick: () => {
-                  expandFileModal(fileData.total);
-                },
-              };
+              text: t(Strings.attachment_capacity_details_entry),
+              onClick: () => {
+                expandFileModal(fileData.total);
+              },
+            };
         return (
           <Card
             {...props}

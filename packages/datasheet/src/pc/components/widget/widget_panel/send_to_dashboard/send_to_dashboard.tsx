@@ -1,4 +1,3 @@
-import { copyWidgetsToNode } from 'api/widget/api';
 import classNames from 'classnames';
 import Image from 'next/image';
 import * as React from 'react';
@@ -8,6 +7,7 @@ import { Provider } from 'react-redux';
 import { Button, Skeleton, ThemeName, useThemeColors } from '@apitable/components';
 import { Api, CollaCommandName, ConfigConstant, ExecuteResult, Navigation, Selectors, StoreActions, Strings, t } from '@apitable/core';
 import { DashboardOutlined } from '@apitable/icons';
+import { copyWidgetsToNode } from 'api/widget/api';
 import { getNodeIcon } from 'pc/components/catalog/tree/node_icon';
 import { Message, Modal } from 'pc/components/common';
 import { TComponent } from 'pc/components/common/t_component';

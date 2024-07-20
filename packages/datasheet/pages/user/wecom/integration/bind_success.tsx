@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 // @ts-ignore
 import { WecomBindSuccess } from 'enterprise/wecom/wecom_integration/wecom_bind_success';

@@ -45,7 +45,7 @@ export const DataSourceSelectorBase: React.FC<ISearchPanelProps> = ({
   const { embedId } = useAppSelector((state) => state.pageParams);
   const editorRef = useRef<{
     focus: () => void;
-  } | null>(null);
+      } | null>(null);
 
   // detail
   const needNodeMetaData = requiredData.includes('viewId') || requiredData.includes('meta');

@@ -1,3 +1,1 @@
-
-
 import '@webcomponents/shadydom';

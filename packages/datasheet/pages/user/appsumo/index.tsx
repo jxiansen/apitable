@@ -5,7 +5,7 @@ import styles from 'pc/components/home/style.module.less';
 import { useResponsive } from 'pc/hooks';
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ()=>{
+export default () => {
   const { screenIsAtMost } = useResponsive();
   const isMobile = screenIsAtMost(ScreenSize.lg);
 

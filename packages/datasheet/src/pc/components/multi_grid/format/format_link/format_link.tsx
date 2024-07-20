@@ -57,14 +57,14 @@ export const FormateLink: React.FC<React.PropsWithChildren<IFormateLinkProps>> =
   const setForeignDatasheetId = (id: string) => {
     const property = !isLinkType
       ? {
-          ...currentField.property,
-          foreignDatasheetId: id,
-        }
+        ...currentField.property,
+        foreignDatasheetId: id,
+      }
       : {
-          ...currentField.property,
-          foreignDatasheetId: id,
-          brotherFieldId: activeDatasheetId === id ? undefined : (currentField as ILinkField).property.brotherFieldId,
-        };
+        ...currentField.property,
+        foreignDatasheetId: id,
+        brotherFieldId: activeDatasheetId === id ? undefined : (currentField as ILinkField).property.brotherFieldId,
+      };
     setCurrentField({
       ...currentField,
       property,

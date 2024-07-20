@@ -76,9 +76,9 @@ export const SchemaPropertyListItem = memo((props: ISchemaPropertyListItemProps)
           style={
             disabled
               ? {
-                  opacity: 0.5,
-                  cursor: 'not-allowed',
-                }
+                opacity: 0.5,
+                cursor: 'not-allowed',
+              }
               : {}
           }
         >

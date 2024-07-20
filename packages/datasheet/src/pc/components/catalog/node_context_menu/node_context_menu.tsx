@@ -350,25 +350,25 @@ export const NodeContextMenu: FC<React.PropsWithChildren<INodeContextMenuProps>>
               }),
               judgeShowAIEntrance()
                 ? contextItemMap.get(ContextItemKey.addAi)(() => {
-                    if (!spaceInfo?.isEnableChatbot) {
-                      if (!getEnvVariables().IS_APITABLE) {
-                        if (getReleaseVersion() !== 'development') {
-                          window.open(getAIOpenFormUrl());
-                          return;
-                        }
+                  if (!spaceInfo?.isEnableChatbot) {
+                    if (!getEnvVariables().IS_APITABLE) {
+                      if (getReleaseVersion() !== 'development') {
+                        window.open(getAIOpenFormUrl());
+                        return;
                       }
                     }
-                    const result = triggerUsageAlert?.(
-                      'maxFormViewsInSpace',
-                      { usage: spaceInfo!.formViewNums + 1, alwaysAlert: true },
-                      SubscribeUsageTipType.Alert,
-                    );
-                    if (result) {
-                      return;
-                    }
-                    openCatalog();
-                    addTreeNode(targetId, ConfigConstant.NodeType.AI);
-                  })
+                  }
+                  const result = triggerUsageAlert?.(
+                    'maxFormViewsInSpace',
+                    { usage: spaceInfo!.formViewNums + 1, alwaysAlert: true },
+                    SubscribeUsageTipType.Alert,
+                  );
+                  if (result) {
+                    return;
+                  }
+                  openCatalog();
+                  addTreeNode(targetId, ConfigConstant.NodeType.AI);
+                })
                 : undefined,
 
               contextItemMap.get(ContextItemKey.AddAutomation)(() => {

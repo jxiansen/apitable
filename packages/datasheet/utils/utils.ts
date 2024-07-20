@@ -1,5 +1,3 @@
-
-
 import { deleteCookie, setCookie } from 'cookies-next';
 import { NextPageContext } from 'next';
 

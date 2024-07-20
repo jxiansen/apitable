@@ -33,15 +33,15 @@ export function fieldChangeConfirm(props: { fieldId: string; datasheetId?: strin
     title:
       count > 1
         ? t(Strings.delete_n_columns, {
-            count,
-          })
+          count,
+        })
         : t(Strings.delete_field_tips_title),
     content:
       count > 1
         ? t(Strings.these_columns_you_chose_would_be_deleted, { count })
         : t(Strings.delete_field_tips_content, {
-            field_title: field.name,
-          }),
+          field_title: field.name,
+        }),
     cancelText: t(Strings.cancel),
     okText: t(Strings.confirm),
     onOk: () => {

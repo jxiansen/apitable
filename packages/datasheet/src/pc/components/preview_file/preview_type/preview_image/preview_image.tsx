@@ -28,7 +28,7 @@ export const PreviewImage: React.FC<React.PropsWithChildren<IPreviewTypeBase>> =
     const { offsetWidth, offsetHeight } = wrapperRef.current as HTMLDivElement;
 
     let initActualScale = 1,
-      scale = 1;
+        scale = 1;
 
     let translatePosition = {
       x: 0,

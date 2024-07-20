@@ -1,5 +1,4 @@
 import { isEmpty } from 'lodash';
-import { ContextName, ShortcutActionName } from 'modules/shared/shortcut_key/enum';
 import {
   CollaCommandName,
   ConfigConstant,
@@ -12,6 +11,7 @@ import {
   Strings,
   t,
 } from '@apitable/core';
+import { ContextName, ShortcutActionName } from 'modules/shared/shortcut_key/enum';
 import { Message } from 'pc/components/common/message/message';
 import { notify } from 'pc/components/common/notify/notify';
 import { NotifyKey } from 'pc/components/common/notify/notify.interface';

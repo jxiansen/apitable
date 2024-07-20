@@ -60,8 +60,8 @@ const ExpandLinkBase: React.ForwardRefRenderFunction<IExpandFieldEditRef, IExpan
   const needIgnoreFetch = !manualFetchForeignDatasheet
     ? false
     : manualFetchForeignDatasheet === FetchForeignTimes.OnlyOnce
-    ? !manualFetch.current
-    : false;
+      ? !manualFetch.current
+      : false;
   const { foreignDatasheet, foreignDatasheetErrorCode } = useAppSelector((state: IReduxState) => {
     return {
       foreignDatasheet: Selectors.getDatasheet(state, field.property.foreignDatasheetId)!,
@@ -202,13 +202,13 @@ const ExpandLinkBase: React.ForwardRefRenderFunction<IExpandFieldEditRef, IExpan
           {!editable
             ? t(Strings.add_link_record_button_disable)
             : addBtnText || (
-                <TComponent
-                  tkey={t(Strings.add_link_record_button)}
-                  params={{
-                    datasheetname: <span className={style.datasheetName}>{foreignDatasheetName}</span>,
-                  }}
-                />
-              )}
+              <TComponent
+                tkey={t(Strings.add_link_record_button)}
+                params={{
+                  datasheetname: <span className={style.datasheetName}>{foreignDatasheetName}</span>,
+                }}
+              />
+            )}
         </span>
       </Button>
     );

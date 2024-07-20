@@ -1,7 +1,6 @@
 import { useToggle, useUnmount } from 'ahooks';
 import { Spin } from 'antd';
 import classNames from 'classnames';
-import { TriggerCommands } from 'modules/shared/apphook/trigger_commands';
 import Image from 'next/image';
 import * as React from 'react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
@@ -27,6 +26,7 @@ import {
 } from '@apitable/core';
 import { EditOutlined, MoreOutlined, ShareOutlined } from '@apitable/icons';
 import { uploadAttachToS3, useGetSignatureAssertFunc } from '@apitable/widget-sdk';
+import { TriggerCommands } from 'modules/shared/apphook/trigger_commands';
 import { Share } from 'pc/components/catalog/share';
 import { ButtonPlus, ImageCropUpload, Message } from 'pc/components/common';
 import { ComponentDisplay, ScreenSize } from 'pc/components/common/component_display';

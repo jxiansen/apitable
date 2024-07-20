@@ -62,10 +62,10 @@ export const PermissionAndCollaborator: React.FC<IShareContentProps> = ({ data }
 
   const adminAndOwnerUnitIds = roleList
     ? [
-        ...roleList.admins.map((v) => v.unitId),
-        ...roleList.roleUnits.filter((v) => v.role === 'manager').map((v) => v.unitId),
-        roleList.owner?.unitId || '',
-      ]
+      ...roleList.admins.map((v) => v.unitId),
+      ...roleList.roleUnits.filter((v) => v.role === 'manager').map((v) => v.unitId),
+      roleList.owner?.unitId || '',
+    ]
     : [];
 
   // Select member submission events

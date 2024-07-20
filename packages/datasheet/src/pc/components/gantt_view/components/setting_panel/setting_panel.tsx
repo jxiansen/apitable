@@ -272,8 +272,8 @@ export const SettingPanel: FC<React.PropsWithChildren<ISettingPanelProps>> = mem
       const newFieldName = isLinkFieldType
         ? t(Strings.field_title_link)
         : styleKey === GanttStyleKeyType.StartFieldId
-        ? t(Strings.gantt_start_field_name)
-        : t(Strings.gantt_end_field_name);
+          ? t(Strings.gantt_start_field_name)
+          : t(Strings.gantt_end_field_name);
       const result = resourceService.instance!.commandManager.execute({
         cmd: CollaCommandName.AddFields,
         data: [
@@ -284,8 +284,8 @@ export const SettingPanel: FC<React.PropsWithChildren<ISettingPanelProps>> = mem
               type: isLinkFieldType ? FieldType.Link : FieldType.DateTime,
               property: isLinkFieldType
                 ? {
-                    foreignDatasheetId: datasheetId,
-                  }
+                  foreignDatasheetId: datasheetId,
+                }
                 : DateTimeField.defaultProperty(),
             },
             viewId,

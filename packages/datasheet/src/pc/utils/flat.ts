@@ -26,9 +26,9 @@ export const flatContextData = (contextData: Partial<IContextMenuItemProps>[], t
       res.push(
         item.children
           ? {
-              ...resultItem,
-              children: dfs(item.children, childGroupId, index + 1),
-            }
+            ...resultItem,
+            children: dfs(item.children, childGroupId, index + 1),
+          }
           : resultItem,
       );
     }

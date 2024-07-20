@@ -36,8 +36,8 @@ export const FilterCascader = (props: IFilterCascader) => {
     lookUpFieldInfo?.field.type === FieldType.Cascader
       ? lookUpFieldInfo.datasheetId
       : linkedFieldId
-      ? (fieldMap?.[linkedFieldId] as ILinkField)?.property.foreignDatasheetId
-      : '';
+        ? (fieldMap?.[linkedFieldId] as ILinkField)?.property.foreignDatasheetId
+        : '';
   const [options, setOptions] = useState<ICascaderOption[]>([]);
   const [loading, setLoading] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);

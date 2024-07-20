@@ -35,17 +35,17 @@ export const useSearch = ({ localDispatch, localState }: IParams) => {
           const { folders, files } = nodes.reduce<{
             folders: (INode | IViewNode)[];
             files: (INode | IViewNode)[];
-          }>(
-            (collect, node) => {
-              if (node.type === ConfigConstant.NodeType.FOLDER) {
-                collect.folders.push(node);
-              } else {
-                collect.files.push(node);
-              }
-              return collect;
-            },
-            { folders: [], files: [] },
-          );
+              }>(
+              (collect, node) => {
+                if (node.type === ConfigConstant.NodeType.FOLDER) {
+                  collect.folders.push(node);
+                } else {
+                  collect.files.push(node);
+                }
+                return collect;
+              },
+              { folders: [], files: [] },
+              );
 
           localDispatch({ showSearch: true });
           if (!folders.length && !files.length) {

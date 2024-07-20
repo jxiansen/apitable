@@ -193,12 +193,12 @@ const FieldSettingBase: FC<PropsWithChildren<IFieldSettingProps>> = (props) => {
   const fieldInfoForState = field
     ? field
     : ({
-        id: getNewId(IDPrefix.Field),
-        // New fields are added and no longer populated with a field name by default
-        name: '',
-        type: FieldType.Text,
-        property: getFieldClass(FieldType.Text).defaultProperty(),
-      } as IField);
+      id: getNewId(IDPrefix.Field),
+      // New fields are added and no longer populated with a field name by default
+      name: '',
+      type: FieldType.Text,
+      property: getFieldClass(FieldType.Text).defaultProperty(),
+    } as IField);
   const [currentField, setCurrentField] = useState(fieldInfoForState);
   const [baseErrMsg, setBaseErrMsg] = useState('');
   const [optionErrMsg, setOptionErrMsg] = useState<string | object>('');

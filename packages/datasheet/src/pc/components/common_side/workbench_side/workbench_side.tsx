@@ -1,5 +1,3 @@
-import { ShortcutActionManager, ShortcutActionName } from 'modules/shared/shortcut_key';
-import { getShortcutKeyString } from 'modules/shared/shortcut_key/keybinding_config';
 import { usePostHog } from 'posthog-js/react';
 import * as React from 'react';
 import { FC, useEffect, useMemo, useState } from 'react';
@@ -19,6 +17,8 @@ import {
   WORKBENCH_SIDE_ID,
 } from '@apitable/core';
 import { AddOutlined, DeleteOutlined, FolderAddOutlined, ImportOutlined, PlanetOutlined, SearchOutlined, UserAddOutlined } from '@apitable/icons';
+import { ShortcutActionManager, ShortcutActionName } from 'modules/shared/shortcut_key';
+import { getShortcutKeyString } from 'modules/shared/shortcut_key/keybinding_config';
 import { GenerateTemplate } from 'pc/components/catalog/generate_template';
 import { ImportFile } from 'pc/components/catalog/import_file';
 import { MoveTo } from 'pc/components/catalog/move_to';

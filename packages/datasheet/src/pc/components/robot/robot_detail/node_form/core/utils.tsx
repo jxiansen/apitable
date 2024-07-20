@@ -691,7 +691,7 @@ export function mergeSchemas(obj1: any, obj2: any) {
   const acc = Object.assign({}, obj1); // Prevent mutation of source object.
   return Object.keys(obj2).reduce((acc, key) => {
     const left = obj1 ? obj1[key] : {},
-      right = obj2[key];
+          right = obj2[key];
     if (obj1 && obj1.hasOwnProperty(key) && isObject(right)) {
       acc[key] = mergeSchemas(left, right);
     } else if (

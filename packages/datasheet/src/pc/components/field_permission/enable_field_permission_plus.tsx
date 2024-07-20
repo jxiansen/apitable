@@ -1,8 +1,8 @@
 import { useMount, useToggle } from 'ahooks';
-import { TriggerCommands } from 'modules/shared/apphook/trigger_commands';
 import { useEffect, useState } from 'react';
 import { Box, IOption, Skeleton, Switch } from '@apitable/components';
 import { ConfigConstant, DatasheetApi, IFieldPermissionRole, IUnitValue, MemberType, Selectors, StoreActions, Strings, t } from '@apitable/core';
+import { TriggerCommands } from 'modules/shared/apphook/trigger_commands';
 import { MembersDetail } from 'pc/components/catalog/permission_settings_plus/permission/members_detail';
 import { UnitItem } from 'pc/components/catalog/permission_settings_plus/permission/unit_item';
 import { Message } from 'pc/components/common/message/message';

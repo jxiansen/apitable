@@ -25,8 +25,8 @@ import { store } from 'pc/store';
 
 const compose =
   (...args: any) =>
-  (value: any, datasheetId: string) =>
-    args.reduceRight((preValue: any, curFn: (arg0: any, arg1: string) => any) => curFn(preValue, datasheetId), value);
+    (value: any, datasheetId: string) =>
+      args.reduceRight((preValue: any, curFn: (arg0: any, arg1: string) => any) => curFn(preValue, datasheetId), value);
 
 export const checkComputeRef = (curField: string | ILookUpField | IFormulaField) => {
   if (typeof curField === 'string') {

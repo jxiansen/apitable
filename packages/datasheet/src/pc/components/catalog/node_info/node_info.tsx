@@ -53,10 +53,10 @@ const NodeInfoModal: React.FC<React.PropsWithChildren<INodeInfoProps>> = (props)
   const nameTitle =
     !loading && nodeInfo
       ? getSocialWecomUnitName?.({
-          name: nodeInfo.creator.memberName,
-          isModified: nodeInfo.creator.isMemberNameModified,
-          spaceInfo,
-        }) || nodeInfo.creator.memberName
+        name: nodeInfo.creator.memberName,
+        isModified: nodeInfo.creator.isMemberNameModified,
+        spaceInfo,
+      }) || nodeInfo.creator.memberName
       : '';
 
   const content =

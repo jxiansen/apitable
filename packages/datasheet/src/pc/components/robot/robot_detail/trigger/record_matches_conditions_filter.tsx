@@ -25,9 +25,9 @@ import styles from './styles.module.less';
 const transformNullFilter = (filter?: IExpression | null) => {
   return filter == null || isEqual(filter, EmptyNullOperand)
     ? {
-        operator: OperatorEnums.And,
-        operands: [],
-      }
+      operator: OperatorEnums.And,
+      operands: [],
+    }
     : filter;
 };
 

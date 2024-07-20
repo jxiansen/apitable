@@ -1,5 +1,3 @@
-
-
 import dynamic from 'next/dynamic';
 
 const WidgetStage = dynamic(() => import('widget-stage'), { ssr: false });

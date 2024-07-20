@@ -155,11 +155,11 @@ export const IdentifyingCodeInput: FC<React.PropsWithChildren<IIdentifyingCodeIn
         >
           {isRunning
             ? t(Strings.how_many_seconds, {
-                seconds: second,
-              })
+              seconds: second,
+            })
             : isLoading
-            ? ''
-            : t(Strings.message_code)}
+              ? ''
+              : t(Strings.message_code)}
         </Button>
       </div>
     </>

@@ -189,56 +189,56 @@ export const Tab: FC<React.PropsWithChildren<ITabStateProps>> = memo((props) => 
     >
       {isOnlyView
         ? isShowNodeInfoBar && (
-            <div className={styles.embedTitle}>
-              {viewEditor && editable ? (
-                <div className={styles.embedOnlyViewName}>
-                  <input
-                    className={classNames(styles.inputBox, {
-                      [styles.error]: errMsg,
-                    })}
-                    type="text"
-                    defaultValue={embedOnlyViewName}
-                    autoFocus
-                    onBlur={handleInputBlur}
-                    onKeyDown={handleInputEnter}
-                    onDoubleClick={(e: any) => e.stopPropagation()}
-                    onClick={(e: any) => e.stopPropagation()}
-                    onMouseDown={stopPropagation}
-                  />
-                  {showSyncIcon && <ViewLockIcon viewId={activeView!} view={currentView!} />}
-                  {errMsg && (
-                    <Typography component={'span'} variant={'body3'} color={colors.errorColor}>
-                      {errMsg}
-                    </Typography>
-                  )}
-                </div>
-              ) : (
-                <div className={styles.embedOnlyViewName}>
-                  <p onDoubleClick={() => setViewEditor(true)}>{embedOnlyViewName}</p>
-                  {showSyncIcon && <ViewLockIcon viewId={activeView!} view={currentView!} />}
-                </div>
-              )}
-            </div>
-          )
-        : isShowNodeInfoBar && (
-            <div className={styles.nodeName} style={{ paddingLeft: !sideBarVisible ? 16 : '' }}>
-              {datasheetName && (
-                <NodeInfoBar
-                  data={{
-                    nodeId: datasheetId!,
-                    type: ConfigConstant.NodeType.DATASHEET,
-                    icon: datasheetIcon,
-                    name: datasheetName,
-                    role: role === ConfigConstant.Role.Foreigner && editable ? ConfigConstant.Role.Editor : role,
-                    favoriteEnabled: nodeFavorite,
-                    nameEditable: renamable,
-                    iconEditable: iconEditable,
-                  }}
-                  hiddenModule={{ favorite: Boolean(shareId || templateId) }}
+          <div className={styles.embedTitle}>
+            {viewEditor && editable ? (
+              <div className={styles.embedOnlyViewName}>
+                <input
+                  className={classNames(styles.inputBox, {
+                    [styles.error]: errMsg,
+                  })}
+                  type="text"
+                  defaultValue={embedOnlyViewName}
+                  autoFocus
+                  onBlur={handleInputBlur}
+                  onKeyDown={handleInputEnter}
+                  onDoubleClick={(e: any) => e.stopPropagation()}
+                  onClick={(e: any) => e.stopPropagation()}
+                  onMouseDown={stopPropagation}
                 />
-              )}
-            </div>
-          )}
+                {showSyncIcon && <ViewLockIcon viewId={activeView!} view={currentView!} />}
+                {errMsg && (
+                  <Typography component={'span'} variant={'body3'} color={colors.errorColor}>
+                    {errMsg}
+                  </Typography>
+                )}
+              </div>
+            ) : (
+              <div className={styles.embedOnlyViewName}>
+                <p onDoubleClick={() => setViewEditor(true)}>{embedOnlyViewName}</p>
+                {showSyncIcon && <ViewLockIcon viewId={activeView!} view={currentView!} />}
+              </div>
+            )}
+          </div>
+        )
+        : isShowNodeInfoBar && (
+          <div className={styles.nodeName} style={{ paddingLeft: !sideBarVisible ? 16 : '' }}>
+            {datasheetName && (
+              <NodeInfoBar
+                data={{
+                  nodeId: datasheetId!,
+                  type: ConfigConstant.NodeType.DATASHEET,
+                  icon: datasheetIcon,
+                  name: datasheetName,
+                  role: role === ConfigConstant.Role.Foreigner && editable ? ConfigConstant.Role.Editor : role,
+                  favoriteEnabled: nodeFavorite,
+                  nameEditable: renamable,
+                  iconEditable: iconEditable,
+                }}
+                hiddenModule={{ favorite: Boolean(shareId || templateId) }}
+              />
+            )}
+          </div>
+        )}
       {isShowViewbar && !isOnlyView && (
         <ViewBar
           editIndex={editIndex}

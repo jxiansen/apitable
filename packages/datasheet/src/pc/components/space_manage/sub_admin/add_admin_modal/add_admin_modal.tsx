@@ -124,10 +124,10 @@ export const AddAdminModal: FC<React.PropsWithChildren<IModalProps>> = ({ cancel
   const title =
     source !== ModalType.Add && editOrReadSubMainInfo
       ? getSocialWecomUnitName?.({
-          name: editOrReadSubMainInfo?.memberName,
-          isModified: editOrReadSubMainInfo?.isMemberNameModified,
-          spaceInfo,
-        }) || editOrReadSubMainInfo?.memberName
+        name: editOrReadSubMainInfo?.memberName,
+        isModified: editOrReadSubMainInfo?.isMemberNameModified,
+        spaceInfo,
+      }) || editOrReadSubMainInfo?.memberName
       : '';
   return (
     <>

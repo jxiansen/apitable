@@ -65,48 +65,48 @@ export const ViewFieldOptionsMobile: React.FC<React.PropsWithChildren<IViewField
         <div className={styles.optionsListWrapper}>
           {filteredOptions.length
             ? filteredOptions.map((item) => {
-                const field = fieldMap[item.fieldId];
-                const disabled = !Field.bindModel(field).canGroup || Field.bindModel(field).hasError;
+              const field = fieldMap[item.fieldId];
+              const disabled = !Field.bindModel(field).canGroup || Field.bindModel(field).hasError;
 
-                const Inner = (
-                  <div
-                    className={styles.optionItem}
-                    key={field.id}
-                    onClick={() => {
-                      if (disabled) {
-                        return;
-                      }
-                      onChange(field.id);
-                      setOptionsVisible(false);
-                    }}
-                  >
-                    <div className={styles.fieldItem}>
-                      {getFieldTypeIcon(field.type, disabled ? colors.fourthLevelText : colors.thirdLevelText)}
-                      <span
-                        className={styles.fieldName}
-                        style={{
-                          color: disabled ? colors.fourthLevelText : 'inherit',
-                        }}
-                      >
-                        {field.name}
-                      </span>
-                    </div>
-                    {renderComputeFieldError(field, t(Strings.error_configuration_and_invalid_filter_option), true)}
+              const Inner = (
+                <div
+                  className={styles.optionItem}
+                  key={field.id}
+                  onClick={() => {
+                    if (disabled) {
+                      return;
+                    }
+                    onChange(field.id);
+                    setOptionsVisible(false);
+                  }}
+                >
+                  <div className={styles.fieldItem}>
+                    {getFieldTypeIcon(field.type, disabled ? colors.fourthLevelText : colors.thirdLevelText)}
+                    <span
+                      className={styles.fieldName}
+                      style={{
+                        color: disabled ? colors.fourthLevelText : 'inherit',
+                      }}
+                    >
+                      {field.name}
+                    </span>
                   </div>
-                );
+                  {renderComputeFieldError(field, t(Strings.error_configuration_and_invalid_filter_option), true)}
+                </div>
+              );
 
-                return (
-                  <>
-                    {disabled ? (
-                      <Tooltip title={t(Strings.view_sort_and_group_disabled)} showTipAnyway>
-                        {Inner}
-                      </Tooltip>
-                    ) : (
-                      Inner
-                    )}
-                  </>
-                );
-              })
+              return (
+                <>
+                  {disabled ? (
+                    <Tooltip title={t(Strings.view_sort_and_group_disabled)} showTipAnyway>
+                      {Inner}
+                    </Tooltip>
+                  ) : (
+                    Inner
+                  )}
+                </>
+              );
+            })
             : t(Strings.no_option)}
         </div>
       </Popup>

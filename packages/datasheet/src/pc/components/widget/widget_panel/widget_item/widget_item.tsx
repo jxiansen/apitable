@@ -1,6 +1,5 @@
 import { useToggle } from 'ahooks';
 import classNames from 'classnames';
-import { SimpleEmitter } from 'modules/shared/simple_emitter';
 import Image from 'next/image';
 import * as React from 'react';
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
@@ -8,6 +7,7 @@ import { ThemeName } from '@apitable/components';
 import { CollaCommandName, ConfigConstant, ExecuteResult, ResourceType, Selectors, StoreActions, Strings, t } from '@apitable/core';
 import { RuntimeEnv } from '@apitable/widget-sdk';
 import { WidgetLoadError } from '@apitable/widget-sdk/dist/initialize_widget';
+import { SimpleEmitter } from 'modules/shared/simple_emitter';
 import { ComponentDisplay, ScreenSize } from 'pc/components/common/component_display';
 import { DataSourceSelectorForNode } from 'pc/components/data_source_selector_enhanced/data_source_selector_for_node/data_source_selector_for_node';
 import { expandRecordInCenter } from 'pc/components/expand_record';

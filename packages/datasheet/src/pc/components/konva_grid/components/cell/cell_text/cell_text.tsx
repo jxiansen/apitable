@@ -70,28 +70,28 @@ export const CellText: FC<React.PropsWithChildren<ICellProps>> = (props) => {
   const restIconProps =
     field.type === FieldType.URL
       ? {
-          y: 24 - GRID_ICON_COMMON_SIZE - 3,
-          shape: 'square' as Shape,
-          cornerRadius: 4,
-          backgroundWidth: 22,
-          backgroundHeight: 22,
-          background: isHover ? colors.rowSelectedBgSolid : colors.defaultBg,
-          onMouseEnter: () => {
-            setHover(true);
-            setTooltipInfo({
-              title: t(Strings.url_cell_edit),
-              visible: true,
-              x: x + columnWidth - GRID_ICON_COMMON_SIZE - GRID_CELL_VALUE_PADDING + 4,
-              y,
-              width: 1,
-              height: 1,
-            });
-          },
-          onMouseOut: () => {
-            setHover(false);
-            clearTooltipInfo();
-          },
-        }
+        y: 24 - GRID_ICON_COMMON_SIZE - 3,
+        shape: 'square' as Shape,
+        cornerRadius: 4,
+        backgroundWidth: 22,
+        backgroundHeight: 22,
+        background: isHover ? colors.rowSelectedBgSolid : colors.defaultBg,
+        onMouseEnter: () => {
+          setHover(true);
+          setTooltipInfo({
+            title: t(Strings.url_cell_edit),
+            visible: true,
+            x: x + columnWidth - GRID_ICON_COMMON_SIZE - GRID_CELL_VALUE_PADDING + 4,
+            y,
+            width: 1,
+            height: 1,
+          });
+        },
+        onMouseOut: () => {
+          setHover(false);
+          clearTooltipInfo();
+        },
+      }
       : {};
 
   const renderText = () => {

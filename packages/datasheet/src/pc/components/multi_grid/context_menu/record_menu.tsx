@@ -2,9 +2,6 @@ import { useMount } from 'ahooks';
 import parser from 'html-react-parser';
 import { isInteger } from 'lodash';
 import difference from 'lodash/difference';
-import { ShortcutActionName } from 'modules/shared/shortcut_key';
-import { getShortcutKeyString } from 'modules/shared/shortcut_key/keybinding_config';
-import { appendRow, Direction } from 'modules/shared/shortcut_key/shortcut_actions/append_row';
 import path from 'path-browserify';
 import * as React from 'react';
 import { KeyboardEvent, useRef, useCallback } from 'react';
@@ -35,6 +32,9 @@ import {
   ExpandOutlined,
   ArchiveOutlined,
 } from '@apitable/icons';
+import { ShortcutActionName } from 'modules/shared/shortcut_key';
+import { getShortcutKeyString } from 'modules/shared/shortcut_key/keybinding_config';
+import { appendRow, Direction } from 'modules/shared/shortcut_key/shortcut_actions/append_row';
 import { Message } from 'pc/components/common';
 import { Modal } from 'pc/components/common/modal/modal/modal';
 import { notifyWithUndo } from 'pc/components/common/notify';

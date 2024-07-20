@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 // @ts-ignore
 import { WecomConfig } from 'enterprise/wecom/wecom_integration/wecom_config';

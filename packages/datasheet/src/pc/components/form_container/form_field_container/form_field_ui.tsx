@@ -81,24 +81,24 @@ export const FormFieldUI: React.FC<React.PropsWithChildren<IFormFieldUIProps>> =
         {formState?.permissions?.manageable &&
           formState?.sourceInfo?.datasheetPermissions?.manageable &&
           !formState?.fieldPermissionMap?.[fieldId] && (
-            <div className={classnames(styles.buttonsGroup, isTouchDevice() && styles.touchDevice)}>
-              <Tooltip title={t(Strings.insert_new_field_below)}>
-                <IconButton
-                  component="button"
-                  shape="square"
-                  icon={() => <AddOutlined size={16} color={colorVars.fc3} />}
-                  onClick={(e) => onAppendField(e, Number(colIndex))}
-                  style={{ marginRight: 8 }}
-                />
-              </Tooltip>
+          <div className={classnames(styles.buttonsGroup, isTouchDevice() && styles.touchDevice)}>
+            <Tooltip title={t(Strings.insert_new_field_below)}>
               <IconButton
                 component="button"
                 shape="square"
-                icon={() => <MoreOutlined size={16} color={colorVars.fc3} />}
-                onClick={(e) => onShowMenu(e)}
+                icon={() => <AddOutlined size={16} color={colorVars.fc3} />}
+                onClick={(e) => onAppendField(e, Number(colIndex))}
+                style={{ marginRight: 8 }}
               />
-            </div>
-          )}
+            </Tooltip>
+            <IconButton
+              component="button"
+              shape="square"
+              icon={() => <MoreOutlined size={16} color={colorVars.fc3} />}
+              onClick={(e) => onShowMenu(e)}
+            />
+          </div>
+        )}
       </h4>
       {/* {errorMsg && <div className={styles.errorMsg}>{errorMsg}</div>} */}
       {!descIsEmpty && (

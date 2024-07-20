@@ -37,9 +37,9 @@ export const DataSourceSelectorForWidget: React.FC<IDataSourceSelectorForAIProps
           headerConfig={
             isPc
               ? {
-                  title: title,
-                  onHide,
-                }
+                title: title,
+                onHide,
+              }
               : undefined
           }
           requiredData={['datasheetId']}

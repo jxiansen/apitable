@@ -1,8 +1,8 @@
-import { ShortcutActionName } from 'modules/shared/shortcut_key';
-import { getShortcutKeyString } from 'modules/shared/shortcut_key/keybinding_config';
 import { isMobile } from 'react-device-detect';
 import { black, colorVars } from '@apitable/components';
 import { ConfigConstant, Strings, t, WORKBENCH_SIDE_ID } from '@apitable/core';
+import { ShortcutActionName } from 'modules/shared/shortcut_key';
+import { getShortcutKeyString } from 'modules/shared/shortcut_key/keybinding_config';
 import { getEnvVariables } from 'pc/utils/env';
 import { makeNodeIconComponent, NodeIcon } from './node_icons';
 import styles from './style.module.less';

@@ -1,5 +1,3 @@
-
-
 import { getEnvVars } from 'get_env';
 import { NextPageContext } from 'next';
 import { FILTER_HEADERS } from './constant';

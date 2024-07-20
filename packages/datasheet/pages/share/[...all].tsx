@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 import { NextPageContext } from 'next';
 import dynamic from 'next/dynamic';

@@ -22,11 +22,11 @@ export const useAutomationResourcePermission = (): INodePermissions => {
     const resourceId = stateValue?.resourceId!;
     const defaultValue = state.catalogTree.treeNodesMap[resourceId]?.permissions ||
       state.catalogTree.privateTreeNodesMap[resourceId]?.permissions || {
-        manageable: false,
-        editable: false,
-        readable: true,
-        descriptionEditable: false,
-      };
+      manageable: false,
+      editable: false,
+      readable: true,
+      descriptionEditable: false,
+    };
     if (isMobile) {
       return {
         ...defaultValue,
