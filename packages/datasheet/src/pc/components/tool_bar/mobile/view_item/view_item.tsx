@@ -93,11 +93,11 @@ export const ViewItem: React.FC<React.PropsWithChildren<IViewItemProps>> = (prop
           content:
             formList.length > 0
               ? t(Strings.notes_delete_the_view_linked_to_form, {
-                view_name: view.name,
-              })
+                  view_name: view.name,
+                })
               : t(Strings.del_view_content, {
-                view_name: view.name,
-              }),
+                  view_name: view.name,
+                }),
           onOk: () => {
             onChange(ActionType.Delete, view);
           },

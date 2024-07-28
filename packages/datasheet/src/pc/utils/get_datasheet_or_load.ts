@@ -18,8 +18,8 @@ export const getDatasheetOrLoad = (
   // check if foreign datasheet has link relationship
   const isforeignDatasheetIdRelated = fieldMap
     ? Object.values(fieldMap).some(
-      (field) => [FieldType.Link, FieldType.OneWayLink].includes(field.type) && field.property.foreignDatasheetId === foreignDatasheetId,
-    )
+        (field) => [FieldType.Link, FieldType.OneWayLink].includes(field.type) && field.property.foreignDatasheetId === foreignDatasheetId,
+      )
     : true;
 
   if (

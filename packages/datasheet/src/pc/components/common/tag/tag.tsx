@@ -39,13 +39,13 @@ export const Tag: FC<React.PropsWithChildren<ITagProps>> = ({ color = '#000000',
   const tagStyle =
     mod === TagMod.FILL
       ? {
-        background: hexToRgba(color, 0.2),
-        color,
-      }
+          background: hexToRgba(color, 0.2),
+          color,
+        }
       : {
-        border: `1px solid ${color}`,
-        color,
-      };
+          border: `1px solid ${color}`,
+          color,
+        };
 
   return (
     <span className={classnames(styles.tag, mod === TagMod.FILL ? styles.fill : styles.stroke, className)} style={{ ...style, ...tagStyle }}>

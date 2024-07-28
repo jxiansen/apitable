@@ -137,9 +137,9 @@ export const ShareModal: React.FC<React.PropsWithChildren<IShareModalProps>> = (
     const checked = e.target.value;
     const params = checked
       ? {
-        fillAnonymous: checked,
-        submitLimit: 0,
-      }
+          fillAnonymous: checked,
+          submitLimit: 0,
+        }
       : { fillAnonymous: checked };
 
     updateProps(params);

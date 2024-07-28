@@ -29,8 +29,8 @@ export const useCacheScroll = (): Required<IScrollOffset> & Pick<IScrollContextP
   const defaultValue = { scrollLeft: 0, scrollTop: 0, changeCacheScroll };
   return cacheScrollMap.current && cacheScrollMap.current[`${datasheetId},${viewId}`]
     ? {
-      ...defaultValue,
-      ...cacheScrollMap.current[`${datasheetId},${viewId}`],
-    }
+        ...defaultValue,
+        ...cacheScrollMap.current[`${datasheetId},${viewId}`],
+      }
     : defaultValue;
 };

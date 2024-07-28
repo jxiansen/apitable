@@ -74,14 +74,14 @@ export const ImageCropUpload: FC<React.PropsWithChildren<IImageUploadProps>> = (
   const isPreviewCircle = previewShape === IPreviewShape.Circle;
   const thumbOptions = isCropRectangle
     ? {
-      method: CutMethod.CUT,
-      w: 420,
-      h: 140,
-    }
+        method: CutMethod.CUT,
+        w: 420,
+        h: 140,
+      }
     : {
-      method: CutMethod.CUT,
-      size: 470,
-    };
+        method: CutMethod.CUT,
+        size: 470,
+      };
   const { cropTip, cropDesc } = customTips;
   const { width: imgWidth, height: imgHeight } = imgRef.current || {};
 

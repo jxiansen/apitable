@@ -231,15 +231,15 @@ export const stylizeIcon = (funcProps: ICloneIconFuncProps) => {
     icon &&
     (React.isValidElement<{ className?: string; width?: number; height?: number; fill?: string; style?: React.CSSProperties }>(icon)
       ? React.cloneElement(icon, {
-        width: icon.props.width || defaultSize,
-        height: icon.props.height || defaultSize,
-        fill: icon.props.fill || 'currentColor',
-        style: icon.props.style,
-        className: classNames({
-          [icon.props.className!]: icon.props.className,
-          [extraClassName!]: Boolean(extraClassName),
-        }),
-      })
+          width: icon.props.width || defaultSize,
+          height: icon.props.height || defaultSize,
+          fill: icon.props.fill || 'currentColor',
+          style: icon.props.style,
+          className: classNames({
+            [icon.props.className!]: icon.props.className,
+            [extraClassName!]: Boolean(extraClassName),
+          }),
+        })
       : { icon });
   return finalIcon;
 };

@@ -57,8 +57,8 @@ export const SearchSelectField = (props: ISearchSelectFieldProps) => {
 
   const listStyle = fieldType?.includes(FieldType.Link)
     ? {
-      display: 'none',
-    }
+        display: 'none',
+      }
     : {};
 
   return (

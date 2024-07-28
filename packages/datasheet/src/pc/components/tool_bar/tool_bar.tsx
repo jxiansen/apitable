@@ -665,8 +665,8 @@ const ToolbarBase = () => {
               text={
                 isExitGroup
                   ? t(Strings.group_amount, {
-                    amount: (activeView as IGridViewProperty).groupInfo!.length,
-                  })
+                      amount: (activeView as IGridViewProperty).groupInfo!.length,
+                    })
                   : t(Strings.group)
               }
             />
@@ -817,8 +817,8 @@ function FilterNode(props: { showLabel: boolean; disabled: boolean }) {
         isMobile
           ? t(Strings.filter)
           : t(Strings.filters_amount, {
-            amount: actualFilterCont,
-          })
+              amount: actualFilterCont,
+            })
       }
     />
   );

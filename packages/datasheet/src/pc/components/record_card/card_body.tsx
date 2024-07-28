@@ -76,8 +76,8 @@ export const CardBody: React.FC<React.PropsWithChildren<IGalleryCardBodyProps>> 
         const fieldValueStyle: React.CSSProperties = isVirtual
           ? {}
           : isGallery
-            ? { height: 4 + getVietualFieldHeight(field, multiTextMaxLine, isMobile) + 8 }
-            : { height: 4 + getFieldHeight(field, multiTextMaxLine, isMobile) + 12 };
+          ? { height: 4 + getVietualFieldHeight(field, multiTextMaxLine, isMobile) + 8 }
+          : { height: 4 + getFieldHeight(field, multiTextMaxLine, isMobile) + 12 };
         return (
           <div key={item.fieldId} className={styles.fieldItem}>
             {isColNameVisible && (

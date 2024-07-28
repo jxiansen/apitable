@@ -51,9 +51,9 @@ const ObjectField = (props: IFieldProps) => {
         _newFormData,
         errorSchema &&
           props.errorSchema && {
-          ...props.errorSchema,
-          [name]: errorSchema,
-        },
+            ...props.errorSchema,
+            [name]: errorSchema,
+          },
       );
     };
   };
@@ -100,9 +100,9 @@ const ObjectField = (props: IFieldProps) => {
         renamedObj,
         errorSchema &&
           props.errorSchema && {
-          ...props.errorSchema,
-          [value]: errorSchema,
-        },
+            ...props.errorSchema,
+            [value]: errorSchema,
+          },
       );
     };
   };

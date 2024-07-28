@@ -91,11 +91,11 @@ export const DataSourceSelectorForNode: React.FC<IDataSourceSelectorForAIProps> 
             headerConfig={
               isPc
                 ? {
-                  // eslint-disable-next-line indent
+                    // eslint-disable-next-line indent
                     title: title,
-                  // eslint-disable-next-line indent
+                    // eslint-disable-next-line indent
                     onHide,
-                }
+                  }
                 : undefined
             }
             requiredData={requiredData}

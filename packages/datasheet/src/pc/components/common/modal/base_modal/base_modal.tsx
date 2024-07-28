@@ -26,9 +26,9 @@ export const BaseModal: FC<React.PropsWithChildren<IModalProps & IBaseModalProps
   } = props;
   const buttonConfig: any = showButton
     ? {
-      cancelButtonProps: { size: 'small', ...cancelButtonProps, className: 'subText' },
-      okButtonProps: { size: 'small', ...okButtonProps },
-    }
+        cancelButtonProps: { size: 'small', ...cancelButtonProps, className: 'subText' },
+        okButtonProps: { size: 'small', ...okButtonProps },
+      }
     : { footer: null };
 
   return (

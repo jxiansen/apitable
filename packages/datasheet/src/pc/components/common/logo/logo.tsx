@@ -45,9 +45,9 @@ export const Logo: React.FC<React.PropsWithChildren<ILogoProps>> = (props) => {
   const logoSize =
     typeof size === 'number'
       ? {
-        logoSize: size,
-        logoTextHeight: size,
-      }
+          logoSize: size,
+          logoTextHeight: size,
+        }
       : LogoSize[size];
 
   const envVars = getEnvVariables();

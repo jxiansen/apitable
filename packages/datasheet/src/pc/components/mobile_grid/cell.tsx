@@ -76,14 +76,14 @@ const CellFunc: React.FC<React.PropsWithChildren<ChildProps & ICellFuncOwnProps>
   const field = fieldMap[type === CellType.TITLE ? firstColumn.fieldId : remainingColumns[columnIndex].fieldId];
   const cellValue = record
     ? Selectors.getCellValue(
-      state,
-      {
-        meta: { fieldMap: { [field.id]: field } },
-        recordMap: { [record.id]: record },
-      },
-      record.id,
-      field.id,
-    )
+        state,
+        {
+          meta: { fieldMap: { [field.id]: field } },
+          recordMap: { [record.id]: record },
+        },
+        record.id,
+        field.id,
+      )
     : null;
 
   const isEmptyCell = Boolean(cellValue);

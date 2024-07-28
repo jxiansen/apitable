@@ -180,10 +180,10 @@ export const renderMember = (info: IFromUserInfo, spaceName: string, spaceInfo?:
   }
   const title = spaceInfo
     ? getSocialWecomUnitName?.({
-      name: info?.memberName,
-      isModified: info?.isMemberNameModified,
-      spaceInfo,
-    }) || info?.memberName
+        name: info?.memberName,
+        isModified: info?.isMemberNameModified,
+        spaceInfo,
+      }) || info?.memberName
     : undefined;
   return (
     <div {...triggerWrapBase}>

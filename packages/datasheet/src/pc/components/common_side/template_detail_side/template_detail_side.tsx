@@ -40,10 +40,10 @@ export const TemplateDetailSide: React.FC<React.PropsWithChildren<unknown>> = ()
   const templateDirectory = useAppSelector((state) => state.templateCentre.directory);
   const title = templateDirectory
     ? getSocialWecomUnitName?.({
-      name: templateDirectory.nickName,
-      isModified: templateDirectory.isMemberNameModified,
-      spaceInfo,
-    }) || templateDirectory.nickName
+        name: templateDirectory.nickName,
+        isModified: templateDirectory.isMemberNameModified,
+        spaceInfo,
+      }) || templateDirectory.nickName
     : '';
 
   const isOfficial = categoryId !== 'tpcprivate';
@@ -97,8 +97,8 @@ export const TemplateDetailSide: React.FC<React.PropsWithChildren<unknown>> = ()
                     categoryId === ConfigConstant.TEMPLATE_CHOICE_CATEGORY_ID
                       ? t(Strings.template_recommend_title)
                       : templateDirectory.categoryName
-                        ? templateDirectory.categoryName
-                        : t(Strings.space_template),
+                      ? templateDirectory.categoryName
+                      : t(Strings.space_template),
                 })}
               </span>
             </div>

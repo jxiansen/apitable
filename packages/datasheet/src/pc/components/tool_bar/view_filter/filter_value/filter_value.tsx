@@ -26,8 +26,8 @@ export const FilterValue: React.FC<React.PropsWithChildren<IFilterValueProps>> =
     field.type === FieldType.LookUp
       ? field.property.relatedLinkFieldId
       : primaryField?.type === FieldType.LookUp
-        ? primaryField.property.relatedLinkFieldId
-        : '';
+      ? primaryField.property.relatedLinkFieldId
+      : '';
   const { isViewLock } = useContext(ViewFilterContext);
 
   const { run: debounceInput } = useDebounceFn(

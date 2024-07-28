@@ -107,8 +107,8 @@ export const Drag: React.FC<React.PropsWithChildren<IDragProps>> = (props) => {
 
   const fieldIndexRanges = fieldRanges
     ? visibleColumns
-      .map((column) => fieldIndexMap.get(column.fieldId)!)
-      .slice(fieldIndexMap.get(fieldRanges[0]), fieldIndexMap.get(fieldRanges[fieldRanges.length - 1])! + 1)
+        .map((column) => fieldIndexMap.get(column.fieldId)!)
+        .slice(fieldIndexMap.get(fieldRanges[0]), fieldIndexMap.get(fieldRanges[fieldRanges.length - 1])! + 1)
     : [];
 
   const dispatch = useDispatch();

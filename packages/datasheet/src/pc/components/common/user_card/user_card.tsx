@@ -205,13 +205,13 @@ export const UserCard: FC<React.PropsWithChildren<IUserCard>> = ({
                       <div className={styles.teamList}>
                         {memberInfo
                           ? memberInfo?.teamData?.map((item, index) => {
-                            return (
-                              <div key={index} className={styles.teamItem}>
-                                <p>-</p>
-                                <p className={styles.teamText}>{item.fullHierarchyTeamName}</p>
-                              </div>
-                            );
-                          })
+                              return (
+                                <div key={index} className={styles.teamItem}>
+                                  <p>-</p>
+                                  <p className={styles.teamText}>{item.fullHierarchyTeamName}</p>
+                                </div>
+                              );
+                            })
                           : '-'}
                       </div>
                     </>

@@ -93,10 +93,10 @@ const AvatarHoc = (Component: any) => {
     const avatarSrc =
       isGzip && _src
         ? getImageThumbSrc(integrateCdnHost(_src), {
-          method: CutMethod.CUT,
-          quality: 100,
-          size: size * ratio,
-        })
+            method: CutMethod.CUT,
+            quality: 100,
+            size: size * ratio,
+          })
         : _src;
     const firstWord = getFirstWordFromString(title);
     const avatarBg = avatarSrc ? colors.defaultBg : avatarColor != null ? bgColorList[avatarColor] : getAvatarRandomColor(id);

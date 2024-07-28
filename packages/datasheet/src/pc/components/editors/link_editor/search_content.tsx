@@ -116,8 +116,8 @@ const SearchContentBase: React.ForwardRefRenderFunction<{ getFilteredRows(): { [
         field.type === FieldType.Link
           ? cellValue
           : cellValue?.filter((id) => {
-            return foreignRows.some((row) => row.recordId === id) || archivedRecordIds.includes(id);
-          });
+              return foreignRows.some((row) => row.recordId === id) || archivedRecordIds.includes(id);
+            });
 
       if (filterCellValue && filterCellValue.includes(recordId)) {
         value = filterCellValue.filter((id) => id !== recordId);

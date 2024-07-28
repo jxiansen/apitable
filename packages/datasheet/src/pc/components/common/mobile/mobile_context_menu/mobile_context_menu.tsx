@@ -41,10 +41,10 @@ export const MobileContextMenu: FC<React.PropsWithChildren<IMobileContextMenuPro
                   onClick={
                     groupItem.disabled
                       ? () => {
-                        Message.warning({
-                          content: groupItem.disabledTip,
-                        });
-                      }
+                          Message.warning({
+                            content: groupItem.disabledTip,
+                          });
+                        }
                       : groupItem.onClick
                   }
                 />

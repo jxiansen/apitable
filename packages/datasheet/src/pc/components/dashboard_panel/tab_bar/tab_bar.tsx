@@ -140,8 +140,8 @@ export const TabBar: React.FC<React.PropsWithChildren<ITabBarProps>> = (props) =
     expandWidgetCenter(InstallPosition.Dashboard, {
       closeModalCb: visibleRecommend
         ? () => {
-          setVisibleRecommend(true);
-        }
+            setVisibleRecommend(true);
+          }
         : undefined,
       installedWidgetHandle,
     });
@@ -232,16 +232,16 @@ export const TabBar: React.FC<React.PropsWithChildren<ITabBarProps>> = (props) =
           isEnoughToShowButton &&
           !hideReadonlyEmbedItem &&
           (!embedId || embedInfo.viewControl?.toolBar.addWidgetBtn) && (
-          <TextButton
-            prefixIcon={<AddFilled size={16} className={styles.toolIcon} color={[colors.primaryColor, 'white']} />}
-            onClick={() => {
-              expandWidgetCenter(InstallPosition.Dashboard);
-            }}
-            disabled={Boolean(linkId)}
-          >
-            {t(Strings.add_widget)}
-          </TextButton>
-        )}
+            <TextButton
+              prefixIcon={<AddFilled size={16} className={styles.toolIcon} color={[colors.primaryColor, 'white']} />}
+              onClick={() => {
+                expandWidgetCenter(InstallPosition.Dashboard);
+              }}
+              disabled={Boolean(linkId)}
+            >
+              {t(Strings.add_widget)}
+            </TextButton>
+          )}
         {isEnoughToShowButton && (!embedId || embedInfo.viewControl?.toolBar.fullScreenBtn) && (
           <TextButton prefixIcon={isFullscreen ? <NarrowOutlined /> : <ExpandOutlined />} onClick={toggleFullscreen} className={styles.atcButton}>
             {isFullscreen ? t(Strings.collapse_full_screen) : t(Strings.full_screen)}

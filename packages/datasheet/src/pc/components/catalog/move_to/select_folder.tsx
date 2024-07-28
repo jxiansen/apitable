@@ -151,26 +151,26 @@ export const SelectFolder: React.FC<
   const list = keyword ? searchList : isWhole ? wholeList : recentlyBrowsedList;
   const catalogList = isPrivate
     ? [
-      {
-        nodeId: ConfigConstant.Modules.CATALOG,
-        nodeName: t(Strings.catalog_team),
-      },
-      {
-        nodeId: ConfigConstant.Modules.PRIVATE,
-        nodeName: t(Strings.catalog_private),
-      },
-    ]
+        {
+          nodeId: ConfigConstant.Modules.CATALOG,
+          nodeName: t(Strings.catalog_team),
+        },
+        {
+          nodeId: ConfigConstant.Modules.PRIVATE,
+          nodeName: t(Strings.catalog_private),
+        },
+      ]
     : [];
 
   const folderCatalogTips =
     catalogList.length > 0
       ? catalogList.filter((l) => l.nodeId === catalog)
       : [
-        {
-          nodeId: ConfigConstant.Modules.CATALOG,
-          nodeName: t(Strings.catalog_team),
-        },
-      ];
+          {
+            nodeId: ConfigConstant.Modules.CATALOG,
+            nodeName: t(Strings.catalog_team),
+          },
+        ];
 
   return (
     <div className={styles.selectFolder}>
@@ -215,9 +215,9 @@ export const SelectFolder: React.FC<
                   level={
                     showLevel
                       ? // eslint-disable-next-line max-len
-                      `${spaceName} / ${nodePrivate ? t(Strings.catalog_private) : t(Strings.catalog_team)} ${
-                        (item as ApiInterface.IRecentlyBrowsedFolder).superiorPath
-                      }`
+                        `${spaceName} / ${nodePrivate ? t(Strings.catalog_private) : t(Strings.catalog_team)} ${
+                          (item as ApiInterface.IRecentlyBrowsedFolder).superiorPath
+                        }`
                       : ''
                   }
                 />

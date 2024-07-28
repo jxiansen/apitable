@@ -257,13 +257,13 @@ export const CalendarSettingPanel: FC<React.PropsWithChildren<ICalendarSettingPa
                   {(isStart
                     ? fieldOptions.filter((f) => f.value !== endFieldId)
                     : [
-                      {
-                        label: t(Strings.calendar_setting_clear_end_time),
-                        value: UNUSED_END_DATE,
-                        disabled: !permissions.editable || !endFieldId,
-                      },
-                      ...fieldOptions.filter((f) => f.value !== startFieldId),
-                    ]
+                        {
+                          label: t(Strings.calendar_setting_clear_end_time),
+                          value: UNUSED_END_DATE,
+                          disabled: !permissions.editable || !endFieldId,
+                        },
+                        ...fieldOptions.filter((f) => f.value !== startFieldId),
+                      ]
                   ).map((option, index) => {
                     return (
                       <Select.Option

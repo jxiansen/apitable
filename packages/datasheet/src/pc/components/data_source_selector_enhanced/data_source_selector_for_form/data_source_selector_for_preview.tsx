@@ -64,9 +64,9 @@ export const DataSourceSelectorForForm: React.FC<IDataSourceSelectorForAIProps> 
             headerConfig={
               isPc
                 ? {
-                  title: title,
-                  onHide: onHide,
-                }
+                    title: title,
+                    onHide: onHide,
+                  }
                 : undefined
             }
             requiredData={['datasheetId', 'viewId', 'meta']}

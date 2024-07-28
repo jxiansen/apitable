@@ -381,12 +381,12 @@ export const CalendarView: FC<React.PropsWithChildren<ICalendarViewProps>> = () 
           extraData={
             editable && !(isStartDisabled || isEndDisabled)
               ? [
-                {
-                  icon: <ClearOutlined color={colors.thirdLevelText} />,
-                  text: t(Strings.clear_date),
-                  onClick: (props: { recordId: string }) => setRecord(props.recordId, null, null),
-                },
-              ]
+                  {
+                    icon: <ClearOutlined color={colors.thirdLevelText} />,
+                    text: t(Strings.clear_date),
+                    onClick: (props: { recordId: string }) => setRecord(props.recordId, null, null),
+                  },
+                ]
               : undefined
           }
         />
@@ -424,8 +424,8 @@ export const CalendarView: FC<React.PropsWithChildren<ICalendarViewProps>> = () 
                 startListStyle={
                   listColor
                     ? {
-                      borderLeft: `2px solid ${listColor}`,
-                    }
+                        borderLeft: `2px solid ${listColor}`,
+                      }
                     : undefined
                 }
                 tasks={calendarRecords as any}
